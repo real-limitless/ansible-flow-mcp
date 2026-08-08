@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ansible-flow-mcp"
+version = "0.1.0"
+description = "MCP server exposing Ansible modules to AI agents (search → schema → check → execute)"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.11"
+authors = [{ name = "real-limitless" }]
+keywords = ["ansible", "mcp", "automation", "ai-agent"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Topic :: System :: Systems Administration",
+]
+dependencies = [
+  "mcp>=1.2.0",
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.24"]
+
+[project.scripts]
+ansible-flow-mcp = "ansible_flow_mcp.server:main"
+
+[project.urls]
+Homepage = "https://github.com/real-limitless/ansible-flow-mcp"
+Issues = "https://github.com/real-limitless/ansible-flow-mcp/issues"
+OpenFlow = "https://github.com/real-limitless/OpenFlow/issues/56"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ansible_flow_mcp"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"catalog" = "ansible_flow_mcp/catalog"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["src"]
