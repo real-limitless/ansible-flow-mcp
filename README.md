@@ -99,6 +99,19 @@ pip install pyyaml
 python scripts/generate_catalog.py
 ```
 
+### Galaxy factory (top collections)
+
+Scrape **top Galaxy collections by download count**, queue module schema jobs, merge into the gallery — OpenFlow-style TUI:
+
+```bash
+python scripts/factory/tui.py
+# or headless:
+python scripts/factory/scrape_galaxy.py --top 40 --enqueue
+python scripts/factory/queue_worker.py
+```
+
+See [scripts/factory/README.md](scripts/factory/README.md).
+
 ## Env
 
 | Variable | Meaning |

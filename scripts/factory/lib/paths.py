@@ -1,0 +1,41 @@
+from __future__ import annotations
+
+from pathlib import Path
+
+FACTORY = Path(__file__).resolve().parents[1]
+ROOT = FACTORY.parents[1]
+JOBS = FACTORY / ".jobs"
+SCANS = JOBS / "scans"
+QUEUE = JOBS / "queue"
+NODES = JOBS / "nodes"
+SETTINGS_PATH = JOBS / "settings.json"
+WORKER_PID = JOBS / "worker.pid"
+WORKER_LOG = JOBS / "worker.log"
+CATALOG = ROOT / "catalog"
+GALLERY = CATALOG / "gallery.json"
+SCHEMAS = CATALOG / "schemas"
+ALLOWLIST = CATALOG / "collections-allowlist.yml"
+
+DEFAULT_SETTINGS: dict = {
+    "topN": 40,
+    "modulesPerCollection": 0,  # 0 = all modules
+    "concurrency": 4,
+    "galaxyPageSize": 20,
+    "galaxyBase": "https://galaxy.ansible.com",
+    "includeBuiltin": True,
+    "autoAllowlist": True,
+    "preferAnsibleDoc": True,
+    "denyFreeform": True,
+    "minDownloadCount": 0,
+    "namespaceFilter": "",  # comma namespaces e.g. community,ansible,amazon
+    "outCatalog": str(CATALOG),
+}
+
+DEFAULT_DENY = frozenset(
+    {
+        "ansible.builtin.shell",
+        "ansible.builtin.command",
+        "ansible.builtin.raw",
+        "ansible.builtin.script",
+    }
+)
