@@ -97,3 +97,19 @@ Golden runner fixtures under `tests/fixtures/` define the shared result shape fo
 ## License
 
 Apache-2.0
+
+## Publish (PyPI)
+
+```bash
+pip install build twine
+python -m build
+# twine upload dist/*
+```
+
+Or from git:
+
+```bash
+uvx --from ansible-flow-mcp ansible-flow-mcp
+```
+
+Schemas cover the full committed gallery (builtin + popular collections). Regenerate with `scripts/generate_catalog.py` when `ansible-doc` is available.
