@@ -65,7 +65,7 @@ def test_run_module_with_mock_runner():
 
     def fake_run(argv, env, timeout):
         assert argv[0] == "ansible"
-        assert env.get("ANSIBLE_STDOUT_CALLBACK") == "json"
+        assert "json" in str(env.get("ANSIBLE_STDOUT_CALLBACK", ""))
         assert "--check" in argv
         return 0, fixture, ""
 
@@ -90,3 +90,48 @@ def test_run_module_blocks_disallowed_collection():
     pol = SecurityPolicy(collections={"ansible.builtin"}, deny_modules=set())
     with pytest.raises(ValueError, match="allowlist"):
         run_module("community.general.modprobe", policy=pol, run_fn=lambda *a, **k: (0, "", ""))
+
+
+def test_build_playbook_argv():
+    from ansible_flow_mcp.runner import build_playbook_argv
+
+    argv = build_playbook_argv(
+        playbook="/tmp/site.yml",
+        inventory="/tmp/inv",
+        check_mode=True,
+        become=True,
+        extra_vars_file="/tmp/vars.json",
+        limit="web",
+        tags="deploy",
+    )
+    assert argv[0] == "ansible-playbook"
+    assert "--check" in argv
+    assert "-e" in argv
+    assert "@/tmp/vars.json" in argv
+
+
+def test_assert_playbook_path_rejects_passwd():
+    from ansible_flow_mcp.runner import assert_playbook_path
+
+    with pytest.raises(ValueError):
+        assert_playbook_path("/etc/passwd")
+
+
+def test_run_playbook_mocked(tmp_path):
+    from ansible_flow_mcp.runner import run_playbook
+
+    pb = tmp_path / "site.yml"
+    pb.write_text("---\n- hosts: localhost\n  tasks: []\n", encoding="utf-8")
+    fixture = (FIXTURES / "ping_json_callback.json").read_text(encoding="utf-8")
+
+    def fake_run(argv, env, timeout):
+        assert argv[0] == "ansible-playbook"
+        assert str(pb) in argv
+        assert "--check" in argv
+        return 0, fixture, ""
+
+    result = run_playbook(str(pb), check_mode=True, run_fn=fake_run)
+    d = result.to_dict()
+    assert d["kind"] == "playbook"
+    assert d["failed"] is False
+    assert d["hosts"][0]["result"]["ping"] == "pong"

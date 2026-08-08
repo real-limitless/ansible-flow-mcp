@@ -8,16 +8,17 @@ from mcp.server.fastmcp import FastMCP
 
 from ansible_flow_mcp import __version__
 from ansible_flow_mcp.catalog import get_module_schema, list_collections, search_modules
-from ansible_flow_mcp.runner import run_module
+from ansible_flow_mcp.runner import run_module, run_playbook
 from ansible_flow_mcp.security import load_policy
 
 mcp = FastMCP(
     "ansible-flow-mcp",
     instructions=(
-        "Ansible module runner for agents. Ritual: search_modules → "
+        "Ansible module/playbook runner for agents. Ritual: search_modules → "
         "get_module_schema → run_module(check_mode=true) → run_module(check_mode=false). "
+        "For playbooks: run_playbook(check_mode=true) first. "
         "Never request denied free-form modules (command/shell/raw/script). "
-        "Prefer check mode before applying changes."
+        "Playbooks must be .yml under allowlisted roots. Prefer check mode before applying."
     ),
 )
 
@@ -72,6 +73,40 @@ def run_module_tool(
         become=become,
         become_user=become_user,
         connection=connection,
+        timeout=timeout,
+    )
+    payload = result.to_dict()
+    payload["stdout"] = (payload.get("stdout") or "")[:8000]
+    payload["stderr"] = (payload.get("stderr") or "")[:4000]
+    return _json(payload)
+
+
+@mcp.tool(name="run_playbook")
+def run_playbook_tool(
+    playbook: str,
+    inventory: str | None = None,
+    check_mode: bool = True,
+    become: bool = False,
+    become_user: str | None = None,
+    connection: str | None = None,
+    extra_vars: dict[str, Any] | None = None,
+    limit: str | None = None,
+    tags: str | None = None,
+    skip_tags: str | None = None,
+    timeout: float = 300,
+) -> str:
+    """Run ansible-playbook on a path under allowlisted roots. Prefer check_mode=true first."""
+    result = run_playbook(
+        playbook,
+        inventory=inventory,
+        check_mode=check_mode,
+        become=become,
+        become_user=become_user,
+        connection=connection,
+        extra_vars=extra_vars,
+        limit=limit,
+        tags=tags,
+        skip_tags=skip_tags,
         timeout=timeout,
     )
     payload = result.to_dict()
