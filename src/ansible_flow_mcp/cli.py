@@ -53,6 +53,16 @@ def build_parser() -> argparse.ArgumentParser:
     h_tok = hub_sub.add_parser("issue-token", help="Issue one-time join token")
     h_tok.add_argument("--name", required=True, help="Spoke node name")
     h_tok.add_argument("--ttl", default="15m", help="TTL e.g. 15m, 1h, 900")
+    h_tok.add_argument(
+        "--hub",
+        default=None,
+        help="Join SSH target for copy-paste command (default: mcp-join@$HOSTNAME or $ANSIBLE_FLOW_JOIN_HUB)",
+    )
+    h_tok.add_argument(
+        "--public-addr",
+        default=None,
+        help="Address to put in spoke join command (default: --name)",
+    )
 
     h_rev = hub_sub.add_parser("revoke", help="Revoke enrolled spoke")
     h_rev.add_argument("--name", required=True)
@@ -169,9 +179,22 @@ def _hub_main(args: argparse.Namespace) -> None:
         return
 
     if args.hub_cmd == "issue-token":
+        from ansible_flow_mcp.tui import build_spoke_join_command, default_join_hub
+
         st = load_hub_state(root)
         issued = issue_token(args.name, ttl_seconds=_parse_ttl(args.ttl), state=st)
-        _out(issued.to_dict())
+        join_hub = (args.hub or "").strip() or default_join_hub()
+        pub = (args.public_addr or "").strip() or args.name
+        payload = issued.to_dict()
+        payload["join_hub"] = join_hub
+        payload["public_addr"] = pub
+        payload["join_command"] = build_spoke_join_command(
+            token=issued.token,
+            hub=join_hub,
+            name=args.name,
+            public_addr=pub,
+        )
+        _out(payload)
         return
 
     if args.hub_cmd == "revoke":

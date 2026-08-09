@@ -23,8 +23,14 @@ from ansible_flow_mcp.hub.inventory import (
 )
 from ansible_flow_mcp.hub.state import hub_init
 from ansible_flow_mcp.policy import Role, assert_hosts_allowed, load_inventory_groups
-from ansible_flow_mcp.tui import write_opencode_hub_config
-from ansible_flow_mcp.tui import App
+from ansible_flow_mcp.tui import (
+    App,
+    build_spoke_join_command,
+    default_join_hub,
+    do_invite,
+    wrap_text,
+    write_opencode_hub_config,
+)
 
 
 @pytest.fixture()
@@ -93,3 +99,47 @@ def test_opencode_config_write(hub_root: Path):
     data = path.read_text(encoding="utf-8")
     assert "ansible-flow-hub" in data
     assert "hub" in data and "session" in data
+
+
+def test_build_spoke_join_command_quotes_token():
+    cmd = build_spoke_join_command(
+        token="abc.def+ghi",
+        hub="mcp-join@hub.example:22",
+        name="web-03",
+        public_addr="web-03.example.com",
+    )
+    assert cmd.startswith("ansible-flow-mcp spoke join")
+    assert "--token abc.def+ghi" in cmd or "--token 'abc.def+ghi'" in cmd
+    assert "mcp-join@hub.example:22" in cmd
+    assert "web-03.example.com" in cmd
+    assert "--name web-03" in cmd
+
+
+def test_wrap_text_breaks_long_lines():
+    lines = wrap_text("a" * 50, 20)
+    assert all(len(x) <= 20 for x in lines)
+    assert "".join(lines) == "a" * 50
+
+
+def test_do_invite_builds_join_command(hub_root: Path, monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.delenv("ANSIBLE_FLOW_JOIN_HUB", raising=False)
+    app = App(hub_root=hub_root, hub_ok=True)
+    do_invite(
+        app,
+        "edge-01",
+        "15m",
+        hub="mcp-join@ctrl.example",
+        public_addr="10.0.0.9",
+    )
+    assert app.modal == "token"
+    assert app.last_token
+    assert "spoke join" in app.last_join_cmd
+    assert app.last_token in app.last_join_cmd
+    assert "mcp-join@ctrl.example" in app.last_join_cmd
+    assert "10.0.0.9" in app.last_join_cmd
+    assert any("Copy and run" in line for line in app.last_join_lines)
+
+
+def test_default_join_hub_env(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setenv("ANSIBLE_FLOW_JOIN_HUB", "mcp-join@bastion.internal:2222")
+    assert default_join_hub() == "mcp-join@bastion.internal:2222"

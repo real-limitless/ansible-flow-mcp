@@ -8,7 +8,9 @@ from __future__ import annotations
 import curses
 import json
 import os
+import shlex
 import shutil
+import socket
 import subprocess
 import sys
 from dataclasses import dataclass, field
@@ -40,9 +42,67 @@ class App:
     modal_fields: list[str] = field(default_factory=list)
     modal_values: dict[str, str] = field(default_factory=dict)
     last_token: str = ""
+    last_invite_name: str = ""
+    last_join_cmd: str = ""
+    last_join_lines: list[str] = field(default_factory=list)
     confirm_action: str = ""
     confirm_target: str = ""
 
+
+def default_join_hub() -> str:
+    """Best-effort mcp-join@host for copy-paste spoke join commands."""
+    env = (os.environ.get("ANSIBLE_FLOW_JOIN_HUB") or "").strip()
+    if env:
+        return env
+    host = socket.getfqdn() or socket.gethostname() or "HUB_HOST"
+    if host in {"localhost", "localhost.localdomain"}:
+        host = socket.gethostname() or "HUB_HOST"
+    return f"mcp-join@{host}"
+
+
+def build_spoke_join_command(
+    *,
+    token: str,
+    hub: str,
+    name: str,
+    public_addr: str,
+) -> str:
+    parts = [
+        "ansible-flow-mcp",
+        "spoke",
+        "join",
+        "--token",
+        token,
+        "--hub",
+        hub,
+        "--public-addr",
+        public_addr,
+        "--name",
+        name,
+    ]
+    return " ".join(shlex.quote(p) for p in parts)
+
+
+def wrap_text(text: str, width: int) -> list[str]:
+    if width < 8:
+        width = 8
+    if not text:
+        return [""]
+    lines: list[str] = []
+    rest = text
+    while rest:
+        if len(rest) <= width:
+            lines.append(rest)
+            break
+        chunk = rest[:width]
+        sp = chunk.rfind(" ")
+        if sp >= width // 2:
+            lines.append(rest[:sp])
+            rest = rest[sp + 1 :].lstrip()
+        else:
+            lines.append(rest[:width])
+            rest = rest[width:]
+    return lines
 
 def clamp(n: int, lo: int, hi: int) -> int:
     return max(lo, min(hi, n))
@@ -118,14 +178,42 @@ def do_init(app: App, name: str = "hub-01") -> None:
     refresh_data(app)
 
 
-def do_invite(app: App, name: str, ttl: str = "15m") -> None:
+def do_invite(
+    app: App,
+    name: str,
+    ttl: str = "15m",
+    *,
+    hub: str = "",
+    public_addr: str = "",
+) -> None:
     from ansible_flow_mcp.cli import _parse_ttl
     from ansible_flow_mcp.hub.tokens import issue_token
 
-    issued = issue_token(name, ttl_seconds=_parse_ttl(ttl), root=app.hub_root)
+    node = (name or "").strip()
+    if not node:
+        raise ValueError("spoke name is required")
+    join_hub = (hub or "").strip() or default_join_hub()
+    addr = (public_addr or "").strip() or node
+    issued = issue_token(node, ttl_seconds=_parse_ttl(ttl), root=app.hub_root)
     app.last_token = issued.token
+    app.last_invite_name = node
+    app.last_join_cmd = build_spoke_join_command(
+        token=issued.token,
+        hub=join_hub,
+        name=node,
+        public_addr=addr,
+    )
+    app.last_join_lines = [
+        f"Spoke: {node}  ·  hub join channel: {join_hub}",
+        f"public-addr hub will dial: {addr}",
+        "",
+        "Copy and run on the spoke host:",
+        app.last_join_cmd,
+        "",
+        "Requires: pip install ansible-flow-mcp  (+ join SSH key if not agent-forwarded)",
+    ]
     app.modal = "token"
-    app.message = f"token issued for {name} (shown once)"
+    app.message = f"token issued for {node} — copy join command (shown once)"
     refresh_data(app)
 
 
@@ -329,7 +417,7 @@ def draw_hub(stdscr: Any, app: App) -> None:
 def draw_help(stdscr: Any, app: App) -> None:
     lines = [
         "Servers: list enrolled spokes from hub inventory",
-        "  i  invite (issue join token)",
+        "  i  invite (issue join token + copy-paste spoke join command)",
         "  e  edit host/port/user",
         "  d  revoke selected spoke",
         "  p  ping via spoke_call list_collections",
@@ -345,20 +433,43 @@ def draw_help(stdscr: Any, app: App) -> None:
 
 def draw_modal(stdscr: Any, app: App) -> None:
     h, w = stdscr.getmaxyx()
-    box_h, box_w = 10, min(72, w - 4)
+    box_w = min(92, max(40, w - 4))
+
+    if app.modal == "token":
+        inner_w = box_w - 4
+        body: list[str] = []
+        body.append("Join command (copy now — shown once)")
+        body.append("")
+        for line in app.last_join_lines or [app.last_token]:
+            body.extend(wrap_text(line, inner_w) if line else [""])
+        body.append("")
+        body.append("Token only:")
+        body.extend(wrap_text(app.last_token, inner_w))
+        body.append("")
+        body.append("Enter/Esc close   c copy command to clipboard (if available)")
+        box_h = min(h - 2, max(14, len(body) + 3))
+        y0, x0 = max(1, (h - box_h) // 2), max(1, (w - box_w) // 2)
+        for i in range(box_h):
+            safe_addstr(stdscr, y0 + i, x0, " " * box_w, curses.A_REVERSE)
+        safe_addstr(
+            stdscr,
+            y0,
+            x0,
+            " invite — spoke join ".ljust(box_w),
+            curses.A_REVERSE | curses.A_BOLD,
+        )
+        for i, line in enumerate(body[: box_h - 2]):
+            safe_addstr(stdscr, y0 + 1 + i, x0 + 2, line[:inner_w], curses.A_REVERSE)
+        return
+
+    labels = app.modal_fields or ["value"]
+    box_h = max(10, len(labels) + 6)
+    box_h = min(box_h, h - 2)
     y0, x0 = max(2, (h - box_h) // 2), max(1, (w - box_w) // 2)
     title = app.modal or ""
     for i in range(box_h):
         safe_addstr(stdscr, y0 + i, x0, " " * box_w, curses.A_REVERSE)
     safe_addstr(stdscr, y0, x0, f" {title} ".ljust(box_w), curses.A_REVERSE | curses.A_BOLD)
-
-    if app.modal == "token":
-        safe_addstr(stdscr, y0 + 2, x0 + 2, "Join token (copy now — shown once):", curses.A_REVERSE)
-        tok = app.last_token
-        for i in range(0, len(tok), box_w - 4):
-            safe_addstr(stdscr, y0 + 3 + i // (box_w - 4), x0 + 2, tok[i : i + box_w - 4], curses.A_REVERSE)
-        safe_addstr(stdscr, y0 + box_h - 2, x0 + 2, "Enter/Esc to close", curses.A_REVERSE)
-        return
 
     if app.modal == "confirm":
         safe_addstr(
@@ -371,11 +482,18 @@ def draw_modal(stdscr: Any, app: App) -> None:
         return
 
     # field editor
-    labels = app.modal_fields or ["value"]
     for i, lab in enumerate(labels):
         val = app.modal_values.get(lab, "")
         mark = ">" if i == app.modal_field else " "
         safe_addstr(stdscr, y0 + 2 + i, x0 + 2, f"{mark} {lab}: {val}", curses.A_REVERSE)
+    if app.modal == "invite":
+        safe_addstr(
+            stdscr,
+            y0 + box_h - 3,
+            x0 + 2,
+            "hub = mcp-join@this-host   public_addr = how hub reaches spoke",
+            curses.A_REVERSE,
+        )
     safe_addstr(stdscr, y0 + box_h - 2, x0 + 2, "Tab fields  Enter submit  Esc cancel", curses.A_REVERSE)
 
 
@@ -384,8 +502,13 @@ def open_modal(app: App, kind: str, **kwargs: Any) -> None:
     app.modal_field = 0
     app.modal_values = {}
     if kind == "invite":
-        app.modal_fields = ["name", "ttl"]
-        app.modal_values = {"name": "", "ttl": "15m"}
+        app.modal_fields = ["name", "ttl", "hub", "public_addr"]
+        app.modal_values = {
+            "name": "",
+            "ttl": "15m",
+            "hub": default_join_hub(),
+            "public_addr": "",
+        }
     elif kind == "edit":
         n = kwargs.get("node") or {}
         app.modal_fields = ["name", "ansible_host", "ansible_port", "ansible_user"]
@@ -418,7 +541,15 @@ def submit_modal(app: App) -> None:
     app.modal = None
     try:
         if kind == "invite":
-            do_invite(app, app.modal_values.get("name", ""), app.modal_values.get("ttl", "15m"))
+            name = app.modal_values.get("name", "")
+            pub = app.modal_values.get("public_addr", "") or name
+            do_invite(
+                app,
+                name,
+                app.modal_values.get("ttl", "15m"),
+                hub=app.modal_values.get("hub", ""),
+                public_addr=pub,
+            )
             return
         if kind == "edit":
             name = app.modal_values.get("name", "")
@@ -447,9 +578,39 @@ def submit_modal(app: App) -> None:
             return
         if kind == "token":
             app.last_token = ""
+            app.last_join_cmd = ""
+            app.last_join_lines = []
             return
     except Exception as exc:  # noqa: BLE001
         app.message = f"error: {exc}"
+
+
+def copy_to_clipboard(text: str) -> bool:
+    """Best-effort clipboard; returns True if something accepted the text."""
+    if not text:
+        return False
+    for argv in (
+        ["wl-copy"],
+        ["xclip", "-selection", "clipboard"],
+        ["xsel", "--clipboard", "--input"],
+        ["pbcopy"],
+    ):
+        bin_name = argv[0]
+        if not shutil.which(bin_name):
+            continue
+        try:
+            subprocess.run(
+                argv,
+                input=text.encode("utf-8"),
+                check=True,
+                capture_output=True,
+                timeout=3,
+            )
+            return True
+        except (OSError, subprocess.SubprocessError):
+            continue
+    # last resort: write a one-shot file under hub dir
+    return False
 
 
 def handle_confirm_yes(app: App) -> None:
@@ -493,9 +654,26 @@ def handle_key(stdscr: Any, app: App, key: int) -> bool:
         return True
 
     if app.modal == "token":
+        if key in (ord("c"), ord("C")):
+            cmd = app.last_join_cmd or app.last_token
+            if copy_to_clipboard(cmd):
+                app.message = "join command copied to clipboard"
+            elif app.hub_root:
+                path = Path(app.hub_root) / "last-join-command.sh"
+                try:
+                    path.write_text(cmd + "\n", encoding="utf-8")
+                    os.chmod(path, 0o600)
+                    app.message = f"no clipboard — wrote {path}"
+                except OSError as exc:
+                    app.message = f"copy failed: {exc}"
+            else:
+                app.message = "copy failed (no clipboard tool)"
+            return True
         if key in (27, 10, 13, ord("q")):
             app.modal = None
             app.last_token = ""
+            app.last_join_cmd = ""
+            app.last_join_lines = []
         return True
 
     if app.modal == "confirm":
