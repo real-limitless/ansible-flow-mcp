@@ -9,11 +9,22 @@ cd test
 ./scripts/demo.sh
 ```
 
-Then:
+When run in a real terminal, **demo drops you into a shell on the hub** after smokes pass.
 
 ```bash
-./scripts/tui.sh          # operator TUI (servers + groups)
-./scripts/opencode.sh     # OpenCode with hub MCP session
+./scripts/demo.sh --no-shell   # setup only (CI)
+./scripts/shell.sh             # hub shell anytime lab is up
+./scripts/tui.sh               # operator TUI
+./scripts/opencode.sh          # OpenCode + hub MCP
+```
+
+Inside the hub shell:
+
+```bash
+ansible-flow-mcp hub status
+ansible-flow-mcp tui
+lab-opencode
+ansible-flow-mcp hub spoke-call --node spoke-01 --tool list_collections
 ```
 
 ## Step by step
