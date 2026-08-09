@@ -39,7 +39,26 @@ for s in $SPOKES; do
     exit 1
   fi
   echo "ok: no shell leak (ssh rc=$RC)"
+
+  echo "== ansible shell user on $s (mcp-ansible, no ForceCommand) =="
+  OUT=$(run_hub bash -lc "ssh -i /var/lib/ansible-flow/hub/keys/ansible_client -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/var/lib/ansible-flow/hub/known_hosts -o ConnectTimeout=8 mcp-ansible@$s 'echo ANSIBLE_SHELL_OK'" 2>&1) || true
+  if ! echo "$OUT" | grep -q 'ANSIBLE_SHELL_OK'; then
+    echo "FAIL: mcp-ansible shell missing on $s" >&2
+    echo "$OUT" >&2
+    exit 1
+  fi
+  echo "ok: mcp-ansible shell"
 done
+
+echo "== ansible ping via hub inventory (must not hang) =="
+run_hub bash -lc '
+  set -e
+  export ANSIBLE_FLOW_ROLE=hub ANSIBLE_FLOW_HUB_DIR=/var/lib/ansible-flow/hub
+  export ANSIBLE_HOST_KEY_CHECKING=True
+  timeout 45 ansible all -m ansible.builtin.ping \
+    -i /var/lib/ansible-flow/hub/inventory.yml \
+    -e ansible_python_interpreter=/usr/bin/python3
+'
 
 echo "== reject non-enrolled host =="
 set +e

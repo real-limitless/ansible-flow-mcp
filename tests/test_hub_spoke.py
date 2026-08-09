@@ -89,10 +89,19 @@ def test_join_enrolls_spoke(hub_root: Path, spoke_root: Path, tmp_path: Path):
     )
     assert result["ok"] is True
     assert "spoke-02" in list_spoke_names(load_inventory(st.inventory_path))
+    inv = load_inventory(st.inventory_path)
+    spoke = inv["all"]["children"]["spokes"]["hosts"]["spoke-02"]
+    assert spoke.get("ansible_user") == "mcp-ansible"
     assert ak.is_file()
     text = ak.read_text(encoding="utf-8")
     assert "command=" in text
     assert "spoke session" in text
+    # ansible key must be plain (no ForceCommand) on separate authorized_keys
+    ansible_ak = Path(result["ansible_authorized_keys"])
+    assert ansible_ak.is_file()
+    atext = ansible_ak.read_text(encoding="utf-8")
+    assert "command=" not in atext
+    assert "ssh-" in atext
     assert spoke_status(root=spoke_root)["enrolled"] is True
 
 

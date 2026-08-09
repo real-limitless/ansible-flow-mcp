@@ -8,7 +8,7 @@ install_debian() {
   apt-get install -y --no-install-recommends \
     python3 python3-pip python3-venv \
     openssh-server openssh-client \
-    iproute2 ca-certificates tini
+    iproute2 ca-certificates tini sudo
   rm -rf /var/lib/apt/lists/*
   # nologin path
   if [ ! -e /usr/sbin/nologin ] && [ -e /sbin/nologin ]; then

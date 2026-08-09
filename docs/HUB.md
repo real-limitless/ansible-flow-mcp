@@ -82,6 +82,15 @@ Inventory is fixed; client `-i` rejected in hub mode.
 
 See `test/README.md` and `test/docker-compose.yml` for a full hub + multi-OS spoke compose lab.
 
+## Spoke SSH users (critical)
+
+| User | Key | Purpose |
+| --- | --- | --- |
+| **mcp-spoke** | `hub_client` + **ForceCommand** → `spoke session` | Mesh only (`spoke_call`) |
+| **mcp-ansible** | `ansible_client`, **no** ForceCommand | Real shell for `run_module` / ansible CLI |
+
+Do **not** put `ansible_client` on `mcp-spoke` with ForceCommand. Ansible opens SSH and expects `/bin/sh`; ForceCommand starts MCP instead → both sides wait forever. That blocks the hub stdio MCP session, so even `search_modules` times out.
+
 ## Security properties
 
 - Non-enrolled hosts cannot be targeted in hub mode
@@ -89,3 +98,4 @@ See `test/README.md` and `test/docker-compose.yml` for a full hub + multi-OS spo
 - Host key checking on in hub/spoke mode
 - Spokes cannot lateral-move via this fabric
 - Join tokens: signed, TTL, one-time jti replay cache
+- Mesh user has no shell; ansible user is key-only (lab: passwordless sudo)

@@ -46,11 +46,31 @@ for s in "${SPOKES[@]}"; do
     fi
   fi
 
-  # Already enrolled? refresh known_hosts + authorized keys path only
+  # Already enrolled? refresh known_hosts + repair ansible shell user keys
   ALREADY=$(run_hub python3 -c "import json,subprocess; s=json.loads(subprocess.check_output(['ansible-flow-mcp','hub','status'])); print('yes' if '$s' in (s.get('spokes') or []) else 'no')" 2>/dev/null || echo no)
   if [ "$ALREADY" = "yes" ]; then
-    echo "  already enrolled — refreshing host key"
+    echo "  already enrolled — refreshing host key + mcp-ansible shell access"
     run_hub bash -lc "ssh-keyscan -p 22 $s 2>/dev/null >> /var/lib/ansible-flow/hub/known_hosts || true; chmod 660 /var/lib/ansible-flow/hub/known_hosts"
+    APUB=$(run_hub bash -lc 'cat /var/lib/ansible-flow/hub/keys/ansible_client.pub')
+    run_spoke "$s" bash -lc "
+      set -e
+      mkdir -p /home/mcp-ansible/.ssh
+      id mcp-ansible >/dev/null 2>&1 || useradd -m -s /bin/bash mcp-ansible || adduser -D -s /bin/bash mcp-ansible
+      AK=/home/mcp-ansible/.ssh/authorized_keys
+      KEYBODY=\$(echo '$APUB' | awk '{print \$NF}')
+      if [ -f \"\$AK\" ]; then grep -v \"\$KEYBODY\" \"\$AK\" > \"\$AK.tmp\" || true; mv \"\$AK.tmp\" \"\$AK\"; fi
+      echo \"no-port-forwarding,no-X11-forwarding,no-agent-forwarding $APUB\" >> \"\$AK\"
+      chown -R mcp-ansible:mcp-ansible /home/mcp-ansible
+      chmod 700 /home/mcp-ansible/.ssh
+      chmod 600 \"\$AK\"
+      if [ -f /home/mcp-spoke/.ssh/authorized_keys ]; then
+        grep -v \"\$KEYBODY\" /home/mcp-spoke/.ssh/authorized_keys > /tmp/mcp-spoke.ak || true
+        mv /tmp/mcp-spoke.ak /home/mcp-spoke/.ssh/authorized_keys
+        chown mcp-spoke:mcp-spoke /home/mcp-spoke/.ssh/authorized_keys
+        chmod 600 /home/mcp-spoke/.ssh/authorized_keys
+      fi
+    "
+    run_hub python3 -c "from ansible_flow_mcp.hub.enroll import update_node; print(update_node('$s', ansible_user='mcp-ansible'))"
     continue
   fi
 
@@ -63,8 +83,10 @@ for s in "${SPOKES[@]}"; do
 
   run_spoke "$s" bash -lc "
     set -e
-    mkdir -p /home/mcp-spoke/.ssh /var/lib/ansible-flow/spoke/keys
+    mkdir -p /home/mcp-spoke/.ssh /home/mcp-ansible/.ssh /var/lib/ansible-flow/spoke/keys
     chown -R mcp-spoke:mcp-spoke /home/mcp-spoke /var/lib/ansible-flow/spoke
+    chown -R mcp-ansible:mcp-ansible /home/mcp-ansible
+    chmod 700 /home/mcp-spoke/.ssh /home/mcp-ansible/.ssh
     ansible-flow-mcp spoke join \
       --token '$TOKEN' \
       --hub 'mcp-join@hub:22' \
@@ -75,22 +97,39 @@ for s in "${SPOKES[@]}"; do
       --authorized-keys /home/mcp-spoke/.ssh/authorized_keys
     chown mcp-spoke:mcp-spoke /home/mcp-spoke/.ssh/authorized_keys
     chmod 600 /home/mcp-spoke/.ssh/authorized_keys
-    # Also authorize ansible_client pubkey for Ansible SSH (same ForceCommand)
-    if ! grep -q ansible-flow-ansible /home/mcp-spoke/.ssh/authorized_keys 2>/dev/null; then
-      true
+    # join installs ansible_client (no ForceCommand) on mcp-ansible when home exists
+    if [ -f /home/mcp-ansible/.ssh/authorized_keys ]; then
+      chown mcp-ansible:mcp-ansible /home/mcp-ansible/.ssh/authorized_keys
+      chmod 600 /home/mcp-ansible/.ssh/authorized_keys
     fi
   "
 
-  # Pull ansible_client.pub from hub and append with same ForceCommand
+  # Ensure ansible_client is on mcp-ansible WITHOUT ForceCommand (never on mcp-spoke)
   APUB=$(run_hub bash -lc 'cat /var/lib/ansible-flow/hub/keys/ansible_client.pub')
   run_spoke "$s" bash -lc "
-    FC='/usr/local/bin/ansible-flow-mcp spoke session'
-    LINE=\"command=\\\"\$FC\\\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty $APUB\"
-    grep -q \"\$(echo '$APUB' | awk '{print \$NF}')\" /home/mcp-spoke/.ssh/authorized_keys 2>/dev/null \
-      || echo \"\$LINE\" >> /home/mcp-spoke/.ssh/authorized_keys
-    chown mcp-spoke:mcp-spoke /home/mcp-spoke/.ssh/authorized_keys
-    chmod 600 /home/mcp-spoke/.ssh/authorized_keys
+    set -e
+    mkdir -p /home/mcp-ansible/.ssh
+    AK=/home/mcp-ansible/.ssh/authorized_keys
+    KEYBODY=\$(echo '$APUB' | awk '{print \$NF}')
+    # strip any prior copy of this key (including mistaken ForceCommand lines)
+    if [ -f \"\$AK\" ]; then
+      grep -v \"\$KEYBODY\" \"\$AK\" > \"\$AK.tmp\" || true
+      mv \"\$AK.tmp\" \"\$AK\"
+    fi
+    echo \"no-port-forwarding,no-X11-forwarding,no-agent-forwarding $APUB\" >> \"\$AK\"
+    chown -R mcp-ansible:mcp-ansible /home/mcp-ansible
+    chmod 700 /home/mcp-ansible/.ssh
+    chmod 600 \"\$AK\"
+    # Remove ansible key from mcp-spoke if a previous lab put ForceCommand on it
+    if [ -f /home/mcp-spoke/.ssh/authorized_keys ]; then
+      grep -v \"\$KEYBODY\" /home/mcp-spoke/.ssh/authorized_keys > /tmp/mcp-spoke.ak || true
+      mv /tmp/mcp-spoke.ak /home/mcp-spoke/.ssh/authorized_keys
+      chown mcp-spoke:mcp-spoke /home/mcp-spoke/.ssh/authorized_keys
+      chmod 600 /home/mcp-spoke/.ssh/authorized_keys
+    fi
   "
+  # Point inventory at shell user (never mcp-spoke — that is ForceCommand-only)
+  run_hub python3 -c "from ansible_flow_mcp.hub.enroll import update_node; print(update_node('$s', ansible_user='mcp-ansible'))"
 
   # Capture spoke host key into hub known_hosts
   run_hub bash -lc "

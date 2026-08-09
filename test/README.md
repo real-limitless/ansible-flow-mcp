@@ -76,8 +76,10 @@ Groups: **prod web app data edge batch canary**
 | --- | --- |
 | Hub init | entrypoint → `hub init` |
 | Join tokens | `issue-token` + `spoke join` |
-| ForceCommand | no shell on spoke SSH |
+| ForceCommand | no shell on **mcp-spoke** SSH |
+| Ansible shell | **mcp-ansible** + `ansible_client` (no ForceCommand) |
 | `spoke_call` | hub → spoke simple-exec |
+| `run_module` / ping | hub ansible → mcp-ansible (must not hang) |
 | Groups | `seed_demo.sh` |
 | OpenCode wiring | binary + `opencode-hub.jsonc` + `lab-opencode` |
 | TUI module | import + config write (headless) |
