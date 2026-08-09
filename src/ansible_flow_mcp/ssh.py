@@ -31,6 +31,11 @@ class SpokeCallResult:
 
 
 def _spoke_target(state: HubState, node: str) -> tuple[str, int, str]:
+    """Return (host, port, mesh_user) for spoke_call ForceCommand SSH.
+
+    Mesh user is always mcp-spoke (ForceCommand MCP). Inventory ansible_user is
+    the shell account for ansible CLI (mcp-ansible) and must not be used here.
+    """
     inv = load_inventory(state.inventory_path)
     children = (inv.get("all") or {}).get("children") or {}
     spokes = (children.get("spokes") or {}).get("hosts") or {}
@@ -39,7 +44,12 @@ def _spoke_target(state: HubState, node: str) -> tuple[str, int, str]:
     meta = spokes[node] or {}
     host = str(meta.get("ansible_host") or node)
     port = int(meta.get("ansible_port") or 22)
-    user = str(meta.get("ansible_user") or (inv.get("all") or {}).get("vars", {}).get("ansible_user") or "mcp-spoke")
+    vars_n = (inv.get("all") or {}).get("vars") or {}
+    user = str(
+        meta.get("mesh_user")
+        or vars_n.get("mesh_user")
+        or "mcp-spoke"
+    )
     return host, port, user
 
 

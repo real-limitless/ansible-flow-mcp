@@ -39,6 +39,11 @@ RUN set -eux; \
       useradd -m -s /bin/bash mcp-ansible 2>/dev/null \
         || adduser -D -s /bin/bash mcp-ansible; \
     fi; \
+    # OpenSSH rejects locked accounts (passwd '!'); keep key-only, unlocked.
+    usermod -p '*' mcp-ansible 2>/dev/null \
+      || passwd -u mcp-ansible 2>/dev/null \
+      || passwd -d mcp-ansible 2>/dev/null \
+      || true; \
     # lab: passwordless sudo so run_module(become=true) works for package etc.
     if command -v sudo >/dev/null 2>&1; then \
       echo 'mcp-ansible ALL=(ALL) NOPASSWD:ALL' >/etc/sudoers.d/mcp-ansible; \

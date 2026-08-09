@@ -56,19 +56,41 @@ for s in "${SPOKES[@]}"; do
       set -e
       mkdir -p /home/mcp-ansible/.ssh
       id mcp-ansible >/dev/null 2>&1 || useradd -m -s /bin/bash mcp-ansible || adduser -D -s /bin/bash mcp-ansible
+      # OpenSSH: locked passwd ('!') rejects pubkey auth even when keys are correct
+      usermod -p '*' mcp-ansible 2>/dev/null || passwd -u mcp-ansible 2>/dev/null || passwd -d mcp-ansible 2>/dev/null || true
       AK=/home/mcp-ansible/.ssh/authorized_keys
       KEYBODY=\$(echo '$APUB' | awk '{print \$NF}')
       if [ -f \"\$AK\" ]; then grep -v \"\$KEYBODY\" \"\$AK\" > \"\$AK.tmp\" || true; mv \"\$AK.tmp\" \"\$AK\"; fi
       echo \"no-port-forwarding,no-X11-forwarding,no-agent-forwarding $APUB\" >> \"\$AK\"
       chown -R mcp-ansible:mcp-ansible /home/mcp-ansible
+      chmod 755 /home/mcp-ansible
       chmod 700 /home/mcp-ansible/.ssh
       chmod 600 \"\$AK\"
-      if [ -f /home/mcp-spoke/.ssh/authorized_keys ]; then
+      # Strip ansible key from mcp-spoke only; never leave mesh keys empty
+      if [ -n \"\$KEYBODY\" ] && [ -f /home/mcp-spoke/.ssh/authorized_keys ]; then
         grep -v \"\$KEYBODY\" /home/mcp-spoke/.ssh/authorized_keys > /tmp/mcp-spoke.ak || true
-        mv /tmp/mcp-spoke.ak /home/mcp-spoke/.ssh/authorized_keys
+        if [ -s /tmp/mcp-spoke.ak ]; then
+          mv /tmp/mcp-spoke.ak /home/mcp-spoke/.ssh/authorized_keys
+        else
+          rm -f /tmp/mcp-spoke.ak
+        fi
         chown mcp-spoke:mcp-spoke /home/mcp-spoke/.ssh/authorized_keys
         chmod 600 /home/mcp-spoke/.ssh/authorized_keys
       fi
+    "
+    # Ensure hub_client ForceCommand key is present on mcp-spoke
+    HPUB=$(run_hub bash -lc 'cat /var/lib/ansible-flow/hub/keys/hub_client.pub')
+    run_spoke "$s" bash -lc "
+      set -e
+      FC='/usr/local/bin/ansible-flow-mcp spoke session'
+      AK=/home/mcp-spoke/.ssh/authorized_keys
+      mkdir -p /home/mcp-spoke/.ssh
+      KEYBODY=\$(echo '$HPUB' | awk '{print \$2}')
+      if [ -n \"\$KEYBODY\" ] && ! grep -q \"\$KEYBODY\" \"\$AK\" 2>/dev/null; then
+        echo \"command=\\\"\$FC\\\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty $HPUB\" >> \"\$AK\"
+      fi
+      chown mcp-spoke:mcp-spoke \"\$AK\"
+      chmod 600 \"\$AK\"
     "
     run_hub python3 -c "from ansible_flow_mcp.hub.enroll import update_node; print(update_node('$s', ansible_user='mcp-ansible'))"
     continue
@@ -84,8 +106,11 @@ for s in "${SPOKES[@]}"; do
   run_spoke "$s" bash -lc "
     set -e
     mkdir -p /home/mcp-spoke/.ssh /home/mcp-ansible/.ssh /var/lib/ansible-flow/spoke/keys
+    id mcp-ansible >/dev/null 2>&1 || useradd -m -s /bin/bash mcp-ansible || adduser -D -s /bin/bash mcp-ansible
+    usermod -p '*' mcp-ansible 2>/dev/null || passwd -u mcp-ansible 2>/dev/null || passwd -d mcp-ansible 2>/dev/null || true
     chown -R mcp-spoke:mcp-spoke /home/mcp-spoke /var/lib/ansible-flow/spoke
     chown -R mcp-ansible:mcp-ansible /home/mcp-ansible
+    chmod 755 /home/mcp-ansible
     chmod 700 /home/mcp-spoke/.ssh /home/mcp-ansible/.ssh
     ansible-flow-mcp spoke join \
       --token '$TOKEN' \

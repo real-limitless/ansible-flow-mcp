@@ -85,6 +85,7 @@ def add_spoke(
         "ansible_host": ansible_host,
         "ansible_port": int(ansible_port),
         "ansible_user": ansible_user,
+        "mesh_user": "mcp-spoke",
         "mesh_role": "spoke",
     }
     if extra:
