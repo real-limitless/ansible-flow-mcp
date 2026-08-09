@@ -8,7 +8,13 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable
 
-from ansible_flow_mcp.policy import Role, assert_hosts_allowed, detect_mode, load_enrolled_hosts
+from ansible_flow_mcp.policy import (
+    Role,
+    assert_hosts_allowed,
+    detect_mode,
+    load_enrolled_hosts,
+    load_inventory_groups,
+)
 from ansible_flow_mcp.security import SecurityPolicy, load_policy, redact_secrets
 
 RunFn = Callable[[list[str], dict[str, str], float], tuple[int, str, str]]
@@ -40,7 +46,13 @@ def _resolve_inventory_and_hosts(
         if inventory is not None and str(inventory).strip() and Path(inventory).resolve() != inv_path.resolve():
             raise ValueError("hub mode rejects client-supplied inventory; enrollment inventory is fixed")
         enrolled = load_enrolled_hosts(inv_path)
-        hosts_n = assert_hosts_allowed(hosts or "localhost", enrolled=enrolled, role=role)
+        groups = load_inventory_groups(inv_path)
+        hosts_n = assert_hosts_allowed(
+            hosts or "localhost",
+            enrolled=enrolled,
+            role=role,
+            groups=groups,
+        )
         return hosts_n, str(inv_path), role, True
 
     # legacy

@@ -59,6 +59,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     hub_sub.add_parser("status", help="Show hub status / enrolled spokes")
     hub_sub.add_parser("session", help="Run hub MCP stdio session")
+    hub_sub.add_parser("tui", help="Operator TUI (servers, groups, OpenCode launch)")
     hub_sub.add_parser("accept-join", help="ForceCommand: accept spoke join JSON on stdin")
 
     h_call = hub_sub.add_parser("spoke-call", help="SSH ForceCommand MCP tool call on spoke")
@@ -94,13 +95,30 @@ def main(argv: list[str] | None = None) -> None:
     argv = list(sys.argv[1:] if argv is None else argv)
 
     # No subcommand → legacy/dev stdio MCP
-    if not argv or argv[0] not in {"hub", "spoke", "-h", "--help"}:
+    if not argv or argv[0] not in {"hub", "spoke", "tui", "-h", "--help"}:
         if argv and argv[0] in {"-h", "--help"}:
             build_parser().print_help()
             return
         from ansible_flow_mcp.server import run_server
 
         run_server(role=None)
+        return
+
+    # top-level tui shortcut
+    if argv[0] == "tui":
+        rest = argv[1:]
+        hub_path = None
+        # allow --hub-dir before/after
+        import os
+
+        if "--hub-dir" in rest:
+            i = rest.index("--hub-dir")
+            if i + 1 < len(rest):
+                hub_path = Path(rest[i + 1]).expanduser()
+                os.environ["ANSIBLE_FLOW_HUB_DIR"] = str(hub_path)
+        from ansible_flow_mcp.tui import run_tui
+
+        run_tui(hub_root=hub_path)
         return
 
     parser = build_parser()
@@ -158,6 +176,12 @@ def _hub_main(args: argparse.Namespace) -> None:
 
     if args.hub_cmd == "status":
         _out(hub_status(root=root))
+        return
+
+    if args.hub_cmd == "tui":
+        from ansible_flow_mcp.tui import run_tui
+
+        run_tui(hub_root=root)
         return
 
     if args.hub_cmd == "session":

@@ -56,6 +56,23 @@ def load_enrolled_hosts(inventory_path: Path) -> set[str]:
     return names
 
 
+def load_inventory_groups(inventory_path: Path) -> set[str]:
+    """Targetable Ansible group names from hub inventory (system + custom)."""
+    if not inventory_path.is_file():
+        return {"all", "hub", "spokes", "ungrouped"}
+    try:
+        from ansible_flow_mcp.hub.inventory import inventory_group_names, load_inventory
+
+        return inventory_group_names(load_inventory(inventory_path))
+    except Exception:  # noqa: BLE001
+        data = yaml.safe_load(inventory_path.read_text(encoding="utf-8")) or {}
+        names = {"all", "hub", "spokes", "ungrouped"}
+        children = ((data.get("all") or {}).get("children") or {}) if isinstance(data, dict) else {}
+        if isinstance(children, dict):
+            names.update(str(k) for k in children.keys())
+        return names
+
+
 def _walk_hosts(node: object, out: set[str]) -> None:
     if not isinstance(node, dict):
         return
@@ -91,6 +108,7 @@ def assert_hosts_allowed(
     enrolled: Iterable[str],
     role: Role,
     allow_localhost: bool = True,
+    groups: Iterable[str] | None = None,
 ) -> str:
     """Validate host pattern against role + enrollment. Returns normalized pattern."""
     enrolled_set = {str(h) for h in enrolled}
@@ -108,15 +126,17 @@ def assert_hosts_allowed(
         allowed = set(enrolled_set)
         if allow_localhost:
             allowed.update({"localhost", "127.0.0.1"})
-        # group names used in inventory
-        allowed.update({"all", "hub", "spokes", "ungrouped"})
+        group_set = {str(g) for g in (groups or ())}
+        if not group_set:
+            group_set = {"all", "hub", "spokes", "ungrouped"}
+        allowed.update(group_set)
         for p in parts:
             if p in allowed:
                 continue
-            # reject unknown single hosts; allow simple group names already in allowed
             raise ValueError(
                 f"host {p!r} is not enrolled on this hub "
-                f"(enrolled: {', '.join(sorted(enrolled_set)) or 'none'})"
+                f"(enrolled: {', '.join(sorted(enrolled_set)) or 'none'}; "
+                f"groups: {', '.join(sorted(group_set))})"
             )
         return ",".join(parts)
 

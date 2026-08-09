@@ -152,7 +152,7 @@ def revoke_node(
 def hub_status(*, state: HubState | None = None, root: Path | None = None) -> dict[str, Any]:
     st = state or load_hub_state(root)
     inv = load_inventory(st.inventory_path)
-    from ansible_flow_mcp.hub.inventory import list_spoke_names
+    from ansible_flow_mcp.hub.inventory import list_groups, list_spoke_names, list_spokes_detail
 
     return {
         "role": "hub",
@@ -160,9 +160,94 @@ def hub_status(*, state: HubState | None = None, root: Path | None = None) -> di
         "name": st.name,
         "root": str(st.root),
         "spokes": list_spoke_names(inv),
+        "nodes": list_spokes_detail(inv),
+        "groups": list_groups(inv),
         "inventory": str(st.inventory_path),
         "known_hosts": str(st.known_hosts_path),
     }
+
+
+def update_node(
+    name: str,
+    *,
+    ansible_host: str | None = None,
+    ansible_port: int | None = None,
+    ansible_user: str | None = None,
+    state: HubState | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    from ansible_flow_mcp.hub.inventory import update_spoke
+
+    st = state or load_hub_state(root)
+    inv = load_inventory(st.inventory_path)
+    node = update_spoke(
+        inv,
+        name,
+        ansible_host=ansible_host,
+        ansible_port=ansible_port,
+        ansible_user=ansible_user,
+    )
+    write_inventory(st.inventory_path, inv)
+    audit_log(st, "update_node", node_name=name, node=node)
+    return {"ok": True, "node": node}
+
+
+def list_groups_op(*, state: HubState | None = None, root: Path | None = None) -> dict[str, Any]:
+    from ansible_flow_mcp.hub.inventory import list_groups
+
+    st = state or load_hub_state(root)
+    inv = load_inventory(st.inventory_path)
+    return {"ok": True, "groups": list_groups(inv)}
+
+
+def create_group_op(
+    name: str,
+    *,
+    state: HubState | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    from ansible_flow_mcp.hub.inventory import create_group
+
+    st = state or load_hub_state(root)
+    inv = load_inventory(st.inventory_path)
+    grp = create_group(inv, name)
+    write_inventory(st.inventory_path, inv)
+    audit_log(st, "create_group", group=name)
+    return {"ok": True, "group": grp}
+
+
+def delete_group_op(
+    name: str,
+    *,
+    state: HubState | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    from ansible_flow_mcp.hub.inventory import delete_group
+
+    st = state or load_hub_state(root)
+    inv = load_inventory(st.inventory_path)
+    removed = delete_group(inv, name)
+    if removed:
+        write_inventory(st.inventory_path, inv)
+    audit_log(st, "delete_group", group=name, removed=removed)
+    return {"ok": True, "group": name, "removed": removed}
+
+
+def set_group_members_op(
+    name: str,
+    hosts: list[str],
+    *,
+    state: HubState | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    from ansible_flow_mcp.hub.inventory import set_group_members
+
+    st = state or load_hub_state(root)
+    inv = load_inventory(st.inventory_path)
+    grp = set_group_members(inv, name, hosts)
+    write_inventory(st.inventory_path, inv)
+    audit_log(st, "set_group_members", group=name, hosts=grp.get("hosts"))
+    return {"ok": True, "group": grp}
 
 
 def accept_join_stdio() -> int:

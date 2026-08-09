@@ -41,7 +41,29 @@ ansible-flow-mcp hub spoke-call --node web-03 --tool list_collections
 ansible-flow-mcp hub revoke --name web-03
 ```
 
-Hub MCP tools: `list_nodes`, `hub_status`, `issue_token`, `revoke_node`, `spoke_call`, plus catalog/run tools with **fixed inventory**.
+### Operator TUI
+
+```bash
+ansible-flow-mcp tui
+# or: ansible-flow-mcp hub tui --hub-dir /var/lib/ansible-flow/hub
+```
+
+- **Servers** — list enrolled spokes; invite (join token); edit host/port/user; revoke; ping  
+- **Groups** — create/delete targeting groups; set members (enrolled spokes only)  
+- **A** — write hub OpenCode MCP config and launch `opencode` with hub session  
+- Static example: `examples/opencode-hub.jsonc`
+
+### Hub MCP tools (agent + TUI parity)
+
+| Tool | Purpose |
+| --- | --- |
+| `list_nodes` / `hub_status` | Spokes + groups projection |
+| `issue_token` / `revoke_node` / `update_node` | Membership |
+| `list_groups` / `create_group` / `delete_group` / `set_group_members` | Targeting groups |
+| `spoke_call` | SSH ForceCommand tool on a spoke |
+| `search_modules` / `run_module` / … | Catalog + enrolled hosts **or** group names |
+
+Inventory is fixed; client `-i` rejected in hub mode.
 
 ## Lab
 
