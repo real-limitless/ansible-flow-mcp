@@ -11,7 +11,7 @@ MCP server that exposes real Ansible modules and playbooks to AI agents — and 
 | **Agent loop** | `search → schema → check → execute` on allowlisted collections |
 | **Fleet fabric** | One hub · join tokens · SSH ForceCommand spokes · fixed inventory |
 
-[Issue #2 · hub/spoke](https://github.com/real-limitless/ansible-flow-mcp/issues/2) · [OpenFlow dual-track](https://github.com/real-limitless/OpenFlow) · [Campaign storyboard](docs/campaign/) · Apache-2.0
+[OpenFlow dual-track](https://github.com/real-limitless/OpenFlow) · [Campaign storyboard](docs/campaign/) · [Hub/spoke ops](docs/HUB.md) · Apache-2.0
 
 Not affiliated with Red Hat or the Ansible project beyond using the public Ansible CLI and docs.
 
@@ -66,7 +66,7 @@ Curated module gallery. Slim argSpec before any run. Check mode default. Free-fo
 
 ### 2. Hub/spoke — nothing is a target until enrolled
 
-Secure multi-host mode from [issue #2](https://github.com/real-limitless/ansible-flow-mcp/issues/2): **agent attaches to the hub only**. Hub reaches spokes over **SSH only**. Spokes execute **localhost** and cannot lateral-move via this fabric.
+Secure multi-host mode: **agent attaches to the hub only**. Hub reaches spokes over **SSH only**. Spokes execute **localhost** and cannot lateral-move via this fabric.
 
 ![SSH hub/spoke topology and enrollment](docs/images/campaign-hub-spoke.png)
 
@@ -166,7 +166,7 @@ ansible-flow-mcp
 | Hub inventory | Enrolled hosts only · no client `-i` · host key checking on |
 | Spoke path | SSH ForceCommand · localhost exec · no peer fabric |
 
-**Residual:** hub compromise = fleet (same class as any Ansible control node). Harden the bastion — see [docs/SECURITY.md](docs/SECURITY.md) and hub hardening in issue #2 / [docs/HUB.md](docs/HUB.md).
+**Residual:** hub compromise = fleet (same class as any Ansible control node). Harden the bastion — see [docs/SECURITY.md](docs/SECURITY.md) and [docs/HUB.md](docs/HUB.md).
 
 ---
 

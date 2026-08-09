@@ -1,4 +1,4 @@
-# Hub/spoke deployment (issue #2)
+# Hub/spoke deployment
 
 Secure multi-host mode: **one hub** (agent entry + inventory source of truth) and **enrolled spokes** reached only over SSH.
 

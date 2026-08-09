@@ -1,6 +1,6 @@
 # Hub/spoke lab (`test/`)
 
-Docker/Podman Compose lab for [issue #2](https://github.com/real-limitless/ansible-flow-mcp/issues/2): **1 hub + 3 spokes**, operator TUI, OpenCode + hub MCP, demo inventory/groups.
+Docker/Podman Compose lab for hub/spoke: **1 hub + 3 spokes**, operator TUI, OpenCode + hub MCP, demo inventory/groups.
 
 ## One-shot demo (recommended)
 
