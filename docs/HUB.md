@@ -2,7 +2,8 @@
 
 Secure multi-host mode: **one hub** (agent entry + inventory source of truth) and **enrolled spokes** reached only over SSH.
 
-Product overview and campaign visuals: [README.md](../README.md) · storyboard [docs/campaign/](campaign/).
+Product overview and campaign visuals: [README.md](../README.md) · storyboard [docs/campaign/](campaign/).  
+**Step-by-step first run:** [QUICKSTART.md](QUICKSTART.md).
 
 ## Roles
 

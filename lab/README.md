@@ -2,6 +2,8 @@
 
 Docker/Podman Compose lab for hub/spoke: **1 hub + 3 spokes**, operator TUI, OpenCode + hub MCP, demo inventory/groups.
 
+Full project walkthrough (install → lab → bare metal): **[docs/QUICKSTART.md](../docs/QUICKSTART.md)** (Path B).
+
 ## One-shot demo (recommended)
 
 ```bash

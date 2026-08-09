@@ -15,7 +15,7 @@ Guidance for AI coding agents working in this repository.
 
 Not affiliated with Red Hat/Ansible beyond the public CLI. Dual-tracked with [OpenFlow](https://github.com/real-limitless/OpenFlow) gallery concepts.
 
-**Product docs:** `README.md`, `docs/HUB.md`, `docs/SECURITY.md`, `lab/README.md`.
+**Product docs:** `README.md`, `docs/QUICKSTART.md`, `docs/HUB.md`, `docs/SECURITY.md`, `lab/README.md`.
 
 ---
 

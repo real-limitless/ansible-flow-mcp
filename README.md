@@ -15,6 +15,8 @@ MCP server that exposes real Ansible modules and playbooks to AI agents — and 
 
 Not affiliated with Red Hat or the Ansible project beyond using the public Ansible CLI and docs.
 
+**New here?** Full step-by-step: **[docs/QUICKSTART.md](docs/QUICKSTART.md)** — local MCP · compose lab · bare-metal hub/spoke · editor wiring.
+
 ---
 
 ## Visual tour
@@ -111,36 +113,34 @@ See [lab/README.md](lab/README.md).
 
 ---
 
-## Quick start (single-node / dev)
+## Quick start
 
-### Requirements
+**Full guide (all paths, verify, troubleshooting):** **[docs/QUICKSTART.md](docs/QUICKSTART.md)**
 
-- Python ≥ 3.11
-- `ansible` / `ansible-core` on `PATH` for real runs
-- Collection **`ansible.posix`** (JSON callback)
-- Collections you intend to use installed on the control node
+| Path | Guide section |
+| --- | --- |
+| Local MCP + Cursor/Claude | [Path A](docs/QUICKSTART.md#path-a--local-mcp-single-node) |
+| Compose lab (hub + 3 spokes) | [Path B](docs/QUICKSTART.md#path-b--compose-lab-full-hubspoke) |
+| Bare-metal hub/spoke | [Path C](docs/QUICKSTART.md#path-c--bare-metal-hubspoke) |
+
+### Single-node / dev (short form)
+
+Requirements: Python ≥ 3.11 · `ansible-core` on `PATH` · collection **`ansible.posix`** · collections you will run.
 
 ```bash
 python3 -m pip install --user 'ansible-core>=2.16,<2.19'
 export PATH="$HOME/.local/bin:$PATH"
 ansible-galaxy collection install ansible.posix
-```
 
-### Install & run
-
-```bash
 cd ansible-flow-mcp
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
-pytest
+pytest -q
 ansible-flow-mcp
-# or: python -m ansible_flow_mcp.server
 ```
 
-### Cursor / Claude Desktop / OpenCode
-
-- `examples/cursor-mcp.json`, `examples/claude-desktop.json`
-- Hub + OpenCode: `examples/opencode-hub.jsonc` · `ansible-flow-mcp hub write-opencode-config`
+Editor snippets: `examples/cursor-mcp.json`, `examples/claude-desktop.json`.  
+Hub + OpenCode: `examples/opencode-hub.jsonc` · `ansible-flow-mcp hub write-opencode-config`.
 
 ```json
 {
