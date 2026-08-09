@@ -4,18 +4,29 @@
 
 MCP server that exposes real Ansible modules and playbooks to AI agents — and a **SSH hub/spoke fabric** so multi-host automation is enrolled, bastion-scoped, and check-first by default.
 
-<p align="center">
-  <img src="docs/images/campaign-hero.png" alt="ansible-flow-mcp: agent hub session and enrolled inventory rail" width="900" />
-</p>
+![Hero: agent hub session and enrolled inventory rail](docs/images/campaign-hero.png)
 
 | Track | What you get |
 | --- | --- |
 | **Agent loop** | `search → schema → check → execute` on allowlisted collections |
 | **Fleet fabric** | One hub · join tokens · SSH ForceCommand spokes · fixed inventory |
 
-[Issue #2 · hub/spoke](https://github.com/real-limitless/ansible-flow-mcp/issues/2) · [OpenFlow dual-track](https://github.com/real-limitless/OpenFlow) · Apache-2.0
+[Issue #2 · hub/spoke](https://github.com/real-limitless/ansible-flow-mcp/issues/2) · [OpenFlow dual-track](https://github.com/real-limitless/OpenFlow) · [Campaign storyboard](docs/campaign/) · Apache-2.0
 
 Not affiliated with Red Hat or the Ansible project beyond using the public Ansible CLI and docs.
+
+---
+
+## Visual tour
+
+| | |
+| :---: | :---: |
+| **Why it exists** | **Agent loop** |
+| ![Why: god-mode control node vs enrolled bastion](docs/images/campaign-why.png) | ![Agent ritual: search → schema → check → execute](docs/images/campaign-agent-loop.png) |
+| **Hub / spoke fabric** | **Operators** |
+| ![SSH hub/spoke topology and enrollment](docs/images/campaign-hub-spoke.png) | ![Operator TUI, hub MCP tools, lab demo](docs/images/campaign-operator.png) |
+
+Screenshots live in [`docs/images/campaign-*.png`](docs/images/). Re-shoot from [`docs/campaign/`](docs/campaign/) with `./capture.sh`.
 
 ---
 
@@ -23,9 +34,7 @@ Not affiliated with Red Hat or the Ansible project beyond using the public Ansib
 
 Agents on a god-mode control node invent inventory, reach for `shell`, and treat every worker as an entrypoint. That is not a security model.
 
-<p align="center">
-  <img src="docs/images/campaign-why.png" alt="Without a fabric vs ansible-flow-mcp controls" width="900" />
-</p>
+![Without a fabric vs ansible-flow-mcp controls](docs/images/campaign-why.png)
 
 **You need this when:**
 
@@ -41,9 +50,7 @@ Agents on a god-mode control node invent inventory, reach for `shell`, and treat
 
 Curated module gallery. Slim argSpec before any run. Check mode default. Free-form modules denied. Playbooks path-jailed.
 
-<p align="center">
-  <img src="docs/images/campaign-agent-loop.png" alt="Agent ritual and MCP tools" width="900" />
-</p>
+![Agent ritual and MCP tools](docs/images/campaign-agent-loop.png)
 
 | Tool | Purpose |
 | --- | --- |
@@ -61,9 +68,7 @@ Curated module gallery. Slim argSpec before any run. Check mode default. Free-fo
 
 Secure multi-host mode from [issue #2](https://github.com/real-limitless/ansible-flow-mcp/issues/2): **agent attaches to the hub only**. Hub reaches spokes over **SSH only**. Spokes execute **localhost** and cannot lateral-move via this fabric.
 
-<p align="center">
-  <img src="docs/images/campaign-hub-spoke.png" alt="SSH hub/spoke topology and enrollment" width="900" />
-</p>
+![SSH hub/spoke topology and enrollment](docs/images/campaign-hub-spoke.png)
 
 | | Full mesh (withdrawn) | **Hub/spoke (shipped)** |
 | --- | --- | --- |
@@ -84,9 +89,7 @@ Deep ops: **[docs/HUB.md](docs/HUB.md)**.
 
 Day-2 surface matches the agent: enroll, group, hand the hub to OpenCode.
 
-<p align="center">
-  <img src="docs/images/campaign-operator.png" alt="Operator TUI, hub MCP tools, lab demo" width="900" />
-</p>
+![Operator TUI, hub MCP tools, lab demo](docs/images/campaign-operator.png)
 
 ```bash
 ansible-flow-mcp hub init --name ctrl-01
@@ -165,8 +168,6 @@ ansible-flow-mcp
 
 **Residual:** hub compromise = fleet (same class as any Ansible control node). Harden the bastion — see [docs/SECURITY.md](docs/SECURITY.md) and hub hardening in issue #2 / [docs/HUB.md](docs/HUB.md).
 
-Campaign storyboard (re-shoot PNGs): [docs/campaign/](docs/campaign/).
-
 ---
 
 ## Catalog & OpenFlow
@@ -186,9 +187,7 @@ Dual-tracked with [OpenFlow](https://github.com/real-limitless/OpenFlow) Ansible
 | Playbook resource | `run_playbook` |
 | Control-node SSH / become | Inventory + Ansible config · hub→spoke SSH in hub mode |
 
-<p align="center">
-  <img src="docs/images/architecture.png" alt="Dual-track architecture with OpenFlow" width="720" />
-</p>
+![Dual-track architecture with OpenFlow](docs/images/architecture.png)
 
 ---
 
