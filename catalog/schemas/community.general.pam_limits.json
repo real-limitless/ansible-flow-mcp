@@ -1,0 +1,131 @@
+{
+  "fqcn": "community.general.pam_limits",
+  "shortDescription": "Modify Linux PAM limits",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/pam_limits_module.html",
+  "options": [
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered it incorrectly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Comment associated with the limit.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": false,
+      "default": "/etc/security/limits.conf",
+      "description": "Modify the limits.conf path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "A username, @groupname, wildcard, UID/GID range.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit_item",
+      "displayName": "Limit Item",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The limit to be set.",
+      "choices": [
+        "core",
+        "data",
+        "fsize",
+        "memlock",
+        "nofile",
+        "rss",
+        "stack",
+        "cpu",
+        "nproc",
+        "as",
+        "maxlogins",
+        "maxsyslogins",
+        "priority",
+        "locks",
+        "sigpending",
+        "msgqueue",
+        "nice",
+        "rtprio",
+        "chroot"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit_type",
+      "displayName": "Limit Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Limit type, see C(man 5 limits.conf) for an explanation.",
+      "choices": [
+        "hard",
+        "soft",
+        "-"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_max",
+      "displayName": "Use Max",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), the maximal value is used or conserved. If the specified value is superior to the value in the file, file content is replaced with the new value, else content is not modified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_min",
+      "displayName": "Use Min",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), the minimal value is used or conserved. If the specified value is inferior to the value in the file, file content is replaced with the new value, else content is not modified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "value",
+      "displayName": "Value",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The value of the limit. Value must either be V(unlimited), V(infinity) or V(-1), all of which indicate no limit, or a limit of 0 or larger. Value must be a number in the range -20 to 19 inclusive, if O(limit_item) is set to V(nice) or V(priority). Refer to the C(man 5 limits.conf) manual pages for more details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

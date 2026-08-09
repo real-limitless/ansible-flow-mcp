@@ -1,0 +1,119 @@
+{
+  "fqcn": "community.general.sefcontext",
+  "shortDescription": "Manages SELinux file context mapping definitions",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/sefcontext_module.html",
+  "options": [
+    {
+      "name": "ftype",
+      "displayName": "Ftype",
+      "type": "string",
+      "required": false,
+      "default": "a",
+      "description": "The file type that should have SELinux contexts applied. The following file type options are available: V(a) for all files, V(b) for block devices, V(c) for character devices, V(d) for directories, V(f) for regular files, V(l) for symbolic links, V(p) for named pipes, V(s) for socket files.",
+      "choices": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "f",
+        "l",
+        "p",
+        "s"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_selinux_state",
+      "displayName": "Ignore Selinux State",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Useful for scenarios (chrooted environment) that you cannot get the real SELinux state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reload",
+      "displayName": "Reload",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Reload SELinux policy after commit. Note that this does not apply SELinux file contexts to existing files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SELinux range for the specified O(target). Defaults to V(s0) for new file contexts and to existing value when modifying file contexts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SELinux type for the specified O(target).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SELinux user for the specified O(target). Defaults to V(system_u) for new file contexts and to existing value when modifying file contexts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the SELinux file context must be V(absent) or V(present). Specifying V(absent) without either O(setype) or O(substitute) deletes both SELinux type or path substitution mappings that match O(target).",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "substitute",
+      "displayName": "Substitute",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to use to substitute file context(s) for the specified O(target). The context labeling for the O(target) subtree is made equivalent to this path. This is also referred to as SELinux file context equivalence and it implements the C(equal) functionality of the SELinux management tools.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Target path (expression).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,201 @@
+{
+  "fqcn": "community.general.ipa_group",
+  "shortDescription": "Manage FreeIPA group",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ipa_group_module.html",
+  "options": [
+    {
+      "name": "append",
+      "displayName": "Append",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If V(true), add the listed O(user) and O(group) to the group members. If V(false), only the listed O(user) and O(group) are set as group members, removing any other members.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cn",
+      "displayName": "Cn",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Canonical name. Can not be changed as it is the unique identifier.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "external",
+      "displayName": "External",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allow adding external non-IPA members from trusted domains.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "external_user",
+      "displayName": "External User",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of external users assigned to this group. Behaves identically to O(user) with respect to O(append) attribute. List entries can be in V(DOMAIN\\\\\\\\username) or SID format. Unless SIDs are provided, the module always attempts to make changes even if the group already has all the users. This is because only SIDs are returned by IPA query. O(external=true) is needed for this option to work.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gidnumber",
+      "displayName": "Gidnumber",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "GID (use this option to set it manually).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of group names assigned to this group. If O(append=false) and an empty list is passed all groups are removed from this group. Groups that are already assigned but not passed are removed. If O(append=true) the listed groups are assigned without removing other groups. If option is omitted assigned groups are not checked or changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_host",
+      "displayName": "Ipa Host",
+      "type": "string",
+      "required": false,
+      "default": "ipa.example.com",
+      "description": "IP or hostname of IPA server. If the value is not specified in the task, the value of environment variable E(IPA_HOST) is used instead. If both the environment variable E(IPA_HOST) and the value are not specified in the task, then DNS is used to try to discover the FreeIPA server. The relevant entry needed in FreeIPA is the C(ipa-ca) entry. If neither the DNS entry, nor the environment E(IPA_HOST), nor the value are available in the task, then the default value is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_pass",
+      "displayName": "Ipa Pass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of administrative user. If the value is not specified in the task, the value of environment variable E(IPA_PASS) is used instead. Note that if the C(urllib_gssapi) library is available, it is possible to use GSSAPI to authenticate to FreeIPA. If the environment variable E(KRB5CCNAME) is available, the module uses this Kerberos credentials cache to authenticate to the FreeIPA server. If the environment variable E(KRB5_CLIENT_KTNAME) is available, and E(KRB5CCNAME) is not; the module uses",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_port",
+      "displayName": "Ipa Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port of FreeIPA / IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PORT) is used instead. If both the environment variable E(IPA_PORT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_prot",
+      "displayName": "Ipa Prot",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "Protocol used by IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PROT) is used instead. If both the environment variable E(IPA_PROT) and the value are not specified in the task, then default value is set.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_timeout",
+      "displayName": "Ipa Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Specifies idle timeout (in seconds) for the connection. For bulk operations, you may want to increase this in order to avoid timeout from IPA server. If the value is not specified in the task, the value of environment variable E(IPA_TIMEOUT) is used instead. If both the environment variable E(IPA_TIMEOUT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_user",
+      "displayName": "Ipa User",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Administrative account used on IPA server. If the value is not specified in the task, the value of environment variable E(IPA_USER) is used instead. If both the environment variable E(IPA_USER) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nonposix",
+      "displayName": "Nonposix",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Create as a non-POSIX group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State to ensure.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of user names assigned to this group. If O(append=false) and an empty list is passed all users are removed from this group. Users that are already assigned but not passed are removed. If O(append=true) the listed users are assigned without removing other users. If option is omitted assigned users are not checked or changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This only applies if O(ipa_prot) is V(https). If set to V(false), the SSL certificates are not validated. This should only set to V(false) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

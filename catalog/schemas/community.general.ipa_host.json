@@ -1,0 +1,258 @@
+{
+  "fqcn": "community.general.ipa_host",
+  "shortDescription": "Manage FreeIPA host",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ipa_host_module.html",
+  "options": [
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A description of this host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Force host name even if not in DNS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_creation",
+      "displayName": "Force Creation",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Create host if O(state=disabled) or O(state=enabled) but not present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fqdn",
+      "displayName": "Fqdn",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Full qualified domain name. Can not be changed as it is the unique identifier.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_address",
+      "displayName": "Ip Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Add the host to DNS with this IP address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_host",
+      "displayName": "Ipa Host",
+      "type": "string",
+      "required": false,
+      "default": "ipa.example.com",
+      "description": "IP or hostname of IPA server. If the value is not specified in the task, the value of environment variable E(IPA_HOST) is used instead. If both the environment variable E(IPA_HOST) and the value are not specified in the task, then DNS is used to try to discover the FreeIPA server. The relevant entry needed in FreeIPA is the C(ipa-ca) entry. If neither the DNS entry, nor the environment E(IPA_HOST), nor the value are available in the task, then the default value is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_pass",
+      "displayName": "Ipa Pass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of administrative user. If the value is not specified in the task, the value of environment variable E(IPA_PASS) is used instead. Note that if the C(urllib_gssapi) library is available, it is possible to use GSSAPI to authenticate to FreeIPA. If the environment variable E(KRB5CCNAME) is available, the module uses this Kerberos credentials cache to authenticate to the FreeIPA server. If the environment variable E(KRB5_CLIENT_KTNAME) is available, and E(KRB5CCNAME) is not; the module uses",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_port",
+      "displayName": "Ipa Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port of FreeIPA / IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PORT) is used instead. If both the environment variable E(IPA_PORT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_prot",
+      "displayName": "Ipa Prot",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "Protocol used by IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PROT) is used instead. If both the environment variable E(IPA_PROT) and the value are not specified in the task, then default value is set.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_timeout",
+      "displayName": "Ipa Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Specifies idle timeout (in seconds) for the connection. For bulk operations, you may want to increase this in order to avoid timeout from IPA server. If the value is not specified in the task, the value of environment variable E(IPA_TIMEOUT) is used instead. If both the environment variable E(IPA_TIMEOUT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_user",
+      "displayName": "Ipa User",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Administrative account used on IPA server. If the value is not specified in the task, the value of environment variable E(IPA_USER) is used instead. If both the environment variable E(IPA_USER) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "l",
+      "displayName": "L",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host locality (for example V(Baltimore, MD)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mac_address",
+      "displayName": "Mac Address",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of Hardware MAC address(es) off this host. If option is omitted MAC addresses are not checked nor changed. If an empty list is passed all assigned MAC addresses are removed. MAC addresses that are already assigned but not passed are removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ns_hardware_platform",
+      "displayName": "Ns Hardware Platform",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host hardware platform (for example V(Lenovo T61\")).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ns_host_location",
+      "displayName": "Ns Host Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host location (for example V(Lab 2)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ns_os_version",
+      "displayName": "Ns Os Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host operating system and version (for example V(Fedora 9)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "random_password",
+      "displayName": "Random Password",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Generate a random password to be used in bulk enrollment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State to ensure.",
+      "choices": [
+        "absent",
+        "disabled",
+        "enabled",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_dns",
+      "displayName": "Update Dns",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If set V(true) with O(state=absent), then removes DNS records of the host managed by FreeIPA DNS. This option has no effect for states other than V(absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_certificate",
+      "displayName": "User Certificate",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of Base-64 encoded server certificates. If option is omitted certificates are not checked nor changed. If an empty list is passed all assigned certificates are removed. Certificates already assigned but not passed are removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "userclass",
+      "displayName": "Userclass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host category (semantics placed on this attribute are for local interpretation).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This only applies if O(ipa_prot) is V(https). If set to V(false), the SSL certificates are not validated. This should only set to V(false) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

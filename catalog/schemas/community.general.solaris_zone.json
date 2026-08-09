@@ -1,0 +1,128 @@
+{
+  "fqcn": "community.general.solaris_zone",
+  "shortDescription": "Manage Solaris zones",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/solaris_zone_module.html",
+  "options": [
+    {
+      "name": "attach_options",
+      "displayName": "Attach Options",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Extra options to the zoneadm attach command. For example, this can be used to specify whether a minimum or full update of packages is required and if any packages need to be deleted. For valid values, see zoneadm(1M).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config",
+      "displayName": "Config",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The C(zonecfg) configuration commands for this zone. See zonecfg(1M) for the valid options and syntax. Typically this is a list of options separated by semi-colons or new lines, for example V(set auto-boot=true;add net;set physical=bge0;set address=10.1.1.1;end).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_options",
+      "displayName": "Create Options",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Extra options to the zonecfg(1M) create command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "install_options",
+      "displayName": "Install Options",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Extra options to the zoneadm(1M) install command. To automate Solaris 11 zone creation, use this to specify the profile XML file, for example O(install_options=-c sc_profile.xml).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Zone name. A zone name must be unique name. A zone name must begin with an alphanumeric character. The name can contain alphanumeric characters, underscores V(_), hyphens V(-), and periods V(.). The name cannot be longer than 64 characters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path where the zone is created. This is required when the zone is created, but not used otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "root_password",
+      "displayName": "Root Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password hash for the root account. If not specified, the zone's root account does not have a password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sparse",
+      "displayName": "Sparse",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to create a sparse (V(true)) or whole root (V(false)) zone.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "V(present), configure and install the zone. V(installed), synonym for V(present). V(running), if the zone already exists, boot it, otherwise, configure and install the zone first, then boot it. V(started), synonym for V(running). V(stopped), shutdown a zone. V(absent), destroy the zone. V(configured), configure the ready so that it is to be attached. V(attached), attach a zone, but do not boot it. V(detached), shutdown and detach a zone.",
+      "choices": [
+        "absent",
+        "attached",
+        "configured",
+        "detached",
+        "installed",
+        "present",
+        "running",
+        "started",
+        "stopped"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Timeout, in seconds, for zone to boot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

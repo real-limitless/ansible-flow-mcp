@@ -6,6 +6,7 @@ Factory-style **TUI + queue** that scrapes **top Ansible Galaxy collections** (b
 
 ```bash
 cd ansible-flow-mcp
+pip install -r scripts/factory/requirements.txt   # pyyaml + httpx[socks]
 python scripts/factory/tui.py
 ```
 
@@ -14,10 +15,32 @@ Or headless:
 ```bash
 # 1) Scan top 40 Galaxy collections → module list
 python scripts/factory/scrape_galaxy.py --top 40 --enqueue
+# with proxy:
+python scripts/factory/scrape_galaxy.py --top 40 --use-proxy --proxy socks5h://127.0.0.1:1080
 
 # 2) Generate schemas + merge gallery (ansible-doc when available)
-python scripts/factory/queue_worker.py --concurrency 4
+python scripts/factory/queue_worker.py --concurrency 2
 ```
+
+### Proxy (TUI → PROXIES)
+
+| Key | Action |
+|-----|--------|
+| **t** / Space | Toggle `useProxy` |
+| **R** | Refresh free SOCKS5 list (`proxyListUrl`, default Databay) |
+| **H** | Health-check sample against Galaxy |
+| **a** | Add fixed proxy (`socks5h://host:port` or `host:port`) |
+| **c** | Clear fixed proxy (rotate pool) |
+| **s** | Save settings |
+
+Also honors `ALL_PROXY` / `HTTPS_PROXY` / `HTTP_PROXY`.
+
+Settings keys: `useProxy`, `proxy`, `proxyListUrl`, `proxyProbeLimit`, `proxyProbeTimeout`.
+
+### Failed jobs (`Extra data`)
+
+Parallel workers used to corrupt `catalog/gallery.json`. Writes are now **file-locked + atomic**.  
+On TUI start the gallery is auto-repaired. Then **QUEUE → r** requeues failed jobs.
 
 ## Mental model
 

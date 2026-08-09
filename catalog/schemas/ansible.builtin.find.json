@@ -1,0 +1,226 @@
+{
+  "fqcn": "ansible.builtin.find",
+  "shortDescription": "Return a list of files based on specific criteria",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/builtin/find_module.html",
+  "options": [
+    {
+      "name": "age",
+      "displayName": "Age",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Select files whose age is equal to or greater than the specified time. Use a negative age to find files equal to or less than the specified time. You can choose seconds, minutes, hours, days, or weeks by specifying the first letter of any of those words (e.g., \"1w\").",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "age_stamp",
+      "displayName": "Age Stamp",
+      "type": "string",
+      "required": false,
+      "default": "mtime",
+      "description": "Choose the file property against which we compare age.",
+      "choices": [
+        "atime",
+        "ctime",
+        "mtime"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "contains",
+      "displayName": "Contains",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A regular expression or pattern which should be matched against the file content. If O(read_whole_file=false) it matches against the beginning of the line (uses V(re.match(\\))). If O(read_whole_file=true), it searches anywhere for that pattern (uses V(re.search(\\))). Works only when O(file_type) is V(file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "depth",
+      "displayName": "Depth",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Set the maximum number of levels to descend into. Setting O(recurse=false) will override this value, which is effectively depth 1. Default is unlimited depth.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encoding",
+      "displayName": "Encoding",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When doing a O(contains) search, determine the encoding of the files to be searched.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exact_mode",
+      "displayName": "Exact Mode",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Restrict mode matching to exact matches only, and not as a minimum set of permissions to match.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "excludes",
+      "displayName": "Excludes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "One or more (shell or regex) patterns, which type is controlled by O(use_regex) option. Items whose basenames match an O(excludes) pattern are culled from O(patterns) matches. Multiple patterns can be specified using a list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_type",
+      "displayName": "File Type",
+      "type": "string",
+      "required": false,
+      "default": "file",
+      "description": "Type of file to select. The V(link) and V(any) choices were added in Ansible 2.3.",
+      "choices": [
+        "any",
+        "directory",
+        "file",
+        "link"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "follow",
+      "displayName": "Follow",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set this to V(true) to follow symlinks in path for systems with python 2.6+.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "get_checksum",
+      "displayName": "Get Checksum",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set this to V(true) to retrieve a file's SHA1 checksum.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hidden",
+      "displayName": "Hidden",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set this to V(true) to include hidden files, otherwise they will be ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit",
+      "displayName": "Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Limit the maximum number of matching paths returned. After finding this many, the find action will stop looking. Matches are made from the top, down (i.e. shallowest directory first). If not set, or set to v(null), it will do unlimited matches. Default is unlimited matches.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Choose objects matching a specified permission. This value is restricted to modes that can be applied using the python C(os.chmod) function. The mode can be provided as an octal such as V(\"0644\") or as symbolic such as V(u=rw,g=r,o=r).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "paths",
+      "displayName": "Paths",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "List of paths of directories to search. All paths must be fully qualified. From ansible-core 2.18 and onwards, the data type has changed from C(str) to C(path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "patterns",
+      "displayName": "Patterns",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "One or more (shell or regex) patterns, which type is controlled by O(use_regex) option. The patterns restrict the list of files to be returned to those whose basenames match at least one of the patterns specified. Multiple patterns can be specified using a list. The pattern is matched against the file base name, excluding the directory. When using regexen, the pattern MUST match the ENTIRE file name, not just parts of it. So if you are looking to match all files ending in .default, you'd need to",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_whole_file",
+      "displayName": "Read Whole File",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When doing a C(contains) search, determines whether the whole file should be read into memory or if the regex should be applied to the file line-by-line. Setting this to C(true) can have performance and memory implications for large files. This uses V(re.search(\\)) instead of V(re.match(\\)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recurse",
+      "displayName": "Recurse",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If target is a directory, recursively descend into the directory looking for files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Select files whose size is equal to or greater than the specified size. Use a negative size to find files equal to or less than the specified size. Unqualified values are in bytes but b, k, m, g, and t can be appended to specify bytes, kilobytes, megabytes, gigabytes, and terabytes, respectively. Size is not evaluated for directories.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_regex",
+      "displayName": "Use Regex",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If V(false), the patterns are file globs (shell). If V(true), they are python regexes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

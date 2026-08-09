@@ -1,0 +1,216 @@
+{
+  "fqcn": "community.general.slack",
+  "shortDescription": "Send Slack notifications",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/slack_module.html",
+  "options": [
+    {
+      "name": "attachments",
+      "displayName": "Attachments",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Define a list of attachments. This list mirrors the Slack JSON API. For more information, see U(https://api.slack.com/docs/attachments).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "blocks",
+      "displayName": "Blocks",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Define a list of blocks. This list mirrors the Slack JSON API. For more information, see U(https://api.slack.com/block-kit).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "channel",
+      "displayName": "Channel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Channel to send the message to. If absent, the message goes to the channel selected for the O(token).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "color",
+      "displayName": "Color",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "Allow text to use default colors - use the default of V(normal) to not send a custom color bar at the start of the message. Allowed values for color can be one of V(normal), V(good), V(warning), V(danger), any valid 3 digit or 6 digit hex color value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When using new format 'Webhook token' and WebAPI tokens: this can be V(slack.com) or V(slack-gov.com) and is ignored otherwise. When using old format 'Webhook token': Slack (sub)domain for your environment without protocol. (For example V(example.slack.com).) in Ansible 1.8 and beyond, this is deprecated and may be ignored. See token documentation for information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fail_on_file_error",
+      "displayName": "Fail On File Error",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(true), the module fails if a file is missing or encounters an upload error. If V(false), the module issues a warning and continue processing the next file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "files",
+      "displayName": "Files",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of files to be uploaded to Slack. Each list item should be a dictionary containing O(files[].path) (absolute or relative path to the file) and optionally O(files[].name) (the filename as it will appear in Slack).\n If O(msg), O(attachments), or O(blocks) are provided, the files are attached as a reply to that message (creating a thread). If no message content is provided, the files are uploaded as a standalone post in the specified O(channel). Note: File uploading requires a WebAPI token (",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "icon_emoji",
+      "displayName": "Icon Emoji",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Emoji for the message sender. See Slack documentation for options. If O(icon_emoji) is set, O(icon_url) is not used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "icon_url",
+      "displayName": "Icon Url",
+      "type": "string",
+      "required": false,
+      "default": "https://docs.ansible.com/favicon/favicon.ico",
+      "description": "URL for the message sender's icon.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "link_names",
+      "displayName": "Link Names",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Automatically create links for channels and usernames in O(msg).",
+      "choices": [
+        1,
+        0
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "message_id",
+      "displayName": "Message Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional. Message ID to edit, instead of posting a new message. If supplied O(channel) must be in form of C(C0xxxxxxx). use C({{ slack_response.channel }}) to get RV(ignore:channel) from previous task run. The token needs history scope to get information on the message to edit (C(channels:history,groups:history,mpim:history,im:history)). Corresponds to C(ts) in the Slack API (U(https://api.slack.com/messaging/modifying)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "msg",
+      "displayName": "Msg",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Message to send. Note that the module does not handle escaping characters. Plain-text angle brackets and ampersands should be converted to HTML entities (for example C(&) to C(&amp;)) before sending. See Slack's documentation (U(https://api.slack.com/docs/message-formatting)) for more.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parse",
+      "displayName": "Parse",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Setting for the message parser at Slack.",
+      "choices": [
+        "full",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prepend_hash",
+      "displayName": "Prepend Hash",
+      "type": "string",
+      "required": false,
+      "default": "never",
+      "description": "Setting for automatically prepending a V(#) symbol on the passed in O(channel). The V(auto) method prepends a V(#) unless O(channel) starts with one of V(#), V(@), V(C0), V(GF), V(G0), V(CP). These prefixes only cover a small set of the prefixes that should not have a V(#) prepended. Since an exact condition which O(channel) values must not have the V(#) prefix is not known, the value V(auto) for this option is deprecated in the future. It is best to explicitly set O(prepend_hash=always) or O(pr",
+      "choices": [
+        "always",
+        "never",
+        "auto"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "thread_id",
+      "displayName": "Thread Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional. Timestamp of parent message to thread this message, see U(https://api.slack.com/docs/message-threading).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Slack integration token. This authenticates you to the Slack service. Make sure to use the correct type of token, depending on what method you use. Webhook token: Prior to Ansible 1.8, a token looked like V(3Ffe373sfhRE6y42Fg3rvf4GlK). In Ansible 1.8 and above, Ansible adapts to the new Slack API where tokens look like V(G922VJP24/D921DW937/3Ffe373sfhRE6y42Fg3rvf4GlK). If tokens are in the new format then Slack ignores any value of domain except V(slack.com) or V(slack-gov.com). If the token is ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": "Ansible",
+      "description": "This is the sender of the message.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(false), SSL certificates are not validated. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

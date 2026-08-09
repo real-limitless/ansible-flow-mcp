@@ -1,0 +1,275 @@
+{
+  "fqcn": "community.general.ini_file",
+  "shortDescription": "Tweak settings in INI files",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ini_file_module.html",
+  "options": [
+    {
+      "name": "allow_no_value",
+      "displayName": "Allow No Value",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allow option without value and without '=' symbol.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered it incorrectly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create",
+      "displayName": "Create",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to V(false), the module fails if the file does not already exist. By default it creates the file if it is missing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclusive",
+      "displayName": "Exclusive",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to V(true) (default), all matching O(option) lines are removed when O(state=absent), or replaced when O(state=present). If set to V(false), only the specified O(value)/O(values) are added when O(state=present), or removed when O(state=absent), and existing ones are not modified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "follow",
+      "displayName": "Follow",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This flag indicates that filesystem links, if they exist, should be followed. O(follow=true) can modify O(path) when combined with parameters such as O(mode).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_spaces",
+      "displayName": "Ignore Spaces",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Do not change a line if doing so would only add or remove spaces before or after the V(=) symbol.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "modify_inactive_option",
+      "displayName": "Modify Inactive Option",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "By default the module replaces a commented line that matches the given option. Set this option to V(false) to avoid this. This is useful when you want to keep commented example C(key=value) pairs for documentation purposes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_extra_spaces",
+      "displayName": "No Extra Spaces",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Do not insert spaces before and after '=' symbol.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "option",
+      "displayName": "Option",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If set (required for changing a O(value)), this is the name of the option. May be omitted if adding/removing a whole O(section).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the INI-style file; this file is created if required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "section",
+      "displayName": "Section",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Section name in INI file. This is added if O(state=present) automatically when a single value is being set. If being omitted, the O(option) is placed before the first O(section). Omitting O(section) is also required if the config format does not support sections.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "section_has_values",
+      "displayName": "Section Has Values",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Among possibly multiple sections of the same name, select the first one that contains matching options and values. With O(state=present), if a suitable section is not found, a new section is added, including the required options. With O(state=absent), at most one O(section) is removed if it contains the values.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If set to V(absent) and O(exclusive) set to V(true) all matching O(option) lines are removed. If set to V(absent) and O(exclusive) set to V(false) the specified O(option=value) lines are removed, but the other O(option)s with the same name are not touched. If set to V(present) and O(exclusive) set to V(false) the specified O(option=values) lines are added, but the other O(option)s with the same name are not touched. If set to V(present) and O(exclusive) set to V(true) all given O(option=values) ",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "value",
+      "displayName": "Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The string value to be associated with an O(option). May be omitted when removing an O(option). Mutually exclusive with O(values). O(value=v) is equivalent to O(values=[v]).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "values",
+      "displayName": "Values",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The string value to be associated with an O(option). May be omitted when removing an O(option). Mutually exclusive with O(value). O(value=v) is equivalent to O(values=[v]).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

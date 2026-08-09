@@ -1,0 +1,271 @@
+{
+  "fqcn": "community.general.ufw",
+  "shortDescription": "Manage firewall with UFW",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ufw_module.html",
+  "options": [
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Add a comment to the rule. Requires UFW version >=0.35.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default",
+      "displayName": "Default",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Change the default policy for incoming or outgoing traffic.",
+      "choices": [
+        "allow",
+        "deny",
+        "reject"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete",
+      "displayName": "Delete",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Delete rule. If O(delete=true) and a value is provided for O(insert), then O(insert) is ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "direction",
+      "displayName": "Direction",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Select direction for a rule or default policy command. Mutually exclusive with O(interface_in) and O(interface_out).",
+      "choices": [
+        "in",
+        "incoming",
+        "out",
+        "outgoing",
+        "routed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "from_ip",
+      "displayName": "From Ip",
+      "type": "string",
+      "required": false,
+      "default": "any",
+      "description": "Source IP address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "from_port",
+      "displayName": "From Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Source port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "insert",
+      "displayName": "Insert",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Insert the corresponding rule as rule number NUM. Note that ufw numbers rules starting with 1. If O(delete=true) and a value is provided for O(insert), then O(insert) is ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "insert_relative_to",
+      "displayName": "Insert Relative To",
+      "type": "string",
+      "required": false,
+      "default": "zero",
+      "description": "Allows to interpret the index in O(insert) relative to a position. V(zero) interprets the rule number as an absolute index (that is, 1 is the first rule). V(first-ipv4) interprets the rule number relative to the index of the first IPv4 rule, or relative to the position where the first IPv4 rule would be if there is currently none. V(last-ipv4) interprets the rule number relative to the index of the last IPv4 rule, or relative to the position where the last IPv4 rule would be if there is currentl",
+      "choices": [
+        "first-ipv4",
+        "first-ipv6",
+        "last-ipv4",
+        "last-ipv6",
+        "zero"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify interface for the rule. The direction (in or out) used for the interface depends on the value of O(direction). See O(interface_in) and O(interface_out) for routed rules that needs to supply both an input and output interface. Mutually exclusive with O(interface_in) and O(interface_out).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface_in",
+      "displayName": "Interface In",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify input interface for the rule. This is mutually exclusive with O(direction) and O(interface). However, it is compatible with O(interface_out) for routed rules.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface_out",
+      "displayName": "Interface Out",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify output interface for the rule. This is mutually exclusive with O(direction) and O(interface). However, it is compatible with O(interface_in) for routed rules.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log",
+      "displayName": "Log",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Log new connections matched to this rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logging",
+      "displayName": "Logging",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Toggles logging. Logged packets use the LOG_KERN syslog facility.",
+      "choices": [
+        "on",
+        "off",
+        "low",
+        "medium",
+        "high",
+        "full"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use profile located in C(/etc/ufw/applications.d).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proto",
+      "displayName": "Proto",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "TCP/IP protocol. The value V(vrrp) is supported since community.general 10.3.0.",
+      "choices": [
+        "any",
+        "tcp",
+        "udp",
+        "ipv6",
+        "esp",
+        "ah",
+        "gre",
+        "igmp",
+        "vrrp"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "route",
+      "displayName": "Route",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Apply the rule to routed/forwarded packets.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rule",
+      "displayName": "Rule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Add firewall rule.",
+      "choices": [
+        "allow",
+        "deny",
+        "limit",
+        "reject"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "V(enabled) reloads firewall and enables firewall on boot. V(disabled) unloads firewall and disables firewall on boot. V(reloaded) reloads firewall. V(reset) disables and resets firewall to installation defaults.",
+      "choices": [
+        "disabled",
+        "enabled",
+        "reloaded",
+        "reset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "to_ip",
+      "displayName": "To Ip",
+      "type": "string",
+      "required": false,
+      "default": "any",
+      "description": "Destination IP address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "to_port",
+      "displayName": "To Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Destination port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

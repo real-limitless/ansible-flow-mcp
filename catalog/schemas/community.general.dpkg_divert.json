@@ -1,0 +1,77 @@
+{
+  "fqcn": "community.general.dpkg_divert",
+  "shortDescription": "Override a debian package's version of a file",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/dpkg_divert_module.html",
+  "options": [
+    {
+      "name": "divert",
+      "displayName": "Divert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location where the versions of file are diverted. Default is to add suffix C(.distrib) to the file path. This parameter is ignored when O(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When O(rename=true) and O(force=true), renaming is performed even if the target of the renaming exists, in other words the existing contents of the file at this location are lost. This parameter is ignored when O(rename=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "holder",
+      "displayName": "Holder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the package whose copy of file is not diverted, also known as the diversion holder or the package the diversion belongs to. The actual package does not have to be installed or even to exist for its name to be valid. If not specified, the diversion is hold by 'LOCAL', that is reserved by/for dpkg for local diversions. This parameter is ignored when O(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The original and absolute path of the file to be diverted or undiverted. This path is unique, in other words it is not possible to get two diversions for the same O(path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rename",
+      "displayName": "Rename",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Actually move the file aside (when O(state=present)) or back (when O(state=absent)), but only when changing the state of the diversion. This parameter has no effect when attempting to add a diversion that already exists or when removing an unexisting one. Unless O(force=true), renaming fails if the destination file already exists (this lock being a dpkg-divert feature, and bypassing it being a module feature).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When O(state=absent), remove the diversion of the specified O(path); when O(state=present), create the diversion if it does not exist, or update its package O(holder) or O(divert) location, if it already exists.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

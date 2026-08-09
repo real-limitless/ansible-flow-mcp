@@ -1,0 +1,404 @@
+{
+  "fqcn": "community.general.jenkins_plugin",
+  "shortDescription": "Add or remove Jenkins plugin",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/jenkins_plugin_module.html",
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted certificate chain file to be used for SSL client authentication. This file can also include the key as well, and if the key is included, O(client_key) is not required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted file that contains your private key to be used for SSL client authentication. If O(client_cert) contains both the certificate and key, this option is not required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If V(yes) do not get a cached copy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_basic_auth",
+      "displayName": "Force Basic Auth",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Credentials specified with O(url_username) and O(url_password) should be passed in HTTP Header.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": "jenkins",
+      "description": "GID or name of the Jenkins group on the OS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_agent",
+      "displayName": "Http Agent",
+      "type": "string",
+      "required": false,
+      "default": "ansible-httpget",
+      "description": "Header to identify as, generally appears in web server logs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "jenkins_home",
+      "displayName": "Jenkins Home",
+      "type": "string",
+      "required": false,
+      "default": "/var/lib/jenkins",
+      "description": "Home directory of the Jenkins user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "latest_plugins_url_segments",
+      "displayName": "Latest Plugins Url Segments",
+      "type": "list",
+      "required": false,
+      "default": [
+        "latest"
+      ],
+      "description": "Path inside the O(updates_url) to get latest plugins from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": "0644",
+      "description": "File mode applied on versioned plugins.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Unique plugin ID obtained from L(Jenkins Plugin Index, https://plugins.jenkins.io). See the notes for more information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": "jenkins",
+      "description": "UID or name of the Jenkins user on the OS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plugin_versions_url_segment",
+      "displayName": "Plugin Versions Url Segment",
+      "type": "list",
+      "required": false,
+      "default": [
+        "plugin-versions.json",
+        "current/plugin-versions.json"
+      ],
+      "description": "A list of URL segment(s) to retrieve the plugin versions JSON file from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired plugin state. If set to V(latest), the check for new version is performed every time. This is suitable to keep the plugin up-to-date.",
+      "choices": [
+        "absent",
+        "present",
+        "pinned",
+        "unpinned",
+        "enabled",
+        "disabled",
+        "latest"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Server connection timeout in secs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_json_url_segment",
+      "displayName": "Update Json Url Segment",
+      "type": "list",
+      "required": false,
+      "default": [
+        "update-center.json",
+        "updates/update-center.json"
+      ],
+      "description": "A list of URL segment(s) to retrieve the update center JSON file from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "updates_expiration",
+      "displayName": "Updates Expiration",
+      "type": "number",
+      "required": false,
+      "default": 86400,
+      "description": "Number of seconds after which a new copy of the C(update-center.json) file is downloaded. This is used to avoid the need to download the plugin to calculate its checksum when O(state=latest) is specified. Set it to V(0) if no cache file should be used. In that case, the plugin file is always downloaded to calculate its checksum when O(state=latest) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "updates_url",
+      "displayName": "Updates Url",
+      "type": "list",
+      "required": false,
+      "default": [
+        "https://updates.jenkins.io",
+        "http://mirrors.jenkins.io"
+      ],
+      "description": "A list of base URL(s) to retrieve C(update-center.json), and direct plugin files from. This can be a list since community.general 3.3.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "updates_url_password",
+      "displayName": "Updates Url Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If using a custom O(updates_url), set this as the password of the user with access to the URL. If the custom O(updates_url) does not require authentication, this can be left empty.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "updates_url_username",
+      "displayName": "Updates Url Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If using a custom O(updates_url), set this as the username of the user with access to the URL. If the custom O(updates_url) does not require authentication, this can be left empty.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": "http://localhost:8080",
+      "description": "URL of the Jenkins server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url_password",
+      "displayName": "Url Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for use in HTTP basic authentication. If the O(url_username) parameter is not specified, the O(url_password) parameter will not be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url_username",
+      "displayName": "Url Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username for use in HTTP basic authentication. This parameter can be used without O(url_password) for sites that allow empty passwords.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_gssapi",
+      "displayName": "Use Gssapi",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use GSSAPI to perform the authentication, typically this is for Kerberos or Kerberos through Negotiate authentication. Requires the Python library L(gssapi,https://github.com/pythongssapi/python-gssapi) to be installed. Credentials for GSSAPI can be specified with O(url_username)/O(url_password) or with the GSSAPI env var E(KRB5CCNAME) that specified a custom Kerberos credential cache. NTLM authentication is B(not) supported even if the GSSAPI mech for NTLM has been installed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(no), SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Plugin version number. If this option is specified, all plugin dependencies must be installed manually. It might take longer to verify that the correct version is installed. This is especially true if a specific version number is specified. Quote the version to prevent the value to be interpreted as float. For example if V(1.20) would be unquoted, it would become V(1.2).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "versioned_plugins_url_segments",
+      "displayName": "Versioned Plugins Url Segments",
+      "type": "list",
+      "required": false,
+      "default": [
+        "download/plugins",
+        "plugins"
+      ],
+      "description": "Path inside the O(updates_url) to get specific version of plugins from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "with_dependencies",
+      "displayName": "With Dependencies",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Defines whether to install plugin dependencies. In earlier versions, this option had no effect when a specific O(version) was set. Since community.general 11.2.0, dependencies are also installed for versioned plugins.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

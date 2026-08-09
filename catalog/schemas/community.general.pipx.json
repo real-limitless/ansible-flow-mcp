@@ -1,0 +1,212 @@
+{
+  "fqcn": "community.general.pipx",
+  "shortDescription": "Manages applications installed with pipx",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/pipx_module.html",
+  "options": [
+    {
+      "name": "editable",
+      "displayName": "Editable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Install the project in editable mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "executable",
+      "displayName": "Executable",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the C(pipx) installed in the system. If not specified, the module uses C(python -m pipx) to run the tool, using the same Python interpreter as ansible itself.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Force modification of the application's virtual environment. See C(pipx) for details. Only used when O(state=install), O(state=upgrade), O(state=upgrade_all), O(state=latest), or O(state=inject). The module is not idempotent when O(force=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "global",
+      "displayName": "Global",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "The module passes the C(--global) argument to C(pipx), to execute actions in global scope.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_injected",
+      "displayName": "Include Injected",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Upgrade the injected packages along with the application. Only used when O(state=upgrade), O(state=upgrade_all), or O(state=latest). This is used with O(state=upgrade) and O(state=latest) since community.general 6.6.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "index_url",
+      "displayName": "Index Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Base URL of Python Package Index. Only used when O(state=install), O(state=upgrade), O(state=latest), or O(state=inject).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inject_packages",
+      "displayName": "Inject Packages",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Packages to be injected into an existing virtual environment. Only used when O(state=inject).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "install_apps",
+      "displayName": "Install Apps",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Add apps from the injected packages. Only used when O(state=inject).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "install_deps",
+      "displayName": "Install Deps",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Include applications of dependent packages. Only used when O(state=install), O(state=latest), or O(state=inject).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the application and also the name of the Python package being installed. In C(pipx) documentation it is also referred to as the name of the virtual environment where the application is installed. If O(name) is a simple package name without version specifiers, then that name is used as the Python package name to be installed. Starting in community.general 10.7.0, you can use package specifiers when O(state=present) or O(state=install). For example, O(name=tox<4.0.0) or O(name=tox>3.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pip_args",
+      "displayName": "Pip Args",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Arbitrary arguments to pass directly to C(pip).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "python",
+      "displayName": "Python",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Python version to be used when creating the application virtual environment. Must be 3.6+. Only used when O(state=install), O(state=latest), O(state=reinstall), or O(state=reinstall_all).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Source for the package. This option is used when O(state=install) or O(state=latest), and it is ignored with other states. Use O(source) when installing a Python package with version specifier, or from a local path, from a VCS URL or compressed file. The value of this option is passed as-is to C(pipx). O(name) is still required when using O(source) to establish the application name without fetching the package from a remote source. The module is not idempotent when using O(source).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "spec_metadata",
+      "displayName": "Spec Metadata",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Spec metadata file for O(state=install_all). This content of the file is usually generated with C(pipx list --json), and it can be obtained with M(community.general.pipx_info) with O(community.general.pipx_info#module:include_raw=true) and obtaining the content from the RV(community.general.pipx_info#module:raw_output).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "install",
+      "description": "Desired state for the application. The states V(present) and V(absent) are aliases to V(install) and V(uninstall), respectively. The state V(latest) is equivalent to executing the task twice, with state V(install) and then V(upgrade). It was added in community.general 5.5.0. The states V(install_all), V(uninject), V(upgrade_shared), V(pin) and V(unpin) are only available in C(pipx>=1.6.0), make sure to have a compatible version when using this option. These states have been added in community.ge",
+      "choices": [
+        "present",
+        "absent",
+        "install",
+        "install_all",
+        "uninstall",
+        "uninstall_all",
+        "inject",
+        "uninject",
+        "upgrade",
+        "upgrade_shared",
+        "upgrade_all",
+        "reinstall",
+        "reinstall_all",
+        "latest",
+        "pin",
+        "unpin"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suffix",
+      "displayName": "Suffix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional suffix for virtual environment and executable names. B(Warning:) C(pipx) documentation states this is an B(experimental) feature subject to change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system_site_packages",
+      "displayName": "System Site Packages",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Give application virtual environment access to the system site-packages directory. Only used when O(state=install) or O(state=latest).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

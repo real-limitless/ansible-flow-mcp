@@ -1,0 +1,92 @@
+{
+  "fqcn": "community.general.flatpak",
+  "shortDescription": "Manage flatpaks",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/flatpak_module.html",
+  "options": [
+    {
+      "name": "executable",
+      "displayName": "Executable",
+      "type": "string",
+      "required": false,
+      "default": "flatpak",
+      "description": "The path to the C(flatpak) executable to use. By default, this module looks for the C(flatpak) executable on the path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "from_url",
+      "displayName": "From Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A C(http://) or C(https://) URL pointing to a C(.flatpakref) file to install from. When this option is set, O(name) must contain exactly one entry specifying the reverse DNS application ID of the flatpak (for example V(com.onepassword.OnePassword)). This is used to check whether the flatpak is already installed. O(name) and O(from_url) cannot both contain URLs. This option is recommended instead of passing a URL in O(name); passing URLs in O(name) will be deprecated in the future.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "method",
+      "displayName": "Method",
+      "type": "string",
+      "required": false,
+      "default": "system",
+      "description": "The installation method to use. Defines if the C(flatpak) is supposed to be installed globally for the whole V(system) or only for the current V(user).",
+      "choices": [
+        "system",
+        "user"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "The name of the flatpak to manage. To operate on several packages this can accept a list of packages. Should be specified as the unique reverse DNS name that identifies a flatpak (for example V(org.gnome.gedit)). When supplying a reverse DNS name, you can use the O(remote) option to specify on what remote to look for the flatpak. When used with O(state=present), O(name) can also be specified as a C(https://) or C(http://) URL to a C(flatpakref) file. However, it is recommended you use O(from_url",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_dependencies",
+      "displayName": "No Dependencies",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If installing runtime dependencies should be omitted or not. This parameter is primarily implemented for integration testing this module. There might however be some use cases where you would want to have this, like when you are packaging your own flatpaks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote",
+      "displayName": "Remote",
+      "type": "string",
+      "required": false,
+      "default": "flathub",
+      "description": "The flatpak remote (repository) to install the flatpak from. By default, V(flathub) is assumed, but you do need to add the flathub flatpak_remote before you can use this. See the M(community.general.flatpak_remote) module for managing flatpak remotes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Indicates the desired package state. The value V(latest) is supported since community.general 8.6.0.",
+      "choices": [
+        "absent",
+        "present",
+        "latest"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,202 @@
+{
+  "fqcn": "community.general.parted",
+  "shortDescription": "Configure block device partitions",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/parted_module.html",
+  "options": [
+    {
+      "name": "align",
+      "displayName": "Align",
+      "type": "string",
+      "required": false,
+      "default": "optimal",
+      "description": "Set alignment for newly created partitions. Use V(undefined) for parted default alignment.",
+      "choices": [
+        "cylinder",
+        "minimal",
+        "none",
+        "optimal",
+        "undefined"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device",
+      "displayName": "Device",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The block device (disk) where to operate. Regular files can also be partitioned, but it is recommended to create a loopback device using C(losetup) to easily access its partitions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flags",
+      "displayName": "Flags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of the flags that has to be set on the partition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fs_type",
+      "displayName": "Fs Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If specified and the partition does not exist, sets filesystem type to given partition. Parameter optional, but see notes below about negative O(part_start) values.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "label",
+      "displayName": "Label",
+      "type": "string",
+      "required": false,
+      "default": "msdos",
+      "description": "Disk label type or partition table to use. If O(device) already contains a different label, it is changed to O(label) and any previous partitions are lost. A O(name) must be specified for a V(gpt) partition table.",
+      "choices": [
+        "aix",
+        "amiga",
+        "bsd",
+        "dvh",
+        "gpt",
+        "loop",
+        "mac",
+        "msdos",
+        "pc98",
+        "sun"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets the name for the partition number (GPT, Mac, MIPS and PC98 only).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "number",
+      "displayName": "Number",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The partition number being affected. Required when performing any action on the disk, except fetching information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "part_end",
+      "displayName": "Part End",
+      "type": "string",
+      "required": false,
+      "default": "100%",
+      "description": "Where the partition ends as offset from the beginning of the disk, that is, the \"distance\" from the start of the disk. Negative numbers specify distance from the end of the disk. The distance can be specified with all the units supported by parted (except compat) and it is case sensitive, for example V(10GiB), V(15%).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "part_start",
+      "displayName": "Part Start",
+      "type": "string",
+      "required": false,
+      "default": "0%",
+      "description": "Where the partition starts as offset from the beginning of the disk, that is, the \"distance\" from the start of the disk. Negative numbers specify distance from the end of the disk. The distance can be specified with all the units supported by parted (except compat) and it is case sensitive, for example V(10GiB), V(15%). Using negative values may require setting of O(fs_type) (see notes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "part_type",
+      "displayName": "Part Type",
+      "type": "string",
+      "required": false,
+      "default": "primary",
+      "description": "May be specified only with O(label=msdos) or O(label=dvh). Neither O(part_type) nor O(name) may be used with O(label=sun).",
+      "choices": [
+        "extended",
+        "logical",
+        "primary"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resize",
+      "displayName": "Resize",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Call C(resizepart) on existing partitions to match the size specified by O(part_end).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "info",
+      "description": "Whether to create or delete a partition. If set to V(info) the module only returns the device information.",
+      "choices": [
+        "absent",
+        "present",
+        "info"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unit",
+      "displayName": "Unit",
+      "type": "string",
+      "required": false,
+      "default": "KiB",
+      "description": "Selects the current default unit that Parted uses to display locations and capacities on the disk and to interpret those given by the user if they are not suffixed by an unit. When fetching information about a disk, it is recommended to always specify a unit. O(unit_preserve_case) controls the case of the units in the return values. It used to be all lower case, but using that option you can make it return the units textually equal to the choices used in O(unit).",
+      "choices": [
+        "s",
+        "B",
+        "KB",
+        "KiB",
+        "MB",
+        "MiB",
+        "GB",
+        "GiB",
+        "TB",
+        "TiB",
+        "%",
+        "cyl",
+        "chs",
+        "compact"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unit_preserve_case",
+      "displayName": "Unit Preserve Case",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Controls the case of the V(unit) field in the module output (RV(ignore:partition_info.disk.unit), RV(ignore:partition_info.partitions[].unit)). When V(true), the unit is returned in its original mixed case, for example V(KiB) or V(MiB). This matches the values accepted by O(unit), making it safe to feed the output back as input. When V(false), the unit is returned in lowercase (legacy behavior), for example V(kib) or V(mib).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

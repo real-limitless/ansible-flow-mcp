@@ -16,9 +16,10 @@ ROOT = Path(__file__).resolve().parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from lib.galaxy_client import GalaxyClient, modules_from_hits  # noqa: E402
+from lib.galaxy_client import client_from_settings, modules_from_hits  # noqa: E402
 from lib.job_store import enqueue, load_settings, new_scan_id, save_scan  # noqa: E402
 from lib.paths import DEFAULT_DENY  # noqa: E402
+from lib.proxy_pool import ProxyPool  # noqa: E402
 from lib.schema_gen import builtin_modules_from_doc  # noqa: E402
 
 
@@ -33,6 +34,8 @@ def main() -> int:
     ap.add_argument("--no-builtin", action="store_true")
     ap.add_argument("--enqueue", action="store_true", help="Enqueue all modules after scan")
     ap.add_argument("--json", action="store_true", help="Print scan summary JSON")
+    ap.add_argument("--proxy", default="", help="Proxy URL e.g. socks5h://host:1080")
+    ap.add_argument("--use-proxy", action="store_true", help="Force proxy on for this run")
     args = ap.parse_args()
 
     settings = load_settings()
@@ -50,10 +53,15 @@ def main() -> int:
     )
     ns_raw = args.namespaces or str(settings.get("namespaceFilter") or "")
     namespaces = {x.strip() for x in ns_raw.split(",") if x.strip()} or None
-    base = str(settings.get("galaxyBase") or "https://galaxy.ansible.com")
     include_builtin = (not args.no_builtin) and bool(settings.get("includeBuiltin", True))
 
-    client = GalaxyClient(base=base)
+    if args.proxy:
+        settings["proxy"] = args.proxy
+        settings["useProxy"] = True
+    if args.use_proxy:
+        settings["useProxy"] = True
+    pool = ProxyPool() if settings.get("useProxy") else None
+    client = client_from_settings(settings, pool)
 
     def progress(msg: str) -> None:
         print(msg, file=sys.stderr)

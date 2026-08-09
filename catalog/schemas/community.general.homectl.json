@@ -1,0 +1,326 @@
+{
+  "fqcn": "community.general.homectl",
+  "shortDescription": "Manage user accounts with systemd-homed",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/homectl_module.html",
+  "options": [
+    {
+      "name": "disksize",
+      "displayName": "Disksize",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The intended home directory disk space. Human readable value such as V(10G), V(10M), or V(10B).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "email",
+      "displayName": "Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The email address of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "environment",
+      "displayName": "Environment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "String separated by comma each containing an environment variable and its value to set for the user's login session, in a format compatible with C(putenv(\\)). Any environment variable listed here is automatically set by pam_systemd for all login sessions of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gid",
+      "displayName": "Gid",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Sets the gid of the user. If using O(uid) homed requires the value to be the same. Only used when a user is first created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "homedir",
+      "displayName": "Homedir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to use as home directory for the user. This is the directory the user's home directory is mounted to while the user is logged in. This is not where the user's data is actually stored, see O(imagepath) for that. Only used when a user is first created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iconname",
+      "displayName": "Iconname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of an icon picked by the user, for example for the purpose of an avatar. Should follow the semantics defined in the Icon Naming Specification. See U(https://specifications.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html) for specifics.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "imagepath",
+      "displayName": "Imagepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to place the user's home directory. See U(https://www.freedesktop.org/software/systemd/man/homectl.html#--image-path=PATH) for more information. Only used when a user is first created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "language",
+      "displayName": "Language",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The preferred language/locale for the user. This should be in a format compatible with the E(LANG) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location",
+      "displayName": "Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A free-form location string describing the location of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "locked",
+      "displayName": "Locked",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the user account should be locked or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "memberof",
+      "displayName": "Memberof",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "String separated by comma each indicating a UNIX group this user shall be a member of. Groups the user should be a member of should be supplied as comma separated list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mountopts",
+      "displayName": "Mountopts",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "String separated by comma each indicating mount options for a users home directory. Valid options are V(nosuid), V(nodev) or V(noexec). Homed by default uses V(nodev) and V(nosuid) while V(noexec) is off.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The user name to create, remove, or update.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notafter",
+      "displayName": "Notafter",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "A time since the UNIX epoch after which the record should be considered invalid for the purpose of logging in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notbefore",
+      "displayName": "Notbefore",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "A time since the UNIX epoch before which the record should be considered invalid for the purpose of logging in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the user's password to this. Homed requires this value to be in cleartext on user creation and updating a user. The module takes the password and generates a password hash in SHA-512 with 10000 rounds of salt generation using crypt. See U(https://systemd.io/USER_RECORD/). This is required for O(state=present). When an existing user is updated this is checked against the stored hash in homed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "passwordhint",
+      "displayName": "Passwordhint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password hint for the given user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realm",
+      "displayName": "Realm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The 'realm' a user is defined in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realname",
+      "displayName": "Realname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user's real ('human') name. This can also be used to add a comment to maintain compatibility with C(useradd).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resize",
+      "displayName": "Resize",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When used with O(disksize) this attempts to resize the home directory immediately.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shell",
+      "displayName": "Shell",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Shell binary to use for terminal logins of given user. If not specified homed by default uses V(/bin/bash).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skeleton",
+      "displayName": "Skeleton",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The absolute path to the skeleton directory to populate a new home directory from. This is only used when a home directory is first created. If not specified homed by default uses V(/etc/skel).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sshkeys",
+      "displayName": "Sshkeys",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "String separated by comma each listing a SSH public key that is authorized to access the account. The keys should follow the same format as the lines in a traditional C(~/.ssh/authorized_key) file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The operation to take on the user.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage",
+      "displayName": "Storage",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Indicates the storage mechanism for the user's home directory. If the storage type is not specified, C(homed.conf(5\\)) defines which default storage to use. Only used when a user is first created.",
+      "choices": [
+        "classic",
+        "luks",
+        "directory",
+        "subvolume",
+        "fscrypt",
+        "cifs"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timezone",
+      "displayName": "Timezone",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Preferred timezone to use for the user. Should be a tzdata compatible location string such as V(America/New_York).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uid",
+      "displayName": "Uid",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Sets the UID of the user. If using O(gid) homed requires the value to be the same. Only used when a user is first created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "umask",
+      "displayName": "Umask",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Sets the umask for the user's login sessions. Value from V(0000) to V(0777).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

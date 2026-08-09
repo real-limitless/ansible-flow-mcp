@@ -1,0 +1,209 @@
+{
+  "fqcn": "community.general.ldap_attrs",
+  "shortDescription": "Add or remove multiple LDAP attribute values",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ldap_attrs_module.html",
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The attribute(s) and value(s) to add or remove. Each attribute value can be a string for single-valued attributes or a list of strings for multi-valued attributes. If you specify values for this option in YAML, please note that you can improve readability for long string values by using YAML block modifiers as seen in the examples for this module. Note that when using values that YAML/ansible-core interprets as other types, like V(yes), V(no) (booleans), or V(2.10) (float), make sure to quote th",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "binary_attributes",
+      "displayName": "Binary Attributes",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "If O(state=present), attributes whose values must be handled as raw sequences of bytes must be listed here. The values provided for the attributes will be converted from Base64.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bind_dn",
+      "displayName": "Bind Dn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A DN to bind with. Try to use a SASL bind with the EXTERNAL mechanism as default when this parameter is omitted. Use an anonymous bind if the parameter is blank.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bind_pw",
+      "displayName": "Bind Pw",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The password to use with O(bind_dn).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the path to PEM file with CA certs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted certificate chain file to be used for SSL client authentication. Required if O(client_key) is defined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted file that contains your private key to be used for SSL client authentication. Required if O(client_cert) is defined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dn",
+      "displayName": "Dn",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The DN of the entry to add or remove.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "honor_binary",
+      "displayName": "Honor Binary",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If O(state=present) and this option is V(true), attributes whose name include the V(binary) option will be treated as Base64-encoded byte sequences automatically, even if they are not listed in O(binary_attributes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ordered",
+      "displayName": "Ordered",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If V(true), prepend list values with X-ORDERED index numbers in all attributes specified in the current task. This is useful mostly with C(olcAccess) attribute to easily manage LDAP Access Control Lists.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "referrals_chasing",
+      "displayName": "Referrals Chasing",
+      "type": "string",
+      "required": false,
+      "default": "anonymous",
+      "description": "Set the referrals chasing behavior. V(anonymous) follow referrals anonymously. This is the default behavior. V(disabled) disable referrals chasing. This sets C(OPT_REFERRALS) to off.",
+      "choices": [
+        "disabled",
+        "anonymous"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sasl_class",
+      "displayName": "Sasl Class",
+      "type": "string",
+      "required": false,
+      "default": "external",
+      "description": "The class to use for SASL authentication.",
+      "choices": [
+        "external",
+        "gssapi"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_uri",
+      "displayName": "Server Uri",
+      "type": "string",
+      "required": false,
+      "default": "ldapi:///",
+      "description": "The O(server_uri) parameter may be a comma- or whitespace-separated list of URIs containing only the schema, the host, and the port fields. The default value lets the underlying LDAP client library look for a UNIX domain socket in its default location. Note that when using multiple URIs you cannot determine to which URI your client gets connected. For URIs containing additional fields, particularly when using commas, behavior is undefined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_tls",
+      "displayName": "Start Tls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use the START_TLS LDAP extension if set to V(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the attribute values. If V(present), all given attribute values are added if they are missing. If V(absent), all given attribute values are removed if present. If V(exact), the set of attribute values is forced to exactly those provided and no others. If O(state=exact) and the attribute value is empty, all values for this attribute are removed.",
+      "choices": [
+        "present",
+        "absent",
+        "exact"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to V(false), SSL certificates are not validated. This should only be used on sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "xorder_discovery",
+      "displayName": "Xorder Discovery",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Set the behavior on how to process Xordered DNs. V(enable) performs a C(ONELEVEL) search below the superior RDN to find the matching DN. V(disable) always uses the DN unmodified (as passed by the O(dn) parameter). V(auto) only performs a search if the first RDN does not contain an index number (C({x})).",
+      "choices": [
+        "enable",
+        "auto",
+        "disable"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

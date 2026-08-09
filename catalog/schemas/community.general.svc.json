@@ -1,0 +1,81 @@
+{
+  "fqcn": "community.general.svc",
+  "shortDescription": "Manage C(daemontools) services",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/svc_module.html",
+  "options": [
+    {
+      "name": "downed",
+      "displayName": "Downed",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Should a C(down) file exist or not, if it exists it disables auto startup. Defaults to V(false). Downed does not imply stopped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the service is enabled or not, if disabled it also implies O(state=stopped). Take note that a service can be enabled and downed (no auto restart).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the service to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_dir",
+      "displayName": "Service Dir",
+      "type": "string",
+      "required": false,
+      "default": "/service",
+      "description": "Directory C(svscan) watches for services.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_src",
+      "displayName": "Service Src",
+      "type": "string",
+      "required": false,
+      "default": "/etc/service",
+      "description": "Directory where services are defined, the source of symlinks to O(service_dir).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "V(started)/V(stopped) are idempotent actions that do not run commands unless necessary. V(restarted) always bounces the svc (svc -t) and V(killed) always bounces the svc (svc -k). V(reloaded) sends a sigusr1 (svc -1). V(once) runs a normally downed svc once (svc -o), not really an idempotent operation.",
+      "choices": [
+        "killed",
+        "once",
+        "reloaded",
+        "restarted",
+        "started",
+        "stopped"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,177 @@
+{
+  "fqcn": "community.general.gitlab_group_members",
+  "shortDescription": "Manage group members on GitLab Server",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/gitlab_group_members_module.html",
+  "options": [
+    {
+      "name": "access_level",
+      "displayName": "Access Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The access level for the user. Required if O(state=present), user state is set to present. Mutually exclusive with O(gitlab_users_access).",
+      "choices": [
+        "guest",
+        "reporter",
+        "developer",
+        "maintainer",
+        "owner"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_job_token",
+      "displayName": "Api Job Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "GitLab CI job token for logging in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_oauth_token",
+      "displayName": "Api Oauth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "GitLab OAuth token for logging in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to use for authentication against the API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token",
+      "displayName": "Api Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "GitLab access token with API permissions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The resolvable endpoint for the API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use for authentication against the API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CA certificates bundle to use to verify GitLab server certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gitlab_group",
+      "displayName": "Gitlab Group",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The C(full_path) of the GitLab group the member is added to/removed from. Setting this to C(name) or C(path) has been disallowed since community.general 6.0.0. Use C(full_path) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gitlab_user",
+      "displayName": "Gitlab User",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A username or a list of usernames to add to/remove from the GitLab group. Mutually exclusive with O(gitlab_users_access).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gitlab_users_access",
+      "displayName": "Gitlab Users Access",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Provide a list of user to access level mappings. Every dictionary in this list specifies a user (by username) and the access level the user should have. Mutually exclusive with O(gitlab_user) and O(access_level). Use together with O(purge_users) to remove all users not specified here from the group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge_users",
+      "displayName": "Purge Users",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Adds/remove users of the given access_level to match the given O(gitlab_user)/O(gitlab_users_access) list. If omitted do not purge orphaned members. Is only used when O(state=present).",
+      "choices": [
+        "guest",
+        "reporter",
+        "developer",
+        "maintainer",
+        "owner"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the member in the group. On V(present), it adds a user to a GitLab group. On V(absent), it removes a user from a GitLab group.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether or not to validate SSL certs when supplying a HTTPS endpoint.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

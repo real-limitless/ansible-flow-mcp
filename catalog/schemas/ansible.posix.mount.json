@@ -1,0 +1,137 @@
+{
+  "fqcn": "ansible.posix.mount",
+  "shortDescription": "Control active and configured mount points",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/posix/mount_module.html",
+  "options": [
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered it incorrectly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot",
+      "displayName": "Boot",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Determines if the filesystem should be mounted on boot. Only applies to Solaris and Linux systems. For Solaris systems, C(true) will set C(yes) as the value of mount at boot in C(/etc/vfstab). For Linux, FreeBSD, NetBSD and OpenBSD systems, C(false) will add C(noauto) to mount options in C(/etc/fstab). To avoid mount option conflicts, if C(noauto) specified in O(opts), mount module will ignore O(boot). This parameter is ignored when O(state=ephemeral).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dump",
+      "displayName": "Dump",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "description": "Dump (see fstab(5)). Note that if set to C(null) and O(state=present), it will cease to work and duplicate entries will be made with subsequent runs. Has no effect on Solaris systems or when used with O(state=ephemeral).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fstab",
+      "displayName": "Fstab",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "File to use instead of C(/etc/fstab). You should not use this option unless you really know what you are doing. This might be useful if you need to configure mountpoints in a chroot environment. OpenBSD does not allow specifying alternate fstab files with mount so do not use this on OpenBSD with any state that operates on the live filesystem. This parameter defaults to C(/etc/fstab) or C(/etc/vfstab) on Solaris. This parameter is ignored when O(state=ephemeral).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fstype",
+      "displayName": "Fstype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filesystem type. Required when O(state) is V(present), V(mounted), or V(ephemeral).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opts",
+      "displayName": "Opts",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Mount options (see fstab(5), or vfstab(4) on Solaris).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opts_no_log",
+      "displayName": "Opts No Log",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Do not log opts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "passno",
+      "displayName": "Passno",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "description": "Passno (see fstab(5)). Note that if set to C(null) and O(state=present), it will cease to work and duplicate entries will be made with subsequent runs. Deprecated on Solaris systems. Has no effect when used with O(state=ephemeral).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the mount point (e.g. C(/mnt/files)). Before Ansible 2.3 this option was only usable as O(ignore:dest), O(ignore:destfile), and O(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Device (or NFS volume, or something else) to be mounted on I(path). Required when O(state) set to V(present), V(mounted), or V(ephemeral). Ignored when O(state) set to V(absent) or V(unmounted).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "If V(mounted), the device will be actively mounted and appropriately configured in I(fstab). If the mount point is not present, the mount point will be created. If V(unmounted), the device will be unmounted without changing I(fstab). V(present) only specifies that the device is to be configured in I(fstab) and does not trigger or require a mount. V(ephemeral) only specifies that the device is to be mounted, without changing I(fstab). If it is already mounted, a remount will be triggered. This wi",
+      "choices": [
+        "absent",
+        "absent_from_fstab",
+        "mounted",
+        "present",
+        "unmounted",
+        "remounted",
+        "ephemeral"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

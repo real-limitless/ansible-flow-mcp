@@ -1,0 +1,155 @@
+{
+  "fqcn": "community.general.haproxy",
+  "shortDescription": "Enable, disable, and set weights for HAProxy backend servers using socket commands",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/haproxy_module.html",
+  "options": [
+    {
+      "name": "agent",
+      "displayName": "Agent",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disable/enable agent checks (depending on O(state) value).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backend",
+      "displayName": "Backend",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the HAProxy backend pool. If this parameter is unset, it is auto-detected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "drain",
+      "displayName": "Drain",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Wait until the server has no active connections or until the timeout determined by O(wait_interval) and O(wait_retries) is reached. Continue only after the status changes to C(MAINT). This overrides the shutdown_sessions option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fail_on_not_found",
+      "displayName": "Fail On Not Found",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Fail whenever trying to enable/disable a backend host that does not exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health",
+      "displayName": "Health",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disable/enable health checks (depending on O(state) value).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the backend host to change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shutdown_sessions",
+      "displayName": "Shutdown Sessions",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When disabling a server, immediately terminate all the sessions attached to the specified server. This can be used to terminate long-running sessions after a server is put into maintenance mode. Overridden by the drain option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "socket",
+      "displayName": "Socket",
+      "type": "string",
+      "required": false,
+      "default": "/var/run/haproxy.sock",
+      "description": "Path to the HAProxy socket file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Desired state of the provided backend host. Note that V(drain) state is supported only by HAProxy version 1.5 or later. When used on versions < 1.5, it is ignored.",
+      "choices": [
+        "disabled",
+        "drain",
+        "enabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Wait until the server reports a status of C(UP) when O(state=enabled), status of C(MAINT) when O(state=disabled) or status of C(DRAIN) when O(state=drain).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_interval",
+      "displayName": "Wait Interval",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Number of seconds to wait between retries.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_retries",
+      "displayName": "Wait Retries",
+      "type": "number",
+      "required": false,
+      "default": 25,
+      "description": "Number of times to check for status after changing the state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "weight",
+      "displayName": "Weight",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The value passed in argument. If the value ends with the V(%) sign, then the new weight is relative to the initially configured weight. Relative weights are only permitted between 0 and 100% and absolute weights are permitted between 0 and 256.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

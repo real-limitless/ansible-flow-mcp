@@ -1,0 +1,142 @@
+{
+  "fqcn": "ansible.posix.acl",
+  "shortDescription": "Set and retrieve file ACL information.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/posix/acl_module.html",
+  "options": [
+    {
+      "name": "default",
+      "displayName": "Default",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If O(path) is a directory, setting this to V(true) will make it the default ACL for entities created inside the directory. Setting O(default=true) causes an error if O(path) is a file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "entity",
+      "displayName": "Entity",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The actual user or group that the ACL applies to when matching entity types user or group are selected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "entry",
+      "displayName": "Entry",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "DEPRECATED. The ACL to set or remove. This must always be quoted in the form of C(<etype>:<qualifier>:<perms>). The qualifier may be empty for some types, but the type and perms are always required. C(-) can be used as placeholder when you do not care about permissions. This is now superseded by entity, type and permissions fields.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "etype",
+      "displayName": "Etype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The entity type of the ACL to apply, see C(setfacl) documentation for more info.",
+      "choices": [
+        "group",
+        "mask",
+        "other",
+        "user"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "follow",
+      "displayName": "Follow",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to follow symlinks on the path if a symlink is encountered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The full path of the file or object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "permissions",
+      "displayName": "Permissions",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions to apply/remove can be any combination of C(r), C(w), C(x) (read, write and execute respectively), and C(X) (execute permission if the file is a directory or already has execute permission for some user)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recalculate_mask",
+      "displayName": "Recalculate Mask",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "Select if and when to recalculate the effective right masks of the files. See C(setfacl) documentation for more info. Incompatible with O(state=query).",
+      "choices": [
+        "default",
+        "mask",
+        "no_mask"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recursive",
+      "displayName": "Recursive",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Recursively sets the specified ACL. Incompatible with O(state=query). Alias O(recurse) added in version 1.3.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "query",
+      "description": "Define whether the ACL should be present or not. The V(query) state gets the current ACL without changing it, for use in C(register) operations.",
+      "choices": [
+        "absent",
+        "present",
+        "query"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_nfsv4_acls",
+      "displayName": "Use Nfsv4 Acls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use NFSv4 ACLs instead of POSIX ACLs. This feature uses C(nfs4_setfacl) and C(nfs4_getfacl). The behavior depends on those implementation. And currently it only supports C(A) in ACE, so C(D) must be replaced with the appropriate C(A). Permission is set as optimised ACLs by the system. You can check the actual ACLs that has been set using the return value. More info C(man nfs4_setfacl)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

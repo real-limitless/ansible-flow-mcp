@@ -1,0 +1,132 @@
+{
+  "fqcn": "community.general.nagios",
+  "shortDescription": "Perform common tasks in Nagios related to downtime and notifications",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/nagios_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Action to take. The V(acknowledge) and V(forced_check) actions were added in community.general 1.2.0.",
+      "choices": [
+        "downtime",
+        "delete_downtime",
+        "enable_alerts",
+        "disable_alerts",
+        "silence",
+        "unsilence",
+        "silence_nagios",
+        "unsilence_nagios",
+        "command",
+        "servicegroup_service_downtime",
+        "servicegroup_host_downtime",
+        "acknowledge",
+        "forced_check"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "author",
+      "displayName": "Author",
+      "type": "string",
+      "required": false,
+      "default": "Ansible",
+      "description": "Author to leave downtime comments as. Only used when O(action) is V(downtime) or V(acknowledge).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cmdfile",
+      "displayName": "Cmdfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the nagios I(command file) (FIFO pipe). Only required if auto-detection fails.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The raw command to send to Nagios, which should not include the submitted time header or the line-feed. B(Required) option when O(action=command).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": "Scheduling downtime",
+      "description": "Comment when O(action) is V(downtime) or V(acknowledge).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host to operate on in Nagios.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minutes",
+      "displayName": "Minutes",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Minutes to schedule downtime for. Only usable with O(action=downtime).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "servicegroup",
+      "displayName": "Servicegroup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Servicegroup we want to set downtimes/alerts for. B(Required) option when using the V(servicegroup_service_downtime) and V(servicegroup_host_downtime) O(action).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "services",
+      "displayName": "Services",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "What to manage downtime/alerts for. Separate multiple services with commas. B(Required) option when O(action) is one of: V(downtime), V(acknowledge), V(forced_check), V(enable_alerts), V(disable_alerts). When specifying what O(services) to handle there is a special service value, V(host), which handles alerts/downtime/acknowledge for the I(host itself), for example O(services=host). This keyword may not be given with other services at the same time. B(Setting alerts/downtime/acknowledge for a ho",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start",
+      "displayName": "Start",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When downtime should start, in C(time_t) format (epoch seconds).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

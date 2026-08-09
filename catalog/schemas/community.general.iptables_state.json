@@ -1,0 +1,108 @@
+{
+  "fqcn": "community.general.iptables_state",
+  "shortDescription": "Save iptables state into a file or restore it from a file",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/iptables_state_module.html",
+  "options": [
+    {
+      "name": "counters",
+      "displayName": "Counters",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Save or restore the values of all packet and byte counters. When V(true), the module is not idempotent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_version",
+      "displayName": "Ip Version",
+      "type": "string",
+      "required": false,
+      "default": "ipv4",
+      "description": "Which version of the IP protocol this module should apply to.",
+      "choices": [
+        "ipv4",
+        "ipv6"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "modprobe",
+      "displayName": "Modprobe",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the path to the C(modprobe) program internally used by iptables related commands to load kernel modules. By default, V(/proc/sys/kernel/modprobe) is inspected to determine the executable's path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "noflush",
+      "displayName": "Noflush",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "For O(state=restored), ignored otherwise. If V(false), restoring iptables rules from a file flushes (deletes) all previous contents of the respective table(s). If V(true), the previous rules are left untouched (but policies are updated anyway, for all built-in chains).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The file the iptables state should be saved to. The file the iptables state should be restored from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Whether the firewall state should be saved (into a file) or restored (from a file).",
+      "choices": [
+        "saved",
+        "restored"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "table",
+      "displayName": "Table",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When O(state=restored), restore only the named table even if the input file contains other tables. Fail if the named table is not declared in the file. When O(state=saved), restrict output to the specified table. If not specified, output includes all active tables.",
+      "choices": [
+        "filter",
+        "nat",
+        "mangle",
+        "raw",
+        "security"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Wait N seconds for the xtables lock to prevent instant failure in case multiple instances of the program are running concurrently.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

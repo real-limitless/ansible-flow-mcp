@@ -1,0 +1,267 @@
+{
+  "fqcn": "community.general.ipa_pwpolicy",
+  "shortDescription": "Manage FreeIPA password policies",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ipa_pwpolicy_module.html",
+  "options": [
+    {
+      "name": "dictcheck",
+      "displayName": "Dictcheck",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Check whether the password (with possible modifications) matches a word in a dictionary (using cracklib).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "failinterval",
+      "displayName": "Failinterval",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Period (in seconds) after which the number of failed login attempts is reset.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gracelimit",
+      "displayName": "Gracelimit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of LDAP logins after password expiration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that the policy applies to. If omitted, the global policy is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "historylength",
+      "displayName": "Historylength",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of previous passwords that are remembered. Users cannot reuse remembered passwords.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_host",
+      "displayName": "Ipa Host",
+      "type": "string",
+      "required": false,
+      "default": "ipa.example.com",
+      "description": "IP or hostname of IPA server. If the value is not specified in the task, the value of environment variable E(IPA_HOST) is used instead. If both the environment variable E(IPA_HOST) and the value are not specified in the task, then DNS is used to try to discover the FreeIPA server. The relevant entry needed in FreeIPA is the C(ipa-ca) entry. If neither the DNS entry, nor the environment E(IPA_HOST), nor the value are available in the task, then the default value is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_pass",
+      "displayName": "Ipa Pass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of administrative user. If the value is not specified in the task, the value of environment variable E(IPA_PASS) is used instead. Note that if the C(urllib_gssapi) library is available, it is possible to use GSSAPI to authenticate to FreeIPA. If the environment variable E(KRB5CCNAME) is available, the module uses this Kerberos credentials cache to authenticate to the FreeIPA server. If the environment variable E(KRB5_CLIENT_KTNAME) is available, and E(KRB5CCNAME) is not; the module uses",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_port",
+      "displayName": "Ipa Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port of FreeIPA / IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PORT) is used instead. If both the environment variable E(IPA_PORT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_prot",
+      "displayName": "Ipa Prot",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "Protocol used by IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PROT) is used instead. If both the environment variable E(IPA_PROT) and the value are not specified in the task, then default value is set.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_timeout",
+      "displayName": "Ipa Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Specifies idle timeout (in seconds) for the connection. For bulk operations, you may want to increase this in order to avoid timeout from IPA server. If the value is not specified in the task, the value of environment variable E(IPA_TIMEOUT) is used instead. If both the environment variable E(IPA_TIMEOUT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_user",
+      "displayName": "Ipa User",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Administrative account used on IPA server. If the value is not specified in the task, the value of environment variable E(IPA_USER) is used instead. If both the environment variable E(IPA_USER) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lockouttime",
+      "displayName": "Lockouttime",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Period (in seconds) for which users are locked out.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxfailcount",
+      "displayName": "Maxfailcount",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of consecutive failures before lockout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxpwdlife",
+      "displayName": "Maxpwdlife",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Maximum password lifetime (in days).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxrepeat",
+      "displayName": "Maxrepeat",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of allowed same consecutive characters in the new password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxsequence",
+      "displayName": "Maxsequence",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum length of monotonic character sequences in the new password. An example of a monotonic sequence of length 5 is V(12345).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minclasses",
+      "displayName": "Minclasses",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Minimum number of character classes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minlength",
+      "displayName": "Minlength",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Minimum password length.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minpwdlife",
+      "displayName": "Minpwdlife",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Minimum password lifetime (in hours).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Priority of the policy. High number means lower priority. Required when C(cn) is not the global policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State to ensure.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "usercheck",
+      "displayName": "Usercheck",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Check whether the password (with possible modifications) contains the user name in some form (if the name has > 3 characters).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This only applies if O(ipa_prot) is V(https). If set to V(false), the SSL certificates are not validated. This should only set to V(false) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

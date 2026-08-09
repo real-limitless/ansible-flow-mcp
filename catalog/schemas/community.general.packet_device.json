@@ -1,0 +1,215 @@
+{
+  "fqcn": "community.general.packet_device",
+  "shortDescription": "Manage a bare metal server in the Packet Host",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/packet_device_module.html",
+  "options": [
+    {
+      "name": "always_pxe",
+      "displayName": "Always Pxe",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Persist PXE as the first boot option. Normally, the PXE process happens only on the first boot. Set this arg to have your device continuously boot to iPXE.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_token",
+      "displayName": "Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Packet API token. You can also supply it in environment variable E(PACKET_API_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "count",
+      "displayName": "Count",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The number of devices to create. Count number can be included in hostname using the C(%d) string formatter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "count_offset",
+      "displayName": "Count Offset",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "From which number to start the count.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_ids",
+      "displayName": "Device Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of device IDs on which to operate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "facility",
+      "displayName": "Facility",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Facility slug for device creation. See Packet API for current list - U(https://www.packet.net/developers/api/facilities/).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "features",
+      "displayName": "Features",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dict with \"features\" for device creation. See Packet API docs for details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostnames",
+      "displayName": "Hostnames",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A hostname of a device, or a list of hostnames. If given string or one-item list, you can use the C(\"%d\") Python string format to expand numbers from O(count). If only one hostname, it might be expanded to list if O(count)>1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipxe_script_url",
+      "displayName": "Ipxe Script Url",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "URL of custom iPXE script for provisioning. More about custom iPXE for Packet devices at U(https://help.packet.net/technical/infrastructure/custom-ipxe).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "locked",
+      "displayName": "Locked",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to lock a created device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operating_system",
+      "displayName": "Operating System",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OS slug for device creation. See Packet API for current list - U(https://www.packet.net/developers/api/operatingsystems/).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plan",
+      "displayName": "Plan",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Plan slug for device creation. See Packet API for current list - U(https://www.packet.net/developers/api/plans/).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project_id",
+      "displayName": "Project Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "ID of project of the device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the device. If set to V(present) (the default), the module call returns immediately after the device-creating HTTP request successfully returns. If set to V(active), the module call blocks until all the specified devices are in state active due to the Packet API, or until O(wait_timeout).",
+      "choices": [
+        "present",
+        "absent",
+        "active",
+        "inactive",
+        "rebooted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of device tags. Currently implemented only for device creation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_data",
+      "displayName": "User Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Userdata blob made available to the machine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_public_IPv",
+      "displayName": "Wait For Public Ipv",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Whether to wait for the instance to be assigned a public IPv4/IPv6 address. If set to V(4), it waits until IPv4 is assigned to the instance. If set to V(6), it waits until public IPv6 is assigned to the instance.",
+      "choices": [
+        4,
+        6
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 900,
+      "description": "How long (seconds) to wait either for automatic IP address assignment, or for the device to reach the V(active) state. If O(wait_for_public_IPv) is set and O(state=active), the module waits for both events consequently, applying the timeout twice.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,253 @@
+{
+  "fqcn": "ansible.builtin.blockinfile",
+  "shortDescription": "Insert/update/remove a text block surrounded by marker lines",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/builtin/blockinfile_module.html",
+  "options": [
+    {
+      "name": "append_newline",
+      "displayName": "Append Newline",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Append a blank line to the inserted block, if this does not appear at the end of the file. Note that this attribute is not considered when C(state) is set to C(absent)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered it incorrectly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "block",
+      "displayName": "Block",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The text to insert inside the marker lines. If it is missing or an empty string, the block will be removed as if O(state) were specified to V(absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create",
+      "displayName": "Create",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create a new file if it does not exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "insertafter",
+      "displayName": "Insertafter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If specified and no begin/ending O(marker) lines are found, the block will be inserted after the last match of specified regular expression. A special value is available; V(EOF) for inserting the block at the end of the file. If specified regular expression has no matches or no value is passed, V(EOF) will be used instead. The presence of the multiline flag (?m) in the regular expression controls whether the match is done line by line or with multiple lines. This behaviour was added in ansible-c",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "insertbefore",
+      "displayName": "Insertbefore",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If specified and no begin/ending O(marker) lines are found, the block will be inserted before the last match of specified regular expression. A special value is available; V(BOF) for inserting the block at the beginning of the file. If specified regular expression has no matches, the block will be inserted at the end of the file. The presence of the multiline flag (?m) in the regular expression controls whether the match is done line by line or with multiple lines. This behaviour was added in an",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "marker",
+      "displayName": "Marker",
+      "type": "string",
+      "required": false,
+      "default": "# {mark} ANSIBLE MANAGED BLOCK",
+      "description": "The marker line template. C({mark}) will be replaced with the values in O(marker_begin) (default=C(BEGIN)) and O(marker_end) (default=C(END)). Using a custom marker without the C({mark}) variable may result in the block being repeatedly inserted on subsequent playbook runs. Multi-line markers are not supported and will result in the block being repeatedly inserted on subsequent playbook runs. A newline is automatically appended by the module to O(marker_begin) and O(marker_end).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "marker_begin",
+      "displayName": "Marker Begin",
+      "type": "string",
+      "required": false,
+      "default": "BEGIN",
+      "description": "This will be inserted at C({mark}) in the opening ansible block O(marker).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "marker_end",
+      "displayName": "Marker End",
+      "type": "string",
+      "required": false,
+      "default": "END",
+      "description": "This will be inserted at C({mark}) in the closing ansible block O(marker).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The file to modify. Before Ansible 2.3 this option was only usable as O(dest), O(destfile) and O(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prepend_newline",
+      "displayName": "Prepend Newline",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Prepend a blank line to the inserted block, if this does not appear at the beginning of the file. Note that this attribute is not considered when C(state) is set to C(absent)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the block should be there or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate",
+      "displayName": "Validate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The validation command to run before copying the updated file into the final destination. A temporary file path is used to validate, passed in through C(%s) which must be present as in the examples below. Also, the command is passed securely so shell features such as expansion and pipes will not work. For an example on how to handle more complex validation than what this option provides, see R(handling complex validation,complex_configuration_validation).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,220 @@
+{
+  "fqcn": "community.general.zypper",
+  "shortDescription": "Manage packages on SUSE and openSUSE",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/zypper_module.html",
+  "options": [
+    {
+      "name": "allow_vendor_change",
+      "displayName": "Allow Vendor Change",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Adds C(--allow_vendor_change) option to I(zypper) dist-upgrade command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_import_keys",
+      "displayName": "Auto Import Keys",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to automatically import new repository signing keys. Adds C(--gpg-auto-import-keys) option to I(zypper). Is only used when installing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clean_deps",
+      "displayName": "Clean Deps",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Adds C(--clean-deps) option to I(zypper) remove command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_gpg_check",
+      "displayName": "Disable Gpg Check",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to disable to GPG signature checking of the package signature being installed. Has an effect only if O(state) is V(present) or V(latest).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_recommends",
+      "displayName": "Disable Recommends",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Corresponds to the C(--no-recommends) option for I(zypper). Default behavior (V(true)) modifies zypper's default behavior; V(false) does install recommended packages.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extra_args",
+      "displayName": "Extra Args",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Add additional options to C(zypper) command. Options should be supplied in a single line as if given in the command line.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extra_args_precommand",
+      "displayName": "Extra Args Precommand",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Add additional global target options to C(zypper). Options should be supplied in a single line as if given in the command line.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Adds C(--force) option to I(zypper). Allows to downgrade packages and change vendor or architecture.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_resolution",
+      "displayName": "Force Resolution",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Adds C(--force-resolution) option to I(zypper). Allows to (un)install packages with conflicting requirements (resolver chooses a solution).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Package name V(name) or package specifier or a list of either. Can include a version like V(name=1.0), V(name>3.4) or V(name<=2.7). If a version is given, V(oldpackage) is implied and zypper is allowed to update the package within the version range given. You can also pass a URL or a local path to a rpm file. When using O(state=latest), this can be V(*), which updates all installed packages.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oldpackage",
+      "displayName": "Oldpackage",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Adds C(--oldpackage) option to I(zypper). Allows to downgrade packages with less side-effects than force. This is implied as soon as a version is specified as part of the package name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quiet",
+      "displayName": "Quiet",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Adds C(--quiet) option to I(zypper) install/update command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replacefiles",
+      "displayName": "Replacefiles",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Adds C(--replacefiles) option to I(zypper) install/update command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "simple_errors",
+      "displayName": "Simple Errors",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When set to V(true), provide a simplified error output (parses only the C(<message>) tag text in the XML output).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skip_post_errors",
+      "displayName": "Skip Post Errors",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When set to V(true), ignore I(zypper) return code 107 (post install script errors).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "V(present) makes sure the package is installed. V(latest) makes sure the latest version of the package is installed. V(absent) makes sure the specified package is not installed. V(dist-upgrade) makes sure the latest version of all installed packages from all enabled repositories is installed. When using V(dist-upgrade), O(name) should be V(*).",
+      "choices": [
+        "present",
+        "latest",
+        "absent",
+        "dist-upgrade",
+        "installed",
+        "removed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "package",
+      "description": "The type of package to be operated on.",
+      "choices": [
+        "package",
+        "patch",
+        "pattern",
+        "product",
+        "srcpackage",
+        "application"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_cache",
+      "displayName": "Update Cache",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Run the equivalent of C(zypper refresh) before the operation. Disabled in check mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,212 @@
+{
+  "fqcn": "community.general.deploy_helper",
+  "shortDescription": "Manages some of the steps common in deploying projects",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/deploy_helper_module.html",
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clean",
+      "displayName": "Clean",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to run the clean procedure in case of O(state=finalize).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "current_path",
+      "displayName": "Current Path",
+      "type": "string",
+      "required": false,
+      "default": "current",
+      "description": "The name of the symlink that is created when the deploy is finalized. Used in O(state=finalize) and O(state=clean). Returned in the C(deploy_helper.current_path) fact.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keep_releases",
+      "displayName": "Keep Releases",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "The number of old releases to keep when cleaning. Used in O(state=finalize) and O(state=clean). Any unfinished builds are deleted first, so only correct releases count. The current version does not count.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The root path of the project. Returned in the C(deploy_helper.project_path) fact.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "release",
+      "displayName": "Release",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The release version that is being deployed. Defaults to a timestamp format C(%Y%m%d%H%M%S) (for example V(20141119223359)). This parameter is optional during O(state=present), but needs to be set explicitly for O(state=finalize). You can use the generated fact C(release={{ deploy_helper.new_release }}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "releases_path",
+      "displayName": "Releases Path",
+      "type": "string",
+      "required": false,
+      "default": "releases",
+      "description": "The name of the folder that holds the releases. This can be relative to O(path) or absolute. Returned in the C(deploy_helper.releases_path) fact.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shared_path",
+      "displayName": "Shared Path",
+      "type": "string",
+      "required": false,
+      "default": "shared",
+      "description": "The name of the folder that holds the shared resources. This can be relative to O(path) or absolute. If this is set to an empty string, no shared folder is created. Returned in the C(deploy_helper.shared_path) fact.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the project. V(query) gathers facts. V(present) creates the project C(root) folder, and in it the C(releases) and C(shared) folders. V(finalize) removes the unfinished_filename file, creates a symlink to the newly deployed release and optionally cleans old releases. V(clean) removes failed & old releases. V(absent) removes the project folder (synonymous to the M(ansible.builtin.file) module with O(state=absent)).",
+      "choices": [
+        "present",
+        "finalize",
+        "absent",
+        "clean",
+        "query"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unfinished_filename",
+      "displayName": "Unfinished Filename",
+      "type": "string",
+      "required": false,
+      "default": "DEPLOY_UNFINISHED",
+      "description": "The name of the file that indicates a deploy has not finished. All folders in the O(releases_path) that contain this file are deleted on O(state=finalize) with O(clean=true), or O(state=clean). This file is automatically deleted from the C(new_release_path) during O(state=finalize).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

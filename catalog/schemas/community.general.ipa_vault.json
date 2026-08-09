@@ -1,0 +1,197 @@
+{
+  "fqcn": "community.general.ipa_vault",
+  "shortDescription": "Manage FreeIPA vaults",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ipa_vault_module.html",
+  "options": [
+    {
+      "name": "cn",
+      "displayName": "Cn",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Vault name. Can not be changed as it is the unique identifier.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_host",
+      "displayName": "Ipa Host",
+      "type": "string",
+      "required": false,
+      "default": "ipa.example.com",
+      "description": "IP or hostname of IPA server. If the value is not specified in the task, the value of environment variable E(IPA_HOST) is used instead. If both the environment variable E(IPA_HOST) and the value are not specified in the task, then DNS is used to try to discover the FreeIPA server. The relevant entry needed in FreeIPA is the C(ipa-ca) entry. If neither the DNS entry, nor the environment E(IPA_HOST), nor the value are available in the task, then the default value is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_pass",
+      "displayName": "Ipa Pass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of administrative user. If the value is not specified in the task, the value of environment variable E(IPA_PASS) is used instead. Note that if the C(urllib_gssapi) library is available, it is possible to use GSSAPI to authenticate to FreeIPA. If the environment variable E(KRB5CCNAME) is available, the module uses this Kerberos credentials cache to authenticate to the FreeIPA server. If the environment variable E(KRB5_CLIENT_KTNAME) is available, and E(KRB5CCNAME) is not; the module uses",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_port",
+      "displayName": "Ipa Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port of FreeIPA / IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PORT) is used instead. If both the environment variable E(IPA_PORT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_prot",
+      "displayName": "Ipa Prot",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "Protocol used by IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PROT) is used instead. If both the environment variable E(IPA_PROT) and the value are not specified in the task, then default value is set.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_timeout",
+      "displayName": "Ipa Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Specifies idle timeout (in seconds) for the connection. For bulk operations, you may want to increase this in order to avoid timeout from IPA server. If the value is not specified in the task, the value of environment variable E(IPA_TIMEOUT) is used instead. If both the environment variable E(IPA_TIMEOUT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_user",
+      "displayName": "Ipa User",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Administrative account used on IPA server. If the value is not specified in the task, the value of environment variable E(IPA_USER) is used instead. If both the environment variable E(IPA_USER) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipavaultpublickey",
+      "displayName": "Ipavaultpublickey",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipavaultsalt",
+      "displayName": "Ipavaultsalt",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Vault Salt.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipavaulttype",
+      "displayName": "Ipavaulttype",
+      "type": "string",
+      "required": false,
+      "default": "symmetric",
+      "description": "Vault types are based on security level.",
+      "choices": [
+        "asymmetric",
+        "standard",
+        "symmetric"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace",
+      "displayName": "Replace",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Force replace the existent vault on IPA server.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service",
+      "displayName": "Service",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Any service can own one or more service vaults. Mutually exclusive with O(user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State to ensure.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Any user can own one or more user vaults. Mutually exclusive with O(service).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Validate IPA server certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

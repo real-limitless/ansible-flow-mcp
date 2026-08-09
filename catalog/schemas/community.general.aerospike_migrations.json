@@ -1,0 +1,140 @@
+{
+  "fqcn": "community.general.aerospike_migrations",
+  "shortDescription": "Check or wait for migrations between nodes",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/aerospike_migrations_module.html",
+  "options": [
+    {
+      "name": "connect_timeout",
+      "displayName": "Connect Timeout",
+      "type": "number",
+      "required": false,
+      "default": 1000,
+      "description": "How long to try to connect before giving up (milliseconds).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "consecutive_good_checks",
+      "displayName": "Consecutive Good Checks",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "How many times should the cluster report \"no migrations\" consecutively before returning OK back to ansible?",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fail_on_cluster_change",
+      "displayName": "Fail On Cluster Change",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Fail if the cluster key changes if something else is changing the cluster, we may want to fail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "Which host do we use as seed for info connection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_only",
+      "displayName": "Local Only",
+      "type": "boolean",
+      "required": true,
+      "default": null,
+      "description": "Do you wish to only check for migrations on the local node before returning, or do you want all nodes in the cluster to finish before returning?",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "migrate_rx_key",
+      "displayName": "Migrate Rx Key",
+      "type": "string",
+      "required": false,
+      "default": "migrate_rx_partitions_remaining",
+      "description": "The metric key used to determine if we have rx migrations remaining. Changeable due to backwards compatibility.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "migrate_tx_key",
+      "displayName": "Migrate Tx Key",
+      "type": "string",
+      "required": false,
+      "default": "migrate_tx_partitions_remaining",
+      "description": "The metric key used to determine if we have tx migrations remaining. Changeable due to backwards compatibility.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_cluster_size",
+      "displayName": "Min Cluster Size",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Check fails until cluster size is met or until tries is exhausted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 3000,
+      "description": "Which port to connect to Aerospike on (service port).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sleep_between_checks",
+      "displayName": "Sleep Between Checks",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "How long to sleep between each check (seconds).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_cluster_size",
+      "displayName": "Target Cluster Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "When all aerospike builds in the cluster are greater than version 4.3, then the C(cluster-stable) info command is used. Inside this command, you can optionally specify what the target cluster size is - but it is not necessary. You can still rely on O(min_cluster_size) if you do not want to use this option. If this option is specified on a cluster that has at least one host <4.3 then it is ignored until the min version reaches 4.3.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tries_limit",
+      "displayName": "Tries Limit",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "How many times do we poll before giving up and failing?",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

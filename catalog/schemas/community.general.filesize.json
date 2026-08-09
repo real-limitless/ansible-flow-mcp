@@ -1,0 +1,173 @@
+{
+  "fqcn": "community.general.filesize",
+  "shortDescription": "Create a file with a given size, or resize it if it exists",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/filesize_module.html",
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "blocksize",
+      "displayName": "Blocksize",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Size of blocks, in bytes if not followed by a multiplicative suffix. The numeric value (before the unit) B(MUST) be an integer (or a C(float) if it equals an integer). If not set, the size of blocks is guessed from the OS and commonly results in V(512) or V(4096) bytes, that is used internally by the module or when O(size) has no unit.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether or not to overwrite the file if it exists, in other words, to truncate it from 0. When V(true), the module is not idempotent, that means it always reports RV(ignore:changed=true). O(force=true) and O(sparse=true) are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path of the regular file to create or resize.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Requested size of the file. The value is a number (either C(int) or C(float)) optionally followed by a multiplicative suffix, that can be one of V(B) (bytes), V(KB) or V(kB) (= 1000B), V(MB) or V(mB) (= 1000kB), V(GB) or V(gB) (= 1000MB), and so on for V(T), V(P), V(E), V(Z) and V(Y); or alternatively one of V(K), V(k) or V(KiB) (= 1024B); V(M), V(m) or V(MiB) (= 1024KiB); V(G), V(g) or V(GiB) (= 1024MiB); and so on. If the multiplicative suffix is not provided, the value is treated as an intege",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": false,
+      "default": "/dev/zero",
+      "description": "Device or file that provides input data to provision the file. This parameter is ignored when O(sparse=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sparse",
+      "displayName": "Sparse",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether or not the file to create should be a sparse file. This option is effective only on newly created files, or when growing a file, only for the bytes to append. This option is not supported on OSes or filesystems not supporting sparse files. O(force=true) and O(sparse=true) are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This option is silently ignored. This module always modifies file size in-place.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

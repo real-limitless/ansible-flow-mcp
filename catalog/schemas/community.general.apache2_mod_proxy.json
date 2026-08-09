@@ -1,0 +1,82 @@
+{
+  "fqcn": "community.general.apache2_mod_proxy",
+  "shortDescription": "Set and/or get members' attributes of an Apache httpd 2.4 mod_proxy balancer pool",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/apache2_mod_proxy_module.html",
+  "options": [
+    {
+      "name": "balancer_url_suffix",
+      "displayName": "Balancer Url Suffix",
+      "type": "string",
+      "required": false,
+      "default": "/balancer-manager/",
+      "description": "Suffix of the balancer pool URL required to access the balancer pool status page (for example V(balancer_vhost[:port]/balancer_url_suffix)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "balancer_vhost",
+      "displayName": "Balancer Vhost",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "(IPv4|IPv6|FQDN):port of the Apache httpd 2.4 mod_proxy balancer pool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "member_host",
+      "displayName": "Member Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "(IPv4|IPv6|FQDN) of the balancer member to get or to set attributes to. Port number is autodetected and should not be specified here. If undefined, the M(community.general.apache2_mod_proxy) module returns a members list of dictionaries of all the current balancer pool members' attributes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Desired state of the member host. States can be simultaneously invoked by separating them with a comma (for example V(state=drained,ignore_errors)), but it is recommended to specify them as a proper YAML list. States V(present) and V(absent) must be used without any other state.",
+      "choices": [
+        "present",
+        "absent",
+        "enabled",
+        "disabled",
+        "drained",
+        "hot_standby",
+        "ignore_errors"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls",
+      "displayName": "Tls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use https to access balancer management page.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Validate ssl/tls certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

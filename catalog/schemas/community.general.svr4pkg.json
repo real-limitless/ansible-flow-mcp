@@ -1,0 +1,91 @@
+{
+  "fqcn": "community.general.svr4pkg",
+  "shortDescription": "Manage Solaris SVR4 packages",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/svr4pkg_module.html",
+  "options": [
+    {
+      "name": "category",
+      "displayName": "Category",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Install/Remove category instead of a single package.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Package name, for example V(SUNWcsr).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy",
+      "displayName": "Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "HTTP[s] proxy to be used if O(src) is a URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "response_file",
+      "displayName": "Response File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the location of a response file to be used if package expects input on install.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the location to install the package from. Required when O(state=present). Can be any path acceptable to the C(pkgadd) command's C(-d) option. For example: V(somefile.pkg), V(/dir/with/pkgs), V(http://server/mypkgs.pkg). If using a file or directory, they must already be accessible by the host. See the M(ansible.builtin.copy) module for a way to get them there.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Whether to install (V(present)), or remove (V(absent)) a package. If the package is to be installed, then O(src) is required. The SVR4 package system does not provide an upgrade operation. You need to uninstall the old, then install the new package.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone",
+      "displayName": "Zone",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "description": "Whether to install the package only in the current zone, or install it into all zones. The installation into all zones works only if you are working with the global zone.",
+      "choices": [
+        "current",
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

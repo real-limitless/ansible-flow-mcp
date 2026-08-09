@@ -1,0 +1,195 @@
+{
+  "fqcn": "ansible.builtin.cron",
+  "shortDescription": "Manage cron.d and crontab entries",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/builtin/cron_module.html",
+  "options": [
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set, create a backup of the crontab before it is modified. The location of the backup is returned in the RV(ignore:backup_file) variable by this module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cron_file",
+      "displayName": "Cron File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If specified, uses this file instead of an individual user's crontab. The assumption is that this file is exclusively managed by the module, do not use if the file contains multiple entries, NEVER use for /etc/crontab. If this is a relative path, it is interpreted with respect to C(/etc/cron.d). Many Linux distros expect (and some require) the filename portion to consist solely of upper- and lower-case letters, digits, underscores, and hyphens. Using this parameter requires you to specify the O(",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "day",
+      "displayName": "Day",
+      "type": "string",
+      "required": false,
+      "default": "*",
+      "description": "Day of the month the job should run (V(1-31), V(*), V(*/2), and so on).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disabled",
+      "displayName": "Disabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If the job should be disabled (commented out) in the crontab. Only has effect if O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "env",
+      "displayName": "Env",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set, manages a crontab's environment variable. New variables are added on top of crontab. O(name) and O(value) parameters are the name and the value of environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hour",
+      "displayName": "Hour",
+      "type": "string",
+      "required": false,
+      "default": "*",
+      "description": "Hour when the job should run (V(0-23), V(*), V(*/2), and so on).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "insertafter",
+      "displayName": "Insertafter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Used with O(state=present) and O(env). If specified, the environment variable will be inserted after the declaration of specified environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "insertbefore",
+      "displayName": "Insertbefore",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Used with O(state=present) and O(env). If specified, the environment variable will be inserted before the declaration of specified environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job",
+      "displayName": "Job",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The command to execute or, if O(env) is set, the value of environment variable. The command should not contain line breaks. Required if O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minute",
+      "displayName": "Minute",
+      "type": "string",
+      "required": false,
+      "default": "*",
+      "description": "Minute when the job should run (V(0-59), V(*), V(*/2), and so on).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "month",
+      "displayName": "Month",
+      "type": "string",
+      "required": false,
+      "default": "*",
+      "description": "Month of the year the job should run (V(1-12), V(*), V(*/2), and so on).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Description of a crontab entry or, if O(env) is set, the name of environment variable. This parameter is always required as of ansible-core 2.12.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "special_time",
+      "displayName": "Special Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Special time specification nickname.",
+      "choices": [
+        "annually",
+        "daily",
+        "hourly",
+        "monthly",
+        "reboot",
+        "weekly",
+        "yearly"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether to ensure the job or environment variable is present or absent.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The specific user whose crontab should be modified. When unset, this parameter defaults to the current user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "weekday",
+      "displayName": "Weekday",
+      "type": "string",
+      "required": false,
+      "default": "*",
+      "description": "Day of the week that the job should run (V(0-6) for Sunday-Saturday, V(*), and so on).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

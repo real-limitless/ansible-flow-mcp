@@ -1,0 +1,101 @@
+{
+  "fqcn": "community.general.snap",
+  "shortDescription": "Manages snaps",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/snap_module.html",
+  "options": [
+    {
+      "name": "channel",
+      "displayName": "Channel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Define which release of a snap is installed and tracked for updates. This option can only be specified if there is a single snap in the task. If not passed, the C(snap) command defaults to V(stable). If the value passed does not contain the C(track), it defaults to C(latest). For example, if V(edge) is passed, the module assumes the channel to be V(latest/edge). See U(https://snapcraft.io/docs/channels) for more details about snap channels.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "classic",
+      "displayName": "Classic",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Install a snap that has classic confinement. This option corresponds to the C(--classic) argument of the C(snap install) command. This level of confinement is permissive, granting full system access, similar to that of traditionally packaged applications that do not use sandboxing mechanisms. This option can only be specified when the task involves a single snap. See U(https://snapcraft.io/docs/snap-confinement) for more details about classic confinement and confinement levels.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dangerous",
+      "displayName": "Dangerous",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Install the snap in dangerous mode, without validating its assertions and signatures. This is useful when installing local snaps that are either unsigned or have signatures that have not been acknowledged. See U(https://snapcraft.io/docs/install-modes) for more details about installation modes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "devmode",
+      "displayName": "Devmode",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Install the snap in developer mode, granting the snap full system access and disabling security confinement. See U(https://snapcraft.io/docs/install-modes) for more details about installation modes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Name of the snaps to be installed. Any named snap accepted by the C(snap) command is valid. O(dangerous=true) may be necessary when installing C(.snap) files. See O(dangerous) for more details. The special name V(system) refers to the snapd system-wide configuration namespace. When used with O(options), it runs C(snap set system <key=value>). It is always considered present and only V(state=present) and O(options) are meaningful for it. Support for V(system) was added in community.general 13.0.0",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "options",
+      "displayName": "Options",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Set options with pattern C(key=value) or C(snap:key=value). If a snap name is given, the option is applied to that snap only. If the snap name is omitted, the options are applied to all snaps listed in O(name). Options are only applied to active snaps. Options are only applied when C(state) is set to V(present). This is done after the necessary installation or refresh (upgrade/downgrade) of all the snaps listed in O(name). See U(https://snapcraft.io/docs/configuration-in-snaps) for more details ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "revision",
+      "displayName": "Revision",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Install a specific revision of the snap. This option can only be specified if there is a single snap in the task. Mutually exclusive with O(channel). When a specific revision is set, the snap is held (C(snap refresh --hold)) to prevent automatic updates from overriding the pinned revision. B(Note:) running C(snap refresh <name>) manually bypasses the hold and will update the snap regardless. The hold only prevents snapd's automatic background refreshes. See U(https://snapcraft.io/docs/how-to-gui",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the package. When O(state=present) the module uses C(snap install) if the snap is not installed, and C(snap refresh) if it is installed but from a different channel.",
+      "choices": [
+        "absent",
+        "present",
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

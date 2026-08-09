@@ -7,6 +7,23 @@ from pathlib import Path
 from typing import Any
 
 
+def _loads_first_json(text: str) -> Any:
+    """Parse first JSON value; tolerate trailing noise from ansible-doc."""
+    text = (text or "").strip()
+    if not text:
+        raise json.JSONDecodeError("empty", text, 0)
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+    dec = json.JSONDecoder()
+    for i, ch in enumerate(text):
+        if ch in "{[":
+            data, _ = dec.raw_decode(text[i:])
+            return data
+    raise json.JSONDecodeError("no json", text, 0)
+
+
 def run_doc_json(fqcn: str, *, timeout: float = 60) -> dict[str, Any] | None:
     try:
         out = subprocess.check_output(
@@ -15,12 +32,13 @@ def run_doc_json(fqcn: str, *, timeout: float = 60) -> dict[str, Any] | None:
             timeout=timeout,
             stderr=subprocess.DEVNULL,
         )
-        data = json.loads(out)
+        data = _loads_first_json(out)
     except (
         FileNotFoundError,
         subprocess.CalledProcessError,
         subprocess.TimeoutExpired,
         json.JSONDecodeError,
+        ValueError,
     ):
         return None
     if isinstance(data, dict):
@@ -38,12 +56,13 @@ def run_doc_list(*, timeout: float = 120) -> list[str] | None:
             timeout=timeout,
             stderr=subprocess.DEVNULL,
         )
-        data = json.loads(out)
+        data = _loads_first_json(out)
     except (
         FileNotFoundError,
         subprocess.CalledProcessError,
         subprocess.TimeoutExpired,
         json.JSONDecodeError,
+        ValueError,
     ):
         return None
     if isinstance(data, dict):

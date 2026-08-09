@@ -1,0 +1,291 @@
+{
+  "fqcn": "community.general.ipa_user",
+  "shortDescription": "Manage FreeIPA users",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ipa_user_module.html",
+  "options": [
+    {
+      "name": "displayname",
+      "displayName": "Displayname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Display name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gidnumber",
+      "displayName": "Gidnumber",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Posix Group ID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "givenname",
+      "displayName": "Givenname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "First name. If user does not exist and O(state=present), the usage of O(givenname) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "homedirectory",
+      "displayName": "Homedirectory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default home directory of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_host",
+      "displayName": "Ipa Host",
+      "type": "string",
+      "required": false,
+      "default": "ipa.example.com",
+      "description": "IP or hostname of IPA server. If the value is not specified in the task, the value of environment variable E(IPA_HOST) is used instead. If both the environment variable E(IPA_HOST) and the value are not specified in the task, then DNS is used to try to discover the FreeIPA server. The relevant entry needed in FreeIPA is the C(ipa-ca) entry. If neither the DNS entry, nor the environment E(IPA_HOST), nor the value are available in the task, then the default value is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_pass",
+      "displayName": "Ipa Pass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of administrative user. If the value is not specified in the task, the value of environment variable E(IPA_PASS) is used instead. Note that if the C(urllib_gssapi) library is available, it is possible to use GSSAPI to authenticate to FreeIPA. If the environment variable E(KRB5CCNAME) is available, the module uses this Kerberos credentials cache to authenticate to the FreeIPA server. If the environment variable E(KRB5_CLIENT_KTNAME) is available, and E(KRB5CCNAME) is not; the module uses",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_port",
+      "displayName": "Ipa Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port of FreeIPA / IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PORT) is used instead. If both the environment variable E(IPA_PORT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_prot",
+      "displayName": "Ipa Prot",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "Protocol used by IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PROT) is used instead. If both the environment variable E(IPA_PROT) and the value are not specified in the task, then default value is set.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_timeout",
+      "displayName": "Ipa Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Specifies idle timeout (in seconds) for the connection. For bulk operations, you may want to increase this in order to avoid timeout from IPA server. If the value is not specified in the task, the value of environment variable E(IPA_TIMEOUT) is used instead. If both the environment variable E(IPA_TIMEOUT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_user",
+      "displayName": "Ipa User",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Administrative account used on IPA server. If the value is not specified in the task, the value of environment variable E(IPA_USER) is used instead. If both the environment variable E(IPA_USER) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "krbpasswordexpiration",
+      "displayName": "Krbpasswordexpiration",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Date at which the user password expires. In the format YYYYMMddHHmmss. For example V(20180121182022) expires on 21 January 2018 at 18:20:22.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "loginshell",
+      "displayName": "Loginshell",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Login shell.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mail",
+      "displayName": "Mail",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of mail addresses assigned to the user. If an empty list is passed all assigned email addresses are deleted. If None is passed email addresses are not checked nor changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for a user. It is not set for an existing user unless O(update_password=always), which is the default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sn",
+      "displayName": "Sn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Surname. If user does not exist and O(state=present), the usage of O(sn) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sshpubkey",
+      "displayName": "Sshpubkey",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of public SSH key. If an empty list is passed all assigned public keys are deleted. If None is passed SSH public keys are not checked nor changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State to ensure.",
+      "choices": [
+        "absent",
+        "disabled",
+        "enabled",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "telephonenumber",
+      "displayName": "Telephonenumber",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of telephone numbers assigned to the user. If an empty list is passed all assigned telephone numbers are deleted. If None is passed telephone numbers are not checked nor changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "title",
+      "displayName": "Title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Title.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uid",
+      "displayName": "Uid",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Uid of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uidnumber",
+      "displayName": "Uidnumber",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Account Settings UID/Posix User ID number.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "Set password for a user.",
+      "choices": [
+        "always",
+        "on_create"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "userauthtype",
+      "displayName": "Userauthtype",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The authentication type to use for the user. To remove all authentication types from the user, use an empty list V([]). The choice V(idp) and V(passkey) has been added in community.general 8.1.0.",
+      "choices": [
+        "password",
+        "radius",
+        "otp",
+        "pkinit",
+        "hardened",
+        "idp",
+        "passkey"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This only applies if O(ipa_prot) is V(https). If set to V(false), the SSL certificates are not validated. This should only set to V(false) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

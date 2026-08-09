@@ -1,0 +1,145 @@
+{
+  "fqcn": "community.general.pubnub_blocks",
+  "shortDescription": "PubNub blocks management module",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/pubnub_blocks_module.html",
+  "options": [
+    {
+      "name": "account",
+      "displayName": "Account",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Name of PubNub account for from which O(application) is used to manage blocks. User's account is used if value not set or empty.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "application",
+      "displayName": "Application",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of target PubNub application for which blocks configuration on specific O(keyset) is done.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cache",
+      "displayName": "Cache",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "In case if single play use blocks management module few times it is preferred to enabled 'caching' by making previous module to share gathered artifacts and pass them to this parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "changes",
+      "displayName": "Changes",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "List of fields which should be changed by block itself (does not affect any event handlers). Possible options for change is: O(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Short block description which is later visible on U(https://admin.pubnub.com). Used only if block does not exists and does not change description for existing block.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "email",
+      "displayName": "Email",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Email from account for which new session should be started. Not required if O(cache) contains result of previous module call (in same play).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "event_handlers",
+      "displayName": "Event Handlers",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of event handlers which should be updated for specified block O(name). Each entry for new event handler should contain: V(name), V(src), V(channels), V(event). V(name) used as event handler name which can be used later to make changes to it. C(src) is full path to file with event handler code. V(channels) is name of channel from which event handler is waiting for events. V(event) is type of event which is able to trigger event handler: V(js-before-publish), V(js-after-publish), V(js-after-p",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keyset",
+      "displayName": "Keyset",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of application's keys set which is bound to managed blocks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of managed block which is later visible on admin.pubnub.com.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Password which match to account to which specified O(email) belong. Not required if O(cache) contains result of previous module call (in same play).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Intended block state after event handlers creation / update process is completed.",
+      "choices": [
+        "started",
+        "stopped",
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This key allow to try skip certificates check when performing REST API calls. Sometimes host may have issues with certificates on it and this causes problems to call PubNub REST API. If check should be ignored V(false) should be passed to this parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

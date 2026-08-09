@@ -19,7 +19,7 @@ ALLOWLIST = CATALOG / "collections-allowlist.yml"
 DEFAULT_SETTINGS: dict = {
     "topN": 40,
     "modulesPerCollection": 0,  # 0 = all modules
-    "concurrency": 4,
+    "concurrency": 2,  # keep low — gallery lock serializes writes
     "galaxyPageSize": 20,
     "galaxyBase": "https://galaxy.ansible.com",
     "includeBuiltin": True,
@@ -29,6 +29,15 @@ DEFAULT_SETTINGS: dict = {
     "minDownloadCount": 0,
     "namespaceFilter": "",  # comma namespaces e.g. community,ansible,amazon
     "outCatalog": str(CATALOG),
+    # HTTP / proxy
+    "useProxy": False,
+    "proxy": "",  # fixed proxy URL e.g. socks5h://host:1080 or http://host:8080
+    "proxyListUrl": "https://databay.com/free-proxy-list/socks5.txt",
+    "proxyProbeLimit": 40,
+    "proxyProbeTimeout": 10,
+    "httpTimeout": 45,
+    "httpRetries": 3,
+    "galaxyPause": 0.15,
 }
 
 DEFAULT_DENY = frozenset(

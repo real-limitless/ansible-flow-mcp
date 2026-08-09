@@ -1,13 +1,13 @@
 """Ansible Galaxy HTTP client — top collections + module inventory."""
 from __future__ import annotations
 
-import json
 import time
-import urllib.error
 import urllib.parse
-import urllib.request
 from dataclasses import dataclass, field
 from typing import Any, Callable
+
+from .http_util import http_get_json
+from .proxy_pool import ProxyPool
 
 
 @dataclass
@@ -34,38 +34,57 @@ class GalaxyClient:
         timeout: float = 45.0,
         pause: float = 0.15,
         user_agent: str = "ansible-flow-mcp-factory/0.1",
+        use_proxy: bool = False,
+        proxy: str | None = None,
+        proxy_pool: ProxyPool | None = None,
+        retries: int = 3,
     ) -> None:
         self.base = base.rstrip("/")
         self.timeout = timeout
         self.pause = pause
         self.user_agent = user_agent
+        self.use_proxy = use_proxy
+        self.proxy = proxy  # fixed proxy URL
+        self.proxy_pool = proxy_pool
+        self.retries = max(1, retries)
+
+    def _pick_proxy(self) -> str | None:
+        if not self.use_proxy:
+            return None
+        if self.proxy:
+            return self.proxy
+        if self.proxy_pool:
+            return self.proxy_pool.acquire()
+        return None
 
     def _get(self, path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
         q = urllib.parse.urlencode({k: v for k, v in (params or {}).items() if v is not None})
         url = f"{self.base}{path}"
         if q:
             url = f"{url}?{q}"
-        req = urllib.request.Request(
-            url,
-            headers={
-                "Accept": "application/json",
-                "User-Agent": self.user_agent,
-            },
-        )
-        try:
-            with urllib.request.urlopen(req, timeout=self.timeout) as resp:
-                raw = resp.read().decode("utf-8", errors="replace")
-        except urllib.error.HTTPError as e:
-            body = e.read().decode("utf-8", errors="replace")[:300]
-            raise RuntimeError(f"Galaxy HTTP {e.code} {url}: {body}") from e
-        except urllib.error.URLError as e:
-            raise RuntimeError(f"Galaxy network error {url}: {e}") from e
-        if self.pause:
-            time.sleep(self.pause)
-        data = json.loads(raw)
-        if not isinstance(data, dict):
-            raise RuntimeError(f"Unexpected Galaxy payload type: {type(data)}")
-        return data
+        last_err: Exception | None = None
+        for attempt in range(self.retries):
+            proxy = self._pick_proxy()
+            try:
+                data = http_get_json(
+                    url,
+                    headers={"User-Agent": self.user_agent, "Accept": "application/json"},
+                    timeout=self.timeout,
+                    proxy=proxy,
+                )
+                if proxy and self.proxy_pool:
+                    self.proxy_pool.report_ok(proxy)
+                if self.pause:
+                    time.sleep(self.pause)
+                if not isinstance(data, dict):
+                    raise RuntimeError(f"Unexpected Galaxy payload type: {type(data)}")
+                return data
+            except Exception as e:
+                last_err = e
+                if proxy and self.proxy_pool:
+                    self.proxy_pool.report_bad(proxy)
+                time.sleep(0.3 * (attempt + 1))
+        raise RuntimeError(f"Galaxy GET failed {url}: {last_err}") from last_err
 
     def search_top_collections(
         self,
@@ -99,7 +118,8 @@ class GalaxyClient:
                 break
             if progress:
                 total = (data.get("meta") or {}).get("count")
-                progress(f"galaxy offset={offset} got={len(rows)} total≈{total}")
+                px = "proxy" if self.use_proxy else "direct"
+                progress(f"galaxy[{px}] offset={offset} got={len(rows)} total≈{total}")
             for item in rows:
                 hit = self._parse_search_item(item)
                 if hit.deprecated:
@@ -200,3 +220,17 @@ def modules_from_hits(
             )
     rows.sort(key=lambda r: (-int(r.get("downloadCount") or 0), str(r["fqcn"])))
     return rows
+
+
+def client_from_settings(settings: dict[str, Any], pool: ProxyPool | None = None) -> GalaxyClient:
+    use_proxy = bool(settings.get("useProxy"))
+    fixed = str(settings.get("proxy") or "").strip() or None
+    return GalaxyClient(
+        base=str(settings.get("galaxyBase") or "https://galaxy.ansible.com"),
+        timeout=float(settings.get("httpTimeout") or 45),
+        pause=float(settings.get("galaxyPause") or 0.15),
+        use_proxy=use_proxy,
+        proxy=fixed,
+        proxy_pool=pool if use_proxy and not fixed else None,
+        retries=int(settings.get("httpRetries") or 3),
+    )

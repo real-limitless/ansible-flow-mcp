@@ -1,0 +1,266 @@
+{
+  "fqcn": "community.general.ipa_hbacrule",
+  "shortDescription": "Manage FreeIPA HBAC rule",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ipa_hbacrule_module.html",
+  "options": [
+    {
+      "name": "cn",
+      "displayName": "Cn",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Canonical name. Can not be changed as it is the unique identifier.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of host names to assign. If an empty list is passed all hosts are removed from the rule. If option is omitted hosts are not checked or changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostcategory",
+      "displayName": "Hostcategory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host category.",
+      "choices": [
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostgroup",
+      "displayName": "Hostgroup",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of hostgroup names to assign. If an empty list is passed all hostgroups are removed from the rule. If option is omitted hostgroups are not checked or changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_host",
+      "displayName": "Ipa Host",
+      "type": "string",
+      "required": false,
+      "default": "ipa.example.com",
+      "description": "IP or hostname of IPA server. If the value is not specified in the task, the value of environment variable E(IPA_HOST) is used instead. If both the environment variable E(IPA_HOST) and the value are not specified in the task, then DNS is used to try to discover the FreeIPA server. The relevant entry needed in FreeIPA is the C(ipa-ca) entry. If neither the DNS entry, nor the environment E(IPA_HOST), nor the value are available in the task, then the default value is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_pass",
+      "displayName": "Ipa Pass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of administrative user. If the value is not specified in the task, the value of environment variable E(IPA_PASS) is used instead. Note that if the C(urllib_gssapi) library is available, it is possible to use GSSAPI to authenticate to FreeIPA. If the environment variable E(KRB5CCNAME) is available, the module uses this Kerberos credentials cache to authenticate to the FreeIPA server. If the environment variable E(KRB5_CLIENT_KTNAME) is available, and E(KRB5CCNAME) is not; the module uses",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_port",
+      "displayName": "Ipa Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port of FreeIPA / IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PORT) is used instead. If both the environment variable E(IPA_PORT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_prot",
+      "displayName": "Ipa Prot",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "Protocol used by IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PROT) is used instead. If both the environment variable E(IPA_PROT) and the value are not specified in the task, then default value is set.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_timeout",
+      "displayName": "Ipa Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Specifies idle timeout (in seconds) for the connection. For bulk operations, you may want to increase this in order to avoid timeout from IPA server. If the value is not specified in the task, the value of environment variable E(IPA_TIMEOUT) is used instead. If both the environment variable E(IPA_TIMEOUT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_user",
+      "displayName": "Ipa User",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Administrative account used on IPA server. If the value is not specified in the task, the value of environment variable E(IPA_USER) is used instead. If both the environment variable E(IPA_USER) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service",
+      "displayName": "Service",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of service names to assign. If an empty list is passed all services are removed from the rule. If option is omitted services are not checked or changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "servicecategory",
+      "displayName": "Servicecategory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Service category.",
+      "choices": [
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "servicegroup",
+      "displayName": "Servicegroup",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of service group names to assign. If an empty list is passed all assigned service groups are removed from the rule. If option is omitted service groups are not checked or changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sourcehost",
+      "displayName": "Sourcehost",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of source host names to assign. If an empty list if passed all assigned source hosts are removed from the rule. If option is omitted source hosts are not checked or changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sourcehostcategory",
+      "displayName": "Sourcehostcategory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Source host category.",
+      "choices": [
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sourcehostgroup",
+      "displayName": "Sourcehostgroup",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of source host group names to assign. If an empty list if passed all assigned source host groups are removed from the rule. If option is omitted source host groups are not checked or changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State to ensure.",
+      "choices": [
+        "absent",
+        "disabled",
+        "enabled",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of user names to assign. If an empty list if passed all assigned users are removed from the rule. If option is omitted users are not checked or changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "usercategory",
+      "displayName": "Usercategory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User category.",
+      "choices": [
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "usergroup",
+      "displayName": "Usergroup",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of user group names to assign. If an empty list if passed all assigned user groups are removed from the rule. If option is omitted user groups are not checked or changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This only applies if O(ipa_prot) is V(https). If set to V(false), the SSL certificates are not validated. This should only set to V(false) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

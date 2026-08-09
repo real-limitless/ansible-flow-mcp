@@ -1,0 +1,115 @@
+{
+  "fqcn": "community.general.filesystem",
+  "shortDescription": "Makes a filesystem",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/filesystem_module.html",
+  "options": [
+    {
+      "name": "dev",
+      "displayName": "Dev",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Target path to block device (Linux) or character device (FreeBSD) or regular file (both). When setting Linux-specific filesystem types on FreeBSD, this module only works when applying to regular files, also known as disk images. Currently V(lvm) (Linux-only) and V(ufs) (FreeBSD-only) do not support a regular file as their target O(dev). Support for character devices on FreeBSD has been added in community.general 3.4.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If V(true), allows to create new filesystem on devices that already has filesystem.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fstype",
+      "displayName": "Fstype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filesystem type to be created. This option is required with O(state=present) (or if O(state) is omitted). V(ufs) support has been added in community.general 3.4.0. V(bcachefs) support has been added in community.general 8.6.0. V(gfs2) support has been added in community.general 13.1.0.",
+      "choices": [
+        "bcachefs",
+        "btrfs",
+        "ext2",
+        "ext3",
+        "ext4",
+        "ext4dev",
+        "f2fs",
+        "lvm",
+        "ocfs2",
+        "reiserfs",
+        "xfs",
+        "vfat",
+        "swap",
+        "ufs",
+        "gfs2"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "label",
+      "displayName": "Label",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set filesystem's label to the given value. The label options specified in O(opts) take precedence over this value. Supported for O(fstype) being one of V(gfs2). Support for other filesystems might be added later. On GFS2 this sets the lock table with the C(-t) option of mkfs.gfs2(8). It has to be in the form V(CLUSTERNAME:LOCKSPACE).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opts",
+      "displayName": "Opts",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "List of options to be passed to C(mkfs) command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resizefs",
+      "displayName": "Resizefs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If V(true), if the block device and filesystem size differ, grow the filesystem into the space. Supported when O(fstype) is one of: V(bcachefs), V(btrfs), V(ext2), V(ext3), V(ext4), V(ext4dev), V(f2fs), V(lvm), V(xfs), V(ufs) and V(vfat). Attempts to resize other filesystem types fail. XFS only grows if mounted. Currently, the module is based on commands from C(util-linux) package to perform operations, so resizing of XFS is not supported on FreeBSD systems. VFAT is likely to fail if C(fatresize",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If O(state=present), the filesystem is created if it does not already exist, that is the default behaviour if O(state) is omitted. If O(state=absent), filesystem signatures on O(dev) are wiped if it contains a filesystem (as known by C(blkid)). When O(state=absent), all other options but O(dev) are ignored, and the module does not fail if the device O(dev) does not actually exist.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set filesystem's UUID to the given value. The UUID options specified in O(opts) take precedence over this value. See xfs_admin(8) (C(xfs)), tune2fs(8) (C(ext2), C(ext3), C(ext4), C(ext4dev)) for possible values. For O(fstype=lvm) the value is ignored, it resets the PV UUID if set. Supported for O(fstype) being one of V(bcachefs), V(ext2), V(ext3), V(ext4), V(ext4dev), V(lvm), V(gfs2) or V(xfs). This is B(not idempotent). Specifying this option always results in a change. Mutually exclusive with ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

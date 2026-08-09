@@ -1,0 +1,265 @@
+{
+  "fqcn": "community.general.terraform",
+  "shortDescription": "Manages a Terraform deployment (and plans)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/terraform_module.html",
+  "options": [
+    {
+      "name": "backend_config",
+      "displayName": "Backend Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A group of key-values to provide at init stage to the -backend-config parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backend_config_files",
+      "displayName": "Backend Config Files",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The path to a configuration file to provide at init state to the -backend-config parameter. This can accept a list of paths to multiple configuration files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "binary_path",
+      "displayName": "Binary Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of a C(terraform) binary to use, relative to the 'service_path' unless you supply an absolute path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_destroy",
+      "displayName": "Check Destroy",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Apply only when no resources are destroyed. Note that this only prevents \"destroy\" actions, but not \"destroy and re-create\" actions. This option is ignored when O(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "complex_vars",
+      "displayName": "Complex Vars",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable/disable capability to handle complex variable structures for C(terraform). If V(true) the O(variables) also accepts dictionaries, lists, and booleans to be passed to C(terraform). Strings that are passed are correctly quoted. When disabled, supports only simple variables (strings, integers, and floats), and passes them on unquoted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_init",
+      "displayName": "Force Init",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "To avoid duplicating infra, if a state file cannot be found this forces a C(terraform init). Generally, this should be turned off unless you intend to provision an entirely new Terraform deployment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "init_reconfigure",
+      "displayName": "Init Reconfigure",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Forces backend reconfiguration during init.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lock",
+      "displayName": "Lock",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enable statefile locking, if you use a service that accepts locks (such as S3+DynamoDB) to store your statefile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lock_timeout",
+      "displayName": "Lock Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "How long to maintain the lock on the statefile, if you use a service that accepts locks (such as S3+DynamoDB).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_color",
+      "displayName": "No Color",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(true), suppress color codes in output from Terraform commands. If V(false), allows Terraform to use color codes in its output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "overwrite_init",
+      "displayName": "Overwrite Init",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Run init even if C(.terraform/terraform.tfstate) already exists in O(project_path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parallelism",
+      "displayName": "Parallelism",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Restrict concurrent operations when Terraform applies the plan.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plan_file",
+      "displayName": "Plan File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to an existing Terraform plan file to apply. If this is not specified, Ansible builds a new TF plan and execute it. Note that this option is required if O(state=planned).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plugin_paths",
+      "displayName": "Plugin Paths",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of paths containing Terraform plugin executable files. Plugin executables can be downloaded from U(https://releases.hashicorp.com/). When set, the plugin discovery and auto-download behavior of Terraform is disabled. The directory structure in the plugin path can be tricky. The Terraform docs U(https://learn.hashicorp.com/tutorials/terraform/automate-terraform#pre-installed-plugins) show a simple directory of files, but actually, the directory structure has to follow the same structure you ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project_path",
+      "displayName": "Project Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The path to the root of the Terraform directory with the C(vars.tf)/C(main.tf)/etc to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider_upgrade",
+      "displayName": "Provider Upgrade",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allows Terraform init to upgrade providers to versions specified in the project's version constraints.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge_workspace",
+      "displayName": "Purge Workspace",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Only works with state = absent. If V(true), the O(workspace) is deleted after the C(terraform destroy) action. If O(workspace=default) then it is not deleted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Goal state of given stage/project.",
+      "choices": [
+        "planned",
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state_file",
+      "displayName": "State File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to an existing Terraform state file to use when building plan. If this is not specified, the default C(terraform.tfstate) is used. This option is ignored when plan is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "targets",
+      "displayName": "Targets",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of specific resources to target in this plan/application. The resources selected here are also auto-include any dependencies.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "variables",
+      "displayName": "Variables",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A group of key-values pairs to override template variables or those in variables files. By default, only string and number values are allowed, which are passed on unquoted. Support complex variable structures (lists, dictionaries, numbers, and booleans) to reflect terraform variable syntax when O(complex_vars=true). Ansible integers or floats are mapped to terraform numbers. Ansible strings are mapped to terraform strings. Ansible dictionaries are mapped to terraform objects. Ansible lists are m",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "variables_files",
+      "displayName": "Variables Files",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The path to a variables file for Terraform to fill into the TF configurations. This can accept a list of paths to multiple variables files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "workspace",
+      "displayName": "Workspace",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The terraform workspace to work with. This sets the E(TF_WORKSPACE) environmental variable that is used to override workspace selection. For more information about workspaces have a look at U(https://developer.hashicorp.com/terraform/language/state/workspaces).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

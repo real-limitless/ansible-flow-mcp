@@ -1,0 +1,329 @@
+{
+  "fqcn": "community.general.cloudflare_dns",
+  "shortDescription": "Manage Cloudflare DNS records",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/cloudflare_dns_module.html",
+  "options": [
+    {
+      "name": "account_api_key",
+      "displayName": "Account Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Account API key. Required for API keys authentication. You can obtain your API key from the bottom of the Cloudflare 'My Account' page, found here: U(https://dash.cloudflare.com/).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "account_email",
+      "displayName": "Account Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Account email. Required for API keys authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "algorithm",
+      "displayName": "Algorithm",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Algorithm number. Required for O(type=DS) and O(type=SSHFP) when O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token",
+      "displayName": "Api Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "API token. Required for API token authentication. You can obtain your API token from the bottom of the Cloudflare 'My Account' page, found here: U(https://dash.cloudflare.com/). Can be specified in E(CLOUDFLARE_TOKEN) environment variable since community.general 2.0.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_usage",
+      "displayName": "Cert Usage",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Certificate usage number. Required for O(type=TLSA) when O(state=present).",
+      "choices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Comments or notes about the DNS record.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flag",
+      "displayName": "Flag",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Issuer Critical Flag. Should be set either to V(0) for not critical, or to V(128) for critical. Before community.general 12.3.0, only V(0) and V(1) were valid options. The value V(1) is still available for backwards-compatibility reasons. Required for O(type=CAA) when O(state=present).",
+      "choices": [
+        0,
+        1,
+        128
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hash_type",
+      "displayName": "Hash Type",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Hash type number. Required for O(type=DS), O(type=SSHFP) and O(type=TLSA) when O(state=present).",
+      "choices": [
+        1,
+        2
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_tag",
+      "displayName": "Key Tag",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "DNSSEC key tag. Needed for O(type=DS) when O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Service port. Required for O(type=SRV) and O(type=TLSA).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Record priority. Required for O(type=MX) and O(type=SRV).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proto",
+      "displayName": "Proto",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Service protocol. Required for O(type=SRV) and O(type=TLSA). Common values are TCP and UDP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxied",
+      "displayName": "Proxied",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Proxy through Cloudflare network or just use DNS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "record",
+      "displayName": "Record",
+      "type": "string",
+      "required": false,
+      "default": "@",
+      "description": "Record to add. Required if O(state=present). Default is V(@) (that is, the zone name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selector",
+      "displayName": "Selector",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Selector number. Required for O(type=TLSA) when O(state=present).",
+      "choices": [
+        0,
+        1
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service",
+      "displayName": "Service",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Record service. Required for O(type=SRV).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "solo",
+      "displayName": "Solo",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the record should be the only one for that record type and record name. Only use with O(state=present). This deletes all other records with the same record name and type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the record(s) should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tag",
+      "displayName": "Tag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "CAA issue restriction. Required for O(type=CAA) when O(state=present).",
+      "choices": [
+        "issue",
+        "issuewild",
+        "iodef"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Custom tags for the DNS record.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Timeout for Cloudflare API calls.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttl",
+      "displayName": "Ttl",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The TTL to give the new record. Must be between V(120) and V(2,147,483,647) seconds, or V(1) for automatic.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of DNS record to create. Required if O(state=present). Support for V(SPF) has been removed from community.general 9.0.0 since that record type is no longer supported by CloudFlare. Support for V(PTR) has been added in community.general 11.1.0.",
+      "choices": [
+        "A",
+        "AAAA",
+        "CNAME",
+        "DS",
+        "MX",
+        "NS",
+        "SRV",
+        "SSHFP",
+        "TLSA",
+        "CAA",
+        "TXT",
+        "PTR"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "value",
+      "displayName": "Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The record value. Required for O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "weight",
+      "displayName": "Weight",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Service weight. Required for O(type=SRV).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone",
+      "displayName": "Zone",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the Zone to work with (for example V(example.com)). The Zone must already exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,157 @@
+{
+  "fqcn": "community.general.ipa_getkeytab",
+  "shortDescription": "Manage keytab file in FreeIPA",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ipa_getkeytab_module.html",
+  "options": [
+    {
+      "name": "bind_dn",
+      "displayName": "Bind Dn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The LDAP DN to bind as when retrieving a keytab without Kerberos credentials. Generally used with the O(bind_pw) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bind_pw",
+      "displayName": "Bind Pw",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The LDAP password to use when not binding with Kerberos.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the IPA CA certificate used to validate LDAPS/STARTTLS connections.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_types",
+      "displayName": "Encryption Types",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The list of encryption types to use to generate keys. It uses local client defaults if not provided. Valid values depend on the Kerberos library version and configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Force recreation if exists already.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_host",
+      "displayName": "Ipa Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IPA server to retrieve the keytab from (FQDN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_uri",
+      "displayName": "Ldap Uri",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP URI. If V(ldap://) is specified, STARTTLS is initiated by default. Can not be used with the O(ipa_host) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use this password for the key instead of one randomly generated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The base path where to put generated keytab file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "principal",
+      "displayName": "Principal",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The non-realm part of the full principal name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retrieve_mode",
+      "displayName": "Retrieve Mode",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Retrieve an existing key from the server instead of generating a new one. This is incompatible with the O(password), and works only against a IPA server more recent than version 3.3. The user requesting the keytab must have access to the keys for this operation to succeed. Be aware that if set V(true), a new keytab is generated. This invalidates all previously retrieved keytabs for this service principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sasl_mech",
+      "displayName": "Sasl Mech",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SASL mechanism to use if O(bind_dn) and O(bind_pw) are not specified.",
+      "choices": [
+        "GSSAPI",
+        "EXTERNAL"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the keytab file. V(present) only check for existence of a file, if you want to recreate keytab with other parameters you should set O(force=true).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,221 @@
+{
+  "fqcn": "community.general.ldap_search",
+  "shortDescription": "Search for entries in a LDAP server",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ldap_search_module.html",
+  "options": [
+    {
+      "name": "attrs",
+      "displayName": "Attrs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of attributes for limiting the result. Use an actual list or a comma-separated string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "base64_attributes",
+      "displayName": "Base64 Attributes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "If provided, all attribute values returned that are listed in this option are Base64 encoded. If the special value V(*) appears in this list, all attributes are Base64 encoded. All other attribute values are converted to UTF-8 strings. If they contain binary data, please note that invalid UTF-8 bytes are omitted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bind_dn",
+      "displayName": "Bind Dn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A DN to bind with. Try to use a SASL bind with the EXTERNAL mechanism as default when this parameter is omitted. Use an anonymous bind if the parameter is blank.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bind_pw",
+      "displayName": "Bind Pw",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The password to use with O(bind_dn).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the path to PEM file with CA certs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted certificate chain file to be used for SSL client authentication. Required if O(client_key) is defined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted file that contains your private key to be used for SSL client authentication. Required if O(client_cert) is defined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dn",
+      "displayName": "Dn",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The LDAP DN to search in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filter",
+      "displayName": "Filter",
+      "type": "string",
+      "required": false,
+      "default": "(objectClass=*)",
+      "description": "Used for filtering the LDAP search result.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "page_size",
+      "displayName": "Page Size",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The page size when performing a simple paged result search (RFC 2696). This setting can be tuned to reduce issues with timeouts and server limits. Setting the page size to V(0) (default) disables paged searching.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "referrals_chasing",
+      "displayName": "Referrals Chasing",
+      "type": "string",
+      "required": false,
+      "default": "anonymous",
+      "description": "Set the referrals chasing behavior. V(anonymous) follow referrals anonymously. This is the default behavior. V(disabled) disable referrals chasing. This sets C(OPT_REFERRALS) to off.",
+      "choices": [
+        "disabled",
+        "anonymous"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sasl_class",
+      "displayName": "Sasl Class",
+      "type": "string",
+      "required": false,
+      "default": "external",
+      "description": "The class to use for SASL authentication.",
+      "choices": [
+        "external",
+        "gssapi"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schema",
+      "displayName": "Schema",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set to V(true) to return the full attribute schema of entries, not their attribute values. Overrides O(attrs) when provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scope",
+      "displayName": "Scope",
+      "type": "string",
+      "required": false,
+      "default": "base",
+      "description": "The LDAP scope to use. V(subordinate) requires the LDAPv3 subordinate feature extension. V(children) is equivalent to a \"subtree\" scope.",
+      "choices": [
+        "base",
+        "onelevel",
+        "subordinate",
+        "children"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_uri",
+      "displayName": "Server Uri",
+      "type": "string",
+      "required": false,
+      "default": "ldapi:///",
+      "description": "The O(server_uri) parameter may be a comma- or whitespace-separated list of URIs containing only the schema, the host, and the port fields. The default value lets the underlying LDAP client library look for a UNIX domain socket in its default location. Note that when using multiple URIs you cannot determine to which URI your client gets connected. For URIs containing additional fields, particularly when using commas, behavior is undefined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_tls",
+      "displayName": "Start Tls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use the START_TLS LDAP extension if set to V(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to V(false), SSL certificates are not validated. This should only be used on sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "xorder_discovery",
+      "displayName": "Xorder Discovery",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Set the behavior on how to process Xordered DNs. V(enable) performs a C(ONELEVEL) search below the superior RDN to find the matching DN. V(disable) always uses the DN unmodified (as passed by the O(dn) parameter). V(auto) only performs a search if the first RDN does not contain an index number (C({x})).",
+      "choices": [
+        "enable",
+        "auto",
+        "disable"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

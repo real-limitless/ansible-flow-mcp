@@ -1,0 +1,248 @@
+{
+  "fqcn": "community.general.lxd_container",
+  "shortDescription": "Manage LXD instances",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/lxd_container_module.html",
+  "options": [
+    {
+      "name": "architecture",
+      "displayName": "Architecture",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The architecture for the instance (for example V(x86_64) or V(i686)). See U(https://documentation.ubuntu.com/lxd/en/latest/api/#/instances/instance_get).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The client certificate file path. If not specified, it defaults to C(${HOME}/.config/lxc/client.crt).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The client certificate key file path. If not specified, it defaults to C(${HOME}/.config/lxc/client.key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config",
+      "displayName": "Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The config for the instance (for example V({\"limits.cpu\": \"2\"})). All values in O(config) must be strings, as required by the LXD/Incus API. Using non-string values (such as integers or booleans) will cause an API error. Make sure to quote numeric and boolean values in YAML (for example, use V(\"2\") instead of V(2)). See U(https://documentation.ubuntu.com/lxd/en/latest/api/#/instances/instance_get). If the instance already exists and its \"config\" values in metadata obtained from the LXD API U(htt",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "devices",
+      "displayName": "Devices",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The devices for the instance (for example V({ \"rootfs\": { \"path\": \"/dev/kvm\", \"type\": \"unix-char\" }})). See U(https://documentation.ubuntu.com/lxd/en/latest/api/#/instances/instance_get).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ephemeral",
+      "displayName": "Ephemeral",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not the instance is ephemeral (for example V(true) or V(false)). See U(https://documentation.ubuntu.com/lxd/en/latest/api/#/instances/instance_get).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_stop",
+      "displayName": "Force Stop",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If this is V(true), the C(lxd_container) forces to stop the instance when it stops or restarts the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_volatile_options",
+      "displayName": "Ignore Volatile Options",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), options starting with C(volatile.) are ignored. As a result, they are reapplied for each execution. This default behavior can be changed by setting this option to V(false). The default value changed from V(true) to V(false) in community.general 6.0.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of an instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profiles",
+      "displayName": "Profiles",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Profile to be used by the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Project of an instance. See U(https://documentation.ubuntu.com/lxd/en/latest/projects/).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snap_url",
+      "displayName": "Snap Url",
+      "type": "string",
+      "required": false,
+      "default": "unix:/var/snap/lxd/common/lxd/unix.socket",
+      "description": "The unix domain socket path when LXD is installed by snap package manager.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The source for the instance (for example V({ \"type\": \"image\", \"mode\": \"pull\", \"server\": \"https://cloud-images.ubuntu.com/releases/\", \"protocol\": \"simplestreams\", \"alias\": \"22.04\" })). See U(https://documentation.ubuntu.com/lxd/en/latest/api/) for complete API documentation. Note that C(protocol) accepts two choices: V(lxd) or V(simplestreams).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "started",
+      "description": "Define the state of an instance.",
+      "choices": [
+        "started",
+        "stopped",
+        "restarted",
+        "absent",
+        "frozen"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "For cluster deployments. It attempts to create an instance on a target node. If the instance exists elsewhere in a cluster, then it is not replaced nor moved. The name should respond to same name of the node you see in C(lxc cluster list).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "A timeout for changing the state of the instance. This is also used as a timeout for waiting until IPv4 addresses are set to the all network interfaces in the instance after starting or restarting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "trust_password",
+      "displayName": "Trust Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The client trusted password. You need to set this password on the LXD server before running this module using the following command: C(lxc config set core.trust_password <some random password>). See U(https://www.stgraber.org/2016/04/18/lxd-api-direct-interaction/). If trust_password is set, this module send a request for authentication before sending any requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "container",
+      "description": "Instance type can be either V(virtual-machine) or V(container).",
+      "choices": [
+        "container",
+        "virtual-machine"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": "unix:/var/lib/lxd/unix.socket",
+      "description": "The unix domain socket path or the https URL for the LXD server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_container",
+      "displayName": "Wait For Container",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), the tasks wait until the task reports a success status when performing container operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_ipv4_addresses",
+      "displayName": "Wait For Ipv4 Addresses",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If this is V(true), the C(lxd_container) waits until IPv4 addresses are set to the all network interfaces in the instance after starting or restarting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

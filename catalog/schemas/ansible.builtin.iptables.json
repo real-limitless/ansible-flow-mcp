@@ -1,0 +1,562 @@
+{
+  "fqcn": "ansible.builtin.iptables",
+  "shortDescription": "Modify iptables rules",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/builtin/iptables_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "append",
+      "description": "Whether the rule should be appended at the bottom or inserted at the top. If the rule already exists the chain will not be modified.",
+      "choices": [
+        "append",
+        "insert"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chain",
+      "displayName": "Chain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the iptables chain to modify. This could be a user-defined chain or one of the standard iptables chains, like V(INPUT), V(FORWARD), V(OUTPUT), V(PREROUTING), V(POSTROUTING), V(SECMARK) or V(CONNSECMARK).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chain_management",
+      "displayName": "Chain Management",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If V(true) and O(state) is V(present), the chain will be created if needed. If V(true) and O(state) is V(absent), the chain will be deleted if the only other parameter passed are O(chain) and optionally O(table).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This specifies a comment that will be added to the rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ctstate",
+      "displayName": "Ctstate",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of the connection states to match in the conntrack module. Possible values are V(INVALID), V(NEW), V(ESTABLISHED), V(RELATED), V(UNTRACKED), V(SNAT), V(DNAT).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination",
+      "displayName": "Destination",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Destination specification. Address can be either a network name, a hostname, a network IP address (with /mask), or a plain IP address. Hostnames will be resolved once only, before the rule is submitted to the kernel. Please note that specifying any name to be resolved with a remote query such as DNS is a really bad idea. The mask can be either a network mask or a plain number, specifying the number of 1's at the left side of the network mask. Thus, a mask of 24 is equivalent to 255.255.255.0. A ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_port",
+      "displayName": "Destination Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Destination port or port range specification. This can either be a service name or a port number. An inclusive range can also be specified, using the format first:last. If the first port is omitted, '0' is assumed; if the last is omitted, '65535' is assumed. If the first port is greater than the second one they will be swapped. This is only valid if the rule also specifies one of the following protocols: tcp, udp, dccp or sctp.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_ports",
+      "displayName": "Destination Ports",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "This specifies multiple destination port numbers or port ranges to match in the multiport module. It can only be used in conjunction with the protocols tcp, udp, udplite, dccp and sctp.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dst_range",
+      "displayName": "Dst Range",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the destination IP range to match in the iprange module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flush",
+      "displayName": "Flush",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Flushes the specified table and chain of all rules. If no chain is specified then the entire table is purged. Ignores all other parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fragment",
+      "displayName": "Fragment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This means that the rule only refers to second and further fragments of fragmented packets. Since there is no way to tell the source or destination ports of such a packet (or ICMP type), such a packet will not match any rules which specify them. When the \"!\" argument precedes the fragment argument, the rule will only match head fragments, or unfragmented packets.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gateway",
+      "displayName": "Gateway",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This specifies the IP address of the host to send the cloned packets. This option is only valid when O(jump=TEE).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gid_owner",
+      "displayName": "Gid Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the GID or group to use in the match by owner rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "goto",
+      "displayName": "Goto",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This specifies that the processing should continue in a user-specified chain. Unlike the jump argument return will not continue processing in this chain but instead in the chain that called us via jump.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "icmp_type",
+      "displayName": "Icmp Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This allows specification of the ICMP type, which can be a numeric ICMP type, type/code pair, or one of the ICMP type names shown by the command C(iptables -p icmp -h).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "in_interface",
+      "displayName": "In Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of an interface via which a packet was received (only for packets entering the V(INPUT), V(FORWARD) and V(PREROUTING) chains). When the V(!) argument is used before the interface name, the sense is inverted. If the interface name ends in a V(+), then any interface which begins with this name will match. If this option is omitted, any interface name will match.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_version",
+      "displayName": "Ip Version",
+      "type": "string",
+      "required": false,
+      "default": "ipv4",
+      "description": "Which version of the IP protocol this rule should apply to.",
+      "choices": [
+        "ipv4",
+        "ipv6"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "jump",
+      "displayName": "Jump",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This specifies the target of the rule; i.e., what to do if the packet matches it. The target can be a user-defined chain (other than the one this rule is in), one of the special builtin targets that decide the fate of the packet immediately, or an extension (see EXTENSIONS below). If this option is omitted in a rule (and the goto parameter is not used), then matching the rule will have no effect on the packet's fate, but the counters on the rule will be incremented.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit",
+      "displayName": "Limit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum average number of matches to allow per second. The number can specify units explicitly, using C(/second), C(/minute), C(/hour) or C(/day), or parts of them (so V(5/second) is the same as V(5/s)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit_burst",
+      "displayName": "Limit Burst",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum burst before the above limit kicks in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_level",
+      "displayName": "Log Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Logging level according to the syslogd-defined priorities. The value can be strings or numbers from 1-8. This parameter is only applicable if O(jump=LOG).",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "emerg",
+        "alert",
+        "crit",
+        "error",
+        "warning",
+        "notice",
+        "info",
+        "debug"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_prefix",
+      "displayName": "Log Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a log text for the rule. Only makes sense with a LOG jump.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "match",
+      "displayName": "Match",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specifies a match to use, that is, an extension module that tests for a specific property. The set of matches makes up the condition under which a target is invoked. Matches are evaluated first to last if specified as an array and work in short-circuit fashion, in other words if one extension yields false, the evaluation will stop.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "match_set",
+      "displayName": "Match Set",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a set name that can be defined by ipset. Must be used together with the O(match_set_flags) parameter. When the V(!) argument is prepended then it inverts the rule. Uses the iptables set extension.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "match_set_flags",
+      "displayName": "Match Set Flags",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the necessary flags for the match_set parameter. Must be used together with the O(match_set) parameter. Uses the iptables set extension. Choices V(dst,dst) and V(src,src) added in version 2.17.",
+      "choices": [
+        "src",
+        "dst",
+        "src,dst",
+        "dst,src",
+        "dst,dst",
+        "src,src"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "numeric",
+      "displayName": "Numeric",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This parameter controls the running of the list -action of iptables, which is used internally by the module. Does not affect the actual functionality. Use this if iptables hang when creating a chain or altering policy. If V(true), then iptables skips the DNS-lookup of the IP addresses in a chain when it uses the list -action. Listing is used internally for example when setting a policy or creating a chain.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "out_interface",
+      "displayName": "Out Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of an interface via which a packet is going to be sent (for packets entering the V(FORWARD), V(OUTPUT) and V(POSTROUTING) chains). When the V(!) argument is used before the interface name, the sense is inverted. If the interface name ends in a V(+), then any interface which begins with this name will match. If this option is omitted, any interface name will match.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policy",
+      "displayName": "Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the policy for the chain to the given target. Only built-in chains can have policies. This parameter requires the O(chain) parameter. If you specify this parameter, all other parameters will be ignored. This parameter is used to set the default policy for the given O(chain). Do not confuse this with O(jump) parameter.",
+      "choices": [
+        "ACCEPT",
+        "DROP",
+        "QUEUE",
+        "RETURN"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The protocol of the rule or of the packet to check. The specified protocol can be one of V(tcp), V(udp), V(udplite), V(icmp), V(ipv6-icmp) or V(icmpv6), V(esp), V(ah), V(sctp) or the special keyword V(all), or it can be a numeric value, representing one of these protocols or a different one. A protocol name from C(/etc/protocols) is also allowed. A V(!) argument before the protocol inverts the test. The number zero is equivalent to all. V(all) will match with all protocols and is taken as defaul",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reject_with",
+      "displayName": "Reject With",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the error packet type to return while rejecting. It implies C(jump=REJECT).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rule_num",
+      "displayName": "Rule Num",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Insert the rule as the given rule number. This works only with O(action=insert).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "set_counters",
+      "displayName": "Set Counters",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This enables the administrator to initialize the packet and byte counters of a rule (during V(INSERT), V(APPEND), V(REPLACE) operations).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "set_dscp_mark",
+      "displayName": "Set Dscp Mark",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This allows specifying a DSCP mark to be added to packets. It takes either an integer or hex value. If the parameter is set, O(jump) is set to V(DSCP). Mutually exclusive with O(set_dscp_mark_class).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "set_dscp_mark_class",
+      "displayName": "Set Dscp Mark Class",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This allows specifying a predefined DiffServ class which will be translated to the corresponding DSCP mark. If the parameter is set, O(jump) is set to V(DSCP). Mutually exclusive with O(set_dscp_mark).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Source specification. Address can be either a network name, a hostname, a network IP address (with /mask), or a plain IP address. Hostnames will be resolved once only, before the rule is submitted to the kernel. Please note that specifying any name to be resolved with a remote query such as DNS is a really bad idea. The mask can be either a network mask or a plain number, specifying the number of 1's at the left side of the network mask. Thus, a mask of 24 is equivalent to 255.255.255.0. A V(!) ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_port",
+      "displayName": "Source Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Source port or port range specification. This can either be a service name or a port number. An inclusive range can also be specified, using the format C(first:last). If the first port is omitted, V(0) is assumed; if the last is omitted, V(65535) is assumed. If the first port is greater than the second one they will be swapped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src_range",
+      "displayName": "Src Range",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the source IP range to match the iprange module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the rule should be absent or present.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "syn",
+      "displayName": "Syn",
+      "type": "string",
+      "required": false,
+      "default": "ignore",
+      "description": "This allows matching packets that have the SYN bit set and the ACK and RST bits unset. When negated, this matches all packets with the RST or the ACK bits set.",
+      "choices": [
+        "ignore",
+        "match",
+        "negate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "table",
+      "displayName": "Table",
+      "type": "string",
+      "required": false,
+      "default": "filter",
+      "description": "This option specifies the packet matching table on which the command should operate. If the kernel is configured with automatic module loading, an attempt will be made to load the appropriate module for that table if it is not already there.",
+      "choices": [
+        "filter",
+        "nat",
+        "mangle",
+        "raw",
+        "security"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tcp_flags",
+      "displayName": "Tcp Flags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "TCP flags specification. O(tcp_flags) expects a dict with the two keys C(flags) and C(flags_set).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "to_destination",
+      "displayName": "To Destination",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This specifies a destination address to use with O(ctstate=DNAT). Without this, the destination address is never altered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "to_ports",
+      "displayName": "To Ports",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This specifies a destination port or range of ports to use, without this, the destination port is never altered. This is only valid if the rule also specifies one of the protocol V(tcp), V(udp), V(dccp) or V(sctp).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "to_source",
+      "displayName": "To Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This specifies a source address to use with O(ctstate=SNAT). Without this, the source address is never altered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uid_owner",
+      "displayName": "Uid Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the UID or username to use in the match by owner rule. From Ansible 2.6 when the C(!) argument is prepended then the it inverts the rule to apply instead to all users except that one specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Wait N seconds for the xtables lock to prevent multiple instances of the program from running concurrently.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

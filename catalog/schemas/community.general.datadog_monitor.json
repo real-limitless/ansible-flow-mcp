@@ -1,0 +1,330 @@
+{
+  "fqcn": "community.general.datadog_monitor",
+  "shortDescription": "Manages Datadog monitors",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/datadog_monitor_module.html",
+  "options": [
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL to the Datadog API. Default value is V(https://api.datadoghq.com). This value can also be set with the E(DATADOG_HOST) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Your Datadog API key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "app_key",
+      "displayName": "App Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Your Datadog app key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "escalation_message",
+      "displayName": "Escalation Message",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A message to include with a re-notification. Supports the '@username' notification we allow elsewhere. Not applicable if O(renotify_interval=none).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "evaluation_delay",
+      "displayName": "Evaluation Delay",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Time to delay evaluation (in seconds). Effective for sparse values.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the alert. If set, it is used instead of O(name) to locate the alert.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_tags",
+      "displayName": "Include Tags",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether notifications from this monitor automatically inserts its triggering tags into the title.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "locked",
+      "displayName": "Locked",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether changes to this monitor should be restricted to the creator or admins.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the alert.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_host_delay",
+      "displayName": "New Host Delay",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A positive integer representing the number of seconds to wait before evaluating the monitor for new hosts. This gives the host time to fully initialize.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_data_timeframe",
+      "displayName": "No Data Timeframe",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The number of minutes before a monitor notifies when data stops reporting. Must be at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks. If not specified, it defaults to 2x timeframe for metric, 2 minutes for service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notification_message",
+      "displayName": "Notification Message",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A message to include with notifications for this monitor. Email notifications can be sent to specific users by using the same '@username' notation as events. Monitor message template variables can be accessed by using double square brackets, in other words C([[) and C(]]).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notification_preset_name",
+      "displayName": "Notification Preset Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Toggles the display of additional content sent in the monitor notification.",
+      "choices": [
+        "show_all",
+        "hide_query",
+        "hide_handles",
+        "hide_all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notify_audit",
+      "displayName": "Notify Audit",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether tagged users are notified on changes to this monitor.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notify_no_data",
+      "displayName": "Notify No Data",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether this monitor notifies when data stops reporting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Integer from V(1) (high) to V(5) (low) indicating alert severity.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "query",
+      "displayName": "Query",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The monitor query to notify on. Syntax varies depending on what type of monitor you are creating.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "renotify_interval",
+      "displayName": "Renotify Interval",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The number of minutes after the last notification before a monitor re-notifies on the current status. It only re-notifies if it is not resolved.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "renotify_occurrences",
+      "displayName": "Renotify Occurrences",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of times re-notification messages should be sent on the current status at the provided re-notification interval.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "renotify_statuses",
+      "displayName": "Renotify Statuses",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The types of monitor statuses for which re-notification messages are sent.",
+      "choices": [
+        "alert",
+        "warn",
+        "no data"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "require_full_window",
+      "displayName": "Require Full Window",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether this monitor needs a full window of data before it gets evaluated. We highly recommend you set this to V(false) for sparse metrics, otherwise some evaluations are skipped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "silenced",
+      "displayName": "Silenced",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary of scopes to silence, with timestamps or None. Each scope is muted until the given POSIX timestamp or forever if the value is V(None).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The designated state of the monitor. The values V(mute) and V(unmute) are deprecated since community.general 13.0.0 and will be removed in 15.0.0. Use the M(community.general.datadog_downtime) module to manage monitor downtimes instead.",
+      "choices": [
+        "present",
+        "absent",
+        "mute",
+        "unmute"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of tags to associate with your monitor when creating or updating. This can help you categorize and filter monitors.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "thresholds",
+      "displayName": "Thresholds",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary of thresholds by status. Only available for service checks and metric alerts. Because each of them can have multiple thresholds, we do not define them directly in the query. If not specified, it defaults to: V({'ok': 1, 'critical': 1, 'warning': 1}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout_h",
+      "displayName": "Timeout H",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The number of hours of the monitor not reporting data before it automatically resolves from a triggered state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of the monitor. The types V(query alert), V(trace-analytics alert) and V(rum alert) were added in community.general 2.1.0. The type V(composite) was added in community.general 3.4.0. The type V(event-v2 alert) was added in community.general 4.8.0.",
+      "choices": [
+        "metric alert",
+        "service check",
+        "event alert",
+        "event-v2 alert",
+        "process alert",
+        "log alert",
+        "query alert",
+        "trace-analytics alert",
+        "rum alert",
+        "composite"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

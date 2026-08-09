@@ -1,0 +1,121 @@
+{
+  "fqcn": "ansible.posix.authorized_key",
+  "shortDescription": "Adds or removes an SSH authorized key",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/posix/authorized_key_module.html",
+  "options": [
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Change the comment on the public key. Rewriting the comment is useful in cases such as fetching it from GitHub or GitLab. If no comment is specified, the existing comment will be kept.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclusive",
+      "displayName": "Exclusive",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to remove all other non-specified keys from the authorized_keys file. Multiple keys can be specified in a single O(key) string value by separating them by newlines. This option is not loop aware, so if you use C(with_) , it will be exclusive per iteration of the loop. If you want multiple keys in the file you need to pass them all to O(key) in a single batch as mentioned above.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "follow",
+      "displayName": "Follow",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Follow path symlink instead of replacing it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key",
+      "displayName": "Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The SSH public key(s), as a string or (since Ansible 1.9) url (https://github.com/username.keys). You can also use V(file://) prefix to search remote for a file with SSH key(s).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_options",
+      "displayName": "Key Options",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A string of ssh key options to be prepended to the key in the authorized_keys file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "manage_dir",
+      "displayName": "Manage Dir",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether this module should manage the directory of the authorized key file. If set to V(true), the module will create the directory, as well as set the owner and permissions of an existing directory. Be sure to set O(manage_dir=false) if you are using an alternate directory for authorized_keys, as set with O(path), since you could lock yourself out of SSH access. See the example below.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Alternative path to the authorized_keys file. The default value is the V(.ssh/authorized_keys) of the home of the user specified in the O(user) parameter. Most of the time, it is not necessary to set this key. Use the path to your target authorized_keys if you need to explicitly point on it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the given key (with the given key_options) should or should not be in the file.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username on the remote host whose authorized_keys file will be modified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This only applies if using a https url as the source of the keys. If set to V(false), the SSL certificates will not be validated. This should only set to V(false) used on personally controlled sites using self-signed certificates as it avoids verifying the source site. Prior to 2.1 the code worked as if this was set to V(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

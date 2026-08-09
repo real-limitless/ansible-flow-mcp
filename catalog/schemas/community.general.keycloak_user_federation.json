@@ -1,0 +1,256 @@
+{
+  "fqcn": "community.general.keycloak_user_federation",
+  "shortDescription": "Allows administration of Keycloak user federations using Keycloak API",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/keycloak_user_federation_module.html",
+  "options": [
+    {
+      "name": "auth_client_id",
+      "displayName": "Auth Client Id",
+      "type": "string",
+      "required": false,
+      "default": "admin-cli",
+      "description": "OpenID Connect C(client_id) to authenticate to the API with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_client_secret",
+      "displayName": "Auth Client Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Client Secret to use in conjunction with O(auth_client_id) (if required).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_keycloak_url",
+      "displayName": "Auth Keycloak Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL to the Keycloak instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_password",
+      "displayName": "Auth Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password to authenticate for API access with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_realm",
+      "displayName": "Auth Realm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Keycloak realm name to authenticate to for API access.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_username",
+      "displayName": "Auth Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username to authenticate for API access with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bind_credential_update_mode",
+      "displayName": "Bind Credential Update Mode",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "The value of the config parameter O(config.bindCredential) is redacted in the Keycloak responses. Comparing the redacted value with the desired value always evaluates to not equal. This means the before and desired states are never equal if the parameter is set. Set to V(always) to include O(config.bindCredential) in the comparison of before and desired state. Because of the redacted value returned by Keycloak the module always detects a change and make an update if a O(config.bindCredential) va",
+      "choices": [
+        "always",
+        "only_indirect"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config",
+      "displayName": "Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dict specifying the configuration options for the provider; the contents differ depending on the value of O(provider_id). Examples are given below for V(ldap), V(kerberos) and V(sssd). It is easiest to obtain valid config values by dumping an already-existing user federation configuration through check-mode in the RV(existing) field. The value V(sssd) has been supported since community.general 4.2.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_timeout",
+      "displayName": "Connection Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Controls the HTTP connections timeout period (in seconds) to Keycloak API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_agent",
+      "displayName": "Http Agent",
+      "type": "string",
+      "required": false,
+      "default": "Ansible",
+      "description": "Configures the HTTP User-Agent header.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The unique ID for this user federation. If left empty, the user federation is searched by its O(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mappers",
+      "displayName": "Mappers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of dicts defining mappers associated with this Identity Provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Display name of provider when linked in admin console.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent_id",
+      "displayName": "Parent Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Unique ID for the parent of this user federation. Realm ID is automatically used if left blank.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider_id",
+      "displayName": "Provider Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provider for this user federation. Built-in providers are V(ldap), V(kerberos), and V(sssd). Custom user storage providers can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider_type",
+      "displayName": "Provider Type",
+      "type": "string",
+      "required": false,
+      "default": "org.keycloak.storage.UserStorageProvider",
+      "description": "Component type for user federation (only supported value is V(org.keycloak.storage.UserStorageProvider)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realm",
+      "displayName": "Realm",
+      "type": "string",
+      "required": false,
+      "default": "master",
+      "description": "The Keycloak realm under which this user federation resides.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "refresh_token",
+      "displayName": "Refresh Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication refresh token for Keycloak API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_unspecified_mappers",
+      "displayName": "Remove Unspecified Mappers",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Remove mappers that are not specified in the configuration for this federation. Set to V(false) to keep mappers that are not listed in O(mappers).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the user federation. On V(present), the user federation is created if it does not yet exist, or updated with the parameters you provide. On V(absent), the user federation is removed if it exists.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token for Keycloak API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Verify TLS certificates (do not disable this in production).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

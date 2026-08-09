@@ -1,0 +1,254 @@
+{
+  "fqcn": "community.general.xenserver_guest",
+  "shortDescription": "Manages virtual machines running on Citrix Hypervisor/XenServer host or pool",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/xenserver_guest_module.html",
+  "options": [
+    {
+      "name": "cdrom",
+      "displayName": "Cdrom",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A CD-ROM configuration for the VM. All parameters are case sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_params",
+      "displayName": "Custom Params",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Define a list of custom VM params to set on VM. Useful for advanced users familiar with managing VM params through C(xe) CLI. A custom value object takes two fields O(custom_params[].key) and O(custom_params[].value) (see example below).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disks",
+      "displayName": "Disks",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of disks to add to VM. All parameters are case sensitive. Removing or detaching existing disks of VM is not supported. New disks are required to have either a O(disks[].size) or one of O(ignore:disks[].size_[tb,gb,mb,kb,b]) parameters specified. VM needs to be shut down to reconfigure disk size.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder",
+      "displayName": "Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Destination folder for VM. This parameter is case sensitive. Example: O(folder=/folder1/folder2).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Ignore warnings and complete the actions. This parameter is useful for removing VM in running state or reconfiguring VM params that require VM to be shut down.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hardware",
+      "displayName": "Hardware",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Manage VM's hardware parameters. VM needs to be shut down to reconfigure these parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "home_server",
+      "displayName": "Home Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of a XenServer host that is a Home Server for the VM. This parameter is case sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "The hostname or IP address of the XenServer host or XenServer pool master. If the value is not specified in the task, the value of environment variable E(XENSERVER_HOST) is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_template",
+      "displayName": "Is Template",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Convert VM to template.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "linked_clone",
+      "displayName": "Linked Clone",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to create a Linked Clone from the template, existing VM or snapshot. If V(false), it creates a full copy. This is equivalent to C(Use storage-level fast disk clone) option in XenCenter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the VM to work with. VMs running on XenServer do not necessarily have unique names. The module fails if multiple VMs with same name are found. In case of multiple VMs with same name, use O(uuid) to uniquely specify VM to manage. This parameter is case sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name_desc",
+      "displayName": "Name Desc",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "VM description.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "networks",
+      "displayName": "Networks",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of networks (in the order of the NICs). All parameters are case sensitive. Name is required for new NICs. Other parameters are optional in all cases.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to use for connecting to XenServer. If the value is not specified in the task, the value of environment variable E(XENSERVER_PASSWORD) is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Specify the state VM should be in. If O(state) is set to V(present) and VM exists, ensure the VM configuration conforms to given parameters. If O(state) is set to V(present) and VM does not exist, then VM is deployed with given parameters. If O(state) is set to V(absent) and VM exists, then VM is removed with its associated components. If O(state) is set to V(poweredon) and VM does not exist, then VM is deployed with given parameters and powered on automatically.",
+      "choices": [
+        "present",
+        "absent",
+        "poweredon"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state_change_timeout",
+      "displayName": "State Change Timeout",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "By default, the module waits indefinitely for VM to acquire an IP address if O(wait_for_ip_address=true). If this parameter is set to a positive value, the module instead waits the specified number of seconds for the state change. In case of timeout, module generates an error message.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of a template, an existing VM (must be shut down) or a snapshot that should be used to create VM. Templates/VMs/snapshots on XenServer do not necessarily have unique names. The module fails if multiple templates with same name are found. In case of multiple templates/VMs/snapshots with same name, use O(template_uuid) to uniquely specify source template. If VM already exists, this setting is ignored. This parameter is case sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_uuid",
+      "displayName": "Template Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "UUID of a template, an existing VM or a snapshot that should be used to create VM. It is required if template name is not unique.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": "root",
+      "description": "The username to use for connecting to XenServer. If the value is not specified in the task, the value of environment variable E(XENSERVER_USER) is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "UUID of the VM to manage if known. This is XenServer's unique identifier. It is required if name is not unique. Please note that a supplied UUID is ignored on VM creation, as XenServer creates the UUID internally.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(XENSERVER_VALIDATE_CERTS) is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_ip_address",
+      "displayName": "Wait For Ip Address",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Wait until XenServer detects an IP address for the VM. If O(state) is set to V(absent), this parameter is ignored. This requires XenServer Tools to be preinstalled on the VM to work properly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

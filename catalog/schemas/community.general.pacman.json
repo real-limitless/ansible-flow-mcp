@@ -1,0 +1,185 @@
+{
+  "fqcn": "community.general.pacman",
+  "shortDescription": "Manage packages with I(pacman)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/pacman_module.html",
+  "options": [
+    {
+      "name": "cachedir",
+      "displayName": "Cachedir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An alternative package cache directory, passed as C(--cachedir) to all pacman commands. Only used when O(root) is also specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config",
+      "displayName": "Config",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to an alternative pacman configuration file, passed as C(--config) to all pacman commands.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "executable",
+      "displayName": "Executable",
+      "type": "string",
+      "required": false,
+      "default": "pacman",
+      "description": "Path of the binary to use. This can either be C(pacman) or a pacman compatible AUR helper. Pacman compatibility is unfortunately ill defined, in particular, this modules makes extensive use of the C(--print-format) directive which is known not to be implemented by some AUR helpers (notably, C(yay)). Beware that AUR helpers might behave unexpectedly and are therefore not recommended.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extra_args",
+      "displayName": "Extra Args",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Additional option to pass to pacman when enforcing O(state).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When removing packages, forcefully remove them, without any checks. Same as O(extra_args=\"--nodeps --nodeps\"). When combined with O(update_cache), force a refresh of all package databases. Same as O(update_cache_extra_args=\"--refresh --refresh\").",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Name or list of names of the package(s) or file(s) to install, upgrade, or remove. Cannot be used in combination with O(upgrade).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reason",
+      "displayName": "Reason",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The install reason to set for the packages.",
+      "choices": [
+        "dependency",
+        "explicit"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reason_for",
+      "displayName": "Reason For",
+      "type": "string",
+      "required": false,
+      "default": "new",
+      "description": "Set the install reason for V(all) packages or only for V(new) packages. In case of O(state=latest) already installed packages which are updated to a newer version are not counted as V(new).",
+      "choices": [
+        "all",
+        "new"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_nosave",
+      "displayName": "Remove Nosave",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When removing packages, do not save modified configuration files as C(.pacsave) files. (passes C(--nosave) to pacman).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "root",
+      "displayName": "Root",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An alternative installation root directory, passed as C(--root) to all pacman commands. Useful for installing packages into a chroot or a new system root, similarly to how C(pacstrap) works.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether to install (V(present) or V(installed), V(latest)), or remove (V(absent) or V(removed)) a package. V(present) and V(installed) simply ensure that a desired package is installed. V(latest) updates the specified package if it is not of the latest available version. V(absent) and V(removed) remove the specified package.",
+      "choices": [
+        "absent",
+        "installed",
+        "latest",
+        "present",
+        "removed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_cache",
+      "displayName": "Update Cache",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not to refresh the master package lists. This can be run as part of a package installation or as a separate step. If not specified, it defaults to V(false). Please note that this option only had an influence on the module's RV(ignore:changed) state if O(name) and O(upgrade) are not specified before community.general 5.0.0. See the examples for how to keep the old behavior.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_cache_extra_args",
+      "displayName": "Update Cache Extra Args",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Additional option to pass to pacman when enforcing O(update_cache).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "upgrade",
+      "displayName": "Upgrade",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not to upgrade the whole system. Cannot be used in combination with O(name). If not specified, it defaults to V(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "upgrade_extra_args",
+      "displayName": "Upgrade Extra Args",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Additional option to pass to pacman when enforcing O(upgrade).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

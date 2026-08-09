@@ -1,0 +1,162 @@
+{
+  "fqcn": "community.general.ali_instance_info",
+  "shortDescription": "Gather information on instances of Alibaba Cloud ECS",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ali_instance_info_module.html",
+  "options": [
+    {
+      "name": "alicloud_access_key",
+      "displayName": "Alicloud Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Alibaba Cloud access key. If not set then the value of environment variable E(ALICLOUD_ACCESS_KEY), E(ALICLOUD_ACCESS_KEY_ID) is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_assume_role",
+      "displayName": "Alicloud Assume Role",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "If provided with a role ARN, Ansible attempts to assume this role using the supplied credentials. The nested assume_role block supports C(alicloud_assume_role_arn), C(alicloud_assume_role_session_name), C(alicloud_assume_role_session_expiration) and C(alicloud_assume_role_policy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_assume_role_arn",
+      "displayName": "Alicloud Assume Role Arn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Alibaba Cloud C(role_arn). The ARN of the role to assume. If ARN is set to an empty string, it does not perform role switching. It supports environment variable E(ALICLOUD_ASSUME_ROLE_ARN). Ansible executes with provided credentials.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_assume_role_session_expiration",
+      "displayName": "Alicloud Assume Role Session Expiration",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The Alibaba Cloud C(session_expiration). The time after which the established session for assuming role expires. Valid value range 900-3600 seconds. Default to 3600 (in this case Alicloud use own default value). It supports environment variable E(ALICLOUD_ASSUME_ROLE_SESSION_EXPIRATION).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_assume_role_session_name",
+      "displayName": "Alicloud Assume Role Session Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Alibaba Cloud session_name. The session name to use when assuming the role. If omitted, 'ansible' is passed to the AssumeRole call as session name. It supports environment variable E(ALICLOUD_ASSUME_ROLE_SESSION_NAME).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_region",
+      "displayName": "Alicloud Region",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Alibaba Cloud region to use. If not specified then the value of environment variable E(ALICLOUD_REGION), E(ALICLOUD_REGION_ID) is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_secret_key",
+      "displayName": "Alicloud Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Alibaba Cloud secret key. If not set then the value of environment variable E(ALICLOUD_SECRET_KEY), E(ALICLOUD_SECRET_ACCESS_KEY) is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_security_token",
+      "displayName": "Alicloud Security Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Alibaba Cloud security token. If not specified then the value of environment variable E(ALICLOUD_SECURITY_TOKEN) is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ecs_role_name",
+      "displayName": "Ecs Role Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The RAM Role Name attached on a ECS instance for API operations. You can retrieve this from the 'Access Control' section of the Alibaba Cloud console. If you are running Ansible from an ECS instance with RAM Instance using RAM Role, Ansible just accesses the metadata U(http://100.100.100.200/latest/meta-data/ram/security-credentials/<ecs_role_name>) to obtain the STS credential. This is a preferred approach over any other when running in ECS as you can avoid hard coding credentials. Instead thes",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filters",
+      "displayName": "Filters",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict of filters to apply. Each dict item consists of a filter key and a filter value. The filter keys can be all of request parameters. See U(https://www.alibabacloud.com/help/doc-detail/25506.htm) for parameter details. Filter keys can be same as request parameter name or be lower case and use underscore (V(\"_\")) or dash (V(\"-\")) to connect different words in one parameter. C(InstanceIds) should be a list. C(Tag.n.Key) and C(Tag.n.Value) should be a dict and using O(tags) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name_prefix",
+      "displayName": "Name Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use a instance name prefix to filter ECS instances.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This is the Alicloud profile name as set in the shared credentials file. It can also be sourced from the E(ALICLOUD_PROFILE) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shared_credentials_file",
+      "displayName": "Shared Credentials File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This is the path to the shared credentials file. It can also be sourced from the E(ALICLOUD_SHARED_CREDENTIALS_FILE) environment variable. If this is not set and a profile is specified, C(~/.aliyun/config.json) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A hash/dictionaries of instance tags. C({\"key\":\"value\"}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

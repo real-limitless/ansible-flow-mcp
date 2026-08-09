@@ -1,0 +1,198 @@
+{
+  "fqcn": "community.general.consul_agent_check",
+  "shortDescription": "Add, modify, and delete checks within a Consul cluster",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/consul_agent_check_module.html",
+  "options": [
+    {
+      "name": "args",
+      "displayName": "Args",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies command arguments to run to update the status of the check. Requires O(interval) to be provided. Mutually exclusive with O(ttl), O(tcp) and O(http).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CA bundle to use for https connections.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "Host of the Consul agent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http",
+      "displayName": "Http",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Checks can be registered with an HTTP endpoint. This means that Consul checks that the HTTP endpoint returns a successful HTTP status. Requires O(interval) to be provided. Mutually exclusive with O(args), O(ttl) and O(tcp).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a unique ID for this check on the node. This defaults to the O(name) parameter, but it may be necessary to provide an ID for uniqueness. This value is returned in the response as V(CheckId).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interval",
+      "displayName": "Interval",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The interval at which the service check is run. This is a number with a V(s) or V(m) suffix to signify the units of seconds or minutes, for example V(15s) or V(1m). If no suffix is supplied V(s) is used by default, for example V(10) is equivalent to V(10s). Required if one of the parameters O(args), O(http), or O(tcp) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Required name for the service check.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notes",
+      "displayName": "Notes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Notes to attach to check when registering it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 8500,
+      "description": "The port on which the consul agent is running.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheme",
+      "displayName": "Scheme",
+      "type": "string",
+      "required": false,
+      "default": "http",
+      "description": "The protocol scheme on which the Consul agent is running. Defaults to V(http) and can be set to V(https) for secure connections.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_id",
+      "displayName": "Service Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID for the service, must be unique per node. If O(state=absent), defaults to the service name if supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the check should be present or absent.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tcp",
+      "displayName": "Tcp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Checks can be registered with a TCP port. This means that Consul will check if the connection attempt to that port is successful (that is, the port is currently accepting connections). The format is V(host:port), for example V(localhost:80). Requires O(interval) to be provided. Mutually exclusive with O(args), O(ttl) and O(http).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A custom HTTP check timeout. The Consul default is 10 seconds. Similar to the interval this is a number with a V(s) or V(m) suffix to signify the units of seconds or minutes, for example V(15s) or V(1m). If no suffix is supplied V(s) is used by default, for example V(10) is equivalent to V(10s).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The token to use for authorization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttl",
+      "displayName": "Ttl",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Checks can be registered with a TTL instead of a O(args) and O(interval) this means that the service checks in with the agent before the TTL expires. If it does not the check is considered failed. Required if registering a check and the script an interval are missing Similar to the interval this is a number with a V(s) or V(m) suffix to signify the units of seconds or minutes, for example V(15s) or V(1m). If no suffix is supplied V(s) is used by default, for example V(10) is equivalent to V(10s)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to verify the TLS certificate of the Consul agent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,250 @@
+{
+  "fqcn": "ansible.builtin.unarchive",
+  "shortDescription": "Unpacks an archive after (optionally) copying it from the local machine",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/builtin/unarchive_module.html",
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "copy",
+      "displayName": "Copy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, the file is copied from local controller to the managed (remote) node, otherwise, the plugin will look for src archive on the managed machine. This option has been deprecated in favor of O(remote_src). This option is mutually exclusive with O(remote_src).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "creates",
+      "displayName": "Creates",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If the specified absolute path (file or directory) already exists, this step will B(not) be run. The specified absolute path (file or directory) must be below the base path given with O(dest).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "decrypt",
+      "displayName": "Decrypt",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This option controls the auto-decryption of source files using vault.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Remote absolute path where the archive should be unpacked. The given path must exist. Base directory is not created by this module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude",
+      "displayName": "Exclude",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List the directory and file entries that you would like to exclude from the unarchive action. Mutually exclusive with O(include).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extra_opts",
+      "displayName": "Extra Opts",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specify additional options by passing in an array. Each space-separated command-line option should be a new element of the array. See examples. Command-line options with multiple elements must use multiple lines in the array, one for each element.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include",
+      "displayName": "Include",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of directory and file entries that you would like to extract from the archive. If O(include) is not empty, only files listed here will be extracted. Mutually exclusive with O(exclude).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "io_buffer_size",
+      "displayName": "Io Buffer Size",
+      "type": "number",
+      "required": false,
+      "default": 65536,
+      "description": "Size of the volatile memory buffer that is used for extracting files from the archive in bytes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keep_newer",
+      "displayName": "Keep Newer",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Do not replace existing files that are newer than files from the archive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "list_files",
+      "displayName": "List Files",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to True, return the list of files that are contained in the tarball.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_src",
+      "displayName": "Remote Src",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set to V(true) to indicate the archived file is already on the remote system and not local to the Ansible controller. This option is mutually exclusive with O(copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "If O(remote_src=no) (default), local path to archive file to copy to the target server; can be absolute or relative. If O(remote_src=yes), path on the target server to existing archive file to unpack. If O(remote_src=yes) and O(src) contains V(://), the remote machine will download the file from the URL first. (version_added 2.0). This is only for simple cases, for full download support use the M(ansible.builtin.get_url) module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This only applies if using a https URL as the source of the file. This should only set to V(false) used on personally controlled sites using self-signed certificate. Prior to 2.2 the code worked as if this was set to V(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

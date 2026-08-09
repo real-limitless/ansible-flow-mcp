@@ -25,8 +25,8 @@ REPO = ROOT.parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from lib.catalog_io import gallery_fqcns, schema_exists  # noqa: E402
-from lib.galaxy_client import GalaxyClient, modules_from_hits  # noqa: E402
+from lib.catalog_io import gallery_fqcns, repair_gallery, schema_exists  # noqa: E402
+from lib.galaxy_client import client_from_settings, modules_from_hits  # noqa: E402
 from lib.job_store import (  # noqa: E402
     append_log,
     drop_done,
@@ -47,9 +47,10 @@ from lib.job_store import (  # noqa: E402
     update_job,
 )
 from lib.paths import DEFAULT_DENY, DEFAULT_SETTINGS, JOBS, WORKER_LOG  # noqa: E402
+from lib.proxy_pool import ProxyPool  # noqa: E402
 from lib.schema_gen import builtin_modules_from_doc  # noqa: E402
 
-MODES = ("scan", "list", "queue", "settings", "log", "help")
+MODES = ("scan", "list", "queue", "proxies", "settings", "log", "help")
 
 
 @dataclass
@@ -78,6 +79,12 @@ class App:
     queue_sel: int = 0
     queue_scroll: int = 0
     queue_filter: str = "all"
+    # proxies
+    proxy_pool: ProxyPool | None = None
+    proxy_summary: dict[str, Any] = field(default_factory=dict)
+    proxy_busy: bool = False
+    proxy_input_mode: bool = False
+    proxy_input_buf: str = ""
     # settings
     settings: dict[str, Any] = field(default_factory=dict)
     settings_keys: list[str] = field(default_factory=list)
@@ -164,12 +171,14 @@ def start_scan(app: App) -> None:
         return
     app.scan_running = True
     app.scan_progress = "starting…"
-    app.message = "Galaxy scan started…"
+    px = "proxy" if app.settings.get("useProxy") else "direct"
+    app.message = f"Galaxy scan started ({px})…"
     settings = dict(app.settings)
+    pool = app.proxy_pool
 
     def run() -> None:
         try:
-            client = GalaxyClient(base=str(settings.get("galaxyBase") or "https://galaxy.ansible.com"))
+            client = client_from_settings(settings, pool)
             top = int(settings.get("topN") or 40)
             page = int(settings.get("galaxyPageSize") or 20)
             min_dl = int(settings.get("minDownloadCount") or 0)
@@ -325,6 +334,8 @@ def draw_footer(stdscr: Any, app: App, h: int, w: int) -> None:
         keys = "[Space]pick  [a/A]all/clear  [e/E]enq sel/visible  [/]filter  [k]hide-known  [n]enq+start"
     elif app.mode == "queue":
         keys = "[S]tart worker  [X]stop  [r]requeue-fail  [d]drop-done  [1-5]filter  [R]refresh"
+    elif app.mode == "proxies":
+        keys = "[t]oggle useProxy  [R]efresh list  [H]ealth-check  [a]dd proxy  [s]ave settings"
     elif app.mode == "settings":
         keys = "[Enter]edit  [s]ave  [↑↓]field"
     elif app.mode == "log":
@@ -337,11 +348,12 @@ def draw_footer(stdscr: Any, app: App, h: int, w: int) -> None:
 
 def draw_scan(stdscr: Any, app: App, h: int, w: int) -> None:
     s = app.settings
+    px = "proxy" if s.get("useProxy") else "direct"
     safe_addstr(
         stdscr,
         3,
         2,
-        f"Top Galaxy collections  topN={s.get('topN')}  ns={s.get('namespaceFilter') or '*'}  "
+        f"Top Galaxy collections  topN={s.get('topN')}  via={px}  ns={s.get('namespaceFilter') or '*'}  "
         f"{'SCANNING '+app.scan_progress if app.scan_running else 'Enter=scan'}"[: w - 3],
         curses.A_BOLD,
     )
@@ -463,16 +475,75 @@ def draw_settings(stdscr: Any, app: App, h: int, w: int) -> None:
     safe_addstr(stdscr, 3, 2, "Factory settings → scripts/factory/.jobs/settings.json", curses.A_BOLD)
     keys = app.settings_keys
     view_h = max(1, h - 8)
-    for row in range(min(view_h, len(keys))):
-        k = keys[row]
-        val = app.settings.get(k, "")
-        if app.settings_edit and row == app.settings_sel:
+    start = 0
+    if app.settings_sel >= view_h:
+        start = app.settings_sel - view_h + 1
+    for row in range(view_h):
+        idx = start + row
+        if idx >= len(keys):
+            break
+        k = keys[idx]
+        val = app.settings.get(k, DEFAULT_SETTINGS.get(k, ""))
+        if app.settings_edit and idx == app.settings_sel:
             val_s = app.settings_buf + "_"
         else:
             val_s = json.dumps(val) if not isinstance(val, str) else val
-        mark = "▶" if row == app.settings_sel else " "
-        attr = curses.A_REVERSE if row == app.settings_sel else curses.A_NORMAL
+        mark = "▶" if idx == app.settings_sel else " "
+        attr = curses.A_REVERSE if idx == app.settings_sel else curses.A_NORMAL
         safe_addstr(stdscr, 5 + row, 2, f"{mark} {k}: {val_s}"[: w - 3], attr)
+
+
+def draw_proxies(stdscr: Any, app: App, h: int, w: int) -> None:
+    s = app.settings
+    sum_ = app.proxy_summary or {}
+    use = "ON" if s.get("useProxy") else "OFF"
+    fixed = str(s.get("proxy") or "") or "(pool)"
+    safe_addstr(stdscr, 3, 2, "Proxy — Galaxy HTTP via SOCKS5/HTTP", curses.A_BOLD)
+    safe_addstr(
+        stdscr,
+        4,
+        2,
+        f"useProxy={use}  fixed={fixed}  listed={sum_.get('listed', 0)}  "
+        f"alive={sum_.get('alive', 0)}  dead={sum_.get('dead', 0)}"[: w - 3],
+    )
+    safe_addstr(
+        stdscr,
+        5,
+        2,
+        f"listUrl={s.get('proxyListUrl') or ''}"[: w - 3],
+        curses.A_DIM,
+    )
+    if app.proxy_pool:
+        safe_addstr(
+            stdscr,
+            6,
+            2,
+            f"file={app.proxy_pool.list_path}"[: w - 3],
+            curses.A_DIM,
+        )
+    lines = [
+        "",
+        "t  toggle useProxy (applies to Galaxy scan)",
+        "R  refresh free SOCKS5 list (Databay / proxyListUrl)",
+        "H  health-check sample against galaxy.ansible.com",
+        "a  add fixed proxy (socks5h://host:port or host:port)",
+        "c  clear fixed proxy (use rotating pool)",
+        "s  save settings.json",
+        "",
+        "Also honors env: ALL_PROXY / HTTPS_PROXY / HTTP_PROXY",
+        "Needs: pip install 'httpx[socks]'",
+        "",
+        "Jobs failed with 'Extra data' = corrupted gallery from parallel",
+        "writes — fixed with lock. QUEUE→r requeues failed.",
+    ]
+    if app.proxy_input_mode:
+        lines = [f"Add proxy: {app.proxy_input_buf}_", "(Enter confirm · Esc cancel)"] + lines
+    if app.proxy_busy:
+        lines = ["… busy …"] + lines
+    for i, line in enumerate(lines):
+        if 8 + i >= h - 2:
+            break
+        safe_addstr(stdscr, 8 + i, 2, line[: w - 3])
 
 
 def draw_log(stdscr: Any, app: App, h: int, w: int) -> None:
@@ -503,19 +574,17 @@ def draw_help(stdscr: Any, app: App, h: int, w: int) -> None:
     lines = [
         "Ansible Flow Factory — Galaxy catalog scraper",
         "",
-        "1. SETTINGS — set topN (e.g. 40), optional namespaceFilter",
-        "2. SCAN — Enter fetches top collections by Galaxy download_count",
-        "3. Space toggle collections · e enqueue their modules",
-        "4. LIST — cherry-pick modules · e enqueue · n enqueue+start worker",
-        "5. QUEUE — S start worker (schema gen → gallery.json + schemas/)",
+        "1. PROXIES — enable useProxy, refresh SOCKS5 list, health-check",
+        "2. SETTINGS — topN, concurrency, proxy URL, namespaceFilter",
+        "3. SCAN — Enter fetches top collections by download_count",
+        "4. LIST — cherry-pick · e enqueue · n enqueue+start worker",
+        "5. QUEUE — S start worker · r requeue failed",
         "",
-        "Worker uses ansible-doc when available; else Galaxy stub schemas.",
-        "autoAllowlist=true adds collections to collections-allowlist.yml",
-        "Free-form modules (command/shell/raw/script) denied by default.",
+        "Gallery writes are file-locked (fixes Extra data failures).",
+        "Worker: ansible-doc when available; else stub schemas.",
         "",
-        "CLI: python scripts/factory/scrape_galaxy.py --top 40 --enqueue",
-        "     python scripts/factory/queue_worker.py",
-        "     python scripts/factory/tui.py",
+        "pip install -r scripts/factory/requirements.txt",
+        "python scripts/factory/tui.py",
     ]
     for i, line in enumerate(lines):
         if 3 + i >= h - 2:
@@ -533,6 +602,8 @@ def draw(stdscr: Any, app: App) -> None:
         draw_list(stdscr, app, h, w)
     elif app.mode == "queue":
         draw_queue(stdscr, app, h, w)
+    elif app.mode == "proxies":
+        draw_proxies(stdscr, app, h, w)
     elif app.mode == "settings":
         draw_settings(stdscr, app, h, w)
     elif app.mode == "log":
@@ -541,6 +612,60 @@ def draw(stdscr: Any, app: App) -> None:
         draw_help(stdscr, app, h, w)
     draw_footer(stdscr, app, h, w)
     stdscr.refresh()
+
+
+def refresh_proxy_summary(app: App) -> None:
+    if app.proxy_pool:
+        app.proxy_summary = app.proxy_pool.summary()
+
+
+def proxy_refresh_bg(app: App) -> None:
+    if app.proxy_busy or not app.proxy_pool:
+        return
+    app.proxy_busy = True
+    app.message = "Refreshing proxy list…"
+    settings = dict(app.settings)
+    pool = app.proxy_pool
+
+    def run() -> None:
+        try:
+            url = str(settings.get("proxyListUrl") or "")
+            n = pool.refresh(source_url=url or None)
+            app.proxy_summary = pool.summary()
+            app.message = f"Proxy list refreshed · {n} entries"
+        except Exception as e:
+            app.message = f"Proxy refresh failed: {e}"
+        finally:
+            app.proxy_busy = False
+
+    threading.Thread(target=run, daemon=True).start()
+
+
+def proxy_health_bg(app: App) -> None:
+    if app.proxy_busy or not app.proxy_pool:
+        return
+    app.proxy_busy = True
+    app.message = "Health-checking proxies…"
+    settings = dict(app.settings)
+    pool = app.proxy_pool
+
+    def run() -> None:
+        try:
+            r = pool.health_check(
+                limit=int(settings.get("proxyProbeLimit") or 40),
+                timeout=float(settings.get("proxyProbeTimeout") or 10),
+            )
+            app.proxy_summary = pool.summary()
+            app.message = (
+                f"Probe done · alive={r.get('probeAlive')} dead={r.get('probeDead')} "
+                f"pool_alive={r.get('alive')}"
+            )
+        except Exception as e:
+            app.message = f"Health-check failed: {e}"
+        finally:
+            app.proxy_busy = False
+
+    threading.Thread(target=run, daemon=True).start()
 
 
 def handle_settings_edit(app: App, ch: int) -> None:
@@ -587,14 +712,25 @@ def main_curses(stdscr: Any) -> None:
 
     app = App()
     app.settings = load_settings()
+    # merge new default keys
+    for k, v in DEFAULT_SETTINGS.items():
+        app.settings.setdefault(k, v)
     app.settings_keys = list(DEFAULT_SETTINGS.keys())
+    app.proxy_pool = ProxyPool()
+    refresh_proxy_summary(app)
+    try:
+        n = repair_gallery()
+        append_log(f"gallery repair on start → {n} entries")
+    except Exception as e:
+        append_log(f"gallery repair skipped: {e}")
     app.known_gallery = gallery_fqcns()
     load_last_scan_into_app(app)
     refresh_queue(app)
     refresh_log(app)
+    px = "proxyON" if app.settings.get("useProxy") else "direct"
     app.message = (
-        f"Ready · last_scan={app.active_scan_id or 'none'} · "
-        f"mods={len(app.modules)} · Enter on SCAN to fetch Galaxy top {app.settings.get('topN')}"
+        f"Ready · {px} · last_scan={app.active_scan_id or 'none'} · "
+        f"mods={len(app.modules)} · failed→QUEUE r · proxies Tab"
     )
 
     modes_cycle = [m for m in MODES if m != "help"]
@@ -606,6 +742,8 @@ def main_curses(stdscr: Any) -> None:
                 refresh_queue(app)
             if app.mode == "log":
                 refresh_log(app)
+            if app.mode == "proxies" and not app.proxy_busy:
+                refresh_proxy_summary(app)
             app.last_refresh = now
 
         draw(stdscr, app)
@@ -618,6 +756,34 @@ def main_curses(stdscr: Any) -> None:
 
         if app.settings_edit:
             handle_settings_edit(app, ch)
+            continue
+
+        if app.proxy_input_mode:
+            if ch in (27,):
+                app.proxy_input_mode = False
+                app.message = "Cancelled"
+            elif ch in (10, 13):
+                raw = app.proxy_input_buf.strip()
+                app.proxy_input_mode = False
+                if raw and app.proxy_pool:
+                    try:
+                        app.proxy_pool.add_proxy(raw)
+                        # if looks like full URL, also set fixed proxy
+                        if "://" in raw or raw.count(":") == 1:
+                            parsed = app.proxy_pool.parse_proxy_lines(raw)
+                            if parsed:
+                                app.settings["proxy"] = parsed[0]
+                                app.settings["useProxy"] = True
+                        refresh_proxy_summary(app)
+                        app.message = f"Added proxy · useProxy={app.settings.get('useProxy')}"
+                    except Exception as e:
+                        app.message = f"Add failed: {e}"
+                else:
+                    app.message = "Empty proxy"
+            elif ch in (curses.KEY_BACKSPACE, 127, 8):
+                app.proxy_input_buf = app.proxy_input_buf[:-1]
+            elif 32 <= ch < 127:
+                app.proxy_input_buf += chr(ch)
             continue
 
         if app.list_filter_mode:
@@ -651,6 +817,8 @@ def main_curses(stdscr: Any) -> None:
                 refresh_queue(app)
             if app.mode == "log":
                 refresh_log(app)
+            if app.mode == "proxies":
+                refresh_proxy_summary(app)
             continue
         if ch == curses.KEY_BTAB:
             i = modes_cycle.index(app.mode) if app.mode in modes_cycle else 0
@@ -775,6 +943,33 @@ def main_curses(stdscr: Any) -> None:
                 refresh_queue(app)
                 app.message = f"Skipped {j.get('fqcn')}"
 
+        elif app.mode == "proxies":
+            if ch == ord("t"):
+                app.settings["useProxy"] = not bool(app.settings.get("useProxy"))
+                app.message = f"useProxy={'ON' if app.settings.get('useProxy') else 'OFF'} (s to save)"
+            elif ch == ord("R"):
+                proxy_refresh_bg(app)
+            elif ch == ord("H"):
+                proxy_health_bg(app)
+            elif ch == ord("a"):
+                app.proxy_input_mode = True
+                app.proxy_input_buf = str(app.settings.get("proxy") or "")
+                app.message = "Type proxy URL…"
+            elif ch == ord("c"):
+                app.settings["proxy"] = ""
+                app.message = "Cleared fixed proxy — pool will rotate (s to save)"
+            elif ch == ord("s"):
+                save_settings(app.settings)
+                app.message = (
+                    f"Saved useProxy={app.settings.get('useProxy')} "
+                    f"proxy={app.settings.get('proxy') or '(pool)'}"
+                )
+            elif ch == ord(" "):
+                # quick toggle
+                app.settings["useProxy"] = not bool(app.settings.get("useProxy"))
+                save_settings(app.settings)
+                app.message = f"useProxy={'ON' if app.settings.get('useProxy') else 'OFF'} saved"
+
         elif app.mode == "settings":
             if ch == curses.KEY_UP:
                 app.settings_sel = max(0, app.settings_sel - 1)
@@ -782,9 +977,13 @@ def main_curses(stdscr: Any) -> None:
                 app.settings_sel = min(max(0, len(app.settings_keys) - 1), app.settings_sel + 1)
             elif ch in (10, 13):
                 key = app.settings_keys[app.settings_sel]
-                cur = app.settings.get(key, "")
-                app.settings_buf = json.dumps(cur) if not isinstance(cur, str) else str(cur)
-                app.settings_edit = True
+                cur = app.settings.get(key, DEFAULT_SETTINGS.get(key, ""))
+                if isinstance(cur, bool):
+                    app.settings[key] = not cur
+                    app.message = f"Toggled {key}={app.settings[key]} (s to save)"
+                else:
+                    app.settings_buf = json.dumps(cur) if not isinstance(cur, str) else str(cur)
+                    app.settings_edit = True
             elif ch == ord("s"):
                 save_settings(app.settings)
                 app.message = "Settings saved"

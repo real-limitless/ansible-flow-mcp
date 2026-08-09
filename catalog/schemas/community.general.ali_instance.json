@@ -1,0 +1,564 @@
+{
+  "fqcn": "community.general.ali_instance",
+  "shortDescription": "Create, Start, Stop, Restart or Terminate an Instance in ECS; Add or Remove Instance to/from a Security Group",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ali_instance_module.html",
+  "options": [
+    {
+      "name": "alicloud_access_key",
+      "displayName": "Alicloud Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Alibaba Cloud access key. If not set then the value of environment variable E(ALICLOUD_ACCESS_KEY), E(ALICLOUD_ACCESS_KEY_ID) is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_assume_role",
+      "displayName": "Alicloud Assume Role",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "If provided with a role ARN, Ansible attempts to assume this role using the supplied credentials. The nested assume_role block supports C(alicloud_assume_role_arn), C(alicloud_assume_role_session_name), C(alicloud_assume_role_session_expiration) and C(alicloud_assume_role_policy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_assume_role_arn",
+      "displayName": "Alicloud Assume Role Arn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Alibaba Cloud C(role_arn). The ARN of the role to assume. If ARN is set to an empty string, it does not perform role switching. It supports environment variable E(ALICLOUD_ASSUME_ROLE_ARN). Ansible executes with provided credentials.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_assume_role_session_expiration",
+      "displayName": "Alicloud Assume Role Session Expiration",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The Alibaba Cloud C(session_expiration). The time after which the established session for assuming role expires. Valid value range 900-3600 seconds. Default to 3600 (in this case Alicloud use own default value). It supports environment variable E(ALICLOUD_ASSUME_ROLE_SESSION_EXPIRATION).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_assume_role_session_name",
+      "displayName": "Alicloud Assume Role Session Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Alibaba Cloud session_name. The session name to use when assuming the role. If omitted, 'ansible' is passed to the AssumeRole call as session name. It supports environment variable E(ALICLOUD_ASSUME_ROLE_SESSION_NAME).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_region",
+      "displayName": "Alicloud Region",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Alibaba Cloud region to use. If not specified then the value of environment variable E(ALICLOUD_REGION), E(ALICLOUD_REGION_ID) is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_secret_key",
+      "displayName": "Alicloud Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Alibaba Cloud secret key. If not set then the value of environment variable E(ALICLOUD_SECRET_KEY), E(ALICLOUD_SECRET_ACCESS_KEY) is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alicloud_security_token",
+      "displayName": "Alicloud Security Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Alibaba Cloud security token. If not specified then the value of environment variable E(ALICLOUD_SECURITY_TOKEN) is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allocate_public_ip",
+      "displayName": "Allocate Public Ip",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether allocate a public IP for the new instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_renew",
+      "displayName": "Auto Renew",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether automate renew the charge of the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_renew_period",
+      "displayName": "Auto Renew Period",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The duration of the automatic renew the charge of the instance. Required when O(auto_renew=true).",
+      "choices": [
+        1,
+        2,
+        3,
+        6,
+        12
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_zone",
+      "displayName": "Availability Zone",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Aliyun availability zone ID in which to launch the instance. If it is not specified, it is allocated by system automatically.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "count",
+      "displayName": "Count",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The number of the new instance. An integer value which indicates how many instances that match O(count_tag) should be running. Instances are either created or terminated based on this value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "count_tag",
+      "displayName": "Count Tag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "O(count) determines how many instances based on a specific tag criteria should be present. This can be expressed in multiple ways and is shown in the EXAMPLES section. The specified count_tag must already exist or be passed in as the O(tags) option. If it is not specified, it is replaced by O(instance_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description of ECS instance, which is a string of 2 to 256 characters. It cannot begin with V(http://) or V(https://).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dry_run",
+      "displayName": "Dry Run",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies whether to send a dry-run request. If O(dry_run=true), Only a dry-run request is sent and no instance is created. The system checks whether the required parameters are set, and validates the request format, service permissions, and available ECS instances. If the validation fails, the corresponding error code is returned. If the validation succeeds, the DryRunOperation error code is returned. If O(dry_run=false), a request is sent. If the validation succeeds, the instance is created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ecs_role_name",
+      "displayName": "Ecs Role Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The RAM Role Name attached on a ECS instance for API operations. You can retrieve this from the 'Access Control' section of the Alibaba Cloud console. If you are running Ansible from an ECS instance with RAM Instance using RAM Role, Ansible just accesses the metadata U(http://100.100.100.200/latest/meta-data/ram/security-credentials/<ecs_role_name>) to obtain the STS credential. This is a preferred approach over any other when running in ECS as you can avoid hard coding credentials. Instead thes",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the current operation needs to be execute forcibly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_name",
+      "displayName": "Host Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Instance host name. Ordered hostname is not supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_id",
+      "displayName": "Image Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Image ID used to launch instances. Required when O(state=present) and creating new ECS instances.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_data_disks",
+      "displayName": "Include Data Disks",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to change instance disks charge type when changing instance charge type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_charge_type",
+      "displayName": "Instance Charge Type",
+      "type": "string",
+      "required": false,
+      "default": "PostPaid",
+      "description": "The charge type of the instance.",
+      "choices": [
+        "PrePaid",
+        "PostPaid"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_ids",
+      "displayName": "Instance Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of instance IDs. It is required when need to operate existing instances. If it is specified, O(count) is ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_name",
+      "displayName": "Instance Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of ECS instance, which is a string of 2 to 128 Chinese or English characters. It must begin with an uppercase/lowercase letter or a Chinese character and can contain numerals, V(.), V(_) or V(-). It cannot begin with V(http://) or V(https://).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_type",
+      "displayName": "Instance Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Instance type used to launch instances. Required when O(state=present) and creating new ECS instances.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "internet_charge_type",
+      "displayName": "Internet Charge Type",
+      "type": "string",
+      "required": false,
+      "default": "PayByBandwidth",
+      "description": "Internet charge type of ECS instance.",
+      "choices": [
+        "PayByBandwidth",
+        "PayByTraffic"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_name",
+      "displayName": "Key Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of key pair which is used to access ECS instance in SSH.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_bandwidth_in",
+      "displayName": "Max Bandwidth In",
+      "type": "number",
+      "required": false,
+      "default": 200,
+      "description": "Maximum incoming bandwidth from the public network, measured in Mbps (Megabits per second).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_bandwidth_out",
+      "displayName": "Max Bandwidth Out",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Maximum outgoing bandwidth to the public network, measured in Mbps (Megabits per second). Required when O(allocate_public_ip=true). Ignored when O(allocate_public_ip=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to login instance. After rebooting instances, modified password is effective.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "period",
+      "displayName": "Period",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The charge duration of the instance, in months. Required when O(instance_charge_type=PrePaid). The valid value are [V(1-9), V(12), V(24), V(36)].",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "period_unit",
+      "displayName": "Period Unit",
+      "type": "string",
+      "required": false,
+      "default": "Month",
+      "description": "The duration unit that you are buying the resource. It is valid when O(instance_charge_type=PrePaid).",
+      "choices": [
+        "Month",
+        "Week"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This is the Alicloud profile name as set in the shared credentials file. It can also be sourced from the E(ALICLOUD_PROFILE) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge_tags",
+      "displayName": "Purge Tags",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Delete any tags not specified in the task that are on the instance. If V(true), it means you have to specify all the desired tags on each task affecting an instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ram_role_name",
+      "displayName": "Ram Role Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the instance RAM role.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_groups",
+      "displayName": "Security Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of security group IDs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shared_credentials_file",
+      "displayName": "Shared Credentials File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This is the path to the shared credentials file. It can also be sourced from the E(ALICLOUD_SHARED_CREDENTIALS_FILE) environment variable. If this is not set and a profile is specified, C(~/.aliyun/config.json) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "spot_price_limit",
+      "displayName": "Spot Price Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The maximum hourly price for the preemptible instance. This parameter supports a maximum of three decimal places and takes effect when the SpotStrategy parameter is set to SpotWithPriceLimit.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "spot_strategy",
+      "displayName": "Spot Strategy",
+      "type": "string",
+      "required": false,
+      "default": "NoSpot",
+      "description": "The bidding mode of the pay-as-you-go instance. This parameter is valid when O(instance_charge_type=PostPaid).",
+      "choices": [
+        "NoSpot",
+        "SpotWithPriceLimit",
+        "SpotAsPriceGo"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the instance after operating.",
+      "choices": [
+        "present",
+        "running",
+        "stopped",
+        "restarted",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system_disk_category",
+      "displayName": "System Disk Category",
+      "type": "string",
+      "required": false,
+      "default": "cloud_efficiency",
+      "description": "Category of the system disk.",
+      "choices": [
+        "cloud_efficiency",
+        "cloud_ssd"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system_disk_description",
+      "displayName": "System Disk Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the system disk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system_disk_name",
+      "displayName": "System Disk Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the system disk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system_disk_size",
+      "displayName": "System Disk Size",
+      "type": "number",
+      "required": false,
+      "default": 40,
+      "description": "Size of the system disk, in GB. The valid values are V(40)~V(500).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A hash/dictionaries of instance tags, to add to the new instance or for starting/stopping instance by tag. V({\"key\":\"value\"}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unique_suffix",
+      "displayName": "Unique Suffix",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies whether to add sequential suffixes to the host_name. The sequential suffix ranges from 001 to 999.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_data",
+      "displayName": "User Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User-defined data to customize the startup behaviors of an ECS instance and to pass data into an ECS instance. It only takes effect when launching the new ECS instances.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vswitch_id",
+      "displayName": "Vswitch Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The subnet ID in which to launch the instances (VPC).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

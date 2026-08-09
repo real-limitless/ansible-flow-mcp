@@ -1,0 +1,116 @@
+{
+  "fqcn": "ansible.builtin.systemd_service",
+  "shortDescription": "Manage systemd units",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html",
+  "options": [
+    {
+      "name": "daemon_reexec",
+      "displayName": "Daemon Reexec",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Run daemon_reexec command before doing any other operations, the systemd manager will serialize the manager state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "daemon_reload",
+      "displayName": "Daemon Reload",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Run C(daemon-reload) before doing any other operations, to make sure systemd has read any changes. When set to V(true), runs C(daemon-reload) even if the module does not start or stop anything.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the unit should start on boot. At least one of O(state) and O(enabled) are required. If set, requires O(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to override existing symlinks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "masked",
+      "displayName": "Masked",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the unit should be masked or not. A masked unit is impossible to start. If set, requires O(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the unit. This parameter takes the name of exactly one unit to work with. When no extension is given, it is implied to a C(.service) as systemd. When using in a chroot environment you always need to specify the name of the unit with the extension. For example, C(crond.service).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_block",
+      "displayName": "No Block",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Do not synchronously wait for the requested operation to finish. Enqueued job will continue without Ansible blocking on its completion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scope",
+      "displayName": "Scope",
+      "type": "string",
+      "required": false,
+      "default": "system",
+      "description": "Run C(systemctl) within a given service manager scope, either as the default system scope V(system), the current user's scope V(user), or the scope of all users V(global). For systemd to work with V(user), the executing user must have its own instance of dbus started and accessible (systemd requirement). The user dbus process is normally started during normal login, but not during the run of Ansible tasks. Otherwise you will probably get a 'Failed to connect to bus: no such file or directory' er",
+      "choices": [
+        "system",
+        "user",
+        "global"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "V(started)/V(stopped) are idempotent actions that will not run commands unless necessary. V(restarted) will always bounce the unit. V(reloaded) will always reload and if the service is not running at the moment of the reload, it is started. If set, requires O(name).",
+      "choices": [
+        "reloaded",
+        "restarted",
+        "started",
+        "stopped"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

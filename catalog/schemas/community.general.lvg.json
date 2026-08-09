@@ -1,0 +1,134 @@
+{
+  "fqcn": "community.general.lvg",
+  "shortDescription": "Configure LVM volume groups",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/lvg_module.html",
+  "options": [
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If V(true), allows to remove volume group with logical volumes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pesize",
+      "displayName": "Pesize",
+      "type": "string",
+      "required": false,
+      "default": "4",
+      "description": "The size of the physical extent. O(pesize) must be a power of 2 of at least 1 sector (where the sector size is the largest sector size of the PVs currently used in the VG), or at least 128KiB. O(pesize) can be optionally suffixed by a UNIT (k/K/m/M/g/G), default unit is megabyte.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pv_options",
+      "displayName": "Pv Options",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Additional options to pass to C(pvcreate) when creating the volume group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pvresize",
+      "displayName": "Pvresize",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If V(true), resize the physical volume to the maximum available size.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pvs",
+      "displayName": "Pvs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of comma-separated devices to use as physical devices in this volume group. Required when creating or resizing volume group. The module runs C(pvcreate) if needed. This parameter defines the B(desired state) of the physical volumes in the volume group. When the volume group already exists, physical volumes not listed here are removed from it by default. To add physical volumes without removing existing unlisted ones, set O(remove_extra_pvs=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_extra_pvs",
+      "displayName": "Remove Extra Pvs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Remove physical volumes from the volume group which are not in O(pvs).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset_pv_uuid",
+      "displayName": "Reset Pv Uuid",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the volume group's physical volumes' UUIDs are regenerated. This is B(not idempotent). Specifying this parameter always results in a change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset_vg_uuid",
+      "displayName": "Reset Vg Uuid",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the volume group's UUID is regenerated. This is B(not idempotent). Specifying this parameter always results in a change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Control if the volume group exists and its state. The states V(active) and V(inactive) implies V(present) state. Added in 7.1.0. If V(active) or V(inactive), the module manages the VG's logical volumes current state. The module also handles the VG's autoactivation state if supported unless when creating a volume group and the autoactivation option specified in O(vg_options).",
+      "choices": [
+        "absent",
+        "present",
+        "active",
+        "inactive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vg",
+      "displayName": "Vg",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the volume group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vg_options",
+      "displayName": "Vg Options",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Additional options to pass to C(vgcreate) when creating the volume group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

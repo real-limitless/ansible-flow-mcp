@@ -1,0 +1,110 @@
+{
+  "fqcn": "community.general.mssql_script",
+  "shortDescription": "Execute SQL scripts on a MSSQL database",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/mssql_script_module.html",
+  "options": [
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Host running the database. For named instances, use the format V(server\\\\instance). In that case, do not use O(login_port).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password used to authenticate with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Port of the MSSQL server. Requires O(login_host) to be defined as well. Cannot be used together with a named instance in O(login_host) (that is, V(server\\\\instance) format). If O(login_host) is not a named instance and O(login_port) is not specified, it defaults to V(1433).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username used to authenticate with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Database to run script against.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output",
+      "displayName": "Output",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "With V(default) each row is returned as a list of values. See RV(query_results). Output format V(dict) returns dictionary with the column names as keys. See RV(query_results_dict). V(dict) requires named columns to be returned by each query otherwise an error is thrown.",
+      "choices": [
+        "dict",
+        "default"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "params",
+      "displayName": "Params",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Parameters passed to the script as SQL parameters.\n(Query V('SELECT %(name\\)s\"') with V(example: '{\"name\": \"John Doe\"}).)'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "script",
+      "displayName": "Script",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The SQL script to be executed. Script can contain multiple SQL statements. Multiple Batches can be separated by V(GO) command. Each batch must return at least one result set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "transaction",
+      "displayName": "Transaction",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If transactional mode is requested, start a transaction and commit the change only if the script succeed. Otherwise, rollback the transaction. If transactional mode is not requested (default), automatically commit the change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

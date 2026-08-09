@@ -1,0 +1,282 @@
+{
+  "fqcn": "community.general.ipa_config",
+  "shortDescription": "Manage Global FreeIPA Configuration Settings",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/general/ipa_config_module.html",
+  "options": [
+    {
+      "name": "ipa_host",
+      "displayName": "Ipa Host",
+      "type": "string",
+      "required": false,
+      "default": "ipa.example.com",
+      "description": "IP or hostname of IPA server. If the value is not specified in the task, the value of environment variable E(IPA_HOST) is used instead. If both the environment variable E(IPA_HOST) and the value are not specified in the task, then DNS is used to try to discover the FreeIPA server. The relevant entry needed in FreeIPA is the C(ipa-ca) entry. If neither the DNS entry, nor the environment E(IPA_HOST), nor the value are available in the task, then the default value is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_pass",
+      "displayName": "Ipa Pass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of administrative user. If the value is not specified in the task, the value of environment variable E(IPA_PASS) is used instead. Note that if the C(urllib_gssapi) library is available, it is possible to use GSSAPI to authenticate to FreeIPA. If the environment variable E(KRB5CCNAME) is available, the module uses this Kerberos credentials cache to authenticate to the FreeIPA server. If the environment variable E(KRB5_CLIENT_KTNAME) is available, and E(KRB5CCNAME) is not; the module uses",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_port",
+      "displayName": "Ipa Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port of FreeIPA / IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PORT) is used instead. If both the environment variable E(IPA_PORT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_prot",
+      "displayName": "Ipa Prot",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "Protocol used by IPA server. If the value is not specified in the task, the value of environment variable E(IPA_PROT) is used instead. If both the environment variable E(IPA_PROT) and the value are not specified in the task, then default value is set.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_timeout",
+      "displayName": "Ipa Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Specifies idle timeout (in seconds) for the connection. For bulk operations, you may want to increase this in order to avoid timeout from IPA server. If the value is not specified in the task, the value of environment variable E(IPA_TIMEOUT) is used instead. If both the environment variable E(IPA_TIMEOUT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_user",
+      "displayName": "Ipa User",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Administrative account used on IPA server. If the value is not specified in the task, the value of environment variable E(IPA_USER) is used instead. If both the environment variable E(IPA_USER) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipaconfigstring",
+      "displayName": "Ipaconfigstring",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Extra hashes to generate in password plug-in.",
+      "choices": [
+        "AllowNThash",
+        "KDC:Disable Last Success",
+        "KDC:Disable Lockout",
+        "KDC:Disable Default Preauth for SPNs"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipadefaultemaildomain",
+      "displayName": "Ipadefaultemaildomain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default e-mail domain for new users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipadefaultloginshell",
+      "displayName": "Ipadefaultloginshell",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default shell for new users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipadefaultprimarygroup",
+      "displayName": "Ipadefaultprimarygroup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default group for new users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipagroupobjectclasses",
+      "displayName": "Ipagroupobjectclasses",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of group objectclasses.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipagroupsearchfields",
+      "displayName": "Ipagroupsearchfields",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of fields to search in when searching for groups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipahomesrootdir",
+      "displayName": "Ipahomesrootdir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default location of home directories.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipakrbauthzdata",
+      "displayName": "Ipakrbauthzdata",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Default types of PAC supported for services.",
+      "choices": [
+        "MS-PAC",
+        "PAD",
+        "nfs:NONE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipamaxusernamelength",
+      "displayName": "Ipamaxusernamelength",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum length of usernames.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipapwdexpadvnotify",
+      "displayName": "Ipapwdexpadvnotify",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Notice of impending password expiration, in days.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipasearchrecordslimit",
+      "displayName": "Ipasearchrecordslimit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of records to search (-1 or 0 is unlimited).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipasearchtimelimit",
+      "displayName": "Ipasearchtimelimit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum amount of time (seconds) for a search (-1 or 0 is unlimited).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipaselinuxusermaporder",
+      "displayName": "Ipaselinuxusermaporder",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The SELinux user map order (order in increasing priority of SELinux users).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipauserauthtype",
+      "displayName": "Ipauserauthtype",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The authentication type to use by default. The choice V(idp) has been added in community.general 7.3.0. The choice V(passkey) has been added in community.general 8.1.0.",
+      "choices": [
+        "password",
+        "radius",
+        "otp",
+        "pkinit",
+        "hardened",
+        "idp",
+        "passkey",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipauserobjectclasses",
+      "displayName": "Ipauserobjectclasses",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of user objectclasses.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipausersearchfields",
+      "displayName": "Ipausersearchfields",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of fields to search in when searching for users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This only applies if O(ipa_prot) is V(https). If set to V(false), the SSL certificates are not validated. This should only set to V(false) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}
