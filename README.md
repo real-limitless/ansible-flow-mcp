@@ -187,8 +187,6 @@ Dual-tracked with [OpenFlow](https://github.com/real-limitless/OpenFlow) Ansible
 | Playbook resource | `run_playbook` |
 | Control-node SSH / become | Inventory + Ansible config · hub→spoke SSH in hub mode |
 
-![Dual-track architecture with OpenFlow](docs/images/architecture.png)
-
 ---
 
 ## Env (common)
