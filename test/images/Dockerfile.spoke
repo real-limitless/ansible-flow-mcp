@@ -29,12 +29,24 @@ RUN set -eux; \
     fi; \
     test -x /usr/local/bin/ansible-flow-mcp || test -x "$BIN"; \
     chmod +x /usr/local/bin/entrypoint-spoke.sh; \
-    mkdir -p /var/lib/ansible-flow/spoke /var/run/sshd /home/mcp-spoke/.ssh; \
+    mkdir -p /var/lib/ansible-flow/spoke /var/run/sshd \
+      /home/mcp-spoke/.ssh /home/mcp-ansible/.ssh; \
     if ! id mcp-spoke >/dev/null 2>&1; then \
       useradd -m -s /usr/sbin/nologin mcp-spoke 2>/dev/null \
         || adduser -D -s /sbin/nologin mcp-spoke; \
     fi; \
+    if ! id mcp-ansible >/dev/null 2>&1; then \
+      useradd -m -s /bin/bash mcp-ansible 2>/dev/null \
+        || adduser -D -s /bin/bash mcp-ansible; \
+    fi; \
+    # lab: passwordless sudo so run_module(become=true) works for package etc.
+    if command -v sudo >/dev/null 2>&1; then \
+      echo 'mcp-ansible ALL=(ALL) NOPASSWD:ALL' >/etc/sudoers.d/mcp-ansible; \
+      chmod 440 /etc/sudoers.d/mcp-ansible; \
+    fi; \
     chown -R mcp-spoke:mcp-spoke /home/mcp-spoke /var/lib/ansible-flow/spoke; \
+    chown -R mcp-ansible:mcp-ansible /home/mcp-ansible; \
+    chmod 700 /home/mcp-spoke/.ssh /home/mcp-ansible/.ssh; \
     chmod -R a+rX /opt/ansible-flow-mcp; \
     ssh-keygen -A || true
 
