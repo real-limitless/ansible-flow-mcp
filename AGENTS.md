@@ -4,129 +4,358 @@ Guidance for AI coding agents working in this repository.
 
 ## What this is
 
-**ansible-flow-mcp** is an MCP server that exposes Ansible to AI agents:
+**ansible-flow-mcp** is an MCP server that exposes Ansible to AI agents, plus an optional **SSH hub/spoke** multi-host fabric:
 
-1. **Agent loop** — `search_modules` → `get_module_schema` → `run_module` / `run_playbook` (check-first)
-2. **Hub/spoke fabric** ([issue #2](https://github.com/real-limitless/ansible-flow-mcp/issues/2)) — agent attaches to **hub only**; spokes enroll via join tokens; hub→spoke is SSH only
+| Layer | Purpose |
+| --- | --- |
+| **Core MCP** | `search_modules` → `get_module_schema` → `run_module` / `run_playbook` (check-first) |
+| **Hub/spoke** ([issue #2](https://github.com/real-limitless/ansible-flow-mcp/issues/2)) | Agent attaches to **hub only**; spokes enroll with join tokens; hub→spoke is SSH only |
+| **Operator TUI** | Curses UI on hub: servers/groups CRUD, invite tokens, launch OpenCode |
+| **Compose lab** (`test/`) | Full hub + 3 spokes, smoke scripts, OpenCode bridge from host |
 
 Not affiliated with Red Hat/Ansible beyond the public CLI. Dual-tracked with [OpenFlow](https://github.com/real-limitless/OpenFlow) gallery concepts.
+
+**Product docs:** `README.md`, `docs/HUB.md`, `docs/SECURITY.md`, `test/README.md`.
+
+---
 
 ## Layout
 
 ```text
 src/ansible_flow_mcp/
-  server.py      # MCP tools (stdio); hub vs spoke mode registration
-  cli.py         # ansible-flow-mcp hub|spoke|tui|…
-  runner.py      # ansible / ansible-playbook invocation
-  catalog.py     # gallery + schemas
-  policy.py      # allow/deny, hub targeting rules
-  security.py    # redaction, path jail helpers
-  ssh.py         # spoke_call (ForceCommand mesh SSH)
-  tui.py         # operator TUI
-  hub/           # init, tokens, inventory, enroll, groups
-  spoke/         # join, spoke session
-catalog/         # allowlist, gallery.json, schemas/ (shipped in wheel)
+  cli.py           # entry: hub|spoke|tui|write-opencode-config|…
+  server.py        # FastMCP tools; hub tools registered in hub mode
+  runner.py        # ansible / ansible-playbook; hub inventory gates
+  catalog.py       # gallery.json + catalog/schemas/*.json
+  policy.py        # Role hub|spoke|legacy; enrolled hosts + groups
+  security.py      # allowlist, redaction
+  ssh.py           # spoke_call (ForceCommand simple-exec over SSH)
+  tui.py           # operator TUI + write_opencode_hub_config
+  paths.py         # ANSIBLE_FLOW_HUB_DIR / SPOKE_DIR defaults
+  hub/
+    state.py       # hub init, keys, signing, audit.jsonl
+    tokens.py      # issue/verify join tokens (HMAC, jti replay)
+    inventory.py   # inventory.yml, spokes, custom groups
+    enroll.py      # accept_join, revoke, update_node, group ops
+  spoke/
+    join.py        # spoke join ceremony
+    session.py     # ForceCommand: simple-exec or MCP stdio
+
+catalog/           # MUST ship in wheel/image (do not dockerignore schemas/)
+  collections-allowlist.yml
+  gallery.json     # ~8k modules
+  schemas/*.json   # arg schemas for get_module_schema
+
 docs/
-  HUB.md         # operator hub/spoke guide
-  SECURITY.md    # trust boundary
-  campaign/      # marketing storyboard HTML + capture.sh
-  images/        # campaign-*.png for README
-examples/        # MCP client configs, sshd drop-ins, hub systemd
-test/            # docker/podman hub+spoke lab (not pytest)
-tests/           # unit tests (pytest)
-scripts/         # generate_catalog.py, factory/
+  HUB.md SECURITY.md campaign/ images/
+
+examples/
+  cursor-mcp.json claude-desktop.json
+  opencode-hub.jsonc          # in-process hub MCP for OpenCode
+  sshd/ hub/                  # drop-ins + systemd examples
+
+test/                         # integration lab (compose), NOT pytest
+  docker-compose.yml
+  images/                     # Dockerfile.hub|spoke, entrypoints, lab-opencode
+  scripts/                    # demo, enroll, smoke, tui, opencode-host, …
+  README.md
+
+tests/                        # unit tests (pytest)
+  test_runner.py test_catalog.py
+  test_hub_spoke.py test_hub_groups.py
+
+scripts/                      # generate_catalog.py, factory/ (Galaxy scrape)
 ```
 
-Package lives under `src/`. Entry point: `ansible-flow-mcp` → `ansible_flow_mcp.cli:main`.
+Package: `src/`. Console script: `ansible-flow-mcp` → `ansible_flow_mcp.cli:main`.  
+Dependency pin: `mcp>=1.2.0,<2` (FastMCP lives in 1.x).
+
+---
 
 ## Dev setup
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
+pytest -q
 ```
 
-Requires Python ≥ 3.11. Real Ansible runs need `ansible-core` + `ansible.posix` on `PATH`; unit tests mock the CLI.
+- Python ≥ 3.11  
+- Real Ansible runs: `ansible-core` + collection `ansible.posix` on `PATH`  
+- Unit tests mock the Ansible CLI  
 
-## Commands agents should run
+---
 
-| Task | Command |
+## CLI surface
+
+```bash
+# Legacy / local dev MCP (no hub gates)
+ansible-flow-mcp
+
+# Hub
+ansible-flow-mcp hub init --name hub-01
+ansible-flow-mcp hub issue-token --name web-01 --ttl 15m
+ansible-flow-mcp hub status
+ansible-flow-mcp hub session              # MCP stdio + hub tools
+ansible-flow-mcp hub tui                  # operator TUI
+ansible-flow-mcp tui                      # same
+ansible-flow-mcp hub write-opencode-config
+ansible-flow-mcp hub spoke-call --node web-01 --tool list_collections
+ansible-flow-mcp hub revoke --name web-01
+ansible-flow-mcp hub accept-join          # ForceCommand only
+
+# Spoke
+ansible-flow-mcp spoke join --token … --hub mcp-join@hub:22 --public-addr …
+ansible-flow-mcp spoke session            # ForceCommand MCP / simple-exec
+ansible-flow-mcp spoke status
+```
+
+Env:
+
+| Variable | Meaning |
 | --- | --- |
-| Unit tests | `pytest` |
-| Single test file | `pytest tests/test_hub_spoke.py -q` |
-| Install editable | `pip install -e ".[dev]"` |
-| Run MCP (dev) | `ansible-flow-mcp` or `python -m ansible_flow_mcp.server` |
-| Hub session | `ansible-flow-mcp hub session` |
-| Lab demo | `cd test && ./scripts/demo.sh` |
-| Lab smoke only | `cd test && ./scripts/up.sh && ./scripts/enroll.sh && ./scripts/smoke.sh` |
-| Regen catalog | `python scripts/generate_catalog.py` (needs `ansible-doc`) |
-| Campaign PNGs | `cd docs/campaign && ./capture.sh` |
+| `ANSIBLE_FLOW_HUB_DIR` | Hub state (default `/var/lib/ansible-flow/hub`) |
+| `ANSIBLE_FLOW_SPOKE_DIR` | Spoke state |
+| `ANSIBLE_FLOW_ROLE` | `hub` \| `spoke` (also auto-detected from state files) |
+| `ANSIBLE_FLOW_CATALOG_DIR` | Override catalog root |
+| `ANSIBLE_FLOW_REQUIRE_CHECK` | If truthy, refuse `check_mode=false` |
+| `OPENCODE_CONFIG` | Path to OpenCode config (lab uses hub or host bridge file) |
 
-No dedicated `lint` / `typecheck` scripts in-repo yet. Prefer `pytest` green before claiming done.
+---
 
-CI: `.github/workflows/ci.yml`.
+## MCP tools
 
-## Critical design: dual SSH identities
+### Always (all modes)
 
-**Never conflate mesh MCP hop with Ansible shell.**
+| Tool | Notes |
+| --- | --- |
+| `search_modules` | Gallery substring search (`catalog.py`) — large gallery; keep results compact |
+| `get_module_schema` | Reads `catalog/schemas/<fqcn>.json`; `null` if missing |
+| `run_module` | Default `check_mode=true`; hub gates hosts/inventory |
+| `run_playbook` | Path-jailed `.yml` |
+| `list_collections` | From gallery |
 
-| User | Key | Purpose |
-| --- | --- | --- |
-| `mcp-spoke` | `hub_client` + **ForceCommand** → `spoke session` | `spoke_call` only |
-| `mcp-ansible` | `ansible_client`, **no** ForceCommand | `run_module` / ansible CLI |
+### Hub mode only (`hub session` / `ANSIBLE_FLOW_ROLE=hub` + initialized hub)
 
-- Inventory `ansible_user` = shell user (`mcp-ansible`)
-- Inventory / code `mesh_user` = ForceCommand user (`mcp-spoke`)
-- `ssh.py` `spoke_call` must target **mesh_user**, not `ansible_user`
-- Putting `ansible_client` on `mcp-spoke` with ForceCommand deadlocks Ansible (expects `/bin/sh`, gets MCP) and can hang the hub MCP session
+| Tool | Notes |
+| --- | --- |
+| `list_nodes` / `hub_status` | Spokes + groups projection |
+| `issue_token` / `revoke_node` / `update_node` | Membership |
+| `list_groups` / `create_group` / `delete_group` / `set_group_members` | Targeting groups (enrolled members only) |
+| `spoke_call` | SSH ForceCommand simple-exec JSON to spoke |
 
-Details: `docs/HUB.md` § Spoke SSH users.
+### Spoke mode
+
+- Localhost-only execution; no `issue_token` / foreign hosts.  
+- ForceCommand often uses **simple-exec** one-shot JSON (`ansible_flow:1, op:call`), not full MCP framing — see `spoke/session.py` + `ssh.py`.
+
+---
 
 ## Hub/spoke rules (do not regress)
 
-- Agent attaches to **hub only**; spokes are not agent entrypoints
-- Hub inventory is source of truth; **reject client-supplied `-i`** in hub mode
-- Target only **enrolled** hosts/groups
-- Host key checking **on** in hub/spoke mode
-- Join tokens: signed, TTL, one-time jti replay cache
-- Free-form modules (`command`/`shell`/`raw`/`script`) **denied** by default
-- Playbooks path-jailed; CLI argv-only (no shell interpolation)
-- Check mode default **true** on `run_module`
-- Never log join tokens, private keys, or secret module args
+1. Agent attaches to **hub only** — never make spokes the agent entrypoint.  
+2. Hub inventory is source of truth — **reject client-supplied `-i`** in hub mode.  
+3. Target only **enrolled** host names or **inventory group** names (+ localhost).  
+4. Host key checking **on** in hub/spoke mode.  
+5. Join tokens: signed, TTL, **one-time jti** replay cache.  
+6. Free-form modules (`command`/`shell`/`raw`/`script`) **denied** by default.  
+7. Playbooks path-jailed; subprocess **argv only** (no shell interpolation).  
+8. Check mode default **true** on `run_module`.  
+9. Never log join tokens, private keys, or secret module args.  
+10. Groups cannot reference non-enrolled hosts; reserved: `all`, `hub`, `spokes`, `ungrouped`.
+
+### Dual SSH identities (critical)
+
+**Never conflate mesh MCP hop with Ansible shell.**
+
+| Identity | Key (under hub `keys/`) | User on spoke | Purpose |
+| --- | --- | --- | --- |
+| Mesh / ForceCommand | `hub_client` | `mcp-spoke` + ForceCommand → `spoke session` | `spoke_call` only |
+| Ansible | `ansible_client` | shell-capable user (lab may also ForceCommand for simplicity) | `run_module` SSH |
+
+- `ssh.py` `spoke_call` must use **mesh** key + mesh user.  
+- Lab enroll installs both pubs on `mcp-spoke` with ForceCommand for smoke simplicity; production should split users per `docs/HUB.md`.  
+- Putting Ansible’s interactive expectations on a ForceCommand-only user deadlocks runs and can hang the hub MCP session.
+
+Join channel on hub: user `mcp-join`, ForceCommand → `hub accept-join`.  
+Hub volume perms: `mcp-join` in group `ansible-flow` must **read** `hub_id` and **write** inventory/tokens (see `test/images/entrypoint-hub.sh` + enroll perm fixup).
+
+---
+
+## Operator TUI
+
+```bash
+ansible-flow-mcp tui
+# keys: 1 servers  2 groups  3 hub  i invite  e edit  d revoke  g/m/x groups  A OpenCode  q quit
+```
+
+- Same inventory APIs as hub MCP tools (in-process).  
+- **A** writes `$HUB_DIR/opencode-hub.jsonc` and launches `opencode` if on `PATH`.  
+- Needs a real TTY (curses).
+
+---
+
+## Compose lab (`test/`) — primary integration suite
+
+**Not pytest.** Docker or Podman Compose. Full fabric + OpenCode wiring.
+
+### One-shot
+
+```bash
+cd test
+./scripts/demo.sh              # up → enroll → seed → smoke → hub shell (if TTY)
+./scripts/demo.sh --no-shell   # CI / non-interactive
+```
+
+### After hub image rebuild (spokes “missing” in OpenCode)
+
+```bash
+cd test
+./scripts/reconnect.sh         # re-enroll + seed + refresh configs
+./scripts/opencode-host.sh     # OpenCode on HOST → lab hub via bridge
+```
+
+### Script map
+
+| Script | Purpose |
+| --- | --- |
+| `up.sh` | compose up --build |
+| `enroll.sh` | issue-token + spoke join each spoke; calls `seed_demo.sh` |
+| `seed_demo.sh` | groups: prod/web/app/data/edge/batch/canary + labels |
+| `smoke.sh` | spoke_call, no shell leak, reject unenrolled host |
+| `smoke_tui_opencode.sh` | opencode binary, config, seeded groups, APIs |
+| `demo.sh` | full path + optional hub shell |
+| `shell.sh` | interactive shell **on hub container** |
+| `tui.sh` | TUI inside hub |
+| `opencode.sh` | OpenCode **inside** hub (`lab-opencode`) |
+| `opencode-host.sh` | OpenCode **on host** → `hub-mcp.sh` bridge |
+| `hub-mcp.sh` | stdio MCP: `compose exec -T hub hub session` |
+| `write-host-opencode-config.sh` | writes `test/opencode-hub.host.jsonc` |
+| `reconnect.sh` | rebuild recovery |
+
+### Demo inventory (after seed)
+
+| Spoke | Flavor | Groups |
+| --- | --- | --- |
+| `spoke-01` | web/edge (debian) | web, edge, prod |
+| `spoke-02` | app/canary (ubuntu) | app, canary, prod |
+| `spoke-03` | data/batch (debian) | data, batch, prod |
+
+### OpenCode attachment (do not confuse)
+
+| Where OpenCode runs | Config | Sees lab spokes? |
+| --- | --- | --- |
+| **Host** | `OPENCODE_CONFIG=test/opencode-hub.host.jsonc` via `opencode-host.sh` | Yes (bridge into container volume) |
+| **Inside hub** | `/var/lib/ansible-flow/hub/opencode-hub.jsonc` via `opencode.sh` | Yes |
+| Host with default local `ANSIBLE_FLOW_HUB_DIR` empty | local empty hub | **No** — looks like “no servers” |
+
+### Lab image pitfalls
+
+1. **Never dockerignore `catalog/schemas`** — hub image must include schemas or `get_module_schema` returns null for everything (gallery alone is not enough).  
+2. Hub build arg `INSTALL_OPENCODE=1` (default) installs OpenCode for lab AI.  
+3. Editable install in image: code under `/opt/ansible-flow-mcp`; state under `/var/lib/ansible-flow/hub` (volume `hub-data`).  
+4. After `compose build hub` + recreate, run **`reconnect.sh`** if inventory/joins drift or perms break `mcp-join`.
+
+### Manual lab checks
+
+```bash
+cd test
+podman compose exec -T hub ansible-flow-mcp hub status
+podman compose exec -T hub ansible-flow-mcp hub spoke-call --node spoke-01 --tool list_collections
+podman compose exec -T hub python3 -c "from ansible_flow_mcp.catalog import get_module_schema; print(bool(get_module_schema('community.general.cloudflare_dns')))"
+```
+
+---
+
+## Unit tests (`tests/`)
+
+```bash
+pytest -q
+pytest tests/test_hub_spoke.py tests/test_hub_groups.py -q
+```
+
+| File | Covers |
+| --- | --- |
+| `test_runner.py` | argv, policy deny, mocked run |
+| `test_catalog.py` | gallery/schema basics |
+| `test_hub_spoke.py` | init, tokens, join, revoke, runner hub gates |
+| `test_hub_groups.py` | groups CRUD, update_node, opencode config write |
+
+Prefer **pytest green** before claiming done. Lab smokes are separate and slower.
+
+---
+
+## Commands cheat sheet
+
+| Task | Command |
+| --- | --- |
+| Unit tests | `pytest -q` |
+| Install editable | `pip install -e ".[dev]"` |
+| Dev MCP | `ansible-flow-mcp` |
+| Hub MCP | `ANSIBLE_FLOW_HUB_DIR=… ansible-flow-mcp hub session` |
+| Lab full | `cd test && ./scripts/demo.sh --no-shell` |
+| Lab after rebuild | `cd test && ./scripts/reconnect.sh` |
+| Host OpenCode → lab | `cd test && ./scripts/opencode-host.sh` |
+| Regen catalog | `python scripts/generate_catalog.py` (needs `ansible-doc`) |
+| Campaign PNGs | `cd docs/campaign && ./capture.sh` |
+
+No dedicated lint/typecheck scripts yet. CI: `.github/workflows/ci.yml`.
+
+---
 
 ## Conventions
 
-- Python 3.11+, type hints where the surrounding file already uses them
-- Match existing style: concise, few comments unless non-obvious security/SSH reasons
-- Tests under `tests/`; lab integration under `test/` (compose scripts)
-- Prefer editing existing modules over new top-level packages
-- Catalog allowlist: `catalog/collections-allowlist.yml`
-- State dirs (runtime, not in git): `/var/lib/ansible-flow/hub`, `…/spoke` (or `ANSIBLE_FLOW_HUB_DIR` / `ANSIBLE_FLOW_SPOKE_DIR`)
+- Python 3.11+; type hints where the file already uses them.  
+- Concise style; few comments unless security/SSH non-obvious.  
+- Prefer extending `hub/`, `spoke/`, `server.py`, `catalog.py` over new top-level packages.  
+- Catalog allowlist: `catalog/collections-allowlist.yml`.  
+- Runtime state **not in git**: hub/spoke dirs, `test/keys/*`, `test/opencode-hub.host.jsonc`.  
+- Commit style when asked: `feat(hub):`, `fix(lab):`, `test(lab):`, `docs:`.  
+- Feature branch for hub work: `feature/2-ssh-hub-spoke`.
+
+---
 
 ## Docs & marketing
 
-- Product story: `README.md` (campaign embeds)
-- Ops: `docs/HUB.md`, security: `docs/SECURITY.md`
-- Visuals: `docs/images/campaign-*.png` from `docs/campaign/` — do **not** reintroduce old OpenFlow `architecture.png` / `gallery-concept.png`
-- Lab operator notes: `test/README.md`
+- Product story: `README.md` (campaign embeds under `docs/images/campaign-*.png`).  
+- Generate PNGs: `docs/campaign/capture.sh` — do **not** reintroduce old OpenFlow `architecture.png` / `gallery-concept.png`.  
+- Ops: `docs/HUB.md`. Security: `docs/SECURITY.md`. Lab: `test/README.md`.
+
+---
+
+## Known gaps / next work (do not assume done)
+
+- **search_modules** is linear substring over ~8k gallery entries; fine CPU-wise, but hub path can feel slow due to **compose exec + cold MCP process**. Planned: compact JSON, warm index, hybrid/synonym (RAG-like) search — not implemented until explicitly requested.  
+- Full semantic embeddings optional later.  
+- Production split of `mcp-spoke` vs Ansible shell user more strict than lab.  
+- No multi-hub HA, WinRM, or public HTTP MCP in v1.
+
+---
 
 ## Out of scope / non-goals (v1)
 
-- Full-mesh hop plane, agent attach to arbitrary spokes
-- WinRM / non-SSH Ansible in hub mode
-- Replacing AWX/Controller
-- Multi-hub HA
-- Public unauthenticated HTTP MCP
+- Full-mesh hop plane; agent attach to arbitrary spokes  
+- WinRM / non-SSH Ansible in hub mode  
+- Replacing AWX/Controller  
+- Multi-hub HA  
+- Public unauthenticated HTTP MCP  
 
-## Git
+---
 
-- Do not commit secrets, lab keys under `test/keys/*`, or hub/spoke private key material
-- Commit only when the user asks; match recent message style (`feat(hub):`, `fix(lab):`, `docs:`)
-- Default feature branch for hub work has been `feature/2-ssh-hub-spoke`
+## Git hygiene
+
+- Do not commit secrets, `test/keys/*` private material, hub/spoke private keys, join tokens.  
+- Commit only when the user asks.  
+- Never force-push protected branches unless asked.
+
+---
 
 ## When stuck
 
-1. Read `docs/HUB.md` and `docs/SECURITY.md`
-2. Trace tools from `server.py` → `runner.py` / `hub/*` / `ssh.py`
-3. Reproduce with `tests/test_hub_spoke.py` or `test/scripts/smoke.sh`
-4. Issue plan: [#2](https://github.com/real-limitless/ansible-flow-mcp/issues/2) (hub/spoke), [#1](https://github.com/real-limitless/ansible-flow-mcp/issues/1) (core MCP)
+1. Read `docs/HUB.md`, `docs/SECURITY.md`, `test/README.md`.  
+2. Trace: `cli.py` → `server.py` → `runner.py` / `hub/*` / `ssh.py` / `spoke/*`.  
+3. Unit: `pytest tests/test_hub_spoke.py tests/test_hub_groups.py -q`.  
+4. Lab: `cd test && ./scripts/smoke.sh && ./scripts/smoke_tui_opencode.sh`.  
+5. Empty servers in OpenCode: use `./scripts/opencode-host.sh` or `./scripts/reconnect.sh` — not a random local hub dir.  
+6. Missing schemas in lab: ensure `.dockerignore` does **not** exclude `catalog/schemas`.  
+7. Issues: [#2](https://github.com/real-limitless/ansible-flow-mcp/issues/2) hub/spoke, [#1](https://github.com/real-limitless/ansible-flow-mcp/issues/1) core MCP.
