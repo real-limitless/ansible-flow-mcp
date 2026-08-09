@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from typing import Any
 
@@ -8,19 +9,43 @@ from mcp.server.fastmcp import FastMCP
 
 from ansible_flow_mcp import __version__
 from ansible_flow_mcp.catalog import get_module_schema, list_collections, search_modules
+from ansible_flow_mcp.policy import Role, detect_mode
 from ansible_flow_mcp.runner import run_module, run_playbook
 from ansible_flow_mcp.security import load_policy
 
-mcp = FastMCP(
-    "ansible-flow-mcp",
-    instructions=(
+_ROLE: str | None = None
+
+
+def _role() -> Role:
+    if _ROLE == "hub":
+        return Role.HUB
+    if _ROLE == "spoke":
+        return Role.SPOKE
+    return detect_mode().role
+
+
+def _instructions() -> str:
+    role = _role()
+    base = (
         "Ansible module/playbook runner for agents. Ritual: search_modules → "
         "get_module_schema → run_module(check_mode=true) → run_module(check_mode=false). "
         "For playbooks: run_playbook(check_mode=true) first. "
         "Never request denied free-form modules (command/shell/raw/script). "
         "Playbooks must be .yml under allowlisted roots. Prefer check mode before applying."
-    ),
-)
+    )
+    if role == Role.HUB:
+        return (
+            base
+            + " HUB mode: inventory is fixed to enrolled spokes; do not pass custom inventory. "
+            "Use list_nodes / issue_token / spoke_call / revoke_node for membership. "
+            "hosts must be enrolled names or localhost."
+        )
+    if role == Role.SPOKE:
+        return base + " SPOKE mode: localhost execution only. No issue_token or foreign hosts."
+    return base
+
+
+mcp = FastMCP("ansible-flow-mcp", instructions=_instructions())
 
 
 def _json(data: Any) -> str:
@@ -118,11 +143,73 @@ def run_playbook_tool(
 @mcp.tool(name="list_collections")
 def list_collections_tool() -> str:
     """List collections present in the committed gallery."""
-    return _json({"collections": list_collections(), "version": __version__})
+    return _json({"collections": list_collections(), "version": __version__, "role": _role().value})
+
+
+def _register_hub_tools() -> None:
+    @mcp.tool(name="list_nodes")
+    def list_nodes_tool() -> str:
+        """List hub + enrolled spokes from hub inventory."""
+        from ansible_flow_mcp.hub.enroll import hub_status
+
+        return _json(hub_status())
+
+    @mcp.tool(name="hub_status")
+    def hub_status_tool() -> str:
+        """Hub controller status (inventory path, spoke names)."""
+        from ansible_flow_mcp.hub.enroll import hub_status
+
+        return _json(hub_status())
+
+    @mcp.tool(name="issue_token")
+    def issue_token_tool(name: str, ttl_seconds: int = 900) -> str:
+        """Issue a one-time spoke join token (hub only)."""
+        from ansible_flow_mcp.hub.tokens import issue_token
+
+        issued = issue_token(name, ttl_seconds=ttl_seconds)
+        return _json(issued.to_dict())
+
+    @mcp.tool(name="revoke_node")
+    def revoke_node_tool(name: str) -> str:
+        """Remove spoke from hub inventory and mark revoked."""
+        from ansible_flow_mcp.hub.enroll import revoke_node
+
+        return _json(revoke_node(name))
+
+    @mcp.tool(name="spoke_call")
+    def spoke_call_tool(
+        node: str,
+        tool: str = "list_collections",
+        arguments: dict[str, Any] | None = None,
+        timeout: float = 60,
+    ) -> str:
+        """SSH to an enrolled spoke ForceCommand MCP and call one tool."""
+        from ansible_flow_mcp.ssh import spoke_call
+
+        result = spoke_call(node, tool=tool, arguments=arguments or {}, timeout=timeout)
+        return _json(result.to_dict())
+
+
+def run_server(*, role: str | None = None) -> None:
+    global _ROLE
+    _ROLE = role
+    if role == "hub" or (role is None and detect_mode().role == Role.HUB):
+        if os.environ.get("ANSIBLE_FLOW_ROLE", "").lower() != "spoke":
+            os.environ.setdefault("ANSIBLE_FLOW_ROLE", "hub")
+            _register_hub_tools()
+    elif role == "spoke":
+        os.environ["ANSIBLE_FLOW_ROLE"] = "spoke"
+    mcp.run(transport="stdio")
 
 
 def main() -> None:
-    mcp.run(transport="stdio")
+    # Prefer CLI dispatcher when invoked as console script with args
+    if len(sys.argv) > 1:
+        from ansible_flow_mcp.cli import main as cli_main
+
+        cli_main()
+        return
+    run_server(role=None)
 
 
 if __name__ == "__main__":

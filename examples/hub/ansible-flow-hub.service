@@ -1,0 +1,21 @@
+[Unit]
+Description=ansible-flow-mcp hub (stdio wrapper / socket activation placeholder)
+After=network.target
+
+[Service]
+Type=simple
+User=mcp-hub
+Group=mcp-hub
+Environment=ANSIBLE_FLOW_ROLE=hub
+Environment=ANSIBLE_FLOW_HUB_DIR=/var/lib/ansible-flow/hub
+WorkingDirectory=/var/lib/ansible-flow/hub
+ExecStart=/usr/local/bin/ansible-flow-mcp hub session
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/ansible-flow/hub
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

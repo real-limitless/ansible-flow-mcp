@@ -1,4 +1,4 @@
-from ansible_flow_mcp.server import main
+from ansible_flow_mcp.cli import main
 
 if __name__ == "__main__":
     main()

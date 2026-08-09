@@ -8,11 +8,48 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable
 
+from ansible_flow_mcp.policy import Role, assert_hosts_allowed, detect_mode, load_enrolled_hosts
 from ansible_flow_mcp.security import SecurityPolicy, load_policy, redact_secrets
 
 RunFn = Callable[[list[str], dict[str, str], float], tuple[int, str, str]]
 
 MAX_PLAYBOOK_BYTES = 2_000_000
+
+
+def _resolve_inventory_and_hosts(
+    *,
+    hosts: str,
+    inventory: str | None,
+) -> tuple[str, str | None, Role, bool]:
+    """Apply hub/spoke policy. Returns (hosts, inventory, role, host_key_checking)."""
+    mode = detect_mode()
+    role = mode.role
+    host_key_checking = True
+
+    if role == Role.SPOKE:
+        hosts_n = assert_hosts_allowed(hosts or "localhost", enrolled=set(), role=role)
+        # spokes never accept client inventory
+        return hosts_n, None, role, host_key_checking
+
+    if role == Role.HUB:
+        if mode.hub_path is None:
+            raise ValueError("hub mode detected but hub path missing")
+        inv_path = mode.hub_path / "inventory.yml"
+        if not inv_path.is_file():
+            raise ValueError(f"hub inventory missing: {inv_path}")
+        if inventory is not None and str(inventory).strip() and Path(inventory).resolve() != inv_path.resolve():
+            raise ValueError("hub mode rejects client-supplied inventory; enrollment inventory is fixed")
+        enrolled = load_enrolled_hosts(inv_path)
+        hosts_n = assert_hosts_allowed(hosts or "localhost", enrolled=enrolled, role=role)
+        return hosts_n, str(inv_path), role, True
+
+    # legacy
+    host_key_checking = os.environ.get("ANSIBLE_HOST_KEY_CHECKING", "False").lower() in {
+        "1",
+        "true",
+        "yes",
+    }
+    return (hosts or "localhost").strip() or "localhost", inventory, role, host_key_checking
 
 
 @dataclass
@@ -224,14 +261,22 @@ def run_module(
         "yes",
     }
     if require_check and not check_mode:
-        # Soft policy: still allow, but callers should prefer check first.
-        pass
+        raise ValueError("ANSIBLE_FLOW_REQUIRE_CHECK is set; check_mode=true is required")
+
+    hosts_n, inv, role, hkc = _resolve_inventory_and_hosts(
+        hosts=hosts,
+        inventory=inventory if inventory is not None else os.environ.get("ANSIBLE_FLOW_INVENTORY"),
+    )
+
+    # hub mode: never fall back to env inventory override past fixed path
+    if role != Role.HUB and inv is None:
+        inv = os.environ.get("ANSIBLE_FLOW_INVENTORY")
 
     argv = build_ansible_argv(
         module=fqcn,
-        hosts=hosts,
+        hosts=hosts_n,
         args=args,
-        inventory=inventory or os.environ.get("ANSIBLE_FLOW_INVENTORY"),
+        inventory=inv,
         check_mode=check_mode,
         become=become,
         become_user=become_user,
@@ -244,7 +289,17 @@ def run_module(
     env.setdefault("ANSIBLE_STDOUT_CALLBACK", "ansible.posix.json")
     env.setdefault("ANSIBLE_LOAD_CALLBACK_PLUGINS", "1")
     env.setdefault("ANSIBLE_RETRY_FILES_ENABLED", "False")
-    env.setdefault("ANSIBLE_HOST_KEY_CHECKING", "False")
+    if role in {Role.HUB, Role.SPOKE}:
+        env["ANSIBLE_HOST_KEY_CHECKING"] = "True" if hkc else "False"
+        if role == Role.HUB:
+            mode = detect_mode()
+            if mode.hub_path is not None:
+                env.setdefault("ANSIBLE_PRIVATE_KEY_FILE", str(mode.hub_path / "keys" / "ansible_client"))
+                kh = mode.hub_path / "known_hosts"
+                if kh.is_file():
+                    env.setdefault("ANSIBLE_SSH_ARGS", f"-o UserKnownHostsFile={kh} -o IdentitiesOnly=yes")
+    else:
+        env.setdefault("ANSIBLE_HOST_KEY_CHECKING", "False")
     # Avoid interactive prompts
     env.setdefault("ANSIBLE_DEPRECATION_WARNINGS", "False")
 
@@ -259,7 +314,7 @@ def run_module(
     if not host_results and code != 0:
         host_results = [
             HostResult(
-                host=(hosts or "localhost").split(",")[0].strip() or "localhost",
+                host=(hosts_n or "localhost").split(",")[0].strip() or "localhost",
                 ok=False,
                 changed=False,
                 failed=True,
@@ -430,9 +485,28 @@ def run_playbook(
             )
             os.chmod(vars_path, 0o600)
 
+        require_check = os.environ.get("ANSIBLE_FLOW_REQUIRE_CHECK", "").lower() in {
+            "1",
+            "true",
+            "yes",
+        }
+        if require_check and not check_mode:
+            raise ValueError("ANSIBLE_FLOW_REQUIRE_CHECK is set; check_mode=true is required")
+
+        hosts_for_gate = (limit or "localhost").strip() or "localhost"
+        _hosts_n, inv, role, hkc = _resolve_inventory_and_hosts(
+            hosts=hosts_for_gate,
+            inventory=inventory if inventory is not None else os.environ.get("ANSIBLE_FLOW_INVENTORY"),
+        )
+        if role == Role.SPOKE and limit and limit not in {"localhost", "127.0.0.1"}:
+            raise ValueError("spoke mode allows limit=localhost only")
+
+        if role != Role.HUB and inv is None:
+            inv = os.environ.get("ANSIBLE_FLOW_INVENTORY")
+
         argv = build_playbook_argv(
             playbook=str(path),
-            inventory=inventory or os.environ.get("ANSIBLE_FLOW_INVENTORY"),
+            inventory=inv,
             check_mode=check_mode,
             become=become,
             become_user=become_user,
@@ -446,7 +520,23 @@ def run_playbook(
         env.setdefault("ANSIBLE_STDOUT_CALLBACK", "ansible.posix.json")
         env.setdefault("ANSIBLE_LOAD_CALLBACK_PLUGINS", "1")
         env.setdefault("ANSIBLE_RETRY_FILES_ENABLED", "False")
-        env.setdefault("ANSIBLE_HOST_KEY_CHECKING", "False")
+        if role in {Role.HUB, Role.SPOKE}:
+            env["ANSIBLE_HOST_KEY_CHECKING"] = "True" if hkc else "False"
+            if role == Role.HUB:
+                mode = detect_mode()
+                if mode.hub_path is not None:
+                    env.setdefault(
+                        "ANSIBLE_PRIVATE_KEY_FILE",
+                        str(mode.hub_path / "keys" / "ansible_client"),
+                    )
+                    kh = mode.hub_path / "known_hosts"
+                    if kh.is_file():
+                        env.setdefault(
+                            "ANSIBLE_SSH_ARGS",
+                            f"-o UserKnownHostsFile={kh} -o IdentitiesOnly=yes",
+                        )
+        else:
+            env.setdefault("ANSIBLE_HOST_KEY_CHECKING", "False")
         env.setdefault("ANSIBLE_DEPRECATION_WARNINGS", "False")
 
         t = float(timeout if timeout is not None else os.environ.get("ANSIBLE_FLOW_TIMEOUT", "300"))
