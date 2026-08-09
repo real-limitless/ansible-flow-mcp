@@ -40,8 +40,9 @@ services:
       VERSION: ${WIN_CLIENT_VERSION:-11}
       HOST: win-client
     volumes:
-      - ./windows/client:/storage
-      - ./windows/oem-client:/oem
+      # :Z for SELinux (Podman/Fedora) — dockur requires writable /storage
+      - ./windows/client:/storage:Z
+      - ./windows/oem-client:/oem:Z
     ports:
       - "127.0.0.1:8006:8006"
       - "127.0.0.1:3389:3389/tcp"
@@ -57,8 +58,8 @@ services:
       VERSION: ${WIN_SERVER_VERSION:-2022}
       HOST: win-server
     volumes:
-      - ./windows/server:/storage
-      - ./windows/oem-server:/oem
+      - ./windows/server:/storage:Z
+      - ./windows/oem-server:/oem:Z
     ports:
       - "127.0.0.1:8007:8006"
       - "127.0.0.1:3390:3389/tcp"
