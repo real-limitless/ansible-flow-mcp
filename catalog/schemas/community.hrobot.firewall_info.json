@@ -1,0 +1,96 @@
+{
+  "fqcn": "community.hrobot.firewall_info",
+  "shortDescription": "Manage Hetzner's dedicated server firewall",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/hrobot/firewall_info_module.html",
+  "options": [
+    {
+      "name": "hetzner_password",
+      "displayName": "Hetzner Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password for the Robot web-service user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hetzner_user",
+      "displayName": "Hetzner User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username for the Robot web-service user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rate_limit_retry_timeout",
+      "displayName": "Rate Limit Retry Timeout",
+      "type": "number",
+      "required": false,
+      "default": -1,
+      "description": "Timeout (in seconds) for waiting when rate limit exceeded errors are returned. Set to V(0) to not retry. Set to a negative value like V(-1) to retry forever.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_ip",
+      "displayName": "Server Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The server's main IP address. Exactly one of O(server_ip) and O(server_number) must be specified. Note that Hetzner deprecated identifying the server's firewall by the server's main IP. Using this option can thus stop working at any time in the future. Use O(server_number) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_number",
+      "displayName": "Server Number",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The server's number. Exactly one of O(server_ip) and O(server_number) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "Timeout (in seconds) for waiting for firewall to be configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_delay",
+      "displayName": "Wait Delay",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Delay to wait (in seconds) before checking again whether the firewall has been configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_configured",
+      "displayName": "Wait For Configured",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to wait until the firewall has been successfully configured before returning from the module. The API returns status C(in progress) when the firewall is currently being configured. If this happens, the module will try again until the status changes to C(active) or C(disabled). Please note that there is a request limit. If you have to do multiple updates, it can be better to disable waiting, and regularly use M(community.hrobot.firewall_info) to query status.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

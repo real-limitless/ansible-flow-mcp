@@ -1,0 +1,183 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_vcmp_guest",
+  "shortDescription": "Manages vCMP guests on a BIG-IP",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_vcmp_guest_module.html",
+  "options": [
+    {
+      "name": "allowed_slots",
+      "displayName": "Allowed Slots",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Contains those slots to which the guest is allowed to be assigned. When the host determines which slots this guest should be assigned, only slots in this list are considered. This is a good way to force guests to be assigned only to particular slots, or, by configuring disjoint C(allowed_slots) on two guests, that those guests are never assigned to the same slot. By default, this list includes every available slot in the cluster. This means the guest may be assigned to any slot by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cores_per_slot",
+      "displayName": "Cores Per Slot",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of cores the system allocates to the guest. Each core represents a portion of CPU and memory. Therefore, the amount of memory allocated per core is directly tied to the amount of CPU. This amount of memory varies per hardware platform type. The number you can specify depends on the type of hardware you have. In the event of a reboot, the system persists the guest to the same slot on which it ran prior to the reboot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_virtual_disk",
+      "displayName": "Delete Virtual Disk",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When C(state) is C(absent), the system additionally deletes the virtual disk associated with the vCMP guest. By default, this value is C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initial_hotfix",
+      "displayName": "Initial Hotfix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the hotfix ISO image file which is applied on top of the base image.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initial_image",
+      "displayName": "Initial Image",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the base software release ISO image file for installing the TMOS hypervisor instance and any licensed BIG-IP modules onto the guest's virtual disk. When creating a new guest, this parameter is required. Ensure this image is present on the VCMP host and not only on the VCMP guest. Also, the file reference for this image should be the one present on the host and not on the guest.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mgmt_address",
+      "displayName": "Mgmt Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the IP address and subnet or subnet mask you use to access the guest when you want to manage a module running within the guest. This parameter is required if the C(mgmt_network) parameter is C(bridged). When creating a new guest, if you do not specify a network or network mask, a default of C(/24) (C(255.255.255.0)) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mgmt_network",
+      "displayName": "Mgmt Network",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the method by which the management address is used in the vCMP guest. When C(bridged), specifies the guest can communicate with the vCMP host's management network. When C(isolated), specifies the guest is isolated from the vCMP host's management network. In this case, the only way a guest can communicate with the vCMP host is through the console port or through a self IP address on the guest that allows traffic through port 22. When C(host only), prevents the guest from installing imag",
+      "choices": [
+        "bridged",
+        "isolated",
+        "host only"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mgmt_route",
+      "displayName": "Mgmt Route",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the gateway address for the C(mgmt_address). If this value is not specified when creating a new guest, it is set to C(none). The value C(none) can be used during an update to remove this value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_number_of_slots",
+      "displayName": "Min Number Of Slots",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the minimum number of slots the guest must be assigned to in order to deploy. This field dictates the number of slots to which the guest must be assigned. At the end of any allocation attempt, if the guest is not assigned to at least this many slots, the attempt fails and the change that initiated it is reverted. A guest's C(min_number_of_slots) value cannot be greater than its C(number_of_slots).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the vCMP guest to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "number_of_slots",
+      "displayName": "Number Of Slots",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of slots for the system to use when creating the guest. This value dictates how many cores a guest is allocated from each slot to which it is assigned. Possible values are dependent on the type of blades being used in this cluster. The default value depends on the type of blades being used in this cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the vCMP guest on the system. Each state implies the actions of all states before it. When C(configured), guarantees the vCMP guest exists with the provided attributes. Additionally, ensures the vCMP guest is turned off. When C(disabled), behaves the same way as C(configured), it is just a more user-friendly name. When C(provisioned), ensures the guest is created and installed. This state does not start the guest; use C(deployed) for that purpose. This state is one step beyond C(pre",
+      "choices": [
+        "configured",
+        "disabled",
+        "provisioned",
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlans",
+      "displayName": "Vlans",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "VLANs the guest uses to communicate with other guests, the host, and with the external network. The available VLANs in the list are those that are currently configured on the vCMP host. The order of these VLANs is not important and is ignored. This module orders the VLANs automatically. Therefore, if you deliberately re-order them in subsequent tasks, this module does B(not) register a change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

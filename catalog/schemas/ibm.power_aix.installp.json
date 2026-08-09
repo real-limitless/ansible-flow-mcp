@@ -1,0 +1,186 @@
+{
+  "fqcn": "ibm.power_aix.installp",
+  "shortDescription": "Installs and updates software.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/installp_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "apply",
+      "description": "Controls what is performed. C(apply) to install with apply. C(commit) to commit applied updates. C(reject) to reject applied updates. C(deinstall) to deinstall (remove) installed software. C(cleanup) to clean up a failed installation. C(list) to list all installable software on media. C(list_fixes) to obtain a list of the Authorized Program Analysis Report (APAR) numbers and summaries. C(list_applied) to list all software products and updates that have been applied but not committed.",
+      "choices": [
+        "apply",
+        "commit",
+        "reject",
+        "deinstall",
+        "cleanup",
+        "list",
+        "list_fixes",
+        "list_applied"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "agree_licenses",
+      "displayName": "Agree Licenses",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Agrees to required software license agreements for software to be installed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "base_only",
+      "displayName": "Base Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Limits the requested action to base level filesets. Base level filesets can be used to install software, reinstall existing fileset or downlevel existing filesets. Some fileset do not have a base level version of the software, come preloaded on the system and cannot be force overwritten or reinstalled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bosboot",
+      "displayName": "Bosboot",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Performs a bosboot in the event that creating the boot image is needed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "commit",
+      "displayName": "Commit",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Commits all specified updates that are currently applied but not committed. When an update is committed all other software products it is dependent on must also be committed. If the requisite software products are not in the committed state, the commit fails and error messages are displayed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_image",
+      "displayName": "Delete Image",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Deletes the installation image file after the software product or update has been successfully installed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dependencies",
+      "displayName": "Dependencies",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Automatically installs any software products or updates that are requisites of the specified software product. Automatically removes or rejects dependents of the specified software. It causes the newest update to be installed for a given fileset, when there are multiple superseding updates for the same fileset on the installation media.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device",
+      "displayName": "Device",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the device or directory that contains the installation images.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extend_fs",
+      "displayName": "Extend Fs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Attempts to resize any file systems where there is insufficient space to do the installation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Forces the installation of a software product even if there exists a previously installed version of the software product that is the same as or newer than the version currently being installed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "install_list",
+      "displayName": "Install List",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Lists the software products to install. One can specify either an entire software product or any separately installable filesets within the software product. This can be used to specify the name of a fileset or fileset update. A specific level of the software can be provided using the following format 'fileset:level'. It indicates the level of the software product or update that is to be installed and is of the form vv.rr.mmmm.ffff. If a fileset update has an additional fix ID (also know as ptf ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parts",
+      "displayName": "Parts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Installs the specified part of the software product. C(root) C(share) C(usr) When not specified, all parts of software are installed by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "platform",
+      "displayName": "Platform",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "description": "Specifies the platform. C(POWER) specifies POWER processor-based platform packages only. C(neutral) specifies neutral packages, that is, packages that are not restricted to the POWER processor-based platform. C(all) specifies all packages.",
+      "choices": [
+        "POWER",
+        "neutral",
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save",
+      "displayName": "Save",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Saves existing files that are replaced when installing or updating. When I(save=no) and there is a failure in the system during the installation, then no recovery of replaced files is performed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "updates_only",
+      "displayName": "Updates Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates that the requested action should be limited to software updates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

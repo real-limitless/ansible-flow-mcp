@@ -2,6 +2,162 @@
   "fqcn": "ansible.windows.win_dns_record",
   "shortDescription": "Manage Windows Server DNS records",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_dns_record_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "aging",
+      "displayName": "Aging",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Should aging be activated for the record. If set to C(false), the record will be static.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_update_any",
+      "displayName": "Allow Update Any",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies if any authenticated user can update the record. If set to C(true), any authenticated user can update the record. If set to C(false), only the account that created the record or accounts with appropriate permissions can update it. For non-SRV records, this was previously hardcoded to C(true). Since C(ansible.windows>=3.5.0) it now defaults to C(false) to ensure records are secure by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "computer_name",
+      "displayName": "Computer Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a DNS server. You can specify an IP address or any value that resolves to an IP address, such as a fully qualified domain name (FQDN), host name, or NETBIOS name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the record.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port number of the record. Required when C(type=SRV). Supported only for C(type=SRV).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The priority number for each service in SRV record. Required when C(type=SRV). Supported only for C(type=SRV).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the record should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttl",
+      "displayName": "Ttl",
+      "type": "number",
+      "required": false,
+      "default": 3600,
+      "description": "The \"time to live\" of the record, in seconds. Ignored when C(state=absent). Valid range is 1 - 31557600. Note that an Active Directory forest can specify a minimum TTL, and will dynamically \"round up\" other values to that minimum.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of DNS record to manage. C(SRV) was added in the 1.0.0 release of this collection. C(NS) was added in the 1.1.0 release of this collection. C(TXT) was added in the 1.6.0 release of this collection. C(DHCID) was added in the 1.12.0 release of this collection.",
+      "choices": [
+        "A",
+        "AAAA",
+        "CNAME",
+        "DHCID",
+        "NS",
+        "PTR",
+        "SRV",
+        "TXT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "value",
+      "displayName": "Value",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The value(s) to specify. Required when C(state=present). When C(type=PTR) only the partial part of the IP should be given. Multiple values can be passed when C(type=NS)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "weight",
+      "displayName": "Weight",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Weightage given to each service record in SRV record. Required when C(type=SRV). Supported only for C(type=SRV).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone",
+      "displayName": "Zone",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the zone to manage (eg C(example.com)). The zone must already exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone_scope",
+      "displayName": "Zone Scope",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the zone scope to manage (eg C(ScopeAZ)). The zone must already exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

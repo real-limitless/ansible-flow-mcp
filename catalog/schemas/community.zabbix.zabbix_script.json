@@ -2,6 +2,364 @@
   "fqcn": "community.zabbix.zabbix_script",
   "shortDescription": "Create/update/delete Zabbix scripts",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/zabbix/zabbix_script_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "authtype",
+      "displayName": "Authtype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication method used for SSH script type. Used if type is C(ssh).",
+      "choices": [
+        "password",
+        "public_key"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Command to run. Required when state is 'present'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "confirmation",
+      "displayName": "Confirmation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Confirmation pop up text. The pop up will appear when trying to run the script from the Zabbix frontend. Used if scope is C(manual_host_action) or C(manual_event_action).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the script.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "execute_on",
+      "displayName": "Execute On",
+      "type": "string",
+      "required": false,
+      "default": "zabbix_server_proxy",
+      "description": "Where to run the script. Used if type is C(script).",
+      "choices": [
+        "zabbix_agent",
+        "zabbix_server",
+        "zabbix_server_proxy"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_access",
+      "displayName": "Host Access",
+      "type": "string",
+      "required": false,
+      "default": "read",
+      "description": "Host permissions needed to run the script. Used if scope is C(manual_host_action) or C(manual_event_action).",
+      "choices": [
+        "read",
+        "write"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_group",
+      "displayName": "Host Group",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "description": "host group name that the script can be run on. If set to \"all\", the script will be available on all host groups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_password",
+      "displayName": "Http Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_user",
+      "displayName": "Http Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth login",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "menu_path",
+      "displayName": "Menu Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Folders separated by slash that form a menu like navigation in frontend when clicked on host or event. Used if scope is C(manual_host_action) or C(manual_event_action).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the script.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_window",
+      "displayName": "New Window",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Should URL be opened in a new window? Only available if script_type is C(url)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parameters",
+      "displayName": "Parameters",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of webhook input parameters. Used if type is C(webhook).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password used for SSH scripts with password authentication and Telnet scripts. Used if type is C(ssh) and authtype is C(password) or type is C(telnet).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Port number used for SSH and Telnet scripts. Used if type is C(ssh) or C(telnet).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey",
+      "displayName": "Privatekey",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the private key file used for SSH scripts with public key authentication. Used if type is C(ssh) and authtype is C(public_key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "publickey",
+      "displayName": "Publickey",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the public key file used for SSH scripts with public key authentication. Used if type is C(ssh) and authtype is C(public_key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scope",
+      "displayName": "Scope",
+      "type": "string",
+      "required": false,
+      "default": "action_operation",
+      "description": "Script scope.",
+      "choices": [
+        "action_operation",
+        "manual_host_action",
+        "manual_event_action"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "script_timeout",
+      "displayName": "Script Timeout",
+      "type": "string",
+      "required": false,
+      "default": "30s",
+      "description": "Webhook script execution timeout in seconds. Time suffixes are supported, e.g. 30s, 1m. Required if type is C(webhook). Possible values: 1-60s.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "script_type",
+      "displayName": "Script Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Script type. Required when state is 'present'. A value of 'url' is only available in 7.0 or later",
+      "choices": [
+        "script",
+        "ipmi",
+        "ssh",
+        "telnet",
+        "webhook",
+        "url"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the script.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL for quick access Required if script_type is C(url) Only available if script_type is C(url)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_group",
+      "displayName": "User Group",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "description": "user group name that will be allowed to run the script. If set to \"all\", the script will be available for all user groups. Used if scope is C(manual_host_action) or C(manual_event_action).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_input_default_input",
+      "displayName": "User Input Default Input",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default user input Available if user_input_type is C(regex) Available for Zabbix >= 7.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_input_enabled",
+      "displayName": "User Input Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allow advanced user input configuration Available for Zabbix >= 7.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_input_list",
+      "displayName": "User Input List",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of possible choices for the user. Required if user_input_type is C(dropdown). NOTE the first option will be the default. Available for Zabbix >= 7.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_input_prompt",
+      "displayName": "User Input Prompt",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Prompt to display when user input is enabled Required when user_input_enabled is C(True) Available for Zabbix >= 7.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_input_regex",
+      "displayName": "User Input Regex",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A regular expression to validate user input Required if user_input_type is C(regex) Available for Zabbix >= 7.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_input_type",
+      "displayName": "User Input Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Choosing 'regex' allows the use of a regular expression Choosing 'dropdown' allows a pre-defined list of choices Required if user_input_enabled is C(true) Available for Zabbix >= 7.0.",
+      "choices": [
+        "regex",
+        "dropdown"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User name used for authentication. Used if type is C(ssh) or C(telnet)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

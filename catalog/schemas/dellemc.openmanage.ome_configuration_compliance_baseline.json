@@ -1,0 +1,255 @@
+{
+  "fqcn": "dellemc.openmanage.ome_configuration_compliance_baseline",
+  "shortDescription": "Create, modify, and delete a configuration compliance baseline and remediate non-compliant devices on OpenManage Enterprise",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/ome_configuration_compliance_baseline_module.html",
+  "options": [
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": false,
+      "default": "create",
+      "description": "C(create) creates a configuration baseline from an existing compliance template.C(create) supports C(check_mode) or idempotency checking for only I(names). C(modify) modifies an existing baseline.Only I(names), I(description), I(device_ids), I(device_service_tags), and I(device_group_names) can be modified I(WARNING) When a baseline is modified, the provided I(device_ids), I(device_group_names), and I(device_service_tags) replaces the devices previously present in the baseline. C(delete) deletes",
+      "choices": [
+        "create",
+        "modify",
+        "delete",
+        "remediate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cron",
+      "displayName": "Cron",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a cron expression based on Quartz cron format. Time format is \"%S %M %H %d %m ? %Y\". This is applicable when I(run_later) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the compliance baseline. This option is applicable when I(command) is C(create), or C(modify).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_group_names",
+      "displayName": "Device Group Names",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Name of the target device group. This option is applicable when I(command) is C(create), or C(modify) and is mutually exclusive with I(device_ids) and I(device_service_tag).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_ids",
+      "displayName": "Device Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "IDs of the target devices. This option is applicable when I(command) is C(create), C(modify), or C(remediate), and is mutually exclusive with I(device_service_tag) and I(device_group_names).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_service_tags",
+      "displayName": "Device Service Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Service tag of the target device. This option is applicable when I(command) is C(create), C(modify), or C(remediate) and is mutually exclusive with I(device_ids) and I(device_group_names).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "OpenManage Enterprise IP address or hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Provides the option to wait for job completion. This option is applicable when I(command) is C(create), C(modify), or C(remediate).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10800,
+      "description": "The maximum wait time of I(job_wait) in seconds.The job will only be tracked for this duration. This option is applicable when I(job_wait) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "names",
+      "displayName": "Names",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Name(s) of the configuration compliance baseline. This option is applicable when I(command) is C(create), C(modify), or C(delete). Provide the list of configuration compliance baselines names that are supported when I(command) is C(delete).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_name",
+      "displayName": "New Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "New name of the compliance baseline to be modified. This option is applicable when I(command) is C(modify).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OpenManage Enterprise password. If the password is not provided, then the environment variable E(OME_PASSWORD) is used. Example: export OME_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "OpenManage Enterprise HTTPS port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "run_later",
+      "displayName": "Run Later",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether to remediate immediately or in the future. This is applicable when I(command) is C(remediate). If I(run_later) is C(true), then I(staged_at_reboot) is ignored. If I(run_later) is C(true), then I(job_wait) is not applicable. If I(run_later) is C(true), then I(cron) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "staged_at_reboot",
+      "displayName": "Staged At Reboot",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether remediate has to be executed on next reboot. If I(staged_at_reboot) is C(true), then remediation will occur during the next reboot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_id",
+      "displayName": "Template Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the deployment template to be used for creating a compliance baseline. This option is applicable when I(command) is C(create) and is mutually exclusive with I(template_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_name",
+      "displayName": "Template Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the compliance template for creating the compliance baseline(s). Name of the deployment template to be used for creating a compliance baseline. This option is applicable when I(command) is C(create) and is mutually exclusive with I(template_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OpenManage Enterprise username. If the username is not provided, then the environment variable E(OME_USERNAME) is used. Example: export OME_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(OME_X_AUTH_TOKEN) is used. Example: export OME_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

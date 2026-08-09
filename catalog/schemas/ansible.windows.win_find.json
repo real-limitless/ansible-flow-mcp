@@ -2,6 +2,175 @@
   "fqcn": "ansible.windows.win_find",
   "shortDescription": "Return a list of files based on specific criteria",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_find_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "age",
+      "displayName": "Age",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Select files or folders whose age is equal to or greater than the specified time. Use a negative age to find files equal to or less than the specified time. You can choose seconds, minutes, hours, days or weeks by specifying the first letter of an of those words (for example, \"2s\", \"10d\", 1w\").",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "age_stamp",
+      "displayName": "Age Stamp",
+      "type": "string",
+      "required": false,
+      "default": "mtime",
+      "description": "Choose the file property against which we compare C(age). The default attribute we compare with is the last modification time.",
+      "choices": [
+        "atime",
+        "ctime",
+        "mtime"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "case_sensitive",
+      "displayName": "Case Sensitive",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Make case-sensitive string comparisons for the filename match. Set C(use_regex) to V(true) to make this work.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum_algorithm",
+      "displayName": "Checksum Algorithm",
+      "type": "string",
+      "required": false,
+      "default": "sha1",
+      "description": "Algorithm to determine the checksum of a file. Will throw an error if the host is unable to use specified algorithm.",
+      "choices": [
+        "md5",
+        "sha1",
+        "sha256",
+        "sha384",
+        "sha512"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "depth",
+      "displayName": "Depth",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Set the maximum number of levels to descend into. Setting recurse to C(false) will override this value, which is effectively depth 1. Default depth is unlimited.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_type",
+      "displayName": "File Type",
+      "type": "string",
+      "required": false,
+      "default": "file",
+      "description": "Type of file to search for. Specify V(any) to find both file and directory. Added in version 3.2.0.",
+      "choices": [
+        "directory",
+        "file",
+        "any"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "follow",
+      "displayName": "Follow",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set this to C(true) to follow symlinks in the path. This needs to be used in conjunction with C(recurse).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "get_checksum",
+      "displayName": "Get Checksum",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to return a checksum of the file in the return info (default sha1), use C(checksum_algorithm) to change from the default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hidden",
+      "displayName": "Hidden",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set this to include hidden files or folders.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "paths",
+      "displayName": "Paths",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "List of paths of directories to search for files or folders in. This can be supplied as a single path or a list of paths.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "patterns",
+      "displayName": "Patterns",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "One or more (powershell or regex) patterns to compare filenames with. The type of pattern matching is controlled by C(use_regex) option. The patterns restrict the list of files or folders to be returned based on the filenames. For a file to be matched it only has to match with one pattern in a list provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recurse",
+      "displayName": "Recurse",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Will recursively descend into the directory looking for files or folders.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Select files or folders whose size is equal to or greater than the specified size. Use a negative value to find files equal to or less than the specified size. You can specify the size with a suffix of the byte type i.e. kilo = k, mega = m... Size is not evaluated for symbolic links.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_regex",
+      "displayName": "Use Regex",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Will set patterns to run as a regex check if set to C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

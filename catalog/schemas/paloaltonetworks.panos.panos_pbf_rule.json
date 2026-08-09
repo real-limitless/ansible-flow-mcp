@@ -1,0 +1,507 @@
+{
+  "fqcn": "paloaltonetworks.panos.panos_pbf_rule",
+  "shortDescription": "Manage Policy Based Forwarding rules on PAN-OS.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/paloaltonetworks/panos/panos_pbf_rule_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "forward",
+      "description": "The action to take.",
+      "choices": [
+        "forward",
+        "forward-to-vsys",
+        "discard",
+        "no-pbf"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "B(Deprecated) Use I(provider) to specify PAN-OS connectivity instead. HORIZONTALLINE The API key to use instead of generating it using I(username) / I(password).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "applications",
+      "displayName": "Applications",
+      "type": "list",
+      "required": false,
+      "default": [
+        "any"
+      ],
+      "description": "List of applications.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "audit_comment",
+      "displayName": "Audit Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Add an audit comment to the rule being defined. This is only applied if there was a change to the rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_addresses",
+      "displayName": "Destination Addresses",
+      "type": "list",
+      "required": false,
+      "default": [
+        "any"
+      ],
+      "description": "List of destination addresses. When referencing predefined EDLs, use config names of the EDLS not their full names. The config names can be found with the CLI... request system external-list show type predefined-ip name <tab> panw-bulletproof-ip-list   panw-bulletproof-ip-list panw-highrisk-ip-list      panw-highrisk-ip-list panw-known-ip-list         panw-known-ip-list panw-torexit-ip-list       panw-torexit-ip-list",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_group",
+      "displayName": "Device Group",
+      "type": "string",
+      "required": false,
+      "default": "shared",
+      "description": "(Panorama only) The device group the operation should target.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disabled",
+      "displayName": "Disabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Disable this rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_enforce_symmetric_return",
+      "displayName": "Enable Enforce Symmetric Return",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set to enforce symmetric return.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "existing_rule",
+      "displayName": "Existing Rule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If I(location=before) or I(location=after), this option specifies an existing rule name.  The rule being managed by this module will be positioned relative to the value of this parameter. Required if I(location=before) or I(location=after).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forward_egress_interface",
+      "displayName": "Forward Egress Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The egress interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forward_monitor_disable_if_unreachable",
+      "displayName": "Forward Monitor Disable If Unreachable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set to disable this rule if nexthop / monitor IP is unreachable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forward_monitor_ip_address",
+      "displayName": "Forward Monitor Ip Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The monitor IP address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forward_monitor_profile",
+      "displayName": "Forward Monitor Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The monitor profile to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forward_next_hop_type",
+      "displayName": "Forward Next Hop Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The next hop type. Leave this as None for a next hop type of 'None'. To specify a next-hop of none, leave this parameter unset.",
+      "choices": [
+        "ip-address",
+        "fqdn"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forward_next_hop_value",
+      "displayName": "Forward Next Hop Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The next hop value if forward next hop type is not None.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forward_vsys",
+      "displayName": "Forward Vsys",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The vsys to forward to if action is set to forward to a vsys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "from_type",
+      "displayName": "From Type",
+      "type": "string",
+      "required": false,
+      "default": "zone",
+      "description": "Source from type.",
+      "choices": [
+        "zone",
+        "interface"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "from_value",
+      "displayName": "From Value",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The source values for the given type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gathered_filter",
+      "displayName": "Gathered Filter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When I(state=gathered). An advanced filtering option to filter results returned from PAN-OS. Refer to the guide discussing I(gathered_filter) for more information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_tag",
+      "displayName": "Group Tag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The group tag.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_address",
+      "displayName": "Ip Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "B(Deprecated) Use I(provider) to specify PAN-OS connectivity instead. HORIZONTALLINE The IP address or hostname of the PAN-OS device being configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location",
+      "displayName": "Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Position to place the rule in.",
+      "choices": [
+        "top",
+        "bottom",
+        "before",
+        "after"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "negate_destination",
+      "displayName": "Negate Destination",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set to negate the destination.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "negate_source",
+      "displayName": "Negate Source",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set to negate the source.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "negate_target",
+      "displayName": "Negate Target",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Applicable for Panorama only. Negate the value for I(target).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "B(Deprecated) Use I(provider) to specify PAN-OS connectivity instead. HORIZONTALLINE The password to use for authentication.  This is ignored if I(api_key) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "B(Deprecated) Use I(provider) to specify PAN-OS connectivity instead. HORIZONTALLINE The port number to connect to the PAN-OS device on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rulebase",
+      "displayName": "Rulebase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The rulebase in which the rule is to exist.  If left unspecified, this defaults to I(rulebase=pre-rulebase) for Panorama.  For NGFW, this is always set to be I(rulebase=rulebase).",
+      "choices": [
+        "pre-rulebase",
+        "rulebase",
+        "post-rulebase"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schedule",
+      "displayName": "Schedule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The schedule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "services",
+      "displayName": "Services",
+      "type": "list",
+      "required": false,
+      "default": [
+        "any"
+      ],
+      "description": "List of services.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_addresses",
+      "displayName": "Source Addresses",
+      "type": "list",
+      "required": false,
+      "default": [
+        "any"
+      ],
+      "description": "List of source IP addresses. When referencing predefined EDLs, use config names of the EDLS not their full names. The config names can be found with the CLI... request system external-list show type predefined-ip name <tab> panw-bulletproof-ip-list   panw-bulletproof-ip-list panw-highrisk-ip-list      panw-highrisk-ip-list panw-known-ip-list         panw-known-ip-list panw-torexit-ip-list       panw-torexit-ip-list",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_users",
+      "displayName": "Source Users",
+      "type": "list",
+      "required": false,
+      "default": [
+        "any"
+      ],
+      "description": "List of source users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state.",
+      "choices": [
+        "present",
+        "absent",
+        "replaced",
+        "merged",
+        "deleted",
+        "gathered"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "symmetric_return_addresses",
+      "displayName": "Symmetric Return Addresses",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of symmetric return addresses.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Applicable for Panorama only. Apply this rule exclusively to the listed firewall serial numbers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "B(Deprecated) Use I(provider) to specify PAN-OS connectivity instead. HORIZONTALLINE The username to use for authentication.  This is ignored if I(api_key) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The rule UUID. Note that this is currently more of a read-only field. Usage of the UUID cannot currently take the place of using the rule name as the primary identifier.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vsys",
+      "displayName": "Vsys",
+      "type": "string",
+      "required": false,
+      "default": "vsys1",
+      "description": "The vsys this object belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

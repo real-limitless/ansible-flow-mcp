@@ -1,0 +1,216 @@
+{
+  "fqcn": "community.proxysql.proxysql_galera_hostgroups",
+  "shortDescription": "Manages galera hostgroups using the proxysql admin interface",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/proxysql/proxysql_galera_hostgroups_module.html",
+  "options": [
+    {
+      "name": "active",
+      "displayName": "Active",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Enabled (1) or disabled (0) defined hostgroup configuration.",
+      "choices": [
+        0,
+        1
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_writer_hostgroup",
+      "displayName": "Backup Writer Hostgroup",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "Id of the hostgroup that will contain all the Galera nodes that are standby writers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Text field that can be used for any purposes defined by the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file",
+      "displayName": "Config File",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Specify a config file from which I(login_user) and I(login_password) are to be read.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "load_to_runtime",
+      "displayName": "Load To Runtime",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Dynamically load config to runtime memory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": "127.0.0.1",
+      "description": "The host used to connect to ProxySQL admin interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password used to authenticate to ProxySQL admin interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": 6032,
+      "description": "The port used to connect to ProxySQL admin interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_unix_socket",
+      "displayName": "Login Unix Socket",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The socket used to connect to ProxySQL admin interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username used to authenticate to ProxySQL admin interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_transactions_behind",
+      "displayName": "Max Transactions Behind",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "maximum number of writesets behind the cluster that ProxySQL should allow before shunning the node to prevent stale reads",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_writers",
+      "displayName": "Max Writers",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "number of Read-Write instances populated in the writer hostgroup",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "offline_hostgroup",
+      "displayName": "Offline Hostgroup",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "Id of the hostgroup all failed nodes will be moved to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reader_hostgroup",
+      "displayName": "Reader Hostgroup",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "Id of the hostgroup that will contain all the Galera nodes that are readers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save_to_disk",
+      "displayName": "Save To Disk",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Save config to sqlite db on disk to persist the configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present) - adds the galera hostgroup, when C(absent) - removes the galera hostgroup.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "writer_hostgroup",
+      "displayName": "Writer Hostgroup",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "Id of the hostgroup that will contain all the Galera nodes that are active writers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "writer_is_also_reader",
+      "displayName": "Writer Is Also Reader",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "writer_is_also_reader - 0 nodes with `read_only=0` will be placed either in the writer_hostgroup and in the backup_writer_hostgroup after a topology change, these will be excluded from the reader_hostgroup writer_is_also_reader - 1 nodes with `read_only=0` will be placed in the writer_hostgroup or backup_writer_hostgroup and are all also placed in reader_hostgroup after a topology change writer_is_also_reader - 2 Only the nodes with `read_only=0` which are placed in the in the backup_writer_host",
+      "choices": [
+        0,
+        1,
+        2
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

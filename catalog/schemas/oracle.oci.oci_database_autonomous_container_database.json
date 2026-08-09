@@ -2,6 +2,558 @@
   "fqcn": "oracle.oci.oci_database_autonomous_container_database",
   "shortDescription": "Manage an AutonomousContainerDatabase resource in Oracle Cloud Infrastructure",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/oracle/oci/oci_database_autonomous_container_database_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the user, on whose behalf, OCI APIs are invoked. If not set, then the value of the OCI_USER_ID environment variable, if any, is used. This option is required if the user is not specified through a configuration file (See C(config_file_location)). To get the user's OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_fingerprint",
+      "displayName": "Api User Fingerprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fingerprint for the key pair being used. If not set, then the value of the OCI_USER_FINGERPRINT environment variable, if any, is used. This option is required if the key fingerprint is not specified through a configuration file (See C(config_file_location)). To get the key pair's fingerprint value please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_file",
+      "displayName": "Api User Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Full path and filename of the private key (in PEM format). If not set, then the value of the OCI_USER_KEY_FILE variable, if any, is used. This option is required if the private key is not specified through a configuration file (See C(config_file_location)). If the key is encrypted with a pass-phrase, the C(api_user_key_pass_phrase) option must also be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_pass_phrase",
+      "displayName": "Api User Key Pass Phrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase used by the key referenced in C(api_user_key_file), if it is encrypted. If not set, then the value of the OCI_USER_KEY_PASS_PHRASE variable, if any, is used. This option is required if the key passphrase is not specified through a configuration file (See C(config_file_location)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_purpose",
+      "displayName": "Auth Purpose",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The auth purpose which can be used in conjunction with 'auth_type=instance_principal'. The default auth_purpose for instance_principal is None.",
+      "choices": [
+        "service_principal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "api_key",
+      "description": "The type of authentication to use for making API requests. By default C(auth_type=\"api_key\") based authentication is performed and the API key (see I(api_user_key_file)) in your config file will be used. If this 'auth_type' module option is not specified, the value of the OCI_ANSIBLE_AUTH_TYPE, if any, is used. Use C(auth_type=\"instance_principal\") to use instance principal based authentication when running ansible playbooks within an OCI compute instance.",
+      "choices": [
+        "api_key",
+        "instance_principal",
+        "instance_obo_user",
+        "resource_principal",
+        "security_token"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autonomous_container_database_id",
+      "displayName": "Autonomous Container Database Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Autonomous Container Database L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm). Required for update using I(state=present) when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is not set. Required for delete using I(state=absent) when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autonomous_exadata_infrastructure_id",
+      "displayName": "Autonomous Exadata Infrastructure Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "**No longer used.** This parameter is no longer used for Autonomous Database on dedicated Exadata infrasture. Specify a `cloudAutonomousVmClusterId` instead. Using this parameter will cause the operation to fail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autonomous_vm_cluster_id",
+      "displayName": "Autonomous Vm Cluster Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the Autonomous VM Cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_config",
+      "displayName": "Backup Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": " This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_bundle",
+      "displayName": "Cert Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full path to a CA certificate bundle to be used for SSL verification. This will override the default CA certificate bundle. If not set, then the value of the OCI_ANSIBLE_CERT_BUNDLE variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud_autonomous_vm_cluster_id",
+      "displayName": "Cloud Autonomous Vm Cluster Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the cloud Autonomous Exadata VM Cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compartment_id",
+      "displayName": "Compartment Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the compartment containing the Autonomous Container Database. Required for create using I(state=present). Required for update when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is set. Required for delete when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file_location",
+      "displayName": "Config File Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to configuration file. If not set then the value of the OCI_CONFIG_FILE environment variable, if any, is used. Otherwise, defaults to ~/.oci/config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_profile_name",
+      "displayName": "Config Profile Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The profile to load from the config file referenced by C(config_file_location). If not set, then the value of the OCI_CONFIG_PROFILE environment variable, if any, is used. Otherwise, defaults to the \"DEFAULT\" profile in C(config_file_location).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_name",
+      "displayName": "Db Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Database name for the Autonomous Container Database. The name must be unique within the Cloud Autonomous VM Cluster, starting with an alphabetic character, followed by 1 to 7 alphanumeric characters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_unique_name",
+      "displayName": "Db Unique Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "**Deprecated.** The `DB_UNIQUE_NAME` value is set by Oracle Cloud Infrastructure.  Do not specify a value for this parameter. Specifying a value for this field will cause Terraform operations to fail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_version",
+      "displayName": "Db Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The base version for the Autonomous Container Database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "defined_tags",
+      "displayName": "Defined Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see L(Resource Tags,https://docs.cloud.oracle.com/Content/General/Concepts/resourcetags.htm). This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The display name for the Autonomous Container Database. Required for create using I(state=present). Required for update, delete when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is set. This parameter is updatable when C(OCI_USE_NAME_AS_IDENTIFIER) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fast_start_fail_over_lag_limit_in_seconds",
+      "displayName": "Fast Start Fail Over Lag Limit In Seconds",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The lag time for my preference based on data loss tolerance in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_create",
+      "displayName": "Force Create",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to attempt non-idempotent creation of a resource. By default, create resource is an idempotent operation, and doesn't create the resource if it already exists. Setting this option to true, forcefully creates a copy of the resource, even if it already exists.This option is mutually exclusive with I(key_by).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "freeform_tags",
+      "displayName": "Freeform Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see L(Resource Tags,https://docs.cloud.oracle.com/Content/General/Concepts/resourcetags.htm). Example: `{\"Department\": \"Finance\"}` This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_automatic_failover_enabled",
+      "displayName": "Is Automatic Failover Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether Automatic Failover is enabled for Autonomous Container Database Dataguard Association",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_by",
+      "displayName": "Key By",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of attributes of this resource which should be used to uniquely identify an instance of the resource. By default, all the attributes of a resource are used to uniquely identify a resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_store_id",
+      "displayName": "Key Store Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the key store of Oracle Vault.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kms_key_id",
+      "displayName": "Kms Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the key container that is used as the master encryption key in database transparent data encryption (TDE) operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kms_key_version_id",
+      "displayName": "Kms Key Version Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the key container version that is used in database transparent data encryption (TDE) operations KMS Key can have multiple key versions. If none is specified, the current key version (latest) of the Key Id is used for the operation. Autonomous Database Serverless does not use key versions, hence is not applicable for Autonomous Database Serverless instances.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maintenance_window_details",
+      "displayName": "Maintenance Window Details",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": " This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "patch_model",
+      "displayName": "Patch Model",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Database Patch model preference. Required for create using I(state=present). This parameter is updatable.",
+      "choices": [
+        "RELEASE_UPDATES",
+        "RELEASE_UPDATE_REVISIONS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_autonomous_container_database_backup_config",
+      "displayName": "Peer Autonomous Container Database Backup Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_autonomous_container_database_compartment_id",
+      "displayName": "Peer Autonomous Container Database Compartment Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the compartment where the standby Autonomous Container Database will be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_autonomous_container_database_display_name",
+      "displayName": "Peer Autonomous Container Database Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The display name for the peer Autonomous Container Database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_autonomous_exadata_infrastructure_id",
+      "displayName": "Peer Autonomous Exadata Infrastructure Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "*No longer used.* This parameter is no longer used for Autonomous Database on dedicated Exadata infrasture. Specify a `peerCloudAutonomousVmClusterId` instead. Using this parameter will cause the operation to fail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_autonomous_vm_cluster_id",
+      "displayName": "Peer Autonomous Vm Cluster Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the peer Autonomous VM cluster for Autonomous Data Guard. Required to enable Data Guard.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_cloud_autonomous_vm_cluster_id",
+      "displayName": "Peer Cloud Autonomous Vm Cluster Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the peer cloud Autonomous Exadata VM Cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_db_unique_name",
+      "displayName": "Peer Db Unique Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "**Deprecated.** The `DB_UNIQUE_NAME` of the peer Autonomous Container Database in a Data Guard association is set by Oracle Cloud Infrastructure. Do not specify a value for this parameter. Specifying a value for this field will cause Terraform operations to fail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protection_mode",
+      "displayName": "Protection Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The protection mode of this Autonomous Data Guard association. For more information, see L(Oracle Data Guard Protection Modes,http://docs.oracle.com/database/122/SBYDB/oracle-data-guard-protection-modes.htm#SBYDB02000) in the Oracle Data Guard documentation.",
+      "choices": [
+        "MAXIMUM_AVAILABILITY",
+        "MAXIMUM_PERFORMANCE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realm_specific_endpoint_template_enabled",
+      "displayName": "Realm Specific Endpoint Template Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable/Disable realm specific endpoint template for service client. By Default, realm specific endpoint template is disabled. If not set, then the value of the OCI_REALM_SPECIFIC_SERVICE_ENDPOINT_TEMPLATE_ENABLED variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle Cloud Infrastructure region to use for all OCI API requests. If not set, then the value of the OCI_REGION variable, if any, is used. This option is required if the region is not specified through a configuration file (See C(config_file_location)). Please refer to U(https://docs.us-phoenix-1.oraclecloud.com/Content/General/Concepts/regions.htm) for more information on OCI regions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_level_agreement_type",
+      "displayName": "Service Level Agreement Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The service level agreement type of the Autonomous Container Database. The default is STANDARD. For an autonomous dataguard Autonomous Container Database, the specified Autonomous Exadata Infrastructure must be associated with a remote Autonomous Exadata Infrastructure.",
+      "choices": [
+        "STANDARD",
+        "AUTONOMOUS_DATAGUARD"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "standby_maintenance_buffer_in_days",
+      "displayName": "Standby Maintenance Buffer In Days",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The scheduling detail for the quarterly maintenance window of the standby Autonomous Container Database. This value represents the number of days before scheduled maintenance of the primary database. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the AutonomousContainerDatabase. Use I(state=present) to create or update an AutonomousContainerDatabase. Use I(state=absent) to delete an AutonomousContainerDatabase.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenancy",
+      "displayName": "Tenancy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OCID of your tenancy. If not set, then the value of the OCI_TENANCY variable, if any, is used. This option is required if the tenancy OCID is not specified through a configuration file (See C(config_file_location)). To get the tenancy OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_id",
+      "displayName": "Vault Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the Oracle Cloud Infrastructure L(vault,https://docs.cloud.oracle.com/Content/KeyManagement/Concepts/keyoverview.htm#concepts). This parameter and `secretId` are required for Customer Managed Keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version_preference",
+      "displayName": "Version Preference",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The next maintenance version preference. This parameter is updatable.",
+      "choices": [
+        "NEXT_RELEASE_UPDATE",
+        "LATEST_RELEASE_UPDATE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to wait for create or delete operation to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Time, in seconds, to wait when I(wait=yes). Defaults to 1200 for most of the services but some services might have a longer wait timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

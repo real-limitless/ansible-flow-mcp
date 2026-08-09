@@ -1,0 +1,265 @@
+{
+  "fqcn": "community.digitalocean.digital_ocean_load_balancer",
+  "shortDescription": "Manage DigitalOcean Load Balancers",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/digitalocean/digital_ocean_load_balancer_module.html",
+  "options": [
+    {
+      "name": "baseurl",
+      "displayName": "Baseurl",
+      "type": "string",
+      "required": false,
+      "default": "https://api.digitalocean.com/v2",
+      "description": "DigitalOcean API base url.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "droplet_ids",
+      "displayName": "Droplet Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "An array containing the IDs of the Droplets assigned to the load balancer. Required when creating load balancers. Mutually exclusive with tag, you can either define tag or droplet_ids but not both.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_backend_keepalive",
+      "displayName": "Enable Backend Keepalive",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_proxy_protocol",
+      "displayName": "Enable Proxy Protocol",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "A boolean value indicating whether PROXY Protocol is in use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forwarding_rules",
+      "displayName": "Forwarding Rules",
+      "type": "list",
+      "required": false,
+      "default": [
+        {
+          "certificate_id": "",
+          "entry_port": 8080,
+          "entry_protocol": "http",
+          "target_port": 8080,
+          "target_protocol": "http",
+          "tls_passthrough": false
+        }
+      ],
+      "description": "An array of objects specifying the forwarding rules for a load balancer. Required when creating load balancers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_check",
+      "displayName": "Health Check",
+      "type": "dict",
+      "required": false,
+      "default": {
+        "check_interval_seconds": 10,
+        "healthy_threshold": 5,
+        "path": "/",
+        "port": 80,
+        "protocol": "http",
+        "response_timeout_seconds": 5,
+        "unhealthy_threshold": 3
+      },
+      "description": "An object specifying health check settings for the load balancer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "A human-readable name for a load balancer instance. Required and must be unique (current API documentation is not up-to-date for this parameter).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oauth_token",
+      "displayName": "Oauth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "DigitalOcean OAuth token. There are several other environment variables which can be used to provide this value. i.e., - C(DO_API_TOKEN), C(DO_API_KEY), C(DO_OAUTH_TOKEN) and C(OAUTH_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project_name",
+      "displayName": "Project Name",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Project to assign the resource to (project name, not UUID). Defaults to the default project of the account (empty string). Currently only supported when creating.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "redirect_http_to_https",
+      "displayName": "Redirect Http To Https",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The slug identifier for the region where the resource will initially be available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": false,
+      "default": "lb-small",
+      "description": "The size of the load balancer. The available sizes are C(lb-small), C(lb-medium), or C(lb-large). You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation. This field has been replaced by the C(size_unit) field for all regions except in C(ams2), C(nyc2), and C(sfo1). Each available load balancer size now equates to the load balancer having a set number of nodes. The formula is C(lb-small) = 1 node, C(lb-medium) = 3 ",
+      "choices": [
+        "lb-small",
+        "lb-medium",
+        "lb-large"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size_unit",
+      "displayName": "Size Unit",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the C(ams2), C(nyc2), or C(sfo1) regions. Use the C(size) field to scale load balancers that reside in these regions. The value must be in the range 1-100.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The usual, C(present) to create, C(absent) to destroy",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sticky_sessions",
+      "displayName": "Sticky Sessions",
+      "type": "dict",
+      "required": false,
+      "default": {
+        "type": "none"
+      },
+      "description": "An object specifying sticky sessions settings for the load balancer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tag",
+      "displayName": "Tag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A tag associated with the droplets that you want to dynamically assign to the load balancer. Required when creating load balancers. Mutually exclusive with droplet_ids, you can either define tag or droplet_ids but not both.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The timeout in seconds used for polling DigitalOcean's API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to C(no), the SSL certificates will not be validated. This should only set to C(no) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vpc_uuid",
+      "displayName": "Vpc Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A string specifying the UUID of the VPC to which the load balancer is assigned. If unspecified, uses the default VPC in the region.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Wait for the Load Balancer to be running before returning.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "How long before wait gives up, in seconds, when creating a Load Balancer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

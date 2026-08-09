@@ -1,7 +1,298 @@
 {
   "fqcn": "community.aws.ecs_taskdefinition",
-  "shortDescription": "A variety of Ansible content to help automate the management of AWS services.",
+  "shortDescription": "register a task definition in ecs",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/aws/ecs_taskdefinition_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS access key ID. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_ACCESS_KEY_ID) or C(AWS_ACCESS_KEY) environment variables may also be used in decreasing order of preference. The I(aws_access_key) and I(profile) options are mutually exclusive. The I(aws_access_key_id) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "arn",
+      "displayName": "Arn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ARN of the task description to delete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_ca_bundle",
+      "displayName": "Aws Ca Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location of a CA Bundle to use when validating SSL certificates. The C(AWS_CA_BUNDLE) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_config",
+      "displayName": "Aws Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary to modify the botocore configuration. Parameters can be found in the AWS documentation U(https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html#botocore.config.Config).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "containers",
+      "displayName": "Containers",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "A list of containers definitions. See U(https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html) for a complete list of parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpu",
+      "displayName": "Cpu",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The number of cpu units used by the task. If I(launch_type=EC2), this field is optional and any value can be used. If I(launch_type=FARGATE), this field is required and you must use one of C(256), C(512), C(1024), C(2048), C(4096).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug_botocore_endpoint_logs",
+      "displayName": "Debug Botocore Endpoint Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use a C(botocore.endpoint) logger to parse the unique (rather than total) C(\"resource:action\") API calls made during a task, outputing the set to the resource_actions key in the task results. Use the C(aws_resource_action) callback to output to total list made during a playbook. The C(ANSIBLE_DEBUG_BOTOCORE_LOGS) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_url",
+      "displayName": "Endpoint Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to connect to instead of the default AWS endpoints.  While this can be used to connection to other AWS-compatible services the amazon.aws and community.aws collections are only tested against AWS. The  C(AWS_URL) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "execution_role_arn",
+      "displayName": "Execution Role Arn",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The Amazon Resource Name (ARN) of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "family",
+      "displayName": "Family",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A Name that would be given to the task definition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_create",
+      "displayName": "Force Create",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Always create new task definition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "launch_type",
+      "displayName": "Launch Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The launch type on which to run your task.",
+      "choices": [
+        "EC2",
+        "FARGATE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "memory",
+      "displayName": "Memory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The amount (in MiB) of memory used by the task. If I(launch_type=EC2), this field is optional and any value can be used. If I(launch_type=FARGATE), this field is required and is limited by the CPU.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_mode",
+      "displayName": "Network Mode",
+      "type": "string",
+      "required": false,
+      "default": "bridge",
+      "description": "The Docker networking mode to use for the containers in the task. Windows containers must use I(network_mode=default), which will utilize docker NAT networking. Setting I(network_mode=default) for a Linux container will use C(bridge) mode.",
+      "choices": [
+        "default",
+        "bridge",
+        "host",
+        "none",
+        "awsvpc"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "placement_constraints",
+      "displayName": "Placement Constraints",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Placement constraint objects to use for the task. You can specify a maximum of 10 constraints per task. Task placement constraints are not supported for tasks run on Fargate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A named AWS profile to use for authentication. See the AWS documentation for more information about named profiles U(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html). The C(AWS_PROFILE) environment variable may also be used. The I(profile) option is mutually exclusive with the I(aws_access_key), I(aws_secret_key) and I(session_token) options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS region to use. For global services such as IAM, Route53 and CloudFront, I(region) is ignored. The C(AWS_REGION) environment variable may also be used. See the Amazon AWS documentation for more information U(http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "revision",
+      "displayName": "Revision",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "A revision number for the task definition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "runtime_platform",
+      "displayName": "Runtime Platform",
+      "type": "dict",
+      "required": false,
+      "default": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+      },
+      "description": "runtime platform configuration for the task",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_key",
+      "displayName": "Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS secret access key. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SECRET_ACCESS_KEY) or C(AWS_SECRET_KEY) environment variables may also be used in decreasing order of preference. The I(secret_key) and I(profile) options are mutually exclusive. The I(aws_secret_access_key) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_token",
+      "displayName": "Session Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS STS session token for use with temporary credentials. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SESSION_TOKEN) environment variable may also be used. The I(session_token) and I(profile) options are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "State whether the task definition should exist or be deleted.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "task_role_arn",
+      "displayName": "Task Role Arn",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When set to C(false), SSL certificates will not be validated for communication with the AWS APIs. Setting I(validate_certs=false) is strongly discouraged, as an alternative, consider setting I(aws_ca_bundle) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volumes",
+      "displayName": "Volumes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of names of volumes to be attached.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

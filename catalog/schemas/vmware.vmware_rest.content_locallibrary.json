@@ -1,0 +1,290 @@
+{
+  "fqcn": "vmware.vmware_rest.content_locallibrary",
+  "shortDescription": "Creates a new local library.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware_rest/content_locallibrary_module.html",
+  "options": [
+    {
+      "name": "client_token",
+      "displayName": "Client Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A unique token generated on the client for each creation request. The token should be a universally unique identifier (UUID), for example: b8a2a2e3-2314-43cd-a871-6ede0f429751. This token can be used to guarantee idempotent creation. If not specified creation is not idempotent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "creation_time",
+      "displayName": "Creation Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The date and time when this library was created. This field is not used for the create operation. It will always be present in the result of the get or list operations. It is not used for the update operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A human-readable description for this library. This field is optional for the create operation. Leaving it unset during creation will result in an empty string value. It will always be present in the result of a get or list operation. It is optional for the update operation. Leaving it unset during update indicates that the description should be left unchanged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An identifier which uniquely identifies this LibraryModel. This field is not used for the create operation. It will not be present in the result of the get or list operations. It is not used for the update operation. When clients pass a value of this structure as a parameter, the field must be the id of a resource returned by M(vmware.vmware_rest.content_library_info). ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "last_modified_time",
+      "displayName": "Last Modified Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The date and time when this library was last updated.   This field is updated automatically when the library properties are changed. This field is not affected by adding, removing, or modifying a library item or its content within the library. Tagging the library or syncing the subscribed library does not alter this field.  This field is not used for the create operation. It will always be present in the result of the get or list operations. It is not used for the update operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "last_sync_time",
+      "displayName": "Last Sync Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The date and time when this library was last synchronized.   This field applies only to subscribed libraries. It is updated every time a synchronization is triggered on the library. The value is unset for a local library.  This field is not used for the create operation. It is optional in the result of the get or list operations. It is not used for the update operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "library_id",
+      "displayName": "Library Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Identifier of the local library to delete. The parameter must be the id of a resource returned by M(vmware.vmware_rest.content_library_info). Required with I(state=['absent', 'present', 'publish'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the library.   A Library is identified by a human-readable name. Library names cannot be undefined or an empty string. Names do not have to be unique.  This field must be provided for the create operation. It will always be present in the result of the get or list operations. It is optional for the update operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "optimization_info",
+      "displayName": "Optimization Info",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Defines various optimizations and optimization parameters applied to this library. This field is optional for the create operation. It is optional in the result of the get or list operations. It is optional for the update operation. Valid attributes are:  - C(optimize_remote_publishing) (bool): If set to true then library would be optimized for remote publishing.   Turn it on if remote publishing is dominant use case for this library. Remote publishing means here that publisher and subscribers a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "publish_info",
+      "displayName": "Publish Info",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Defines how this library is published so that it can be subscribed to by a remote subscribed library.   The PublishInfo defines where and how the metadata for this local library is accessible. A local library is only published publically if PublishInfo.published is true.  This field is optional for the create and update operations. If not specified during creation, the default is for the library to not be published. If not specified during update, the field is left unchanged. Valid attributes ar",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_policy_id",
+      "displayName": "Security Policy Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Represents the security policy applied to this library.   Setting the field will make the library secure. This field is ignored in update operation if LibraryModel.unset-security-policy-id is set to true.  This field is optional for the create and update operations. If not set in create operation, the library will be insecure. If not specified in update operation, the field is left unchanged. When clients pass a value of this structure as a parameter, the field must be the id of a resource retur",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_guid",
+      "displayName": "Server Guid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The unique identifier of the vCenter server where the library exists. This field is optional for the create operation. It will always be present in the result of the get or list operations. It is not used for the update operation. When clients pass a value of this structure as a parameter, the field must be the id of a resource returned by M(vmware.vmware_rest.vcenter_cluster_info). ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_timeout",
+      "displayName": "Session Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Timeout settings for client session.  The maximal number of seconds for the whole operation including connection establishment, request sending and response.  The default value is 300s.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "",
+      "choices": [
+        "absent",
+        "present",
+        "publish"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_backings",
+      "displayName": "Storage Backings",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of default storage backings which are available for this library.   A StorageBacking defines a default storage location which can be used to store files for library items in this library. Some library items, for instance, virtual machine template items, support files that may be distributed across various storage backings. One or more item files may or may not be located on the default storage backing.    Multiple default storage locations are not currently supported but may become supp",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subscription_info",
+      "displayName": "Subscription Info",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Defines the subscription behavior for this Library.   The SubscriptionInfo defines how this subscribed library synchronizes to a remote source. Setting the value will determine the remote source to which the library synchronizes, and how. Changing the subscription will result in synchronizing to a new source. If the new source differs from the old one, the old library items and data will be lost. Setting SubscriptionInfo.automatic-sync-enabled to false will halt subscription but will not remove ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subscriptions",
+      "displayName": "Subscriptions",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of subscriptions to publish this library to. Valid attributes are:  - C(subscription) (str): Identifier of the subscription associated with the subscribed library. When clients pass a value of this structure as a parameter, the field must be the id of a resource returned by M(vmware.vmware_rest.content_library_subscriptions_info). (['publish'])    This key is required with ['publish'].",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The I(library_type) enumerated type defines the type of a LibraryModel.   The type of a library can be used to determine which additional services can be performed with a library.",
+      "choices": [
+        "LOCAL",
+        "SUBSCRIBED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unset_security_policy_id",
+      "displayName": "Unset Security Policy Id",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "This represents the intent of the change to LibraryModel.security-policy-id in update operation.   If this field is set to true, any security policy applied to the library will be removed. If this field is set to false, any security policy applied to library will be changed to the value specified in LibraryModel.security-policy-id, if any.  This field is optional for the update operation. If unset, any existing security policy will be changed to the value specified in LibraryModel.security-polic",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_hostname",
+      "displayName": "Vcenter Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter If the value is not specified in the task, the value of environment variable C(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_password",
+      "displayName": "Vcenter Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter password If the value is not specified in the task, the value of environment variable C(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_rest_log_file",
+      "displayName": "Vcenter Rest Log File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "You can use this optional parameter to set the location of a log file.  This file will be used to record the HTTP REST interaction.  The file will be stored on the host that runs the module.  If the value is not specified in the task, the value of  environment variable C(VMWARE_REST_LOG_FILE) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_username",
+      "displayName": "Vcenter Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter username If the value is not specified in the task, the value of environment variable C(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_validate_certs",
+      "displayName": "Vcenter Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to C(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable C(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A version number which is updated on metadata changes. This value allows clients to detect concurrent updates and prevent accidental clobbering of data.   This value represents a number which is incremented every time library properties, such as name or description, are changed. It is not incremented by changes to a library item within the library, including adding or removing items. It is also not affected by tagging the library.  This field is not used for the create operation. It will always ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,479 @@
   "fqcn": "openstack.cloud.server",
   "shortDescription": "Create/Delete Compute Instances from OpenStack",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/openstack/cloud/server_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "How long should the socket layer wait before timing out for API calls. If this is omitted, nothing will be passed to the requests library.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary containing auth information as needed by the cloud's auth plugin strategy. For the default I(password) plugin, this would contain I(auth_url), I(username), I(password), I(project_name) and any information about domains (for example, I(user_domain_name) or I(project_domain_name)) if the cloud supports them. For other plugins, this param will need to contain whatever parameters that auth plugin requires. This parameter is not needed if a named cloud is provided or OpenStack OS_* environ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the auth plugin to use. If the cloud uses something other than password authentication, the name of the plugin should be indicated here and the contents of the I(auth) parameter should be updated accordingly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_ip",
+      "displayName": "Auto Ip",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Ensure instance has public ip however the cloud wants to do that. For example, the cloud could add a floating ip for the server or attach the server to a public network. Requires I(wait) to be C(True) during server creation. Floating IP support is unstable in this module, use with caution. Options I(auto_ip), I(floating_ip_pools) and I(floating_ips) interact in non-obvious ways and undocumentable depth. For explicit and safe attaching and detaching of floating ip addresses use module I(openstack",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_zone",
+      "displayName": "Availability Zone",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Availability zone in which to create the server. This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_from_volume",
+      "displayName": "Boot From Volume",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Should the instance boot from a persistent volume created based on the image given. Mutually exclusive with boot_volume. This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_volume",
+      "displayName": "Boot Volume",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Volume name or id to use as the volume to boot from. Implies boot_from_volume. Mutually exclusive with image and boot_from_volume. This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a CA Cert bundle that can be used as part of verifying SSL API requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a client certificate to use as part of the SSL transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a client key to use as part of the SSL transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud",
+      "displayName": "Cloud",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Named cloud or cloud config to operate against. If I(cloud) is a string, it references a named cloud config as defined in an OpenStack clouds.yaml file. Provides default values for I(auth) and I(auth_type). This parameter is not needed if I(auth) is provided or if OpenStack OS_* environment variables are present. If I(cloud) is a dict, it contains a complete cloud configuration like would be in a section of clouds.yaml.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_drive",
+      "displayName": "Config Drive",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Whether to boot the server with config drive enabled. This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_ips",
+      "displayName": "Delete Ips",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "When I(state) is C(absent) and this option is true, any floating IP address associated with this server will be deleted along with it. Floating IP support is unstable in this module, use with caution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flavor",
+      "displayName": "Flavor",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name or id of the flavor in which the new instance has to be created. Exactly one of I(flavor) and I(flavor_ram) must be defined when I(state=present). This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flavor_include",
+      "displayName": "Flavor Include",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Text to use to filter flavor names, for the case, such as Rackspace, where there are multiple flavors that have the same ram count. flavor_include is a positive match filter - it must exist in the flavor name. This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flavor_ram",
+      "displayName": "Flavor Ram",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The minimum amount of ram in MB that the flavor in which the new instance has to be created must have. Exactly one of I(flavor) and I(flavor_ram) must be defined when I(state=present). This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "floating_ip_pools",
+      "displayName": "Floating Ip Pools",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Name of floating IP pool from which to choose a floating IP. Requires I(wait) to be C(True) during server creation. Floating IP support is unstable in this module, use with caution. Options I(auto_ip), I(floating_ip_pools) and I(floating_ips) interact in non-obvious ways and undocumentable depth. For explicit and safe attaching and detaching of floating ip addresses use module I(openstack.cloud.resource) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "floating_ips",
+      "displayName": "Floating Ips",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "list of valid floating IPs that pre-exist to assign to this node. Requires I(wait) to be C(True) during server creation. Floating IP support is unstable in this module, use with caution. Options I(auto_ip), I(floating_ip_pools) and I(floating_ips) interact in non-obvious ways and undocumentable depth. For explicit and safe attaching and detaching of floating ip addresses use module I(openstack.cloud.resource) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image",
+      "displayName": "Image",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name or id of the base image to boot. Required when I(boot_from_volume=true). This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_exclude",
+      "displayName": "Image Exclude",
+      "type": "string",
+      "required": false,
+      "default": "(deprecated)",
+      "description": "Text to use to filter image names, for the case, such as HP, where there are multiple image names matching the common identifying portions. image_exclude is a negative match filter - it is text that may not exist in the image name. This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": false,
+      "default": "public",
+      "description": "Endpoint URL type to fetch from the service catalog.",
+      "choices": [
+        "admin",
+        "internal",
+        "public"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_name",
+      "displayName": "Key Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The key pair name to be used when creating a instance. This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "metadata",
+      "displayName": "Metadata",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A list of key value pairs that should be provided as a metadata to the new instance or a string containing a list of key-value pairs. Example:  metadata: \"key1=value1,key2=value2\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name that has to be given to the instance. It is also possible to specify the ID of the instance instead of its name if I(state) is I(absent). This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name or ID of a network to attach this instance to. A simpler version of the I(nics) parameter, only one of I(network) or I(nics) should be supplied. This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nics",
+      "displayName": "Nics",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of networks to which the instance's interface should be attached. Networks may be referenced by net-id/net-name/port-id or port-name. Also this accepts a string containing a list of (net/port)-(id/name) Example: C(nics: \"net-id=uuid-1,port-name=myport\") Only one of I(network) or I(nics) should be supplied. This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region_name",
+      "displayName": "Region Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the region.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reuse_ips",
+      "displayName": "Reuse Ips",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "When I(auto_ip) is true and this option is true, the I(auto_ip) code will attempt to re-use unassigned floating ips in the project before creating a new one. It is important to note that it is impossible to safely do this concurrently, so if your use case involves concurrent server creation, it is highly recommended to set this to false and to delete the floating ip associated with a server when the server is deleted using I(delete_ips). Floating IP support is unstable in this module, use with c",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheduler_hints",
+      "displayName": "Scheduler Hints",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Arbitrary key/value pairs to the scheduler for custom use. This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdk_log_level",
+      "displayName": "Sdk Log Level",
+      "type": "string",
+      "required": false,
+      "default": "INFO",
+      "description": "Log level of the OpenStackSDK",
+      "choices": [
+        "INFO",
+        "DEBUG"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdk_log_path",
+      "displayName": "Sdk Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the logfile of the OpenStackSDK. If empty no log is written",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_groups",
+      "displayName": "Security Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Names or IDs of the security groups to which the instance should be added. On server creation, if I(security_groups) is omitted, the API creates the server in the default security group. On server creation, requested security groups are not applied to pre-existing ports. On update, if I(security_groups) is set, the security groups are applied to all attached ports.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Should the resource be C(present) or C(absent).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of tags should be added to instance",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "terminate_volume",
+      "displayName": "Terminate Volume",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "If C(true), delete volume when deleting the instance and if it has been booted from volume(s). This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "The amount of time the module should wait for the instance to get into active state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "userdata",
+      "displayName": "Userdata",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Opaque blob of data which is made available to the instance. This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not SSL API requests should be verified. Before Ansible 2.3 this defaulted to C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume_size",
+      "displayName": "Volume Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The size of the volume to create in GB if booting from volume based on an image. This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volumes",
+      "displayName": "Volumes",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of preexisting volumes names or ids to attach to the instance This server attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "If the module should wait for the instance to be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

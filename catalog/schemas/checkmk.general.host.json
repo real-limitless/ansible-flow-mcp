@@ -1,0 +1,224 @@
+{
+  "fqcn": "checkmk.general.host",
+  "shortDescription": "Manage hosts in Checkmk",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/checkmk/general/host_module.html",
+  "options": [
+    {
+      "name": "add_nodes",
+      "displayName": "Add Nodes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of nodes to be added as members of the cluster host provided in name. Works only if the existing host was already a cluster host, or entirely new is created. B(Mutually exclusive with I(nodes) and I(remove_nodes).)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_auth_cookie",
+      "displayName": "Api Auth Cookie",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication cookie for the Checkmk session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_auth_type",
+      "displayName": "Api Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "bearer",
+      "description": "Type of authentication to use.",
+      "choices": [
+        "bearer",
+        "basic",
+        "cookie"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_secret",
+      "displayName": "Api Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The secret to authenticate your automation user. If not set the module will fall back to the environment variable C(CHECKMK_VAR_API_SECRET).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The automation user you want to use. It has to be an 'Automation' user, not a normal one. If not set the module will fall back to the environment variable C(CHECKMK_VAR_API_USER).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes of your host as described in the API documentation. B(Attention! This option OVERWRITES all existing attributes!) B(Attention! I(folder) should match the folder where host is residing) If you are using custom tags, make sure to prepend the attribute with C(tag_).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client certificate file for authentication with the web server hosting Checkmk. This is not a Checkmk feature, but one of Ansible and the respective web server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client certificate key file for authentication with the web server hosting Checkmk. This is not a Checkmk feature, but one of Ansible and the respective web server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extended_functionality",
+      "displayName": "Extended Functionality",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allow extended functionality instead of the expected REST API behavior.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder",
+      "displayName": "Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The folder your host is located in. On create it defaults to C(/). B(For existing host, host is moved to the specified folder if different and this procedue is mutualy exclusive with specified I(attributes), I(update_attributes), and I(remove_attributes)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The host you want to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nodes",
+      "displayName": "Nodes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Nodes, members of the cluster host provided in name. B(Mutually exclusive with I(add_nodes) and I(remove_nodes).)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_attributes",
+      "displayName": "Remove Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The remove_attributes of your host as described in the API documentation. B(Attention! I(folder) should match the folder where host is residing) B(If a list of strings is supplied, the listed attributes are removed.) B(If) I(extended_functionality) B(and a dict is supplied, the attributes that exactly match the passed attributes are removed.) This will only remove the given attributes. If you are using custom tags, make sure to prepend the attribute with C(tag_). As of Checkmk 2.2.0p7 and 2.3.0b",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_nodes",
+      "displayName": "Remove Nodes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of nodes to be removes from the cluster host provided in name. B(Mutually exclusive with I(nodes) and I(add_nodes).)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_url",
+      "displayName": "Server Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The base url of your Checkmk server including the protocol but excluding the site. If not set the module will fall back to the environment variable C(CHECKMK_VAR_SERVER_URL).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "site",
+      "displayName": "Site",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The site you want to connect to. This will be appended to the server_url as part of the API request url. If not set the module will fall back to the environment variable C(CHECKMK_VAR_SITE).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of your host.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_attributes",
+      "displayName": "Update Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The update_attributes of your host as described in the API documentation. B(Attention! I(folder) should match the folder where host is residing) This will only update the given attributes. If you are using custom tags, make sure to prepend the attribute with C(tag_).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate the SSL certificate of the Checkmk server. If not set the module will fall back to the environment variable C(CHECKMK_VAR_VALIDATE_CERTS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

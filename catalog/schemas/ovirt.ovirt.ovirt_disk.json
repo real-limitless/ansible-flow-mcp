@@ -1,0 +1,476 @@
+{
+  "fqcn": "ovirt.ovirt.ovirt_disk",
+  "shortDescription": "Module to manage Virtual Machine and floating disks in oVirt/RHV",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ovirt/ovirt/ovirt_disk_module.html",
+  "options": [
+    {
+      "name": "activate",
+      "displayName": "Activate",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "I(True) if the disk should be activated. When creating disk of Virtual Machine it is set to I(True).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Dictionary with values needed to create HTTP/HTTPS connection to oVirt:",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The backup behavior supported by the disk.",
+      "choices": [
+        "incremental"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bootable",
+      "displayName": "Bootable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "I(True) if the disk should be bootable. By default when disk is created it isn't bootable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "content_type",
+      "displayName": "Content Type",
+      "type": "string",
+      "required": false,
+      "default": "data",
+      "description": "Specify if the disk is a data disk or ISO image or a one of a the Hosted Engine disk types The Hosted Engine disk content types are available with Engine 4.3+ and Ansible 2.8",
+      "choices": [
+        "data",
+        "iso",
+        "hosted_engine",
+        "hosted_engine_sanlock",
+        "hosted_engine_metadata",
+        "hosted_engine_configuration"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the disk image to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_image_path",
+      "displayName": "Download Image Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path on a file system where disk should be downloaded. Note that you must have an valid oVirt/RHV engine CA in your system trust store or you must provide it in C(ca_file) parameter. Note that the disk is not downloaded when the file already exists, but you can forcibly download the disk when using C(force) I (true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fetch_nested",
+      "displayName": "Fetch Nested",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If I(True) the module will fetch additional data from the API. It will fetch IDs of the VMs disks, snapshots, etc. User can configure to fetch other attributes of the nested entities by specifying C(nested_attributes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Please take a look at C(image_path) documentation to see the correct usage of this parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "format",
+      "displayName": "Format",
+      "type": "string",
+      "required": false,
+      "default": "cow",
+      "description": "Specify format of the disk. Note that this option isn't idempotent as it's not currently possible to change format of the disk via API.",
+      "choices": [
+        "raw",
+        "cow"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When the hypervisor name is specified the newly created disk or an existing disk will refresh its information about the underlying storage( Disk size, Serial, Product ID, Vendor ID ...) The specified host will be used for gathering the storage related information. This option is only valid for passthrough disks. This option requires at least the logical_unit.id to be specified",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the disk to manage. Either C(id) or C(name)/C(alias) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_provider",
+      "displayName": "Image Provider",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When C(state) is I(exported) disk is exported to given Glance image provider. When C(state) is I(imported) disk is imported from given Glance image provider. C(**IMPORTANT**) There is no reliable way to achieve idempotency, so every time you specify this parameter the disk is exported, so please handle your playbook accordingly to not export the disk all the time. This option is valid only for template disks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Driver of the storage interface. It's required parameter when creating the new disk.",
+      "choices": [
+        "virtio",
+        "ide",
+        "sata",
+        "virtio_scsi"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logical_unit",
+      "displayName": "Logical Unit",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary which describes LUN to be directly attached to VM:",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_workers",
+      "displayName": "Max Workers",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of workers which should be used in the upload/download of the image. The use of multiple workers can speed up the process.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the disk to manage. Either C(id) or C(name)/C(alias) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nested_attributes",
+      "displayName": "Nested Attributes",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specifies list of the attributes which should be fetched from the API. This parameter apply only when C(fetch_nested) is I(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "openstack_volume_type",
+      "displayName": "Openstack Volume Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the openstack volume type. This is valid when working with cinder.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pass_discard",
+      "displayName": "Pass Discard",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Defines whether the Virtual Machine passes discard commands to the storage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "poll_interval",
+      "displayName": "Poll Interval",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Number of the seconds the module waits until another poll request on entity status is sent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Disk profile name to be attached to disk. By default profile is chosen by oVirt/RHV engine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "propagate_errors",
+      "displayName": "Propagate Errors",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates if disk errors should cause Virtual Machine to be paused or if disk errors should be propagated to the the guest operating system instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quota_id",
+      "displayName": "Quota Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Disk quota ID to be used for disk. By default quota is chosen by oVirt/RHV engine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_only",
+      "displayName": "Read Only",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "I(True) if the disk should be read_only. By default when disk is created it isn't read_only.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scsi_passthrough",
+      "displayName": "Scsi Passthrough",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether SCSI passthrough is enable and its policy. Setting a value of `filtered`/`unfiltered` will enable SCSI passthrough for a LUN disk with unprivileged/privileged SCSI I/O. To disable SCSI passthrough the value should be set to `disabled`",
+      "choices": [
+        "disabled",
+        "filtered",
+        "unfiltered"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shareable",
+      "displayName": "Shareable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "I(True) if the disk should be shareable. By default when disk is created it isn't shareable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Size of the disk. Size should be specified using IEC standard units. For example 10GiB, 1024MiB, etc. Size can be only increased, not decreased. If the disk is referenced by C(name) and is attached to a VM, make sure to specify C(vm_name)/C(vm_id) to prevent extension of another disk that is not attached to the VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sparse",
+      "displayName": "Sparse",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "I(True) if the disk should be sparse (also known as I(thin provision)). If the parameter is omitted, cow disks will be created as sparse and raw disks as I(preallocated) Note that this option isn't idempotent as it's not currently possible to change sparseness of the disk via API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sparsify",
+      "displayName": "Sparsify",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "I(True) if the disk should be sparsified. Sparsification frees space in the disk image that is not used by its filesystem. As a result, the image will occupy less space on the storage. Note that this parameter isn't idempotent, as it's not possible to check if the disk should be or should not be sparsified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Should the Virtual Machine disk be present/absent/attached/detached/exported/imported.",
+      "choices": [
+        "present",
+        "absent",
+        "attached",
+        "detached",
+        "exported",
+        "imported"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_domain",
+      "displayName": "Storage Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Storage domain name where disk should be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_domains",
+      "displayName": "Storage Domains",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Storage domain names where disk should be copied. C(**IMPORTANT**) There is no reliable way to achieve idempotency, so every time you specify this parameter the disks are copied, so please handle your playbook accordingly to not copy the disks all the time. This is valid only for VM and floating disks, template disks works as expected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "The amount of time in seconds the module should wait for the instance to get into desired state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "upload_image_path",
+      "displayName": "Upload Image Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to disk image, which should be uploaded. Note if C(size) is not specified the size of the disk will be determined by the size of the specified image. Note that currently we support only compatibility version 0.10 of the qcow disk. Note that you must have an valid oVirt/RHV engine CA in your system trust store or you must provide it in C(ca_file) parameter. Note that there is no reliable way to achieve idempotency, so if you want to upload the disk even if the disk with C(id) or C(name) exis",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uses_scsi_reservation",
+      "displayName": "Uses Scsi Reservation",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Defines whether SCSI reservation is enabled for this disk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_id",
+      "displayName": "Vm Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the Virtual Machine to manage. Either C(vm_id) or C(vm_name) is required if C(state) is I(attached) or I(detached).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name",
+      "displayName": "Vm Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Virtual Machine to manage. Either C(vm_id) or C(vm_name) is required if C(state) is I(attached) or I(detached).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "C(yes) if the module should wait for the entity to get into desired state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wipe_after_delete",
+      "displayName": "Wipe After Delete",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If the disk's Wipe After Delete is enabled, then the disk is first wiped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,379 @@
   "fqcn": "community.zabbix.zabbix_proxy",
   "shortDescription": "Create/delete/get/update Zabbix proxies",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/zabbix/zabbix_proxy_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "address",
+      "displayName": "Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. IP address or DNS name to connect to. Required if the Zabbix proxy operating mode is passive",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allowed_addresses",
+      "displayName": "Allowed Addresses",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Comma-delimited IP addresses or DNS names of active Zabbix proxy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Certificate issuer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_timeouts",
+      "displayName": "Custom Timeouts",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Parameter introduced in Zabbix 7.0. Whether to override global item timeouts on the proxy level. 0 - use global settings; 1 - override timeouts.",
+      "choices": [
+        0,
+        1
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the proxy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_password",
+      "displayName": "Http Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_user",
+      "displayName": "Http Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth login",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Deprecated for Zabbix version >= 7.0. Dictionary with params for the interface when proxy is in passive mode. For more information, review proxy interface documentation at U(https://www.zabbix.com/documentation/current/en/manual/api/reference/proxy/object#proxy-interface).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_address",
+      "displayName": "Local Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Address for active agents. IP address or DNS name to connect to. Required if proxy_groupid is not 0",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_port",
+      "displayName": "Local Port",
+      "type": "string",
+      "required": false,
+      "default": "10051",
+      "description": "Parameter introduced in Zabbix 7.0. Local proxy port number to connect to. Supported if proxy_groupid is not 0",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operating_mode",
+      "displayName": "Operating Mode",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "description": "Parameter introduced in Zabbix 7.0. Type of proxy.",
+      "choices": [
+        "active",
+        "passive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "string",
+      "required": false,
+      "default": "10051",
+      "description": "Parameter introduced in Zabbix 7.0. Port number to connect to. supported if the Zabbix proxy operating mode is passive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_address",
+      "displayName": "Proxy Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Deprecated for Zabbix version >= 7.0. Comma-delimited list of IP/CIDR addresses or DNS names to accept active proxy requests from. Requires I(status=active).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_group",
+      "displayName": "Proxy Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Proxy group name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_name",
+      "displayName": "Proxy Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the proxy in Zabbix.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the proxy. On C(present), it will create if proxy does not exist or update the proxy if the associated data is different. On C(absent) will remove a proxy if it exists.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "description": "Deprecated for Zabbix version >= 7.0. Type of proxy. (4 - active, 5 - passive)",
+      "choices": [
+        "active",
+        "passive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout_browser",
+      "displayName": "Timeout Browser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Spend no more than this number of seconds on browser type checks processing. Accepts seconds or time unit with suffix (e.g., 30s, 1m). Possible values range: 1-600s. Required if if C(custom_timeouts) is set to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout_db_monitor",
+      "displayName": "Timeout Db Monitor",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Spend no more than this number of seconds on DB checks processing. Accepts seconds or time unit with suffix (e.g., 30s, 1m). Possible values range: 1-600s. Required if if C(custom_timeouts) is set to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout_external_check",
+      "displayName": "Timeout External Check",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Spend no more than this number of seconds on external checks processing. Accepts seconds or time unit with suffix (e.g., 30s, 1m). Possible values range: 1-600s. Required if if C(custom_timeouts) is set to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout_http_agent",
+      "displayName": "Timeout Http Agent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Spend no more than this number of seconds on HTTPagent checks processing. Accepts seconds or time unit with suffix (e.g., 30s, 1m). Possible values range: 1-600s. Required if if C(custom_timeouts) is set to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout_script",
+      "displayName": "Timeout Script",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Spend no more than this number of seconds on script type checks processing. Accepts seconds or time unit with suffix (e.g., 30s, 1m). Possible values range: 1-600s. Required if if C(custom_timeouts) is set to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout_simple_check",
+      "displayName": "Timeout Simple Check",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Spend no more than this number of seconds on simple checks processing. Accepts seconds or time unit with suffix (e.g., 30s, 1m). Possible values range: 1-600s. Required if if C(custom_timeouts) is set to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout_snmp_agent",
+      "displayName": "Timeout Snmp Agent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Spend no more than this number of seconds on SNMP agent checks processing. Accepts seconds or time unit with suffix (e.g., 30s, 1m). Possible values range: 1-600s. Required if if C(custom_timeouts) is set to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout_ssh_agent",
+      "displayName": "Timeout Ssh Agent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Spend no more than this number of seconds on SSH checks processing. Accepts seconds or time unit with suffix (e.g., 30s, 1m). Possible values range: 1-600s. Required if if C(custom_timeouts) is set to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout_telnet_agent",
+      "displayName": "Timeout Telnet Agent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Spend no more than this number of seconds on Telnet checks processing. Accepts seconds or time unit with suffix (e.g., 30s, 1m). Possible values range: 1-600s. Required if if C(custom_timeouts) is set to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout_zabbix_agent",
+      "displayName": "Timeout Zabbix Agent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Spend no more than this number of seconds on Zabbix agent checks processing. Accepts seconds or time unit with suffix (e.g., 30s, 1m). Possible values range: 1-600s. Rired if if C(custom_timeouts) is set to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_accept",
+      "displayName": "Tls Accept",
+      "type": "string",
+      "required": false,
+      "default": "no_encryption",
+      "description": "Connections from proxy.",
+      "choices": [
+        "no_encryption",
+        "PSK",
+        "certificate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_connect",
+      "displayName": "Tls Connect",
+      "type": "string",
+      "required": false,
+      "default": "no_encryption",
+      "description": "Connections to proxy.",
+      "choices": [
+        "no_encryption",
+        "PSK",
+        "certificate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_psk",
+      "displayName": "Tls Psk",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The preshared key, at least 32 hex digits. Required if either I(tls_connect) or I(tls_accept) has PSK enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_psk_identity",
+      "displayName": "Tls Psk Identity",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PSK identity. Required if either I(tls_connect) or I(tls_accept) has PSK enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_subject",
+      "displayName": "Tls Subject",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Certificate subject.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

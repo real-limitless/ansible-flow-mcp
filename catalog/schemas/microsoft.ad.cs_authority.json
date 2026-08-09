@@ -2,6 +2,40 @@
   "fqcn": "microsoft.ad.cs_authority",
   "shortDescription": "Manage CA CRL Distribution Points and Authority Information Access",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/microsoft/ad/cs_authority_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "aia",
+      "displayName": "Aia",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Desired list of Authority Information Access entries. Each entry specifies a URI and whether it is an AIA or OCSP endpoint. When specified, the module enforces exactly this list of AIA entries. Existing entries not in the list are removed. An empty list V([]) removes all AIA entries. When omitted, AIA configuration is not managed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cdp",
+      "displayName": "Cdp",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Desired list of CRL Distribution Point entries. Each entry specifies a URI and the boolean flags that control how the CDP is used. When specified, the module enforces exactly this list of CDPs. Existing entries not in the list are removed. An empty list V([]) removes all CDP entries. When omitted, CDP configuration is not managed. URI strings may contain ADCS variable tokens in angle-bracket format: C(<ServerDNSName>), C(<ServerShortName>), C(<CAName>), C(<CertificateName>), C(<CATruncatedName>)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restart_service",
+      "displayName": "Restart Service",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to restart the CertSvc service after making changes. CDP and AIA changes typically require a service restart to take effect on newly issued certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

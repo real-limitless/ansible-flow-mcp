@@ -2,6 +2,431 @@
   "fqcn": "community.zabbix.zabbix_authentication",
   "shortDescription": "Update Zabbix authentication",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/zabbix/zabbix_authentication_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "authentication_type",
+      "displayName": "Authentication Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Choose default authentication type.",
+      "choices": [
+        "internal",
+        "ldap"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disabled_usrgroup",
+      "displayName": "Disabled Usrgroup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User group name to assign the deprovisioned user to. The user group must be disabled and cannot be enabled or deleted when configured. Required if C(ldap_jit_status) for C(saml_jit_status) enabled. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_auth_enabled",
+      "displayName": "Http Auth Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "HTTP authentication will be enabled if C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_case_sensitive",
+      "displayName": "Http Case Sensitive",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Case sensitive login for HTTP authentication will be enabled if C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_form",
+      "displayName": "Http Login Form",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Choose default login form.",
+      "choices": [
+        "zabbix_login_form",
+        "http_login_form"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_password",
+      "displayName": "Http Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_user",
+      "displayName": "Http Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth login",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_strip_domains",
+      "displayName": "Http Strip Domains",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of domain names that should be removed from the username.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "jit_provision_interval",
+      "displayName": "Jit Provision Interval",
+      "type": "string",
+      "required": false,
+      "default": "1h",
+      "description": "Time interval between JIT provision requests for logged-in user. Accepts seconds and time unit with suffix with month and year support (3600s,60m,1h,1d,1M,1y). Minimum value 1h. Available only for LDAP provisioning. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_auth_enabled",
+      "displayName": "Ldap Auth Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "LDAP authentication will be enabled if C(true). This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_base_dn",
+      "displayName": "Ldap Base Dn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Base DN of LDAP. This setting is required if current value of I(ldap_configured) is C(false). Works only with Zabbix <= 6.0 and is silently ignored in higher versions. Please use community.zabbix.zabbix_user_directory module instead of this parameter with Zabbix >= 7.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_bind_dn",
+      "displayName": "Ldap Bind Dn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bind DN of LDAP. Works only with Zabbix <= 6.0 and is silently ignored in higher versions. Please use community.zabbix.zabbix_user_directory module instead of this parameter with Zabbix >= 7.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_bind_password",
+      "displayName": "Ldap Bind Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bind password of LDAP. Works only with Zabbix <= 6.0 and is silently ignored in higher versions. Please use community.zabbix.zabbix_user_directory module instead of this parameter with Zabbix >= 7.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_case_sensitive",
+      "displayName": "Ldap Case Sensitive",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "case sensitive login for LDAP authentication will be enabled if C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_configured",
+      "displayName": "Ldap Configured",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "LDAP authentication will be enabled if C(true). Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_host",
+      "displayName": "Ldap Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP server name. e.g. C(ldap://ldap.zabbix.com) This setting is required if current value of I(ldap_configured) is C(false). Works only with Zabbix <= 6.0 and is silently ignored in higher versions. Please use community.zabbix.zabbix_user_directory module instead of this parameter with Zabbix >= 7.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_jit_status",
+      "displayName": "Ldap Jit Status",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Status of LDAP provisioning. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_port",
+      "displayName": "Ldap Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "A port number of LDAP server. This setting is required if current value of I(ldap_configured) is C(false). Works only with Zabbix <= 6.0 and is silently ignored in higher versions. Please use community.zabbix.zabbix_user_directory module instead of this parameter with Zabbix >= 7.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_search_attribute",
+      "displayName": "Ldap Search Attribute",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Search attribute of LDAP. This setting is required if current value of I(ldap_configured) is C(false). Works only with Zabbix <= 6.0 and is silently ignored in higher versions. Please use community.zabbix.zabbix_user_directory module instead of this parameter with Zabbix >= 7.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_userdirectory",
+      "displayName": "Ldap Userdirectory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP authentication default user directory name for user groups with gui_access set to LDAP or System default. Required to be set when C(ldap_configured) / C(ldap_auth_enabled) is set to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "passwd_check_rules",
+      "displayName": "Passwd Check Rules",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Checking password rules. Select multiple from C(contain_uppercase_and_lowercase_letters), C(contain_digits). C(contain_special_characters) and C(avoid_easy_to_guess). This parameter is available since Zabbix 6.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "passwd_min_length",
+      "displayName": "Passwd Min Length",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Minimal length of password. Choose from 1-70. This parameter is available since Zabbix 6.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_auth_enabled",
+      "displayName": "Saml Auth Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "SAML authentication will be enabled if C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_case_sensitive",
+      "displayName": "Saml Case Sensitive",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Case sensitive login for SAML authentication will be enabled if C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_encrypt_assertions",
+      "displayName": "Saml Encrypt Assertions",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "SAML encrypt assertions will be enabled if C(true). Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_encrypt_nameid",
+      "displayName": "Saml Encrypt Nameid",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "SAML encrypt name ID will be enabled if C(true). Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_idp_entityid",
+      "displayName": "Saml Idp Entityid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SAML identify provider's entity ID. This setting is required if current value of I(saml_auth_enabled) is C(false). Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_jit_status",
+      "displayName": "Saml Jit Status",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Status of SAML provisioning. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_nameid_format",
+      "displayName": "Saml Nameid Format",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name identifier format of SAML service provider. Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_sign_assertions",
+      "displayName": "Saml Sign Assertions",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "SAML sign assertions will be enabled if C(true). Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_sign_authn_requests",
+      "displayName": "Saml Sign Authn Requests",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "SAML sign AuthN requests will be enabled if C(true). Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_sign_logout_requests",
+      "displayName": "Saml Sign Logout Requests",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "SAML sign logout requests will be enabled if C(true). Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_sign_logout_responses",
+      "displayName": "Saml Sign Logout Responses",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "SAML sign logout responses will be enabled if C(true). Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_sign_messages",
+      "displayName": "Saml Sign Messages",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "SAML sign messages will be enabled if C(true). Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_slo_url",
+      "displayName": "Saml Slo Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL for SAML single logout service. Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_sp_entityid",
+      "displayName": "Saml Sp Entityid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Entity ID of SAML service provider. This setting is required if current value of I(saml_auth_enabled) is C(false). Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_sso_url",
+      "displayName": "Saml Sso Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL for single sign on service of SAML. This setting is required if current value of I(saml_auth_enabled) is C(false). Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saml_username_attribute",
+      "displayName": "Saml Username Attribute",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User name attribute of SAML. This setting is required if current value of I(saml_auth_enabled) is C(false). Works only with Zabbix = 6.0 and is silently ignored in higher versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

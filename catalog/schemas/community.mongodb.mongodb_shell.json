@@ -2,6 +2,352 @@
   "fqcn": "community.mongodb.mongodb_shell",
   "shortDescription": "Run commands via the MongoDB shell.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/mongodb/mongodb_shell_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "additional_args",
+      "displayName": "Additional Args",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Additional arguments to supply to the mongo command. Supply as key-value pairs. If the parameter is a valueless flag supply an empty string as the value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "atlas_auth",
+      "displayName": "Atlas Auth",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Authentication path intended for MongoDB Atlas Instances",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_mechanism",
+      "displayName": "Auth Mechanism",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication type.",
+      "choices": [
+        "SCRAM-SHA-256",
+        "SCRAM-SHA-1",
+        "MONGODB-X509",
+        "GSSAPI",
+        "PLAIN"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_options",
+      "displayName": "Connection Options",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Additional connection options. Supply as a list of dicts or strings containing key value pairs seperated with '='.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db",
+      "displayName": "Db",
+      "type": "string",
+      "required": false,
+      "default": "test",
+      "description": "The database to run commands against",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "show additional debug info.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "eval",
+      "displayName": "Eval",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A MongoDB command to run.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file",
+      "displayName": "File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file containing MongoDB commands.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idempotent",
+      "displayName": "Idempotent",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Provides a form of pseudo-idempotency to the module. We perform a hash calculation on the contents of the eval key or the file name provided in the file key. When the command is first execute a filed called <hash>.success will be created. The module will not rerun the command if this file exists and idempotent is set to true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_database",
+      "displayName": "Login Database",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "The database where login credentials are stored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "The host running MongoDB instance to login to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password used to authenticate with. Required when I(login_user) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": 27017,
+      "description": "The MongoDB server port to login to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The MongoDB user to login with. Required when I(login_password) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mongo_cmd",
+      "displayName": "Mongo Cmd",
+      "type": "string",
+      "required": false,
+      "default": "mongosh",
+      "description": "The MongoDB shell command. auto - Automatically detect which MongoDB shell command used. Use \"mongosh\" if available, else use \"mongo\" command. mongo - This should still work for most cases but you might have problems with json parsinf. Use transform_type of 'raw' is you encounter problems.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nodb",
+      "displayName": "Nodb",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specify a non-default encoding for output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "norc",
+      "displayName": "Norc",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Prevents the shell from sourcing and evaluating ~/.mongorc.js on start up.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "omit",
+      "displayName": "Omit",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Parameter to omit from the command line. This should match the parameter name that the MongoDB shell accepts not the module name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quiet",
+      "displayName": "Quiet",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Silences output from the shell during the connection process..",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "split_char",
+      "displayName": "Split Char",
+      "type": "string",
+      "required": false,
+      "default": " ",
+      "description": "Used by the split action in the transform stage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl",
+      "displayName": "Ssl",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to use an SSL connection when connecting to the database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_ca_certs",
+      "displayName": "Ssl Ca Certs",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ssl_ca_certs option takes a path to a CA file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_cert_reqs",
+      "displayName": "Ssl Cert Reqs",
+      "type": "string",
+      "required": false,
+      "default": "CERT_REQUIRED",
+      "description": "Specifies whether a certificate is required from the other side of the connection, and whether it will be validated if provided.",
+      "choices": [
+        "CERT_NONE",
+        "CERT_OPTIONAL",
+        "CERT_REQUIRED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_certfile",
+      "displayName": "Ssl Certfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Present a client certificate using the ssl_certfile option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_crlfile",
+      "displayName": "Ssl Crlfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ssl_crlfile option takes a path to a CRL file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_keyfile",
+      "displayName": "Ssl Keyfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Private key for the client certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_pem_passphrase",
+      "displayName": "Ssl Pem Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase to decrypt encrypted private keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "strict_compatibility",
+      "displayName": "Strict Compatibility",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enforce strict requirements for pymongo and MongoDB software versions",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stringify",
+      "displayName": "Stringify",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Wraps the command in eval in JSON.stringify(<js cmd>) (mongo) or EJSON.stringify(<js cmd>) (mongosh). Useful for escaping documents that are returned in Extended JSON format. Automatically set to false when using mongo. Automatically set to true when using mongosh. Set explicitly to override automatic selection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "transform",
+      "displayName": "Transform",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Transform the output returned to the user. auto - Attempt to automatically decide the best tranformation. split - Split output on a character. json - parse as json. raw - Return the raw output.",
+      "choices": [
+        "auto",
+        "split",
+        "json",
+        "raw"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

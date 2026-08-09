@@ -1,0 +1,110 @@
+{
+  "fqcn": "fedora.linux_system_roles.sr_fingerprint",
+  "shortDescription": "Write role fingerprint data to syslog and optionally to a JSONL log file",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/fedora/linux_system_roles/sr_fingerprint_module.html",
+  "options": [
+    {
+      "name": "ansible_play_hosts_all",
+      "displayName": "Ansible Play Hosts All",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "All hosts in the play, typically C({{ ansible_play_hosts_all }}). Used to derive C(play_hosts_number).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "distribution",
+      "displayName": "Distribution",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "OS distribution name, typically C({{ ansible_facts[\"distribution\"] }}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "distribution_version",
+      "displayName": "Distribution Version",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "OS distribution version, typically C({{ ansible_facts[\"distribution_version\"] }}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_file",
+      "displayName": "Log File",
+      "type": "string",
+      "required": false,
+      "default": "/var/log/sysroles.jsonl",
+      "description": "Path to the JSONL log file. A lock sidecar (C(<log_file>.lock)) is created next to the log file for cross-process safety.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_log_size",
+      "displayName": "Max Log Size",
+      "type": "number",
+      "required": false,
+      "default": 2000000,
+      "description": "Maximum log file size in bytes. When appending a new record would exceed this limit, the oldest records are removed first. Set to C(0) to disable trimming.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role_name",
+      "displayName": "Role Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the role, typically C({{ role_name }}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role_path",
+      "displayName": "Role Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the role, typically C({{ role_path }}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Role execution status.",
+      "choices": [
+        "begin",
+        "success"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_log_file",
+      "displayName": "Write Log File",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true), append fingerprint data to the JSONL log file. Defaults to C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,158 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_profile_oneconnect",
+  "shortDescription": "Manage OneConnect profiles on a BIG-IP",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_profile_oneconnect_module.html",
+  "options": [
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idle_timeout_override",
+      "displayName": "Idle Timeout Override",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of seconds a connection is idle before the connection flow is eligible for deletion. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile. You may specify a number of seconds for the timeout override. When C(disabled), specifies there is no timeout override for the connection. When C(indefinite), specifies a connection may be idle with no timeout override.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit_type",
+      "displayName": "Limit Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When C(none), simultaneous in-flight requests and responses over TCP connections to a pool member are counted toward the limit. This is the historical behavior. When C(idle), idle connections will be dropped as the TCP connection limit is reached. For short intervals, during the overlap of the idle connection being dropped and the new connection being established, the TCP connection limit may be exceeded. When C(strict), the TCP connection limit is honored with no exceptions. This means that idl",
+      "choices": [
+        "none",
+        "idle",
+        "strict"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maximum_age",
+      "displayName": "Maximum Age",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum number of seconds allowed for a connection in the connection reuse pool. For any connection with an age higher than this value, the system removes that connection from the re-use pool. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maximum_reuse",
+      "displayName": "Maximum Reuse",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum number of times that a server-side connection can be reused. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maximum_size",
+      "displayName": "Maximum Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum number of connections the system holds in the connection reuse pool. If the pool is already full, a server-side connection closes after the response is completed. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the OneConnect profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent",
+      "displayName": "Parent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the profile from which this profile inherits settings. When creating a new profile, if this parameter is not specified, the default is the system-supplied C(oneconnect) profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_pools",
+      "displayName": "Share Pools",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates connections may be shared not only within a virtual server, but also among similar virtual servers. When C(true), all virtual servers that use the same OneConnect and other internal network profiles can share connections. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_mask",
+      "displayName": "Source Mask",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a value the system applies to the source address to determine its eligibility for reuse. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile. The system applies the value of this setting to the server-side source address to determine its eligibility for reuse. A mask of C(0) causes the system to share reused connections across all source addresses. A host mask of C(32) causes the system to share only those reused connections or",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present), ensures the profile exists. When C(absent), ensures the profile is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

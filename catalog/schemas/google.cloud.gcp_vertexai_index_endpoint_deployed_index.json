@@ -2,6 +2,235 @@
   "fqcn": "google.cloud.gcp_vertexai_index_endpoint_deployed_index",
   "shortDescription": "Creates a GCP VertexAI.IndexEndpointDeployedIndex resource",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/google/cloud/gcp_vertexai_index_endpoint_deployed_index_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The access token used to authenticate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_kind",
+      "displayName": "Auth Kind",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of credential used.",
+      "choices": [
+        "accesstoken",
+        "application",
+        "machineaccount",
+        "serviceaccount"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "automatic_resources",
+      "displayName": "Automatic Resources",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A description of resources that the DeployedIndex uses, which to large degree are decided by Vertex AI, and optionally allows only a modest additional configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dedicated_resources",
+      "displayName": "Dedicated Resources",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A description of resources that are dedicated to the DeployedIndex, and that need a higher degree of manual configuration. The field minReplicaCount must be set to a value strictly greater than 0, or else validation will fail. We don't provide SLA when minReplicaCount=1. If maxReplicaCount is not set, the default value is minReplicaCount. The max allowed replica count is 1000. Available machine types for SMALL shard: e2-standard-2 and all machine types available for MEDIUM and LARGE shard. Avail",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deployed_index_auth_config",
+      "displayName": "Deployed Index Auth Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "If set, the authentication is enabled for the private endpoint. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deployed_index_id",
+      "displayName": "Deployed Index Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The user specified ID of the DeployedIndex. The ID can be up to 128 characters long and must start with a letter and only contain letters, numbers, and underscores. The ID must be unique within the project it is created in. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deployment_group",
+      "displayName": "Deployment Group",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The deployment group can be no longer than 64 characters (eg: 'test', 'prod'). If not set, we will use the 'default' deployment group. Creating deployment_groups with reserved_ip_ranges is a recommended practice when the peered network has multiple peering ranges. This creates your deployments from predictable IP spaces for easier traffic administration. Also, one deployment_group (except 'default') can only be used with the same reserved_ip_ranges which means if the deployment_group has been us",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The display name of the Index. The name can be up to 128 characters long and can consist of any UTF-8 characters. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_access_logging",
+      "displayName": "Enable Access Logging",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, private endpoint's access logs are sent to Cloud Logging. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "env_type",
+      "displayName": "Env Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies which Ansible environment you're running this module within. This should not be set unless you know what you're doing. This only alters the User Agent string for any API requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "index",
+      "displayName": "Index",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the Index this is the deployment of. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "index_endpoint",
+      "displayName": "Index Endpoint",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Identifies the index endpoint. Must be in the format 'projects/{{project}}/locations/{{region}}/indexEndpoints/{{indexEndpoint}}'. This field is a reference to a IndexEndpoint resource in GCP. It can be specified in two ways: First, you can place a dictionary with key 'name' matching your resource. Alternatively, you can add `register: name-of-resource` to a IndexEndpoint task and then set this field to `{{ name-of-resource }}`. This property is immutable, to change it, you must delete and recre",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Google Cloud Platform project to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The region of the index. eg us-central1. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reserved_ip_ranges",
+      "displayName": "Reserved Ip Ranges",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of reserved ip ranges under the VPC network that can be used for this DeployedIndex. If set, we will deploy the index within the provided ip ranges. Otherwise, the index might be deployed to any ip ranges under the provided VPC network. The value should be the name of the address (https://cloud.google.com/compute/docs/reference/rest/v1/addresses) Example: ['vertex-ai-ip-range']. For more information about subnets and network IP ranges, please see https://cloud.google.com/vpc/docs/subnets#",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scopes",
+      "displayName": "Scopes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of scopes to be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_contents",
+      "displayName": "Service Account Contents",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_email",
+      "displayName": "Service Account Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional service account email address if machineaccount is selected and the user does not wish to use the default email.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_file",
+      "displayName": "Service Account File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of a Service Account JSON file if serviceaccount is selected as type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the resource should exist in GCP.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

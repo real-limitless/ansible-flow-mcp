@@ -1,0 +1,211 @@
+{
+  "fqcn": "servicenow.itsm.problem",
+  "shortDescription": "Manage ServiceNow problems",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/servicenow/itsm/problem_module.html",
+  "options": [
+    {
+      "name": "assigned_to",
+      "displayName": "Assigned To",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A person who will assess this problem. Expected value for I(assigned_to) is user id (usually in the form of C(first_name.last_name)). This field is required when creating new problems for all problem I(state)s except C(new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attachments",
+      "displayName": "Attachments",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "ServiceNow attachments.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "base_api_path",
+      "displayName": "Base Api Path",
+      "type": "string",
+      "required": false,
+      "default": "/api/x_rhtpp_ansible/problem",
+      "description": "Base API path for the ServiceNow problem state management scripted API. Used for managing problem state transitions. Requires I(API for Red Hat Ansible Automation Platform Certified Content Collection) application to be installed from the ServiceNow Store U(https://store.servicenow.com/sn_appstore_store.do#!/store/application/9b33c83a1bcc5510b76a0d0fdc4bcb21/1.0.0?sl=sh). Considered mostly for development and testing purposes, as in most cases the default value should be fine. Starting with rele",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cause_notes",
+      "displayName": "Cause Notes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide information on what caused the problem. Required if I(state) is C(in_progress). Required if I(state) is C(resolved) or C(closed) and I(resolution_code) is C(fix_applied) or C(risk_accepted).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "close_notes",
+      "displayName": "Close Notes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The reason for closing the problem. Required if I(state) is C(resolved) or C(closed) and I(resolution_code) is C(risk_accepted) or C(canceled).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Detailed description of the problem.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "duplicate_of",
+      "displayName": "Duplicate Of",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of the problem of which this problem is a duplicate of. Required if I(state) is C(resolved) or C(closed) and I(resolution_code) is C(duplicate).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fix_notes",
+      "displayName": "Fix Notes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Notes on how the problem was fixed. Required if I(state) is C(in_progress). Required if I(state) is C(resolved) or C(closed) and I(resolution_code) is C(fix_applied).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "impact",
+      "displayName": "Impact",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Effect that the problem has on business. Default choices are C(low), C(medium), C(high). One can override them by setting I(problem_mapping.impact).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance",
+      "displayName": "Instance",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "ServiceNow instance information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "number",
+      "displayName": "Number",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of the record to operate on. Note that contrary to I(sys_id), I(number) may not uniquely identify a record.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "other",
+      "displayName": "Other",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Optional remaining parameters. For more information on optional parameters, refer to the ServiceNow documentation on creating problems at U(https://docs.servicenow.com/bundle/tokyo-it-service-management/page/product/problem-management/task/create-a-problem-v2.html).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "problem_mapping",
+      "displayName": "Problem Mapping",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "User mapping for I(Problem) object, where user can override Choice Lists values for objects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resolution_code",
+      "displayName": "Resolution Code",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The reason for problem resolution.",
+      "choices": [
+        "fix_applied",
+        "risk_accepted",
+        "duplicate",
+        "canceled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "short_description",
+      "displayName": "Short Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Short description of the problem that the problem-solving team should address. Required if the problem does not exist yet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "State of the problem. If a problem does not yet exist, all states except for C(new) require setting of I(assigned_to) parameter. Default choices are C(new), C(assess), C(root_cause_analysis), C(fix_in_progress), C(resolved), C(closed), C(absent). One can override them by setting I(problem_mapping.state).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sys_id",
+      "displayName": "Sys Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Unique identifier of the record to operate on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "urgency",
+      "displayName": "Urgency",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The extent to which the problem resolution can bear delay. Default choices are C(low), C(medium), C(high). One can override them by setting I(problem_mapping.urgency).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

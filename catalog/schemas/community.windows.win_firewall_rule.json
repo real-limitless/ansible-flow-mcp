@@ -2,6 +2,192 @@
   "fqcn": "community.windows.win_firewall_rule",
   "shortDescription": "Windows firewall automation",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/windows/win_firewall_rule_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "What to do with the items this rule is for. Defaults to C(allow) when creating a new rule.",
+      "choices": [
+        "allow",
+        "block"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description for the firewall rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "direction",
+      "displayName": "Direction",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Whether this rule is for inbound or outbound traffic. Defaults to C(in) when creating a new rule.",
+      "choices": [
+        "in",
+        "out"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether this firewall rule is enabled or disabled. Defaults to C(true) when creating a new rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The group name for the rule. If I(name) is not specified then the module will set the firewall options for all the rules in this group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "icmp_type_code",
+      "displayName": "Icmp Type Code",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The ICMP types and codes for the rule. This is only valid when I(protocol) is C(icmpv4) or C(icmpv6). Each entry follows the format C(type:code) where C(type) is the type number and C(code) is the code number for that type or C(*) for all codes. Set the value to just C(*) to apply the rule for all ICMP type codes. See U(https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml) for a list of ICMP types and the codes that apply to them. ICMP types and codes for IPV6 can be found at U",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "localip",
+      "displayName": "Localip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The local ip address this rule applies to. Set to C(any) to apply to all local ip addresses. Defaults to C(any) when creating a new rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "localport",
+      "displayName": "Localport",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The local port this rule applies to. Set to C(any) to apply to all local ports. Defaults to C(any) when creating a new rule. Must have I(protocol) set",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The rule's display name. This is required unless I(group) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profiles",
+      "displayName": "Profiles",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The profile this rule applies to. Defaults to C(domain,private,public) when creating a new rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "program",
+      "displayName": "Program",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The program this rule applies to. Set to C(any) to apply to all programs. Defaults to C(any) when creating a new rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The protocol this rule applies to. Set to C(any) to apply to all services. Defaults to C(any) when creating a new rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remoteip",
+      "displayName": "Remoteip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The remote ip address/range this rule applies to. Set to C(any) to apply to all remote ip addresses. Defaults to C(any) when creating a new rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remoteport",
+      "displayName": "Remoteport",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The remote port this rule applies to. Set to C(any) to apply to all remote ports. Defaults to C(any) when creating a new rule. Must have I(protocol) set",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service",
+      "displayName": "Service",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The service this rule applies to. Set to C(any) to apply to all services. Defaults to C(any) when creating a new rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Should this rule be added or removed.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

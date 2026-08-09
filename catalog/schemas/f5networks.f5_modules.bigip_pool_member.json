@@ -1,0 +1,245 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_pool_member",
+  "shortDescription": "Manages F5 BIG-IP LTM pool members",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_pool_member_module.html",
+  "options": [
+    {
+      "name": "address",
+      "displayName": "Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP address of the pool member. This can be either IPv4 or IPv6. When creating a new pool member, one of either C(address) or C(fqdn) must be provided. This parameter cannot be updated after it is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aggregate",
+      "displayName": "Aggregate",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of pool member definitions to be created, modified, or removed. When using C(aggregates), if one of the aggregate definitions is invalid, the aggregate run will fail, indicating the error it last encountered. The module will B(NOT) rollback any changes it has made prior to encountering the error. The module also will not indicate what changes were made prior to failure. Therefore we strong advise you run the module in C(check) mode to ensure basic validation prior to executing this module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_requirements",
+      "displayName": "Availability Requirements",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "If you activate more than one health monitor, specifies the number of health monitors that must receive successful responses in order for the link to be considered available. Specifying an empty string will remove the monitors and revert to inheriting from the pool (default). Specifying C(none) will remove any health monitoring from the member completely.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_limit",
+      "displayName": "Connection Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Pool member connection limit. Setting this to C(0) disables the limit.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Pool member description.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fqdn",
+      "displayName": "Fqdn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FQDN name of the pool member. This can be any name that is a valid RFC 1123 DNS name. Therefore, the only usable characters are \"A\" to \"Z\", \"a\" to \"z\", \"0\" to \"9\", the hyphen (\"-\") and the period (\".\"). FQDN names must include at least one period; delineating the host from the domain. For example, C(host.domain). FQDN names must end with a letter or a number. When creating a new pool member, one of either C(address) or C(fqdn) must be provided. This parameter cannot be updated after it is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fqdn_auto_populate",
+      "displayName": "Fqdn Auto Populate",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the system automatically creates ephemeral nodes using the IP addresses returned by the resolution of a DNS query for a node defined by an FQDN. When C(true), the system generates an ephemeral node for each IP address returned in response to a DNS query for the FQDN of the node. Additionally, when a DNS response indicates the IP address of an ephemeral node no longer exists, the system deletes the ephemeral node. When C(false), the system resolves a DNS query for the FQDN of th",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_encapsulation",
+      "displayName": "Ip Encapsulation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the IP encapsulation using either IPIP (IP encapsulation within IP, RFC 2003) or GRE (Generic Router Encapsulation, RFC 2784) on outbound packets (from BIG-IP system to server-pool member). When C(none), disables IP encapsulation. When C(inherit), inherits the IP encapsulation setting from the member's pool. When any other value, the options are None, Inherit from Pool, and Member Specific.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitors",
+      "displayName": "Monitors",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the health monitors the system currently uses to monitor this resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the node to create or re-use when creating a new pool member. While this parameter is optional, we recommend specifying this parameter at all times to mitigate any unexpected behavior. If not specified, a node name is created automatically from either the specified C(address) or C(fqdn). The C(enabled) state is an alias of C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool",
+      "displayName": "Pool",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Pool name. This pool must exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Pool member port. This value cannot be changed after it has been set. Parameter must be provided when using aggregates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preserve_node",
+      "displayName": "Preserve Node",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When state is C(absent), the system attempts to remove the node the pool member references. The node will not be removed if it is still referenced by other pool members. If this happens, the module will not raise an error. Setting this to C(true) disables this behavior.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority_group",
+      "displayName": "Priority Group",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies a number representing the priority group for the pool member. When adding a new member, the default is C(0), meaning the member has no priority. To specify a priority, you must activate priority group usage when you create a new pool or when adding or removing pool members. When activated, the system load balances traffic according to the priority group number assigned to the pool member. The higher the number, the higher the priority. So a member with a priority of 3 has higher priori",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rate_limit",
+      "displayName": "Rate Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Pool member rate limit (connections-per-second). Setting this to C(0) disables the limit.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ratio",
+      "displayName": "Ratio",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Pool member ratio weight. Valid values range from 1 through 100. New pool members -- unless overridden with this value -- default to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace_all_with",
+      "displayName": "Replace All With",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Removes members not defined in the C(aggregate) parameter. This operation is all or none, meaning it will stop if there are some pool members that cannot be removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reuse_nodes",
+      "displayName": "Reuse Nodes",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Reuses node definitions if requested.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Pool member state.",
+      "choices": [
+        "present",
+        "absent",
+        "enabled",
+        "disabled",
+        "forced_offline"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

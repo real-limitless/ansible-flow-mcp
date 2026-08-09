@@ -1,0 +1,161 @@
+{
+  "fqcn": "ibm.power_aix.audit",
+  "shortDescription": "Control the AIX auditing subsystem.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/audit_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Defines the audit operation to perform. C(start) Starts the audit subsystem. This option reads the instructions in the configuration files and performs the auditing C(shutdown) Stops the collection of audit records and resets the configuration information by removing the definition of classes from the kernel tables C(off) Suspends the auditing system, but leaves the configuration valid. Data collection pauses until you give the 'audit on' command C(on) Restarts the auditing system after a suspen",
+      "choices": [
+        "start",
+        "shutdown",
+        "on",
+        "off",
+        "query"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "audit_trail_path",
+      "displayName": "Audit Trail Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to audit trail file or directory. Overrides the path from /etc/security/audit/config. If a specific file is provided, only that file will be processed. If a directory is provided, all trail files (trail, bin1, bin2, auditb) in that directory will be processed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auditpr_fields",
+      "displayName": "Auditpr Fields",
+      "type": "string",
+      "required": false,
+      "default": "E,l,R,t,c,r,p,P,T,h,W",
+      "description": "Comma-separated list of fields to display in auditpr output. Available fields: C(E) (event), C(l) (login), C(R) (result), C(t) (time), C(c) (command), C(r) (real_user), C(p) (pid), C(P) (ppid), C(T) (tid), C(h) (host), C(W) (wpar)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auditpr_header_type",
+      "displayName": "Auditpr Header Type",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Header display type for auditpr output. 0 = no header, 1 = header once, 2 = header repeated.",
+      "choices": [
+        0,
+        1,
+        2
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auditpr_long_usernames",
+      "displayName": "Auditpr Long Usernames",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Print long user names at end of audit record (-X flag).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auditpr_message",
+      "displayName": "Auditpr Message",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Custom message to display with each heading in auditpr output (-m flag).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auditpr_single_line",
+      "displayName": "Auditpr Single Line",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Display trail and audit record in single line (-w flag). Mutually exclusive with auditpr_verbose.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auditpr_suppress_translation",
+      "displayName": "Auditpr Suppress Translation",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Suppress ID translation to symbolic names in auditpr output (-r flag).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auditpr_verbose",
+      "displayName": "Auditpr Verbose",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enable verbose output in auditpr (-v flag).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "capture_delay",
+      "displayName": "Capture Delay",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Seconds to wait before capturing logs (only for C(query) action). Ensures recent events are flushed to disk before reading.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fullpath",
+      "displayName": "Fullpath",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Used with C(action=on). Enables full path capture for FILE_* and PROC_* events.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "panic",
+      "displayName": "Panic",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Used only with C(action=on). Enables panic mode (system halts if bin data cannot be written).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recorded_output",
+      "displayName": "Recorded Output",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "File path where audit logs will be saved using auditpr. Log capture is only performed for C(query), C(shutdown), and C(off) actions. Requires binary mode (binmode = on) in /etc/security/audit/config. The output file will be overwritten on each run to avoid duplicate data.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

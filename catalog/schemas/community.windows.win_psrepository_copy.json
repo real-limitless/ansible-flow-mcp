@@ -2,6 +2,81 @@
   "fqcn": "community.windows.win_psrepository_copy",
   "shortDescription": "Copies registered PSRepositories to other user profiles",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/windows/win_psrepository_copy_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "exclude",
+      "displayName": "Exclude",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The names of repositories to exclude. Names are interpreted as wildcards. If a name matches both an include (I(name)) and I(exclude), it will be excluded.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_profiles",
+      "displayName": "Exclude Profiles",
+      "type": "list",
+      "required": false,
+      "default": [
+        "systemprofile",
+        "LocalService",
+        "NetworkService"
+      ],
+      "description": "The names of user profiles to exclude. If a profile matches both an include (I(profiles)) and I(exclude_profiles), it will be excluded. By default, the service account profiles are excluded. To explcitly exclude nothing, set I(exclude_profiles=[]).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(True), this deletes repositories that are not present in the source.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "list",
+      "required": false,
+      "default": [
+        "*"
+      ],
+      "description": "The names of repositories to copy. Names are interpreted as wildcards.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profiles",
+      "displayName": "Profiles",
+      "type": "list",
+      "required": false,
+      "default": [
+        "*"
+      ],
+      "description": "The names of user profiles to populate with repositories. Names are interpreted as wildcards. The C(Default) profile can also be matched. The C(Public) and C(All Users) profiles cannot be targeted, as PSRepositories are not loaded from them.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": false,
+      "default": "%LOCALAPPDATA%\\Microsoft\\Windows\\PowerShell\\PowerShellGet\\PSRepositories.xml",
+      "description": "The full path to the source repositories XML file. Defaults to the repositories registered to the current user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

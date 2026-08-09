@@ -1,0 +1,135 @@
+{
+  "fqcn": "cisco.iosxr.iosxr_user",
+  "shortDescription": "Module to manage the aggregates of local users.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/iosxr/iosxr_user_module.html",
+  "options": [
+    {
+      "name": "admin",
+      "displayName": "Admin",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enters into administration configuration mode for making config changes to the device. Applicable only when using network_cli transport",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aggregate",
+      "displayName": "Aggregate",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The set of username objects to be configured on the remote Cisco IOS XR device. The list entries can either be the username or a hash of username and properties. This argument is mutually exclusive with the C(name) argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configured_password",
+      "displayName": "Configured Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to be configured on the Cisco IOS XR device. The password needs to be provided in clear text. Password is encrypted on the device when used with I(cli) and by Ansible when used with I(netconf) using the same MD5 hash technique with salt size of 3. Please note that this option is not same as C(provider password).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the group for the username in the device running configuration. The argument accepts a string value defining the group name. This argument does not check if the group has been configured on the device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "groups",
+      "displayName": "Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Configures the groups for the username in the device running configuration. The argument accepts a list of group names. This argument does not check if the group has been configured on the device. It is similar to the aggregate command for usernames, but lets you configure multiple groups for the user(s).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to be configured on the Cisco IOS XR device. This argument accepts a string value and is mutually exclusive with the C(aggregate) argument. Please note that this option is not same as C(provider username).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_key",
+      "displayName": "Public Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the contents of the public keyfile to upload to the IOS-XR node. This enables users to login using the accompanying private key. IOS-XR only accepts base64 decoded files, so this will be decoded and uploaded to the node. Do note that this requires an OpenSSL public key file, PuTTy generated files will not work! Mutually exclusive with public_key_contents. If used with multiple users in aggregates, then the same key file is used for all users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_key_contents",
+      "displayName": "Public Key Contents",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the contents of the public keyfile to upload to the IOS-XR node. This enables users to login using the accompanying private key. IOS-XR only accepts base64 decoded files, so this will be decoded and uploaded to the node. Do note that this requires an OpenSSL public key file, PuTTy generated files will not work! Mutually exclusive with public_key.If used with multiple users in aggregates, then the same key file is used for all users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge",
+      "displayName": "Purge",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Instructs the module to consider the resource definition absolute. It will remove any previously configured usernames on the device with the exception of the `admin` user and the current defined set of users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Configures the state of the username definition as it relates to the device operational configuration. When set to I(present), the username(s) should be configured in the device active configuration and when set to I(absent) the username(s) should not be in the device active configuration",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "Since passwords are encrypted in the device running config, this argument will instruct the module when to change the password.  When set to C(always), the password will always be updated in the device and when set to C(on_create) the password will be updated only if the username is created.",
+      "choices": [
+        "on_create",
+        "always"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

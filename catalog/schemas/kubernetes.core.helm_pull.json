@@ -2,6 +2,216 @@
   "fqcn": "kubernetes.core.helm_pull",
   "shortDescription": "download a chart from a repository and (optionally) unpack it in local directory.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/kubernetes/core/helm_pull_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "binary_path",
+      "displayName": "Binary Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of a helm binary to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chart_ca_cert",
+      "displayName": "Chart Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Verify certificates of HTTPS-enabled servers using this CA bundle. Requires helm >= 3.1.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chart_devel",
+      "displayName": "Chart Devel",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use development versions, too. Equivalent to version '>0.0.0-0'. Mutually exclusive with C(chart_version).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chart_ref",
+      "displayName": "Chart Ref",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "chart name on chart repository. absolute URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chart_ssl_cert_file",
+      "displayName": "Chart Ssl Cert File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Identify HTTPS client using this SSL certificate file. Requires helm >= 3.1.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chart_ssl_key_file",
+      "displayName": "Chart Ssl Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Identify HTTPS client using this SSL key file Requires helm >= 3.1.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chart_version",
+      "displayName": "Chart Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify a version constraint for the chart version to use. This constraint can be a specific tag (e.g. 1.1.1) or it may reference a valid range (e.g. ^2.0.0). Mutually exclusive with C(chart_devel).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination",
+      "displayName": "Destination",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "location to write the chart.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Force download of the chart even if it already exists in the destination directory. By default, the module will skip downloading if the chart with the same version already exists for idempotency. When used with O(untar_chart=true), will remove any existing chart directory before extracting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pass_credentials",
+      "displayName": "Pass Credentials",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Pass credentials to all domains.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plain_http",
+      "displayName": "Plain Http",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use HTTP instead of HTTPS when working with OCI registries Requires Helm >= 3.13.0",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provenance",
+      "displayName": "Provenance",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Fetch the provenance file, but don't perform verification.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "repo_password",
+      "displayName": "Repo Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Chart repository password where to locate the requested chart. Required if C(repo_username) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "repo_url",
+      "displayName": "Repo Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "chart repository url where to locate the requested chart.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "repo_username",
+      "displayName": "Repo Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Chart repository username where to locate the requested chart. Required if C(repo_password) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skip_tls_certs_check",
+      "displayName": "Skip Tls Certs Check",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether or not to check tls certificate for the chart download. Requires helm >= 3.3.0. Alias C(insecure_skip_tls_verify) added in 5.3.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "untar_chart",
+      "displayName": "Untar Chart",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "if set to true, will untar the chart after downloading it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_chart",
+      "displayName": "Verify Chart",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Verify the package before using it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_chart_keyring",
+      "displayName": "Verify Chart Keyring",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "location of public keys used for verification.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

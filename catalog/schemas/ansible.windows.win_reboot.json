@@ -2,6 +2,84 @@
   "fqcn": "ansible.windows.win_reboot",
   "shortDescription": "Reboot a windows machine",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "boot_time_command",
+      "displayName": "Boot Time Command",
+      "type": "string",
+      "required": false,
+      "default": "(Get-CimInstance -ClassName Win32_OperatingSystem -Property LastBootUpTime).LastBootUpTime.ToFileTime()",
+      "description": "Command to run that returns a unique string indicating the last time the system was booted. Setting this to a command that has different output each time it is run will cause the task to fail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connect_timeout",
+      "displayName": "Connect Timeout",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Maximum seconds to wait for a single successful TCP connection to the WinRM endpoint before trying again.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "msg",
+      "displayName": "Msg",
+      "type": "string",
+      "required": false,
+      "default": "Reboot initiated by Ansible",
+      "description": "Message to display to users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "post_reboot_delay",
+      "displayName": "Post Reboot Delay",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Seconds to wait after the reboot command was successful before attempting to validate the system rebooted successfully. This is useful if you want wait for something to settle despite your connection already working.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pre_reboot_delay",
+      "displayName": "Pre Reboot Delay",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Seconds to wait before reboot. Passed as a parameter to the reboot command. The minimum version is C(2) seconds and cannot be set lower.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot_timeout",
+      "displayName": "Reboot Timeout",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Maximum seconds to wait for machine to re-appear on the network and respond to a test command. This timeout is evaluated separately for both reboot verification and test command success so maximum clock time is actually twice this value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_command",
+      "displayName": "Test Command",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Command to expect success for to determine the machine is ready for management. By default this test command is a custom one to detect when the Windows Logon screen is up and ready to accept credentials. Using a custom command will replace this behaviour and just run the command specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

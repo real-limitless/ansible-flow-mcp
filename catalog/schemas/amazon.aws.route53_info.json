@@ -2,6 +2,294 @@
   "fqcn": "amazon.aws.route53_info",
   "shortDescription": "Retrieves Route 53 details using AWS methods",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/amazon/aws/route53_info_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS access key ID. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_ACCESS_KEY_ID) or C(AWS_ACCESS_KEY) environment variables may also be used in decreasing order of preference. The I(aws_access_key) and I(profile) options are mutually exclusive. The I(aws_access_key_id) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_ca_bundle",
+      "displayName": "Aws Ca Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location of a CA Bundle to use when validating SSL certificates. The C(AWS_CA_BUNDLE) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_config",
+      "displayName": "Aws Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary to modify the botocore configuration. Parameters can be found in the AWS documentation U(https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html#botocore.config.Config).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "change_id",
+      "displayName": "Change Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the change batch request. The value that you specify here is the value that ChangeResourceRecordSets returned in the Id element when you submitted the request. Required if O(query=change).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug_botocore_endpoint_logs",
+      "displayName": "Debug Botocore Endpoint Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use a C(botocore.endpoint) logger to parse the unique (rather than total) C(\"resource:action\") API calls made during a task, outputing the set to the resource_actions key in the task results. Use the C(aws_resource_action) callback to output to total list made during a playbook. The C(ANSIBLE_DEBUG_BOTOCORE_LOGS) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delegation_set_id",
+      "displayName": "Delegation Set Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The DNS Zone delegation set ID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_name",
+      "displayName": "Dns Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The first name in the lexicographic ordering of domain names that you want the list_command to start listing from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_url",
+      "displayName": "Endpoint Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to connect to instead of the default AWS endpoints.  While this can be used to connection to other AWS-compatible services the amazon.aws and community.aws collections are only tested against AWS. The  C(AWS_URL) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_check_id",
+      "displayName": "Health Check Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the health check. Required if V(query) is set to V(health_check) and O(health_check_method) is set to V(details) or V(status) or V(failure_reason).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_check_method",
+      "displayName": "Health Check Method",
+      "type": "string",
+      "required": false,
+      "default": "list",
+      "description": "This is used in conjunction with query: health_check. It allows for listing details, counts or tags of various health check details.",
+      "choices": [
+        "list",
+        "details",
+        "status",
+        "failure_reason",
+        "count",
+        "tags"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hosted_zone_id",
+      "displayName": "Hosted Zone Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Hosted Zone ID of the DNS zone. Required if O(query) is set to V(hosted_zone) and O(hosted_zone_method) is set to V(details). Required if O(query) is set to V(record_sets).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hosted_zone_method",
+      "displayName": "Hosted Zone Method",
+      "type": "string",
+      "required": false,
+      "default": "list",
+      "description": "This is used in conjunction with query: hosted_zone. It allows for listing details, counts or tags of various hosted zone details.",
+      "choices": [
+        "details",
+        "list",
+        "list_by_name",
+        "count",
+        "tags"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_items",
+      "displayName": "Max Items",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of items to return for various get/list requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "next_marker",
+      "displayName": "Next Marker",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Some requests such as list_command: hosted_zones will return a maximum number of entries - EG 100 or the number specified by O(max_items). If the number of entries exceeds this maximum another request can be sent using the NextMarker entry from the first response to get the next page of results.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A named AWS profile to use for authentication. See the AWS documentation for more information about named profiles U(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html). The C(AWS_PROFILE) environment variable may also be used. The I(profile) option is mutually exclusive with the I(aws_access_key), I(aws_secret_key) and I(session_token) options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "query",
+      "displayName": "Query",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the query action to take.",
+      "choices": [
+        "change",
+        "checker_ip_range",
+        "health_check",
+        "hosted_zone",
+        "record_sets",
+        "reusable_delegation_set"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS region to use. For global services such as IAM, Route53 and CloudFront, I(region) is ignored. The C(AWS_REGION) environment variable may also be used. See the Amazon AWS documentation for more information U(http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_id",
+      "displayName": "Resource Id",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The ID/s of the specified resource/s. Required if O(query=health_check) and O(health_check_method=tags). Required if O(query=hosted_zone) and O(hosted_zone_method=tags).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_key",
+      "displayName": "Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS secret access key. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SECRET_ACCESS_KEY) or C(AWS_SECRET_KEY) environment variables may also be used in decreasing order of preference. The I(secret_key) and I(profile) options are mutually exclusive. The I(aws_secret_access_key) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_token",
+      "displayName": "Session Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS STS session token for use with temporary credentials. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SESSION_TOKEN) environment variable may also be used. The I(session_token) and I(profile) options are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_record_name",
+      "displayName": "Start Record Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The first name in the lexicographic ordering of domain names that you want the list_command: record_sets to start listing from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of DNS record.",
+      "choices": [
+        "A",
+        "CNAME",
+        "MX",
+        "AAAA",
+        "TXT",
+        "PTR",
+        "SRV",
+        "SPF",
+        "CAA",
+        "NS",
+        "NAPTR",
+        "SOA",
+        "DS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When set to C(false), SSL certificates will not be validated for communication with the AWS APIs. Setting I(validate_certs=false) is strongly discouraged, as an alternative, consider setting I(aws_ca_bundle) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

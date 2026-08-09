@@ -1,0 +1,174 @@
+{
+  "fqcn": "checkmk.general.role",
+  "shortDescription": "Manage roles in Checkmk",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/checkmk/general/role_module.html",
+  "options": [
+    {
+      "name": "api_auth_cookie",
+      "displayName": "Api Auth Cookie",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication cookie for the Checkmk session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_auth_type",
+      "displayName": "Api Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "bearer",
+      "description": "Type of authentication to use.",
+      "choices": [
+        "bearer",
+        "basic",
+        "cookie"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_secret",
+      "displayName": "Api Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The secret to authenticate your automation user. If not set the module will fall back to the environment variable C(CHECKMK_VAR_API_SECRET).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The automation user you want to use. It has to be an 'Automation' user, not a normal one. If not set the module will fall back to the environment variable C(CHECKMK_VAR_API_USER).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "based_on",
+      "displayName": "Based On",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the built-in role to clone from when creating a new custom role. This parameter is ignored when updating an existing role.",
+      "choices": [
+        "admin",
+        "user",
+        "guest",
+        "agent_registration"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client certificate file for authentication with the web server hosting Checkmk. This is not a Checkmk feature, but one of Ansible and the respective web server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client certificate key file for authentication with the web server hosting Checkmk. This is not a Checkmk feature, but one of Ansible and the respective web server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The internal ID of the role. This is used to uniquely identify the role. It cannot be changed after creation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "permissions",
+      "displayName": "Permissions",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary of permissions to set on the role. Keys are permission IDs (e.g., C(general.use), C(wato.edit), C(wato.all_folders)). Values must be one of C(yes), C(no), or C(default). Values must be quoted strings in YAML; unquoted C(yes) and C(no) are interpreted as booleans and will be rejected. The value C(default) reverts a permission to the base role's setting. It is only valid for custom roles. For built-in roles (C(admin), C(user), C(guest), C(agent_registration)) use C(yes) or C(no) expli",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_url",
+      "displayName": "Server Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The base url of your Checkmk server including the protocol but excluding the site. If not set the module will fall back to the environment variable C(CHECKMK_VAR_SERVER_URL).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "site",
+      "displayName": "Site",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The site you want to connect to. This will be appended to the server_url as part of the API request url. If not set the module will fall back to the environment variable C(CHECKMK_VAR_SITE).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the role. C(present) ensures the role exists with the specified configuration. If the role does not exist, it will be created by cloning the role specified in C(based_on). C(absent) ensures the custom role does not exist. Built-in roles cannot be deleted.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "title",
+      "displayName": "Title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The human-readable title (alias) of the role. Optional when creating a new custom role. If omitted, the title of the source role is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate the SSL certificate of the Checkmk server. If not set the module will fall back to the environment variable C(CHECKMK_VAR_VALIDATE_CERTS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

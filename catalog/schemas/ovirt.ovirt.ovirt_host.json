@@ -1,0 +1,359 @@
+{
+  "fqcn": "ovirt.ovirt.ovirt_host",
+  "shortDescription": "Module to manage hosts in oVirt/RHV",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ovirt/ovirt/ovirt_host_module.html",
+  "options": [
+    {
+      "name": "activate",
+      "displayName": "Activate",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(state) is I(present) activate the host. This parameter is good to disable, when you don't want to change the state of host when using I(present) C(state).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "address",
+      "displayName": "Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host address. It can be either FQDN (preferred) or IP address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Dictionary with values needed to create HTTP/HTTPS connection to oVirt:",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_upgrade",
+      "displayName": "Check Upgrade",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If I(true) and C(state) is I(upgraded) run check for upgrade action before executing upgrade action.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the cluster, where host should be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enroll_certificate",
+      "displayName": "Enroll Certificate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enrolls the certificate of the host. Useful in case you get a warning that it is about to expire or has already expired. The host must be in maintenance status before enrolling the certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fetch_nested",
+      "displayName": "Fetch Nested",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If I(True) the module will fetch additional data from the API. It will fetch IDs of the VMs disks, snapshots, etc. User can configure to fetch other attributes of the nested entities by specifying C(nested_attributes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates that the host should be removed even if it is non-responsive, or if it is part of a Gluster Storage cluster and has volume bricks on it. WARNING: It doesn't forcibly remove the host if another host related operation is being executed on the host at the same time.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hosted_engine",
+      "displayName": "Hosted Engine",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If I(deploy) it means this host should deploy also hosted engine components. If I(undeploy) it means this host should un-deploy hosted engine components and this host will not function as part of the High Availability cluster.",
+      "choices": [
+        "deploy",
+        "undeploy"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the host to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iscsi",
+      "displayName": "Iscsi",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "If C(state) is I(iscsidiscover) it means that the iscsi attribute is being used to discover targets If C(state) is I(iscsilogin) it means that the iscsi attribute is being used to login to the specified targets passed as part of the iscsi attribute",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kdump_integration",
+      "displayName": "Kdump Integration",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify if host will have enabled Kdump integration.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kernel_params",
+      "displayName": "Kernel Params",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of kernel boot parameters. Following are most common kernel parameters used for host: Hostdev Passthrough & SR-IOV: intel_iommu=on Nested Virtualization: kvm-intel.nested=1 Unsafe Interrupts: vfio_iommu_type1.allow_unsafe_interrupts=1 PCI Reallocation: pci=realloc C(Note:) Modifying kernel boot parameters settings can lead to a host boot failure. Please consult the product documentation before doing any changes. Kernel boot parameters changes require host deploy and restart. The host needs ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the host to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nested_attributes",
+      "displayName": "Nested Attributes",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specifies list of the attributes which should be fetched from the API. This parameter apply only when C(fetch_nested) is I(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "override_display",
+      "displayName": "Override Display",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the display address of all VMs on this host with specified address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "override_iptables",
+      "displayName": "Override Iptables",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If True host iptables will be overridden by host deploy script. Note that C(override_iptables) is I(false) by default in oVirt/RHV.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of the root. It's required in case C(public_key) is set to I(False).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "poll_interval",
+      "displayName": "Poll Interval",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Number of the seconds the module waits until another poll request on entity status is sent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_management_enabled",
+      "displayName": "Power Management Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable power management of the host. For more comprehensive setup of PM use C(ovirt_host_pm) module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_key",
+      "displayName": "Public Key",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "I(True) if the public key should be used to authenticate to host. It's required in case C(password) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot_after_installation",
+      "displayName": "Reboot After Installation",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If I(true) reboot host after successful installation. Default value on engine is I(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot_after_upgrade",
+      "displayName": "Reboot After Upgrade",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If I(true) and C(state) is I(upgraded) reboot host after successful upgrade.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "spm_priority",
+      "displayName": "Spm Priority",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "SPM priority of the host. Integer value from 1 to 10, where higher number means higher priority.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_port",
+      "displayName": "Ssh Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The host SSH port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State which should a host to be in after successful completion. I(iscsilogin) and I(iscsidiscover) are supported since version 2.4. I(refreshed) is supported since 3.1.0",
+      "choices": [
+        "present",
+        "absent",
+        "maintenance",
+        "upgraded",
+        "started",
+        "restarted",
+        "stopped",
+        "reinstalled",
+        "iscsidiscover",
+        "iscsilogin",
+        "refreshed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "The amount of time in seconds the module should wait for the host to get into desired state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vgpu_placement",
+      "displayName": "Vgpu Placement",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If I(consolidated), each vGPU is placed on the first physical card with available space. This is the default placement, utilizing all available space on the physical cards. If I(separated), each vGPU is placed on a separate physical card, if possible. This can be useful for improving vGPU performance.",
+      "choices": [
+        "consolidated",
+        "separated"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "C(yes) if the module should wait for the entity to get into desired state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

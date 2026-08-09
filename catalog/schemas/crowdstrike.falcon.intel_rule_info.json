@@ -1,0 +1,179 @@
+{
+  "fqcn": "crowdstrike.falcon.intel_rule_info",
+  "shortDescription": "Get information about CrowdStrike Falcon Intel rules",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/crowdstrike/falcon/intel_rule_info_module.html",
+  "options": [
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The registered result of the M(crowdstrike.falcon.auth) module, or a dictionary containing the I(access_token) and I(cloud) keys. If provided, the I(client_id), I(client_secret), I(member_cid), and I(cloud) options are ignored. Useful when needing to make multiple API calls to avoid rate limiting issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike API client ID to use. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_CLIENT_ID) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_secret",
+      "displayName": "Client Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike API secret that corresponds to the client ID. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_CLIENT_SECRET) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud",
+      "displayName": "Cloud",
+      "type": "string",
+      "required": false,
+      "default": "us-1",
+      "description": "The CrowdStrike cloud region to use. All clouds are automatically discovered if not specified, except for the C(us-gov-1) cloud. The C(FALCON_CLOUD) environment variable can also be used.",
+      "choices": [
+        "us-1",
+        "us-2",
+        "us-gov-1",
+        "eu-1"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Substring match on the description field.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ext_headers",
+      "displayName": "Ext Headers",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Extended headers that are prepended to the default headers dictionary.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit",
+      "displayName": "Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The maximum number of rule IDs to return. [integer, 1-5000]",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "member_cid",
+      "displayName": "Member Cid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike member CID for MSSP authentication. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_MEMBER_CID) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Search by rule title.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "q",
+      "displayName": "Q",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Perform a generic substring search across all fields.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sort",
+      "displayName": "Sort",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The property to sort by in FQL (Falcon Query Language) syntax (e.g. created_date|asc). See the L(FalconPy documentation,https://www.falconpy.io/Usage/Falcon-Query-Language.html#using-fql-in-a-sort) for more information about sorting with FQL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Search for rule tags.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The rule news report type.",
+      "choices": [
+        "common-event-format",
+        "netwitness",
+        "snort-suricata-changelog",
+        "snort-suricata-master",
+        "snort-suricata-update",
+        "yara-changelog",
+        "yara-master",
+        "yara-update",
+        "cql-master",
+        "cql-changelog",
+        "cql-update"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_agent",
+      "displayName": "User Agent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Custom User-Agent string to use for requests to the API. The user agent string is prepended to the default user agent string (C(crowdstrike-ansible/<version>)). See L(RFC 7231,https://tools.ietf.org/html/rfc7231#section-5.5.3) for more information. The C(FALCON_USER_AGENT) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

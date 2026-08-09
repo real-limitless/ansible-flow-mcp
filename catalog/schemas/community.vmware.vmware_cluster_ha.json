@@ -1,7 +1,322 @@
 {
   "fqcn": "community.vmware.vmware_cluster_ha",
-  "shortDescription": "vmware_cluster_ha",
+  "shortDescription": "Manage High Availability (HA) on VMware vSphere clusters",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_cluster_ha_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "advanced_settings",
+      "displayName": "Advanced Settings",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "A dictionary of advanced HA settings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "apd_delay",
+      "displayName": "Apd Delay",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "The response recovery delay time in sec for storage failures categorized as All Paths Down (APD). Only set if O(apd_response=restartConservative) or O(apd_response=restartAggressive).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "apd_reaction",
+      "displayName": "Apd Reaction",
+      "type": "string",
+      "required": false,
+      "default": "reset",
+      "description": "VM response recovery reaction for storage failures categorized as All Paths Down (APD). Only set if O(apd_response=restartConservative) or O(apd_response=restartAggressive).",
+      "choices": [
+        "reset",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "apd_response",
+      "displayName": "Apd Response",
+      "type": "string",
+      "required": false,
+      "default": "warning",
+      "description": "VM storage protection setting for storage failures categorized as All Paths Down (APD).",
+      "choices": [
+        "disabled",
+        "warning",
+        "restartConservative",
+        "restartAggressive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_name",
+      "displayName": "Cluster Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the cluster to be managed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the datacenter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable",
+      "displayName": "Enable",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to enable HA.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "failover_host_admission_control",
+      "displayName": "Failover Host Admission Control",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configure dedicated failover hosts. O(slot_based_admission_control), O(reservation_based_admission_control) and O(failover_host_admission_control) are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha_host_monitoring",
+      "displayName": "Ha Host Monitoring",
+      "type": "string",
+      "required": false,
+      "default": "enabled",
+      "description": "Whether HA restarts virtual machines after a host fails. If set to V(enabled), HA restarts virtual machines after a host fails. If set to V(disabled), HA does not restart virtual machines after a host fails. If O(enable=false), this value is ignored.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha_restart_priority",
+      "displayName": "Ha Restart Priority",
+      "type": "string",
+      "required": false,
+      "default": "medium",
+      "description": "Priority HA gives to a virtual machine if sufficient capacity is not available to power on all failed virtual machines. Valid only when O(ha_vm_monitoring=vmAndAppMonitoring) or O(ha_vm_monitoring=vmMonitoringOnly). If set to V(disabled), then HA is disabled for this virtual machine. If set to V(high), then virtual machine with this priority have a higher chance of powering on after a failure, when there is insufficient capacity on hosts to meet all virtual machine needs. If set to V(medium), th",
+      "choices": [
+        "disabled",
+        "high",
+        "low",
+        "medium"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha_vm_failure_interval",
+      "displayName": "Ha Vm Failure Interval",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The number of seconds after which virtual machine is declared as failed if no heartbeat has been received. This setting is only valid if O(ha_vm_monitoring=vmAndAppMonitoring) or O(ha_vm_monitoring=vmMonitoringOnly). Unit is seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha_vm_max_failure_window",
+      "displayName": "Ha Vm Max Failure Window",
+      "type": "number",
+      "required": false,
+      "default": -1,
+      "description": "The number of seconds for the window during which up to O(ha_vm_max_failures) resets can occur before automated responses stop. Valid only when O(ha_vm_monitoring=vmAndAppMonitoring) or O(ha_vm_monitoring=vmMonitoringOnly). Unit is seconds. Default specifies no failure window.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha_vm_max_failures",
+      "displayName": "Ha Vm Max Failures",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Maximum number of failures and automated resets allowed during the time that O(ha_vm_max_failure_window) specifies. Valid only when O(ha_vm_monitoring=vmAndAppMonitoring) or O(ha_vm_monitoring=vmMonitoringOnly).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha_vm_min_up_time",
+      "displayName": "Ha Vm Min Up Time",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "The number of seconds for the virtual machine's heartbeats to stabilize after the virtual machine has been powered on. Valid only when O(ha_vm_monitoring=vmAndAppMonitoring) or O(ha_vm_monitoring=vmMonitoringOnly). Unit is seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha_vm_monitoring",
+      "displayName": "Ha Vm Monitoring",
+      "type": "string",
+      "required": false,
+      "default": "vmMonitoringDisabled",
+      "description": "State of virtual machine health monitoring service. If set to V(vmAndAppMonitoring), HA response to both virtual machine and application heartbeat failure. If set to V(vmMonitoringDisabled), virtual machine health monitoring is disabled. If set to V(vmMonitoringOnly), HA response to virtual machine heartbeat failure. If O(enable=false), then this value is ignored.",
+      "choices": [
+        "vmAndAppMonitoring",
+        "vmMonitoringOnly",
+        "vmMonitoringDisabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_isolation_response",
+      "displayName": "Host Isolation Response",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "Indicates whether or VMs should be powered off if a host determines that it is isolated from the rest of the compute resource. If set to V(none), do not power off VMs in the event of a host network isolation. If set to V(powerOff), power off VMs in the event of a host network isolation. If set to V(shutdown), shut down VMs guest operating system in the event of a host network isolation.",
+      "choices": [
+        "none",
+        "powerOff",
+        "shutdown"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pdl_response",
+      "displayName": "Pdl Response",
+      "type": "string",
+      "required": false,
+      "default": "warning",
+      "description": "VM storage protection setting for storage failures categorized as Permenant Device Loss (PDL).",
+      "choices": [
+        "disabled",
+        "warning",
+        "restartAggressive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reservation_based_admission_control",
+      "displayName": "Reservation Based Admission Control",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configure reservation based admission control policy. O(slot_based_admission_control), O(reservation_based_admission_control) and O(failover_host_admission_control) are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "slot_based_admission_control",
+      "displayName": "Slot Based Admission Control",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configure slot based admission control policy. O(slot_based_admission_control), O(reservation_based_admission_control) and O(failover_host_admission_control) are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

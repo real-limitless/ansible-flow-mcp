@@ -2,6 +2,121 @@
   "fqcn": "microsoft.ad.object_info",
   "shortDescription": "Gather information an Active Directory object",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/microsoft/ad/object_info_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "domain_password",
+      "displayName": "Domain Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for I(domain_username). This can be set under the R(play's module defaults,module_defaults_groups) under the C(group/microsoft.ad.domain) group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_server",
+      "displayName": "Domain Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specified the Active Directory Domain Services instance to connect to. Can be in the form of an FQDN or NetBIOS name. If not specified then the value is based on the default domain of the computer running PowerShell. This can be set under the R(play's module defaults,module_defaults_groups) under the C(group/microsoft.ad.domain) group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_username",
+      "displayName": "Domain Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use when interacting with AD. If this is not set then the user that is used for authentication will be the connection user. Ansible will be unable to use the connection user unless auth is Kerberos with credential delegation or CredSSP, or become is used on the task. This can be set under the R(play's module defaults,module_defaults_groups) under the C(group/microsoft.ad.domain) group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filter",
+      "displayName": "Filter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a query string using the PowerShell Expression Language syntax. This follows the same rules and formatting as the C(-Filter) parameter for the PowerShell AD cmdlets except there is no variable substitutions. This is mutually exclusive with I(identity) and I(ldap_filter).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identity",
+      "displayName": "Identity",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a single Active Directory object by its distinguished name or its object GUID. This is mutually exclusive with I(filter) and I(ldap_filter). This cannot be used with either the I(search_base) or I(search_scope) options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_deleted",
+      "displayName": "Include Deleted",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Also search for deleted Active Directory objects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_filter",
+      "displayName": "Ldap Filter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Like I(filter) but this is a traditional LDAP query string to filter the objects to return. This is mutually exclusive with I(filter) and I(identity).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "properties",
+      "displayName": "Properties",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of properties to return. If a property is C(*), all properties that have a set value on the AD object will be returned. If a property is valid on the object but not set, it is only returned if defined explicitly in this option list. The properties C(DistinguishedName), C(Name), C(ObjectClass), and C(ObjectGUID) are always returned. Specifying multiple properties can have a performance impact, it is best to only return what is needed. If an invalid property is specified then the module wil",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search_base",
+      "displayName": "Search Base",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the Active Directory path to search for objects in. This cannot be set with I(identity). By default the search base is the default naming context of the target AD instance which is the DN returned by C(Get-ADRootDSE | Select-Object -ExpandProperty defaultNamingContext).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search_scope",
+      "displayName": "Search Scope",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the scope of when searching for an object in the I(search_base). C(base) will limit the search to the base object so the maximum number of objects returned is always one. This will not search any objects inside a container. C(one_level) will search the current path and any immediate objects in that path. C(subtree) will search the current path and all objects of that path recursively. This cannot be set with I(identity).",
+      "choices": [
+        "base",
+        "one_level",
+        "subtree"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -2,6 +2,395 @@
   "fqcn": "google.cloud.gcp_alloydb_cluster",
   "shortDescription": "Creates a GCP Alloydb.Cluster resource",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/google/cloud/gcp_alloydb_cluster_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The access token used to authenticate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "annotations",
+      "displayName": "Annotations",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Annotations to allow client tools to store small amount of arbitrary data. This is distinct from labels. https://google.aip.dev/128 An object containing a list of \"key\": value pairs. Example: { \"name\": \"wrench\", \"mass\": \"1.3kg\", \"count\": \"3\" }. **Note**: This field is non-authoritative, and will only manage the annotations present in your configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_kind",
+      "displayName": "Auth Kind",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of credential used.",
+      "choices": [
+        "accesstoken",
+        "application",
+        "machineaccount",
+        "serviceaccount"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "automated_backup_policy",
+      "displayName": "Automated Backup Policy",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The automated backup policy for this cluster. AutomatedBackupPolicy is disabled by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_id",
+      "displayName": "Cluster Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The ID of the alloydb cluster. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_type",
+      "displayName": "Cluster Type",
+      "type": "string",
+      "required": false,
+      "default": "PRIMARY",
+      "description": "The type of cluster. If not set, defaults to PRIMARY.",
+      "choices": [
+        "PRIMARY",
+        "SECONDARY"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "continuous_backup_config",
+      "displayName": "Continuous Backup Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The continuous backup config for this cluster. If no policy is provided then the default policy will be used. The default policy takes one backup a day and retains backups for 14 days.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_version",
+      "displayName": "Database Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The database engine major version. This is an optional field and it's populated at the Cluster creation time. Note: Changing this field to a higer version results in upgrading the AlloyDB cluster which is an irreversible change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dataplex_config",
+      "displayName": "Dataplex Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration for Dataplex integration. This is an optional field. If not set, Dataplex integration will be enabled by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deletion_policy",
+      "displayName": "Deletion Policy",
+      "type": "string",
+      "required": false,
+      "default": "DEFAULT",
+      "description": "Policy to determine if the cluster should be deleted forcefully. Deleting a cluster forcefully, deletes the cluster and all its associated instances within the cluster. Deleting a Secondary cluster with a secondary instance REQUIRES setting deletion_policy = \"FORCE\" otherwise an error is returned. This is needed as there is no support to delete just the secondary instance, and the only way to delete secondary instance is to delete the associated secondary cluster forcefully which also deletes th",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deletion_protection",
+      "displayName": "Deletion Protection",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether Terraform will be prevented from destroying the cluster. When the field is set to true or unset in Terraform state, a `terraform apply` or `terraform destroy` that would delete the cluster will fail. When the field is set to false, deleting the cluster is allowed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User-settable and human-readable display name for the Cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_config",
+      "displayName": "Encryption Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "EncryptionConfig describes the encryption config of a cluster or a backup that is encrypted with a CMEK (customer-managed encryption key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "env_type",
+      "displayName": "Env Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies which Ansible environment you're running this module within. This should not be set unless you know what you're doing. This only alters the User Agent string for any API requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "etag",
+      "displayName": "Etag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "For Resource freshness validation (https://google.aip.dev/154).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initial_user",
+      "displayName": "Initial User",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Initial user to setup during cluster creation. If unset for new Clusters, a postgres role with null password is created. You will need to create additional users or set the password in order to log in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "User-defined labels for the alloydb cluster. **Note**: This field is non-authoritative, and will only manage the labels present in your configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location",
+      "displayName": "Location",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The location where the alloydb cluster should reside. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maintenance_update_policy",
+      "displayName": "Maintenance Update Policy",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "MaintenanceUpdatePolicy defines the policy for system updates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_config",
+      "displayName": "Network Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Metadata related to network configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Google Cloud Platform project to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "psc_config",
+      "displayName": "Psc Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration for Private Service Connect (PSC) for the cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restore_backup_source",
+      "displayName": "Restore Backup Source",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The source when restoring from a backup. Conflicts with 'restore_continuous_backup_source', 'restore_backupdr_backup_source' and 'restore_backupdr_pitr_source', they can't be set together. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restore_backupdr_backup_source",
+      "displayName": "Restore Backupdr Backup Source",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The source when restoring from a backup. Conflicts with 'restore_continuous_backup_source',  'restore_backup_source' and 'restore_backupdr_pitr_source', they can't be set together. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restore_backupdr_pitr_source",
+      "displayName": "Restore Backupdr Pitr Source",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The BackupDR source used for point in time recovery. Conflicts with 'restore_backupdr_backup_source', 'restore_continuous_backup_source' and 'restore_backupdr_backup_source', they can't be set togeter. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restore_continuous_backup_source",
+      "displayName": "Restore Continuous Backup Source",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The source when restoring via point in time recovery (PITR). Conflicts with 'restore_backup_source', 'restore_backupdr_backup_source' and 'restore_backupdr_pitr_source', they can't be set together. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scopes",
+      "displayName": "Scopes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of scopes to be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secondary_config",
+      "displayName": "Secondary Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration of the secondary cluster for Cross Region Replication. This should be set if and only if the cluster is of type SECONDARY.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_contents",
+      "displayName": "Service Account Contents",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_email",
+      "displayName": "Service Account Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional service account email address if machineaccount is selected and the user does not wish to use the default email.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_file",
+      "displayName": "Service Account File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of a Service Account JSON file if serviceaccount is selected as type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skip_await_major_version_upgrade",
+      "displayName": "Skip Await Major Version Upgrade",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Set to true to skip awaiting on the major version upgrade of the cluster. Possible values: true, false Default value: \"true\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the resource should exist in GCP.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subscription_type",
+      "displayName": "Subscription Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The subscrition type of cluster.",
+      "choices": [
+        "TRIAL",
+        "STANDARD"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

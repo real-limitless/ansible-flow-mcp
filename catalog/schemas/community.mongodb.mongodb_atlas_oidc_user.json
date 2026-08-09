@@ -2,6 +2,126 @@
   "fqcn": "community.mongodb.mongodb_atlas_oidc_user",
   "shortDescription": "Manage OIDC database users in Atlas",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/mongodb/mongodb_atlas_oidc_user_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Atlas API private key. Alternative to C(service_account_secret).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Atlas API public key. Alternative to C(service_account_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_name",
+      "displayName": "Database Name",
+      "type": "string",
+      "required": false,
+      "default": "$external",
+      "description": "Database against which Atlas authenticates the user. Must be C($external) for C(USER) and C(admin) for C(IDP_GROUP).",
+      "choices": [
+        "admin",
+        "$external"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_id",
+      "displayName": "Group Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Unique identifier of the Atlas project (group).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oidc_auth_type",
+      "displayName": "Oidc Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "IDP_GROUP",
+      "description": "OIDC authentication type. C(USER) for individual human users authenticated via OIDC. C(IDP_GROUP) for IdP groups mapped to MongoDB roles.",
+      "choices": [
+        "USER",
+        "IDP_GROUP"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roles",
+      "displayName": "Roles",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Array of roles and the databases on which the roles apply.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_id",
+      "displayName": "Service Account Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "MongoDB Atlas Service Account client ID (OAuth2). Mutually exclusive with C(api_username).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_secret",
+      "displayName": "Service Account Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "MongoDB Atlas Service Account client secret (OAuth2). Mutually exclusive with C(api_password).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the user.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Username for OIDC USER or IdP group identifier for IDP_GROUP. For IDP_GROUP format is C(<idp_id>/<group_name>).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

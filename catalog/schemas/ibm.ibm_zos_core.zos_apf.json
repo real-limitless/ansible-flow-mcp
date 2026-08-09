@@ -1,0 +1,115 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_apf",
+  "shortDescription": "Add or remove libraries to Authorized Program Facility (APF)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_apf_module.html",
+  "options": [
+    {
+      "name": "batch",
+      "displayName": "Batch",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of dictionaries for adding or removing libraries. This is mutually exclusive with C(library), C(volume), C(sms) Can be used with C(persistent)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_dynamic",
+      "displayName": "Force Dynamic",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Will force the APF list format to \"DYNAMIC\" before adding or removing libraries. If the format is \"STATIC\", the format will be changed to \"DYNAMIC\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "library",
+      "displayName": "Library",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The library name to be added or removed from the APF list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Change APF list format to \"DYNAMIC\" C(operation=set_dynamic) or \"STATIC\" C(operation=set_static) Display APF list current format C(operation=check_format) Display APF list entries when C(operation=list) C(library), C(volume) and C(sms) will be used as filters. If C(operation) is not set, add or remove operation will be ignored.",
+      "choices": [
+        "set_dynamic",
+        "set_static",
+        "check_format",
+        "list"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persistent",
+      "displayName": "Persistent",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Add/remove persistent entries to or from I(target) C(library) will not be persisted or removed if C(persistent=None)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sms",
+      "displayName": "Sms",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates that the library specified in the C(library) parameter is managed by the storage management subsystem (SMS), and therefore no volume is associated with the library. If C(sms=True), C(volume) value will be ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Ensure that the library is added C(state=present) or removed C(state=absent). The APF list format has to be \"DYNAMIC\".",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tmp_hlq",
+      "displayName": "Tmp Hlq",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the default high level qualifier (HLQ) for temporary and backup datasets. The default HLQ is the Ansible user used to execute the module and if that is not available, then the value C(TMPHLQ) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume",
+      "displayName": "Volume",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The identifier for the volume containing the library specified in the C(library) parameter. The values must be one the following. 1. The volume serial number. 2. Six asterisks C(******), indicating that the system must use the volume serial number of the current system residence (SYSRES) volume. 3. *MCAT*, indicating that the system must use the volume serial number of the volume containing the master catalog. If C(volume) is not specified, C(library) has to be cataloged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

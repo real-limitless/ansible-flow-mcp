@@ -2,6 +2,331 @@
   "fqcn": "community.crypto.x509_crl",
   "shortDescription": "Generate Certificate Revocation Lists (CRLs)",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/crypto/x509_crl_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create a backup file including a timestamp so you can get the original CRL back if you overwrote it with a new one by accident.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "crl_mode",
+      "displayName": "Crl Mode",
+      "type": "string",
+      "required": false,
+      "default": "generate",
+      "description": "Defines how to process entries of existing CRLs. If set to V(generate), makes sure that the CRL has the exact set of revoked certificates as specified in O(revoked_certificates). If set to V(update), makes sure that the CRL contains the revoked certificates from O(revoked_certificates), but can also contain other revoked certificates. If the CRL file already exists, all entries from the existing CRL will also be included in the new CRL. When using V(update), you might be interested in setting O(",
+      "choices": [
+        "generate",
+        "update"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "digest",
+      "displayName": "Digest",
+      "type": "string",
+      "required": false,
+      "default": "sha256",
+      "description": "Digest algorithm to be used when signing the CRL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Should the CRL be forced to be regenerated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "format",
+      "displayName": "Format",
+      "type": "string",
+      "required": false,
+      "default": "pem",
+      "description": "Whether the CRL file should be in PEM or DER format. If an existing CRL file does match everything but O(format), it will be converted to the correct format instead of regenerated.",
+      "choices": [
+        "pem",
+        "der"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_timestamps",
+      "displayName": "Ignore Timestamps",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the timestamps O(last_update), O(next_update) and O(revoked_certificates[].revocation_date) should be ignored for idempotency checks. The timestamp O(revoked_certificates[].invalidity_date) will never be ignored. Use this in combination with relative timestamps for these values to get idempotency.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "issuer",
+      "displayName": "Issuer",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Key/value pairs that will be present in the issuer name field of the CRL. If you need to specify more than one value with the same key, use a list as value. If the order of the components is important, use O(issuer_ordered). One of O(issuer) and O(issuer_ordered) is required if O(state) is V(present). Mutually exclusive with O(issuer_ordered).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "issuer_ordered",
+      "displayName": "Issuer Ordered",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of dictionaries, where every dictionary must contain one key/value pair. This key/value pair will be present in the issuer name field of the CRL. If you want to specify more than one value with the same key in a row, you can use a list as value. One of O(issuer) and O(issuer_ordered) is required if O(state) is V(present). Mutually exclusive with O(issuer).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "last_update",
+      "displayName": "Last Update",
+      "type": "string",
+      "required": false,
+      "default": "+0s",
+      "description": "The point in time from which this CRL can be trusted. Time can be specified either as relative time or as absolute timestamp. Time will always be interpreted as UTC. Valid format is C([+-]timespec | ASN.1 TIME) where timespec can be an integer + C([w | d | h | m | s]) (for example V(+32w1d2h)). Note that if using relative time this module is NOT idempotent, except when O(ignore_timestamps) is set to V(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name_encoding",
+      "displayName": "Name Encoding",
+      "type": "string",
+      "required": false,
+      "default": "ignore",
+      "description": "How to encode names (DNS names, URIs, email addresses) in return values. V(ignore) will use the encoding returned by the backend. V(idna) will convert all labels of domain names to IDNA encoding. IDNA2008 will be preferred, and IDNA2003 will be used if IDNA2008 encoding fails. V(unicode) will convert all labels of domain names to Unicode. IDNA2008 will be preferred, and IDNA2003 will be used if IDNA2008 decoding fails. B(Note) that V(idna) and V(unicode) require the L(idna Python library,https:/",
+      "choices": [
+        "ignore",
+        "idna",
+        "unicode"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "next_update",
+      "displayName": "Next Update",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The absolute latest point in time by which this O(issuer) is expected to have issued another CRL. Many clients will treat a CRL as expired once O(next_update) occurs. Time can be specified either as relative time or as absolute timestamp. Time will always be interpreted as UTC. Valid format is C([+-]timespec | ASN.1 TIME) where timespec can be an integer + C([w | d | h | m | s]) (for example V(+32w1d2h)). Note that if using relative time this module is NOT idempotent, except when O(ignore_timest",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Remote absolute path where the generated CRL file should be created or is already located.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_content",
+      "displayName": "Privatekey Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The content of the CA's private key to use when signing the CRL. Either O(privatekey_path) or O(privatekey_content) must be specified if O(state) is V(present), but not both.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_passphrase",
+      "displayName": "Privatekey Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The passphrase for the O(privatekey_path). This is required if the private key is password protected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_path",
+      "displayName": "Privatekey Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the CA's private key to use when signing the CRL. Either O(privatekey_path) or O(privatekey_content) must be specified if O(state) is V(present), but not both.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "return_content",
+      "displayName": "Return Content",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), will return the (current or generated) CRL's content as RV(crl).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "revoked_certificates",
+      "displayName": "Revoked Certificates",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of certificates to be revoked. Required if O(state) is V(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serial_numbers",
+      "displayName": "Serial Numbers",
+      "type": "string",
+      "required": false,
+      "default": "integer",
+      "description": "This option determines which values will be accepted for O(revoked_certificates[].serial_number). If set to V(integer) (default), serial numbers are assumed to be integers, for example V(66223). (This example value is equivalent to the hex octet string V(01:02:AF)). If set to V(hex-octets), serial numbers are assumed to be colon-separated hex octet strings, for example V(01:02:AF). (This example value is equivalent to the integer V(66223)).",
+      "choices": [
+        "integer",
+        "hex-octets"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the CRL file should exist or not, taking action if the state is different from what is stated.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -2,6 +2,439 @@
   "fqcn": "oracle.oci.oci_database_management_tablespace",
   "shortDescription": "Manage a Tablespace resource in Oracle Cloud Infrastructure",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/oracle/oci/oci_database_management_tablespace_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the user, on whose behalf, OCI APIs are invoked. If not set, then the value of the OCI_USER_ID environment variable, if any, is used. This option is required if the user is not specified through a configuration file (See C(config_file_location)). To get the user's OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_fingerprint",
+      "displayName": "Api User Fingerprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fingerprint for the key pair being used. If not set, then the value of the OCI_USER_FINGERPRINT environment variable, if any, is used. This option is required if the key fingerprint is not specified through a configuration file (See C(config_file_location)). To get the key pair's fingerprint value please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_file",
+      "displayName": "Api User Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Full path and filename of the private key (in PEM format). If not set, then the value of the OCI_USER_KEY_FILE variable, if any, is used. This option is required if the private key is not specified through a configuration file (See C(config_file_location)). If the key is encrypted with a pass-phrase, the C(api_user_key_pass_phrase) option must also be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_pass_phrase",
+      "displayName": "Api User Key Pass Phrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase used by the key referenced in C(api_user_key_file), if it is encrypted. If not set, then the value of the OCI_USER_KEY_PASS_PHRASE variable, if any, is used. This option is required if the key passphrase is not specified through a configuration file (See C(config_file_location)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_purpose",
+      "displayName": "Auth Purpose",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The auth purpose which can be used in conjunction with 'auth_type=instance_principal'. The default auth_purpose for instance_principal is None.",
+      "choices": [
+        "service_principal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "api_key",
+      "description": "The type of authentication to use for making API requests. By default C(auth_type=\"api_key\") based authentication is performed and the API key (see I(api_user_key_file)) in your config file will be used. If this 'auth_type' module option is not specified, the value of the OCI_ANSIBLE_AUTH_TYPE, if any, is used. Use C(auth_type=\"instance_principal\") to use instance principal based authentication when running ansible playbooks within an OCI compute instance.",
+      "choices": [
+        "api_key",
+        "instance_principal",
+        "instance_obo_user",
+        "resource_principal",
+        "security_token"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_extend_max_size",
+      "displayName": "Auto Extend Max Size",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The maximum disk space allowed for automatic extension of the data files or temp files. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_extend_next_size",
+      "displayName": "Auto Extend Next Size",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The size of the next increment of disk space to be allocated automatically when more extents are required. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "block_size_in_kilobytes",
+      "displayName": "Block Size In Kilobytes",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Block size for the tablespace.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_bundle",
+      "displayName": "Cert Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full path to a CA certificate bundle to be used for SSL verification. This will override the default CA certificate bundle. If not set, then the value of the OCI_ANSIBLE_CERT_BUNDLE variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file_location",
+      "displayName": "Config File Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to configuration file. If not set then the value of the OCI_CONFIG_FILE environment variable, if any, is used. Otherwise, defaults to ~/.oci/config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_profile_name",
+      "displayName": "Config Profile Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The profile to load from the config file referenced by C(config_file_location). If not set, then the value of the OCI_CONFIG_PROFILE environment variable, if any, is used. Otherwise, defaults to the \"DEFAULT\" profile in C(config_file_location).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "credential_details",
+      "displayName": "Credential Details",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_files",
+      "displayName": "Data Files",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of data files or temp files created for the tablespace.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_compress",
+      "displayName": "Default Compress",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The default compression of data for all tables created in the tablespace.",
+      "choices": [
+        "NO_COMPRESS",
+        "BASIC_COMPRESS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_algorithm",
+      "displayName": "Encryption Algorithm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the encryption algorithm to be used for tablespace encryption.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extent_management",
+      "displayName": "Extent Management",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies how the extents of the tablespace should be managed.",
+      "choices": [
+        "AUTOALLOCATE",
+        "UNIFORM"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extent_uniform_size",
+      "displayName": "Extent Uniform Size",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The size of the extent when the tablespace is managed with uniform extents of a specific size.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_count",
+      "displayName": "File Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of data files or temp files created for the tablespace. This is for Oracle Managed Files only.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_size",
+      "displayName": "File Size",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The size of each data file or temp file. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_create",
+      "displayName": "Force Create",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to attempt non-idempotent creation of a resource. By default, create resource is an idempotent operation, and doesn't create the resource if it already exists. Setting this option to true, forcefully creates a copy of the resource, even if it already exists.This option is mutually exclusive with I(key_by).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_auto_extensible",
+      "displayName": "Is Auto Extensible",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the data file or temp file can be extended automatically. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_bigfile",
+      "displayName": "Is Bigfile",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the tablespace is a bigfile or smallfile tablespace. A bigfile tablespace contains only one data file or temp file, which can contain up to approximately 4 billion (232) blocks. A smallfile tablespace is a traditional Oracle tablespace, which can contain 1022 data files or temp files, each of which can contain up to approximately 4 million (222) blocks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_default",
+      "displayName": "Is Default",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the tablespace is the default tablespace. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_encrypted",
+      "displayName": "Is Encrypted",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether the tablespace is encrypted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_max_size_unlimited",
+      "displayName": "Is Max Size Unlimited",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the disk space of the data file or temp file can be limited. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_reusable",
+      "displayName": "Is Reusable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether Oracle can reuse the data file or temp file. Reuse is only allowed when the file name is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_by",
+      "displayName": "Key By",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of attributes of this resource which should be used to uniquely identify an instance of the resource. By default, all the attributes of a resource are used to uniquely identify a resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "managed_database_id",
+      "displayName": "Managed Database Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the Managed Database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the tablespace. It must be unique within a database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realm_specific_endpoint_template_enabled",
+      "displayName": "Realm Specific Endpoint Template Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable/Disable realm specific endpoint template for service client. By Default, realm specific endpoint template is disabled. If not set, then the value of the OCI_REALM_SPECIFIC_SERVICE_ENDPOINT_TEMPLATE_ENABLED variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle Cloud Infrastructure region to use for all OCI API requests. If not set, then the value of the OCI_REGION variable, if any, is used. This option is required if the region is not specified through a configuration file (See C(config_file_location)). Please refer to U(https://docs.us-phoenix-1.oraclecloud.com/Content/General/Concepts/regions.htm) for more information on OCI regions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "segment_management",
+      "displayName": "Segment Management",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether tablespace segment management should be automatic or manual.",
+      "choices": [
+        "AUTO",
+        "MANUAL"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the Tablespace. Use I(state=present) to create or update a Tablespace.",
+      "choices": [
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The status of the tablespace. This parameter is updatable.",
+      "choices": [
+        "READ_ONLY",
+        "READ_WRITE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenancy",
+      "displayName": "Tenancy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OCID of your tenancy. If not set, then the value of the OCI_TENANCY variable, if any, is used. This option is required if the tenancy OCID is not specified through a configuration file (See C(config_file_location)). To get the tenancy OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of tablespace. This parameter is updatable.",
+      "choices": [
+        "PERMANENT",
+        "TEMPORARY"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

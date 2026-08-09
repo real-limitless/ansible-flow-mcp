@@ -2,6 +2,108 @@
   "fqcn": "ansible.windows.win_acl",
   "shortDescription": "Set file/directory/registry/certificate permissions for a system user or group",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_acl_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "follow",
+      "displayName": "Follow",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Follow the symlinks and junctions to apply the ACLs to the target instead of the link.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inherit",
+      "displayName": "Inherit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Inherit flags on the ACL rules. Can be specified as a comma separated list, e.g. C(ContainerInherit), C(ObjectInherit). For more information on the choices see MSDN InheritanceFlags enumeration at U(https://msdn.microsoft.com/en-us/library/system.security.accesscontrol.inheritanceflags.aspx). Defaults to C(ContainerInherit, ObjectInherit) for Directories.",
+      "choices": [
+        "ContainerInherit",
+        "ObjectInherit"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The path to the file or directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "propagation",
+      "displayName": "Propagation",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "Propagation flag on the ACL rules. For more information on the choices see MSDN PropagationFlags enumeration at U(https://msdn.microsoft.com/en-us/library/system.security.accesscontrol.propagationflags.aspx).",
+      "choices": [
+        "InheritOnly",
+        "None",
+        "NoPropagateInherit"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rights",
+      "displayName": "Rights",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The rights/permissions that are to be allowed/denied for the specified user or group for the item at C(path). If C(path) is a file or directory, rights can be any right under MSDN FileSystemRights U(https://msdn.microsoft.com/en-us/library/system.security.accesscontrol.filesystemrights.aspx). If C(path) is a registry key, rights can be any right under MSDN RegistryRights U(https://msdn.microsoft.com/en-us/library/system.security.accesscontrol.registryrights.aspx). If I(path) is a certificate key",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Specify whether to add C(present) or remove C(absent) the specified access rule.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify whether to allow or deny the rights specified.",
+      "choices": [
+        "allow",
+        "deny"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "User or Group to add specified rights to act on src file/folder or registry key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

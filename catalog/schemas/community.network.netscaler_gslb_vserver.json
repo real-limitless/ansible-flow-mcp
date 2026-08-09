@@ -1,0 +1,475 @@
+{
+  "fqcn": "community.network.netscaler_gslb_vserver",
+  "shortDescription": "Configure gslb vserver entities in Netscaler.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/network/netscaler_gslb_vserver_module.html",
+  "options": [
+    {
+      "name": "appflowlog",
+      "displayName": "Appflowlog",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enable logging appflow flow information.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backuplbmethod",
+      "displayName": "Backuplbmethod",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Backup load balancing method. Becomes operational if the primary load balancing method fails or cannot be used. Valid only if the primary method is based on either round-trip time (RTT) or static proximity.",
+      "choices": [
+        "ROUNDROBIN",
+        "LEASTCONNECTION",
+        "LEASTRESPONSETIME",
+        "SOURCEIPHASH",
+        "LEASTBANDWIDTH",
+        "LEASTPACKETS",
+        "STATICPROXIMITY",
+        "RTT",
+        "CUSTOMLOAD"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Any comments that you might want to associate with the GSLB virtual server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "considereffectivestate",
+      "displayName": "Considereffectivestate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If the primary state of all bound GSLB services is DOWN, consider the effective states of all the GSLB services, obtained through the Metrics Exchange Protocol (MEP), when determining the state of the GSLB virtual server. To consider the effective state, set the parameter to STATE_ONLY. To disregard the effective state, set the parameter to NONE. The effective state of a GSLB service is the ability of the corresponding virtual server to serve traffic. The effective state of the load balancing vi",
+      "choices": [
+        "NONE",
+        "STATE_ONLY"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disabled",
+      "displayName": "Disabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When set to C(yes) the GSLB Vserver state will be set to C(disabled). When set to C(no) the GSLB Vserver state will be set to C(enabled). Note that due to limitations of the underlying NITRO API a C(disabled) state change alone does not cause the module result to report a changed status.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disableprimaryondown",
+      "displayName": "Disableprimaryondown",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Continue to direct traffic to the backup chain even after the primary GSLB virtual server returns to the UP state. Used when spillover is configured for the virtual server.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dnsrecordtype",
+      "displayName": "Dnsrecordtype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "DNS record type to associate with the GSLB virtual server's domain name. Default value: A Possible values = A, AAAA, CNAME, NAPTR",
+      "choices": [
+        "A",
+        "AAAA",
+        "CNAME",
+        "NAPTR"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_bindings",
+      "displayName": "Domain Bindings",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "List of bindings for domains for this glsb vserver.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dynamicweight",
+      "displayName": "Dynamicweight",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify if the appliance should consider the service count, service weights, or ignore both when using weight-based load balancing methods. The state of the number of services bound to the virtual server help the appliance to select the service.",
+      "choices": [
+        "SERVICECOUNT",
+        "SERVICEWEIGHT",
+        "DISABLED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lbmethod",
+      "displayName": "Lbmethod",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Load balancing method for the GSLB virtual server. Default value: LEASTCONNECTION Possible values = ROUNDROBIN, LEASTCONNECTION, LEASTRESPONSETIME, SOURCEIPHASH, LEASTBANDWIDTH, LEASTPACKETS, STATICPROXIMITY, RTT, CUSTOMLOAD",
+      "choices": [
+        "ROUNDROBIN",
+        "LEASTCONNECTION",
+        "LEASTRESPONSETIME",
+        "SOURCEIPHASH",
+        "LEASTBANDWIDTH",
+        "LEASTPACKETS",
+        "STATICPROXIMITY",
+        "RTT",
+        "CUSTOMLOAD"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mir",
+      "displayName": "Mir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Include multiple IP addresses in the DNS responses sent to clients.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name for the GSLB virtual server. Must begin with an ASCII alphanumeric or underscore C(_) character, and must contain only ASCII alphanumeric, underscore C(_), hash C(#), period C(.), space, colon C(:), at C(@), equals C(=), and hyphen C(-) characters. Can be changed after the virtual server is created. Minimum length = 1",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "netmask",
+      "displayName": "Netmask",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IPv4 network mask for use in the SOURCEIPHASH load balancing method. Minimum length = 1",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_pass",
+      "displayName": "Nitro Pass",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password with which to authenticate to the netscaler node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_protocol",
+      "displayName": "Nitro Protocol",
+      "type": "string",
+      "required": false,
+      "default": "http",
+      "description": "Which protocol to use when accessing the nitro API objects.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_timeout",
+      "displayName": "Nitro Timeout",
+      "type": "number",
+      "required": false,
+      "default": 310,
+      "description": "Time in seconds until a timeout error is thrown when establishing a new session with Netscaler",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_user",
+      "displayName": "Nitro User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username with which to authenticate to the netscaler node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nsip",
+      "displayName": "Nsip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The ip address of the netscaler appliance where the nitro API calls will be made. The port can be specified with the colon (:). E.g. 192.168.1.1:555.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persistenceid",
+      "displayName": "Persistenceid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The persistence ID for the GSLB virtual server. The ID is a positive integer that enables GSLB sites to identify the GSLB virtual server, and is required if source IP address based or spill over based persistence is enabled on the virtual server. Minimum value = C(0) Maximum value = C(65535)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persistencetype",
+      "displayName": "Persistencetype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use source IP address based persistence for the virtual server. After the load balancing method selects a service for the first packet, the IP address received in response to the DNS query is used for subsequent requests from the same client.",
+      "choices": [
+        "SOURCEIP",
+        "NONE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persistmask",
+      "displayName": "Persistmask",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The optional IPv4 network mask applied to IPv4 addresses to establish source IP address based persistence. Minimum length = 1",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save_config",
+      "displayName": "Save Config",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(yes) the module will save the configuration on the netscaler node if it makes any changes. The module will not save the configuration on the netscaler node if it made no changes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_bindings",
+      "displayName": "Service Bindings",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "List of bindings for gslb services bound to this gslb virtual server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "servicetype",
+      "displayName": "Servicetype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Protocol used by services bound to the virtual server. ",
+      "choices": [
+        "HTTP",
+        "FTP",
+        "TCP",
+        "UDP",
+        "SSL",
+        "SSL_BRIDGE",
+        "SSL_TCP",
+        "NNTP",
+        "ANY",
+        "SIP_UDP",
+        "SIP_TCP",
+        "SIP_SSL",
+        "RADIUS",
+        "RDP",
+        "RTSP",
+        "MYSQL",
+        "MSSQL",
+        "ORACLE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sobackupaction",
+      "displayName": "Sobackupaction",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Action to be performed if spillover is to take effect, but no backup chain to spillover is usable or exists.",
+      "choices": [
+        "DROP",
+        "ACCEPT",
+        "REDIRECT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "somethod",
+      "displayName": "Somethod",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of threshold that, when exceeded, triggers spillover. Available settings function as follows: * C(CONNECTION) - Spillover occurs when the number of client connections exceeds the threshold. * C(DYNAMICCONNECTION) - Spillover occurs when the number of client connections at the GSLB virtual server exceeds the sum of the maximum client (Max Clients) settings for bound GSLB services. Do not specify a spillover threshold for this setting, because the threshold is implied by the Max Clients setti",
+      "choices": [
+        "CONNECTION",
+        "DYNAMICCONNECTION",
+        "BANDWIDTH",
+        "HEALTH",
+        "NONE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sopersistence",
+      "displayName": "Sopersistence",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If spillover occurs, maintain source IP address based persistence for both primary and backup GSLB virtual servers.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sopersistencetimeout",
+      "displayName": "Sopersistencetimeout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Timeout for spillover persistence, in minutes. Default value: C(2) Minimum value = C(2) Maximum value = C(1440)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sothreshold",
+      "displayName": "Sothreshold",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Threshold at which spillover occurs. Specify an integer for the CONNECTION spillover method, a bandwidth value in kilobits per second for the BANDWIDTH method (do not enter the units), or a percentage for the HEALTH method (do not enter the percentage symbol). Minimum value = C(1) Maximum value = C(4294967287)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the resource being configured by the module on the netscaler node. When present the resource will be created if needed and configured according to the module's parameters. When absent the resource will be deleted from the netscaler node.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Idle time, in minutes, after which a persistence entry is cleared. Default value: C(2) Minimum value = C(2) Maximum value = C(1440)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tolerance",
+      "displayName": "Tolerance",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Site selection tolerance, in milliseconds, for implementing the RTT load balancing method. If a site's RTT deviates from the lowest RTT by more than the specified tolerance, the site is not considered when the NetScaler appliance makes a GSLB decision. The appliance implements the round robin method of global server load balancing between sites whose RTT values are within the specified tolerance. If the tolerance is 0 (zero), the appliance always sends clients the IP address of the site with the",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "v6netmasklen",
+      "displayName": "V6Netmasklen",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of bits to consider, in an IPv6 source IP address, for creating the hash that is required by the C(SOURCEIPHASH) load balancing method. Default value: C(128) Minimum value = C(1) Maximum value = C(128)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "v6persistmasklen",
+      "displayName": "V6Persistmasklen",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of bits to consider in an IPv6 source IP address when creating source IP address based persistence sessions. Default value: C(128) Minimum value = C(1) Maximum value = C(128)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

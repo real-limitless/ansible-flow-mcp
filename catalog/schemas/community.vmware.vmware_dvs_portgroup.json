@@ -1,7 +1,305 @@
 {
   "fqcn": "community.vmware.vmware_dvs_portgroup",
-  "shortDescription": "vmware_dvs_portgroup",
+  "shortDescription": "Create or remove a Distributed vSwitch portgroup.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_dvs_portgroup_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "in_traffic_shaping",
+      "displayName": "In Traffic Shaping",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary which configures the ingress traffic shaping settings for the portgroup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mac_learning",
+      "displayName": "Mac Learning",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "This option is deprecated in favour of O(network_policy.mac_learning) and will be removed in 7.0.0. Dictionary which configures MAC learning for portgroup. Ignored if O(network_policy.inherited=true). Ignored if O(network_policy.mac_learning) is defined. Beware that setting this to enabled might disable the inheritance of promiscuous mode and so on!",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "net_flow",
+      "displayName": "Net Flow",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Indicate whether or not the virtual machine IP traffic that flows through a vds gets analyzed by sending reports to a NetFlow collector.",
+      "choices": [
+        "true",
+        "on",
+        "yes",
+        "false",
+        "off",
+        "no",
+        "inherited"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_policy",
+      "displayName": "Network Policy",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary which configures the different security values for portgroup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "num_ports",
+      "displayName": "Num Ports",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of ports the portgroup should contain.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "out_traffic_shaping",
+      "displayName": "Out Traffic Shaping",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary which configures the egress traffic shaping settings for the portgroup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_allocation",
+      "displayName": "Port Allocation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Elastic port groups automatically increase or decrease the number of ports as needed. Only valid if O(port_binding=static). Will be V(elastic) if not specified and O(port_binding=static). Will be V(fixed) if not specified and O(port_binding=ephemeral).",
+      "choices": [
+        "elastic",
+        "fixed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_binding",
+      "displayName": "Port Binding",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of port binding determines when ports in a port group are assigned to virtual machines. See VMware KB 1022312 U(https://kb.vmware.com/s/article/1022312) for more details.",
+      "choices": [
+        "static",
+        "ephemeral"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_policy",
+      "displayName": "Port Policy",
+      "type": "dict",
+      "required": false,
+      "default": {
+        "block_override": true,
+        "ipfix_override": false,
+        "live_port_move": false,
+        "mac_management_override": false,
+        "network_rp_override": false,
+        "port_config_reset_at_disconnect": true,
+        "shaping_override": false,
+        "traffic_filter_override": false,
+        "uplink_teaming_override": false,
+        "vendor_config_override": false,
+        "vlan_override": false
+      },
+      "description": "Dictionary which configures the advanced policy settings for the portgroup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "portgroup_description",
+      "displayName": "Portgroup Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the portgroup",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "portgroup_name",
+      "displayName": "Portgroup Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the portgroup that is to be created or deleted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Determines if the portgroup should be present or not.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "switch_name",
+      "displayName": "Switch Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the distributed vSwitch the port group should be created on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "teaming_policy",
+      "displayName": "Teaming Policy",
+      "type": "dict",
+      "required": false,
+      "default": {
+        "load_balance_policy": "loadbalance_srcid",
+        "notify_switches": true,
+        "rolling_order": false
+      },
+      "description": "Dictionary which configures the different teaming values for portgroup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlan_id",
+      "displayName": "Vlan Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The VLAN ID that should be configured with the portgroup, use 0 for no VLAN. If O(vlan_trunk=true), this can be a combination of multiple ranges and numbers, example: 1-200, 205, 400-4094. The valid range is from 0 to 4094. Overlapping ranges are allowed. If O(vlan_private=true), the corresponding private VLAN should already be configured in the distributed vSwitch.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlan_private",
+      "displayName": "Vlan Private",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates whether this is for a private VLAN or not. Mutually exclusive with O(vlan_trunk) parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlan_trunk",
+      "displayName": "Vlan Trunk",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates whether this is a VLAN trunk or not. Mutually exclusive with O(vlan_private) parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

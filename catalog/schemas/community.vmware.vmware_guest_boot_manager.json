@@ -1,7 +1,234 @@
 {
   "fqcn": "community.vmware.vmware_guest_boot_manager",
-  "shortDescription": "vmware_guest_boot_manager",
+  "shortDescription": "Manage boot options for the given virtual machine",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_guest_boot_manager_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "boot_delay",
+      "displayName": "Boot Delay",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Delay in milliseconds before starting the boot sequence.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_firmware",
+      "displayName": "Boot Firmware",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Choose which firmware should be used to boot the virtual machine.",
+      "choices": [
+        "bios",
+        "efi"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_hdd_name",
+      "displayName": "Boot Hdd Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This parameter is optional, if not set, will use the first virtual disk found in VM device list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_order",
+      "displayName": "Boot Order",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of the boot devices.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_retry_delay",
+      "displayName": "Boot Retry Delay",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specify the time in milliseconds between virtual machine boot failure and subsequent attempt to boot again. If set, will automatically set O(boot_retry_enabled=true) as this parameter is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_retry_enabled",
+      "displayName": "Boot Retry Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If set to V(true), the virtual machine that fails to boot, will try to boot again after O(boot_retry_delay) is expired. If set to V(false), the virtual machine waits indefinitely for user intervention.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enter_bios_setup",
+      "displayName": "Enter Bios Setup",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If set to V(true), the virtual machine automatically enters BIOS setup the next time it boots. The virtual machine resets this flag, so that the machine boots proceeds normally.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "moid",
+      "displayName": "Moid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Managed Object ID of the instance to manage if known, this is a unique identifier only within a single vCenter instance. This is required if O(name) or O(uuid) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the VM to work with. This is required if O(uuid) or O(moid) parameter is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name_match",
+      "displayName": "Name Match",
+      "type": "string",
+      "required": false,
+      "default": "first",
+      "description": "If multiple virtual machines matching the name, use the first or last found.",
+      "choices": [
+        "first",
+        "last"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secure_boot_enabled",
+      "displayName": "Secure Boot Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Choose if EFI secure boot should be enabled.  EFI secure boot can only be enabled with boot_firmware = efi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_instance_uuid",
+      "displayName": "Use Instance Uuid",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to use the VMware instance UUID rather than the BIOS UUID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "UUID of the instance to manage if known, this is VMware's BIOS UUID by default. This is required if O(name) or O(moid) parameter is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

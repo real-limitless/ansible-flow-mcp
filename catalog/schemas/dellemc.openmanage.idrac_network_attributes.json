@@ -1,0 +1,211 @@
+{
+  "fqcn": "dellemc.openmanage.idrac_network_attributes",
+  "shortDescription": "Configures the iDRAC network attributes",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/idrac_network_attributes_module.html",
+  "options": [
+    {
+      "name": "apply_time",
+      "displayName": "Apply Time",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Apply time of the I(network_attributes) and I(oem_network_attributes). This is applicable only to I(network_attributes) and I(oem_network_attributes). C(Immediate) allows the user to immediately reboot the host and apply the changes. I(job_wait) is applicable. This is applicable for I(oem_network_attributes) and I(job_wait). C(OnReset) allows the user to apply the changes on the next reboot of the host server. C(AtMaintenanceWindowStart) allows the user to apply at the start of a maintenance win",
+      "choices": [
+        "Immediate",
+        "OnReset",
+        "AtMaintenanceWindowStart",
+        "InMaintenanceWindowOnReset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clear_pending",
+      "displayName": "Clear Pending",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This parameter allows you to clear all the pending OEM network attributes changes. C(false) does not perform any operation. C(true) discards any pending changes to network attributes, or if a job is in scheduled state, removes the job. I(apply_time) value will be ignored and will not have any impact for I(clear_pending) operation. This operation is not supported for iDRAC8.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_ip",
+      "displayName": "Idrac Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC IP Address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_password",
+      "displayName": "Idrac Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC user password. If the password is not provided, then the environment variable E(IDRAC_PASSWORD) is used. Example: export IDRAC_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_port",
+      "displayName": "Idrac Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "iDRAC port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_user",
+      "displayName": "Idrac User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC username. If the username is not provided, then the environment variable E(IDRAC_USERNAME) is used. Example: export IDRAC_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Provides the option to wait for job completion. This is applicable when I(apply_time) is C(Immediate) for I(oem_network_attributes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 1200,
+      "description": "The maximum wait time of I(job_wait) in seconds. The job is tracked only for this duration. This option is applicable when I(job_wait) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maintenance_window",
+      "displayName": "Maintenance Window",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "This option allows you to schedule the maintenance window. This is required when I(apply_time) is C(AtMaintenanceWindowStart) or C(InMaintenanceWindowOnReset).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_adapter_id",
+      "displayName": "Network Adapter Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "FQDD of the network adapter device that represents the physical network adapter capable of connecting to a computer network. An example of FQDD of the network adapter is 'NIC.Mezzanine.1A'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_attributes",
+      "displayName": "Network Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary of network attributes and value. To view the list of attributes and its structure, see the below API U(https://I(idrac_ip)/redfish/v1/Systems/System.Embedded.1/NetworkAdapters/<network_adapter_id>/NetworkDeviceFunctions/ <network_device_function_id>/Settings) and U(https://<idrac_ip>/redfish/v1/Schemas/NetworkDeviceFunction.v1_8_0.json). I(network_attributes) is mutually exclusive with I(oem_network_attributes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_device_function_id",
+      "displayName": "Network Device Function Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "FQDD of the network adapter device function that represents a logical interface exposed by the network adapter. An example of FQDD of the network adapter device function is 'NIC.Mezzanine.1A-1-1'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oem_network_attributes",
+      "displayName": "Oem Network Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The attributes must be part of the Integrated Dell Remote Access Controller Attribute Registry. To view the list of attributes in Attribute Registry for iDRAC9 and newer versions. For more information, see, U(https://I(idrac_ip)/redfish/v1/Chassis/System.Embedded.1/NetworkAdapters/<network_adapter_id>/NetworkDeviceFunctions/ <network_device_function_id>/Oem/Dell/DellNetworkAttributes/<network_device_function_id>) and U(https://I(idrac_ip)/redfish/v1/Registries/NetworkAttributesRegistry_<network_",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_id",
+      "displayName": "Resource Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Id of the resource. If the value for resource ID is not provided, the module picks the first resource ID available from the list of system resources returned by the iDRAC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(IDRAC_X_AUTH_TOKEN) is used. Example: export IDRAC_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

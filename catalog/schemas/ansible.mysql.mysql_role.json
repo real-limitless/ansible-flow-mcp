@@ -1,0 +1,286 @@
+{
+  "fqcn": "ansible.mysql.mysql_role",
+  "shortDescription": "Adds, removes, or updates a MySQL or MariaDB role",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/mysql/mysql_role_module.html",
+  "options": [
+    {
+      "name": "admin",
+      "displayName": "Admin",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Supported by B(MariaDB). Name of the admin user of the role (the I(login_user), by default).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "append_members",
+      "displayName": "Append Members",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Add members defined by the I(members) option to the existing ones for this role instead of overwriting them. Mutually exclusive with the I(detach_members) and I(admin) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "append_privs",
+      "displayName": "Append Privs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Append the privileges defined by the I(priv) option to the existing ones for this role instead of overwriting them. Mutually exclusive with I(subtract_privs).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a Certificate Authority (CA) certificate. This option, if used, must specify the same certificate as used by the server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_hostname",
+      "displayName": "Check Hostname",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to validate the server host name when an SSL connection is required. Corresponds to MySQL CLIs C(--ssl) switch. Setting this to C(false) disables hostname verification. Use with caution. Requires pymysql >= 0.7.11.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_implicit_admin",
+      "displayName": "Check Implicit Admin",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Check if mysql allows login as root/nopassword before trying supplied credentials. If success, passed I(login_user)/I(login_password) will be ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a client public key certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the client private key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "column_case_sensitive",
+      "displayName": "Column Case Sensitive",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "The default is C(true). When C(true), the module will not uppercase the field in the privileges. When C(false), the field names will be upper-cased. This was the default before this feature was introduced but since MySQL/MariaDB is case sensitive you should set this to C(true) in most cases. The default changed from C(false) to C(true) in v4.0.0",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file",
+      "displayName": "Config File",
+      "type": "string",
+      "required": false,
+      "default": "~/.my.cnf",
+      "description": "Specify a config file from which user and password are to be read. The default config file, C(~/.my.cnf), if it exists, will be read, even if I(config_file) is not specified. The default config file, C(~/.my.cnf), if it exists, must contain a C([client]) section as a MySQL connector requirement. To prevent the default config file from being read, set I(config_file) to be an empty string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connect_timeout",
+      "displayName": "Connect Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The connection timeout when connecting to the MySQL server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detach_members",
+      "displayName": "Detach Members",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Detaches members defined by the I(members) option from the role instead of overwriting all the current members. Mutually exclusive with the I(append_members) and I(admin) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "Host running the database. In some cases for local connections the I(login_unix_socket=/path/to/mysqld/socket), that is usually C(/var/run/mysqld/mysqld.sock), needs to be used instead of I(login_host=localhost).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password used to authenticate with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": 3306,
+      "description": "Port of the MySQL server. Requires I(login_host) be defined as other than localhost if login_port is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_unix_socket",
+      "displayName": "Login Unix Socket",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a Unix domain socket for local connections. Use this parameter to avoid the C(Please explicitly state intended protocol) error.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username used to authenticate with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "members",
+      "displayName": "Members",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of members of the role. For users, use the format C(username@hostname). Always specify the hostname part explicitly. For roles, use the format C(rolename). Mutually exclusive with I(admin).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "members_must_exist",
+      "displayName": "Members Must Exist",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When C(yes), the module fails if any user in I(members) does not exist. When C(no), users in I(members) which don't exist are simply skipped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the role to add or remove.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priv",
+      "displayName": "Priv",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "MySQL privileges string in the format: C(db.table:priv1,priv2). You can specify multiple privileges by separating each one using a forward slash: C(db.table:priv/db.table:priv). The format is based on MySQL C(GRANT) statement. Database and table names can be quoted, MySQL-style. If column privileges are used, the C(priv1,priv2) part must be exactly as returned by a C(SHOW GRANT) statement. If not followed, the module will always report changes. It includes grouping columns by permission (C(SELEC",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "set_default_role_all",
+      "displayName": "Set Default Role All",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Is not supported by MariaDB and is silently ignored when working with MariaDB. If C(yes), runs B(SET DEFAULT ROLE ALL TO) each of the I(members) when changed. If you want to avoid this behavior, set this option to C(no) explicitly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_log_bin",
+      "displayName": "Sql Log Bin",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether binary logging should be enabled or disabled for the connection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present) and the role does not exist, creates the role. If C(present) and the role exists, does nothing or updates its attributes. If C(absent), removes the role.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subtract_privs",
+      "displayName": "Subtract Privs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Revoke the privileges defined by the I(priv) option and keep other existing privileges. If set, invalid privileges in I(priv) are ignored. Mutually exclusive with I(append_privs).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

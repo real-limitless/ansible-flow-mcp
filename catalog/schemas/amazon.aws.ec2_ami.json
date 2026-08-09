@@ -2,6 +2,399 @@
   "fqcn": "amazon.aws.ec2_ami",
   "shortDescription": "Create or destroy an image (AMI) in EC2",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/amazon/aws/ec2_ami_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS access key ID. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_ACCESS_KEY_ID) or C(AWS_ACCESS_KEY) environment variables may also be used in decreasing order of preference. The I(aws_access_key) and I(profile) options are mutually exclusive. The I(aws_access_key_id) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "architecture",
+      "displayName": "Architecture",
+      "type": "string",
+      "required": false,
+      "default": "x86_64",
+      "description": "The target architecture of the image to register.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_ca_bundle",
+      "displayName": "Aws Ca Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location of a CA Bundle to use when validating SSL certificates. The C(AWS_CA_BUNDLE) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_config",
+      "displayName": "Aws Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary to modify the botocore configuration. Parameters can be found in the AWS documentation U(https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html#botocore.config.Config).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "billing_products",
+      "displayName": "Billing Products",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of valid billing codes. To be used with valid accounts by AWS Marketplace vendors.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_mode",
+      "displayName": "Boot Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The boot mode of the AMI. See the AWS documentation for more detail U(https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html). Support for V(uefi-preferred) was added in release 8.2.0.",
+      "choices": [
+        "legacy-bios",
+        "uefi",
+        "uefi-preferred"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug_botocore_endpoint_logs",
+      "displayName": "Debug Botocore Endpoint Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use a C(botocore.endpoint) logger to parse the unique (rather than total) C(\"resource:action\") API calls made during a task, outputing the set to the resource_actions key in the task results. Use the C(aws_resource_action) callback to output to total list made during a playbook. The C(ANSIBLE_DEBUG_BOTOCORE_LOGS) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_snapshot",
+      "displayName": "Delete Snapshot",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Delete snapshots when deregistering the AMI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Human-readable string describing the contents and purpose of the AMI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_mapping",
+      "displayName": "Device Mapping",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of device hashes/dictionaries with custom configurations (same block-device-mapping parameters).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_url",
+      "displayName": "Endpoint Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to connect to instead of the default AWS endpoints.  While this can be used to connection to other AWS-compatible services the amazon.aws and community.aws collections are only tested against AWS. The  C(AWS_URL) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enhanced_networking",
+      "displayName": "Enhanced Networking",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A boolean representing whether enhanced networking with ENA is enabled or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_id",
+      "displayName": "Image Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Image ID to be deregistered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_location",
+      "displayName": "Image Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The S3 location of an image to use for the AMI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_id",
+      "displayName": "Instance Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Instance ID to create the AMI from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kernel_id",
+      "displayName": "Kernel Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The target kernel id of the image to register.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "launch_permissions",
+      "displayName": "Launch Permissions",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Launch permissions for the AMI. You must pass all desired launch permissions if you wish to modify existing launch permissions (passing just groups will remove all users).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the new AMI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_reboot",
+      "displayName": "No Reboot",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Flag indicating that the bundling process should not attempt to shutdown the instance before bundling. If this flag is V(true), the responsibility of maintaining file system integrity is left to the owner of the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A named AWS profile to use for authentication. See the AWS documentation for more information about named profiles U(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html). The C(AWS_PROFILE) environment variable may also be used. The I(profile) option is mutually exclusive with the I(aws_access_key), I(aws_secret_key) and I(session_token) options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge_tags",
+      "displayName": "Purge Tags",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If O(purge_tags=true) and O(tags) is set, existing tags will be purged from the resource to match exactly what is defined by O(tags) parameter. If the O(tags) parameter is not set then tags will not be modified, even if O(purge_tags=True). Tag keys beginning with V(aws:) are reserved by Amazon and can not be modified.  As such they will be ignored for the purposes of the O(purge_tags) parameter.  See the Amazon documentation for more information U(https://docs.aws.amazon.com/general/latest/gr/aw",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ramdisk_id",
+      "displayName": "Ramdisk Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the RAM disk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS region to use. For global services such as IAM, Route53 and CloudFront, I(region) is ignored. The C(AWS_REGION) environment variable may also be used. See the Amazon AWS documentation for more information U(http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "root_device_name",
+      "displayName": "Root Device Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The root device name of the image to register.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_key",
+      "displayName": "Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS secret access key. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SECRET_ACCESS_KEY) or C(AWS_SECRET_KEY) environment variables may also be used in decreasing order of preference. The I(secret_key) and I(profile) options are mutually exclusive. The I(aws_secret_access_key) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_token",
+      "displayName": "Session Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS STS session token for use with temporary credentials. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SESSION_TOKEN) environment variable may also be used. The I(session_token) and I(profile) options are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sriov_net_support",
+      "displayName": "Sriov Net Support",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set to simple to enable enhanced networking with the Intel 82599 Virtual Function interface for the AMI and any instances that you launch from the AMI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Register or deregister an AMI.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary representing the tags to be applied to the resource. If the O(tags) parameter is not set then tags will not be modified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tpm_support",
+      "displayName": "Tpm Support",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set to V(v2.0) to enable Trusted Platform Module (TPM) support. If the image is configured for NitroTPM support, the value is V(v2.0). Requires O(boot_mode) to be set to V(uefi). Requires an instance type that is compatible with Nitro. See the AWS documentation for more detail U(https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uefi_data",
+      "displayName": "Uefi Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Base64 representation of the non-volatile UEFI variable store. See the AWS documentation for more detail U(https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When set to C(false), SSL certificates will not be validated for communication with the AWS APIs. Setting I(validate_certs=false) is strongly discouraged, as an alternative, consider setting I(aws_ca_bundle) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "virtualization_type",
+      "displayName": "Virtualization Type",
+      "type": "string",
+      "required": false,
+      "default": "hvm",
+      "description": "The virtualization type of the image to register.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Wait for the AMI to be in state 'available' before returning.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 1200,
+      "description": "How long before wait gives up, in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

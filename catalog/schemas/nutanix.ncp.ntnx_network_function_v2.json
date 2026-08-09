@@ -1,0 +1,306 @@
+{
+  "fqcn": "nutanix.ncp.ntnx_network_function_v2",
+  "shortDescription": "Create, Update and Delete network functions in Nutanix Prism Central",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/nutanix/ncp/ntnx_network_function_v2_module.html",
+  "options": [
+    {
+      "name": "all_proxy",
+      "displayName": "All Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL of the proxy to use for all protocols. Proxy URL precedence (highest to lowest): C(https_proxy) -> C(http_proxy) -> C(all_proxy) module params, then C(HTTPS_PROXY) -> C(HTTP_PROXY) -> C(ALL_PROXY) env vars. C(all_proxy). If not set then the value of the C(ALL_PROXY) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_plane_health_check_config",
+      "displayName": "Data Plane Health Check Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Data Plane Health check configuration applied for the network function. These settings control how the system monitors the health of your Network Function VMs and determines when to trigger failover.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional, longer text field (up to 1000 characters) to describe the network function's purpose.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ext_id",
+      "displayName": "Ext Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network function external ID. Required for updating or deleting the network function.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "failure_handling",
+      "displayName": "Failure Handling",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines what happens to traffic if all Network Function VMs in the chain are unhealthy. This is a critical security and availability decision. C(FAIL_CLOSE) blocks all traffic. This is the secure option, preventing uninspected traffic from passing. C(FAIL_OPEN) allows traffic to bypass the NFVM and go directly to the destination. Use this if connectivity is more critical than inspection. C(NO_ACTION) when network function is unhealthy, no action is taken and traffic is black-holed. This value is",
+      "choices": [
+        "FAIL_OPEN",
+        "FAIL_CLOSE",
+        "NO_ACTION"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "high_availability_mode",
+      "displayName": "High Availability Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A required setting that defines the HA configuration. Currently, only C(ACTIVE_PASSIVE) is supported. Set this to C(ACTIVE_PASSIVE) and define two nicPairs in your configuration, one for each NFVM in the HA pair. This enables high availability. The system will designate one NIC pair as ACTIVE and the other as PASSIVE. If the active one fails its health check, the system automatically fails over to the passive one, ensuring service continuity.",
+      "choices": [
+        "ACTIVE_PASSIVE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_proxy",
+      "displayName": "Http Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL of the HTTP proxy to use. Proxy URL precedence (highest to lowest): C(https_proxy) -> C(http_proxy) -> C(all_proxy) module params, then C(HTTPS_PROXY) -> C(HTTP_PROXY) -> C(ALL_PROXY) env vars. C(http_proxy). If not set then the value of the C(HTTP_PROXY) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "https_proxy",
+      "displayName": "Https Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL of the HTTPS proxy to use. Proxy URL precedence (highest to lowest): C(https_proxy) -> C(http_proxy) -> C(all_proxy) module params, then C(HTTPS_PROXY) -> C(HTTP_PROXY) -> C(ALL_PROXY) env vars. C(https_proxy). If not set then the value of the C(HTTPS_PROXY) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "metadata",
+      "displayName": "Metadata",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "An object containing standard resource metadata. This includes ownership, project association, and categorization details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the network function (up to 128 characters). Required for creating the network function.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nic_pairs",
+      "displayName": "Nic Pairs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of all NIC pairs part of this network function. Minimum 1, maximum 2 items.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_proxy",
+      "displayName": "No Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Comma-separated list of hosts or domains to bypass the proxy. Precedence (highest to lowest): C(no_proxy) module param -> C(NO_PROXY) environment variable. If not set then the value of the C(NO_PROXY) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_api_key",
+      "displayName": "Nutanix Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Prism central API key. Created using Service Account API Key in Prism Central. C(nutanix_api_key). If not set then the value of the C(NUTANIX_API_KEY), environment variable is used. This field is only supported for Prism Central.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_debug",
+      "displayName": "Nutanix Debug",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed debug logging for all API calls made by this module. When enabled, logs will include HTTP method, URL, headers, request body, response body, status code, and elapsed time. Authorization headers and sensitive information are automatically redacted. This parameter can also be set via the NUTANIX_DEBUG environment variable and is preferred over the NUTANIX_DEBUG environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_host",
+      "displayName": "Nutanix Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Prism central hostname or IP address C(nutanix_host). If not set then the value of the C(NUTANIX_HOST), environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_log_file",
+      "displayName": "Nutanix Log File",
+      "type": "string",
+      "required": false,
+      "default": "/tmp/nutanix_ansible_debug.log",
+      "description": "The file to write the logs to. This parameter can also be set via the NUTANIX_LOG_FILE environment variable and is preferred over the NUTANIX_LOG_FILE environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_password",
+      "displayName": "Nutanix Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Prism central password C(nutanix_password). If not set then the value of the C(NUTANIX_PASSWORD), environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_port",
+      "displayName": "Nutanix Port",
+      "type": "string",
+      "required": false,
+      "default": "9440",
+      "description": "Prism central port C(nutanix_port). If not set then the value of the C(NUTANIX_PORT), environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_username",
+      "displayName": "Nutanix Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Prism central username C(nutanix_username). If not set then the value of the C(NUTANIX_USERNAME), environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_password",
+      "displayName": "Proxy Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for proxy authentication (if not embedded in proxy URL). Precedence (highest to lowest): URL-embedded credentials -> C(proxy_password) module param -> C(PROXY_PASSWORD) environment variable. If credentials are embedded in the proxy URL (e.g., C(http://user:pass@proxy:port)), they take precedence. If not set then the value of the C(PROXY_PASSWORD) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_username",
+      "displayName": "Proxy Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username for proxy authentication (if not embedded in proxy URL). Precedence (highest to lowest): URL-embedded credentials -> C(proxy_username) module param -> C(PROXY_USERNAME) environment variable. If credentials are embedded in the proxy URL (e.g., C(http://user:pass@proxy:port)), they take precedence. If not set then the value of the C(PROXY_USERNAME) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_timeout",
+      "displayName": "Read Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30000,
+      "description": "Read timeout in milliseconds for API calls.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(state) is present, it will create or update the network function. If C(state) is set to C(present) and ext_id is not provided, the operation will create the network function. If C(state) is set to C(present) and ext_id is provided, the operation will update the network function. If C(state) is set to C(absent) and ext_id is provided, the operation will delete the network function.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "traffic_forwarding_mode",
+      "displayName": "Traffic Forwarding Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies how traffic is delivered to the NFVM. This determines the fundamental behavior of your service insertion. C(INLINE) redirects traffic through the NFVM. The NFVM inspects, and possibly modifies or blocks, the traffic before forwarding it. Requires both ingress_nic_reference and egress_nic_reference. Use for active enforcement (like a firewall). C(VTAP) mirrors a copy of the traffic to the NFVM for passive monitoring (e.g., for an Intrusion Detection System). The original traffic flow is",
+      "choices": [
+        "VTAP",
+        "INLINE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Set value to C(False) to skip validation for self signed certificates This is not recommended for production setup C(validate_certs). If not set then the value of the C(VALIDATE_CERTS), environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Wait for the  CRUD operation to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

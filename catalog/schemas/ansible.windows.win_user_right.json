@@ -2,6 +2,44 @@
   "fqcn": "ansible.windows.win_user_right",
   "shortDescription": "Manage Windows User Rights",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_user_right_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "set",
+      "description": "C(add) will add the users/groups to the existing right. C(remove) will remove the users/groups from the existing right. C(set) will replace the users/groups of the existing right.",
+      "choices": [
+        "add",
+        "remove",
+        "set"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the User Right as shown by the C(Constant Name) value from U(https://learn.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/user-rights-assignment). The module will return an error if the right is invalid.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "users",
+      "displayName": "Users",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "A list of users or groups to add/remove on the User Right. These can be in the form DOMAIN\\user-group, user-group@DOMAIN.COM for domain users/groups. For local users/groups it can be in the form user-group, .\\user-group, SERVERNAME\\user-group where SERVERNAME is the name of the remote server. It is highly recommended to use the C(.\\) or C(SERVERNAME\\) prefix to avoid any ambiguity with domain account names or errors trying to lookup an account on a domain controller. You can also add special loc",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

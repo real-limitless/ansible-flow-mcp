@@ -1,0 +1,256 @@
+{
+  "fqcn": "crowdstrike.falcon.correlation_rule",
+  "shortDescription": "Manage NG-SIEM correlation rules",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/crowdstrike/falcon/correlation_rule_module.html",
+  "options": [
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The registered result of the M(crowdstrike.falcon.auth) module, or a dictionary containing the I(access_token) and I(cloud) keys. If provided, the I(client_id), I(client_secret), I(member_cid), and I(cloud) options are ignored. Useful when needing to make multiple API calls to avoid rate limiting issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike API client ID to use. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_CLIENT_ID) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_secret",
+      "displayName": "Client Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike API secret that corresponds to the client ID. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_CLIENT_SECRET) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud",
+      "displayName": "Cloud",
+      "type": "string",
+      "required": false,
+      "default": "us-1",
+      "description": "The CrowdStrike cloud region to use. All clouds are automatically discovered if not specified, except for the C(us-gov-1) cloud. The C(FALCON_CLOUD) environment variable can also be used.",
+      "choices": [
+        "us-1",
+        "us-2",
+        "us-gov-1",
+        "eu-1"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A comment associated with the rule change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A description for the correlation rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ext_headers",
+      "displayName": "Ext Headers",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Extended headers that are prepended to the default headers dictionary.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "member_cid",
+      "displayName": "Member Cid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike member CID for MSSP authentication. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_MEMBER_CID) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the correlation rule. Required when creating a new rule and I(rule_id) is not provided. Used to look up an existing rule when I(rule_id) is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notifications",
+      "displayName": "Notifications",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of notification configurations for the rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Scheduling configuration for the rule. Required when creating a new rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "publish",
+      "displayName": "Publish",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to publish the rule version after a create or update operation. When C(true), the module will retrieve the latest rule version and publish it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rule_id",
+      "displayName": "Rule Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of an existing correlation rule. Preferred for identifying existing rules during update or delete operations. If provided with I(state=present), the module will update the existing rule. If provided with I(state=absent), the module will delete the rule by ID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search",
+      "displayName": "Search",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Search criteria for the correlation rule. Required when creating a new rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "severity",
+      "displayName": "Severity",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The severity level of the rule. Valid values: C(10) (informational), C(30) (low), C(50) (medium), C(70) (high), C(90) (critical).",
+      "choices": [
+        10,
+        30,
+        50,
+        70,
+        90
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the correlation rule. C(present) ensures the rule exists with the specified configuration. C(absent) ensures the rule does not exist.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The operational status of the rule. C(active) enables the rule. C(inactive) disables the rule without deleting it.",
+      "choices": [
+        "active",
+        "inactive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tactic",
+      "displayName": "Tactic",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The MITRE ATT&CK tactic associated with the rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "technique",
+      "displayName": "Technique",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The MITRE ATT&CK technique associated with the rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "trigger_on_create",
+      "displayName": "Trigger On Create",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the rule triggers on creation. Only applicable when creating a new rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_agent",
+      "displayName": "User Agent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Custom User-Agent string to use for requests to the API. The user agent string is prepended to the default user agent string (C(crowdstrike-ansible/<version>)). See L(RFC 7231,https://tools.ietf.org/html/rfc7231#section-5.5.3) for more information. The C(FALCON_USER_AGENT) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

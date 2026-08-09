@@ -1,0 +1,57 @@
+{
+  "fqcn": "ibm.power_aix.nim_select_target_disk",
+  "shortDescription": "verify/autoselect a disk used for alternate disk migration role.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/nim_select_target_disk_module.html",
+  "options": [
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Forces removal of any existing alternate disk copy on target disks for I(target_disk_policy). Removes I(target_disk) from an online volume group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nim_client",
+      "displayName": "Nim Client",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies which NIM client LPAR to select target disks from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_disk",
+      "displayName": "Target Disk",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies which physical volume in I(nim_client) to verify if it is available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_disk_policy",
+      "displayName": "Target Disk Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(minimize) smallest disk that can be selected. C(upper) first disk found bigger than the rootvg disk. C(lower) disk size less than rootvg disk size but big enough to contain the used PPs. C(nearest) disk size closest to the rootvg disk. if C(upper) or C(lower) cannot be satisfied, it will default to C(minimize). if an alternate disk copy exists, then this module will fail regardless of the policy selected. if I(force) parameter is used while an alternate disk copy exists, then it will clean up ",
+      "choices": [
+        "minimize",
+        "upper",
+        "lower",
+        "nearest"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

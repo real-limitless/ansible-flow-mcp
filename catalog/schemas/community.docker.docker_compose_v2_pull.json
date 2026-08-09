@@ -2,6 +2,252 @@
   "fqcn": "community.docker.docker_compose_v2_pull",
   "shortDescription": "Pull a Docker compose project",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/docker/docker_compose_v2_pull_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_version",
+      "displayName": "Api Version",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "The version of the Docker API running on the Docker Host. Defaults to the latest version of the API supported by this collection and the docker daemon. If the value is not specified in the task, the value of environment variable E(DOCKER_API_VERSION) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use a CA certificate when performing server verification by providing the path to a CA certificate file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(ca.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_files_existing",
+      "displayName": "Check Files Existing",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to V(false), the module will not check whether one of the files C(compose.yaml), C(compose.yml), C(docker-compose.yaml), or C(docker-compose.yml) exists in O(project_src) if O(files) is not provided. This can be useful if environment files with C(COMPOSE_FILE) are used to configure a different filename. The module currently does not check for C(COMPOSE_FILE) in environment files or the current environment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cli_context",
+      "displayName": "Cli Context",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Docker CLI context to use. Mutually exclusive with O(docker_host).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client's TLS certificate file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(cert.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client's TLS key file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(key.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "definition",
+      "displayName": "Definition",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Compose file describing one or more services, networks and volumes. Mutually exclusive with O(project_src) and O(files). One of O(project_src) and O(definition) must be provided. If provided, PyYAML must be available to this module, and O(project_name) must be specified. Note that a temporary directory will be created and deleted afterwards when using this option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_cli",
+      "displayName": "Docker Cli",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the Docker CLI. If not provided, will search for Docker CLI on the E(PATH).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_host",
+      "displayName": "Docker Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL or Unix socket path used to connect to the Docker API. To connect to a remote host, provide the TCP connection string. For example, V(tcp://192.0.2.23:2376). If TLS is used to encrypt the connection, the module will automatically replace C(tcp) in the connection URL with C(https). If the value is not specified in the task, the value of environment variable E(DOCKER_HOST) will be used instead. If the environment variable is not set, the default value will be used. Mutually exclusive with ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "env_files",
+      "displayName": "Env Files",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "By default environment files are loaded from a C(.env) file located directly under the O(project_src) directory. O(env_files) can be used to specify the path of one or multiple custom environment files instead. The path is relative to the O(project_src) directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "files",
+      "displayName": "Files",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of Compose file names relative to O(project_src) to be used instead of the main Compose file (C(compose.yml), C(compose.yaml), C(docker-compose.yml), or C(docker-compose.yaml)). Files are loaded and merged in the order given. Mutually exclusive with O(definition).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_buildable",
+      "displayName": "Ignore Buildable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), will not pull images that can be built.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_pull_failures",
+      "displayName": "Ignore Pull Failures",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), will pull what it can and ignores images with pull failures.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_deps",
+      "displayName": "Include Deps",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), also pull services that are declared as dependencies. This only makes sense if O(services) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policy",
+      "displayName": "Policy",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "Whether to pull images before running. This is used when C(docker compose up) is ran. V(always) ensures that the images are always pulled, even when already present on the Docker daemon. V(missing) only pulls them when they are not present on the Docker daemon. This is only supported since Docker Compose 2.22.0.",
+      "choices": [
+        "always",
+        "missing"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profiles",
+      "displayName": "Profiles",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of profiles to enable when starting services. Equivalent to C(docker compose --profile).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project_name",
+      "displayName": "Project Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a project name. If not provided, the project name is taken from the basename of O(project_src). Required when O(definition) is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project_src",
+      "displayName": "Project Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a directory containing a Compose file (C(compose.yml), C(compose.yaml), C(docker-compose.yml), or C(docker-compose.yaml)). If O(files) is provided, will look for these files in this directory instead. Mutually exclusive with O(definition). One of O(project_src) and O(definition) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "services",
+      "displayName": "Services",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies a subset of services to be targeted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls",
+      "displayName": "Tls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server. Note that if O(validate_certs) is set to V(true) as well, it will take precedence. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_hostname",
+      "displayName": "Tls Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When verifying the authenticity of the Docker Host server, provide the expected name of the server. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS_HOSTNAME) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS_VERIFY) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

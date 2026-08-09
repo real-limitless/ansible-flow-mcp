@@ -1,0 +1,338 @@
+{
+  "fqcn": "community.proxmox.proxmox_backup",
+  "shortDescription": "Start a VM backup in Proxmox VE cluster",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/proxmox/proxmox_backup_module.html",
+  "options": [
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the target host of the Proxmox VE cluster. Uses the E(PROXMOX_HOST) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_otp",
+      "displayName": "Api Otp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the OTP. Uses the E(PROXMOX_OTP) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the password to authenticate with. Uses the E(PROXMOX_PASSWORD) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_port",
+      "displayName": "Api Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specify the target port of the Proxmox VE cluster. Uses the E(PROXMOX_PORT) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Time limit for requests towards the Proxmox VE API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token_id",
+      "displayName": "Api Token Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the token ID. Uses the E(PROXMOX_TOKEN_ID) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token_secret",
+      "displayName": "Api Token Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the token secret. Uses the E(PROXMOX_TOKEN_SECRET) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the user to authenticate with. Uses the E(PROXMOX_USER) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_mode",
+      "displayName": "Backup Mode",
+      "type": "string",
+      "required": false,
+      "default": "snapshot",
+      "description": "The mode how Proxmox performs backups. The default is, to create a runtime snapshot including memory. Check U(https://pve.proxmox.com/pve-docs/chapter-vzdump.html#_backup_modes) for an explanation of the differences.",
+      "choices": [
+        "snapshot",
+        "suspend",
+        "stop"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bandwidth",
+      "displayName": "Bandwidth",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Limit the I/O bandwidth (in KiB/s) to write backup. V(0) is unlimited.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a local certificate, which will be used to verify TLS connections. Ignored if O(validate_certs=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "change_detection_mode",
+      "displayName": "Change Detection Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the change detection mode (available from Proxmox VE 8.3). It is only used when backing up containers, Proxmox silently ignores this option when applied to kvm guests.",
+      "choices": [
+        "legacy",
+        "data",
+        "metadata"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compress",
+      "displayName": "Compress",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enable additional compression of the backup archive. V(0) will use the Proxmox recommended value, depending on your storage target.",
+      "choices": [
+        "0",
+        "1",
+        "gzip",
+        "lzo",
+        "zstd"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compression_threads",
+      "displayName": "Compression Threads",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of threads zstd will use to compress the backup. V(0) uses 50% of the available cores, anything larger than V(0) will use exactly as many threads. Is ignored if you specify O(compress=gzip) or O(compress=lzo).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": "{{guestname}}",
+      "description": "Specify the description of the backup. Needs to be a single line, newline and backslash need to be escaped as V(\\\\n) and V(\\\\\\\\) respectively. If you need variable interpolation, you can set the content as usual through ansible jinja templating and/or let Proxmox substitute templates. Proxmox currently supports V({{cluster}}), V({{guestname}}), V({{node}}), and V({{vmid}}) as templating variables. Since this is also a jinja delimiter, you need to set these values as raw jinja.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fleecing",
+      "displayName": "Fleecing",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enable backup fleecing. Works only for virtual machines and their disks. Must be entered as a string, containing key-value pairs in a list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifices the mode to select backup targets.",
+      "choices": [
+        "include",
+        "all",
+        "pool"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "node",
+      "displayName": "Node",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Only execute the backup job for the given node. This option is usually used if O(mode=all). If you specify a node ID and your vmids or pool do not reside there, they will not be backed up!",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notification_mode",
+      "displayName": "Notification Mode",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Determine which notification system to use.",
+      "choices": [
+        "auto",
+        "legacy-sendmail",
+        "notification-system"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "performance_tweaks",
+      "displayName": "Performance Tweaks",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enable other performance-related settings. Must be entered as a string, containing comma separated key-value pairs. For example: V(max-workers=2,pbs-entries-max=2).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool",
+      "displayName": "Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify a pool name to limit backups to guests to the given pool. Required, when O(mode=pool). Also required, when your user only has VM.Backup permission for this single pool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protected",
+      "displayName": "Protected",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Marks backups as protected. \"Might fail, when the PBS backend has verify enabled due to this bug: U(https://bugzilla.proxmox.com/show_bug.cgi?id=4289)\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retention",
+      "displayName": "Retention",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use custom retention options instead of those from the default cluster configuration (which is usually V(\"keep-all=1\")). Always requires Datastore.Allocate permission at the storage endpoint. Specifying a retention time other than V(keep-all=1) might trigger pruning on the datastore, if an existing backup should be deleted due to your specified timeframe. Deleting requires C(Datastore.Modify) or C(Datastore.Prune) permissions on the backup storage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage",
+      "displayName": "Storage",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Store the backup archive on this storage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Validate the TLS certificates used for the connection to the Proxmox VE API. May be set through the environment variable E(PROXMOX_VALIDATE_CERTS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vmids",
+      "displayName": "Vmids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The instance IDs to be backed up. Only valid, if O(mode=include).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Wait for the backup to be finished. Fails, if job does not succeed successfully within the given timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Seconds to wait for the backup to be finished. Will only be evaluated, if O(wait=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

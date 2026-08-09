@@ -1,0 +1,189 @@
+{
+  "fqcn": "dellemc.openmanage.idrac_reset",
+  "shortDescription": "Factory reset the iDRACs",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/idrac_reset_module.html",
+  "options": [
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_defaults_buffer",
+      "displayName": "Custom Defaults Buffer",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This parameter provides the option to import the buffer input in XML format as a custom default configuration. This option is applicable when I(reset_to_default) is C(CustomDefaults). I(custom_defaults_buffer) is mutually exclusive with I(custom_defaults_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_defaults_file",
+      "displayName": "Custom Defaults File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the custom default configuration file in the XML format. This option is applicable when I(reset_to_default) is C(CustomDefaults). I(custom_defaults_file) is mutually exclusive with I(custom_defaults_buffer).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_password",
+      "displayName": "Default Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This parameter is only applied when I(reset_to_default) is C(All) or C(ResetAllWithRootDefaults). This parameter is required to track LifeCycle status of the server after the reset operation is performed. If this parameter is not provided, then the LifeCycle status is not tracked after the reset operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_username",
+      "displayName": "Default Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This parameter is only applied when I(reset_to_default) is C(All) or C(ResetAllWithRootDefaults). This parameter is required to track LifeCycle status of the server after the reset operation is performed. If this parameter is not provided, then the LifeCycle status is not tracked after the reset operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_reset",
+      "displayName": "Force Reset",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This parameter provides the option to force reset the iDRAC without checking the iDRAC lifecycle controller status. This option is applicable only for iDRAC9.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_ip",
+      "displayName": "Idrac Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC IP Address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_password",
+      "displayName": "Idrac Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC user password. If the password is not provided, then the environment variable E(IDRAC_PASSWORD) is used. Example: export IDRAC_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_port",
+      "displayName": "Idrac Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "iDRAC port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_user",
+      "displayName": "Idrac User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC username. If the username is not provided, then the environment variable E(IDRAC_USERNAME) is used. Example: export IDRAC_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Time in seconds to wait for job completion. This is applicable when I(wait_for_idrac) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset_to_default",
+      "displayName": "Reset To Default",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If this value is not set the default behaviour is to restart the iDRAC. C(All) Discards all settings and reset to default credentials. C(ResetAllWithRootDefaults) Discards all settings and reset the default username to root and password to the shipping value. C(Default) Discards all settings, but preserves user and network settings. C(CustomDefaults) All configuration is set to custom defaults.This option is supported on firmware version 7.00.00.00 and newer versions.",
+      "choices": [
+        "Default",
+        "All",
+        "ResetAllWithRootDefaults",
+        "CustomDefaults"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_idrac",
+      "displayName": "Wait For Idrac",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This parameter provides the option to wait for the iDRAC to reset and lifecycle controller status to be ready.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(IDRAC_X_AUTH_TOKEN) is used. Example: export IDRAC_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,7 +1,145 @@
 {
   "fqcn": "community.vmware.vmware_host_powerstate",
-  "shortDescription": "vmware_host_powerstate",
+  "shortDescription": "Manages power states of host systems in vCenter",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_host_powerstate_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "cluster_name",
+      "displayName": "Cluster Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the cluster from which all host systems will be used. This is required parameter if O(esxi_hostname) is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "esxi_hostname",
+      "displayName": "Esxi Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the host system to work with. This is required parameter if O(cluster_name) is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This parameter specify if the host should be proceeding with user defined powerstate regardless of whether it is in maintenance mode. If O(state=reboot-host) and O(force=true), then host system is rebooted regardless of whether it is in maintenance mode. If O(state=shutdown-host) and O(force=true), then host system is shutdown regardless of whether it is in maintenance mode. If O(state=power-down-to-standby) and O(force=true), then all powered off VMs will evacuated. Not applicable if O(state=po",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "shutdown-host",
+      "description": "Set the state of the host system.",
+      "choices": [
+        "power-down-to-standby",
+        "power-up-from-standby",
+        "shutdown-host",
+        "reboot-host"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "This parameter defines timeout for O(state=power-down-to-standby) or O(state=power-up-from-standby). Ignored if O(state=reboot-host) or O(state=shutdown-host). This parameter is defined in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

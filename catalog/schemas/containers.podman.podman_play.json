@@ -2,6 +2,305 @@
   "fqcn": "containers.podman.podman_play",
   "shortDescription": "Play kubernetes YAML file using podman",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/containers/podman/podman_play_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "annotation",
+      "displayName": "Annotation",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Add an annotation to the container or pod.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authfile",
+      "displayName": "Authfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path of the authentication file. Default is ${XDG_RUNTIME_DIR}/containers/auth.json, which is set using podman login. If the authorization state is not found there, $HOME/.docker/config.json is checked, which is set using docker login. Note - You can also override the default path of the authentication file by setting the REGISTRY_AUTH_FILE environment variable. export REGISTRY_AUTH_FILE=path",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "build",
+      "displayName": "Build",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Build images even if they are found in the local storage. It is required to exist subdirectories matching the image names to be build.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_dir",
+      "displayName": "Cert Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use certificates at path (*.crt, *.cert, *.key) to connect to the registry. Default certificates directory is /etc/containers/certs.d. (This option is not available with the remote Podman client)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configmap",
+      "displayName": "Configmap",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Use Kubernetes configmap YAML at path to provide a source for environment variable values within the containers of the pod. Note - The configmap option can be used multiple times to pass multiple Kubernetes configmap YAMLs",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context_dir",
+      "displayName": "Context Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use path as the build context directory for each image. Requires build option be true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable debug for the module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "executable",
+      "displayName": "Executable",
+      "type": "string",
+      "required": false,
+      "default": "podman",
+      "description": "Name of executable to run, by default 'podman'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kube_file",
+      "displayName": "Kube File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to file with YAML configuration for a Pod.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kube_file_content",
+      "displayName": "Kube File Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the kube file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_driver",
+      "displayName": "Log Driver",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set logging driver for all created containers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_level",
+      "displayName": "Log Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set logging level for podman calls. Log messages above specified level (\"debug\"|\"info\"|\"warn\"|\"error\"|\"fatal\"|\"panic\") (default \"error\")",
+      "choices": [
+        "debug",
+        "info",
+        "warn",
+        "error",
+        "fatal",
+        "panic"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_opt",
+      "displayName": "Log Opt",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Logging driver specific options. Set custom logging configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of the names of CNI networks the pod should join.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username and password to use to authenticate with the registry if required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quadlet_dir",
+      "displayName": "Quadlet Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the directory to write quadlet file in. By default, it will be set as C(/etc/containers/systemd/) for root user, C(~/.config/containers/systemd/) for non-root users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quadlet_file_mode",
+      "displayName": "Quadlet File Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions of the quadlet file. The O(quadlet_file_mode) can be specified as octal numbers or as a symbolic mode (for example, V(u+rwx) or V(u=rw,g=r,o=r)). For octal numbers format, you must either add a leading zero so that Ansible's YAML parser knows it is an octal number (like V(0644) or V(01777)) or quote it (like V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Giving Ansible a number without following one of these rules will e",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quadlet_filename",
+      "displayName": "Quadlet Filename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of quadlet file to write. Must be specified if state is quadlet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quadlet_options",
+      "displayName": "Quadlet Options",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Options for the quadlet file. Provide missing in usual network args options as a list of lines to add.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quiet",
+      "displayName": "Quiet",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Hide image pulls logs from output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recreate",
+      "displayName": "Recreate",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If pod already exists, delete it and run the new one.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seccomp_profile_root",
+      "displayName": "Seccomp Profile Root",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Directory path for seccomp profiles (default is \"/var/lib/kubelet/seccomp\"). This option is not available with the remote Podman client",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Start the pod after creating it, or to leave it created only.",
+      "choices": [
+        "created",
+        "started",
+        "absent",
+        "quadlet"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_verify",
+      "displayName": "Tls Verify",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Require HTTPS and verify certificates when contacting registries (default is true). If explicitly set to true, then TLS verification will be used. If set to false, then TLS verification will not be used. If not specified, TLS verification will be used unless the target registry is listed as an insecure registry in registries.conf.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username and password to use to authenticate with the registry if required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "userns",
+      "displayName": "Userns",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the user namespace mode for all the containers in a pod. It defaults to the PODMAN_USERNS environment variable. An empty value (\"\") means user namespaces are disabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

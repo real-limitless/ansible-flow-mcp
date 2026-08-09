@@ -1,0 +1,220 @@
+{
+  "fqcn": "checkmk.general.discovery",
+  "shortDescription": "Discover services in Checkmk",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/checkmk/general/discovery_module.html",
+  "options": [
+    {
+      "name": "api_auth_cookie",
+      "displayName": "Api Auth Cookie",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication cookie for the Checkmk session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_auth_type",
+      "displayName": "Api Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "bearer",
+      "description": "Type of authentication to use.",
+      "choices": [
+        "bearer",
+        "basic",
+        "cookie"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_secret",
+      "displayName": "Api Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The secret to authenticate your automation user. If not set the module will fall back to the environment variable C(CHECKMK_VAR_API_SECRET).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The automation user you want to use. It has to be an 'Automation' user, not a normal one. If not set the module will fall back to the environment variable C(CHECKMK_VAR_API_USER).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bulk_size",
+      "displayName": "Bulk Size",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The number of hosts to be handled at once. (Bulk mode only).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client certificate file for authentication with the web server hosting Checkmk. This is not a Checkmk feature, but one of Ansible and the respective web server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client certificate key file for authentication with the web server hosting Checkmk. This is not a Checkmk feature, but one of Ansible and the respective web server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "do_full_scan",
+      "displayName": "Do Full Scan",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "The option whether to perform a full scan or not. (Bulk mode only).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_name",
+      "displayName": "Host Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The host who's services you want to manage. Mutually exclusive with hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hosts",
+      "displayName": "Hosts",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The list of hosts the services of which you want to manage. Mutually exclusive with host_name. This enables bulk discovery mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_errors",
+      "displayName": "Ignore Errors",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "The option whether to ignore errors in single check plugins. (Bulk mode only).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_url",
+      "displayName": "Server Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The base url of your Checkmk server including the protocol but excluding the site. If not set the module will fall back to the environment variable C(CHECKMK_VAR_SERVER_URL).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "site",
+      "displayName": "Site",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The site you want to connect to. This will be appended to the server_url as part of the API request url. If not set the module will fall back to the environment variable C(CHECKMK_VAR_SITE).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "new",
+      "description": "The action to perform during discovery. Not all choices are available with all Checkmk versions. Check the ReDoc documentation in your site for details. In versions 2.4.0 and newer, the modes tabula_rasa and refresh are no longer available. In that case, we perform a add/remove all services and labels, instead.",
+      "choices": [
+        "new",
+        "remove",
+        "fix_all",
+        "refresh",
+        "tabula_rasa",
+        "only_host_labels",
+        "only_service_labels",
+        "monitor_undecided_services",
+        "update_service_parameters"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate the SSL certificate of the Checkmk server. If not set the module will fall back to the environment variable C(CHECKMK_VAR_VALIDATE_CERTS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_completion",
+      "displayName": "Wait For Completion",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, wait for the discovery to finish.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_previous",
+      "displayName": "Wait For Previous",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, wait for previously running discovery jobs to finish.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": -1,
+      "description": "The time in seconds to wait for (previous/current) completion. Default is -1, which means infinite.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

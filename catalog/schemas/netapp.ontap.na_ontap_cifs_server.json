@@ -1,0 +1,467 @@
+{
+  "fqcn": "netapp.ontap.na_ontap_cifs_server",
+  "shortDescription": "NetApp ONTAP CIFS server configuration",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp/ontap/na_ontap_cifs_server_module.html",
+  "options": [
+    {
+      "name": "admin_password",
+      "displayName": "Admin Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the cifs server admin password. When used with absent, the account will be deleted if admin_user_name is also provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "admin_user_name",
+      "displayName": "Admin User Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the cifs server admin username. When used with absent, the account will be deleted if admin_password is also provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aes_netlogon_enabled",
+      "displayName": "Aes Netlogon Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether or not an AES session key is enabled for the Netlogon channel. Only supported with REST and requires ontap version 9.10.1 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_filepath",
+      "displayName": "Cert Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client cert file (.pem). not supported with python 2.6.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A descriptive text comment for the CIFS server. SMB clients can see the CIFS server comment when browsing servers on the network. Only supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_site",
+      "displayName": "Default Site",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the site within the Active Directory domain to associate with the CIFS server if Data ONTAP cannot determine an appropriate site. Only supported with REST and requires ontap version 9.13.1 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Fully Qualified Domain Name of the Windows Active Directory this CIFS server belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encrypt_dc_connection",
+      "displayName": "Encrypt Dc Connection",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether encryption is required for domain controller connections. Only supported with REST and requires ontap version 9.8 or later. Use na_ontap_vserver_cifs_security with ZAPI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "feature_flags",
+      "displayName": "Feature Flags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable a new feature. This can be used to enable an experimental feature or disable a new feature that breaks backward compatibility. Supported keys and values are subject to change without notice.  Unknown keys are ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When state is present, if this is set and a machine account with the same name as specified in 'name' exists in the Active Directory, it will be overwritten and reused. When state is absent, if this is set, the local CIFS configuration is deleted regardless of communication errors. For REST, it requires ontap version 9.11.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_ontap_version",
+      "displayName": "Force Ontap Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the cluster ONTAP version when using REST. The behavior is undefined if the version does not match the target cluster. This is provided as a work-around when the cluster version cannot be read because of permission issues. See https://github.com/ansible-collections/netapp.ontap/wiki/Known-issues. This should be in the form 9.10 or 9.10.1 with each element being an integer number. When C(use_rest) is set to auto, this may force a switch to ZAPI based on the version and platform capabilit",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "from_name",
+      "displayName": "From Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the existing cifs_server name. This option is used to rename cifs_server. Supported only in REST and requires force to be set to True. Requires ontap version 9.11.0. if the service is running, it will be stopped to perform the rename action, and automatically restarts. if the service is stopped, it will be briefly restarted after the rename action, and stopped again.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the ONTAP instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_port",
+      "displayName": "Http Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Override the default port (80 or 443) with this port",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "https",
+      "displayName": "Https",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable and disable https. Ignored when using REST as only https is supported. Ignored when using SSL certificate authentication as it requires SSL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_multichannel_enabled",
+      "displayName": "Is Multichannel Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the CIFS server supports Multichannel or not. Only supported with REST and requires ontap version 9.10 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kdc_encryption",
+      "displayName": "Kdc Encryption",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether AES-128 and AES-256 encryption is enabled for all Kerberos-based communication with the Active Directory KDC. Only supported with REST. Use na_ontap_vserver_cifs_security with ZAPI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_filepath",
+      "displayName": "Key Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client key file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lambda_config",
+      "displayName": "Lambda Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration parameters for AWS Lambda proxy functionality. These option and suboptions are only supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_referral_enabled",
+      "displayName": "Ldap Referral Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether or not LDAP referral chasing is enabled for AD LDAP connections. Only supported with REST and requires ontap version 9.10.1 or later. Use na_ontap_vserver_cifs_security with ZAPI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lm_compatibility_level",
+      "displayName": "Lm Compatibility Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies CIFS server minimum security level, also known as the LMCompatibilityLevel. Only supported with REST and requires ontap version 9.8 or later. Use na_ontap_vserver_cifs_security with ZAPI.",
+      "choices": [
+        "lm_ntlm_ntlmv2_krb",
+        "ntlm_ntlmv2_krb",
+        "ntlmv2_krb",
+        "krb"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the cifs_server name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ontapi",
+      "displayName": "Ontapi",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The ontap api version to use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ou",
+      "displayName": "Ou",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Organizational Unit (OU) within the Windows Active Directory this CIFS server belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the specified user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restrict_anonymous",
+      "displayName": "Restrict Anonymous",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies what level of access an anonymous user is granted. Only supported with REST.",
+      "choices": [
+        "no_enumeration",
+        "no_restriction",
+        "no_access"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_state",
+      "displayName": "Service State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "CIFS Server Administrative Status.",
+      "choices": [
+        "stopped",
+        "started"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_security",
+      "displayName": "Session Security",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies client session security for AD LDAP connections. Only supported with REST and requires ontap version 9.10.1 or later. Use na_ontap_vserver_cifs_security with ZAPI.",
+      "choices": [
+        "none",
+        "sign",
+        "seal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smb_encryption",
+      "displayName": "Smb Encryption",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Determine whether SMB encryption is required for incoming CIFS traffic. Only supported with REST. Use na_ontap_vserver_cifs_security with ZAPI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smb_signing",
+      "displayName": "Smb Signing",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether signing is required for incoming CIFS traffic. Only supported with REST. Use na_ontap_vserver_cifs_security with ZAPI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the specified cifs_server should exist or not.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "try_ldap_channel_binding",
+      "displayName": "Try Ldap Channel Binding",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether or not channel binding is attempted in the case of TLS/LDAPS. Only supported with REST and requires ontap version 9.10.1 or later. Use na_ontap_vserver_cifs_security with ZAPI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_lambda",
+      "displayName": "Use Lambda",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies if AWS Lambda proxy functionality should be used to connect to the ONTAP system. Supported only with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_ldaps",
+      "displayName": "Use Ldaps",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether or not to use use LDAPS for secure Active Directory LDAP connections. Only supported with REST and requires ontap version 9.10.1 or later. Use na_ontap_vserver_cifs_security with ZAPI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_rest",
+      "displayName": "Use Rest",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "Whether to use REST or ZAPI. always -- will always use the REST API if the module supports REST. A warning is issued if the module does not support REST. An error is issued if a module option is not supported in REST. never -- will always use ZAPI if the module supports ZAPI.  An error may be issued if a REST option is not supported in ZAPI. auto -- will try to use the REST API if the module supports REST and modules options are supported.  Reverts to ZAPI otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_start_tls",
+      "displayName": "Use Start Tls",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether or not to use SSL/TLS for allowing secure LDAP communication with Active Directory LDAP servers. Only supported with REST and requires ontap version 9.10.1 or later. Use na_ontap_vserver_cifs_security with ZAPI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required. For more information, please read the documentation U(https://docs.netapp.com/us-en/ontap/authentication/create-svm-user-accounts-task.html). Two authentication methods are supported 1. Basic authentication, using username and password. 2. SSL certificate authentication, using a ssl client cert file, and optionally a private key file. To use a certificate, the certificate must h",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to C(no), the SSL certificates will not be validated. This should only set to C(False) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vserver",
+      "displayName": "Vserver",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the vserver to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "workgroup",
+      "displayName": "Workgroup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The NetBIOS name of the domain or workgroup this CIFS server belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

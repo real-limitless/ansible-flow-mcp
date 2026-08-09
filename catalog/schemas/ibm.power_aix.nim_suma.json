@@ -1,0 +1,110 @@
+{
+  "fqcn": "ibm.power_aix.nim_suma",
+  "shortDescription": "Use NIM to download fixes, SP or TL from IBM Fix Central website.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/nim_suma_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "preview",
+      "description": "Controls the SUMA action to be performed. C(download) specifies to download fixes and define the NIM resource. C(preview) specifies to execute all the checks without downloading the fixes.",
+      "choices": [
+        "download",
+        "preview"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the display name for SUMA task. This is used when viewing existing SUMA tasks in SMIT for example. If not set they will be labelled as 'I(action) request for oslevel I(oslevel)'. Can be used for I(action=download) or I(action=preview).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_dir",
+      "displayName": "Download Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Absolute directory path where to download the packages on the NIM server. When not set, if a NIM resource I(lpp_source_name) exists then it is the resource's location. If no NIM ressource exists, then it is set to /usr/sys/inst.images Can be used if I(action=download) or I(action=preview).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_only",
+      "displayName": "Download Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to perform the preview and download operation only. Do not create the NIM resource. Can be used if I(action=download)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extend_fs",
+      "displayName": "Extend Fs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies to automatically extends the filesystem if extra space is needed. When I(extend_fs=no) and additional space is required for the download, no download occurs. When set, a filesystem could have increased while the task returns I(changed=False). Can be used if I(action=download) or I(action=preview).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lpp_source_name",
+      "displayName": "Lpp Source Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the lpp_source NIM resource to create when I(action=download). When not specified the lpp_source_name is returned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "metadata_dir",
+      "displayName": "Metadata Dir",
+      "type": "string",
+      "required": false,
+      "default": "/var/adm/ansible/metadata",
+      "description": "Specifies the directory where metadata files are downloaded. Can be used if I(action=download) or I(action=preview) when I(oslevel) is not exact, for example I(oslevel=Latest).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oslevel",
+      "displayName": "Oslevel",
+      "type": "string",
+      "required": false,
+      "default": "Latest",
+      "description": "Specifies the Operating System level to build the resource to update to; C(Latest) specifies to update the target to the latest SP suma can update for the current TL. C(xxxx-xx(-00-0000)) specifies to update the target to a specific TL. C(xxxx-xx-xx-xxxx) or C(xxxx-xx-xx) specifies to update the target to a specific SP. Required when I(action=download) or I(action=preview). When target list is empty I(targets=[]), then I(oslevel) cannot be empty I(oslevel=\"\") or I(oslevel=Latest).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "targets",
+      "displayName": "Targets",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Specifies the NIM clients to perform the action on. C(foo*) specifies all the NIM clients with name starting by C(foo). C(foo[2:4]) specifies the NIM clients among foo2, foo3 and foo4. C(*) or C(ALL) specifies all the NIM clients. Can be empty. But it cannot be empty when I(oslevel) is set to a Service Pack.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

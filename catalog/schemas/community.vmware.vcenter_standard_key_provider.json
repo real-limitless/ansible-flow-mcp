@@ -1,7 +1,176 @@
 {
   "fqcn": "community.vmware.vcenter_standard_key_provider",
-  "shortDescription": "vcenter_standard_key_provider",
+  "shortDescription": "Add, reconfigure or remove Standard Key Provider on vCenter server",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vcenter_standard_key_provider_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kms_info",
+      "displayName": "Kms Info",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The information of an external key server (KMS). O(kms_info[].kms_name), O(kms_info[].kms_ip) are required when adding a Standard Key Provider. If O(kms_info[].kms_port) is not specified, the default port 5696 will be used. O(kms_info[].kms_ip), O(kms_info[].kms_port) can be reconfigured for an existing KMS with name O(kms_info[].kms_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kms_password",
+      "displayName": "Kms Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password to authenticate to the KMS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kms_username",
+      "displayName": "Kms Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username to authenticate to the KMS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "make_kms_trust_vc",
+      "displayName": "Make Kms Trust Vc",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "After adding the Standard Key Provider to the vCenter Server, you can establish a trusted connection, the exact process depends on the certificates that the key provider accepts, and on your company policy. Three methods implemented here, (1) upload client certificate and private key through O(make_kms_trust_vc.upload_client_cert) and O(make_kms_trust_vc.upload_client_key) parameters, (2) generate, update, download vCenter self signed certificate through O(make_kms_trust_vc.download_self_signed_",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mark_default",
+      "displayName": "Mark Default",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set specified Key Provider with name O(name) as the default Key Provider. If new added Key Provider is the only key provider in vCenter, then will mark it as default after adding.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the Key Provider to be added, reconfigured or removed from vCenter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Port of the proxy server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_server",
+      "displayName": "Proxy Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Address of the proxy server to connect to KMS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If set to V(absent), the named Key Provider will be removed from vCenter. If set to V(present), the named existing Key Provider will be reconfigured or new Key Provider will be added.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

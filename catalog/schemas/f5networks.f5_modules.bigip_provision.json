@@ -1,0 +1,89 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_provision",
+  "shortDescription": "Manage BIG-IP module provisioning",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_provision_module.html",
+  "options": [
+    {
+      "name": "level",
+      "displayName": "Level",
+      "type": "string",
+      "required": false,
+      "default": "nominal",
+      "description": "Sets the provisioning level for the requested modules. Changing the level for one module may require modifying the level of another module. For example, changing one module to C(dedicated) requires setting all others to C(none). Setting the level of a module to C(none) means the module is not activated. Use a C(state) of B(absent) to set c(level) to none and de-provision the module. This parameter is not relevant to C(cgnat - pre tmos 15.0) or C(mgmt) and will not be applied to the C(cgnat - pre",
+      "choices": [
+        "dedicated",
+        "nominal",
+        "minimum"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "memory",
+      "displayName": "Memory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets additional memory for the management module. This is in addition to minimum allocated RAM of 1264MB. The accepted value range is C(0 - 8192). Maximum value is restricted by the available RAM in the system. Specifying C(large) reserves an additional 500MB for the mgmt module. Specifying C(medium) reserves an additional 200MB for the mgmt module. Specifying C(small) reserves no additional RAM for the mgmt module. Use C(large) for configurations containing more than 2000 objects, or more speci",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "module",
+      "displayName": "Module",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The module to provision in BIG-IP.",
+      "choices": [
+        "am",
+        "afm",
+        "apm",
+        "asm",
+        "avr",
+        "cgnat",
+        "fps",
+        "gtm",
+        "ilx",
+        "lc",
+        "ltm",
+        "mgmt",
+        "pem",
+        "sam",
+        "sslo",
+        "swg",
+        "urldb",
+        "vcmp"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the provisioned module on the system. When C(present), guarantees the specified module is provisioned at the requested level, provided there are sufficient resources on the device (such as physical RAM) to support the module. When C(absent), de-provision the module. C(absent), is not a relevent option for the C(mgmt) module, as it can not be de-provisioned.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

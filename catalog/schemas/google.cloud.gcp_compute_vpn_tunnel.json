@@ -2,6 +2,279 @@
   "fqcn": "google.cloud.gcp_compute_vpn_tunnel",
   "shortDescription": "Creates a GCP VpnTunnel",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/google/cloud/gcp_compute_vpn_tunnel_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An OAuth2 access token if credential type is accesstoken.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_kind",
+      "displayName": "Auth Kind",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of credential used.",
+      "choices": [
+        "application",
+        "machineaccount",
+        "serviceaccount",
+        "accesstoken"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional description of this resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "env_type",
+      "displayName": "Env Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies which Ansible environment you're running this module within. This should not be set unless you know what you're doing. This only alters the User Agent string for any API requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ike_version",
+      "displayName": "Ike Version",
+      "type": "number",
+      "required": false,
+      "default": "2",
+      "description": "IKE protocol version to use when establishing the VPN tunnel with peer VPN gateway. Acceptable IKE versions are 1 or 2. Default version is 2.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_traffic_selector",
+      "displayName": "Local Traffic Selector",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Local traffic selector to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example `192.168.0.0/16`. The ranges should be disjoint. Only IPv4 is supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the resource. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_external_gateway",
+      "displayName": "Peer External Gateway",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "URL of the peer side external VPN gateway to which this VPN tunnel is connected. This field represents a link to a ExternalVpnGateway resource in GCP. It can be specified in two ways. First, you can place a dictionary with key 'selfLink' and value of your resource's selfLink Alternatively, you can add `register: name-of-resource` to a gcp_compute_external_vpn_gateway task and then set this peer_external_gateway field to \"{{ name-of-resource }}\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_external_gateway_interface",
+      "displayName": "Peer External Gateway Interface",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The interface ID of the external VPN gateway to which this VPN tunnel is connected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_gcp_gateway",
+      "displayName": "Peer Gcp Gateway",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "URL of the peer side HA GCP VPN gateway to which this VPN tunnel is connected. If provided, the VPN tunnel will automatically use the same vpn_gateway_interface ID in the peer GCP VPN gateway. This field represents a link to a VpnGateway resource in GCP. It can be specified in two ways. First, you can place a dictionary with key 'selfLink' and value of your resource's selfLink Alternatively, you can add `register: name-of-resource` to a gcp_compute_vpn_gateway task and then set this peer_gcp_gat",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_ip",
+      "displayName": "Peer Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP address of the peer VPN gateway. Only IPv4 is supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Google Cloud Platform project to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The region where the tunnel is located.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_traffic_selector",
+      "displayName": "Remote Traffic Selector",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Remote traffic selector to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example `192.168.0.0/16`. The ranges should be disjoint. Only IPv4 is supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "router",
+      "displayName": "Router",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "URL of router resource to be used for dynamic routing. This field represents a link to a Router resource in GCP. It can be specified in two ways. First, you can place a dictionary with key 'selfLink' and value of your resource's selfLink Alternatively, you can add `register: name-of-resource` to a gcp_compute_router task and then set this router field to \"{{ name-of-resource }}\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scopes",
+      "displayName": "Scopes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of scopes to be used",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_contents",
+      "displayName": "Service Account Contents",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_email",
+      "displayName": "Service Account Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional service account email address if machineaccount is selected and the user does not wish to use the default email.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_file",
+      "displayName": "Service Account File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of a Service Account JSON file if serviceaccount is selected as type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shared_secret",
+      "displayName": "Shared Secret",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Shared secret used to set the secure session between the Cloud VPN gateway and the peer VPN gateway.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the given object should exist in GCP",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_vpn_gateway",
+      "displayName": "Target Vpn Gateway",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "URL of the Target VPN gateway with which this VPN tunnel is associated. This field represents a link to a TargetVpnGateway resource in GCP. It can be specified in two ways. First, you can place a dictionary with key 'selfLink' and value of your resource's selfLink Alternatively, you can add `register: name-of-resource` to a gcp_compute_target_vpn_gateway task and then set this target_vpn_gateway field to \"{{ name-of-resource }}\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vpn_gateway",
+      "displayName": "Vpn Gateway",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "URL of the VPN gateway with which this VPN tunnel is associated. This must be used if a High Availability VPN gateway resource is created. This field represents a link to a VpnGateway resource in GCP. It can be specified in two ways. First, you can place a dictionary with key 'selfLink' and value of your resource's selfLink Alternatively, you can add `register: name-of-resource` to a gcp_compute_vpn_gateway task and then set this vpn_gateway field to \"{{ name-of-resource }}\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vpn_gateway_interface",
+      "displayName": "Vpn Gateway Interface",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The interface ID of the VPN gateway with which this VPN tunnel is associated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

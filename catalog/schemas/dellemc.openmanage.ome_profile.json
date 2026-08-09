@@ -1,0 +1,257 @@
+{
+  "fqcn": "dellemc.openmanage.ome_profile",
+  "shortDescription": "Create, modify, delete, assign, unassign and migrate a profile on OpenManage Enterprise",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/ome_profile_module.html",
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Attributes for C(modify) and C(assign).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_to_network_iso",
+      "displayName": "Boot To Network Iso",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Details of the Share iso. Applicable when I(command) is C(create), C(assign), and C(modify).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": false,
+      "default": "create",
+      "description": "C(create) creates new profiles. C(modify) modifies an existing profile. Only I(name), I(description), I(boot_to_network_iso), and I(attributes) can be modified. C(delete) deletes an existing profile. C(assign) Deploys an existing profile on a target device and returns a task ID. C(unassign) unassigns a profile from a specified target and returns a task ID. C(migrate) migrates an existing profile and returns a task ID.",
+      "choices": [
+        "create",
+        "modify",
+        "delete",
+        "assign",
+        "unassign",
+        "migrate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_id",
+      "displayName": "Device Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the target device. This is applicable when I(command) is C(assign) and C(migrate). This option is mutually exclusive with I(device_service_tag).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_service_tag",
+      "displayName": "Device Service Tag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Identifier of the target device. This is typically 7 to 8 characters in length. Applicable when I(command) is C(assign), and C(migrate). This option is mutually exclusive with I(device_id). If the device does not exist when I(command) is C(assign) then the profile is auto-deployed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filters",
+      "displayName": "Filters",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Filters the profiles based on selected criteria. This is applicable when I(command) is C(delete) or C(unassign). This supports suboption I(ProfileIds) which takes a list of profile IDs. This also supports OData filter expressions with the suboption I(Filters). See OpenManage Enterprise REST API guide for the filtering options available. I(WARNING) When this option is used in case of C(unassign), task ID is not returned for any of the profiles affected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Provides the option to force the migration of a profile even if the source device cannot be contacted. This option is applicable when I(command) is C(migrate).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "OpenManage Enterprise or OpenManage Enterprise Modular IP address or hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the profile. This is applicable for modify, delete, assign, unassign, and migrate operations. This option is mutually exclusive with I(name_prefix) and I(number_of_profiles).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name_prefix",
+      "displayName": "Name Prefix",
+      "type": "string",
+      "required": false,
+      "default": "Profile",
+      "description": "The name provided when creating a profile is used a prefix followed by the number assigned to it by OpenManage Enterprise. This is applicable only for a create operation. This option is mutually exclusive with I(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_name",
+      "displayName": "New Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "New name of the profile. Applicable when I(command) is C(modify).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "number_of_profiles",
+      "displayName": "Number Of Profiles",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Provide the number of profiles to be created. This is applicable when I(name_prefix) is used with C(create). This option is mutually exclusive with I(name). Openmanage Enterprise can create a maximum of 100 profiles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OpenManage Enterprise or OpenManage Enterprise Modular password. If the password is not provided, then the environment variable E(OME_PASSWORD) is used. Example: export OME_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "OpenManage Enterprise or OpenManage Enterprise Modular HTTPS port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_id",
+      "displayName": "Template Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the template. This is applicable when I(command) is C(create). This option is mutually exclusive with I(template_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_name",
+      "displayName": "Template Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the template for creating the profile(s). This is applicable when I(command) is C(create). This option is mutually exclusive with I(template_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OpenManage Enterprise or OpenManage Enterprise Modular username. If the username is not provided, then the environment variable E(OME_USERNAME) is used. Example: export OME_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(OME_X_AUTH_TOKEN) is used. Example: export OME_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

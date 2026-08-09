@@ -1,0 +1,1206 @@
+{
+  "fqcn": "community.network.netscaler_lb_vserver",
+  "shortDescription": "Manage load balancing vserver configuration",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/network/netscaler_lb_vserver_module.html",
+  "options": [
+    {
+      "name": "appflowlog",
+      "displayName": "Appflowlog",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Apply AppFlow logging to the virtual server.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authentication",
+      "displayName": "Authentication",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable user authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authenticationhost",
+      "displayName": "Authenticationhost",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fully qualified domain name (FQDN) of the authentication virtual server to which the user must be redirected for authentication. Make sure that the Authentication parameter is set to C(yes). Minimum length = 3 Maximum length = 252",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authn401",
+      "displayName": "Authn401",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable user authentication with HTTP 401 responses.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authnprofile",
+      "displayName": "Authnprofile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the authentication profile to be used when authentication is turned on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authnvsname",
+      "displayName": "Authnvsname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of an authentication virtual server with which to authenticate users. Minimum length = 1 Maximum length = 252",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backuplbmethod",
+      "displayName": "Backuplbmethod",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Backup load balancing method. Becomes operational if the primary load balancing me thod fails or cannot be used. Valid only if the primary method is based on static proximity.",
+      "choices": [
+        "ROUNDROBIN",
+        "LEASTCONNECTION",
+        "LEASTRESPONSETIME",
+        "SOURCEIPHASH",
+        "LEASTBANDWIDTH",
+        "LEASTPACKETS",
+        "CUSTOMLOAD"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backuppersistencetimeout",
+      "displayName": "Backuppersistencetimeout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Time period for which backup persistence is in effect. Minimum value = C(2) Maximum value = C(1440)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bypassaaaa",
+      "displayName": "Bypassaaaa",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If this option is enabled while resolving DNS64 query AAAA queries are not sent to back end dns server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cacheable",
+      "displayName": "Cacheable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Route cacheable requests to a cache redirection virtual server. The load balancing virtual server can forward requests only to a transparent cache redirection virtual server that has an IP address and port combination of *:80, so such a cache redirection virtual server must be configured on the appliance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clttimeout",
+      "displayName": "Clttimeout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Idle time, in seconds, after which a client connection is terminated. Minimum value = C(0) Maximum value = C(31536000)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Any comments that you might want to associate with the virtual server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connfailover",
+      "displayName": "Connfailover",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Mode in which the connection failover feature must operate for the virtual server. After a failover, established TCP connections and UDP packet flows are kept active and resumed on the secondary appliance. Clients remain connected to the same servers. Available settings function as follows: * C(STATEFUL) - The primary appliance shares state information with the secondary appliance, in real time, resulting in some runtime processing overhead. * C(STATELESS) - State information is not shared, and ",
+      "choices": [
+        "DISABLED",
+        "STATEFUL",
+        "STATELESS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cookiename",
+      "displayName": "Cookiename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use this parameter to specify the cookie name for C(COOKIE) persistence type. It specifies the name of cookie with a maximum of 32 characters. If not specified, cookie name is internally generated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datalength",
+      "displayName": "Datalength",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Length of the token to be extracted from the data segment of an incoming packet, for use in the token method of load balancing. The length of the token, specified in bytes, must not be greater than 24 KB. Applicable to virtual servers of type TCP. Minimum value = C(1) Maximum value = C(100)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dataoffset",
+      "displayName": "Dataoffset",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Offset to be considered when extracting a token from the TCP payload. Applicable to virtual servers, of type TCP, using the token method of load balancing. Must be within the first 24 KB of the TCP payload. Minimum value = C(0) Maximum value = C(25400)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dbprofilename",
+      "displayName": "Dbprofilename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the DB profile whose settings are to be applied to the virtual server. Minimum length = 1 Maximum length = 127",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dbslb",
+      "displayName": "Dbslb",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enable database specific load balancing for MySQL and MSSQL service types.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disabled",
+      "displayName": "Disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "no",
+      "description": "When set to C(yes) the lb vserver will be disabled. When set to C(no) the lb vserver will be enabled. Note that due to limitations of the underlying NITRO API a C(disabled) state change alone does not cause the module result to report a changed status.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disableprimaryondown",
+      "displayName": "Disableprimaryondown",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If the primary virtual server goes down, do not allow it to return to primary status until manually enabled.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns64",
+      "displayName": "Dns64",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This argument is for enabling/disabling the C(dns64) on lbvserver.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dnsprofilename",
+      "displayName": "Dnsprofilename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the DNS profile to be associated with the VServer. DNS profile properties will be applied to the transactions processed by a VServer. This parameter is valid only for DNS and DNS-TCP VServers. Minimum length = 1 Maximum length = 127",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "downstateflush",
+      "displayName": "Downstateflush",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Flush all active transactions associated with a virtual server whose state transitions from UP to DOWN. Do not enable this option for applications that must complete their transactions.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hashlength",
+      "displayName": "Hashlength",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of bytes to consider for the hash value used in the URLHASH and DOMAINHASH load balancing methods. Minimum value = C(1) Maximum value = C(4096)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "healththreshold",
+      "displayName": "Healththreshold",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Threshold in percent of active services below which vserver state is made down. If this threshold is 0, vserver state will be up even if one bound service is up. Minimum value = C(0) Maximum value = C(100)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "httpprofilename",
+      "displayName": "Httpprofilename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the HTTP profile whose settings are to be applied to the virtual server. Minimum length = 1 Maximum length = 127",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "icmpvsrresponse",
+      "displayName": "Icmpvsrresponse",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "How the NetScaler appliance responds to ping requests received for an IP address that is common to one or more virtual servers. Available settings function as follows: * If set to C(PASSIVE) on all the virtual servers that share the IP address, the appliance always responds to the ping requests. * If set to C(ACTIVE) on all the virtual servers that share the IP address, the appliance responds to the ping requests if at least one of the virtual servers is UP. Otherwise, the appliance does not res",
+      "choices": [
+        "PASSIVE",
+        "ACTIVE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "insertvserveripport",
+      "displayName": "Insertvserveripport",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Insert an HTTP header, whose value is the IP address and port number of the virtual server, before forwarding a request to the server. The format of the header is <vipHeader>: <virtual server IP address>_<port number >, where vipHeader is the name that you specify for the header. If the virtual server has an IPv6 address, the address in the header is enclosed in brackets ([ and ]) to separate it from the port number. If you have mapped an IPv4 address to a virtual server's IPv6 address, the valu",
+      "choices": [
+        "OFF",
+        "VIPADDR",
+        "V6TOV4MAPPING"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipmask",
+      "displayName": "Ipmask",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP mask, in dotted decimal notation, for the IP Pattern parameter. Can have leading or trailing non-zero octets (for example, C(255.255.240.0) or C(0.0.255.255)). Accordingly, the mask specifies whether the first n bits or the last n bits of the destination IP address in a client request are to be matched with the corresponding bits in the IP pattern. The former is called a forward mask. The latter is called a reverse mask.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ippattern",
+      "displayName": "Ippattern",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP address pattern, in dotted decimal notation, for identifying packets to be accepted by the virtual server. The IP Mask parameter specifies which part of the destination IP address is matched against the pattern. Mutually exclusive with the IP Address parameter. For example, if the IP pattern assigned to the virtual server is C(198.51.100.0) and the IP mask is C(255.255.240.0) (a forward mask), the first 20 bits in the destination IP addresses are matched with the first 20 bits in the pattern.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipv46",
+      "displayName": "Ipv46",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IPv4 or IPv6 address to assign to the virtual server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "l2conn",
+      "displayName": "L2Conn",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use Layer 2 parameters (channel number, MAC address, and VLAN ID) in addition to the 4-tuple (<source IP>:<source port>::<destination IP>:<destination port>) that is used to identify a connection. Allows multiple TCP and non-TCP connections with the same 4-tuple to co-exist on the NetScaler appliance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lbmethod",
+      "displayName": "Lbmethod",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Load balancing method. The available settings function as follows: * C(ROUNDROBIN) - Distribute requests in rotation, regardless of the load. Weights can be assigned to services to enforce weighted round robin distribution. * C(LEASTCONNECTION) (default) - Select the service with the fewest connections. * C(LEASTRESPONSETIME) - Select the service with the lowest average response time. * C(LEASTBANDWIDTH) - Select the service currently handling the least traffic. * C(LEASTPACKETS) - Select the se",
+      "choices": [
+        "ROUNDROBIN",
+        "LEASTCONNECTION",
+        "LEASTRESPONSETIME",
+        "URLHASH",
+        "DOMAINHASH",
+        "DESTINATIONIPHASH",
+        "SOURCEIPHASH",
+        "SRCIPDESTIPHASH",
+        "LEASTBANDWIDTH",
+        "LEASTPACKETS",
+        "TOKEN",
+        "SRCIPSRCPORTHASH",
+        "LRTM",
+        "CALLIDHASH",
+        "CUSTOMLOAD",
+        "LEASTREQUEST",
+        "AUDITLOGHASH",
+        "STATICPROXIMITY"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "listenpolicy",
+      "displayName": "Listenpolicy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default syntax expression identifying traffic accepted by the virtual server. Can be either an expression (for example, C(CLIENT.IP.DST.IN_SUBNET(192.0.2.0/24)) or the name of a named expression. In the above example, the virtual server accepts all requests whose destination IP address is in the 192.0.2.0/24 subnet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "listenpriority",
+      "displayName": "Listenpriority",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Integer specifying the priority of the listen policy. A higher number specifies a lower priority. If a request matches the listen policies of more than one virtual server the virtual server whose listen policy has the highest priority (the lowest priority number) accepts the request. Minimum value = C(0) Maximum value = C(101)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "m",
+      "displayName": "M",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Redirection mode for load balancing. Available settings function as follows: * C(IP) - Before forwarding a request to a server, change the destination IP address to the server's IP address. * C(MAC) - Before forwarding a request to a server, change the destination MAC address to the server's MAC address. The destination IP address is not changed. MAC-based redirection mode is used mostly in firewall load balancing deployments. * C(IPTUNNEL) - Perform IP-in-IP encapsulation for client IP packets.",
+      "choices": [
+        "IP",
+        "MAC",
+        "IPTUNNEL",
+        "TOS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "macmoderetainvlan",
+      "displayName": "Macmoderetainvlan",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This option is used to retain vlan information of incoming packet when macmode is enabled.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxautoscalemembers",
+      "displayName": "Maxautoscalemembers",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of members expected to be present when vserver is used in Autoscale. Minimum value = C(0) Maximum value = C(5000)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minautoscalemembers",
+      "displayName": "Minautoscalemembers",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Minimum number of members expected to be present when vserver is used in Autoscale. Minimum value = C(0) Maximum value = C(5000)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mssqlserverversion",
+      "displayName": "Mssqlserverversion",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "For a load balancing virtual server of type C(MSSQL), the Microsoft SQL Server version. Set this parameter if you expect some clients to run a version different from the version of the database. This setting provides compatibility between the client-side and server-side connections by ensuring that all communication conforms to the server's version.",
+      "choices": [
+        "70",
+        "2000",
+        "2000SP1",
+        "2005",
+        "2008",
+        "2008R2",
+        "2012",
+        "2014"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mysqlcharacterset",
+      "displayName": "Mysqlcharacterset",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Character set that the virtual server advertises to clients.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mysqlprotocolversion",
+      "displayName": "Mysqlprotocolversion",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "MySQL protocol version that the virtual server advertises to clients.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mysqlservercapabilities",
+      "displayName": "Mysqlservercapabilities",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Server capabilities that the virtual server advertises to clients.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mysqlserverversion",
+      "displayName": "Mysqlserverversion",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "MySQL server version string that the virtual server advertises to clients. Minimum length = 1 Maximum length = 31",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name for the virtual server. Must begin with an ASCII alphanumeric or underscore C(_) character, and must contain only ASCII alphanumeric, underscore, hash C(#), period C(.), space C( ), colon C(:), at sign C(@), equal sign C(=), and hyphen C(-) characters. Can be changed after the virtual server is created. Minimum length = 1",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "netmask",
+      "displayName": "Netmask",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IPv4 subnet mask to apply to the destination IP address or source IP address when the load balancing method is C(DESTINATIONIPHASH) or C(SOURCEIPHASH). Minimum length = 1",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "netprofile",
+      "displayName": "Netprofile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the network profile to associate with the virtual server. If you set this parameter, the virtual server uses only the IP addresses in the network profile as source IP addresses when initiating connections with servers. Minimum length = 1 Maximum length = 127",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "newservicerequest",
+      "displayName": "Newservicerequest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of requests, or percentage of the load on existing services, by which to increase the load on a new service at each interval in slow-start mode. A non-zero value indicates that slow-start is applicable. A zero value indicates that the global RR startup parameter is applied. Changing the value to zero will cause services currently in slow start to take the full traffic as determined by the LB method. Subsequently, any new services added will use the global RR factor.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "newservicerequestincrementinterval",
+      "displayName": "Newservicerequestincrementinterval",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Interval, in seconds, between successive increments in the load on a new service or a service whose state has just changed from DOWN to UP. A value of 0 (zero) specifies manual slow start. Minimum value = C(0) Maximum value = C(3600)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "newservicerequestunit",
+      "displayName": "Newservicerequestunit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Units in which to increment load at each interval in slow-start mode.",
+      "choices": [
+        "PER_SECOND",
+        "PERCENT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_pass",
+      "displayName": "Nitro Pass",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password with which to authenticate to the netscaler node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_protocol",
+      "displayName": "Nitro Protocol",
+      "type": "string",
+      "required": false,
+      "default": "http",
+      "description": "Which protocol to use when accessing the nitro API objects.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_timeout",
+      "displayName": "Nitro Timeout",
+      "type": "number",
+      "required": false,
+      "default": 310,
+      "description": "Time in seconds until a timeout error is thrown when establishing a new session with Netscaler",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_user",
+      "displayName": "Nitro User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username with which to authenticate to the netscaler node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nsip",
+      "displayName": "Nsip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The ip address of the netscaler appliance where the nitro API calls will be made. The port can be specified with the colon (:). E.g. 192.168.1.1:555.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oracleserverversion",
+      "displayName": "Oracleserverversion",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Oracle server version.",
+      "choices": [
+        "10G",
+        "11G"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persistavpno",
+      "displayName": "Persistavpno",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Persist AVP number for Diameter Persistency. In case this AVP is not defined in Base RFC 3588 and it is nested inside a Grouped AVP, define a sequence of AVP numbers (max 3) in order of parent to child. So say persist AVP number X is nested inside AVP Y which is nested in Z, then define the list as Z Y X. Minimum value = C(1)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persistencebackup",
+      "displayName": "Persistencebackup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Backup persistence type for the virtual server. Becomes operational if the primary persistence mechanism fails.",
+      "choices": [
+        "SOURCEIP",
+        "NONE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persistencetype",
+      "displayName": "Persistencetype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of persistence for the virtual server. Available settings function as follows: * C(SOURCEIP) - Connections from the same client IP address belong to the same persistence session. * C(COOKIEINSERT) - Connections that have the same HTTP Cookie, inserted by a Set-Cookie directive from a server, belong to the same persistence session. * C(SSLSESSION) - Connections that have the same SSL Session ID belong to the same persistence session. * C(CUSTOMSERVERID) - Connections with the same server ID ",
+      "choices": [
+        "SOURCEIP",
+        "COOKIEINSERT",
+        "SSLSESSION",
+        "RULE",
+        "URLPASSIVE",
+        "CUSTOMSERVERID",
+        "DESTIP",
+        "SRCIPDESTIP",
+        "CALLID",
+        "RTSPSID",
+        "DIAMETER",
+        "FIXSESSION",
+        "NONE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persistmask",
+      "displayName": "Persistmask",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Persistence mask for IP based persistence types, for IPv4 virtual servers. Minimum length = 1",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Port number for the virtual server. Range C(1) - C(65535) * in CLI is represented as C(65535) in NITRO API",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "processlocal",
+      "displayName": "Processlocal",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "By turning on this option packets destined to a vserver in a cluster will not under go any steering. Turn this option for single packet request response mode or when the upstream device is performing a proper RSS for connection based distribution.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "push",
+      "displayName": "Push",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Process traffic with the push virtual server that is bound to this load balancing virtual server.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pushlabel",
+      "displayName": "Pushlabel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Expression for extracting a label from the server's response. Can be either an expression or the name of a named expression.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pushmulticlients",
+      "displayName": "Pushmulticlients",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allow multiple Web 2.0 connections from the same client to connect to the virtual server and expect updates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pushvserver",
+      "displayName": "Pushvserver",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the load balancing virtual server, of type PUSH or SSL_PUSH, to which the server pushes updates received on the load balancing virtual server that you are configuring. Minimum length = 1",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "range",
+      "displayName": "Range",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of IP addresses that the appliance must generate and assign to the virtual server. The virtual server then functions as a network virtual server, accepting traffic on any of the generated IP addresses. The IP addresses are generated automatically, as follows: * For a range of n, the last octet of the address specified by the IP Address parameter increments n-1 times. * If the last octet exceeds 255, it rolls over to 0 and the third octet increments by 1. Note: The Range parameter assigns ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recursionavailable",
+      "displayName": "Recursionavailable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When set to YES, this option causes the DNS replies from this vserver to have the RA bit turned on. Typically one would set this option to YES, when the vserver is load balancing a set of DNS servers thatsupport recursive queries.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "redirectportrewrite",
+      "displayName": "Redirectportrewrite",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Rewrite the port and change the protocol to ensure successful HTTP redirects from services.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "redirurl",
+      "displayName": "Redirurl",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to which to redirect traffic if the virtual server becomes unavailable. WARNING! Make sure that the domain in the URL does not match the domain specified for a content switching policy. If it does, requests are continuously redirected to the unavailable virtual server. Minimum length = 1",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resrule",
+      "displayName": "Resrule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default syntax expression specifying which part of a server's response to use for creating rule based persistence sessions (persistence type RULE). Can be either an expression or the name of a named expression. Example: C(HTTP.RES.HEADER(\"setcookie\").VALUE(0).TYPECAST_NVLIST_T(\"=\",\";\").VALUE(\"server1\")).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rhistate",
+      "displayName": "Rhistate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Route Health Injection (RHI) functionality of the NetSaler appliance for advertising the route of the VIP address associated with the virtual server. When Vserver RHI Level (RHI) parameter is set to VSVR_CNTRLD, the following are different RHI behaviors for the VIP address on the basis of RHIstate (RHI STATE) settings on the virtual servers associated with the VIP address: * If you set C(rhistate) to C(PASSIVE) on all virtual servers, the NetScaler ADC always advertises the route for the VIP add",
+      "choices": [
+        "PASSIVE",
+        "ACTIVE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rtspnat",
+      "displayName": "Rtspnat",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use network address translation (NAT) for RTSP data connections.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save_config",
+      "displayName": "Save Config",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(yes) the module will save the configuration on the netscaler node if it makes any changes. The module will not save the configuration on the netscaler node if it made no changes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "servicebindings",
+      "displayName": "Servicebindings",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "List of services along with the weights that are load balanced. The following suboptions are available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "servicegroupbindings",
+      "displayName": "Servicegroupbindings",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "List of service groups along with the weights that are load balanced. The following suboptions are available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "servicetype",
+      "displayName": "Servicetype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Protocol used by the service (also called the service type).",
+      "choices": [
+        "HTTP",
+        "FTP",
+        "TCP",
+        "UDP",
+        "SSL",
+        "SSL_BRIDGE",
+        "SSL_TCP",
+        "DTLS",
+        "NNTP",
+        "DNS",
+        "DHCPRA",
+        "ANY",
+        "SIP_UDP",
+        "SIP_TCP",
+        "SIP_SSL",
+        "DNS_TCP",
+        "RTSP",
+        "PUSH",
+        "SSL_PUSH",
+        "RADIUS",
+        "RDP",
+        "MYSQL",
+        "MSSQL",
+        "DIAMETER",
+        "SSL_DIAMETER",
+        "TFTP",
+        "ORACLE",
+        "SMPP",
+        "SYSLOGTCP",
+        "SYSLOGUDP",
+        "FIX",
+        "SSL_FIX"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sessionless",
+      "displayName": "Sessionless",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Perform load balancing on a per-packet basis, without establishing sessions. Recommended for load balancing of intrusion detection system (IDS) servers and scenarios involving direct server return (DSR), where session information is unnecessary.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skippersistency",
+      "displayName": "Skippersistency",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This argument decides the behavior incase the service which is selected from an existing persistence session has reached threshold.",
+      "choices": [
+        "Bypass",
+        "ReLb",
+        "None"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sobackupaction",
+      "displayName": "Sobackupaction",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Action to be performed if spillover is to take effect, but no backup chain to spillover is usable or exists.",
+      "choices": [
+        "DROP",
+        "ACCEPT",
+        "REDIRECT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "somethod",
+      "displayName": "Somethod",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of threshold that, when exceeded, triggers spillover. Available settings function as follows: * C(CONNECTION) - Spillover occurs when the number of client connections exceeds the threshold. * DYNAMICCONNECTION - Spillover occurs when the number of client connections at the virtual server exceeds the sum of the maximum client (Max Clients) settings for bound services. Do not specify a spillover threshold for this setting, because the threshold is implied by the Max Clients settings of bound ",
+      "choices": [
+        "CONNECTION",
+        "DYNAMICCONNECTION",
+        "BANDWIDTH",
+        "HEALTH",
+        "NONE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sopersistence",
+      "displayName": "Sopersistence",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If spillover occurs, maintain source IP address based persistence for both primary and backup virtual servers.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sopersistencetimeout",
+      "displayName": "Sopersistencetimeout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Timeout for spillover persistence, in minutes. Minimum value = C(2) Maximum value = C(1440)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sothreshold",
+      "displayName": "Sothreshold",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Threshold at which spillover occurs. Specify an integer for the C(CONNECTION) spillover method, a bandwidth value in kilobits per second for the C(BANDWIDTH) method (do not enter the units), or a percentage for the C(HEALTH) method (do not enter the percentage symbol). Minimum value = C(1) Maximum value = C(4294967287)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_certkey",
+      "displayName": "Ssl Certkey",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the ssl certificate that is bound to this service. The ssl certificate must already exist. Creating the certificate can be done with the M(community.network.netscaler_ssl_certkey) module. This option is only applicable only when C(servicetype) is C(SSL).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the resource being configured by the module on the netscaler node. When present the resource will be created if needed and configured according to the module's parameters. When absent the resource will be deleted from the netscaler node.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tcpprofilename",
+      "displayName": "Tcpprofilename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the TCP profile whose settings are to be applied to the virtual server. Minimum length = 1 Maximum length = 127",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "td",
+      "displayName": "Td",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Integer value that uniquely identifies the traffic domain in which you want to configure the entity. If you do not specify an ID, the entity becomes part of the default traffic domain, which has an ID of 0. Minimum value = C(0) Maximum value = C(4094)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Time period for which a persistence session is in effect. Minimum value = C(0) Maximum value = C(1440)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tosid",
+      "displayName": "Tosid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "TOS ID of the virtual server. Applicable only when the load balancing redirection mode is set to TOS. Minimum value = C(1) Maximum value = C(63)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "v6netmasklen",
+      "displayName": "V6Netmasklen",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of bits to consider in an IPv6 destination or source IP address, for creating the hash that is required by the C(DESTINATIONIPHASH) and C(SOURCEIPHASH) load balancing methods. Minimum value = C(1) Maximum value = C(128)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "v6persistmasklen",
+      "displayName": "V6Persistmasklen",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Persistence mask for IP based persistence types, for IPv6 virtual servers. Minimum value = C(1) Maximum value = C(128)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vipheader",
+      "displayName": "Vipheader",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name for the inserted header. The default name is vip-header. Minimum length = 1",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

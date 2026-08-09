@@ -1,0 +1,216 @@
+{
+  "fqcn": "nutanix.ncp.ntnx_recovery_plan_jobs",
+  "shortDescription": "Create/Run recovery plan jobs related to recovery plan",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/nutanix/ncp/ntnx_recovery_plan_jobs_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Type of action performed by the Recovery Plan Job. VALIDATE - Performs the validation of the Recovery Plan. The validation includes checks for the presence of entities, networks, categories etc. referenced in the Recovery Plan. MIGRATE - VM would be powered off on the source before migrating it to the recovery Availability Zone. FAILOVER - Restore the entity from the recovery points on the recovery Availability Zone. TEST_FAILOVER - Same as FAILOVER but on a test network. LIVE_MIGRATE - Migrate ",
+      "choices": [
+        "VALIDATE",
+        "MIGRATE",
+        "FAILOVER",
+        "TEST_FAILOVER",
+        "LIVE_MIGRATE",
+        "CLEANUP"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "failed_site",
+      "displayName": "Failed Site",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Availability Zones that have failed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_validation_failures",
+      "displayName": "Ignore Validation Failures",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to ignore the validation failures(e.g. Network mapping is missing for some networks on failed Availability Zone, Virtual network missing.) for the Recovery Plan actions MIGRATE, FAILOVER, TEST_FAILOVER and execute the Recovery Plan.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_uuid",
+      "displayName": "Job Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "recovery_plan_job uuid only required for running cleanup for Test Failover jobs",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Recovery Plan Job name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_api_key",
+      "displayName": "Nutanix Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Prism central API key. Created using Service Account API Key in Prism Central. C(nutanix_api_key). If not set then the value of the C(NUTANIX_API_KEY), environment variable is used. This field is only supported for Prism Central.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_debug",
+      "displayName": "Nutanix Debug",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed debug logging for all API calls made by this module. When enabled, logs will include HTTP method, URL, headers, request body, response body, status code, and elapsed time. Authorization headers and sensitive information are automatically redacted. This parameter can also be set via the NUTANIX_DEBUG environment variable and is preferred over the NUTANIX_DEBUG environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_host",
+      "displayName": "Nutanix Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Prism central hostname or IP address C(nutanix_host). If not set then the value of the C(NUTANIX_HOST), environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_log_file",
+      "displayName": "Nutanix Log File",
+      "type": "string",
+      "required": false,
+      "default": "/tmp/nutanix_ansible_debug.log",
+      "description": "The file to write the logs to. This parameter can also be set via the NUTANIX_LOG_FILE environment variable and is preferred over the NUTANIX_LOG_FILE environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_password",
+      "displayName": "Nutanix Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Prism central password C(nutanix_password). If not set then the value of the C(NUTANIX_PASSWORD), environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_port",
+      "displayName": "Nutanix Port",
+      "type": "string",
+      "required": false,
+      "default": "9440",
+      "description": "Prism central port C(nutanix_port). If not set then the value of the C(NUTANIX_PORT), environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nutanix_username",
+      "displayName": "Nutanix Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Prism central username C(nutanix_username). If not set then the value of the C(NUTANIX_USERNAME), environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recovery_plan",
+      "displayName": "Recovery Plan",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The reference to a recovery_plan",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recovery_reference_time",
+      "displayName": "Recovery Reference Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Time with respect to which Recovery Plan Job has to be executed. This time will be used as reference time with respect to which latest snapshot will have to be restored in case of failover. For example, if failover is required to be done using snapshot created on or before yesterday '2:00' PM, then recovery_reference_time will be set to this time.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recovery_site",
+      "displayName": "Recovery Site",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Availability Zones wherein entities need to be recovered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Specify state If C(state) is set to C(present) then the operation will be  create the item If C(state) is set to C(absent) and if the item exists, then item is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Set value to C(False) to skip validation for self signed certificates This is not recommended for production setup C(validate_certs). If not set then the value of the C(VALIDATE_CERTS), environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Wait for the  CRUD operation to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

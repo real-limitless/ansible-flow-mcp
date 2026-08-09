@@ -1,7 +1,195 @@
 {
   "fqcn": "community.vmware.vmware_guest_sendkey",
-  "shortDescription": "vmware_guest_sendkey",
+  "shortDescription": "Send USB HID codes to the Virtual Machine's keyboard.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_guest_sendkey_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of cluster where the virtual machine is running. This is a required parameter, if O(esxi_hostname) is not set. O(esxi_hostname) and O(cluster) are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The datacenter name to which virtual machine belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "esxi_hostname",
+      "displayName": "Esxi Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ESXi hostname where the virtual machine is running. This is a required parameter, if O(cluster) is not set. O(esxi_hostname) and O(cluster) are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder",
+      "displayName": "Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Destination folder, absolute or relative path to find an existing guest. This is a required parameter, only if multiple VMs are found with same name. The folder should include the datacenter. ESXi server's datacenter is ha-datacenter. Examples:    folder: /ha-datacenter/vm    folder: ha-datacenter/vm    folder: /datacenter1/vm    folder: datacenter1/vm    folder: /datacenter1/vm/folder1    folder: datacenter1/vm/folder1    folder: /folder1/datacenter1/vm    folder: folder1/datacenter1/vm    fold",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keys_send",
+      "displayName": "Keys Send",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The list of the keys will be sent to the virtual machine. Valid values are C(ENTER), C(ESC), C(BACKSPACE), C(TAB), C(SPACE), C(CAPSLOCK), C(HOME), C(DELETE), C(END), C(CTRL_ALT_DEL), C(CTRL_C), C(CTRL_X) and C(F1) to C(F12), C(RIGHTARROW), C(LEFTARROW), C(DOWNARROW), C(UPARROW), C(WINDOWS). If both O(keys_send) and O(string_send) are specified, keys in O(keys_send) list will be sent in front of the O(string_send).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "moid",
+      "displayName": "Moid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Managed Object ID of the instance to manage if known, this is a unique identifier only within a single vCenter instance. This is required if O(name) or O(uuid) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the virtual machine. This is a required parameter, if parameter O(uuid) or O(moid) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sleep_time",
+      "displayName": "Sleep Time",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Sleep time in seconds between two keys or string sent to the virtual machine. API is faster than actual key or string send to virtual machine, this parameter allow to control delay between keys and/or strings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "string_send",
+      "displayName": "String Send",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The string will be sent to the virtual machine. This string can contain valid special character, alphabet and digit on the keyboard. If both O(keys_send) and O(string_send) are specified, keys in O(keys_send) list will be sent in front of the O(string_send).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "UUID of the instance to gather facts if known, this is VMware's unique identifier. This is a required parameter, if parameter O(name) or O(moid) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

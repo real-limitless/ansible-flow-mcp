@@ -2,6 +2,305 @@
   "fqcn": "azure.azcollection.azure_rm_recoveryservicesvault",
   "shortDescription": "Create and Delete Azure Recovery Services vault",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/azure/azcollection/azure_rm_recoveryservicesvault_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "ad_user",
+      "displayName": "Ad User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Active Directory username. Use when authenticating with an Active Directory user rather than service principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "adfs_authority_url",
+      "displayName": "Adfs Authority Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure AD authority url. Use when authenticating with Username/password, and has your own ADFS authority.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_profile",
+      "displayName": "Api Profile",
+      "type": "string",
+      "required": false,
+      "default": "latest",
+      "description": "Selects an API profile to use when communicating with Azure services. Default value of C(latest) is appropriate for public clouds; future values will allow use with Azure Stack.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "append_tags",
+      "displayName": "Append Tags",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Use to control if tags field is canonical or just appends to existing tags. When canonical, any tags not found in the tags parameter will be removed from the object's metadata.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_source",
+      "displayName": "Auth Source",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Controls the source of the credentials to use for authentication. Can also be set via the C(ANSIBLE_AZURE_AUTH_SOURCE) environment variable. When set to C(auto) (the default) the precedence is module parameters -> C(env) -> C(credential_file) -> C(cli). When set to C(env), the credentials will be read from the environment variables. When set to C(credential_file), it will read the profile from C(~/.azure/credentials). When set to C(cli), the credentials will be sources from the Azure CLI profile",
+      "choices": [
+        "auto",
+        "cli",
+        "credential_file",
+        "env",
+        "msi"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_validation_mode",
+      "displayName": "Cert Validation Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Controls the certificate validation behavior for Azure endpoints. By default, all modules will validate the server certificate, but when an HTTPS proxy is in use, or against Azure Stack, it may be necessary to disable this behavior by passing C(ignore). Can also be set via credential file profile or the C(AZURE_CERT_VALIDATION) environment variable.",
+      "choices": [
+        "ignore",
+        "validate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure client ID. Use when authenticating with a Service Principal or Managed Identity (msi). Can also be set via the C(AZURE_CLIENT_ID) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud_environment",
+      "displayName": "Cloud Environment",
+      "type": "string",
+      "required": false,
+      "default": "AzureCloud",
+      "description": "For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(AzureChinaCloud), C(AzureUSGovernment)), or a metadata discovery endpoint URL (required for Azure Stack). Can also be set via credential file profile or the C(AZURE_CLOUD_ENVIRONMENT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_instance_discovery",
+      "displayName": "Disable Instance Discovery",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Determines whether or not instance discovery is performed when attempting to authenticate. Setting this to true will completely disable both instance discovery and authority validation. This functionality is intended for use in scenarios where the metadata endpoint cannot be reached such as in private clouds or Azure Stack. The process of instance discovery entails retrieving authority metadata from https://login.microsoft.com/ to validate the authority. By setting this to **True**, the validati",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identity",
+      "displayName": "Identity",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Identity for the Object",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location",
+      "displayName": "Location",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Azure Resource location.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_mode",
+      "displayName": "Log Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parent argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_path",
+      "displayName": "Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parent argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the Azure Recovery Service Vault.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oidc_token",
+      "displayName": "Oidc Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Direct OpenID Connect (OIDC) token (JWT) used for workload identity authentication. This token is exchanged with Azure AD using OIDC federated identity. Useful in CI systems (for example GitHub Actions, Azure DevOps) where an OIDC token is provided directly by the platform. Can also be set via the C(AZURE_FEDERATED_TOKEN) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oidc_token_file_path",
+      "displayName": "Oidc Token File Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file containing an OpenID Connect (OIDC) token (JWT) used for workload identity authentication. The file must contain only raw token. This method is commonly used in platforms that materialize OIDC tokens as files Can also be set via the C(AZURE_FEDERATED_TOKEN_FILE) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Active Directory user password. Use when authenticating with an Active Directory user rather than service principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Security profile found in ~/.azure/credentials file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_group",
+      "displayName": "Resource Group",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the resource group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret",
+      "displayName": "Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure client secret. Use when authenticating with a Service Principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Assert the state of the protection item. Use C(present) for Creating Azure Recovery Service Vault. Use C(absent) for Deleting Azure Recovery Service Vault.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subscription_id",
+      "displayName": "Subscription Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Your Azure subscription Id.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary of string:string pairs to assign as metadata to the object. Metadata tags on the object will be updated with any provided values. To remove tags set append_tags option to false. Currently, Azure DNS zones and Traffic Manager services also don't allow the use of spaces in the tag. Azure Front Door doesn't support the use of Azure Automation and Azure CDN only support 15 tags on resources.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant",
+      "displayName": "Tenant",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure tenant ID. Use when authenticating with a Service Principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "thumbprint",
+      "displayName": "Thumbprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The thumbprint of the private key specified in I(x509_certificate_path). Use when authenticating with a Service Principal. Required if I(x509_certificate_path) is defined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x509_certificate_path",
+      "displayName": "X509 Certificate Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the X509 certificate used to create the service principal in PEM format. The certificate must be appended to the private key. Use when authenticating with a Service Principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

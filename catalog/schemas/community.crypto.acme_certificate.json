@@ -2,6 +2,339 @@
   "fqcn": "community.crypto.acme_certificate",
   "shortDescription": "Create SSL/TLS certificates with the ACME protocol",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/crypto/acme_certificate_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "account_email",
+      "displayName": "Account Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The email address associated with this account. It will be used for certificate expiration warnings. Note that when O(modify_account) is not set to V(false) and you also used the M(community.crypto.acme_account) module to specify more than one contact for your account, this module will update your account and restrict it to the (at most one) contact email address specified here.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "account_key_content",
+      "displayName": "Account Key Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the ACME account RSA or Elliptic Curve key. For Elliptic Curve keys only the following curves are supported: V(secp256r1), V(secp384r1), and V(secp521r1). Mutually exclusive with O(account_key_src). Required if O(account_key_src) is not used. B(Warning:) the content will be written into a temporary file, which will be deleted by Ansible when the module completes. Since this is an important private key \u2014 it can be used to change the account key, or to revoke your certificates without k",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "account_key_passphrase",
+      "displayName": "Account Key Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase to use to decode the account key. B(Note:) this is not supported by the C(openssl) backend, only by the C(cryptography) backend.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "account_key_src",
+      "displayName": "Account Key Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file containing the ACME account RSA or Elliptic Curve key. For Elliptic Curve keys only the following curves are supported: V(secp256r1), V(secp384r1), and V(secp521r1). Private keys can be created with the M(community.crypto.openssl_privatekey) or M(community.crypto.openssl_privatekey_pipe) modules. If the requisite (cryptography) is not available, keys can also be created directly with the C(openssl) command line tool: RSA keys can be created with C(openssl genrsa ...). Elliptic cur",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "account_uri",
+      "displayName": "Account Uri",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If specified, assumes that the account URI is as given. If the account key does not match this account, or an account with this URI does not exist, the module fails.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "acme_directory",
+      "displayName": "Acme Directory",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The ACME directory to use. This is the entry point URL to access the ACME CA server API. For safety reasons the default is set to the Let's Encrypt staging server (for the ACME v1 protocol). This will create technically correct, but untrusted certificates. For Let's Encrypt, all staging endpoints can be found here: U(https://letsencrypt.org/docs/staging-environment/). For B(Let's Encrypt), the production directory URL for ACME v2 is U(https://acme-v02.api.letsencrypt.org/directory). For B(ZeroSS",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "acme_version",
+      "displayName": "Acme Version",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "The ACME version of the endpoint. Must be V(2) for standardized ACME v2 endpoints. The value V(1) is no longer supported since community.crypto 3.0.0.",
+      "choices": [
+        2
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "agreement",
+      "displayName": "Agreement",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URI to a terms of service document you agree to when using the ACME v1 service at O(acme_directory). Default is latest gathered from O(acme_directory) URL. This option has no longer any effect. It is deprecated and will be removed from community.crypto 4.0.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chain_dest",
+      "displayName": "Chain Dest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If specified, the intermediate certificate will be written to this file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "challenge",
+      "displayName": "Challenge",
+      "type": "string",
+      "required": false,
+      "default": "http-01",
+      "description": "The challenge to be performed. If set to V(no challenge), no challenge will be used. This is necessary for some private CAs which use External Account Binding and other means of validating certificate assurance. For example, an account could be allowed to issue certificates for C(foo.example.com) without any further validation for a certain period of time. Support for V(dns-account-01) and V(dns-persist-01) has been added in community.crypto 3.2.0.",
+      "choices": [
+        "http-01",
+        "dns-01",
+        "dns-account-01",
+        "dns-persist-01",
+        "tls-alpn-01",
+        "no challenge"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "csr",
+      "displayName": "Csr",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "File containing the CSR for the new certificate. Can be created with M(community.crypto.openssl_csr). The CSR may contain multiple Subject Alternate Names, but each one will lead to an individual challenge that must be fulfilled for the CSR to be signed. B(Note): the private key used to create the CSR B(must not) be the account key. This is a bad idea from a security point of view, and the CA should not accept the CSR. The ACME server should return an error in this case. Precisely one of O(csr) ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "csr_content",
+      "displayName": "Csr Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the CSR for the new certificate. Can be created with M(community.crypto.openssl_csr_pipe). The CSR may contain multiple Subject Alternate Names, but each one will lead to an individual challenge that must be fulfilled for the CSR to be signed. B(Note): the private key used to create the CSR B(must not) be the account key. This is a bad idea from a security point of view, and the CA should not accept the CSR. The ACME server should return an error in this case. Precisely one of O(csr) ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data",
+      "displayName": "Data",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The data to validate ongoing challenges. This must be specified for the second run of the module only. The value that must be used here will be provided by a previous use of this module. See the examples for more details. Note that for ACME v2, only the C(order_uri) entry of O(data) will be used. For ACME v1, O(data) must be non-empty to indicate the second stage is active; all needed data will be taken from the CSR. I(Note): the O(data) option was marked as C(no_log) up to Ansible 2.5. From Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deactivate_authzs",
+      "displayName": "Deactivate Authzs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Deactivate authentication objects (authz) after issuing a certificate, or when issuing the certificate failed. Authentication objects are bound to an account key and remain valid for a certain amount of time, and can be used to issue certificates without having to re-authenticate the domain. This can be a security concern.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The destination file for the certificate. Required if O(fullchain_dest) is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enforces the execution of the challenge and validation, even if an existing certificate is still valid for more than O(remaining_days). This is especially helpful when having an updated CSR, for example with additional domains for which a new certificate is desired.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fullchain_dest",
+      "displayName": "Fullchain Dest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The destination file for the full chain (that is, a certificate followed by chain of intermediate certificates). Required if O(dest) is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_renewal_cert_id",
+      "displayName": "Include Renewal Cert Id",
+      "type": "string",
+      "required": false,
+      "default": "never",
+      "description": "Determines whether to request renewal of an existing certificate according to L(Section 5 of RFC 9773, https://www.rfc-editor.org/rfc/rfc9773.html#section-5). This is only used when the certificate specified in O(dest) or O(fullchain_dest) already exists. Generally you should use V(when_ari_supported) if you know that the ACME service supports a compatible draft (or final version, once it is out) of the ARI extension. V(always) should never be necessary. If you are not sure, or if you receive st",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "modify_account",
+      "displayName": "Modify Account",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Boolean indicating whether the module should create the account if necessary, and update its contact data. Set to V(false) if you want to use the M(community.crypto.acme_account) module to manage your account instead, and to avoid accidental creation of a new account using an old key if you changed the account key with M(community.crypto.acme_account). If set to V(false), O(terms_agreed) and O(account_email) are ignored. The current default V(true) is B(deprecated) and will change to V(false) in",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "order_creation_error_strategy",
+      "displayName": "Order Creation Error Strategy",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Selects the error handling strategy for ACME protocol errors if creating a new ACME order fails.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "order_creation_max_retries",
+      "displayName": "Order Creation Max Retries",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Depending on the strategy selected in O(order_creation_error_strategy), will retry creating new orders for at most the specified amount of times.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Chose a specific profile for certificate selection. The available profiles depend on the CA. See L(a blog post by Let's Encrypt, https://letsencrypt.org/2025/01/09/acme-profiles/) and L(draft-aaron-acme-profiles-01, https://datatracker.ietf.org/doc/draft-aaron-acme-profiles/) for more information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remaining_days",
+      "displayName": "Remaining Days",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "The number of days the certificate must have left being valid. If RV(cert_days) < O(remaining_days), then it will be renewed. If the certificate is not renewed, module return values will not include RV(challenge_data). To make sure that the certificate is renewed in any case, you can use the O(force) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "request_timeout",
+      "displayName": "Request Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "The time Ansible should wait for a response from the ACME API. This timeout is applied to all HTTP(S) requests (HEAD, GET, POST).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retrieve_all_alternates",
+      "displayName": "Retrieve All Alternates",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When set to V(true), will retrieve all alternate trust chains offered by the ACME CA. These will not be written to disk, but will be returned together with the main chain as RV(all_chains). See the documentation for the RV(all_chains) return value for details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "select_chain",
+      "displayName": "Select Chain",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Allows to specify criteria by which an (alternate) trust chain can be selected. The list of criteria will be processed one by one until a chain is found matching a criterium. If such a chain is found, it will be used by the module instead of the default chain. If a criterium matches multiple chains, the first one matching will be returned. The order is determined by the ordering of the C(Link) headers returned by the ACME server and might not be deterministic. Every criterium can consist of mult",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "select_crypto_backend",
+      "displayName": "Select Crypto Backend",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Determines which crypto backend to use. The default choice is V(auto), which tries to use C(cryptography) if available, and falls back to C(openssl). If set to V(openssl), will try to use the C(openssl) binary. If set to V(cryptography), will try to use the L(cryptography,https://cryptography.io/) library.",
+      "choices": [
+        "auto",
+        "cryptography",
+        "openssl"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "terms_agreed",
+      "displayName": "Terms Agreed",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Boolean indicating whether you agree to the terms of service document. ACME servers can require this to be true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether calls to the ACME directory will validate TLS certificates. B(Warning:) Should B(only ever) be set to V(false) for testing purposes, for example when testing against a local Pebble server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

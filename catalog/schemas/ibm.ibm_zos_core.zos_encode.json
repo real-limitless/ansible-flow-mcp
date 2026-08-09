@@ -1,0 +1,85 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_encode",
+  "shortDescription": "Perform encoding operations.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_encode_module.html",
+  "options": [
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Creates a backup file or backup data set for I(dest), including the timestamp information to ensure that you retrieve the original file. I(backup_name) can be used to specify a backup file name if I(backup=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_compress",
+      "displayName": "Backup Compress",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Determines if backups to USS files or paths should be compressed. I(backup_compress) is only used when I(backup=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_name",
+      "displayName": "Backup Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the USS file name or data set name for the dest backup. If dest is a USS file or path, I(backup_name) must be a file or path name, and the USS path or file must be an absolute pathname. If dest is an MVS data set, the I(backup_name) must be an MVS data set name. If I(backup_name) is not provided, the default backup name will be used. The default backup name for a USS file or path will be the destination file or path name appended with a timestamp, e.g. /path/file_name.2020-04-23-08-32-29",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location where the converted characters are output. The destination I(dest) can be a UNIX System Services (USS) file or path, PS (sequential data set), PDS, PDSE, member of a PDS or PDSE, a generation data set (GDS) or KSDS (VSAM data set). If the length of the PDSE member name used in I(dest) is greater than 8 characters, the member name will be truncated when written out. If I(dest) is not specified, the I(src) will be used as the destination and will overwrite the I(src) with the characte",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encoding",
+      "displayName": "Encoding",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies which encodings the destination file or data set should be converted from and to. Supported character sets rely on the charset conversion utility (iconv) version; the most common character sets are supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The location can be a UNIX System Services (USS) file or path, PS (sequential data set), PDS, PDSE, member of a PDS or PDSE, a generation data set (GDS) or KSDS (VSAM data set). The USS path or file must be an absolute pathname. If I(src) is a USS directory, all files will be encoded. Encoding a whole generation data group (GDG) is not supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tmp_hlq",
+      "displayName": "Tmp Hlq",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the default high level qualifier (HLQ) for temporary and backup datasets. The default HLQ is the Ansible user used to execute the module and if that is not available, then the value C(TMPHLQ) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

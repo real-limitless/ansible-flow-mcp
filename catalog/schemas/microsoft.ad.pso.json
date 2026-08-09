@@ -2,6 +2,197 @@
   "fqcn": "microsoft.ad.pso",
   "shortDescription": "Manage Active Directory Password Settings Objects",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/microsoft/ad/pso_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "The attributes to either add, remove, or set on the AD object. The value of each attribute option should be a dictionary where the key is the LDAP attribute, e.g. C(firstName), C(comment) and the value is the value, or list of values, to set for that attribute. The attribute value(s) can either be the raw string, integer, or bool value to add, remove, or set on the attribute in question. The value can also be a dictionary with the I(type) key set to C(bytes), C(date_time), C(security_descriptor)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "complexity_enabled",
+      "displayName": "Complexity Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether password complexity requirements are enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description of the AD object to set. This is the value set on the C(description) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The display name of the AD object to set. This is the value of the C(displayName) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_credentials",
+      "displayName": "Domain Credentials",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specifies the credentials that should be used when using the server specified by I(name). To specify credentials for the default domain server, use an entry without the I(name) key or use the I(domain_username) and I(domain_password) option. This can be set under the R(play's module defaults,module_defaults_groups) under the C(group/microsoft.ad.domain) group. See R(AD authentication in modules,ansible_collections.microsoft.ad.docsite.guide_ad_module_authentication) for more information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_password",
+      "displayName": "Domain Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for I(domain_username). The I(domain_credentials) sub entry without a I(name) key can also be used to specify the credentials for the default domain authentication. This can be set under the R(play's module defaults,module_defaults_groups) under the C(group/microsoft.ad.domain) group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_server",
+      "displayName": "Domain Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specified the Active Directory Domain Services instance to connect to. Can be in the form of an FQDN or NetBIOS name. If not specified then the value is based on the default domain of the computer running PowerShell. Custom credentials can be specified under a I(domain_credentials) entry without a I(name) key or through I(domain_username) and I(domain_password). This can be set under the R(play's module defaults,module_defaults_groups) under the C(group/microsoft.ad.domain) group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_username",
+      "displayName": "Domain Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use when interacting with AD. If this is not set then the user that is used for authentication will be the connection user. Ansible will be unable to use the connection user unless auth is Kerberos with credential delegation or CredSSP, or become is used on the task. The I(domain_credentials) sub entry without a I(name) key can also be used to specify the credentials for the default domain authentication. This can be set under the R(play's module defaults,module_defaults_groups) ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identity",
+      "displayName": "Identity",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The identity of the AD object used to find the AD object to manage. This must be specified if; I(name) is not set, when trying to rename the object with a new I(name), or when trying to move the object into a different I(path). The identity can be in the form of a GUID representing the C(objectGUID) value, the C(userPrincipalName), C(sAMAccountName), C(objectSid), or C(distinguishedName). If omitted, the AD object to manage is selected by the C(distinguishedName) using the format C(CN={{ name }}",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lockout_threshold",
+      "displayName": "Lockout Threshold",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of failed logon attempts before an account is locked out. Set to V(0) to disable account lockout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_password_length",
+      "displayName": "Min Password Length",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The minimum password length enforced by the PSO.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The C(name) of the AD object to manage, this is not the C(sAMAccountName) of the object but the LDAP C(cn) or C(name) entry of the object in the path specified. Use I(identity) to select an object to manage by its C(sAMAccountName). If I(identity) is specified, and the name of the object found by that identity does not match this value, the object will be renamed. This must be specified if I(identity) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of the OU or the container where the new object should exist in. If creating a new object, the new object will be created at the path specified. If no path is specified then the C(defaultNamingContext) of the domain will be used as the path for most object types. If managing an existing object found by I(identity), the path of the found object will be moved to the one specified by this option. If no path is specified, the object will not be moved. The modules M(microsoft.ad.computer), M",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "precedence",
+      "displayName": "Precedence",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The precedence value of the PSO. Lower numbers take priority when multiple PSOs apply to the same subject. Required when creating a new PSO.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protect_from_deletion",
+      "displayName": "Protect From Deletion",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Marks the object as protected from accidental deletion. This applies a deny access right from deleting the object normally and the protection needs to be removed before the object can be deleted through the GUI or any other tool outside Ansible. Using I(state=absent) will still delete the AD object even if it is marked as protected from deletion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Set to C(present) to ensure the AD object exists. Set to C(absent) to remove the AD object if it exists. The option I(name) must be set when I(state=present). Using C(absent) will recursively remove the AD object and any child objects if it's a container. It will also remove the AD object even if the object is marked as protected from accidental deletion.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subjects",
+      "displayName": "Subjects",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of users or global security groups the PSO should apply to. Each entry can be a C(sAMAccountName), C(distinguishedName), C(objectGUID), C(objectSid), or C(userPrincipalName). When specified, the PSO applies to exactly these subjects (replace semantics). Subjects not in the list are removed from the policy. When omitted, existing subject assignments are not changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

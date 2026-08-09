@@ -2,6 +2,226 @@
   "fqcn": "community.postgresql.postgresql_ext",
   "shortDescription": "Add or remove PostgreSQL extensions from a database",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/postgresql/postgresql_ext_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of a file containing SSL certificate authority (CA) certificate(s). If the file exists, the server's certificate will be verified to be signed by one of these authorities.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cascade",
+      "displayName": "Cascade",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Automatically install/remove any extensions that this extension depends on that are not already installed/removed (supported since PostgreSQL 9.6).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets a comment on the extension. To reset the comment, pass an empty string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connect_params",
+      "displayName": "Connect Params",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Any additional parameters to be passed to libpg. These parameters take precedence.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_db",
+      "displayName": "Login Db",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the database to add or remove the extension to/from. The V(db) alias is deprecated and will be removed in version 5.0.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Host running the database. If you have connection issues when using C(localhost), try to use C(127.0.0.1) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The password this module should use to establish its PostgreSQL session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": 5432,
+      "description": "Database port to connect to. The C(port) alias is deprecated and will be removed in the next major release. Use C(login_port) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_unix_socket",
+      "displayName": "Login Unix Socket",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Path to a Unix domain socket for local connections.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": "postgres",
+      "description": "The username this module should use to establish its PostgreSQL session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the extension to add or remove.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schema",
+      "displayName": "Schema",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the schema to add the extension to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_role",
+      "displayName": "Session Role",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Switch to session_role after connecting. The specified session_role must be a role that the current login_user is a member of. Permissions checking for SQL commands is carried out as though the session_role were the one that had logged in originally.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_cert",
+      "displayName": "Ssl Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the file name of the client SSL certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_key",
+      "displayName": "Ssl Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the location for the secret key used for the client certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_mode",
+      "displayName": "Ssl Mode",
+      "type": "string",
+      "required": false,
+      "default": "prefer",
+      "description": "Determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server. See U(https://www.postgresql.org/docs/current/static/libpq-ssl.html) for more information on the modes. Default of C(prefer) matches libpq default.",
+      "choices": [
+        "allow",
+        "disable",
+        "prefer",
+        "require",
+        "verify-ca",
+        "verify-full"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The database extension state.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "trust_input",
+      "displayName": "Trust Input",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), check whether values of parameters I(ext), I(schema), I(version), I(session_role) are potentially dangerous. It makes sense to use C(false) only when SQL injections via the parameters are possible.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Extension version to add or update to. Has effect with I(state=present) only. If not specified and extension is not installed in the database, the latest version available will be created. If extension is already installed, will update to the given version if a valid update path exists. Downgrading is only supported if the extension provides a downgrade path otherwise the extension must be removed and a lower version of the extension must be made available. Set I(version=latest) to update the ex",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

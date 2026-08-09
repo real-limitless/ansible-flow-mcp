@@ -1,0 +1,374 @@
+{
+  "fqcn": "netapp.ontap.na_ontap_user",
+  "shortDescription": "NetApp ONTAP user configuration and management",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp/ontap/na_ontap_user_module.html",
+  "options": [
+    {
+      "name": "application_dicts",
+      "displayName": "Application Dicts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of applications to grant access to.  Provides better control on applications and authentication methods. Creating a login with application console, telnet, rsh, and service-processor for a data vserver is not supported. Module supports both service-processor and service_processor choices. ZAPI requires service-processor, while REST requires service_processor, except for an issue with ONTAP 9.6 and 9.7. snmp is not supported in REST. Either C(application_dicts) or C(application_strs) is requ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "application_strs",
+      "displayName": "Application Strs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of applications to grant access to. This option maintains backward compatibility with the existing C(applications) option, but is limited. It is recommended to use the new C(application_dicts) option which provides more flexibility. Creating a login with application console, telnet, rsh, and service-processor for a data vserver is not supported. Module supports both service-processor and service_processor choices. ZAPI requires service-processor, while REST requires service_processor, excep",
+      "choices": [
+        "amqp",
+        "console",
+        "http",
+        "ontapi",
+        "rsh",
+        "snmp",
+        "service_processor",
+        "service-processor",
+        "sp",
+        "ssh",
+        "telnet"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authentication_method",
+      "displayName": "Authentication Method",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication method for the application.  If you need more than one method, use C(application_dicts). Not all authentication methods are valid for an application. Valid authentication methods for each application are as denoted in I(authentication_choices_description). Password for console application Password, domain, nsswitch, cert, saml for http application. Password, domain, nsswitch, cert, saml for ontapi application. SAML is only supported with REST, but seems to work with ZAPI as well. ",
+      "choices": [
+        "community",
+        "password",
+        "publickey",
+        "domain",
+        "nsswitch",
+        "usm",
+        "cert",
+        "saml"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authentication_password",
+      "displayName": "Authentication Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the authentication protocol. This should be minimum 8 characters long. This is required for 'md5', 'sha' and 'sha2-256' authentication protocols and not required for 'none'. Only available for 'usm' authentication method and non modifiable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authentication_protocol",
+      "displayName": "Authentication Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication protocol for the snmp user. When cluster FIPS mode is on, 'sha' and 'sha2-256' are the only possible and valid values. When cluster FIPS mode is off, the default value is 'none'. When cluster FIPS mode is on, the default value is 'sha'. Only available for 'usm' authentication method and non modifiable.",
+      "choices": [
+        "none",
+        "md5",
+        "sha",
+        "sha2-256"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_filepath",
+      "displayName": "Cert Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client cert file (.pem). not supported with python 2.6.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "engine_id",
+      "displayName": "Engine Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authoritative entity's EngineID for the SNMPv3 user. This should be specified as a hexadecimal string. Engine ID with first bit set to 1 in first octet should have a minimum of 5 or maximum of 32 octets. Engine Id with first bit set to 0 in the first octet should be 12 octets in length. Engine Id cannot have all zeros in its address. Only available for 'usm' authentication method and non modifiable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "feature_flags",
+      "displayName": "Feature Flags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable a new feature. This can be used to enable an experimental feature or disable a new feature that breaks backward compatibility. Supported keys and values are subject to change without notice.  Unknown keys are ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_ontap_version",
+      "displayName": "Force Ontap Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the cluster ONTAP version when using REST. The behavior is undefined if the version does not match the target cluster. This is provided as a work-around when the cluster version cannot be read because of permission issues. See https://github.com/ansible-collections/netapp.ontap/wiki/Known-issues. This should be in the form 9.10 or 9.10.1 with each element being an integer number. When C(use_rest) is set to auto, this may force a switch to ZAPI based on the version and platform capabilit",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the ONTAP instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_port",
+      "displayName": "Http Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Override the default port (80 or 443) with this port",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "https",
+      "displayName": "Https",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable and disable https. Ignored when using REST as only https is supported. Ignored when using SSL certificate authentication as it requires SSL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_filepath",
+      "displayName": "Key Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client key file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lambda_config",
+      "displayName": "Lambda Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration parameters for AWS Lambda proxy functionality. These option and suboptions are only supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lock_user",
+      "displayName": "Lock User",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the specified user account is locked.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the user to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ontapi",
+      "displayName": "Ontapi",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The ontap api version to use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the specified user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privacy_password",
+      "displayName": "Privacy Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the privacy protocol. This should be minimum 8 characters long. This is required for 'des' and 'aes128' privacy protocols and not required for 'none'. Only available for 'usm' authentication method and non modifiable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privacy_protocol",
+      "displayName": "Privacy Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Privacy protocol for the snmp user. When cluster FIPS mode is on, 'aes128' is the only possible and valid value. When cluster FIPS mode is off, the default value is 'none'. When cluster FIPS mode is on, the default value is 'aes128'. Only available for 'usm' authentication method and non modifiable.",
+      "choices": [
+        "none",
+        "des",
+        "aes128"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_switch_ipaddress",
+      "displayName": "Remote Switch Ipaddress",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This optionally specifies the IP Address of the remote switch. The remote switch could be a cluster switch monitored by Cluster Switch Health Monitor (CSHM) or a Fiber Channel (FC) switch monitored by Metro Cluster Health Monitor (MCC-HM). This is applicable only for a remote SNMPv3 user i.e. only if user is a remote (non-local) user, application is snmp and authentication method is usm.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace_existing_apps_and_methods",
+      "displayName": "Replace Existing Apps And Methods",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "If the user already exists, the current applications and authentications methods are replaced when state=present. If the user already exists, the current applications and authentications methods are removed when state=absent. When using application_dicts or REST, this the only supported behavior. When using application_strs and ZAPI, this is the behavior when this option is set to always. When using application_strs and ZAPI, if the option is set to auto, applications that are not listed are not",
+      "choices": [
+        "always",
+        "auto"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role_name",
+      "displayName": "Role Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the role. Required when C(state=present)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "set_password",
+      "displayName": "Set Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the user account. It is ignored for creating snmp users, but is required for creating non-snmp users. For an existing user, this value will be used as the new password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the specified user should exist or not.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_lambda",
+      "displayName": "Use Lambda",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies if AWS Lambda proxy functionality should be used to connect to the ONTAP system. Supported only with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_rest",
+      "displayName": "Use Rest",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "Whether to use REST or ZAPI. always -- will always use the REST API if the module supports REST. A warning is issued if the module does not support REST. An error is issued if a module option is not supported in REST. never -- will always use ZAPI if the module supports ZAPI.  An error may be issued if a REST option is not supported in ZAPI. auto -- will try to use the REST API if the module supports REST and modules options are supported.  Reverts to ZAPI otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required. For more information, please read the documentation U(https://docs.netapp.com/us-en/ontap/authentication/create-svm-user-accounts-task.html). Two authentication methods are supported 1. Basic authentication, using username and password. 2. SSL certificate authentication, using a ssl client cert file, and optionally a private key file. To use a certificate, the certificate must h",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to C(no), the SSL certificates will not be validated. This should only set to C(False) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vserver",
+      "displayName": "Vserver",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the vserver to use. Required with ZAPI. With REST, ignore this option for creating cluster scoped user account.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

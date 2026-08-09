@@ -2,6 +2,274 @@
   "fqcn": "amazon.aws.ec2_eip",
   "shortDescription": "manages EC2 elastic IP (EIP) addresses.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/amazon/aws/ec2_eip_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS access key ID. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_ACCESS_KEY_ID) or C(AWS_ACCESS_KEY) environment variables may also be used in decreasing order of preference. The I(aws_access_key) and I(profile) options are mutually exclusive. The I(aws_access_key_id) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_reassociation",
+      "displayName": "Allow Reassociation",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specify this option to allow an Elastic IP address that is already associated with another network interface or instance to be re-associated with the specified instance or interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_ca_bundle",
+      "displayName": "Aws Ca Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location of a CA Bundle to use when validating SSL certificates. The C(AWS_CA_BUNDLE) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_config",
+      "displayName": "Aws Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary to modify the botocore configuration. Parameters can be found in the AWS documentation U(https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html#botocore.config.Config).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug_botocore_endpoint_logs",
+      "displayName": "Debug Botocore Endpoint Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use a C(botocore.endpoint) logger to parse the unique (rather than total) C(\"resource:action\") API calls made during a task, outputing the set to the resource_actions key in the task results. Use the C(aws_resource_action) callback to output to total list made during a playbook. The C(ANSIBLE_DEBUG_BOTOCORE_LOGS) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_id",
+      "displayName": "Device Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The id of the device for the EIP. Can be an EC2 Instance id or Elastic Network Interface (ENI) id. When specifying an ENI id, O(in_vpc) must be V(true). The C(instance_id) alias was removed in release 6.0.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_name",
+      "displayName": "Domain Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The domain name to attach to the IP address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_url",
+      "displayName": "Endpoint Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to connect to instead of the default AWS endpoints.  While this can be used to connection to other AWS-compatible services the amazon.aws and community.aws collections are only tested against AWS. The  C(AWS_URL) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "in_vpc",
+      "displayName": "In Vpc",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allocate an EIP inside a VPC or not. Required if specifying an ENI with O(device_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_ip_address",
+      "displayName": "Private Ip Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The primary or secondary private IP address to associate with the Elastic IP address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A named AWS profile to use for authentication. See the AWS documentation for more information about named profiles U(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html). The C(AWS_PROFILE) environment variable may also be used. The I(profile) option is mutually exclusive with the I(aws_access_key), I(aws_secret_key) and I(session_token) options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_ip",
+      "displayName": "Public Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IP address of a previously allocated EIP. When O(state=present) and device is specified, the EIP is associated with the device. When O(state=absent) and device is specified, the EIP is disassociated from the device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_ipv4_pool",
+      "displayName": "Public Ipv4 Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Allocates the new Elastic IP from the provided public IPv4 pool (BYOIP) only applies to newly allocated Elastic IPs, isn't validated when O(reuse_existing_ip_allowed=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge_tags",
+      "displayName": "Purge Tags",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If O(purge_tags=true) and O(tags) is set, existing tags will be purged from the resource to match exactly what is defined by O(tags) parameter. If the O(tags) parameter is not set then tags will not be modified, even if O(purge_tags=True). Tag keys beginning with V(aws:) are reserved by Amazon and can not be modified.  As such they will be ignored for the purposes of the O(purge_tags) parameter.  See the Amazon documentation for more information U(https://docs.aws.amazon.com/general/latest/gr/aw",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS region to use. For global services such as IAM, Route53 and CloudFront, I(region) is ignored. The C(AWS_REGION) environment variable may also be used. See the Amazon AWS documentation for more information U(http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "release_on_disassociation",
+      "displayName": "Release On Disassociation",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether or not to automatically release the EIP when it is disassociated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reuse_existing_ip_allowed",
+      "displayName": "Reuse Existing Ip Allowed",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Reuse an EIP that is not associated to a device (when available), instead of allocating a new one.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_key",
+      "displayName": "Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS secret access key. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SECRET_ACCESS_KEY) or C(AWS_SECRET_KEY) environment variables may also be used in decreasing order of preference. The I(secret_key) and I(profile) options are mutually exclusive. The I(aws_secret_access_key) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_token",
+      "displayName": "Session Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS STS session token for use with temporary credentials. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SESSION_TOKEN) environment variable may also be used. The I(session_token) and I(profile) options are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When O(state=present), allocate an EIP or associate an existing EIP with a device. When O(state=absent), disassociate the EIP from the device and optionally release it.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tag_name",
+      "displayName": "Tag Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When O(reuse_existing_ip_allowed=true), supplement with this option to only reuse an Elastic IP if it is tagged with O(tag_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tag_value",
+      "displayName": "Tag Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Supplements O(tag_name) but also checks that the value of the tag provided in O(tag_name) matches O(tag_value).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary representing the tags to be applied to the resource. If the O(tags) parameter is not set then tags will not be modified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When set to C(false), SSL certificates will not be validated for communication with the AWS APIs. Setting I(validate_certs=false) is strongly discouraged, as an alternative, consider setting I(aws_ca_bundle) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -1,0 +1,225 @@
+{
+  "fqcn": "crowdstrike.falcon.sensor_update_policy",
+  "shortDescription": "Manage Falcon sensor update policies",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/crowdstrike/falcon/sensor_update_policy_module.html",
+  "options": [
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The registered result of the M(crowdstrike.falcon.auth) module, or a dictionary containing the I(access_token) and I(cloud) keys. If provided, the I(client_id), I(client_secret), I(member_cid), and I(cloud) options are ignored. Useful when needing to make multiple API calls to avoid rate limiting issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "build",
+      "displayName": "Build",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The sensor version setting for the policy. Can be a specific sensor build string or version number from the builds API. Use sensor_update_builds_info module to get available build values for your tenant. Build format examples: C(20008|n-1|tagged|1), C(19320|Auto), C(17804). For sensor updates disabled, omit this parameter entirely. B(Note): Simple values like C(n-1), C(tagged) are not supported by the API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike API client ID to use. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_CLIENT_ID) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_secret",
+      "displayName": "Client Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike API secret that corresponds to the client ID. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_CLIENT_SECRET) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud",
+      "displayName": "Cloud",
+      "type": "string",
+      "required": false,
+      "default": "us-1",
+      "description": "The CrowdStrike cloud region to use. All clouds are automatically discovered if not specified, except for the C(us-gov-1) cloud. The C(FALCON_CLOUD) environment variable can also be used.",
+      "choices": [
+        "us-1",
+        "us-2",
+        "us-gov-1",
+        "eu-1"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A description for the sensor update policy. Only used when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the policy should be enabled. Policies must be enabled to affect hosts. New policies are disabled by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ext_headers",
+      "displayName": "Ext Headers",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Extended headers that are prepended to the default headers dictionary.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_group_action",
+      "displayName": "Host Group Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The action to perform with the host groups specified in I(host_groups). C(add) assigns host groups to the policy. C(remove) unassigns host groups from the policy. Requires I(host_groups) to be specified.",
+      "choices": [
+        "add",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_groups",
+      "displayName": "Host Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of host group IDs to add to or remove from the policy. Use with I(host_group_action) to specify the operation. Only applicable for existing policies and when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "member_cid",
+      "displayName": "Member Cid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike member CID for MSSP authentication. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_MEMBER_CID) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the sensor update policy. B(Preferred method) for idempotent operations - works for create, update, and delete. When used with I(platform_name), provides true Ansible idempotency across the entire policy lifecycle. Cannot be used to rename existing policies.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "platform_name",
+      "displayName": "Platform Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The operating system platform for the policy. Required when using I(name) for policy identification (create, update, or delete). Cannot be changed after policy creation.",
+      "choices": [
+        "Windows",
+        "Mac",
+        "Linux"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheduler",
+      "displayName": "Scheduler",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Time blocks during which to prohibit sensor cloud updates. Dictionary containing scheduler configuration. Keys: C(enabled) (bool), C(timezone) (str), C(schedules) (list). Each schedule contains C(start), C(end), and C(days) (0=Sunday, 6=Saturday).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sensor_update_policy",
+      "displayName": "Sensor Update Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of an existing sensor update policy. Alternative to I(name) + I(platform_name) for identifying existing policies. Provided for backward compatibility and when the policy ID is already known.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the sensor update policy. C(present) ensures the sensor update policy exists with the specified configuration. C(absent) ensures the sensor update policy does not exist.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uninstall_protection",
+      "displayName": "Uninstall Protection",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The uninstall protection setting for hosts with this policy. C(ENABLED) protects the sensor from unauthorized uninstallation. C(DISABLED) allows end users to uninstall the sensor. C(MAINTENANCE_MODE) enables maintenance mode for the sensor.",
+      "choices": [
+        "ENABLED",
+        "DISABLED",
+        "MAINTENANCE_MODE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_agent",
+      "displayName": "User Agent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Custom User-Agent string to use for requests to the API. The user agent string is prepended to the default user agent string (C(crowdstrike-ansible/<version>)). See L(RFC 7231,https://tools.ietf.org/html/rfc7231#section-5.5.3) for more information. The C(FALCON_USER_AGENT) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

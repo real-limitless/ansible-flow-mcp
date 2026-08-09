@@ -2,6 +2,356 @@
   "fqcn": "oracle.oci.oci_object_storage_object_facts",
   "shortDescription": "Fetches details about one or multiple Object resources in Oracle Cloud Infrastructure",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/oracle/oci/oci_object_storage_object_facts_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the user, on whose behalf, OCI APIs are invoked. If not set, then the value of the OCI_USER_ID environment variable, if any, is used. This option is required if the user is not specified through a configuration file (See C(config_file_location)). To get the user's OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_fingerprint",
+      "displayName": "Api User Fingerprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fingerprint for the key pair being used. If not set, then the value of the OCI_USER_FINGERPRINT environment variable, if any, is used. This option is required if the key fingerprint is not specified through a configuration file (See C(config_file_location)). To get the key pair's fingerprint value please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_file",
+      "displayName": "Api User Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Full path and filename of the private key (in PEM format). If not set, then the value of the OCI_USER_KEY_FILE variable, if any, is used. This option is required if the private key is not specified through a configuration file (See C(config_file_location)). If the key is encrypted with a pass-phrase, the C(api_user_key_pass_phrase) option must also be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_pass_phrase",
+      "displayName": "Api User Key Pass Phrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase used by the key referenced in C(api_user_key_file), if it is encrypted. If not set, then the value of the OCI_USER_KEY_PASS_PHRASE variable, if any, is used. This option is required if the key passphrase is not specified through a configuration file (See C(config_file_location)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_purpose",
+      "displayName": "Auth Purpose",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The auth purpose which can be used in conjunction with 'auth_type=instance_principal'. The default auth_purpose for instance_principal is None.",
+      "choices": [
+        "service_principal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "api_key",
+      "description": "The type of authentication to use for making API requests. By default C(auth_type=\"api_key\") based authentication is performed and the API key (see I(api_user_key_file)) in your config file will be used. If this 'auth_type' module option is not specified, the value of the OCI_ANSIBLE_AUTH_TYPE, if any, is used. Use C(auth_type=\"instance_principal\") to use instance principal based authentication when running ansible playbooks within an OCI compute instance.",
+      "choices": [
+        "api_key",
+        "instance_principal",
+        "instance_obo_user",
+        "resource_principal",
+        "security_token"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bucket_name",
+      "displayName": "Bucket Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the bucket. Avoid entering confidential information. Example: `my-new-bucket1`",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_bundle",
+      "displayName": "Cert Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full path to a CA certificate bundle to be used for SSL verification. This will override the default CA certificate bundle. If not set, then the value of the OCI_ANSIBLE_CERT_BUNDLE variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file_location",
+      "displayName": "Config File Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to configuration file. If not set then the value of the OCI_CONFIG_FILE environment variable, if any, is used. Otherwise, defaults to ~/.oci/config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_profile_name",
+      "displayName": "Config Profile Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The profile to load from the config file referenced by C(config_file_location). If not set, then the value of the OCI_CONFIG_PROFILE environment variable, if any, is used. Otherwise, defaults to the \"DEFAULT\" profile in C(config_file_location).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delimiter",
+      "displayName": "Delimiter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When this parameter is set, only objects whose names do not contain the delimiter character (after an optionally specified prefix) are returned in the objects key of the response body. Scanned objects whose names contain the delimiter have the part of their name up to the first occurrence of the delimiter (including the optional prefix) returned as a set of prefixes. Note that only '/' is a supported delimiter character at this time.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "end",
+      "displayName": "End",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Object names returned by a list query must be strictly less than this parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fields",
+      "displayName": "Fields",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Object summary by default includes only the 'name' field. Use this parameter to also include 'size' (object size in bytes), 'etag', 'md5', 'timeCreated' (object creation date and time), 'timeModified' (object modification date and time), 'storageTier' and 'archivalState' fields. Specify the value of this parameter as a comma-separated, case-insensitive list of those field names. For example 'name,etag,timeCreated,md5,timeModified,storageTier,archivalState'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_response_cache_control",
+      "displayName": "Http Response Cache Control",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify this query parameter to override the Cache-Control response header in the GetObject response.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_response_content_disposition",
+      "displayName": "Http Response Content Disposition",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify this query parameter to override the value of the Content-Disposition response header in the GetObject response.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_response_content_encoding",
+      "displayName": "Http Response Content Encoding",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify this query parameter to override the Content-Encoding response header in the GetObject response.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_response_content_language",
+      "displayName": "Http Response Content Language",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify this query parameter to override the Content-Language response header in the GetObject response.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_response_content_type",
+      "displayName": "Http Response Content Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify this query parameter to override the Content-Type response header in the GetObject response.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_response_expires",
+      "displayName": "Http Response Expires",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify this query parameter to override the Expires response header in the GetObject response.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace_name",
+      "displayName": "Namespace Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Object Storage namespace used for the request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_name",
+      "displayName": "Object Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the object. Avoid entering confidential information. Example: `test/object1.log` Required to get a specific object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opc_sse_customer_algorithm",
+      "displayName": "Opc Sse Customer Algorithm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The optional header that specifies \"AES256\" as the encryption algorithm. For more information, see L(Using Your Own Keys for Server-Side Encryption,https://docs.cloud.oracle.com/Content/Object/Tasks/usingyourencryptionkeys.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opc_sse_customer_key",
+      "displayName": "Opc Sse Customer Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The optional header that specifies the base64-encoded 256-bit encryption key to use to encrypt or decrypt the data. For more information, see L(Using Your Own Keys for Server-Side Encryption,https://docs.cloud.oracle.com/Content/Object/Tasks/usingyourencryptionkeys.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opc_sse_customer_key_sha256",
+      "displayName": "Opc Sse Customer Key Sha256",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The optional header that specifies the base64-encoded SHA256 hash of the encryption key. This value is used to check the integrity of the encryption key. For more information, see L(Using Your Own Keys for Server-Side Encryption,https://docs.cloud.oracle.com/Content/Object/Tasks/usingyourencryptionkeys.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix",
+      "displayName": "Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The string to use for matching against the start of object names in a list query.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "range",
+      "displayName": "Range",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional byte range to fetch, as described in L(RFC 7233,https://tools.ietf.org/html/rfc7233#section-2.1). Note that only a single range of bytes is supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realm_specific_endpoint_template_enabled",
+      "displayName": "Realm Specific Endpoint Template Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable/Disable realm specific endpoint template for service client. By Default, realm specific endpoint template is disabled. If not set, then the value of the OCI_REALM_SPECIFIC_SERVICE_ENDPOINT_TEMPLATE_ENABLED variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle Cloud Infrastructure region to use for all OCI API requests. If not set, then the value of the OCI_REGION variable, if any, is used. This option is required if the region is not specified through a configuration file (See C(config_file_location)). Please refer to U(https://docs.us-phoenix-1.oraclecloud.com/Content/General/Concepts/regions.htm) for more information on OCI regions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start",
+      "displayName": "Start",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Object names returned by a list query must be greater or equal to this parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenancy",
+      "displayName": "Tenancy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OCID of your tenancy. If not set, then the value of the OCI_TENANCY variable, if any, is used. This option is required if the tenancy OCID is not specified through a configuration file (See C(config_file_location)). To get the tenancy OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version_id",
+      "displayName": "Version Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "VersionId used to identify a particular version of the object",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

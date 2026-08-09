@@ -2,6 +2,155 @@
   "fqcn": "community.crypto.get_certificate",
   "shortDescription": "Get a certificate from a host:port",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/crypto/get_certificate_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "asn1_base64",
+      "displayName": "Asn1 Base64",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to encode the ASN.1 values in the RV(extensions) return value with Base64 or not. The documentation claimed for a long time that the values are Base64 encoded, but they never were. For compatibility this option is set to V(false). The default value was changed from V(false) to V(true) incommunity.crypto 3.0.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A PEM file containing one or more root certificates; if present, the cert will be validated against these root certs. Note that this only validates the certificate is signed by the chain; not that the cert is valid for the host presenting it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ciphers",
+      "displayName": "Ciphers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "SSL/TLS Ciphers to use for the request. When a list is provided, all ciphers are joined in order with V(:). See the L(OpenSSL Cipher List Format,https://www.openssl.org/docs/manmaster/man1/openssl-ciphers.html#CIPHER-LIST-FORMAT) for more details. The available ciphers is dependent on the Python and OpenSSL/LibreSSL versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "get_certificate_chain",
+      "displayName": "Get Certificate Chain",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), will obtain the certificate chain next to the certificate itself. The chain as returned by the server can be found in RV(unverified_chain), and the chain that passed validation in RV(verified_chain). B(Note) that this needs B(Python 3.10 or newer). Also note that only Python 3.13 or newer officially supports this. The module uses internal APIs of Python 3.10, 3.11, and 3.12 to achieve the same. It can be that future versions of Python 3.10, 3.11, or 3.12 break this.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The host to get the cert for (IP is fine).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "The port to connect to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Proxy host used when get a certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": 8080,
+      "description": "Proxy port used when get a certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "select_crypto_backend",
+      "displayName": "Select Crypto Backend",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Determines which crypto backend to use. The default choice is V(auto), which tries to use C(cryptography) if available. If set to V(cryptography), will try to use the L(cryptography,https://cryptography.io/) library. Note that with community.crypto 3.0.0, all values behave the same. This option will be deprecated in a later version. We recommend to not set it explicitly.",
+      "choices": [
+        "auto",
+        "cryptography"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_name",
+      "displayName": "Server Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Server name used for SNI (L(Server Name Indication,https://en.wikipedia.org/wiki/Server_Name_Indication)) when hostname is an IP or is different from server name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "starttls",
+      "displayName": "Starttls",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Requests a secure connection for protocols which require clients to initiate encryption. Only available for V(mysql) currently.",
+      "choices": [
+        "mysql"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "The timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_ctx_options",
+      "displayName": "Tls Ctx Options",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "TLS context options (TLS/SSL OP flags) to use for the request. See the L(List of SSL OP Flags,https://wiki.openssl.org/index.php/List_of_SSL_OP_Flags) for more details. The available TLS context options is dependent on the Python and OpenSSL/LibreSSL versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

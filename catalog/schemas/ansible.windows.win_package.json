@@ -2,6 +2,392 @@
   "fqcn": "ansible.windows.win_package",
   "shortDescription": "Installs/uninstalls an installable package",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_package_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "arguments",
+      "displayName": "Arguments",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Any arguments the installer needs to either install or uninstall the package. If the package is an MSI do not supply the C(/qn), C(/log) or C(/norestart) arguments. This is only used for the C(msi), C(msp), and C(registry) providers. Can be a list of arguments and the module will escape the arguments as necessary, it is recommended to use a string when dealing with MSI packages due to the unique escaping issues with msiexec. When using a list of arguments each item in the list is considered to b",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chdir",
+      "displayName": "Chdir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the specified path as the current working directory before installing or uninstalling a package. This is only used for the C(msi), C(msp), and C(registry) providers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum",
+      "displayName": "Checksum",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If a I(checksum) is passed to this parameter, the digest of the package will be calculated before executing it to verify that the path or downloaded file has the expected contents.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum_algorithm",
+      "displayName": "Checksum Algorithm",
+      "type": "string",
+      "required": false,
+      "default": "sha1",
+      "description": "Specifies the hashing algorithm used when calculating the checksum of the path provided.",
+      "choices": [
+        "md5",
+        "sha1",
+        "sha256",
+        "sha384",
+        "sha512"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the client certificate (.pfx) that is used for X509 authentication. This path can either be the path to the C(pfx) on the filesystem or the PowerShell certificate path C(Cert:\\CurrentUser\\My\\<thumbprint>). The WinRM connection must be authenticated with C(CredSSP) or C(become) is used on the task if the certificate file is not password protected. Other authentication types can set I(client_cert_password) when the cert is password protected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert_password",
+      "displayName": "Client Cert Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for I(client_cert) if the cert is password protected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "creates_path",
+      "displayName": "Creates Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Will check the existence of the path specified and use the result to determine whether the package is already installed. You can use this in conjunction with C(product_id) and other C(creates_*).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "creates_service",
+      "displayName": "Creates Service",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Will check the existing of the service specified and use the result to determine whether the package is already installed. You can use this in conjunction with C(product_id) and other C(creates_*).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "creates_version",
+      "displayName": "Creates Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Will check the file version property of the file at C(creates_path) and use the result to determine whether the package is already installed. C(creates_path) MUST be set and is a file. You can use this in conjunction with C(product_id) and other C(creates_*).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "expected_return_code",
+      "displayName": "Expected Return Code",
+      "type": "list",
+      "required": false,
+      "default": [
+        0,
+        3010
+      ],
+      "description": "One or more return codes from the package installation that indicates success. The return codes are read as a signed integer, any values greater than 2147483647 need to be represented as the signed equivalent, i.e. C(4294967295) is C(-1). To convert a unsigned number to the signed equivalent you can run \"[Int32](\"0x{0:X}\" -f ([UInt32]3221225477))\". A return code of C(3010) usually means that a reboot is required, the C(reboot_required) return value is set if the return code is C(3010). This is o",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "follow_redirects",
+      "displayName": "Follow Redirects",
+      "type": "string",
+      "required": false,
+      "default": "safe",
+      "description": "Whether the module should follow redirects. C(all) will follow all redirects. C(none) will not follow any redirect. C(safe) will follow only \"safe\" redirects, where \"safe\" means that the client is only doing a C(GET) or C(HEAD) on the URI to which it is being redirected. When following a redirected URL, the C(Authorization) header and any credentials set will be dropped and not redirected.",
+      "choices": [
+        "all",
+        "none",
+        "safe"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_basic_auth",
+      "displayName": "Force Basic Auth",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "By default the authentication header is only sent when a webservice responses to an initial request with a 401 status. Since some basic auth services do not properly send a 401, logins will fail. This option forces the sending of the Basic authentication header upon the original request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "headers",
+      "displayName": "Headers",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Extra headers to set on the request. This should be a dictionary where the key is the header name and the value is the value for that header.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_agent",
+      "displayName": "Http Agent",
+      "type": "string",
+      "required": false,
+      "default": "ansible-httpget",
+      "description": "Header to identify as, generally appears in web server logs. This is set to the C(User-Agent) header on a HTTP request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_path",
+      "displayName": "Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the path to a log file that is persisted after a package is installed or uninstalled. This is only used for the C(msi) or C(msp) provider. When omitted, a temporary log file is used instead for those providers. This is only valid for MSI files, use C(arguments) for the C(registry) provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maximum_redirection",
+      "displayName": "Maximum Redirection",
+      "type": "number",
+      "required": false,
+      "default": 50,
+      "description": "Specify how many times the module will redirect a connection to an alternative URI before the connection fails. If set to C(0) or I(follow_redirects) is set to C(none), or C(safe) when not doing a C(GET) or C(HEAD) it prevents all redirection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Location of the package to be installed or uninstalled. This package can either be on the local file system, network share or a url. When C(state=present), C(product_id) is not set and the path is a URL, this file will always be downloaded to a temporary directory for idempotency checks, otherwise the file will only be downloaded if the package has not been installed based on the C(product_id) checks. If C(state=present) then this value MUST be set. If C(state=absent) and C(product_id) is set th",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "product_id",
+      "displayName": "Product Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The product id of the installed packaged. This is used for checking whether the product is already installed and getting the uninstall information if C(state=absent). For msi packages, this is the C(ProductCode) (GUID) of the package. This can be found under the same registry paths as the C(registry) provider. For msp packages, this is the C(PatchCode) (GUID) of the package which can found under the C(Details -> Revision number) of the file's properties. For msix packages, this is the C(Name) or",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Set the package provider to use when searching for a package. The C(auto) provider will select the proper provider if I(path) otherwise it scans all the other providers based on the I(product_id). The C(msi) provider scans for MSI packages installed on a machine wide and current user context based on the C(ProductCode) of the MSI. The C(msix) provider is used to install C(.appx), C(.msix), C(.appxbundle), or C(.msixbundle) packages. These packages are only installed or removed on the current use",
+      "choices": [
+        "auto",
+        "msi",
+        "msix",
+        "msp",
+        "registry"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_password",
+      "displayName": "Proxy Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for I(proxy_username).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_url",
+      "displayName": "Proxy Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An explicit proxy to use for the request. By default, the request will use the IE defined proxy unless I(use_proxy) is set to C(no).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_use_default_credential",
+      "displayName": "Proxy Use Default Credential",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Uses the current user's credentials when authenticating with a proxy host protected with C(NTLM), C(Kerberos), or C(Negotiate) authentication. Proxies that use C(Basic) auth will still require explicit credentials through the I(proxy_username) and I(proxy_password) options. The module will only have access to the user's credentials if using C(become) with a password, you are connecting with SSH using a password, or connecting with WinRM using C(CredSSP) or C(Kerberos with delegation). If not usi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_username",
+      "displayName": "Proxy Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use for proxy authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether to install or uninstall the package. The module uses I(product_id) to determine whether the package is installed or not. For all providers but C(auto), the I(path) can be used for idempotency checks if it is locally accessible filesystem path.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url_method",
+      "displayName": "Url Method",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The HTTP Method of the request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url_password",
+      "displayName": "Url Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for I(url_username).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url_timeout",
+      "displayName": "Url Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Specifies how long the request can be pending before it times out (in seconds). Set to C(0) to specify an infinite timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url_username",
+      "displayName": "Url Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use for authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_default_credential",
+      "displayName": "Use Default Credential",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Uses the current user's credentials when authenticating with a server protected with C(NTLM), C(Kerberos), or C(Negotiate) authentication. Sites that use C(Basic) auth will still require explicit credentials through the I(url_username) and I(url_password) options. The module will only have access to the user's credentials if using C(become) with a password, you are connecting with SSH using a password, or connecting with WinRM using C(CredSSP) or C(Kerberos with delegation). If not using C(becom",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use the proxy defined in IE for the current user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_signature",
+      "displayName": "Verify Signature",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When set to V(True), validates the Authenticode signature of the installer file before executing it. The task will fail if the signature status returned by Get-AuthenticodeSignature is not Valid. When set to V(False), no Authenticode validation is performed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_children",
+      "displayName": "Wait For Children",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "The module will wait for the process it spawns to finish but any processes spawned in that child process as ignored. Set to C(true) to wait for all descendent processes to finish before the module returns. This is useful if the install/uninstaller is just a wrapper which then calls the actual installer as its own child process. When this option is C(true) then the module will wait for both processes to finish before returning. This should not be required for most installers and setting to C(true",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

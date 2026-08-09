@@ -1,0 +1,334 @@
+{
+  "fqcn": "dellemc.openmanage.redfish_storage_volume",
+  "shortDescription": "Manages the storage volume configuration",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/redfish_storage_volume_module.html",
+  "options": [
+    {
+      "name": "apply_time",
+      "displayName": "Apply Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Apply time of the Volume configuration. C(Immediate) allows you to apply the volume configuration on the host server immediately and apply the changes. This is applicable for I(job_wait). C(OnReset) allows you to apply the changes on the next reboot of the host server. I(apply_time) has a default value based on the different types of the controller. For example, BOSS-S1 and BOSS-N1 controllers have a default value of I(apply_time) as C(OnReset), and PERC controllers have a default value of I(app",
+      "choices": [
+        "Immediate",
+        "OnReset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "baseuri",
+      "displayName": "Baseuri",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP address of the target out-of-band controller. For example- <ipaddress>:<port>.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "block_size_bytes",
+      "displayName": "Block Size Bytes",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "(deprecated) Block size in bytes.Only applicable when I(state) is C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "capacity_bytes",
+      "displayName": "Capacity Bytes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Volume size in bytes. Only applicable when I(state) is C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(initialize) initializes an existing storage volume for a specified I(volume_id).",
+      "choices": [
+        "initialize"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller_id",
+      "displayName": "Controller Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fully Qualified Device Descriptor (FQDD) of the storage controller. For example- RAID.Slot.1-1. This option is mandatory when I(state) is C(present) while creating a volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "drives",
+      "displayName": "Drives",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "FQDD of the Physical disks. For example- Disk.Bay.0:Enclosure.Internal.0-1:RAID.Slot.1-1. Only applicable when I(state) is C(present) when creating a new volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encrypted",
+      "displayName": "Encrypted",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether volume is currently utilizing encryption or not. Only applicable when I(state) is C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_types",
+      "displayName": "Encryption Types",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "(deprecated) The following encryption types can be selected. C(ControllerAssisted) The volume is encrypted by the storage controller entity. C(NativeDriveEncryption) The volume utilizes the native drive encryption capabilities of the drive hardware. C(SoftwareAssisted) The volume is encrypted by the software running on the system or the operating system. Only applicable when I(state) is C(present).",
+      "choices": [
+        "NativeDriveEncryption",
+        "ControllerAssisted",
+        "SoftwareAssisted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_reboot",
+      "displayName": "Force Reboot",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Reboot the server forcefully to apply the changes when the normal reboot fails. I(force_reboot) is applicable only when I(reboot_server) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initialize_type",
+      "displayName": "Initialize Type",
+      "type": "string",
+      "required": false,
+      "default": "Fast",
+      "description": "Initialization type of existing volume. Only applicable when I(command) is C(initialize).",
+      "choices": [
+        "Fast",
+        "Slow"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This parameter provides the option to wait for the job completion. This is applicable when I(apply_time) is C(Immediate). This is applicable when I(apply_time) is C(OnReset) and I(reboot_server) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 1200,
+      "description": "This parameter is the maximum wait time of I(job_wait) in seconds. This option is applicable when I(job_wait) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the volume to be created. Only applicable when I(state) is C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oem",
+      "displayName": "Oem",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Includes OEM extended payloads. Only applicable when I(state) is I(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "optimum_io_size_bytes",
+      "displayName": "Optimum Io Size Bytes",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Stripe size value must be in multiples of 64 * 1024. Only applicable when I(state) is C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of the target out-of-band controller. If the password is not provided, then the environment variable E(IDRAC_PASSWORD) is used. Example: export IDRAC_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "raid_type",
+      "displayName": "Raid Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(RAID0) to create a RAID0 type volume. C(RAID1) to create a RAID1 type volume. C(RAID5) to create a RAID5 type volume. C(RAID6) to create a RAID6 type volume. C(RAID10) to create a RAID10 type volume. C(RAID50) to create a RAID50 type volume. C(RAID60) to create a RAID60 type volume. I(raid_type) is mutually exclusive with I(volume_type).",
+      "choices": [
+        "RAID0",
+        "RAID1",
+        "RAID5",
+        "RAID6",
+        "RAID10",
+        "RAID50",
+        "RAID60"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot_server",
+      "displayName": "Reboot Server",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Reboot the server to apply the changes. I(reboot_server) is applicable only when I(apply_timeout) is C(OnReset) or when the default value for the apply time of the controller is C(OnReset).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(present) creates a storage volume for the specified I (controller_id), or modifies the storage volume for the specified I (volume_id). \"Note: Modification of an existing volume properties depends on drive and controller capabilities\". C(absent) deletes the volume for the specified I(volume_id).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username of the target out-of-band controller. If the username is not provided, then the environment variable E(IDRAC_USERNAME) is used. Example: export IDRAC_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume_id",
+      "displayName": "Volume Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FQDD of existing volume. For example- Disk.Virtual.4:RAID.Slot.1-1. This option is mandatory in the following scenarios, I(state) is C(present), when updating a volume. I(state) is C(absent), when deleting a volume. I(command) is C(initialize), when initializing a volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume_type",
+      "displayName": "Volume Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "One of the following volume types must be selected to create a volume. C(NonRedundant) The volume is a non-redundant storage device. C(Mirrored) The volume is a mirrored device. C(StripedWithParity) The volume is a device which uses parity to retain redundant information. C(SpannedMirrors) The volume is a spanned set of mirrored devices. C(SpannedStripesWithParity) The volume is a spanned set of devices which uses parity to retain redundant information. I(volume_type) is mutually exclusive with ",
+      "choices": [
+        "NonRedundant",
+        "Mirrored",
+        "StripedWithParity",
+        "SpannedMirrors",
+        "SpannedStripesWithParity"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(IDRAC_X_AUTH_TOKEN) is used. Example: export IDRAC_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

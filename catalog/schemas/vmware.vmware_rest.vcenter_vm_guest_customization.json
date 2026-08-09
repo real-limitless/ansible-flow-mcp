@@ -1,0 +1,131 @@
+{
+  "fqcn": "vmware.vmware_rest.vcenter_vm_guest_customization",
+  "shortDescription": "Applies a customization specification on the virtual machine",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware_rest/vcenter_vm_guest_customization_module.html",
+  "options": [
+    {
+      "name": "configuration_spec",
+      "displayName": "Configuration Spec",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Settings to be applied to the guest during the customization. This parameter is mandatory. Valid attributes are:  - C(windows_config) (dict): Guest customization specification for a Windows guest operating system If unset, ConfigurationSpec.linux-config or ConfigurationSpec.cloud-config must be set. Otherwise, an appropriate fault will be thrown. (['set'])    - Accepted keys:      - reboot (string): This option specifies what should be done to the guest after the customization. Accepted value fo",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "global_DNS_settings",
+      "displayName": "Global Dns Settings",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Global DNS settings constitute the DNS settings that are not specific to a particular virtual network adapter. This parameter is mandatory. Valid attributes are:  - C(dns_suffix_list) (list): List of name resolution suffixes for the virtual network adapter. This list applies to both Windows and Linux guest customization. For Linux, this setting is global, whereas in Windows, this setting is listed on a per-adapter basis. If unset, no DNS suffixes are set. (['set'])  - C(dns_servers) (list): List",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interfaces",
+      "displayName": "Interfaces",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "IP settings that are specific to a particular virtual network adapter. The AdapterMapping structure maps a network adapter's MAC address to its IPSettings. May be empty if there are no network adapters, else should match number of network adapters configured for the VM. This parameter is mandatory. Valid attributes are:  - C(mac_address) (str): The MAC address of a network adapter being customized.   In vSphere 7.0 series, the MAC addresses must be specified in the ascending order of pciSlotNumb",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_timeout",
+      "displayName": "Session Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Timeout settings for client session.  The maximal number of seconds for the whole operation including connection establishment, request sending and response.  The default value is 300s.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "set",
+      "description": "",
+      "choices": [
+        "set"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_hostname",
+      "displayName": "Vcenter Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter If the value is not specified in the task, the value of environment variable C(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_password",
+      "displayName": "Vcenter Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter password If the value is not specified in the task, the value of environment variable C(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_rest_log_file",
+      "displayName": "Vcenter Rest Log File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "You can use this optional parameter to set the location of a log file.  This file will be used to record the HTTP REST interaction.  The file will be stored on the host that runs the module.  If the value is not specified in the task, the value of  environment variable C(VMWARE_REST_LOG_FILE) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_username",
+      "displayName": "Vcenter Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter username If the value is not specified in the task, the value of environment variable C(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_validate_certs",
+      "displayName": "Vcenter Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to C(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable C(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm",
+      "displayName": "Vm",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The unique identifier of the virtual machine that needs to be customized. The parameter must be the id of a resource returned by M(vmware.vmware_rest.vcenter_vm_info). This parameter is mandatory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

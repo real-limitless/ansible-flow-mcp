@@ -2,6 +2,222 @@
   "fqcn": "vmware.vmware.vcsa_backup_schedule",
   "shortDescription": "Configure the vCenter Server Appliance backup schedule",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware/vcsa_backup_schedule_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "always_update_password",
+      "displayName": "Always Update Password",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true and O(encryption_password) or O(location.password) is set, this module will always report a change and set the appropriate password values. If false, other properties are still checked for differences. If a difference is found, the value of O(encryption_password) and/or O(location.password) is still used. If the password options are unset, this parameter is ignored. This option is needed because there is no way to check the current password value and compare it against the desired passwo",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_fast_backup",
+      "displayName": "Db Fast Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, the underlying Postgres DB/VCDB will use a fast backup method.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether or not the schedule should be enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_password",
+      "displayName": "Encryption Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A password to use to encrypt the backup. If this is unset, the backup is not encrypted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_stats_events_and_tasks",
+      "displayName": "Include Stats Events And Tasks",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, historical data about stats, events, and tasks will be included in the backups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_supervisors_control_plane",
+      "displayName": "Include Supervisors Control Plane",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, the supervisors control plane will be included in the backups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location",
+      "displayName": "Location",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options describing the location where the backup should be stored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the backup schedule. This must be unique, and is used as an identifier for the schedule. Your VCSA may only allow for one schedule. If you create this schedule via the web UI, its name is 'default'. You can change the name by deleting the existing schedule and creating a new one with a new name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_protocol",
+      "displayName": "Proxy Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The proxy connection protocol to use. This option is used if the correct proxy protocol cannot be automatically determined.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retain_count",
+      "displayName": "Retain Count",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "The number of backups to retain. If this is set to 0, all backups are kept.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schedule",
+      "displayName": "Schedule",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options describing the timing and recurrence of the backup schedule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the schedule should be present or absent.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

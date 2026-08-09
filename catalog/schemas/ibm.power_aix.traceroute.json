@@ -1,0 +1,162 @@
+{
+  "fqcn": "ibm.power_aix.traceroute",
+  "shortDescription": "Trace the route to a network host using AIX traceroute",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/traceroute_module.html",
+  "options": [
+    {
+      "name": "bypass_routing",
+      "displayName": "Bypass Routing",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Bypass the normal routing tables and send probe packets directly to a host on an attached network (C(-r) flag). This option forces packets to be sent directly without consulting the routing table. Only works for hosts on directly attached networks (same subnet). Returns an error if the specified host is not on a directly attached network. Useful for testing local network connectivity or debugging routing issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "concatenated_output",
+      "displayName": "Concatenated Output",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Controls whether to append to or overwrite the output file specified in recorded_output. When true, new output is appended to the existing file content. When false, the file is overwritten with new output. Only used when recorded_output parameter is specified. Useful for collecting multiple traceroute results in a single log file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable socket-level debugging for detailed network operation information (C(-d) flag). Provides low-level debugging output about socket operations and packet handling. Useful for troubleshooting network issues or understanding packet flow. Generates verbose output that may be difficult to interpret without networking knowledge.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The destination host name or IP address to trace the route to. This is the target host for which the network path will be determined. Can be specified as a hostname (e.g., google.com) or IP address (e.g., 8.8.8.8).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_ttl",
+      "displayName": "Max Ttl",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of hops (time-to-live) to trace (C(-m) flag). Determines how many network hops the traceroute will attempt before stopping. Each hop represents a router or gateway in the path to the destination. Default is 30 hops if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "numeric",
+      "displayName": "Numeric",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Display hop addresses numerically only, without performing DNS lookups (C(-n) flag). When enabled, speeds up the traceroute by skipping reverse DNS resolution. Useful when DNS is slow or unavailable, or when you only need IP addresses.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "packet_size",
+      "displayName": "Packet Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Size of the probe packet in bytes. Allows testing with different packet sizes to identify MTU issues or size-dependent routing. Larger packets may be fragmented or dropped on networks with smaller MTU values. Default packet size is determined by the MTU of the outgoing network interface if not specified. Typical values range from 40 bytes (minimum) to 1500 bytes (standard Ethernet MTU).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Base UDP port number to use for probe packets (C(-p) flag). The traceroute command uses sequential port numbers starting from this base value. Each probe increments the port number to help identify responses. Default is 33434 if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "queries",
+      "displayName": "Queries",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of probe packets to send per hop (C(-q) flag). Determines how many probes are sent at each TTL level to measure round-trip time. More queries provide better statistics but increase network load and execution time. Default is 3 probes per hop if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recorded_output",
+      "displayName": "Recorded Output",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "File path where the traceroute command output will be recorded. If specified, both stdout and stderr from the traceroute command are written to this file. The directory path must exist or will be created automatically. Useful for logging, auditing, or later analysis of network paths.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_address",
+      "displayName": "Source Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use the specified IP address as the source address in outgoing probe packets (C(-s) flag). Forces the source IP address to be different from the default interface address. Useful on hosts with multiple network interfaces to control which interface is used. The specified IP address must be configured on one of the machine's network interfaces. Returns an error if the IP address is not found on any local interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tos",
+      "displayName": "Tos",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Set the Type-Of-Service (TOS) value in probe packets (C(-t) flag). TOS is a field in the IP header that indicates the desired quality of service. Valid range is 0 to 255 (decimal integer). Different TOS values may result in different routing paths through the network. Common useful values include 16 (minimize delay), 8 (maximize throughput), 4 (maximize reliability), and 2 (minimize cost). Default is 0 (normal service) if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verbose",
+      "displayName": "Verbose",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable verbose output to receive all ICMP packets, not just TIME_EXCEEDED and PORT_UNREACHABLE (C(-v) flag). Displays additional information about ICMP packets received during the trace. Useful for detailed network diagnostics and understanding all responses from intermediate hops. May produce significantly more output than the standard traceroute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_time",
+      "displayName": "Wait Time",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Time in seconds to wait for a response to each probe packet (C(-w) flag). Determines how long the traceroute waits before considering a probe as timed out. Longer wait times may be necessary for slow or congested networks. Shorter wait times speed up the traceroute but may miss legitimate responses. Default is 3 seconds if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

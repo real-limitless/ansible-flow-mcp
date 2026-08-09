@@ -2,6 +2,270 @@
   "fqcn": "vmware.vmware.vm_powerstate",
   "shortDescription": "Manages power states of virtual machines in vCenter",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware/vm_powerstate_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The datacenter where the VM you'd like to operate the power.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder",
+      "displayName": "Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Destination folder, absolute or relative path to find an existing guest. Should be the full folder path, with or without the 'datacenter/vm/' prefix For example 'datacenter_name/vm/path/to/folder' or 'path/to/folder'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder_paths_are_absolute",
+      "displayName": "Folder Paths Are Absolute",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, any folder path parameters are treated as absolute paths. If false, modules will try to intelligently determine if the path is absolute or relative. This option is useful when your environment has a complex folder structure. By default, modules will try to intelligently determine if the path is absolute or relative. They may mistakenly prepend the datacenter name or other folder names, and this option can be used to avoid this.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Ignore warnings and complete the actions. This parameter is useful while forcing virtual machine state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "moid",
+      "displayName": "Moid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Managed Object ID of the instance to manage if known, this is a unique identifier only within a single vCenter instance. This is required if O(name) or O(uuid) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the virtual machine to work with. Virtual machine names in vCenter are not necessarily unique, which may be problematic, see O(name_match). This is required if O(moid) or O(uuid) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name_match",
+      "displayName": "Name Match",
+      "type": "string",
+      "required": false,
+      "default": "first",
+      "description": "If multiple virtual machines matching the name, use the first or last found.",
+      "choices": [
+        "first",
+        "last"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "question_answers",
+      "displayName": "Question Answers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of questions to answer, should one or more arise while waiting for the task to complete. Some common uses are to allow a cdrom to be changed even if locked, or to answer the question as to whether a VM was copied or moved. Can be used if O(state) is V(powered-on).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheduled_at",
+      "displayName": "Scheduled At",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Date and time in string format at which specified task needs to be performed. The required format for date and time - 'dd/mm/yyyy hh:mm'. Scheduling task requires vCenter server. A standalone ESXi server does not support this option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheduled_task_description",
+      "displayName": "Scheduled Task Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of scheduled task. Valid only if O(scheduled_at) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheduled_task_enabled",
+      "displayName": "Scheduled Task Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Flag to indicate whether the scheduled task is enabled or disabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheduled_task_name",
+      "displayName": "Scheduled Task Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of scheduled task. Valid only if O(scheduled_at) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "powered-on",
+      "description": "Set the state of the virtual machine.",
+      "choices": [
+        "powered-off",
+        "powered-on",
+        "reboot-guest",
+        "restarted",
+        "shutdown-guest",
+        "suspended"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 3600,
+      "description": "If this argument is set to a positive integer, the module will wait for the VM to reach the poweredoff state. The value sets a timeout in seconds for the module to wait for the state change. This value is ignored if the desired state is V(reboot-guest).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_instance_uuid",
+      "displayName": "Use Instance Uuid",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to use the VMware instance UUID rather than the BIOS UUID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "UUID of the instance to manage if known, this is VMware's unique identifier. This is required if O(name) or O(moid) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

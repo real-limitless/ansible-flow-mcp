@@ -1,0 +1,100 @@
+{
+  "fqcn": "ibm.power_aix.llvupdate",
+  "shortDescription": "Performs Live Library Update",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/llvupdate_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Controls what action is performed. C(update) performs live update operation on the specified processes. C(preview) performs live update operation in preview mode. C(clean) performs clean up of kernel state and also uncleaned processes.",
+      "choices": [
+        "update",
+        "preview",
+        "clean"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_cleanup",
+      "displayName": "Auto Cleanup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies if cleanup needs to be automatically performed after performing live update for any process(s) When set to I(auto_cleanup=true), cleanup will be performed after llvupdate command is run, regardless of the return code.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_all",
+      "displayName": "Include All",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Scans all the processes and initiates the Live Library Update operation for all LLU-capable processes according to the timeout policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logfile",
+      "displayName": "Logfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the log file that you want to use. By default, the log file is /var/adm/ras/liveupdate/logs/llvupdlog.<date.time>.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "processes_to_exclude",
+      "displayName": "Processes To Exclude",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Performs LLU operation on all LLU-capable processes except the ones provided using this flag.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "processes_to_include",
+      "displayName": "Processes To Include",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Initiates the Live Library Update for the specified processes. When used, the llvupdate command monitors the progress of the LLU operation of each process and stops the operation for any process that does not complete the update operation within the timeout period.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retries",
+      "displayName": "Retries",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of times the Live Library Update operation must be attempted. The default value is 3.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the time for all threads in a process to reach a state after which the LLU operation can be performed. If the LLU operation cannot be started within this timeout period, the operation is canceled for that process and is retried after 10 seconds up to a number of attempts that are specified. The default timeout period is 30 seconds. The maximum timeout value is 300 seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,546 @@
   "fqcn": "oracle.oci.oci_object_storage_object_actions",
   "shortDescription": "Perform actions on an Object resource in Oracle Cloud Infrastructure",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/oracle/oci/oci_object_storage_object_actions_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The action to perform on the Object.",
+      "choices": [
+        "copy",
+        "reencrypt",
+        "rename",
+        "restore",
+        "update_object_storage_tier"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the user, on whose behalf, OCI APIs are invoked. If not set, then the value of the OCI_USER_ID environment variable, if any, is used. This option is required if the user is not specified through a configuration file (See C(config_file_location)). To get the user's OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_fingerprint",
+      "displayName": "Api User Fingerprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fingerprint for the key pair being used. If not set, then the value of the OCI_USER_FINGERPRINT environment variable, if any, is used. This option is required if the key fingerprint is not specified through a configuration file (See C(config_file_location)). To get the key pair's fingerprint value please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_file",
+      "displayName": "Api User Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Full path and filename of the private key (in PEM format). If not set, then the value of the OCI_USER_KEY_FILE variable, if any, is used. This option is required if the private key is not specified through a configuration file (See C(config_file_location)). If the key is encrypted with a pass-phrase, the C(api_user_key_pass_phrase) option must also be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_pass_phrase",
+      "displayName": "Api User Key Pass Phrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase used by the key referenced in C(api_user_key_file), if it is encrypted. If not set, then the value of the OCI_USER_KEY_PASS_PHRASE variable, if any, is used. This option is required if the key passphrase is not specified through a configuration file (See C(config_file_location)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_purpose",
+      "displayName": "Auth Purpose",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The auth purpose which can be used in conjunction with 'auth_type=instance_principal'. The default auth_purpose for instance_principal is None.",
+      "choices": [
+        "service_principal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "api_key",
+      "description": "The type of authentication to use for making API requests. By default C(auth_type=\"api_key\") based authentication is performed and the API key (see I(api_user_key_file)) in your config file will be used. If this 'auth_type' module option is not specified, the value of the OCI_ANSIBLE_AUTH_TYPE, if any, is used. Use C(auth_type=\"instance_principal\") to use instance principal based authentication when running ansible playbooks within an OCI compute instance.",
+      "choices": [
+        "api_key",
+        "instance_principal",
+        "instance_obo_user",
+        "resource_principal",
+        "security_token"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bucket_name",
+      "displayName": "Bucket Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the bucket. Avoid entering confidential information. Example: `my-new-bucket1`",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_bundle",
+      "displayName": "Cert Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full path to a CA certificate bundle to be used for SSL verification. This will override the default CA certificate bundle. If not set, then the value of the OCI_ANSIBLE_CERT_BUNDLE variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file_location",
+      "displayName": "Config File Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to configuration file. If not set then the value of the OCI_CONFIG_FILE environment variable, if any, is used. Otherwise, defaults to ~/.oci/config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_profile_name",
+      "displayName": "Config Profile Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The profile to load from the config file referenced by C(config_file_location). If not set, then the value of the OCI_CONFIG_PROFILE environment variable, if any, is used. Otherwise, defaults to the \"DEFAULT\" profile in C(config_file_location).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_bucket",
+      "displayName": "Destination Bucket",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The destination bucket the object will be copied to. Required for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_namespace",
+      "displayName": "Destination Namespace",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The destination Object Storage namespace the object will be copied to. Required for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_object_if_match_e_tag",
+      "displayName": "Destination Object If Match E Tag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The entity tag (ETag) to match against that of the destination object (an object intended to be overwritten). Used to confirm that the destination object stored under a given name is the version of that object storing a specified entity tag. Applicable only for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_object_if_none_match_e_tag",
+      "displayName": "Destination Object If None Match E Tag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The entity tag (ETag) to avoid matching. The only valid value is '*', which indicates that the request should fail if the object already exists in the destination bucket. Applicable only for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_object_metadata",
+      "displayName": "Destination Object Metadata",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Arbitrary string keys and values for the user-defined metadata for the object. Keys must be in \"opc-meta-*\" format. Avoid entering confidential information. Metadata key-value pairs entered in this field are assigned to the destination object. If you enter no metadata values, the destination object will inherit any existing metadata values associated with the source object. Applicable only for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_object_name",
+      "displayName": "Destination Object Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the destination object resulting from the copy operation. Avoid entering confidential information. Required for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_object_storage_tier",
+      "displayName": "Destination Object Storage Tier",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The storage tier that the object should be stored in. If not specified, the object will be stored in the same storage tier as the bucket. Applicable only for I(action=copy).",
+      "choices": [
+        "Standard",
+        "InfrequentAccess",
+        "Archive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_region",
+      "displayName": "Destination Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The destination region the object will be copied to, for example \"us-ashburn-1\". Required for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hours",
+      "displayName": "Hours",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of hours for which this object will be restored. By default objects will be restored for 24 hours. You can instead configure the duration using the hours parameter. Applicable only for I(action=restore).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kms_key_id",
+      "displayName": "Kms Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the master encryption key used to call the Vault service to re-encrypt the data encryption keys associated with the object and its chunks. If the kmsKeyId value is empty, whether null or an empty string, the API will perform re-encryption by using the kmsKeyId associated with the bucket or the master encryption key managed by Oracle, depending on the bucket encryption mechanism. Applicable only for I(action=ree",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace_name",
+      "displayName": "Namespace Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Object Storage namespace used for the request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_name",
+      "displayName": "New Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The new name of the source object. Avoid entering confidential information. Required for I(action=rename).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_obj_if_match_e_tag",
+      "displayName": "New Obj If Match E Tag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The if-match entity tag (ETag) of the new object. Applicable only for I(action=rename).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_obj_if_none_match_e_tag",
+      "displayName": "New Obj If None Match E Tag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The if-none-match entity tag (ETag) of the new object. The only valid value is '*', which indicates request should fail if the new object already exists. Applicable only for I(action=rename).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_name",
+      "displayName": "Object Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the object. Avoid entering confidential information. Example: `test/object1.log` Required for I(action=reencrypt), I(action=restore), I(action=update_object_storage_tier).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opc_source_sse_customer_algorithm",
+      "displayName": "Opc Source Sse Customer Algorithm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The optional header that specifies \"AES256\" as the encryption algorithm to use to decrypt the source object. For more information, see L(Using Your Own Keys for Server-Side Encryption,https://docs.cloud.oracle.com/Content/Object/Tasks/usingyourencryptionkeys.htm). Applicable only for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opc_source_sse_customer_key",
+      "displayName": "Opc Source Sse Customer Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The optional header that specifies the base64-encoded 256-bit encryption key to use to decrypt the source object. For more information, see L(Using Your Own Keys for Server-Side Encryption,https://docs.cloud.oracle.com/Content/Object/Tasks/usingyourencryptionkeys.htm). Applicable only for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opc_source_sse_customer_key_sha256",
+      "displayName": "Opc Source Sse Customer Key Sha256",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The optional header that specifies the base64-encoded SHA256 hash of the encryption key used to decrypt the source object. This value is used to check the integrity of the encryption key. For more information, see L(Using Your Own Keys for Server-Side Encryption,https://docs.cloud.oracle.com/Content/Object/Tasks/usingyourencryptionkeys.htm). Applicable only for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opc_sse_customer_algorithm",
+      "displayName": "Opc Sse Customer Algorithm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The optional header that specifies \"AES256\" as the encryption algorithm. For more information, see L(Using Your Own Keys for Server-Side Encryption,https://docs.cloud.oracle.com/Content/Object/Tasks/usingyourencryptionkeys.htm). Applicable only for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opc_sse_customer_key",
+      "displayName": "Opc Sse Customer Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The optional header that specifies the base64-encoded 256-bit encryption key to use to encrypt or decrypt the data. For more information, see L(Using Your Own Keys for Server-Side Encryption,https://docs.cloud.oracle.com/Content/Object/Tasks/usingyourencryptionkeys.htm). Applicable only for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opc_sse_customer_key_sha256",
+      "displayName": "Opc Sse Customer Key Sha256",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The optional header that specifies the base64-encoded SHA256 hash of the encryption key. This value is used to check the integrity of the encryption key. For more information, see L(Using Your Own Keys for Server-Side Encryption,https://docs.cloud.oracle.com/Content/Object/Tasks/usingyourencryptionkeys.htm). Applicable only for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opc_sse_kms_key_id",
+      "displayName": "Opc Sse Kms Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of a master encryption key used to call the Key Management service to generate a data encryption key or to encrypt or decrypt a data encryption key. Applicable only for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realm_specific_endpoint_template_enabled",
+      "displayName": "Realm Specific Endpoint Template Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable/Disable realm specific endpoint template for service client. By Default, realm specific endpoint template is disabled. If not set, then the value of the OCI_REALM_SPECIFIC_SERVICE_ENDPOINT_TEMPLATE_ENABLED variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle Cloud Infrastructure region to use for all OCI API requests. If not set, then the value of the OCI_REGION variable, if any, is used. This option is required if the region is not specified through a configuration file (See C(config_file_location)). Please refer to U(https://docs.us-phoenix-1.oraclecloud.com/Content/General/Concepts/regions.htm) for more information on OCI regions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_name",
+      "displayName": "Source Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the source object to be renamed. Required for I(action=rename).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_object_if_match_e_tag",
+      "displayName": "Source Object If Match E Tag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The entity tag (ETag) to match against that of the source object. Used to confirm that the source object with a given name is the version of that object storing a specified ETag. Applicable only for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_object_name",
+      "displayName": "Source Object Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the object to be copied. Required for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_sse_customer_key",
+      "displayName": "Source Sse Customer Key",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": " Applicable only for I(action=reencrypt).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_version_id",
+      "displayName": "Source Version Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "VersionId of the object to copy. If not provided then current version is copied by default. Applicable only for I(action=copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src_obj_if_match_e_tag",
+      "displayName": "Src Obj If Match E Tag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The if-match entity tag (ETag) of the source object. Applicable only for I(action=rename).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sse_customer_key",
+      "displayName": "Sse Customer Key",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": " Applicable only for I(action=reencrypt).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_tier",
+      "displayName": "Storage Tier",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The storage tier that the object should be moved to. Required for I(action=update_object_storage_tier).",
+      "choices": [
+        "Standard",
+        "InfrequentAccess",
+        "Archive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenancy",
+      "displayName": "Tenancy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OCID of your tenancy. If not set, then the value of the OCI_TENANCY variable, if any, is used. This option is required if the tenancy OCID is not specified through a configuration file (See C(config_file_location)). To get the tenancy OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version_id",
+      "displayName": "Version Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "VersionId used to identify a particular version of the object Applicable only for I(action=reencrypt)I(action=restore)I(action=update_object_storage_tier).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to wait for create or delete operation to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Time, in seconds, to wait when I(wait=yes). Defaults to 1200 for most of the services but some services might have a longer wait timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

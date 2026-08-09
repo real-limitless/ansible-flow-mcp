@@ -2,6 +2,179 @@
   "fqcn": "microsoft.ad.cs_template",
   "shortDescription": "Manage AD Certificate Services certificate templates",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/microsoft/ad/cs_template_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "certificate_name_flag",
+      "displayName": "Certificate Name Flag",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of certificate name flag values to set on the template. Each value can be a well-known name or a raw integer (decimal or hex). Multiple values are combined with bitwise OR. Maps to the C(msPKI-Certificate-Name-Flag) LDAP attribute. Well-known names: V(enrollee_supplies_subject), V(enrollee_supplies_subject_alt_name), V(subject_alt_require_domain_dns), V(subject_alt_require_spn), V(subject_alt_require_directory_guid), V(subject_alt_require_upn), V(subject_alt_require_email), V(subject_alt_re",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The human-readable display name of the template. Defaults to the value of O(name) if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_server",
+      "displayName": "Domain Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The FQDN of the domain controller to target for all AD operations. When not specified, the module will use the default domain controller discovery.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enrollment_flag",
+      "displayName": "Enrollment Flag",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of enrollment flag values to set on the template. Each value can be a well-known name or a raw integer (decimal or hex). Multiple values are combined with bitwise OR. Maps to the C(msPKI-Enrollment-Flag) LDAP attribute. Well-known names: V(include_symmetric_algorithms), V(pend_all_requests), V(publish_to_kra_container), V(publish_to_ds), V(auto_enrollment_check_user_ds_certificate), V(auto_enrollment), V(previous_approval_validate_reenrollment).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extended_key_usages",
+      "displayName": "Extended Key Usages",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of Extended Key Usage (EKU) values. Each value can be a well-known name or a raw OID string. Maps to the C(pKIExtendedKeyUsage) LDAP attribute. Well-known names: V(server_authentication), V(client_authentication), V(code_signing), V(secure_email), V(ip_security_end_system), V(ip_security_tunnel), V(ip_security_user), V(time_stamping), V(ocsp_signing), V(smart_card_logon), V(certificate_request_agent), V(encrypting_file_system), V(file_recovery), V(key_recovery), V(key_recovery_agent), V(doc",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_size",
+      "displayName": "Key Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Minimum key size in bits for the certificate. Maps to the C(msPKI-Minimal-Key-Size) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_usage",
+      "displayName": "Key Usage",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of key usage flags to set on the template. Maps to the C(pKIKeyUsage) LDAP attribute. Valid values: V(digital_signature), V(non_repudiation), V(key_encipherment), V(data_encipherment), V(key_agreement), V(key_cert_sign), V(crl_sign), V(encipher_only), V(decipher_only).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The CN (common name) of the certificate template. This is the unique short name used internally by AD CS (no spaces).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_flag",
+      "displayName": "Private Key Flag",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of private key flag values to set on the template. Each value can be a well-known name or a raw integer (decimal or hex). Multiple values are combined with bitwise OR. Maps to the C(msPKI-Private-Key-Flag) LDAP attribute. Well-known names: V(require_private_key_archival), V(exportable_key), V(strong_key_protection_required), V(require_alternate_signature_algorithm), V(require_same_key_renewal), V(use_legacy_provider), V(ek_trust_on_use), V(ek_validate_cert), V(ek_validate_key), V(attest_pre",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "publish_to_ca",
+      "displayName": "Publish To Ca",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of Enterprise CA short names to which the template should be published. When specified, the module ensures the template is published to exactly the listed CAs and unpublished from any others. An empty list V([]) will unpublish the template from all CAs. When omitted, publishing state is not managed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "renewal_period_days",
+      "displayName": "Renewal Period Days",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Certificate renewal overlap period in days. Maps to the C(pKIOverlapPeriod) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schema_version",
+      "displayName": "Schema Version",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Certificate template schema version. V(2) requires Windows Server 2003+, V(3) requires 2008+, V(4) requires 2012+. Maps to the C(msPKI-Template-Schema-Version) LDAP attribute.",
+      "choices": [
+        2,
+        3,
+        4
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_template",
+      "displayName": "Source Template",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The display name of an existing template to clone when creating a new template (e.g. V(WebServer), V(User), V(Computer)). Required when creating a template for the first time. Ignored when the template already exists (updates are applied in-place).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the template should be present or absent. When V(absent), the template is unpublished from all CAs, the template AD object is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validity_period_days",
+      "displayName": "Validity Period Days",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Certificate validity period in days. Maps to the C(pKIExpirationPeriod) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

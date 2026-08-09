@@ -2,6 +2,194 @@
   "fqcn": "amazon.aws.sts_assume_role",
   "shortDescription": "Assume a role using AWS Security Token Service and obtain temporary credentials",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/amazon/aws/sts_assume_role_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS access key ID. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_ACCESS_KEY_ID) or C(AWS_ACCESS_KEY) environment variables may also be used in decreasing order of preference. The I(aws_access_key) and I(profile) options are mutually exclusive. The I(aws_access_key_id) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_ca_bundle",
+      "displayName": "Aws Ca Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location of a CA Bundle to use when validating SSL certificates. The C(AWS_CA_BUNDLE) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_config",
+      "displayName": "Aws Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary to modify the botocore configuration. Parameters can be found in the AWS documentation U(https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html#botocore.config.Config).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug_botocore_endpoint_logs",
+      "displayName": "Debug Botocore Endpoint Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use a C(botocore.endpoint) logger to parse the unique (rather than total) C(\"resource:action\") API calls made during a task, outputing the set to the resource_actions key in the task results. Use the C(aws_resource_action) callback to output to total list made during a playbook. The C(ANSIBLE_DEBUG_BOTOCORE_LOGS) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "duration_seconds",
+      "displayName": "Duration Seconds",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The duration, in seconds, of the role session. The value can range from 900 seconds (15 minutes) to 43200 seconds (12 hours). The max depends on the IAM role's sessions duration setting. By default, the value is set to V(3600) seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_url",
+      "displayName": "Endpoint Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to connect to instead of the default AWS endpoints.  While this can be used to connection to other AWS-compatible services the amazon.aws and community.aws collections are only tested against AWS. The  C(AWS_URL) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "external_id",
+      "displayName": "External Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A unique identifier that is used by third parties to assume a role in their customers' accounts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mfa_serial_number",
+      "displayName": "Mfa Serial Number",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The identification number of the MFA device that is associated with the user who is making the AssumeRole call.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mfa_token",
+      "displayName": "Mfa Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The value provided by the MFA device, if the trust policy of the role being assumed requires MFA.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policy",
+      "displayName": "Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Supplemental policy to use in addition to assumed role's policies.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A named AWS profile to use for authentication. See the AWS documentation for more information about named profiles U(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html). The C(AWS_PROFILE) environment variable may also be used. The I(profile) option is mutually exclusive with the I(aws_access_key), I(aws_secret_key) and I(session_token) options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS region to use. For global services such as IAM, Route53 and CloudFront, I(region) is ignored. The C(AWS_REGION) environment variable may also be used. See the Amazon AWS documentation for more information U(http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role_arn",
+      "displayName": "Role Arn",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Amazon Resource Name (ARN) of the role that the caller is assuming U(https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html#Identifiers_ARNs).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role_session_name",
+      "displayName": "Role Session Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the role's session - will be used by CloudTrail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_key",
+      "displayName": "Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS secret access key. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SECRET_ACCESS_KEY) or C(AWS_SECRET_KEY) environment variables may also be used in decreasing order of preference. The I(secret_key) and I(profile) options are mutually exclusive. The I(aws_secret_access_key) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_token",
+      "displayName": "Session Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS STS session token for use with temporary credentials. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SESSION_TOKEN) environment variable may also be used. The I(session_token) and I(profile) options are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When set to C(false), SSL certificates will not be validated for communication with the AWS APIs. Setting I(validate_certs=false) is strongly discouraged, as an alternative, consider setting I(aws_ca_bundle) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

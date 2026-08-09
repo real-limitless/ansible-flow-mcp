@@ -1,0 +1,256 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_pool",
+  "shortDescription": "Manages F5 BIG-IP LTM pools",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_pool_module.html",
+  "options": [
+    {
+      "name": "aggregate",
+      "displayName": "Aggregate",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of pool definitions to be created, modified, or removed. When using C(aggregates), if one of the aggregate definitions is invalid, the aggregate run will fail, indicating the error it last encountered. The module will B(NOT) rollback any changes it has made prior to encountering the error. The module also will not indicate which changes were made prior to failure. Therefore we strongly advise you run the module in C(check) mode to ensure basic validation prior to executing this module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies descriptive text that identifies the pool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lb_method",
+      "displayName": "Lb Method",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Load balancing method. When creating a new pool, if this value is not specified, the default of C(round-robin) is used.",
+      "choices": [
+        "dynamic-ratio-member",
+        "dynamic-ratio-node",
+        "fastest-app-response",
+        "fastest-node",
+        "least-connections-member",
+        "least-connections-node",
+        "least-sessions",
+        "observed-member",
+        "observed-node",
+        "predictive-member",
+        "predictive-node",
+        "ratio-least-connections-member",
+        "ratio-least-connections-node",
+        "ratio-member",
+        "ratio-node",
+        "ratio-session",
+        "round-robin",
+        "weighted-least-connections-member",
+        "weighted-least-connections-node"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "metadata",
+      "displayName": "Metadata",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Arbitrary key/value pairs you can attach to a pool. This is useful in situations where you might want to annotate a pool to be managed by Ansible. Key names are stored as strings; this includes names that are numbers. Values for all of the keys are stored as strings; this includes values that are numbers. Data will be persisted, not ephemeral.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_up_members",
+      "displayName": "Min Up Members",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the minimum number of pool members that must be up, otherwise, the system takes the action specified in the C(min-up-members-action) option. Use this option for gateway pools in a redundant system where a unit number is applied to the pool. This indicates the pool is configured only on the specified unit. When creating a new pool, if this parameter is not specified, the default is C(0).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_up_members_action",
+      "displayName": "Min Up Members Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the action to take if C(min_up_members_checking) is C(enabled) and the number of active pool members falls below the number specified in the C(min_up_members) option. When creating a new pool, if this parameter is not specified, the default is C(failover).",
+      "choices": [
+        "failover",
+        "reboot",
+        "restart-all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_up_members_checking",
+      "displayName": "Min Up Members Checking",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables the C(min_up_members) feature. If you enable this feature, you must also specify a value for both the C(min_up_members) and C(min_up_members_action) options. When creating a new pool, if this parameter is not specified, the default is C(disabled).",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitor_type",
+      "displayName": "Monitor Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Monitor rule type when C(monitors) is specified. When creating a new pool, if this value is not specified, the default of C(and_list) is used. When C(single), ensures all specified monitors are checked, but additionally includes checks to make sure you only specified a single monitor. When C(and_list), ensures B(all) monitors are checked. When C(m_of_n), ensures C(quorum) of C(monitors) are checked. C(m_of_n) B(requires) a C(quorum) of 1 or greater be set either in the playbook, or already exist",
+      "choices": [
+        "and_list",
+        "m_of_n",
+        "single"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitors",
+      "displayName": "Monitors",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Monitor template name list. If the partition is not provided as part of the monitor name, the C(partition) option is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Pool name",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition on which to manage resources.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority_group_activation",
+      "displayName": "Priority Group Activation",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the system load balances traffic according to the priority number assigned to the pool member. When creating a new pool, if this parameter is not specified, the default of C(0) is used. To disable this setting, provide the value C(0). Once you enable this setting, you can specify pool member priority when you create a new pool or on a pool member's properties screen. The system treats same-priority pool members as a group. To enable priority group activation, provide a number f",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quorum",
+      "displayName": "Quorum",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Monitor quorum value when C(monitor_type) is C(m_of_n). Quorum must be a value of 1 or greater when C(monitor_type) is C(m_of_n).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace_all_with",
+      "displayName": "Replace All With",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Removes pools not defined in the C(aggregate) parameter. This operation is all or none, meaning it will stop if there are some pools that cannot be removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reselect_tries",
+      "displayName": "Reselect Tries",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Sets the number of times the system tries to contact a pool member after a passive failure.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_down_action",
+      "displayName": "Service Down Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets the action to take when node goes down in pool.",
+      "choices": [
+        "none",
+        "reset",
+        "drop",
+        "reselect"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "slow_ramp_time",
+      "displayName": "Slow Ramp Time",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Sets the ramp-up time (in seconds) to gradually ramp up the load on newly added or freshly detected up pool members.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present), guarantees the pool exists with the provided attributes. When C(absent), removes the pool from the system.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

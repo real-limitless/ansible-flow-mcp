@@ -1,0 +1,121 @@
+{
+  "fqcn": "community.hrobot.v_switch",
+  "shortDescription": "Manage Hetzner's vSwitch",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/hrobot/v_switch_module.html",
+  "options": [
+    {
+      "name": "hetzner_password",
+      "displayName": "Hetzner Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password for the Robot web-service user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hetzner_user",
+      "displayName": "Hetzner User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username for the Robot web-service user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSwitch's name. In order to identify a vSwitch both name and VLAN must match. If not, a new vSwitch will be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rate_limit_retry_timeout",
+      "displayName": "Rate Limit Retry Timeout",
+      "type": "number",
+      "required": false,
+      "default": -1,
+      "description": "Timeout (in seconds) for waiting when rate limit exceeded errors are returned. Set to V(0) to not retry. Set to a negative value like V(-1) to retry forever.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "servers",
+      "displayName": "Servers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of server identifiers (server's numeric ID or server's main IPv4 or IPv6). If servers is not specified, servers are not going to be deleted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the vSwitch. VSwitch is created if state is V(present), and deleted if state is V(absent). V(absent) just cancels the vSwitch at the end of the current day. When cancelling, you have to specify O(servers=[]) if you want to actively remove the servers in the vSwitch.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "Timeout (in seconds) for waiting for vSwitch servers to be configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlan",
+      "displayName": "Vlan",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "The vSwitch's VLAN ID. Range can be from 4000 to 4091. In order to identify a vSwitch both name and VLAN must match. If not, a new vSwitch will be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to wait until the vSwitch has been successfully configured before determining what to do, and before returning from the module. The API returns status C(in process) when the vSwitch is currently being set up in the servers. If this happens, the module will try again until the status changes to C(ready) or server has been removed from vSwitch. Please note that if you disable wait while deleting and removing servers module will fail with C(VSWITCH_IN_PROCESS) error.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_delay",
+      "displayName": "Wait Delay",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Delay to wait (in seconds) before checking again whether the vSwitch servers has been configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

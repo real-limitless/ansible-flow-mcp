@@ -1,0 +1,259 @@
+{
+  "fqcn": "servicenow.itsm.change_request_task",
+  "shortDescription": "Manage ServiceNow change request tasks",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/servicenow/itsm/change_request_task_module.html",
+  "options": [
+    {
+      "name": "assigned_to",
+      "displayName": "Assigned To",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user that the change task is assigned to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "assignment_group",
+      "displayName": "Assignment Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the group that the change task is assigned to. Mutually exclusive with C(assignment_group_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "assignment_group_id",
+      "displayName": "Assignment Group Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The id of the group that the change task is assigned to. Mutually exclusive with C(assignment_group).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "change_request_id",
+      "displayName": "Change Request Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "I(sys_id) of the change request this task belongs to. Mutually exclusive with I(change_request_number).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "change_request_number",
+      "displayName": "Change Request Number",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "I(number) of the change request this task belongs to. Note that contrary to I(change_request_id), change request number may not uniquely identify a record. In case there are more change requests with the same number, the module fails and does nothing. Mutually exclusive with I(change_request_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "change_request_task_mapping",
+      "displayName": "Change Request Task Mapping",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "User mapping for I(Change request task) object, where user can override Choice Lists values for objects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "close_code",
+      "displayName": "Close Code",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide information on how the change task was resolved. The change task must have this parameter set prior to transitioning to the C(closed) state.",
+      "choices": [
+        "successful",
+        "successful_issues",
+        "unsuccessful"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "close_notes",
+      "displayName": "Close Notes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Resolution notes added by the user who closed the change task. The change task must have this parameter set prior to transitioning to the C(closed) state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configuration_item",
+      "displayName": "Configuration Item",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The configuration item (CI) or service name that the change task applies to. Note that contrary to I(configuration_item_id), configuration item names may not uniquely identify a record. In case there are more configuration items with the same name, the module fails and does nothing. Mutually exclusive with I(configuration_item_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configuration_item_id",
+      "displayName": "Configuration Item Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The configuration item (CI) or service ID that the change task applies to. Mutually exclusive with I(configuration_item).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A detailed description of the task. This field has to be set either in the record or here.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hold_reason",
+      "displayName": "Hold Reason",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Reason why change task is on hold. Required if change task's I(on_hold) value will be C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance",
+      "displayName": "Instance",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "ServiceNow instance information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "number",
+      "displayName": "Number",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of the record to operate on. Note that contrary to I(sys_id), I(number) may not uniquely identify a record.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "on_hold",
+      "displayName": "On Hold",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A change task cannot be put on hold when I(state) is C(pending), C(canceled), or C(closed) (module fails and does nothing). Provide an On hold reason if a change task is placed on hold.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "other",
+      "displayName": "Other",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Optional remaining parameters. For more information on optional parameters, refer to the ServiceNow change task documentation at U(https://docs.servicenow.com/bundle/tokyo-it-service-management/page/product/change-management/task/create-a-change-task.html).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "planned_end_date",
+      "displayName": "Planned End Date",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The date the change task is planned to be completed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "planned_start_date",
+      "displayName": "Planned Start Date",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The date you plan to begin working on the task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "short_description",
+      "displayName": "Short Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A summary of the task. This field has to be set either in the record or here.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The state of the change request task. Cannot be changed to C(pending) when I(on_hold) is C(true) (module fails and does nothing). Default choices are C(pending), C(open), C(in_progress), C(closed), C(canceled), C(absent). One can override them by setting I(change_request_task.state).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sys_id",
+      "displayName": "Sys Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Unique identifier of the record to operate on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of change task. Default workflow generates tasks in I(type) C(review). If the task I(type) is C(implementation), the I(planned_start_date) and I(planned_end_date) values must fall within the planned start and end dates specified in the I(change_request).",
+      "choices": [
+        "planning",
+        "implementation",
+        "testing",
+        "review"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

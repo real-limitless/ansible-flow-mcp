@@ -1,0 +1,211 @@
+{
+  "fqcn": "ovirt.ovirt.ovirt_nic",
+  "shortDescription": "Module to manage network interfaces of Virtual Machines in oVirt/RHV",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ovirt/ovirt/ovirt_nic_module.html",
+  "options": [
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Dictionary with values needed to create HTTP/HTTPS connection to oVirt:",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fetch_nested",
+      "displayName": "Fetch Nested",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If I(True) the module will fetch additional data from the API. It will fetch IDs of the VMs disks, snapshots, etc. User can configure to fetch other attributes of the nested entities by specifying C(nested_attributes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the nic to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of the network interface. For example e1000, pci_passthrough, rtl8139, rtl8139_virtio, spapr_vlan or virtio. It's required parameter when creating the new NIC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "linked",
+      "displayName": "Linked",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Defines if the NIC is linked to the virtual machine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mac_address",
+      "displayName": "Mac Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Custom MAC address of the network interface, by default it's obtained from MAC pool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the network interface to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nested_attributes",
+      "displayName": "Nested Attributes",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specifies list of the attributes which should be fetched from the API. This parameter apply only when C(fetch_nested) is I(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Logical network to which the VM network interface should use, by default Empty network is used if network is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_filter_parameters",
+      "displayName": "Network Filter Parameters",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of network filter parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "poll_interval",
+      "displayName": "Poll Interval",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Number of the seconds the module waits until another poll request on entity status is sent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Virtual network interface profile to be attached to VM network interface. When not specified and network has only single profile it will be auto-selected, otherwise you must specify profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Should the Virtual Machine NIC be present/absent/plugged/unplugged.",
+      "choices": [
+        "absent",
+        "plugged",
+        "present",
+        "unplugged"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the template to manage. You must provide either C(vm) parameter or C(template) parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_version",
+      "displayName": "Template Version",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Version number of the template.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "The amount of time in seconds the module should wait for the instance to get into desired state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm",
+      "displayName": "Vm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Virtual Machine to manage. You must provide either C(vm) parameter or C(template) parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "C(yes) if the module should wait for the entity to get into desired state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

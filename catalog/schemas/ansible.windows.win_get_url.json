@@ -2,6 +2,281 @@
   "fqcn": "ansible.windows.win_get_url",
   "shortDescription": "Downloads file from HTTP, HTTPS, or FTP to node",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_get_url_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "checksum",
+      "displayName": "Checksum",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If a I(checksum) is passed to this parameter, the digest of the destination file will be calculated after it is downloaded to ensure its integrity and verify that the transfer completed successfully. If a checksum is passed in this parameter or via C(checksum_url) and the file in C(dest) exists then C(checksum_dest) is calculated. If C(checksum_dest) equals the checksum no download is done unless C(force) is C(true). If the checksum does not match the file is always downloaded, as if C(force) wa",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum_algorithm",
+      "displayName": "Checksum Algorithm",
+      "type": "string",
+      "required": false,
+      "default": "sha1",
+      "description": "Specifies the hashing algorithm used when calculating the checksum of the remote and destination file.",
+      "choices": [
+        "md5",
+        "sha1",
+        "sha256",
+        "sha384",
+        "sha512"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum_url",
+      "displayName": "Checksum Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a URL that contains the checksum values for the resource at I(url). Like C(checksum), this is used to verify the integrity of the remote transfer. This option cannot be set with I(checksum).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the client certificate (.pfx) that is used for X509 authentication. This path can either be the path to the C(pfx) on the filesystem or the PowerShell certificate path C(Cert:\\CurrentUser\\My\\<thumbprint>). The WinRM connection must be authenticated with C(CredSSP) or C(become) is used on the task if the certificate file is not password protected. Other authentication types can set I(client_cert_password) when the cert is password protected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert_password",
+      "displayName": "Client Cert Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for I(client_cert) if the cert is password protected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The location to save the file at the URL. Be sure to include a filename and extension as appropriate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "follow_redirects",
+      "displayName": "Follow Redirects",
+      "type": "string",
+      "required": false,
+      "default": "safe",
+      "description": "Whether the module should follow redirects. C(all) will follow all redirects. C(none) will not follow any redirect. C(safe) will follow only \"safe\" redirects, where \"safe\" means that the client is only doing a C(GET) or C(HEAD) on the URI to which it is being redirected. When following a redirected URL, the C(Authorization) header and any credentials set will be dropped and not redirected.",
+      "choices": [
+        "all",
+        "none",
+        "safe"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(true), will download the file every time and replace the file if the contents change. If C(false), will only download the file if it does not exist or the remote file has been modified more recently than the local file. This works by sending an http HEAD request to retrieve last modified time of the requested resource, so for this to work, the remote web server must support HEAD requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_basic_auth",
+      "displayName": "Force Basic Auth",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "By default the authentication header is only sent when a webservice responses to an initial request with a 401 status. Since some basic auth services do not properly send a 401, logins will fail. This option forces the sending of the Basic authentication header upon the original request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "headers",
+      "displayName": "Headers",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Extra headers to set on the request. This should be a dictionary where the key is the header name and the value is the value for that header.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_agent",
+      "displayName": "Http Agent",
+      "type": "string",
+      "required": false,
+      "default": "ansible-httpget",
+      "description": "Header to identify as, generally appears in web server logs. This is set to the C(User-Agent) header on a HTTP request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maximum_redirection",
+      "displayName": "Maximum Redirection",
+      "type": "number",
+      "required": false,
+      "default": 50,
+      "description": "Specify how many times the module will redirect a connection to an alternative URI before the connection fails. If set to C(0) or I(follow_redirects) is set to C(none), or C(safe) when not doing a C(GET) or C(HEAD) it prevents all redirection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_password",
+      "displayName": "Proxy Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for I(proxy_username).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_url",
+      "displayName": "Proxy Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An explicit proxy to use for the request. By default, the request will use the IE defined proxy unless I(use_proxy) is set to C(no).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_use_default_credential",
+      "displayName": "Proxy Use Default Credential",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Uses the current user's credentials when authenticating with a proxy host protected with C(NTLM), C(Kerberos), or C(Negotiate) authentication. Proxies that use C(Basic) auth will still require explicit credentials through the I(proxy_username) and I(proxy_password) options. The module will only have access to the user's credentials if using C(become) with a password, you are connecting with SSH using a password, or connecting with WinRM using C(CredSSP) or C(Kerberos with delegation). If not usi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_username",
+      "displayName": "Proxy Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use for proxy authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The full URL of a file to download.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url_method",
+      "displayName": "Url Method",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The HTTP Method of the request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url_password",
+      "displayName": "Url Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for I(url_username).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url_timeout",
+      "displayName": "Url Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Specifies how long the request can be pending before it times out (in seconds). Set to C(0) to specify an infinite timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url_username",
+      "displayName": "Url Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use for authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_default_credential",
+      "displayName": "Use Default Credential",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Uses the current user's credentials when authenticating with a server protected with C(NTLM), C(Kerberos), or C(Negotiate) authentication. Sites that use C(Basic) auth will still require explicit credentials through the I(url_username) and I(url_password) options. The module will only have access to the user's credentials if using C(become) with a password, you are connecting with SSH using a password, or connecting with WinRM using C(CredSSP) or C(Kerberos with delegation). If not using C(becom",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use the proxy defined in IE for the current user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

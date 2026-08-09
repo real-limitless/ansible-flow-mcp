@@ -2,6 +2,380 @@
   "fqcn": "amazon.aws.cloudformation",
   "shortDescription": "Create or delete an AWS CloudFormation stack",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/amazon/aws/cloudformation_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS access key ID. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_ACCESS_KEY_ID) or C(AWS_ACCESS_KEY) environment variables may also be used in decreasing order of preference. The I(aws_access_key) and I(profile) options are mutually exclusive. The I(aws_access_key_id) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_ca_bundle",
+      "displayName": "Aws Ca Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location of a CA Bundle to use when validating SSL certificates. The C(AWS_CA_BUNDLE) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_config",
+      "displayName": "Aws Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary to modify the botocore configuration. Parameters can be found in the AWS documentation U(https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html#botocore.config.Config).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backoff_delay",
+      "displayName": "Backoff Delay",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Number of seconds to wait for the next retry.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backoff_max_delay",
+      "displayName": "Backoff Max Delay",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Maximum amount of time to wait between retries.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backoff_retries",
+      "displayName": "Backoff Retries",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Number of times to retry operation. AWS API throttling mechanism fails CloudFormation module so we have to retry a couple of times.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "capabilities",
+      "displayName": "Capabilities",
+      "type": "list",
+      "required": false,
+      "default": [
+        "CAPABILITY_IAM",
+        "CAPABILITY_NAMED_IAM"
+      ],
+      "description": "Specify capabilities that stack template contains. Valid values are V(CAPABILITY_IAM), V(CAPABILITY_NAMED_IAM) and V(CAPABILITY_AUTO_EXPAND).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "changeset_name",
+      "displayName": "Changeset Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name given to the changeset when creating a changeset. Only used when O(create_changeset=true). By default a name prefixed with Ansible-STACKNAME is generated based on input parameters. See the AWS Change Sets docs for more information U(https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_changeset",
+      "displayName": "Create Changeset",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If stack already exists create a changeset instead of directly applying changes.  See the AWS Change Sets docs U(https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html). B(WARNING:) if the stack does not exist, it will be created without changeset. If O(state=absent), the stack will be deleted immediately with no changeset.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_timeout",
+      "displayName": "Create Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The amount of time (in minutes) that can pass before the stack status becomes V(CREATE_FAILED).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug_botocore_endpoint_logs",
+      "displayName": "Debug Botocore Endpoint Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use a C(botocore.endpoint) logger to parse the unique (rather than total) C(\"resource:action\") API calls made during a task, outputing the set to the resource_actions key in the task results. Use the C(aws_resource_action) callback to output to total list made during a playbook. The C(ANSIBLE_DEBUG_BOTOCORE_LOGS) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_rollback",
+      "displayName": "Disable Rollback",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If a stacks fails to form, rollback will remove the stack.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_url",
+      "displayName": "Endpoint Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to connect to instead of the default AWS endpoints.  While this can be used to connection to other AWS-compatible services the amazon.aws and community.aws collections are only tested against AWS. The  C(AWS_URL) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "events_limit",
+      "displayName": "Events Limit",
+      "type": "number",
+      "required": false,
+      "default": 200,
+      "description": "Maximum number of CloudFormation events to fetch from a stack when creating or updating it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notification_arns",
+      "displayName": "Notification Arns",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A comma separated list of Simple Notification Service (SNS) topic ARNs to publish stack related events.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "on_create_failure",
+      "displayName": "On Create Failure",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Action to take upon failure of stack creation. Incompatible with the O(disable_rollback) option.",
+      "choices": [
+        "DO_NOTHING",
+        "ROLLBACK",
+        "DELETE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A named AWS profile to use for authentication. See the AWS documentation for more information about named profiles U(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html). The C(AWS_PROFILE) environment variable may also be used. The I(profile) option is mutually exclusive with the I(aws_access_key), I(aws_secret_key) and I(session_token) options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS region to use. For global services such as IAM, Route53 and CloudFront, I(region) is ignored. The C(AWS_REGION) environment variable may also be used. See the Amazon AWS documentation for more information U(http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role_arn",
+      "displayName": "Role Arn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role that AWS CloudFormation assumes to create the stack. See the AWS CloudFormation Service Role docs U(https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-servicerole.html)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_key",
+      "displayName": "Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS secret access key. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SECRET_ACCESS_KEY) or C(AWS_SECRET_KEY) environment variables may also be used in decreasing order of preference. The I(secret_key) and I(profile) options are mutually exclusive. The I(aws_secret_access_key) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_token",
+      "displayName": "Session Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS STS session token for use with temporary credentials. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SESSION_TOKEN) environment variable may also be used. The I(session_token) and I(profile) options are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stack_name",
+      "displayName": "Stack Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the CloudFormation stack.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stack_policy",
+      "displayName": "Stack Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of the file containing the CloudFormation stack policy. A policy cannot be removed once placed, but it can be modified. for instance, allow all updates U(https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html#d0e9051)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stack_policy_body",
+      "displayName": "Stack Policy Body",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CloudFormation stack policy in JSON. A policy cannot be removed once placed, but it can be modified. for instance, allow all updates U(https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html#d0e9051)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stack_policy_on_update_body",
+      "displayName": "Stack Policy On Update Body",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The body of the cloudformation stack policy only applied during this update.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If O(state=present), stack will be created. If O(state=present) and if stack exists and template has changed, it will be updated. If O(state=absent), stack will be removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary of tags to associate with stack and its resources during stack creation. Can be updated later, updating tags removes previous entries.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The local path of the CloudFormation template. This must be the full path to the file, relative to the working directory. If using roles this may look like V(roles/cloudformation/files/cloudformation-example.json). If O(state=present) and the stack does not exist yet, either O(template), O(template_body) or O(template_url) must be specified (but only one of them). If O(state=present), the stack does exist, and neither O(template), O(template_body) nor O(template_url) are specified, the previous ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_body",
+      "displayName": "Template Body",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Template body. Use this to pass in the actual body of the CloudFormation template. If O(state=present) and the stack does not exist yet, either O(template), O(template_body) or O(template_url) must be specified (but only one of them). If O(state=present), the stack does exist, and neither O(template), O(template_body) nor O(template_url) are specified, the previous template will be reused.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_parameters",
+      "displayName": "Template Parameters",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "A list of hashes of all the template variables for the stack. The value can be a string or a dict. Dict can be used to set additional template parameter attributes like UsePreviousValue (see example).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_url",
+      "displayName": "Template Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Location of file containing the template body. The URL must point to a template (max size 307,200 bytes) located in an S3 bucket in the same region as the stack. If O(state=present) and the stack does not exist yet, either O(template), O(template_body) or O(template_url) must be specified (but only one of them). If O(state=present), the stack does exist, and neither O(template), O(template_body) nor O(template_url) are specified, the previous template will be reused.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "termination_protection",
+      "displayName": "Termination Protection",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable termination protection on the stack.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When set to C(false), SSL certificates will not be validated for communication with the AWS APIs. Setting I(validate_certs=false) is strongly discouraged, as an alternative, consider setting I(aws_ca_bundle) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

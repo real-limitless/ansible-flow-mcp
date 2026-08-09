@@ -1,0 +1,214 @@
+{
+  "fqcn": "dellemc.openmanage.idrac_diagnostics",
+  "shortDescription": "Run and Export iDRAC diagnostics",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/idrac_diagnostics_module.html",
+  "options": [
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "export",
+      "displayName": "Export",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Exports the diagnostics information to the given share. This operation requires I(share_parameters). When I(run) is C(true) and I(job_wait) is C(false), only then the run diagnostics job is triggered. I(export) is ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_ip",
+      "displayName": "Idrac Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC IP Address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_password",
+      "displayName": "Idrac Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC user password. If the password is not provided, then the environment variable E(IDRAC_PASSWORD) is used. Example: export IDRAC_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_port",
+      "displayName": "Idrac Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "iDRAC port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_user",
+      "displayName": "Idrac User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC username. If the username is not provided, then the environment variable E(IDRAC_USERNAME) is used. Example: export IDRAC_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Provides the option to wait for job completion. This is applicable when I(run) is C(true) and I(reboot_type) is C(power_cycle). This is applicable only to run the diagnostics job.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 1200,
+      "description": "Time in seconds to wait for job completion. This is applicable when I(job_wait) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot_type",
+      "displayName": "Reboot Type",
+      "type": "string",
+      "required": false,
+      "default": "graceful",
+      "description": "This option provides the choice to reboot the host immediately to run the diagnostics. This is applicable when I(run) is C(true). C(force) Forced graceful shutdown signals the operating system to turn off and wait for ten minutes. If the operating system does not turn off, the iDRAC power cycles the system. C(graceful) Graceful shutdown waits for the operating system to turn off and wait for the system to restart. C(power_cycle) performs a power cycle for a hard reset on the device.",
+      "choices": [
+        "force",
+        "graceful",
+        "power_cycle"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_id",
+      "displayName": "Resource Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Id of the resource. If the value for resource ID is not provided, the module picks the first resource ID available from the list of system resources returned by the iDRAC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "run",
+      "displayName": "Run",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Run the diagnostics job on iDRAC. Run the diagnostics job based on the I(run_mode) and save the report in the internal storage. I(reboot_type) is applicable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "run_mode",
+      "displayName": "Run Mode",
+      "type": "string",
+      "required": false,
+      "default": "express",
+      "description": "This option provides the choices to run the diagnostics. C(express) The express diagnostics runs a test package for each server subsystem. However, it does not run the complete set of tests available in the package for each subsystem. C(extended) The extended diagnostics run all available tests in each test package for all subsystems. C(long_run) The long-run diagnostics runs express and extended tests.",
+      "choices": [
+        "express",
+        "extended",
+        "long_run"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheduled_end_time",
+      "displayName": "Scheduled End Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Run the diagnostic until the specified end date and end time after the I(scheduled_start_time). The accepted formats are yyyymmddhhmmss and YYYY-MM-DDThh:mm:ss+HH:MM. If the run operation does not complete before the specified end time, then the operation fails. This is applicable when I(run) is C(True) and I(reboot_type) is C(power_cycle).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheduled_start_time",
+      "displayName": "Scheduled Start Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Schedules the job at the specified time. The accepted formats are yyyymmddhhmmss and YYYY-MM-DDThh:mm:ss+HH:MM. This is applicable when I(run) is C(true) and I(reboot_type) is power_cycle.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_parameters",
+      "displayName": "Share Parameters",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Parameters that are required for the export operation of diagnostics. I(share_parameters) is required when I(export) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(IDRAC_X_AUTH_TOKEN) is used. Example: export IDRAC_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,105 @@
+{
+  "fqcn": "ibm.power_aix.tunfile_mgmt",
+  "shortDescription": "Save/Restore/Validate/Modify tunables configuration file for various components on AIX.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/tunfile_mgmt_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the action to be performed for tunables in the system. C(save) saves the tunables values in provided I(filename). C(restore) restores the file I(filename) in current context or boot context as mention by I(make_nextboot). C(modify) modifies the value of parameters I(tunables_with_values) for I(components) or or sets all tunables to default I(set_default) for I(components) C(validate) validates the file to be used for other actions in context I(validation_type).",
+      "choices": [
+        "save",
+        "restore",
+        "modify",
+        "validate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "component_to_set_dflt",
+      "displayName": "Component To Set Dflt",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the component name. supported values in the list are schedo, vmo, ioo, no, nfso, raso and asoo. It must be unique, you cannot use the ALL or default keywords in the component.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filename",
+      "displayName": "Filename",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the file name for the I(action). If the name not starts with '/' the file will be created in /etc/tunables. If filename already exists, the existing file is overwritten",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "make_nextboot",
+      "displayName": "Make Nextboot",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies the boot context as current or boot context during I(action=restore) If changes includes bosboot/reboot tunables it is prefered to be used as true..",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save_all_tunables",
+      "displayName": "Save All Tunables",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies that all tunables should be saved or only those that are having non default values currently for I(action=save) If changes includes bosboot/reboot tunables it is prefered to be used as true..",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "set_default",
+      "displayName": "Set Default",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies that all tunables should be modified to their default value for given I(component) Shoul not be used if I(tunables_with_values) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tunables_with_values",
+      "displayName": "Tunables With Values",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "In the format of dictionary of dictionary (nested dict) Specifies the component(s), tunable(s) and their value(s) whose modification is required. supported keys in the outer dict are schedo, vmo, ioo, no, nfso, raso and asoo. Cannot be used when I(set_default=True).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validation_type",
+      "displayName": "Validation Type",
+      "type": "string",
+      "required": false,
+      "default": "current",
+      "description": "Specifies the type of validation for the I(filename).",
+      "choices": [
+        "current",
+        "reboot",
+        "both"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,131 @@
   "fqcn": "containers.podman.podman_quadlet",
   "shortDescription": "Install or remove Podman Quadlets",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/containers/podman/podman_quadlet_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "all",
+      "displayName": "All",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Remove all installed quadlets when I(state=absent) (maps to C(podman quadlet rm --all)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cmd_args",
+      "displayName": "Cmd Args",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Extra global arguments to pass to the C(podman) command (e.g., C(--log-level=debug)). These are placed after the executable and before the subcommand.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Return additional information which can be helpful for investigations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "executable",
+      "displayName": "Executable",
+      "type": "string",
+      "required": false,
+      "default": "podman",
+      "description": "Path to C(podman) executable if it is not in the C($PATH) on the machine running C(podman)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "files",
+      "displayName": "Files",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Additional non-quadlet files or URLs to install along with the primary I(src) (quadlet application use-case). Passed positionally to C(podman quadlet install) after I(src). For local files, full idempotency is provided. If any file is a URL, the entire install always reports C(changed=true) since remote content cannot be verified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Force removal when I(state=absent) (maps to C(podman quadlet rm --force)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Name (filename without path) of an installed quadlet to remove when I(state=absent). If the name does not include the type suffix (e.g. C(.container)), the module will attempt to find a matching quadlet file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quadlet_dir",
+      "displayName": "Quadlet Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the target quadlet directory used for idempotency checks. By default it follows Podman defaults. C(/etc/containers/systemd/) for root, C(~/.config/containers/systemd/) for non-root. Note this is used for content comparison only and is not passed to Podman.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reload_systemd",
+      "displayName": "Reload Systemd",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Control systemd reload behavior in Podman. When true, pass C(--reload-systemd). When false, pass C(--reload-systemd=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a quadlet file, a directory containing a quadlet application, or a URL to install when I(state=present). For local files and directories, full idempotency is provided (content comparison). For remote URLs, the module always installs fresh and reports C(changed=true) since content cannot be verified. Directory installs support only top-level files; nested subdirectories will cause an error.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of quadlet(s).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

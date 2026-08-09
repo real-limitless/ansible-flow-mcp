@@ -1,0 +1,112 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_device_certificate",
+  "shortDescription": "Manage self-signed device certificates",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_device_certificate_module.html",
+  "options": [
+    {
+      "name": "add_to_trusted",
+      "displayName": "Add To Trusted",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies if the certificate should be added to the trusted client and server certificate files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_name",
+      "displayName": "Cert Name",
+      "type": "string",
+      "required": false,
+      "default": "server.crt",
+      "description": "Specifies the full name of the certificate file. If the name is not default C(server.crt), the module will configure C(httpd) to use them prior to restarting the C(httpd) daemon.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "days_valid",
+      "displayName": "Days Valid",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "Specifies the interval for which the self-signed certificate is valid. The maximum value is 25 years: C(9125) days",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When C(true), will update or overwrite the existing certificate when it is not expired on the device. When C(false), the certificate will only be updated/overwritten if expired. Generally should be C(true) only in cases where you need to update certificate that is about to expire. This option is also needed when generating a new certificate to replace non-expired one.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "issuer",
+      "displayName": "Issuer",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Certificate properties, required when generating new certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_name",
+      "displayName": "Key Name",
+      "type": "string",
+      "required": false,
+      "default": "server.key",
+      "description": "Specifies the full name of the key file. If the name is not default C(server.key), the module will configure C(httpd) to use them prior to restarting the C(httpd) daemon.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_size",
+      "displayName": "Key Size",
+      "type": "number",
+      "required": false,
+      "default": 2048,
+      "description": "Specifies the desired key size in bits. Mandatory option when generating a new certificate.",
+      "choices": [
+        512,
+        1024,
+        2048,
+        4096
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_cert",
+      "displayName": "New Cert",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies if the module should generate a new certificate. When C(true), the device certificate and key will be replaced.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

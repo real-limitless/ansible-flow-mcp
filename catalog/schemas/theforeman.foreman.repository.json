@@ -2,6 +2,677 @@
   "fqcn": "theforeman.foreman.repository",
   "shortDescription": "Manage Repositories",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/theforeman/foreman/repository_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "ansible_collection_auth_token",
+      "displayName": "Ansible Collection Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The token key to use for authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ansible_collection_auth_url",
+      "displayName": "Ansible Collection Auth Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL to receive a session token from, e.g. used with Automation Hub.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ansible_collection_requirements",
+      "displayName": "Ansible Collection Requirements",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Contents of requirement yaml file to sync from URL",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "arch",
+      "displayName": "Arch",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Architecture of content in the repository Set to C(noarch) to disable the architecture restriction again.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_enabled",
+      "displayName": "Auto Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "repositories will be automatically enabled on a registered host subscribed to this product",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted file that contains a CA certificate to be used for validation. If the value is not specified in the task, the value of environment variable C(FOREMAN_CA_PATH) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum_type",
+      "displayName": "Checksum Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Checksum of the repository",
+      "choices": [
+        "sha1",
+        "sha256"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "content_type",
+      "displayName": "Content Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The content type of the repository",
+      "choices": [
+        "deb",
+        "docker",
+        "file",
+        "ostree",
+        "puppet",
+        "yum",
+        "ansible_collection",
+        "python"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deb_architectures",
+      "displayName": "Deb Architectures",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "comma separated list of architectures to be synced from deb-archive only available for I(content_type=deb)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deb_components",
+      "displayName": "Deb Components",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "comma separated list of repo components to be synced from deb-archive only available for I(content_type=deb)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deb_errata_url",
+      "displayName": "Deb Errata Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to sync Debian or Ubuntu errata information from only available on Orcharhino only available for I(content_type=deb)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deb_releases",
+      "displayName": "Deb Releases",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "comma separated list of releases to be synced from deb-archive only available for I(content_type=deb)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "depth",
+      "displayName": "Depth",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "An option to specify how many ostree commits to traverse.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the repository",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_tags_whitelist",
+      "displayName": "Docker Tags Whitelist",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "list of tags to sync for Container Image repository only available for I(content_type=docker) Deprecated since Katello 4.4",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_upstream_name",
+      "displayName": "Docker Upstream Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "name of the upstream docker repository only available for I(content_type=docker)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_concurrency",
+      "displayName": "Download Concurrency",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "download concurrency for sync from upstream as the API does not return this value, this will break idempotence for this module",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_policy",
+      "displayName": "Download Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The download policy for sync from upstream. The download policy C(background) is deprecated and not available since Katello 4.3.",
+      "choices": [
+        "background",
+        "immediate",
+        "on_demand"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_refs",
+      "displayName": "Exclude Refs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags to exclude during an ostree sync. The wildcards C(*), C(?) are recognized. C(exclude_refs) is evaluated after C(include_refs).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_tags",
+      "displayName": "Exclude Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags to exclude when syncing a container image repository.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "excludes",
+      "displayName": "Excludes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Python packages to exclude from the upstream URL. You may also specify versions, for example: C(django~=2.0).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gpg_key",
+      "displayName": "Gpg Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Repository GPG key",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_proxy",
+      "displayName": "Http Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the http proxy to use for content synching Should be combined with I(http_proxy_policy='use_selected_http_proxy')",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_proxy_policy",
+      "displayName": "Http Proxy Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Which proxy to use for content synching",
+      "choices": [
+        "global_default_http_proxy",
+        "none",
+        "use_selected_http_proxy"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignorable_content",
+      "displayName": "Ignorable Content",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of content units to ignore while syncing a yum repository. Must be subset of rpm,drpm,srpm,distribution,erratum.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_global_proxy",
+      "displayName": "Ignore Global Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether content sync should use or ignore the global http proxy setting This is deprecated with Katello 3.13 It has been superseeded by I(http_proxy_policy)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_refs",
+      "displayName": "Include Refs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of refs to include during an ostree sync. The wildcards C(*), C(?) are recognized.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_tags",
+      "displayName": "Include Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags to sync for a container image repository.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "includes",
+      "displayName": "Includes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Python packages to include from the upstream URL, You may also specify versions, for example: C(django~=2.0). Leave empty to include every package.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keep_latest_packages",
+      "displayName": "Keep Latest Packages",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The amount of latest versions of a package to keep on sync, includes pre-releases if synced. Defaults to keep all versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "label",
+      "displayName": "Label",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "label of the repository",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "metadata_expire",
+      "displayName": "Metadata Expire",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Set the metadata expiration time (in seconds) for a yum repository.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mirror_on_sync",
+      "displayName": "Mirror On Sync",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "toggle \"mirror on sync\" where the state of the repository mirrors that of the upstream repository at sync time This is deprecated with Katello 4.3 It has been superseeded by I(mirroring_policy=mirror_content_only)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mirroring_policy",
+      "displayName": "Mirroring Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Policy to set for mirroring content Supported since Katello 4.3",
+      "choices": [
+        "additive",
+        "mirror_content_only",
+        "mirror_complete"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the repository",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oauth1_consumer_key",
+      "displayName": "Oauth1 Consumer Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OAuth1 consumer key for accessing the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_OAUTH1_CONSUMER_KEY) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oauth1_consumer_secret",
+      "displayName": "Oauth1 Consumer Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OAuth1 consumer secret for accessing the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_OAUTH1_CONSUMER_SECRET) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Organization that the entity is in",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os_versions",
+      "displayName": "Os Versions",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Identifies whether the repository should be disabled on a client with a non-matching OS version. A maximum of one OS version can be selected. Set to C([]) to disable filtering again.",
+      "choices": [
+        "rhel-6",
+        "rhel-7",
+        "rhel-8",
+        "rhel-9",
+        "rhel-10"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "package_types",
+      "displayName": "Package Types",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Package types to sync for Python content, separated by comma. FIXME Leave empty to get every package type.",
+      "choices": [
+        "bdist_dmg",
+        "bdist_dumb",
+        "bdist_egg",
+        "bdist_msi",
+        "bdist_rpm",
+        "bdist_wheel",
+        "bdist_wininst",
+        "sdist"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of the user accessing the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "product",
+      "displayName": "Product",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Product to which the repository lives in",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retain_package_versions_count",
+      "displayName": "Retain Package Versions Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The maximum number of versions of each package to keep.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_url",
+      "displayName": "Server Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL of the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_SERVER_URL) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_ca_cert",
+      "displayName": "Ssl Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Repository SSL CA certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_client_cert",
+      "displayName": "Ssl Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Repository SSL client certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_client_key",
+      "displayName": "Ssl Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Repository SSL client private key",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the entity C(present_with_defaults) will ensure the entity exists, but won't update existing ones",
+      "choices": [
+        "present",
+        "present_with_defaults",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unprotected",
+      "displayName": "Unprotected",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "publish the repository via HTTP",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "upstream_authentication_token",
+      "displayName": "Upstream Authentication Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Upstream authentication token string for yum repositories.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "upstream_password",
+      "displayName": "Upstream Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password to access upstream repository. When this parameter is set, the module will not be idempotent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "upstream_username",
+      "displayName": "Upstream Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "username to access upstream repository",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Repository URL to sync from",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_gssapi",
+      "displayName": "Use Gssapi",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use GSSAPI to perform the authentication, typically this is for Kerberos or Kerberos through Negotiate authentication. Requires the Python library L(requests-gssapi,https://github.com/pythongssapi/requests-gssapi) to be installed. If the value is not specified in the task, the value of environment variable C(FOREMAN_USE_GSSAPI) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username accessing the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_USERNAME) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether or not to verify the TLS certificates of the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_ssl_on_sync",
+      "displayName": "Verify Ssl On Sync",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "verify the upstream certifcates are signed by a trusted CA",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

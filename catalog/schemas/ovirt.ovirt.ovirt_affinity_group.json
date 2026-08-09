@@ -1,0 +1,217 @@
+{
+  "fqcn": "ovirt.ovirt.ovirt_affinity_group",
+  "shortDescription": "Module to manage affinity groups in oVirt/RHV",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ovirt/ovirt/ovirt_affinity_group_module.html",
+  "options": [
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Dictionary with values needed to create HTTP/HTTPS connection to oVirt:",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the cluster of the affinity group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the affinity group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fetch_nested",
+      "displayName": "Fetch Nested",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If I(True) the module will fetch additional data from the API. It will fetch IDs of the VMs disks, snapshots, etc. User can configure to fetch other attributes of the nested entities by specifying C(nested_attributes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_enforcing",
+      "displayName": "Host Enforcing",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If I(yes) VM cannot start on host if it does not satisfy the C(host_rule). This parameter is support since oVirt/RHV 4.1 version.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_rule",
+      "displayName": "Host Rule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If I(positive) I(all) VMs in this group should run on the this host. If I(negative) I(no) VMs in this group should run on the this host. If I(disabled) this affinity group doesn't take effect. This parameter is support since oVirt/RHV 4.1 version.",
+      "choices": [
+        "disabled",
+        "negative",
+        "positive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hosts",
+      "displayName": "Hosts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of the hosts names, which should have assigned this affinity group. This parameter is support since oVirt/RHV 4.1 version.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hosts_labels",
+      "displayName": "Hosts Labels",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of the hosts lable names, which should have assigned this affinity group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the affinity group to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nested_attributes",
+      "displayName": "Nested Attributes",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specifies list of the attributes which should be fetched from the API. This parameter apply only when C(fetch_nested) is I(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "poll_interval",
+      "displayName": "Poll Interval",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Number of the seconds the module waits until another poll request on entity status is sent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Should the affinity group be present or absent.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "The amount of time in seconds the module should wait for the instance to get into desired state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_enforcing",
+      "displayName": "Vm Enforcing",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If I(yes) VM cannot start if it does not satisfy the C(vm_rule).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_rule",
+      "displayName": "Vm Rule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If I(positive) I(all) VMs in this group should run on the host defined by C(host_rule). If I(negative) I(no) VMs in this group should run on the host defined by C(host_rule). If I(disabled) this affinity group doesn't take effect.",
+      "choices": [
+        "disabled",
+        "negative",
+        "positive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vms",
+      "displayName": "Vms",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of the VMs names, which should have assigned this affinity group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vms_labels",
+      "displayName": "Vms Labels",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of the hosts lable names, which should have assigned this affinity group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "C(yes) if the module should wait for the entity to get into desired state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

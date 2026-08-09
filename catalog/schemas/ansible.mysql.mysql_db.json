@@ -1,0 +1,369 @@
+{
+  "fqcn": "ansible.mysql.mysql_db",
+  "shortDescription": "Add or remove MySQL or MariaDB databases from a remote host",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/mysql/mysql_db_module.html",
+  "options": [
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a Certificate Authority (CA) certificate. This option, if used, must specify the same certificate as used by the server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chdir",
+      "displayName": "Chdir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Changes the current working directory. Can be useful, for example, when I(state=import) and a dump file contains relative paths.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_hostname",
+      "displayName": "Check Hostname",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to validate the server host name when an SSL connection is required. Corresponds to MySQL CLIs C(--ssl) switch. Setting this to C(false) disables hostname verification. Use with caution. Requires pymysql >= 0.7.11.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_implicit_admin",
+      "displayName": "Check Implicit Admin",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Check if mysql allows login as root/nopassword before trying supplied credentials. If success, passed I(login_user)/I(login_password) will be ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a client public key certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the client private key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "collation",
+      "displayName": "Collation",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Collation mode (sorting). This only applies to new table/databases and does not update existing ones, this is a limitation of MySQL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file",
+      "displayName": "Config File",
+      "type": "string",
+      "required": false,
+      "default": "~/.my.cnf",
+      "description": "Specify a config file from which user and password are to be read. The default config file, C(~/.my.cnf), if it exists, will be read, even if I(config_file) is not specified. The default config file, C(~/.my.cnf), if it exists, must contain a C([client]) section as a MySQL connector requirement. To prevent the default config file from being read, set I(config_file) to be an empty string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_overrides_defaults",
+      "displayName": "Config Overrides Defaults",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(yes), connection parameters from I(config_file) will override the default values of I(login_host) and I(login_port) parameters. Used when I(stat) is C(present) or C(absent), ignored otherwise. It needs Python 3.5+ as the default interpreter on a target host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connect_timeout",
+      "displayName": "Connect Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The connection timeout when connecting to the MySQL server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dump_extra_args",
+      "displayName": "Dump Extra Args",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide additional arguments for mysqldump. Used when I(state=dump) only, ignored otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encoding",
+      "displayName": "Encoding",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Encoding mode to use, examples include C(utf8) or C(latin1_swedish_ci), at creation of database, dump or importation of sql script.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Continue dump or import even if we get an SQL error. Used only when I(state) is C(dump) or C(import).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hex_blob",
+      "displayName": "Hex Blob",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Dump binary columns using hexadecimal notation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_tables",
+      "displayName": "Ignore Tables",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of table names that will be ignored in the dump of the form database_name.table_name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "Host running the database. In some cases for local connections the I(login_unix_socket=/path/to/mysqld/socket), that is usually C(/var/run/mysqld/mysqld.sock), needs to be used instead of I(login_host=localhost).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password used to authenticate with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": 3306,
+      "description": "Port of the MySQL server. Requires I(login_host) be defined as other than localhost if login_port is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_unix_socket",
+      "displayName": "Login Unix Socket",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a Unix domain socket for local connections. Use this parameter to avoid the C(Please explicitly state intended protocol) error.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username used to authenticate with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "master_data",
+      "displayName": "Master Data",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Option to dump a master replication server to produce a dump file that can be used to set up another server as a slave of the master. C(0) to not include master data. C(1) to generate a 'CHANGE MASTER TO' statement required on the slave to start the replication process. C(2) to generate a commented 'CHANGE MASTER TO'. Can be used when I(state=dump).",
+      "choices": [
+        0,
+        1,
+        2
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Name of the database to add or remove. I(name=all) may only be provided if I(state) is C(dump) or C(import). List of databases is provided with I(state=dump), I(state=present) and I(state=absent). If I(name=all) it works like --all-databases option for mysqldump (Added in 2.0).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pipefail",
+      "displayName": "Pipefail",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Use C(bash) instead of C(sh) and add C(-o pipefail) to catch errors from the mysql_dump command when I(state=dump) and compression is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quick",
+      "displayName": "Quick",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Option used for dumping large tables.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restrict_config_file",
+      "displayName": "Restrict Config File",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Read only passed I(config_file). When I(state) is C(dump) or C(import), by default the module passes I(config_file) parameter using C(--defaults-extra-file) command-line argument to C(mysql/mysqldump) utilities under the hood that read named option file in addition to usual option files. If this behavior is undesirable, use C(yes) to read only named option file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "single_transaction",
+      "displayName": "Single Transaction",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Execute the dump in a single transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skip_lock_tables",
+      "displayName": "Skip Lock Tables",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Skip locking tables for read. Used when I(state=dump), ignored otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_log_bin",
+      "displayName": "Sql Log Bin",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether binary logging should be enabled or disabled for the connection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The database state.",
+      "choices": [
+        "absent",
+        "dump",
+        "import",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Location, on the remote host, of the dump file to read from or write to. Uncompressed SQL files (C(.sql)) as well as bzip2 (C(.bz2)), gzip (C(.gz)), xz (Added in 2.0) and zstd (C(.zst)) (Added in 3.12.0) compressed files are supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_login_password",
+      "displayName": "Unsafe Login Password",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(no), the module will safely use a shell-escaped version of the I(login_password) value. It makes sense to use C(yes) only if there are special symbols in the value and errors C(Access denied) occur. Used only when I(state) is C(import) or C(dump) and I(login_password) is passed, ignored otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_shell",
+      "displayName": "Use Shell",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Used to prevent C(Broken pipe) errors when the imported I(target) file is compressed. If C(yes), the module will internally execute commands via a shell. Used when I(state=import), ignored otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

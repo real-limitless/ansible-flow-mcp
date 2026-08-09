@@ -2,6 +2,375 @@
   "fqcn": "oracle.oci.oci_compute_volume_attachment",
   "shortDescription": "Manage a VolumeAttachment resource in Oracle Cloud Infrastructure",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/oracle/oci/oci_compute_volume_attachment_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the user, on whose behalf, OCI APIs are invoked. If not set, then the value of the OCI_USER_ID environment variable, if any, is used. This option is required if the user is not specified through a configuration file (See C(config_file_location)). To get the user's OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_fingerprint",
+      "displayName": "Api User Fingerprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fingerprint for the key pair being used. If not set, then the value of the OCI_USER_FINGERPRINT environment variable, if any, is used. This option is required if the key fingerprint is not specified through a configuration file (See C(config_file_location)). To get the key pair's fingerprint value please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_file",
+      "displayName": "Api User Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Full path and filename of the private key (in PEM format). If not set, then the value of the OCI_USER_KEY_FILE variable, if any, is used. This option is required if the private key is not specified through a configuration file (See C(config_file_location)). If the key is encrypted with a pass-phrase, the C(api_user_key_pass_phrase) option must also be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_pass_phrase",
+      "displayName": "Api User Key Pass Phrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase used by the key referenced in C(api_user_key_file), if it is encrypted. If not set, then the value of the OCI_USER_KEY_PASS_PHRASE variable, if any, is used. This option is required if the key passphrase is not specified through a configuration file (See C(config_file_location)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_purpose",
+      "displayName": "Auth Purpose",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The auth purpose which can be used in conjunction with 'auth_type=instance_principal'. The default auth_purpose for instance_principal is None.",
+      "choices": [
+        "service_principal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "api_key",
+      "description": "The type of authentication to use for making API requests. By default C(auth_type=\"api_key\") based authentication is performed and the API key (see I(api_user_key_file)) in your config file will be used. If this 'auth_type' module option is not specified, the value of the OCI_ANSIBLE_AUTH_TYPE, if any, is used. Use C(auth_type=\"instance_principal\") to use instance principal based authentication when running ansible playbooks within an OCI compute instance.",
+      "choices": [
+        "api_key",
+        "instance_principal",
+        "instance_obo_user",
+        "resource_principal",
+        "security_token"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_bundle",
+      "displayName": "Cert Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full path to a CA certificate bundle to be used for SSL verification. This will override the default CA certificate bundle. If not set, then the value of the OCI_ANSIBLE_CERT_BUNDLE variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compartment_id",
+      "displayName": "Compartment Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/iaas/Content/General/Concepts/identifiers.htm) of the compartment. Required for create using I(state=present). Required for update when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is set. Required for delete when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file_location",
+      "displayName": "Config File Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to configuration file. If not set then the value of the OCI_CONFIG_FILE environment variable, if any, is used. Otherwise, defaults to ~/.oci/config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_profile_name",
+      "displayName": "Config Profile Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The profile to load from the config file referenced by C(config_file_location). If not set, then the value of the OCI_CONFIG_PROFILE environment variable, if any, is used. Otherwise, defaults to the \"DEFAULT\" profile in C(config_file_location).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device",
+      "displayName": "Device",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The device name. To retrieve a list of devices for a given instance, see L(ListInstanceDevices,https://docs.cloud.oracle.com/en- us/iaas/api/#/en/iaas/latest/Device/ListInstanceDevices).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A user-friendly name. Does not have to be unique, and it's changeable. Avoid entering confidential information. Required for create, update, delete when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_in_transit_type",
+      "displayName": "Encryption In Transit Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Refer the top-level definition of encryptionInTransitType. The default value is NONE. Applicable when type is 'iscsi'",
+      "choices": [
+        "NONE",
+        "BM_ENCRYPTION_IN_TRANSIT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_create",
+      "displayName": "Force Create",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to attempt non-idempotent creation of a resource. By default, create resource is an idempotent operation, and doesn't create the resource if it already exists. Setting this option to true, forcefully creates a copy of the resource, even if it already exists.This option is mutually exclusive with I(key_by).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_id",
+      "displayName": "Instance Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the instance. Required for create using I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_agent_auto_iscsi_login_enabled",
+      "displayName": "Is Agent Auto Iscsi Login Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to enable Oracle Cloud Agent to perform the iSCSI login and logout commands after the volume attach or detach operations for non multipath-enabled iSCSI attachments. Applicable when type is 'iscsi'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_pv_encryption_in_transit_enabled",
+      "displayName": "Is Pv Encryption In Transit Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to enable in-transit encryption for the data volume's paravirtualized attachment. The default value is false. Applicable when type is 'paravirtualized'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_read_only",
+      "displayName": "Is Read Only",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the attachment was created in read-only mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_shareable",
+      "displayName": "Is Shareable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the attachment should be created in shareable mode. If an attachment is created in shareable mode, then other instances can attach the same volume, provided that they also create their attachments in shareable mode. Only certain volume types can be attached in shareable mode. Defaults to false if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iscsi_login_state",
+      "displayName": "Iscsi Login State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The iscsi login state of the volume attachment. For a multipath volume attachment, all iscsi sessions need to be all logged-in or logged-out to be in logged-in or logged-out state. This parameter is updatable.",
+      "choices": [
+        "UNKNOWN",
+        "LOGGING_IN",
+        "LOGIN_SUCCEEDED",
+        "LOGIN_FAILED",
+        "LOGGING_OUT",
+        "LOGOUT_SUCCEEDED",
+        "LOGOUT_FAILED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_by",
+      "displayName": "Key By",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of attributes of this resource which should be used to uniquely identify an instance of the resource. By default, all the attributes of a resource are used to uniquely identify a resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realm_specific_endpoint_template_enabled",
+      "displayName": "Realm Specific Endpoint Template Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable/Disable realm specific endpoint template for service client. By Default, realm specific endpoint template is disabled. If not set, then the value of the OCI_REALM_SPECIFIC_SERVICE_ENDPOINT_TEMPLATE_ENABLED variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle Cloud Infrastructure region to use for all OCI API requests. If not set, then the value of the OCI_REGION variable, if any, is used. This option is required if the region is not specified through a configuration file (See C(config_file_location)). Please refer to U(https://docs.us-phoenix-1.oraclecloud.com/Content/General/Concepts/regions.htm) for more information on OCI regions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the VolumeAttachment. Use I(state=present) to create or update a VolumeAttachment. Use I(state=absent) to delete a VolumeAttachment.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenancy",
+      "displayName": "Tenancy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OCID of your tenancy. If not set, then the value of the OCI_TENANCY variable, if any, is used. This option is required if the tenancy OCID is not specified through a configuration file (See C(config_file_location)). To get the tenancy OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of volume. The only supported values are \"iscsi\" and \"paravirtualized\". Required for create using I(state=present).",
+      "choices": [
+        "service_determined",
+        "emulated",
+        "iscsi",
+        "paravirtualized"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_chap",
+      "displayName": "Use Chap",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to use CHAP authentication for the volume attachment. Defaults to false. Applicable when type is 'iscsi'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume_attachment_id",
+      "displayName": "Volume Attachment Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the volume attachment. Required for update using I(state=present) when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is not set. Required for delete using I(state=absent) when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume_id",
+      "displayName": "Volume Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the volume. Required for create using I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to wait for create or delete operation to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Time, in seconds, to wait when I(wait=yes). Defaults to 1200 for most of the services but some services might have a longer wait timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

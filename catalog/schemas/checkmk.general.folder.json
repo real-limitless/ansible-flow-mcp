@@ -1,0 +1,191 @@
+{
+  "fqcn": "checkmk.general.folder",
+  "shortDescription": "Manage folders in Checkmk",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/checkmk/general/folder_module.html",
+  "options": [
+    {
+      "name": "api_auth_cookie",
+      "displayName": "Api Auth Cookie",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication cookie for the Checkmk session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_auth_type",
+      "displayName": "Api Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "bearer",
+      "description": "Type of authentication to use.",
+      "choices": [
+        "bearer",
+        "basic",
+        "cookie"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_secret",
+      "displayName": "Api Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The secret to authenticate your automation user. If not set the module will fall back to the environment variable C(CHECKMK_VAR_API_SECRET).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The automation user you want to use. It has to be an 'Automation' user, not a normal one. If not set the module will fall back to the environment variable C(CHECKMK_VAR_API_USER).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes of your folder as described in the API documentation. B(Attention! This option OVERWRITES all existing attributes!) As of Check MK v2.2.0p7 and v2.3.0b1, simultaneous use of I(attributes), I(remove_attributes), and I(update_attributes) is no longer supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client certificate file for authentication with the web server hosting Checkmk. This is not a Checkmk feature, but one of Ansible and the respective web server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client certificate key file for authentication with the web server hosting Checkmk. This is not a Checkmk feature, but one of Ansible and the respective web server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extended_functionality",
+      "displayName": "Extended Functionality",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allow extended functionality instead of the expected REST API behavior.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name (title) of your folder. If omitted defaults to the string after the last C(/) in I(path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The full path to the folder you want to manage. Pay attention to the leading C(/) and avoid trailing C(/). Special characters apart from C(_) are not allowed! Missing parent folders will be created with their titles taken from the parts of the path parameter. If you want to use different titles, please create each folder in a separate task or in a loop.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_attributes",
+      "displayName": "Remove Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The remove_attributes of your host as described in the API documentation. B(If a list of strings is supplied, the listed attributes are removed.) B(If extended_functionality and a dict is supplied, the attributes that exactly match the passed attributes are removed.) This will only remove the given attributes. As of Check MK v2.2.0p7 and v2.3.0b1, simultaneous use of I(attributes), I(remove_attributes), and I(update_attributes) is no longer supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_url",
+      "displayName": "Server Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The base url of your Checkmk server including the protocol but excluding the site. If not set the module will fall back to the environment variable C(CHECKMK_VAR_SERVER_URL).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "site",
+      "displayName": "Site",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The site you want to connect to. This will be appended to the server_url as part of the API request url. If not set the module will fall back to the environment variable C(CHECKMK_VAR_SITE).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of your folder.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_attributes",
+      "displayName": "Update Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The update_attributes of your host as described in the API documentation. This will only update the given attributes. As of Check MK v2.2.0p7 and v2.3.0b1, simultaneous use of I(attributes), I(remove_attributes), and I(update_attributes) is no longer supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate the SSL certificate of the Checkmk server. If not set the module will fall back to the environment variable C(CHECKMK_VAR_VALIDATE_CERTS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

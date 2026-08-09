@@ -1,0 +1,202 @@
+{
+  "fqcn": "dellemc.openmanage.idrac_support_assist",
+  "shortDescription": "Run and Export iDRAC SupportAssist collection logs",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/idrac_support_assist_module.html",
+  "options": [
+    {
+      "name": "accept_eula",
+      "displayName": "Accept Eula",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "This parameter accepts the EULA terms and conditions that are required for SupportAssist registration. If EULA terms and conditions are not accepted, then the SupportAssist collection cannot be run or exported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_collector",
+      "displayName": "Data Collector",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "This option provides the choice of data to keep in SupportAssist collection. System Information is available in on the SupportAssist collection by default. C(hardware_data), SupportAssist collection includes data that are related to hardware. C(storage_logs), SupportAssist collection includes logs that are related to storage devices. C(os_app_data), SupportAssist collection includes data that is related to the operating system and applications. C(debug_logs), SupportAssist collection includes lo",
+      "choices": [
+        "hardware_data",
+        "storage_logs",
+        "os_app_data",
+        "debug_logs",
+        "telemetry_reports",
+        "gpu_logs"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "export",
+      "displayName": "Export",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Exports the SupportAssist collection to the given network share. This operation requires I(share_parameters).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filter_data",
+      "displayName": "Filter Data",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This option provides the choice to filter data for privacy. It does not include hostname, MAC address, thermal data, logs, or registry content.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_ip",
+      "displayName": "Idrac Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC IP Address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_password",
+      "displayName": "Idrac Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC user password. If the password is not provided, then the environment variable E(IDRAC_PASSWORD) is used. Example: export IDRAC_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_port",
+      "displayName": "Idrac Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "iDRAC port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_user",
+      "displayName": "Idrac User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC username. If the username is not provided, then the environment variable E(IDRAC_USERNAME) is used. Example: export IDRAC_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This option determines whether to wait for the job completion or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 3600,
+      "description": "Time in seconds to wait for job completion. This is applicable when I(job_wait) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_id",
+      "displayName": "Resource Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Id of the resource. If the value for resource ID is not provided, the module picks the first resource ID available from the list of system resources that are returned by the iDRAC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "run",
+      "displayName": "Run",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Run the SupportAssist job based on the different types of logs in the collection on iDRAC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_parameters",
+      "displayName": "Share Parameters",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Parameters that are required for the export operation of SupportAssist collection. I(share_parameters) is required when I(export) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(IDRAC_X_AUTH_TOKEN) is used. Example: export IDRAC_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

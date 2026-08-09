@@ -2,6 +2,139 @@
   "fqcn": "microsoft.ad.domain",
   "shortDescription": "Ensures the existence of a Windows domain",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/microsoft/ad/domain_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "create_dns_delegation",
+      "displayName": "Create Dns Delegation",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to create a DNS delegation that references the new DNS server that you install along with the domain controller. Valid for Active Directory-integrated DNS only. The default is computed automatically based on the environment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_path",
+      "displayName": "Database Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a directory on a fixed disk of the Windows host where the domain database will be created. If not set then the default path is C(%SYSTEMROOT%\\NTDS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_domain_name",
+      "displayName": "Dns Domain Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The DNS name of the domain which should exist and be reachable or reside on the target Windows host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_mode",
+      "displayName": "Domain Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the domain functional level of the first domain in the creation of a new forest. The domain functional level cannot be lower than the forest functional level, but it can be higher. The default is automatically computed and set. Current known modes are C(Win2003), C(Win2008), C(Win2008R2), C(Win2012), C(Win2012R2), C(WinThreshold), or C(Win2025).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_netbios_name",
+      "displayName": "Domain Netbios Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The NetBIOS name for the root domain in the new forest. For NetBIOS names to be valid for use with this parameter they must be single label names of 15 characters or less, if not it will fail. If this parameter is not set, then the default is automatically computed from the value of the I(domain_name) parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forest_mode",
+      "displayName": "Forest Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the forest functional level for the new forest. The default forest functional level in Windows Server is typically the same as the version you are running. Current known modes are C(Win2003), C(Win2008), C(Win2008R2), C(Win2012), C(Win2012R2), C(WinThreshold), or C(Win2025).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "install_dns",
+      "displayName": "Install Dns",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to install the DNS service when creating the domain controller.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_path",
+      "displayName": "Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the fully qualified, non-UNC path to a directory on a fixed disk of the local computer where the log file for this operation is written. If not set then the default path is C(%SYSTEMROOT%\\NTDS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot",
+      "displayName": "Reboot",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true), this will reboot the host if a reboot was required by the module. If C(false), this will not reboot the host if a reboot was required and instead sets the I(reboot_required) return value to C(true). This cannot be used with async mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot_timeout",
+      "displayName": "Reboot Timeout",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Maximum seconds to wait for machine to re-appear after a reboot and respond to a test command. This timeout is evaluated separately for both the reboot verification and test command success so the total timeout can be twice this value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "safe_mode_password",
+      "displayName": "Safe Mode Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Safe mode password for the domain controller.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sysvol_path",
+      "displayName": "Sysvol Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a directory on a fixed disk of the Windows host where the Sysvol file will be created. If not set then the default path is C(%SYSTEMROOT%\\SYSVOL).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

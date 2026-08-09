@@ -1,0 +1,182 @@
+{
+  "fqcn": "freeipa.ansible_freeipa.ipacert",
+  "shortDescription": "Manage FreeIPA certificates",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/freeipa/ansible_freeipa/ipacert_module.html",
+  "options": [
+    {
+      "name": "add",
+      "displayName": "Add",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Automatically add the principal if it doesn't exist (service\nprincipals only). Only available if `state: requested`.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca",
+      "displayName": "Ca",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the issuing certificate authority.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_out",
+      "displayName": "Certificate Out",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Write certificate (chain if `chain` is set) to this file, on the target\nnode.. Use only when `state` is `requested` or `retrieved`.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chain",
+      "displayName": "Chain",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Include certificate chain in output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "csr",
+      "displayName": "Csr",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "X509 certificate signing request, in RFC 7468 PEM encoding.\nOnly available if `state: requested`, required if `csr_file` is not\nprovided.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "csr_file",
+      "displayName": "Csr File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to file with X509 certificate signing request, in RFC 7468 PEM\nencoding. Only available if `state: requested`, required if `csr_file`\nis not provided.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipaadmin_password",
+      "displayName": "Ipaadmin Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The admin password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipaadmin_principal",
+      "displayName": "Ipaadmin Principal",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "The admin principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipaapi_context",
+      "displayName": "Ipaapi Context",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The context in which the module will execute. Executing in a\nserver context is preferred. If not provided context will be\ndetermined by the execution environment.\n",
+      "choices": [
+        "server",
+        "client"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipaapi_ldap_cache",
+      "displayName": "Ipaapi Ldap Cache",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Use LDAP cache for IPA connection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "principal",
+      "displayName": "Principal",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host/service/user principal for the certificate.\nRequired if `state: requested`. Only available if `state: requested`.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Certificate Profile to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "revocation_reason",
+      "displayName": "Revocation Reason",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Reason for revoking the certificate. Use one of the reason strings,\nor the corresponding value: \"unspecified\" (0), \"keyCompromise\" (1),\n\"cACompromise\" (2), \"affiliationChanged\" (3), \"superseded\" (4),\n\"cessationOfOperation\" (5), \"certificateHold\" (6), \"removeFromCRL\" (8),\n\"privilegeWithdrawn\" (9), \"aACompromise\" (10).\nUse only if `state: revoked`. Required if `state: revoked`.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serial_number",
+      "displayName": "Serial Number",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Certificate serial number. Cannot be used with `state: requested`.\nRequired for all states, except `requested`.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The state to ensure. `held` is the same as revoke with reason\n\"certificateHold\" (6). `released` is the same as `cert-revoke-hold`\non IPA CLI, releasing the hold status of a certificate.\n",
+      "choices": [
+        "requested",
+        "held",
+        "released",
+        "revoked",
+        "retrieved"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

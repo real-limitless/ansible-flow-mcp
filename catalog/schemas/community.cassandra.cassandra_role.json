@@ -1,0 +1,236 @@
+{
+  "fqcn": "community.cassandra.cassandra_role",
+  "shortDescription": "Manage roles on your Cassandra cluster.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/cassandra/cassandra_role_module.html",
+  "options": [
+    {
+      "name": "consistency_level",
+      "displayName": "Consistency Level",
+      "type": "string",
+      "required": false,
+      "default": "LOCAL_ONE",
+      "description": "Consistency level to perform cassandra queries with. Not all consistency levels are supported by read or write connections.\\ When a level is not supported then LOCAL_ONE, the default is used. Consult the README.md on GitHub for further details.",
+      "choices": [
+        "ANY",
+        "ONE",
+        "TWO",
+        "THREE",
+        "QUORUM",
+        "ALL",
+        "LOCAL_QUORUM",
+        "EACH_QUORUM",
+        "SERIAL",
+        "LOCAL_SERIAL",
+        "LOCAL_ONE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_centres",
+      "displayName": "Data Centres",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Only relevant if a network_authorizer has been configured. Specify data centres as keys of this dict. Can specify a key as 'all' although this implicity assumed by Cassandra if not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Additional debug output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keyspace_permissions",
+      "displayName": "Keyspace Permissions",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Grant privileges on keyspace objects. Specify keyspaces as keys of this dict. Permissions supplied as a list to the keyspace keys. Valid permissions at keyspace level are as follows; ALL PERMISSIONS, CREATE, ALTER, AUTHORIZE, DROP, MODIFY, SELECT A special key 'all_keyspaces' can be supplied to assign permissions to all keyspaces.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login",
+      "displayName": "Login",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "True allows the role to log in. Use true to create login accounts for internal authentication, PasswordAuthenticator or DSE Unified Authenticator.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The Cassandra hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Cassandra password to login with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": 9042,
+      "description": "The Cassandra port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Cassandra user to login with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the role to create or manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "options",
+      "displayName": "Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Reserved for use with authentication plug-ins. Refer to the authenticator documentation for details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for the role.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roles",
+      "displayName": "Roles",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "One or more roles to grant to this user or role. When set to None, the default, no action is perform on roles. Set to an empty list to revoke all roles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl",
+      "displayName": "Ssl",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Uses SSL encryption if basic SSL encryption is enabled on Cassandra cluster (without client/server verification)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_ca_certs",
+      "displayName": "Ssl Ca Certs",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The SSL CA chain or certificate location to confirm supplied certificate validity (required when  ssl_cert_reqs is set to CERT_OPTIONAL or CERT_REQUIRED)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_cert_reqs",
+      "displayName": "Ssl Cert Reqs",
+      "type": "string",
+      "required": false,
+      "default": "CERT_NONE",
+      "description": "SSL verification mode.",
+      "choices": [
+        "CERT_NONE",
+        "CERT_OPTIONAL",
+        "CERT_REQUIRED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The desired state of the role.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "super_user",
+      "displayName": "Super User",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If the user is a super user or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Passwords are not handled by default. With this set to true, passwords are always overridden. The task will always be considered changed if this is set to true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

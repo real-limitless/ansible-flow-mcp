@@ -1,0 +1,162 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_unarchive",
+  "shortDescription": "Unarchive files and data sets in z/OS.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_unarchive_module.html",
+  "options": [
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The remote absolute path or data set where the content should be unarchived to. I(dest) can be a USS file, directory or MVS data set name. If dest has missing parent directories, they will not be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest_data_set",
+      "displayName": "Dest Data Set",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Data set attributes to customize a C(dest) data set that the archive will be copied into.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encoding",
+      "displayName": "Encoding",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the character encoding conversion to be applied to the destination files after unarchiving. Supported character sets rely on the charset conversion utility C(iconv) version the most common character sets are supported. After conversion the files are stored in same location as they were unarchived to under the same original name. No backup of the original unconverted files is there as for that unarchive can be executed again without encoding params on same source archive files. Destinat",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude",
+      "displayName": "Exclude",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List the directory and file or data set names that you would like to exclude from the unarchive action. GDS relative names are supported. e.g. I(USER.GDG(-1)). Mutually exclusive with include.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to true and the remote file or data set dest exists, the dest will be deleted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "format",
+      "displayName": "Format",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The compression type and corresponding options to use when archiving data.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that will own the file system objects. When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership. This option is only applicable if C(dest) is USS, otherwise ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include",
+      "displayName": "Include",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of directories, files or data set names to extract from the archive. GDS relative names are supported. e.g. I(USER.GDG(-1)). When C(include) is set, only those files will we be extracted leaving the remaining files in the archive. Mutually exclusive with exclude.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "list",
+      "displayName": "List",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Will list the contents of the archive without unpacking.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permission of the uncompressed files. If C(dest) is USS, this will act as Unix file mode, otherwise ignored. It should be noted that modes are octal numbers. The user must either add a leading zero so that Ansible's YAML parser knows it is an octal number (like C(0644) or C(01777))or quote it (like C('644') or C('1777')) so Ansible receives a string and can do its own conversion from string into number. Giving Ansible a number without following one of these rules will end up with a decimal n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be passed to the chown command. When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_src",
+      "displayName": "Remote Src",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to true, C(zos_unarchive) retrieves the archive from the remote system. If set to false, C(zos_unarchive) searches the local machine (Ansible controller) for the archive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The remote absolute path or data set of the archive to be uncompressed. I(src) can be a USS file or MVS data set name. USS file paths should be absolute paths. MVS data sets supported types are C(SEQ), C(PDS), C(PDSE). GDS relative names are supported. e.g. I(USER.GDG(-1)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tmp_hlq",
+      "displayName": "Tmp Hlq",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the default high level qualifier (HLQ) for temporary data sets. The default HLQ is the Ansible user used to execute the module and if that is not available, then the environment variable value C(TMPHLQ) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

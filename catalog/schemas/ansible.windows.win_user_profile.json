@@ -2,6 +2,54 @@
   "fqcn": "ansible.windows.win_user_profile",
   "shortDescription": "Manages the Windows user profiles.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_user_profile_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the base name for the profile path. When I(state) is C(present) this is used to create the profile for I(username) at a specific path within the profile directory. This cannot be used to specify a path outside of the profile directory but rather it specifies a folder(s) within this directory. If a profile for another user already exists at the same path, then a 3 digit incremental number is appended by Windows automatically. When I(state) is C(absent) and I(username) is not set, then t",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_multiple",
+      "displayName": "Remove Multiple",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When I(state) is C(absent) and the value for I(name) matches multiple profiles the module will fail. Set this value to C(yes) to force the module to delete all the profiles found.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Will ensure the profile exists when set to C(present). When creating a profile the I(username) option must be set to a valid account. Will remove the profile(s) when set to C(absent). When removing a profile either I(username) must be set to a valid account, or I(name) is set to the profile's base name.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The account name of security identifier (SID) for the profile. This must be set when I(state) is C(present) and must be a valid account or the SID of a valid account. When I(state) is C(absent) then this must still be a valid account number but the SID can be a deleted user's SID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -1,7 +1,176 @@
 {
   "fqcn": "community.vmware.vmware_vm_vm_drs_rule",
-  "shortDescription": "vmware_vm_vm_drs_rule",
+  "shortDescription": "Configure VMware DRS Affinity rule for virtual machines in the given cluster",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_vm_vm_drs_rule_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "affinity_rule",
+      "displayName": "Affinity Rule",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to V(true), the DRS rule will be an Affinity rule. If set to V(false), the DRS rule will be an Anti-Affinity rule. Effective only if O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_name",
+      "displayName": "Cluster Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Desired cluster name where virtual machines are present for the DRS rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Datacenter to search for given cluster. If not set, we use first cluster we encounter with O(cluster_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "drs_rule_name",
+      "displayName": "Drs Rule Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the DRS rule to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), the DRS rule will be enabled. Effective only if O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mandatory",
+      "displayName": "Mandatory",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), the DRS rule will be mandatory. Effective only if O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If set to V(present), then the DRS rule is created if not present. If set to V(present), then the DRS rule is already present, it updates to the given configurations. If set to V(absent), then the DRS rule is deleted if present.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vms",
+      "displayName": "Vms",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of virtual machines name for which DRS rule needs to be applied. Required if O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

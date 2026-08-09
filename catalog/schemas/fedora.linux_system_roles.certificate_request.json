@@ -1,0 +1,343 @@
+{
+  "fqcn": "fedora.linux_system_roles.certificate_request",
+  "shortDescription": "Manage SSL/TLS certificates.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/fedora/linux_system_roles/certificate_request_module.html",
+  "options": [
+    {
+      "name": "__header",
+      "displayName": "  Header",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Ansible ansible_managed string to put in header of file should be in the format of {{ ansible_managed | comment }} as rendered by the template module",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_renew",
+      "displayName": "Auto Renew",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Indicates if the certificate should be renewed automatically before it expires.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "booted",
+      "displayName": "Booted",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "The role is run in a booted system and can directly talk to services. If false, the certificate generation will be deferred to the first boot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca",
+      "displayName": "Ca",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "CA that will issue the certificate. The available options will vary depending on each provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "common_name",
+      "displayName": "Common Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Common Name requested for the certificate subject.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "contact_email",
+      "displayName": "Contact Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Contact email requested for the certificate subject.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "country",
+      "displayName": "Country",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Country requested for the certificate subject.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directory",
+      "displayName": "Directory",
+      "type": "string",
+      "required": false,
+      "default": "/etc/pki/tls",
+      "description": "Directory where certificate and key will be stored. Only used if I(name) is not an absolute path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns",
+      "displayName": "Dns",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Domain (or list of domains) to be included in the certificate. Also can provide the default value for I(common_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "email",
+      "displayName": "Email",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Email (or list of emails) to be included in the certificate. Also can provide the default value for I(common_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extended_key_usage",
+      "displayName": "Extended Key Usage",
+      "type": "list",
+      "required": false,
+      "default": [
+        "id-kp-serverAuth",
+        "id-kp-clientAuth"
+      ],
+      "description": "Extended Key Usage attributes to be present in the certificate request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Group name (or group id) for the certificate and key files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip",
+      "displayName": "Ip",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "IP (or list of IPs) to be included in the certificate. IPs can be IPv4, IPv6 or both. Also can provide the default value for I(common_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "issuer",
+      "displayName": "Issuer",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the issuer at the CA that will issue the certificate. The interpretation of the issuer may vary depending on each provider, and may be ignored if the CA only has one or a default issuer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_size",
+      "displayName": "Key Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Generate keys with a specific keysize in bits, by default 2048.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_usage",
+      "displayName": "Key Usage",
+      "type": "list",
+      "required": false,
+      "default": [
+        "digitalSignature",
+        "keyEncipherment"
+      ],
+      "description": "Allowed Key Usage for the certificate.",
+      "choices": [
+        "digitalSignature",
+        "nonRepudiation",
+        "keyEncipherment",
+        "dataEncipherment",
+        "keyAgreement",
+        "keyCertSign",
+        "cRLSign",
+        "encipherOnly",
+        "decipherOnly"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "locality",
+      "displayName": "Locality",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Locality requested for the certificate subject (usually city).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The file system permissions for the certificate and key files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the certificate. Can be either a full path where files will be stored or a just a simple file name to be stored in I(directory).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Organization requested for the certificate subject.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organizational_unit",
+      "displayName": "Organizational Unit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Organizational unit requested for the certificate subject.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User name (or user id) for the certificate and key files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "principal",
+      "displayName": "Principal",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Kerberos principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "string",
+      "required": false,
+      "default": "certmonger",
+      "description": "The underlying method used to request and manage the certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider_config_directory",
+      "displayName": "Provider Config Directory",
+      "type": "string",
+      "required": false,
+      "default": "/etc/certmonger",
+      "description": "Directory where pre/post run scripts will be stored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "run_after",
+      "displayName": "Run After",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Command that should run after saving the certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "run_before",
+      "displayName": "Run Before",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Command that should run before saving the certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "State requested for the certificate subject.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If the role should block while waiting for the certificate to be issued.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

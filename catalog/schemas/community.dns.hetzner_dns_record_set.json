@@ -1,0 +1,195 @@
+{
+  "fqcn": "community.dns.hetzner_dns_record_set",
+  "shortDescription": "Add or delete record sets in Hetzner DNS service",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/dns/hetzner_dns_record_set_module.html",
+  "options": [
+    {
+      "name": "bulk_operation_threshold",
+      "displayName": "Bulk Operation Threshold",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Determines the threshold from when on bulk operations are used. The default value 2 means that if 2 or more operations of a kind are planned, and the API supports bulk operations for this kind of operation, they will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hetzner_api_token",
+      "displayName": "Hetzner Api Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The token for the new Hetzner DNS API. If not provided, will be read from the environment variable E(HETZNER_API_TOKEN). Exactly one of O(hetzner_token) and O(hetzner_api_token) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hetzner_token",
+      "displayName": "Hetzner Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The token for the classic Hetzner DNS API. If not provided, will be read from the environment variable E(HETZNER_DNS_TOKEN). Exactly one of O(hetzner_token) and O(hetzner_api_token) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "on_existing",
+      "displayName": "On Existing",
+      "type": "string",
+      "required": false,
+      "default": "replace",
+      "description": "This option defines the behavior if the record set already exists, but differs from the specified record set. For this comparison, O(value) and O(ttl) are used for all records of type O(type) matching the O(prefix) resp. O(record). If set to V(replace), the record will be updated (O(state=present)) or removed (O(state=absent)). This is the old O(ignore:overwrite=true) behavior. If set to V(keep_and_fail), the module will fail and not modify the records. This is the old O(ignore:overwrite=false) ",
+      "choices": [
+        "replace",
+        "keep_and_fail",
+        "keep_and_warn",
+        "keep"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix",
+      "displayName": "Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The prefix of the DNS record. This is the part of O(record) before O(zone_name). For example, if the record to be modified is C(www.example.com) for the zone C(example.com), the prefix is V(www). If the record in this example would be C(example.com), the prefix would be V('') (empty string). Exactly one of O(record) and O(prefix) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "record",
+      "displayName": "Record",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full DNS record to create or delete. Exactly one of O(record) and O(prefix) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the state of the resource record.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttl",
+      "displayName": "Ttl",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The TTL to give the new record, in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "txt_character_encoding",
+      "displayName": "Txt Character Encoding",
+      "type": "string",
+      "required": false,
+      "default": "decimal",
+      "description": "Whether to treat numeric escape sequences (V(\\\\xyz)) as octal or decimal numbers. This is only used when O(txt_transformation=quoted). The default changed to V(decimal) in community.dns 3.0.0. Before, the default used to be V(octal). The value V(decimal) is compatible to L(RFC 1035, https://www.ietf.org/rfc/rfc1035.txt).",
+      "choices": [
+        "decimal",
+        "octal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "txt_transformation",
+      "displayName": "Txt Transformation",
+      "type": "string",
+      "required": false,
+      "default": "unquoted",
+      "description": "Determines how TXT entry values are converted between the API and this module's input and output. The value V(api) means that values are returned from this module as they are returned from the API, and pushed to the API as they have been passed to this module. For idempotency checks, the input string will be compared to the strings returned by the API. The API might automatically transform some values, like splitting long values or adding quotes, which can cause problems with idempotency. The va",
+      "choices": [
+        "api",
+        "quoted",
+        "unquoted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of DNS record to create or delete.",
+      "choices": [
+        "A",
+        "AAAA",
+        "CAA",
+        "CNAME",
+        "DANE",
+        "DS",
+        "HINFO",
+        "HTTPS",
+        "MX",
+        "NS",
+        "PTR",
+        "RP",
+        "SOA",
+        "SRV",
+        "SVCB",
+        "TLSA",
+        "TXT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "value",
+      "displayName": "Value",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The new value when creating a DNS record. YAML lists or multiple comma-spaced values are allowed. When deleting a record all values for the record must be specified or it will not be deleted. Must be specified if O(state=present) or when O(on_existing) is not V(replace). Will be ignored if O(state=absent) and O(on_existing=replace).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone_id",
+      "displayName": "Zone Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the DNS zone to modify. Exactly one of O(zone_name) and O(zone_id) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone_name",
+      "displayName": "Zone Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The DNS zone to modify. Exactly one of O(zone_name) and O(zone_id) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

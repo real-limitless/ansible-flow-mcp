@@ -1,0 +1,282 @@
+{
+  "fqcn": "ibm.power_aix.nim_backup",
+  "shortDescription": "Uses NIM to manage backup of LPAR or VIOS clients.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/nim_backup_module.html",
+  "options": [
+    {
+      "name": "accept_licenses",
+      "displayName": "Accept Licenses",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies to automatically accept all licenses while installing the BOS backup image. Can be used when I(action=restore) and I(type=mksysb or ios_mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the action to perform. C(create) performs a backup operation on targets trough the NIM master. C(restore) restores a backup on targets trough the NIM master. C(view) displays the content of a VIOS backup, only for I(type=backup). C(list) lists backups for targets on the NIM master.",
+      "choices": [
+        "create",
+        "restore",
+        "view",
+        "list"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_target",
+      "displayName": "Boot Target",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies to boot the NIM client after installing the BOS backup image. Can be used when I(action=restore) and I(type=mksysb or ios_mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bosinst_data",
+      "displayName": "Bosinst Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the bosinst_data NIM resource name to install the BOS backup image on a client. This allows running \"non-prompted\" installations, and so more automated restorations. If not specified you will be presented with a series of choices on the console. Can be used when I(action=restore) and I(type=mksysb or ios_mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_files",
+      "displayName": "Exclude Files",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the exclude_files NIM resource name to create a backup image. It represents a file that contains a list of files and directories that should be excluded from the creation. Can be used when I(action=create) and I(type=savevg).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flags",
+      "displayName": "Flags",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies additional flags to pass to the command used. Refer to IBM documentation for details. For I(action=create) and I(type=mksysb), you could use I(-a -A -b -e -i -m -p -P -T -V -X -Z). For I(action=create) and I(type=ios_mksysb), you could use I(-nosvg -nomedialib). For I(action=create) and I(type=savevg), you could use I(-a -A -e -i -m -p -r -T -v -V -X -Z).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the resource group used to install the BOS backup image on a client. Can be used on a standalone client when I(action=restore) and I(type=mksysb or ios_mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location",
+      "displayName": "Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the location of the backup files. When I(type=mksysb), the default value is I(location=/export/nim/mksysb). When I(type=ios_mksysb), the default value is I(location=/export/nim/ios_mksysb). When I(type=ios_backup), the default value is I(location=/export/nim/ios_backup). When I(type=savevg), the default value is I(location=/export/nim/savevg).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the exact name of the backup NIM resource to act on. When I(action=list) it filters the results on the name of the NIM resource. Required when I(action=view) and when I(action=create) and I(type=savevg).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name_postfix",
+      "displayName": "Name Postfix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the postfix of the backup NIM resource name to act on. The name format will be I(<name_prefix><target_name><name_postfix>). Used only when C(name) is not specified. When I(action=list) it filters the results on the name of the NIM resource. When I(type=mksysb) or I(type=ios_mksysb), the default value is I(name_postfix=_sysb). When I(type=ios_backup), the default value is I(name_postfix=_iosb). When I(type=savevg), the default value is I(name_postfix=_svg).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name_prefix",
+      "displayName": "Name Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Prefix of the backup NIM resource name to act on. The name format will be I(<name_prefix><target_name><name_postfix>). Used only when C(name) is not specified. When I(action=list) it filters the results on the name of the NIM resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nim_node",
+      "displayName": "Nim Node",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Allows to pass along NIM node info from a previous task to another so that it discovers NIM info only one time for all tasks. The current task might update the NIM info it needs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oslevel",
+      "displayName": "Oslevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the oslevel to filter results when listing backup images. Can be used when I(action=list).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "other_attributes",
+      "displayName": "Other Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies additional attributes to pass to the NIM operation. Refer to IBM documentation for details. It is a space separated string such as I(other_attributes='-a attr1=value1 -a attr2=value2'). Discarded when I(action=list).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_backup",
+      "displayName": "Remove Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to remove the backup resource after the restoration of the backup image. The preexistence of the backup resource does not condition its removal. The backup resource is B(not) removed when the restore operation fails or in check mode. Can be used when I(action=restore).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_spot",
+      "displayName": "Remove Spot",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies to remove the SPOT resource after the restoration of the backup image. The preexistence of the SPOT resource does not condition its removal. The SPOT resource is B(not) removed when the restore operation fails or in check mode. Can be used on a standalone client when I(action=restore).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shrink_fs",
+      "displayName": "Shrink Fs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to shrink the file system contained in the volume group. Always be sure to check the size of the file systems after the restore is complete. Can be used when I(action=restore) and I(type=savevg).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "spot_location",
+      "displayName": "Spot Location",
+      "type": "string",
+      "required": false,
+      "default": "/export/nim/spot",
+      "description": "Specifies the location of SPOT resource on the NIM master used to install the BOS backup image on a client. created to restore the backup on a standalone client. When the SPOT resource does not exist, it is created that this I(location). Can be used on a standalone client when I(action=restore) and I(type=mksysb or ios_mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "spot_name",
+      "displayName": "Spot Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the exact SPOT resource name used to install the BOS backup image on a client. When the SPOT resource exists, it is used; otherwise it creates it pior to run BOS install. Can be used on a standalone client when I(action=restore) and I(type=mksysb or ios_mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "spot_postfix",
+      "displayName": "Spot Postfix",
+      "type": "string",
+      "required": false,
+      "default": "_spot",
+      "description": "Specifies the postfix of SPOT resource name used to install the BOS backup image on a client. When the SPOT resource exists, it is used; otherwise it creates it pior to run BOS install. The SPOT name format will be I(<spot_prefix><target_name><spot_postfix>). Used only when C(spot_name) is not specified. Can be used on a standalone client when I(action=restore) and I(type=mksysb or ios_mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "spot_prefix",
+      "displayName": "Spot Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the prefix of SPOT resource name used to install the BOS backup image on a client. When the SPOT resource exists, it is used; otherwise it creates it pior to run BOS install. The SPOT name format will be I(<spot_prefix><target_name><spot_postfix>). Used only when C(spot_name) is not specified. Can be used on a standalone client when I(action=restore) and I(type=mksysb or ios_mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "targets",
+      "displayName": "Targets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the NIM clients to perform the action on. C(foo*) specifies all the NIM clients with name starting by C(foo). C(foo[2:4]) specifies the NIM clients among foo2, foo3 and foo4. C(*) or C(ALL) specifies all the NIM clients. C(vios) or C(standalone) specifies all the NIM clients of this type. Required when I(action=create) and I(action=restore). When I(action=list) it filters the results on the B(source_image) attribute of the NIM resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "mksysb",
+      "description": "Specifies the type of backup object to operate. C(mksysb) specifies to operate on installable BOS backup image of the operating system (that is the root volume group) of a LPAR target. C(ios_mksysb) specifies to operate on installable BOS backup image of the operating system (that is, the root volume group) of a VIOS target. C(ios_backup) specifies to operate on virtual and logical configuration backup image of VIOS target; that is all the relevant data to recover VIOS after a fresh installation",
+      "choices": [
+        "mksysb",
+        "ios_mksysb",
+        "ios_backup",
+        "savevg"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume_group",
+      "displayName": "Volume Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the volume group to backup on the target. This volume group must be varied-on and the file systems must be mounted. Required when I(action=create) and I(type=savevg).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

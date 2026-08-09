@@ -2,6 +2,445 @@
   "fqcn": "community.zabbix.zabbix_user_directory",
   "shortDescription": "Create/update/delete Zabbix user directories",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/zabbix/zabbix_user_directory_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "base_dn",
+      "displayName": "Base Dn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP base distinguished name string. required if C(idp_type) is set to I(ldap).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bind_dn",
+      "displayName": "Bind Dn",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "LDAP bind distinguished name string. Can be empty for anonymous binding.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bind_password",
+      "displayName": "Bind Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP bind password. Can be empty for anonymous binding.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "User directory description.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encrypt_assertions",
+      "displayName": "Encrypt Assertions",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "SAML encrypt assertions. Encrypts if I(true). This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encrypt_nameid",
+      "displayName": "Encrypt Nameid",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "SAML encrypt name ID. Encrypts if I(true). This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_basedn",
+      "displayName": "Group Basedn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP groups path in LDAP tree to search for groups data. Used to configure user membership check in I(openLDAP). Required if group_membership is not set. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_filter",
+      "displayName": "Group Filter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP search filter to select groups when searching for specific user groups. Used to configure user membership check in openLDAP. Ignored when provisioning a user if group_membership is set. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_member",
+      "displayName": "Group Member",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP tree attribute name containing group name received with C(group_filter) query. Used to configure user membership check in openLDAP. Ignored when provisioning a user if group_membership is set. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_membership",
+      "displayName": "Group Membership",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP property containing groups of user. E.g. I(memberOf) This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_name",
+      "displayName": "Group Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP/SAML attribute name to get group name for group mapping between Zabbix and IdP. Used to configure user membership check in LDAP. Ignored when provisioning a user if group_membership is set. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP server host name, IP or URI. URI should contain schema, host and port (optional). required if C(idp_type) is set to I(ldap).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_password",
+      "displayName": "Http Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_user",
+      "displayName": "Http Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth login",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idp_entityid",
+      "displayName": "Idp Entityid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SAML URI that identifies the IdP in SAML messages. required if C(idp_type) is set to I(saml). This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idp_type",
+      "displayName": "Idp Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of IdP. Only one user directory of type SAML can exist. This parameter is available since Zabbix 6.4.",
+      "choices": [
+        "ldap",
+        "saml"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Unique name of the user directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nameid_format",
+      "displayName": "Nameid Format",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SAML SP name ID format. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "LDAP server port. required if C(idp_type) is set to I(ldap).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provision_groups",
+      "displayName": "Provision Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of the IdP media type mappings objects. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provision_media",
+      "displayName": "Provision Media",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of the IdP media type mappings objects. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provision_status",
+      "displayName": "Provision Status",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "User directory provisioning status. if I(false) Provisioning of users created by this user directory is disabled if I(true) Provisioning of users created by this user directory is enabled. Additionally, the authentication status of C(ldap_jit_status) or C(saml_jit_status) should be enabled. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scim_status",
+      "displayName": "Scim Status",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the SCIM provisioning for SAML is enabled or disabled. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search_attribute",
+      "displayName": "Search Attribute",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP attribute name to identify user by username in Zabbix database. required if C(idp_type) is set to I(ldap).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search_filter",
+      "displayName": "Search Filter",
+      "type": "string",
+      "required": false,
+      "default": "(%{attr}=%{user})",
+      "description": "LDAP custom filter string when authenticating user in LDAP. Supported search_filter placeholders I(%{attr}) search attribute name (uid, sAMAccountName); I(%{user}) username value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sign_assertions",
+      "displayName": "Sign Assertions",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "SAML sign assertions. Signs if I(true). This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sign_authn_requests",
+      "displayName": "Sign Authn Requests",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "SAML sign AuthN requests. Signs if I(true). This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sign_logout_requests",
+      "displayName": "Sign Logout Requests",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "SAML sign logout requests. Signs if I(true). This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sign_logout_responses",
+      "displayName": "Sign Logout Responses",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "SAML sign logout responses. Signs if I(true). This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sign_messages",
+      "displayName": "Sign Messages",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "SAML sign messages. Signs if I(true). This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "slo_url",
+      "displayName": "Slo Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SAML IdP service endpoint URL to which Zabbix will send SAML logout requests. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sp_entityid",
+      "displayName": "Sp Entityid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SAML SP entity ID. required if C(idp_type) is set to I(saml). This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sso_url",
+      "displayName": "Sso Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SAML URL of the IdP\"s SAML SSO service, to which Zabbix will send SAML authentication requests. required if C(idp_type) is set to I(saml). This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_tls",
+      "displayName": "Start Tls",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "LDAP startTLS option. It cannot be used with ldaps:// protocol hosts.",
+      "choices": [
+        0,
+        1
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the user directory. On C(present), it will create if user directory does not exist or update it if the associated data is different. On C(absent) will remove the user directory if it exists.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_lastname",
+      "displayName": "User Lastname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP/SAML attribute name to use for users.surname field when user is provisioned This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_ref_attr",
+      "displayName": "User Ref Attr",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP user object attribute name. Will be set instead of the placeholder I(%{ref}) in c(group_filter) string. This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_username",
+      "displayName": "User Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP/SAML attribute name to use for users.name field when user is provisioned This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username_attribute",
+      "displayName": "Username Attribute",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SAML username attribute to be used in comparison with Zabbix user.username value when authenticating. required if C(idp_type) is set to I(saml). This parameter is available since Zabbix 6.4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

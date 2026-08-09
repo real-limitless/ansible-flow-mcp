@@ -1,0 +1,199 @@
+{
+  "fqcn": "community.digitalocean.digital_ocean_kubernetes",
+  "shortDescription": "Create and delete a DigitalOcean Kubernetes cluster",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/digitalocean/digital_ocean_kubernetes_module.html",
+  "options": [
+    {
+      "name": "auto_upgrade",
+      "displayName": "Auto Upgrade",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "A boolean value indicating whether the cluster will be automatically upgraded to new patch releases during its maintenance window.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha",
+      "displayName": "Ha",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "A boolean value indicating whether the control plane is run in a highly available configuration in the cluster. Highly available control planes incur less downtime.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maintenance_policy",
+      "displayName": "Maintenance Policy",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "An object specifying the maintenance window policy for the Kubernetes cluster (see table below).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "A human-readable name for a Kubernetes cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "node_pools",
+      "displayName": "Node Pools",
+      "type": "list",
+      "required": false,
+      "default": [
+        {
+          "auto_scale": false,
+          "count": 1,
+          "labels": {},
+          "max_nodes": 0,
+          "min_nodes": 0,
+          "name": "worker-pool",
+          "size": "s-1vcpu-2gb",
+          "tags": [],
+          "taints": []
+        }
+      ],
+      "description": "An object specifying the details of the worker nodes available to the Kubernetes cluster (see table below).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oauth_token",
+      "displayName": "Oauth Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "DigitalOcean OAuth token; can be specified in C(DO_API_KEY), C(DO_API_TOKEN), or C(DO_OAUTH_TOKEN) environment variables",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project_name",
+      "displayName": "Project Name",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Project to assign the resource to (project name, not UUID). Defaults to the default project of the account (empty string).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": "nyc1",
+      "description": "The slug identifier for the region where the Kubernetes cluster will be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "return_kubeconfig",
+      "displayName": "Return Kubeconfig",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Controls whether or not to return the C(kubeconfig).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The usual, C(present) to create, C(absent) to destroy",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "surge_upgrade",
+      "displayName": "Surge Upgrade",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "A boolean value indicating whether surge upgrade is enabled/disabled for the cluster. Surge upgrade makes cluster upgrades fast and reliable by bringing up new nodes before destroying the outdated nodes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A flat array of tag names as strings to be applied to the Kubernetes cluster. All clusters will be automatically tagged \"k8s\" and \"k8s:$K8S_CLUSTER_ID\" in addition to any tags provided by the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": "latest",
+      "description": "The slug identifier for the version of Kubernetes used for the cluster. See the /v2/kubernetes/options endpoint for available versions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vpc_uuid",
+      "displayName": "Vpc Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A string specifying the UUID of the VPC to which the Kubernetes cluster will be assigned. If excluded, the cluster will be assigned to your account's default VPC for the region.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Wait for the cluster to be running before returning.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "How long before wait gives up, in seconds, when creating a cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

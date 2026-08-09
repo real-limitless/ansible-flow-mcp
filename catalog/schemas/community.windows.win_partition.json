@@ -2,6 +2,143 @@
   "fqcn": "community.windows.win_partition",
   "shortDescription": "Creates, changes and removes partitions on Windows Server",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/windows/win_partition_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "active",
+      "displayName": "Active",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies if the partition is active and can be used to start the system. This property is only valid when the disk's partition style is MBR.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_number",
+      "displayName": "Disk Number",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Disk number is mandatory for creating new partitions. A combination of I(disk_number) and I(partition_number) can be used to specify the partition instead of I(drive_letter) if required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "drive_letter",
+      "displayName": "Drive Letter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Used for accessing partitions if I(disk_number) and I(partition_number) are not provided. Use C(auto) for automatically assigning a drive letter, or a letter A-Z for manually assigning a drive letter to a new partition. If not specified, no drive letter is assigned when creating a new partition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gpt_type",
+      "displayName": "Gpt Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the partition's GPT type if the disk's partition style is GPT. This only applies to new partitions. This does not relate to the partitions file system formatting.",
+      "choices": [
+        "system_partition",
+        "microsoft_reserved",
+        "basic_data",
+        "microsoft_recovery"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hidden",
+      "displayName": "Hidden",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Hides the target partition, making it undetectable by the mount manager.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mbr_type",
+      "displayName": "Mbr Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the partition's MBR type if the disk's partition style is MBR. This only applies to new partitions. This does not relate to the partitions file system formatting.",
+      "choices": [
+        "fat12",
+        "fat16",
+        "extended",
+        "huge",
+        "ifs",
+        "fat32"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "offline",
+      "displayName": "Offline",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Sets the partition offline. Adding a mount point (such as a drive letter) will cause the partition to go online again.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition_number",
+      "displayName": "Partition Number",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Used in conjunction with I(disk_number) to uniquely identify a partition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition_size",
+      "displayName": "Partition Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify size of the partition in B, KB, KiB, MB, MiB, GB, GiB, TB or TiB. Use -1 to specify maximum supported size. Partition size is mandatory for creating a new partition but not for updating or deleting a partition. The decimal SI prefixes kilo, mega, giga, tera, etc., are powers of 10^3 = 1000. The binary prefixes kibi, mebi, gibi, tebi, etc. respectively refer to the corresponding power of 2^10 = 1024. Thus, a gigabyte (GB) is 1000000000 (1000^3) bytes while 1 gibibyte (GiB) is 1073741824 (",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_only",
+      "displayName": "Read Only",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Make the partition read only, restricting changes from being made to the partition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Used to specify the state of the partition. Use C(absent) to specify if a partition should be removed and C(present) to specify if the partition should be created or updated.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

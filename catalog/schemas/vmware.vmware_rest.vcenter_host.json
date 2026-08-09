@@ -1,0 +1,192 @@
+{
+  "fqcn": "vmware.vmware_rest.vcenter_host",
+  "shortDescription": "Add a new standalone host in the vCenter inventory",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware_rest/vcenter_host_module.html",
+  "options": [
+    {
+      "name": "folder",
+      "displayName": "Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host and cluster folder in which the new standalone host should be created. This field is currently required. In the future, if this field is unset, the system will attempt to choose a suitable folder for the host; if a folder cannot be chosen, the host creation operation will fail. When clients pass a value of this structure as a parameter, the field must be the id of a resource returned by M(vmware.vmware_rest.vcenter_folder_info). ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_add",
+      "displayName": "Force Add",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether host should be added to the vCenter Server even if it is being managed by another vCenter Server. The original vCenterServer loses connection to the host. If unset, forceAdd is default to false.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Identifier of the host to be disconnected. The parameter must be the id of a resource returned by M(vmware.vmware_rest.vcenter_host_info). Required with I(state=['absent', 'connect', 'disconnect'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IP address or DNS resolvable name of the host. Required with I(state=['present'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for the administrator account on the host. Required with I(state=['present'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the host. If unset, port 443 will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_timeout",
+      "displayName": "Session Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Timeout settings for client session.  The maximal number of seconds for the whole operation including connection establishment, request sending and response.  The default value is 300s.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "",
+      "choices": [
+        "absent",
+        "connect",
+        "disconnect",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "thumbprint",
+      "displayName": "Thumbprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The thumbprint of the SSL certificate, which the host is expected to have. The thumbprint is always computed using the SHA1 hash and is the string representation of that hash in the format: xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx where, 'x' represents a hexadecimal digit. This field is optional and it is only relevant when the value of I(thumbprint_verification) is THUMBPRINT.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "thumbprint_verification",
+      "displayName": "Thumbprint Verification",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The I(thumbprint_verification) enumerated type defines the thumbprint verification schemes for a host's SSL certificate. Required with I(state=['present'])",
+      "choices": [
+        "NONE",
+        "THUMBPRINT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_name",
+      "displayName": "User Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The administrator account on the host. Required with I(state=['present'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_hostname",
+      "displayName": "Vcenter Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter If the value is not specified in the task, the value of environment variable C(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_password",
+      "displayName": "Vcenter Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter password If the value is not specified in the task, the value of environment variable C(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_rest_log_file",
+      "displayName": "Vcenter Rest Log File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "You can use this optional parameter to set the location of a log file.  This file will be used to record the HTTP REST interaction.  The file will be stored on the host that runs the module.  If the value is not specified in the task, the value of  environment variable C(VMWARE_REST_LOG_FILE) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_username",
+      "displayName": "Vcenter Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter username If the value is not specified in the task, the value of environment variable C(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_validate_certs",
+      "displayName": "Vcenter Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to C(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable C(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

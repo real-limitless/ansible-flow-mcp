@@ -1,0 +1,90 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_device_license",
+  "shortDescription": "Manage license installation and activation on BIG-IP devices",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_device_license_module.html",
+  "options": [
+    {
+      "name": "accept_eula",
+      "displayName": "Accept Eula",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Declares whether you accept the BIG-IP EULA or not. By default, this value is C(false). You must specifically declare you have viewed and accepted the license. This module does not present you with the EULA, so it is incumbent on you to read it. The EULA can be found here; https://support.f5.com/csp/article/K12902. This parameter is not required when C(state) is C(absent) and will be ignored if it is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "addon_keys",
+      "displayName": "Addon Keys",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of addon keys to use to in conjunction with the base license. This parameter will be ignored if no C(license_key) is provided. This parameter is not required when C(state) is C(absent) and will be ignored if it is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Declares whether to force license renewal. By default, this value is C(false). This parameter is not required and will be ignored if it is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "license_key",
+      "displayName": "License Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The registration key to use to license the BIG-IP. This parameter is required if the C(state) is equal to C(present) or C(latest). This parameter is not required when C(state) is C(absent) and will be ignored if it is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "license_server",
+      "displayName": "License Server",
+      "type": "string",
+      "required": false,
+      "default": "activate.f5.com",
+      "description": "The F5 license server to use when getting a license and validating a dossier. This parameter is required if the C(state) is equal to C(present) or C(latest). This parameter is not required when C(state) is C(absent) and will be ignored if it is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the license on the system. When C(present), only guarantees that a license exists. When C(absent), removes the license on the system. When C(latest), ensures that the license is always valid. This is not idempotent state since re-run can modify result. When C(revoked), removes the license on the system and revokes its future usage on the F5 license servers.",
+      "choices": [
+        "absent",
+        "latest",
+        "present",
+        "revoked"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

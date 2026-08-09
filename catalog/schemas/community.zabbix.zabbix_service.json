@@ -2,6 +2,179 @@
   "fqcn": "community.zabbix.zabbix_service",
   "shortDescription": "Create/update/delete Zabbix service",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/zabbix/zabbix_service_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "algorithm",
+      "displayName": "Algorithm",
+      "type": "string",
+      "required": false,
+      "default": "status_to_ok",
+      "description": "Status calculation rule. Only applicable if child services exists.  - C(status_to_ok), set status to OK with  - C(most_crit_if_all_children), most critical if all children have problems  - C(most_crit_of_child_serv), most critical of child services with",
+      "choices": [
+        "status_to_ok",
+        "most_crit_if_all_children",
+        "most_crit_of_child_serv"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "children",
+      "displayName": "Children",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Child services to be linked to the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_password",
+      "displayName": "Http Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_user",
+      "displayName": "Http Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth login",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of Zabbix service",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parents",
+      "displayName": "Parents",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Parent services to be linked to the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "problem_tags",
+      "displayName": "Problem Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Problem tags to be created for the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "propagation_rule",
+      "displayName": "Propagation Rule",
+      "type": "string",
+      "required": false,
+      "default": "as_is",
+      "description": "Status propagation value. Must be set together with propagation_rule. C(as_is) propagate service status as is - without any changes C(increase) increase the propagated status by a given propagation_value (by 1 to 5 severities) C(decrease) decrease the propagated status by a given propagation_value (by 1 to 5 severities) C(ignore) ignore this service - the status is not propagated to the parent service at all C(fixed) set fixed service status using a given propagation_value Required with C(propag",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "propagation_value",
+      "displayName": "Propagation Value",
+      "type": "string",
+      "required": false,
+      "default": "not_classified",
+      "description": "Status propagation value. Must be set together with propagation_rule. Possible values when I(propagation_rule=as_is or ignore):  - C(not_classified) Possible values when I(propagation_rule=increase or decrease):  - C(information)  - C(warning)  - C(average)  - C(high)  - C(disaster) Possible values when I(propagation_rule=fixed):  - C(ok)  - C(not_classified)  - C(information)  - C(warning)  - C(average)  - C(high)  - C(disaster) Required with C(propagation_rule)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sortorder",
+      "displayName": "Sortorder",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Position of the service used for sorting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State: present - create/update service; absent - delete service.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status_rules",
+      "displayName": "Status Rules",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Status rules for the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Service tags to be created for the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "weight",
+      "displayName": "Weight",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "description": "Service weight.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

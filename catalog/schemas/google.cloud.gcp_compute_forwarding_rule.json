@@ -2,6 +2,301 @@
   "fqcn": "google.cloud.gcp_compute_forwarding_rule",
   "shortDescription": "Creates a GCP ForwardingRule",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/google/cloud/gcp_compute_forwarding_rule_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An OAuth2 access token if credential type is accesstoken.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "all_ports",
+      "displayName": "All Ports",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "For internal TCP/UDP load balancing (i.e. load balancing scheme is INTERNAL and protocol is TCP/UDP), set this to true to allow packets addressed to any ports to be forwarded to the backends configured with this forwarding rule. Used with backend service. Cannot be set if port or portRange are set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_global_access",
+      "displayName": "Allow Global Access",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If true, clients can access ILB from all regions. Otherwise only allows from the local region the ILB is located at.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_kind",
+      "displayName": "Auth Kind",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of credential used.",
+      "choices": [
+        "application",
+        "machineaccount",
+        "serviceaccount",
+        "accesstoken"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backend_service",
+      "displayName": "Backend Service",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A BackendService to receive the matched traffic. This is used only for INTERNAL load balancing. This field represents a link to a BackendService resource in GCP. It can be specified in two ways. First, you can place a dictionary with key 'selfLink' and value of your resource's selfLink Alternatively, you can add `register: name-of-resource` to a gcp_compute_backend_service task and then set this backend_service field to \"{{ name-of-resource }}\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional description of this resource. Provide this property when you create the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "env_type",
+      "displayName": "Env Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies which Ansible environment you're running this module within. This should not be set unless you know what you're doing. This only alters the User Agent string for any API requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_address",
+      "displayName": "Ip Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IP address that this forwarding rule is serving on behalf of. Addresses are restricted based on the forwarding rule's load balancing scheme (EXTERNAL or INTERNAL) and scope (global or regional). When the load balancing scheme is EXTERNAL, for global forwarding rules, the address must be a global IP, and for regional forwarding rules, the address must live in the same region as the forwarding rule. If this field is empty, an ephemeral IPv4 address from the same scope (global or regional) will",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_protocol",
+      "displayName": "Ip Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IP protocol to which this rule applies. When the load balancing scheme is INTERNAL, only TCP and UDP are valid. Some valid choices include: \"TCP\", \"UDP\", \"ESP\", \"AH\", \"SCTP\", \"ICMP\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_mirroring_collector",
+      "displayName": "Is Mirroring Collector",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether or not this load balancer can be used as a collector for packet mirroring. To prevent mirroring loops, instances behind this load balancer will not have their traffic mirrored even if a PacketMirroring rule applies to them. This can only be set to true for load balancers that have their loadBalancingScheme set to INTERNAL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "load_balancing_scheme",
+      "displayName": "Load Balancing Scheme",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This signifies what the ForwardingRule will be used for and can be EXTERNAL, INTERNAL, or INTERNAL_MANAGED. EXTERNAL is used for Classic Cloud VPN gateways, protocol forwarding to VMs from an external IP address, and HTTP(S), SSL Proxy, TCP Proxy, and Network TCP/UDP load balancers. INTERNAL is used for protocol forwarding to VMs from an internal IP address, and internal TCP/UDP load balancers. INTERNAL_MANAGED is used for internal HTTP(S) load balancers. Some valid choices include: \"EXTERNAL\", ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "For internal load balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used. This field is only used for INTERNAL load balancing. This field represents a link to a Network resource in GCP. It can be specified in two ways. First, you can place a dictionary with key 'selfLink' and value of your resource's selfLink Alternatively, you can add `register: name-of-resource` to a gcp_",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_tier",
+      "displayName": "Network Tier",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The networking tier used for configuring this address. If this field is not specified, it is assumed to be PREMIUM. Some valid choices include: \"PREMIUM\", \"STANDARD\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_range",
+      "displayName": "Port Range",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This field is used along with the target field for TargetHttpProxy, TargetHttpsProxy, TargetSslProxy, TargetTcpProxy, TargetVpnGateway, TargetPool, TargetInstance. Applicable only when IPProtocol is TCP, UDP, or SCTP, only packets addressed to ports in the specified range will be forwarded to target. Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint port ranges. Some types of forwarding target have constraints on the acceptable ports: * TargetHttpProxy: 80, 8080 * Ta",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ports",
+      "displayName": "Ports",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "This field is used along with the backend_service field for internal load balancing. When the load balancing scheme is INTERNAL, a single port or a comma separated list of ports can be configured. Only packets addressed to these ports will be forwarded to the backends configured with this forwarding rule. You may specify a maximum of up to 5 ports.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Google Cloud Platform project to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "A reference to the region where the regional forwarding rule resides. This field is not applicable to global forwarding rules.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scopes",
+      "displayName": "Scopes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of scopes to be used",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_contents",
+      "displayName": "Service Account Contents",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_email",
+      "displayName": "Service Account Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional service account email address if machineaccount is selected and the user does not wish to use the default email.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_file",
+      "displayName": "Service Account File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of a Service Account JSON file if serviceaccount is selected as type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_label",
+      "displayName": "Service Label",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional prefix to the service name for this Forwarding Rule. If specified, will be the first label of the fully qualified service name. The label must be 1-63 characters long, and comply with RFC1035. Specifically, the label must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a da",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the given object should exist in GCP",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subnetwork",
+      "displayName": "Subnetwork",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The subnetwork that the load balanced IP should belong to for this Forwarding Rule. This field is only used for INTERNAL load balancing. If the network specified is in auto subnet mode, this field is optional. However, if the network is in custom subnet mode, a subnetwork must be specified. This field represents a link to a Subnetwork resource in GCP. It can be specified in two ways. First, you can place a dictionary with key 'selfLink' and value of your resource's selfLink Alternatively, you ca",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL of the target resource to receive the matched traffic. The target must live in the same region as the forwarding rule. The forwarded traffic must be of a type appropriate to the target object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

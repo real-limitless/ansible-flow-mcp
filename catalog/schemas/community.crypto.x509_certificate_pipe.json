@@ -2,6 +2,311 @@
   "fqcn": "community.crypto.x509_certificate_pipe",
   "shortDescription": "Generate and/or check OpenSSL certificates",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/crypto/x509_certificate_pipe_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "content",
+      "displayName": "Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The existing certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "csr_content",
+      "displayName": "Csr Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the Certificate Signing Request (CSR) used to generate this certificate. This is mutually exclusive with O(csr_path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "csr_path",
+      "displayName": "Csr Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the Certificate Signing Request (CSR) used to generate this certificate. This is mutually exclusive with O(csr_content).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Generate the certificate, even if it already exists.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_timestamps",
+      "displayName": "Ignore Timestamps",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the \"not before\" and \"not after\" timestamps should be ignored for idempotency checks. It is better to keep the default value V(true) when using relative timestamps (like V(+0s) for now).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_content",
+      "displayName": "Ownca Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the CA (Certificate Authority) certificate. This is only used by the V(ownca) provider. This is mutually exclusive with O(ownca_path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_create_authority_key_identifier",
+      "displayName": "Ownca Create Authority Key Identifier",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Create a Authority Key Identifier from the CA's certificate. If the CSR provided a authority key identifier, it is ignored. The Authority Key Identifier is generated from the CA certificate's Subject Key Identifier, if available. If it is not available, the CA certificate's public key will be used. This is only used by the V(ownca) provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_create_subject_key_identifier",
+      "displayName": "Ownca Create Subject Key Identifier",
+      "type": "string",
+      "required": false,
+      "default": "create_if_not_provided",
+      "description": "Whether to create the Subject Key Identifier (SKI) from the public key. A value of V(create_if_not_provided) (default) only creates a SKI when the CSR does not provide one. A value of V(always_create) always creates a SKI. If the CSR provides one, that one is ignored. A value of V(never_create) never creates a SKI. If the CSR provides one, that one is used. This is only used by the V(ownca) provider.",
+      "choices": [
+        "create_if_not_provided",
+        "always_create",
+        "never_create"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_digest",
+      "displayName": "Ownca Digest",
+      "type": "string",
+      "required": false,
+      "default": "sha256",
+      "description": "The digest algorithm to be used for the V(ownca) certificate. This is only used by the V(ownca) provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_not_after",
+      "displayName": "Ownca Not After",
+      "type": "string",
+      "required": false,
+      "default": "+3650d",
+      "description": "The point in time at which the certificate stops being valid. Time can be specified either as relative time or as absolute timestamp. Time will always be interpreted as UTC. Valid format is C([+-]timespec | ASN.1 TIME) where timespec can be an integer + C([w | d | h | m | s]) (for example V(+32w1d2h)). If this value is not specified, the certificate will stop being valid 10 years from now. Note that this value is B(not used to determine whether an existing certificate should be regenerated). Thi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_not_before",
+      "displayName": "Ownca Not Before",
+      "type": "string",
+      "required": false,
+      "default": "+0s",
+      "description": "The point in time the certificate is valid from. Time can be specified either as relative time or as absolute timestamp. Time will always be interpreted as UTC. Valid format is C([+-]timespec | ASN.1 TIME) where timespec can be an integer + C([w | d | h | m | s]) (for example V(+32w1d2h)). If this value is not specified, the certificate will start being valid from now. Note that this value is B(not used to determine whether an existing certificate should be regenerated). This can be changed by s",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_path",
+      "displayName": "Ownca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Remote absolute path of the CA (Certificate Authority) certificate. This is only used by the V(ownca) provider. This is mutually exclusive with O(ownca_content).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_privatekey_content",
+      "displayName": "Ownca Privatekey Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the CA (Certificate Authority) private key to use when signing the certificate. This is only used by the V(ownca) provider. This is mutually exclusive with O(ownca_privatekey_path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_privatekey_passphrase",
+      "displayName": "Ownca Privatekey Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The passphrase for the O(ownca_privatekey_path) resp. O(ownca_privatekey_content). This is only used by the V(ownca) provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_privatekey_path",
+      "displayName": "Ownca Privatekey Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the CA (Certificate Authority) private key to use when signing the certificate. This is only used by the V(ownca) provider. This is mutually exclusive with O(ownca_privatekey_content).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_version",
+      "displayName": "Ownca Version",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "The version of the V(ownca) certificate. Nowadays it should almost always be V(3). This is only used by the V(ownca) provider.",
+      "choices": [
+        3
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_content",
+      "displayName": "Privatekey Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the private key to use when signing the certificate. This is mutually exclusive with O(privatekey_path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_passphrase",
+      "displayName": "Privatekey Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The passphrase for the O(privatekey_path) resp. O(privatekey_content). This is required if the private key is password protected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_path",
+      "displayName": "Privatekey Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the private key to use when signing the certificate. This is mutually exclusive with O(privatekey_content).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the provider to use to generate/retrieve the OpenSSL certificate. The V(entrust) provider has been removed from community.crypto 3.0.0 due to sunsetting of the ECS API.",
+      "choices": [
+        "ownca",
+        "selfsigned"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "select_crypto_backend",
+      "displayName": "Select Crypto Backend",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Determines which crypto backend to use. The default choice is V(auto), which tries to use C(cryptography) if available. If set to V(cryptography), will try to use the L(cryptography,https://cryptography.io/) library. Note that with community.crypto 3.0.0, all values behave the same. This option will be deprecated in a later version. We recommend to not set it explicitly.",
+      "choices": [
+        "auto",
+        "cryptography"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selfsigned_create_subject_key_identifier",
+      "displayName": "Selfsigned Create Subject Key Identifier",
+      "type": "string",
+      "required": false,
+      "default": "create_if_not_provided",
+      "description": "Whether to create the Subject Key Identifier (SKI) from the public key. A value of V(create_if_not_provided) (default) only creates a SKI when the CSR does not provide one. A value of V(always_create) always creates a SKI. If the CSR provides one, that one is ignored. A value of V(never_create) never creates a SKI. If the CSR provides one, that one is used. This is only used by the V(selfsigned) provider.",
+      "choices": [
+        "create_if_not_provided",
+        "always_create",
+        "never_create"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selfsigned_digest",
+      "displayName": "Selfsigned Digest",
+      "type": "string",
+      "required": false,
+      "default": "sha256",
+      "description": "Digest algorithm to be used when self-signing the certificate. This is only used by the V(selfsigned) provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selfsigned_not_after",
+      "displayName": "Selfsigned Not After",
+      "type": "string",
+      "required": false,
+      "default": "+3650d",
+      "description": "The point in time at which the certificate stops being valid. Time can be specified either as relative time or as absolute timestamp. Time will always be interpreted as UTC. Valid format is C([+-]timespec | ASN.1 TIME) where timespec can be an integer + C([w | d | h | m | s]) (for example V(+32w1d2h)). If this value is not specified, the certificate will stop being valid 10 years from now. Note that this value is B(not used to determine whether an existing certificate should be regenerated). Thi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selfsigned_not_before",
+      "displayName": "Selfsigned Not Before",
+      "type": "string",
+      "required": false,
+      "default": "+0s",
+      "description": "The point in time the certificate is valid from. Time can be specified either as relative time or as absolute timestamp. Time will always be interpreted as UTC. Valid format is C([+-]timespec | ASN.1 TIME) where timespec can be an integer + C([w | d | h | m | s]) (for example V(+32w1d2h)). If this value is not specified, the certificate will start being valid from now. Note that this value is B(not used to determine whether an existing certificate should be regenerated). This can be changed by s",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selfsigned_version",
+      "displayName": "Selfsigned Version",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Version of the V(selfsigned) certificate. Nowadays it should almost always be V(3). This is only used by the V(selfsigned) provider.",
+      "choices": [
+        3
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -1,0 +1,220 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_log_destination",
+  "shortDescription": "Manages log destinations on a BIG-IP.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_log_destination_module.html",
+  "options": [
+    {
+      "name": "address",
+      "displayName": "Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the IP address that will receive messages from the specified local Log Destination. This parameter is only available when C(type) is C(management-port). When creating a new log destination and C(type) is C(management-port), this parameter is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description of the log destination.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "distribution",
+      "displayName": "Distribution",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the distribution method used by the Remote High Speed Log destination to send messages to pool members. When C(adaptive), connections to pool members will be added as required to provide enough logging bandwidth. This can have the undesirable effect of logs accumulating on only one pool member when it provides sufficient logging bandwidth on its own. When C(balanced), sends each successive log to a new pool member, balancing the logs among them according to the pool's load balancing me",
+      "choices": [
+        "adaptive",
+        "balanced",
+        "replicated"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forward_to",
+      "displayName": "Forward To",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When C(type) is C(remote-syslog), specifies the management port log destination, which will be used to forward the logs to a single log server, or a remote high-speed log destination, which will be used to forward the logs to a pool of remote log servers. When C(type) is C(splunk) or C(arcsight), specifies the log destination to which logs are forwarded. This log destination may be a management port destination, a remote high-speed log destination, or a remote Syslog destination which is configu",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the log destination.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool",
+      "displayName": "Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When C(type) is C(remote-high-speed-log), specifies the existing pool of remote high-speed log servers where logs will be sent. When C(type) is C(ipfix), specifies the existing LTM pool of remote IPFIX collectors. Any BIG-IP application that uses this log destination sends its IP-traffic logs to this pool of collectors. When creating a new destination and C(type) is C(remote-high-speed-log) or C(ipfix), this parameter is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the port of the IP address that will receive messages from the specified local Log Destination. This parameter is only available when C(type) is C(management-port). When creating a new log destination and C(type) is C(management-port), this parameter is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When C(type) is C(remote-high-speed-log), specifies the protocol for the system to use to send logs to the pool of remote high-speed log servers, where the logs are stored. When C(type) is C(ipfix), can be IPFIX or Netflow v9, depending on the type of collectors you have in the pool that you specify. When C(type) is C(management-port), specifies the protocol used to send messages to the specified location. When C(type) is C(management-port), only C(tcp) and C(udp) are valid values.",
+      "choices": [
+        "tcp",
+        "udp",
+        "ipfix",
+        "netflow-9"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_ssl_profile",
+      "displayName": "Server Ssl Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If the C(transport_profile) is a TCP profile, you can use this field to choose a Secure Socket Layer (SSL) profile for sending logs to the IPFIX collectors. An SSL server profile defines how to communicate securely over SSL or Transport Layer Security (TLS). This parameter is only available when C(type) is C(ipfix).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present), ensures the resource exists. When C(absent), ensures the resource is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "syslog_format",
+      "displayName": "Syslog Format",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the method to use to format the logs associated with the remote Syslog log destination. When creating a new log destination (and C(type) is C(remote-syslog)), if this parameter is not specified, the default is C(bsd-syslog). The C(syslog) and C(rfc5424) choices are the same. The C(bsd-syslog) and C(rfc3164) choices are the same.",
+      "choices": [
+        "bsd-syslog",
+        "syslog",
+        "legacy-bigip",
+        "rfc5424",
+        "rfc3164"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_delete_delay",
+      "displayName": "Template Delete Delay",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Enter the time (in seconds) that the BIG-IP device should pause between deleting an obsolete IPFIX template and reusing its template ID. This feature is useful for systems where you use iRules to create customized IPFIX templates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_retransmit_interval",
+      "displayName": "Template Retransmit Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Enter the time (in seconds) between each transmission of IPFIX templates to the pool of IPFIX collectors. The logging destination periodically retransmits all of its IPFIX templates at the interval you set in this field. These retransmissions are helpful for UDP, a lossy transport mechanism. This parameter is only available when C(type) is C(ipfix).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "transport_profile",
+      "displayName": "Transport Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Is a transport profile based on either TCP or UDP. This profile defines the TCP or UDP options used to send IP-traffic logs to the pool of collectors. This parameter is only available when C(type) is C(ipfix).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the type of log destination. Once created, this parameter cannot be changed.",
+      "choices": [
+        "remote-high-speed-log",
+        "remote-syslog",
+        "arcsight",
+        "splunk",
+        "management-port",
+        "ipfix"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

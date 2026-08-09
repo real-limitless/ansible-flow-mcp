@@ -1,0 +1,257 @@
+{
+  "fqcn": "dellemc.openmanage.idrac_firmware",
+  "shortDescription": "Firmware update from a repository on a network share (CIFS, NFS, HTTP, HTTPS, FTP)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/idrac_firmware_module.html",
+  "options": [
+    {
+      "name": "apply_update",
+      "displayName": "Apply Update",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If I(apply_update) is set to C(true), then the packages are applied. If I(apply_update) is set to C(false), no updates are applied, and a catalog report of packages is generated and returned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "catalog_file_name",
+      "displayName": "Catalog File Name",
+      "type": "string",
+      "required": false,
+      "default": "Catalog.xml",
+      "description": "Catalog file name relative to the I(share_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_ip",
+      "displayName": "Idrac Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC IP Address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_password",
+      "displayName": "Idrac Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC user password. If the password is not provided, then the environment variable E(IDRAC_PASSWORD) is used. Example: export IDRAC_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_port",
+      "displayName": "Idrac Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "iDRAC port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_user",
+      "displayName": "Idrac User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC username. If the username is not provided, then the environment variable E(IDRAC_USERNAME) is used. Example: export IDRAC_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_cert_warning",
+      "displayName": "Ignore Cert Warning",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies if certificate warnings are ignored when HTTPS share is used. If C(true) option is set, then the certificate warnings are ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to wait for job completion or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_passwd",
+      "displayName": "Proxy Passwd",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for the proxy server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The Port for the proxy server. This is required when I(proxy_support) is C(ParametersProxy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_server",
+      "displayName": "Proxy Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IP address of the proxy server. This IP will not be validated. The download job will be created even for invalid I(proxy_server). Please check the results of the job for error details. This is required when I(proxy_support) is C(ParametersProxy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_support",
+      "displayName": "Proxy Support",
+      "type": "string",
+      "required": false,
+      "default": "Off",
+      "description": "Specifies if a proxy should be used. Proxy parameters are applicable on C(HTTP), C(HTTPS), and C(FTP) share type of repositories. C(ParametersProxy), sets the proxy parameters for the current firmware operation. C(DefaultProxy), iDRAC uses the proxy values set by default. Default Proxy can be set in the Lifecycle Controller attributes using M(dellemc.openmanage.idrac_attributes). C(Off), will not use the proxy. For iDRAC8 based servers, use proxy server with basic authentication. For iDRAC9 base",
+      "choices": [
+        "ParametersProxy",
+        "DefaultProxy",
+        "Off"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_type",
+      "displayName": "Proxy Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The proxy type of the proxy server. This is required when I(proxy_support) is C(ParametersProxy). Note: SOCKS4 proxy does not support IPv6 address.",
+      "choices": [
+        "HTTP",
+        "SOCKS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_uname",
+      "displayName": "Proxy Uname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user name for the proxy server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot",
+      "displayName": "Reboot",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Provides the option to apply the update packages immediately or in the next reboot. If I(reboot) is set to C(true),  then the packages  are applied immediately. If I(reboot) is set to C(false), then the packages are staged and applied in the next reboot. Packages that do not require a reboot are applied immediately irrespective of I (reboot).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_mnt",
+      "displayName": "Share Mnt",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Local mount path of the network share with read-write permission for ansible user. This option is not applicable for HTTP, HTTPS, and FTP shares.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_name",
+      "displayName": "Share Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Network share path of update repository. CIFS, NFS, HTTP, HTTPS and FTP share types are supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_password",
+      "displayName": "Share Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network share user password. This option is mandatory for CIFS Network Share.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_user",
+      "displayName": "Share User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network share user in the format 'user@domain' or 'domain\\\\user' if user is part of a domain else 'user'. This option is mandatory for CIFS Network Share.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,394 @@
   "fqcn": "amazon.aws.elb_application_lb",
   "shortDescription": "Manage an Application Load Balancer",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/amazon/aws/elb_application_lb_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS access key ID. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_ACCESS_KEY_ID) or C(AWS_ACCESS_KEY) environment variables may also be used in decreasing order of preference. The I(aws_access_key) and I(profile) options are mutually exclusive. The I(aws_access_key_id) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_logs_enabled",
+      "displayName": "Access Logs Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not to enable access logs. When set, O(access_logs_s3_bucket) must also be set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_logs_s3_bucket",
+      "displayName": "Access Logs S3 Bucket",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the S3 bucket for the access logs. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permission to write to the bucket. Required if access logs in Amazon S3 are enabled. When set, O(access_logs_enabled) must also be set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_logs_s3_prefix",
+      "displayName": "Access Logs S3 Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The prefix for the log location in the S3 bucket. If you don't specify a prefix, the access logs are stored in the root of the bucket. Cannot begin or end with a slash.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_ca_bundle",
+      "displayName": "Aws Ca Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location of a CA Bundle to use when validating SSL certificates. The C(AWS_CA_BUNDLE) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_config",
+      "displayName": "Aws Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary to modify the botocore configuration. Parameters can be found in the AWS documentation U(https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html#botocore.config.Config).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug_botocore_endpoint_logs",
+      "displayName": "Debug Botocore Endpoint Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use a C(botocore.endpoint) logger to parse the unique (rather than total) C(\"resource:action\") API calls made during a task, outputing the set to the resource_actions key in the task results. Use the C(aws_resource_action) callback to output to total list made during a playbook. The C(ANSIBLE_DEBUG_BOTOCORE_LOGS) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deletion_protection",
+      "displayName": "Deletion Protection",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether deletion protection for the ALB is enabled. Defaults to V(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_url",
+      "displayName": "Endpoint Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to connect to instead of the default AWS endpoints.  While this can be used to connection to other AWS-compatible services the amazon.aws and community.aws collections are only tested against AWS. The  C(AWS_URL) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http2",
+      "displayName": "Http2",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether to enable HTTP2 routing. Defaults to V(True).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_desync_mitigation_mode",
+      "displayName": "Http Desync Mitigation Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Determines how the load balancer handles requests that might pose a security risk to an application. Defaults to V(defensive).",
+      "choices": [
+        "monitor",
+        "defensive",
+        "strictest"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_drop_invalid_header_fields",
+      "displayName": "Http Drop Invalid Header Fields",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether HTTP headers with invalid header fields are removed by the load balancer V(true) or routed to targets V(false). Defaults to V(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_x_amzn_tls_version_and_cipher_suite",
+      "displayName": "Http X Amzn Tls Version And Cipher Suite",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether the two headers are added to the client request before sending it to the target. Defaults to V(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_xff_client_port",
+      "displayName": "Http Xff Client Port",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether the X-Forwarded-For header should preserve the source port that the client used to connect to the load balancer. Defaults to V(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idle_timeout",
+      "displayName": "Idle Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of seconds to wait before an idle connection is closed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_address_type",
+      "displayName": "Ip Address Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets the type of IP addresses used by the subnets of the specified Application Load Balancer.",
+      "choices": [
+        "ipv4",
+        "dualstack"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "listeners",
+      "displayName": "Listeners",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of dicts containing listeners to attach to the ALB. See examples for detail of the dict required. Note that listener keys are CamelCased.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the load balancer. This name must be unique within your AWS account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A named AWS profile to use for authentication. See the AWS documentation for more information about named profiles U(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html). The C(AWS_PROFILE) environment variable may also be used. The I(profile) option is mutually exclusive with the I(aws_access_key), I(aws_secret_key) and I(session_token) options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge_listeners",
+      "displayName": "Purge Listeners",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(true), existing listeners will be purged from the ALB to match exactly what is defined by O(listeners) parameter. If the O(listeners) parameter is not set then listeners will not be modified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge_rules",
+      "displayName": "Purge Rules",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When set to V(false), keep the existing load balancer rules in place. Will modify and add, but will not delete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge_tags",
+      "displayName": "Purge Tags",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If O(purge_tags=true) and O(tags) is set, existing tags will be purged from the resource to match exactly what is defined by O(tags) parameter. If the O(tags) parameter is not set then tags will not be modified, even if O(purge_tags=True). Tag keys beginning with V(aws:) are reserved by Amazon and can not be modified.  As such they will be ignored for the purposes of the O(purge_tags) parameter.  See the Amazon documentation for more information U(https://docs.aws.amazon.com/general/latest/gr/aw",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS region to use. For global services such as IAM, Route53 and CloudFront, I(region) is ignored. The C(AWS_REGION) environment variable may also be used. See the Amazon AWS documentation for more information U(http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheme",
+      "displayName": "Scheme",
+      "type": "string",
+      "required": false,
+      "default": "internet-facing",
+      "description": "Internet-facing or internal load balancer. An ALB scheme can not be modified after creation.",
+      "choices": [
+        "internet-facing",
+        "internal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_key",
+      "displayName": "Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS secret access key. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SECRET_ACCESS_KEY) or C(AWS_SECRET_KEY) environment variables may also be used in decreasing order of preference. The I(secret_key) and I(profile) options are mutually exclusive. The I(aws_secret_access_key) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_groups",
+      "displayName": "Security Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of the names or IDs of the security groups to assign to the load balancer. Required if O(state=present). If V([]), the VPC's default security group will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_token",
+      "displayName": "Session Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS STS session token for use with temporary credentials. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SESSION_TOKEN) environment variable may also be used. The I(session_token) and I(profile) options are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Create or destroy the load balancer.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subnets",
+      "displayName": "Subnets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of the IDs of the subnets to attach to the load balancer. You can specify only one subnet per Availability Zone. You must specify subnets from at least two Availability Zones. Required if O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary representing the tags to be applied to the resource. If the O(tags) parameter is not set then tags will not be modified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When set to C(false), SSL certificates will not be validated for communication with the AWS APIs. Setting I(validate_certs=false) is strongly discouraged, as an alternative, consider setting I(aws_ca_bundle) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "waf_fail_open",
+      "displayName": "Waf Fail Open",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether to allow a AWS WAF-enabled load balancer to route requests to targets if it is unable to forward the request to AWS WAF. Defaults to V(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Wait for the load balancer to have a state of 'active' before completing. A status check is performed every 15 seconds until a successful state is reached. An error is returned after 40 failed checks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The time in seconds to use in conjunction with O(wait).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

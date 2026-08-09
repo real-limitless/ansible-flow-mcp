@@ -1,0 +1,227 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_user",
+  "shortDescription": "Manage z/OS user and group profiles in RACF",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_user_module.html",
+  "options": [
+    {
+      "name": "access",
+      "displayName": "Access",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options that configure security attributes for a user profile. Only valid for I(profile_type=user) This option is valid for I(state=create) and I(state=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "base_segment",
+      "displayName": "Base Segment",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configures the RACF BASE segment attributes. The BASE segment contains core profile information applicable to both I(profile_type=user) and I(profile_type=group). Supported attributes include I(display_name), I(model), I(owner), I(installation_data), and I(custom_fields). Note that I(display_name) is only valid when I(profile_type=user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connect",
+      "displayName": "Connect",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options that configure a user's connection to a group. Only valid when I(state=connect); ignored for all other state values.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database",
+      "displayName": "Database",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the RACF database to use for the purge state. This option is only applicable when I(state=purge).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dfp",
+      "displayName": "Dfp",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options that set DFP attributes from the Storage Management Subsystem (SMS). Supported for both I(profile_type=user) and I(profile_type=group). This option is applicable for I(state=create) and I(state=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "execute_clist",
+      "displayName": "Execute Clist",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to execute the generated CLIST. This option is only applicable when I(state=purge). When set to C(true), the module generates the CLIST, removes the safety C(EXIT) statement, and executes the DELUSER/DELGROUP commands. When set to C(false), the module generates the CLIST but does not execute it. This option is useful for reviewing the purge commands before execution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options that change group-specific attributes in a RACF profile. Only valid when I(profile_type=group), ignored for user profiles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keep_dump",
+      "displayName": "Keep Dump",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to keep the database dump data sets after the purge completes. This option is only applicable when I(state=purge). When set to C(true), the IRRDBU00 dump data set and IRRRID00 CLIST is retained for debugging or auditing purposes. When set to C(false), these temporary data sets are deleted after the purge.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "language",
+      "displayName": "Language",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options that set the preferred national languages for a I(profile_type=user). Valid when I(state=create) and I(state=update). These options override the system-wide defaults.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the RACF profile to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "omvs",
+      "displayName": "Omvs",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Attributes for the RACF OMVS segment. Configures z/OS Unix System Services access and resource limits for the profile. Valid for both I(profile_type=user) and I(profile_type=group) are I(uid), I(custom_uid), I(delete). Valid only for I(profile_type=user) are I(home), I(program), I(nonshared_size), I(shared_size), I(addr_space_size), I(map_size), I(max_procs), I(max_threads), I(max_cpu_time), I(max_files), and their related unit options. User-only options control process and memory resource limit",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operator",
+      "displayName": "Operator",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configures the RACF OPERPARM segment attributes. The OPERPARM segment defined extended MCS console session attributes for the user. Only valid when I(profile_type=user). Supported for I(state=create) and I(state=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "optimize_dump",
+      "displayName": "Optimize Dump",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to skip locking the RACF database during the dump state to optimize performance. This option is only applicable when I(state=purge). When set to C(true), the IRRDBU00 utility runs with the C(NOLOCKINPUT) option. This improves system availability by allowing concurrent updates to the database. However, it may result in inconsistent data if changes occur during the process. The user ID requires C(READ) authority to the RACF database when using C(NOLOCKINPUT). When set to C(false), the IRRD",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_mgmt",
+      "displayName": "Password Mgmt",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options that manage password and passphrase settings for a user profile. These options are only valid for user profiles (I(profile_type=user)). These options are only applicable when I(state=create) or I(state=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile_type",
+      "displayName": "Profile Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Whether the RACF profile specified in I(name) is a user or group profile.",
+      "choices": [
+        "user",
+        "group"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restrictions",
+      "displayName": "Restrictions",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Attributes that determine the days and times a user is allowed to login. This option is valid for I(profile_type=user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the state to perform on the RACF profile. The available choices depend on the value of I(profile_type). C(create) - Creates a new profile. Supported for both I(profile_type=user) and I(profile_type=group). C(update) - Modifies an existing profile. Supported for both I(profile_type=user) and I(profile_type=group). C(delete) - Removes the profile from RACF database, but may leave references to the profile in other RACF profiles or database records. Supported for both I(profile_type=user)",
+      "choices": [
+        "create",
+        "update",
+        "delete",
+        "purge",
+        "connect",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tmp_hlq",
+      "displayName": "Tmp Hlq",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the default high level qualifier (HLQ) for temporary data sets. This option is only applicable when I(state=purge). Temporary data sets are created during the purge for database dumps, CLIST generation, and intermediate processing. If not specified, the system default HLQ is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tso",
+      "displayName": "Tso",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Attributes for the RACF TSO segment. Configures TSO settings for the user profile. Only valid for I(profile_type=user), I(state=create) and I(state=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

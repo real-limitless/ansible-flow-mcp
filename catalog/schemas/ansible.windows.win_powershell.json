@@ -2,6 +2,143 @@
   "fqcn": "ansible.windows.win_powershell",
   "shortDescription": "Run PowerShell scripts",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_powershell_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "arguments",
+      "displayName": "Arguments",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of arguments to pass to I(executable) when running a script in another PowerShell process. These are not arguments to pass to I(script), use I(parameters) for that purpose.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chdir",
+      "displayName": "Chdir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The PowerShell location to set when starting the script. This can be a location in any of the PowerShell providers. The default location is dependent on many factors, if relative paths are used then set this option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "creates",
+      "displayName": "Creates",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path or path filter pattern; when the referenced path exists on the target host, the task will be skipped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "depth",
+      "displayName": "Depth",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "How deep the return values are serialized for C(result), C(output), and C(information[x].message_data). This also controls the depth of the diff output set by C($Ansible.Diff). Setting this to a higher value can dramatically increase the amount of data that needs to be returned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "error_action",
+      "displayName": "Error Action",
+      "type": "string",
+      "required": false,
+      "default": "continue",
+      "description": "The C($ErrorActionPreference) to set before executing I(script). C(silently_continue) will ignore any errors and exceptions raised. C(continue) is the default behaviour in PowerShell, errors are present in the I(error) return value but only terminating exceptions will stop the script from continuing and set it as failed. C(stop) will treat errors like exceptions, will stop the script and set it as failed.",
+      "choices": [
+        "silently_continue",
+        "continue",
+        "stop"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "executable",
+      "displayName": "Executable",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A custom PowerShell executable to run the script in. When not defined the script will run in the current module PowerShell interpreter. Both the remote PowerShell and the one specified by I(executable) must be running on PowerShell v5.1 or newer. Setting this value may change the values returned in the C(output) return value depending on the underlying .NET type. This option is only supported on Windows hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parameters",
+      "displayName": "Parameters",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Parameters to pass into the script as key value pairs. The key corresponds to the parameter name and the value is the value for that parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a PowerShell script to run. When O(remote_src=False), or unset, this path is searched on the Ansible host. When O(remote_src=True), or set, this path is searched on the target host. This option is mutually exclusive with O(script). Scripts are expected to be saved with UTF-8 encoding, using a different encoding will result in non-ASCII characters being read as invalid characters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_src",
+      "displayName": "Remote Src",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When V(false), the O(path) specified will be searched on the Ansible host. When V(true), the O(path) specified will be searched on the target host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "removes",
+      "displayName": "Removes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path or path filter pattern; when the referenced path B(does not) exist on the target host, the task will be skipped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "script",
+      "displayName": "Script",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The PowerShell script to run. This option is mutually exclusive with O(path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sensitive_parameters",
+      "displayName": "Sensitive Parameters",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Parameters to pass into the script as a SecureString or PSCredential. Each sensitive value will be marked with C(no_log) to ensure they are not exposed in the module invocation args logs. The I(value) suboption can be used to create a SecureString value while I(username) and I(password) can be used to create a PSCredential value. If neither I(value) nor I(username)/I(password) is specified, C($null) is passed as the parameter value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

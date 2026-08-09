@@ -1,0 +1,216 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_monitor_snmp_dca",
+  "shortDescription": "Manages BIG-IP SNMP data collecting agent (DCA) monitors",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_monitor_snmp_dca_module.html",
+  "options": [
+    {
+      "name": "agent_type",
+      "displayName": "Agent Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the SNMP agent running on the monitored server. When creating a new monitor, the default is C(UCD) (UC-Davis).",
+      "choices": [
+        "UCD",
+        "WIN2000",
+        "GENERIC"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "community",
+      "displayName": "Community",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the community name the system must use to authenticate with the host server through SNMP. When creating a new monitor, the default value is C(public). This value is case sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpu_coefficient",
+      "displayName": "Cpu Coefficient",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the coefficient the system uses to calculate the weight of the CPU threshold in the dynamic ratio load balancing algorithm. When creating a new monitor, the default is C(1.5).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpu_threshold",
+      "displayName": "Cpu Threshold",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum acceptable CPU usage on the target server. When creating a new monitor, the default is C(80) percent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies descriptive text that identifies the monitor.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_coefficient",
+      "displayName": "Disk Coefficient",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the coefficient the system uses to calculate the weight of the disk threshold in the dynamic ratio load balancing algorithm. When creating a new monitor, the default is C(2.0).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_threshold",
+      "displayName": "Disk Threshold",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum acceptable disk usage on the target server. When creating a new monitor, the default is C(90) percent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interval",
+      "displayName": "Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the frequency, in seconds, at which the system issues the monitor check when either the resource is down or the status of the resource is unknown. When creating a new monitor, the default is C(10).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "memory_coefficient",
+      "displayName": "Memory Coefficient",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the coefficient the system uses to calculate the weight of the memory threshold in the dynamic ratio load balancing algorithm. When creating a new monitor, the default is C(1.0).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "memory_threshold",
+      "displayName": "Memory Threshold",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum acceptable memory usage on the target server. When creating a new monitor, the default is C(70) percent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Monitor name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent",
+      "displayName": "Parent",
+      "type": "string",
+      "required": false,
+      "default": "/Common/snmp_dca",
+      "description": "The parent template of this monitor template. Once this value has been set, it cannot be changed. By default, this value is the C(snmp_dca) parent on the C(Common) partition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present), ensures the monitor exists. When C(absent), ensures the monitor is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_until_up",
+      "displayName": "Time Until Up",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of seconds to wait after a resource first responds correctly to the monitor before setting the resource to 'up'. During the interval, all responses from the resource must be correct. When the interval expires, the resource is marked 'up'. A value of 0, means that the resource is marked up immediately upon receipt of the first correct response. When creating a new monitor, the default is C(0).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of seconds the target has in which to respond to the monitor request. When creating a new monitor, the default is C(30) seconds. If the target responds within the set time period, it is considered 'up'. If the target does not respond within the set time period, it is considered 'down'. When this value is set to 0 (zero), the system uses the interval from the parent monitor. Note that C(timeout) and C(time_until_up) combine to control when a resource is set to up.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the version of SNMP the host server uses. When creating a new monitor, the default is C(v1). When C(v1), specifies the host server uses SNMP version 1. When C(v2c), specifies that the host server uses SNMP version 2c.",
+      "choices": [
+        "v1",
+        "v2c"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

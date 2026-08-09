@@ -1,0 +1,150 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_data_group",
+  "shortDescription": "Manage data groups on a BIG-IP",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_data_group_module.html",
+  "options": [
+    {
+      "name": "delete_data_group_file",
+      "displayName": "Delete Data Group File",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When C(true), ensures the remote data group file is deleted. This parameter is only relevant when C(state) is C(absent) and C(internal) is C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description of the data group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "external_file_name",
+      "displayName": "External File Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When creating a new data group, this specifies the file name you want to give an external data group file on the BIG-IP. This parameter is ignored when C(internal) is C(true). This parameter can be used to select an existing data group file to use with an existing external data group. If this value is not provided, it will be given the value specified in C(name) and, therefore, match the name of the data group. This value may only contain letters, numbers, underscores, dashes, or a period.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "internal",
+      "displayName": "Internal",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "The type of this data group. You should only consider setting this value in cases where you know exactly what you are doing, B(or), you are working with a pre-existing internal data group. Be aware that if you deliberately force this parameter to C(true), and you have a either a large number of records or a large total records size, this large amount of data will be reflected in your BIG-IP configuration. This can lead to B(long) system configuration load times due to parsing and verifying the l",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the data group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "records",
+      "displayName": "Records",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the records you want to add to a data group. If you have a large number of records, we recommend you use C(records_src) instead of typing all those records here. The technical limit of either the number of records, or the total size of all records. Varies with the size of the total resources on your system; in particular, RAM. When C(internal) is C(false), at least one record must be specified in either C(records) or C(records_src). When C(type) is: C(ip), C(address), C(addr) if the ad",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "records_src",
+      "displayName": "Records Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file with records in it. The file should be well-formed. This means it includes records, one per line, that resemble the following format \"key separator value\". For example, C(foo := bar). BIG-IP is strict about this format, but this module is a bit more lax. It will allow you to include arbitrary amounts (including none) of empty space on either side of the separator. For an illustration of this, see the Examples section. Record keys are limited in length to no more than 65520 charact",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "separator",
+      "displayName": "Separator",
+      "type": "string",
+      "required": false,
+      "default": ":=",
+      "description": "When specifying C(records_src), this is the string of characters that will be used to break apart entries in the C(records_src) into key/value pairs. By default, the value of this parameter is C(:=). This value cannot be changed once it is set. This parameter is only relevant when C(internal) is C(false). It will be ignored otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(state) is C(present), ensures the data group exists. When C(state) is C(absent), ensures the data group is removed. The use of state in this module refers to the entire data group, not its members.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "string",
+      "description": "The type of records in this data group. This parameter is important because it causes the BIG-IP to store your data in different ways to optimize access to it. For example, it would be wrong to specify a list of records containing IP addresses, but label them as a C(string) type. This value cannot be changed once the data group is created.",
+      "choices": [
+        "address",
+        "addr",
+        "ip",
+        "string",
+        "integer",
+        "int"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

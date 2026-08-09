@@ -1,0 +1,145 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_trunk",
+  "shortDescription": "Manage trunks on a BIG-IP",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_trunk_module.html",
+  "options": [
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the trunk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "frame_distribution_hash",
+      "displayName": "Frame Distribution Hash",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the basis for the hash the system uses as the frame distribution algorithm. The system uses the resulting hash to determine which interface to use for forwarding traffic. When creating a new trunk, if this parameter is not specified, the default is C(source-destination-ip). When C(source-destination-mac), specifies the system bases the hash on the combined MAC addresses of the source and the destination. When C(destination-mac), specifies the system bases the hash on the MAC address of",
+      "choices": [
+        "destination-mac",
+        "source-destination-ip",
+        "source-destination-mac"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interfaces",
+      "displayName": "Interfaces",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The interfaces that are part of the trunk. To clear the list of interfaces, specify an empty list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lacp_enabled",
+      "displayName": "Lacp Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When C(true), specifies the system supports the link aggregation control protocol (LACP), which monitors the trunk by exchanging control packets over the member links to determine the health of the links. If LACP detects a failure in a member link, it removes the link from the link aggregation. When creating a new trunk, if this parameter is not specified, LACP is C(false). LACP is disabled by default for backward compatibility. If this does not apply to your network, we recommend that you enabl",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lacp_mode",
+      "displayName": "Lacp Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the operation mode for link aggregation control protocol (LACP), if LACP is enabled for the trunk. When creating a new trunk, if this parameter is not specified, the default is C(active). When C(active), specifies the system periodically sends control packets regardless of whether the partner system has issued a request. When C(passive), specifies the system sends control packets only when the partner system has issued a request.",
+      "choices": [
+        "active",
+        "passive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lacp_timeout",
+      "displayName": "Lacp Timeout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the rate at which the system sends the LACP control packets. When creating a new trunk, if this parameter is not specified, the default is C(long). When C(long), specifies the system sends an LACP control packet every 30 seconds. When C(short), specifies the system sends an LACP control packet every second.",
+      "choices": [
+        "long",
+        "short"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "link_selection_policy",
+      "displayName": "Link Selection Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Once the trunk is configured, specifies the policy the trunk uses to determine which member link (interface) can handle new traffic. When creating a new trunk, if this value is not specified, the default is C(auto). When C(auto), specifies the system automatically determines which interfaces can handle new traffic. For the C(auto) option, the member links must all be the same media type and speed. When C(maximum-bandwidth), specifies the system determines which interfaces can handle new traffic ",
+      "choices": [
+        "auto",
+        "maximum-bandwidth"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the trunk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "qinq_ethertype",
+      "displayName": "Qinq Ethertype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the ether-type value used for the packets handled on this trunk when it is a member in a QinQ VLAN. The ether-type can be set to any string containing a valid hexadecimal 16 bits number, or any of the well known ether-types; C(0x8100), C(0x9100), C(0x88a8). This parameter is not supported on Virtual Editions. You should always wrap this value in quotes to prevent Ansible from interpreting the value as a literal hexadecimal number and converting it to an integer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present), ensures the resource exists. When C(absent), ensures the resource is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

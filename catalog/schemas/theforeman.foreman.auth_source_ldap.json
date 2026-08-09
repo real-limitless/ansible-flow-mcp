@@ -2,6 +2,348 @@
   "fqcn": "theforeman.foreman.auth_source_ldap",
   "shortDescription": "Manage LDAP Authentication Sources",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/theforeman/foreman/auth_source_ldap_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "account",
+      "displayName": "Account",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Account name to use when accessing the LDAP server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "account_password",
+      "displayName": "Account Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Account password to use when accessing the LDAP server. Required when using I(onthefly_register). When this parameter is set, the module will not be idempotent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attr_firstname",
+      "displayName": "Attr Firstname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Attribute containing first name. Required when using I(onthefly_register).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attr_lastname",
+      "displayName": "Attr Lastname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Attribute containing last name. Required when using I(onthefly_register).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attr_login",
+      "displayName": "Attr Login",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Attribute containing login ID. Required when using I(onthefly_register).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attr_mail",
+      "displayName": "Attr Mail",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Attribute containing email address. Required when using I(onthefly_register).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attr_photo",
+      "displayName": "Attr Photo",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Attribute containing user photo",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "base_dn",
+      "displayName": "Base Dn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The base DN to use when searching.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted file that contains a CA certificate to be used for validation. If the value is not specified in the task, the value of environment variable C(FOREMAN_CA_PATH) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "groups_base",
+      "displayName": "Groups Base",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Base DN where groups reside.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname of the LDAP server",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_filter",
+      "displayName": "Ldap Filter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filter to apply to LDAP searches",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_group_membership",
+      "displayName": "Ldap Group Membership",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Which group membership method to use, not valid for I(server_type=active_directory). Option I(rfc4519) is valid only for I(server_type=posix).",
+      "choices": [
+        "posix",
+        "nis_netgroups",
+        "rfc4519"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "locations",
+      "displayName": "Locations",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of locations the entity should be assigned to",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the LDAP authentication source",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oauth1_consumer_key",
+      "displayName": "Oauth1 Consumer Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OAuth1 consumer key for accessing the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_OAUTH1_CONSUMER_KEY) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oauth1_consumer_secret",
+      "displayName": "Oauth1 Consumer Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OAuth1 consumer secret for accessing the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_OAUTH1_CONSUMER_SECRET) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "onthefly_register",
+      "displayName": "Onthefly Register",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not to register users on the fly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organizations",
+      "displayName": "Organizations",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of organizations the entity should be assigned to",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of the user accessing the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 389,
+      "description": "The port number of the LDAP server",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_type",
+      "displayName": "Server Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of the LDAP server",
+      "choices": [
+        "free_ipa",
+        "active_directory",
+        "posix"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_url",
+      "displayName": "Server Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL of the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_SERVER_URL) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the entity",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls",
+      "displayName": "Tls",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not to use TLS when contacting the LDAP server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_gssapi",
+      "displayName": "Use Gssapi",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use GSSAPI to perform the authentication, typically this is for Kerberos or Kerberos through Negotiate authentication. Requires the Python library L(requests-gssapi,https://github.com/pythongssapi/requests-gssapi) to be installed. If the value is not specified in the task, the value of environment variable C(FOREMAN_USE_GSSAPI) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_netgroups",
+      "displayName": "Use Netgroups",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to use NIS netgroups instead of posix groups, not valid for I(server_type=active_directory) Deprecated: The I(use_netgroups) parameter is deprecated with Foreman 3.16 in favor of I(ldap_group_membership) and will be removed in a future release.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "usergroup_sync",
+      "displayName": "Usergroup Sync",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not to sync external user groups on login",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username accessing the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_USERNAME) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether or not to verify the TLS certificates of the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

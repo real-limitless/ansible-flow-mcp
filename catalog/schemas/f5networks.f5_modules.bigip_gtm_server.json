@@ -1,0 +1,226 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_gtm_server",
+  "shortDescription": "Manages F5 BIG-IP GTM servers",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_gtm_server_module.html",
+  "options": [
+    {
+      "name": "availability_requirements",
+      "displayName": "Availability Requirements",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "If you activate more than one health monitor, specifies the number of health monitors that must receive successful responses in order for the link to be considered available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Data center to which the server belongs. When creating a new GTM server, this value is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "devices",
+      "displayName": "Devices",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Lists the self IP addresses and translations for each device. When creating a new GTM server, this value is required. This list is a complex list that specifies a number of keys. The C(name) key specifies a name for the device. The device name must be unique per server. This key is required. The C(address) key contains an IP address, or list of IP addresses, for the destination server. This key is required. The C(translation) key contains an IP address to translate the C(address) value above to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iquery_options",
+      "displayName": "Iquery Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the Global Traffic Manager uses this BIG-IP system to conduct a variety of probes before delegating traffic to it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limits",
+      "displayName": "Limits",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies resource thresholds or limit requirements at the pool member level. When you enable one or more limit settings, the system then uses that data to take members in and out of service. You can define limits for any or all of the limit settings. However, when a member does not meet the resource threshold limit requirement, the system marks the member as unavailable and directs load balancing traffic to another resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "link_discovery",
+      "displayName": "Link Discovery",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the system auto-discovers the links for this server. When creating a new GTM server, if this parameter is not specified, the default value C(disabled) is used. If you set this parameter to C(enabled) or C(enabled-no-delete), you must also ensure the C(virtual_server_discovery) parameter is also set to C(enabled) or C(enabled-no-delete).",
+      "choices": [
+        "enabled",
+        "disabled",
+        "enabled-no-delete"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitors",
+      "displayName": "Monitors",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the health monitors the system currently uses to monitor this resource. When C(availability_requirements.type) is C(require), you may only have a single monitor in the C(monitors) list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the server. If the virtual server is auto-discovered from the LTM,then the partition name needs to be included as part of the virtual server name when referencing from the module e.g. \"/Common/vsname\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prober_fallback",
+      "displayName": "Prober Fallback",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the type of prober to use to monitor this server's resources when the preferred prober is not available. This option is ignored in C(TMOS) version C(12.x). From C(TMOS) version C(13.x) and up, when prober_preference is set to C(pool) a C(prober_pool) parameter must be specified. The choices are mutually exclusive with prober_preference parameter, with the exception of the C(any-available) or C(none) options.",
+      "choices": [
+        "any",
+        "inside-datacenter",
+        "outside-datacenter",
+        "inherit",
+        "pool",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prober_pool",
+      "displayName": "Prober Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of the prober pool to use to monitor this server's resources. In C(TMOS) version C(13.x) and later, this parameter is mandatory when C(prober_preference) is set to C(pool). The format of the name can be either be prepended by partition (C(/Common/foo)), or specified just as an object name (C(foo)). In C(TMOS) version C(12.x), prober_pool can be set to an empty string to revert to default setting of C(inherit).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prober_preference",
+      "displayName": "Prober Preference",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the type of prober to use to monitor this server's resources. This option is ignored in C(TMOS) version C(12.x). From C(TMOS) version C(13.x) and up, when prober_preference is set to C(pool) a C(prober_pool) parameter must be specified.",
+      "choices": [
+        "inside-datacenter",
+        "outside-datacenter",
+        "inherit",
+        "pool"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_type",
+      "displayName": "Server Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the server type. The server type determines the metrics the system can collect from the server. When creating a new GTM server, the default value C(bigip) is used.",
+      "choices": [
+        "alteon-ace-director",
+        "cisco-css",
+        "cisco-server-load-balancer",
+        "generic-host",
+        "radware-wsd",
+        "windows-nt-4.0",
+        "bigip",
+        "cisco-local-director-v2",
+        "extreme",
+        "generic-load-balancer",
+        "sun-solaris",
+        "cacheflow",
+        "cisco-local-director-v3",
+        "foundry-server-iron",
+        "netapp",
+        "windows-2000-server"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The server state. If C(absent), the module attempts to delete the server. This will only succeed if this server is not in use by a virtual server. C(present) creates the server and enables it. If C(enabled), enables the server if it exists. If C(disabled), creates the server if needed, and sets state to C(disabled).",
+      "choices": [
+        "present",
+        "absent",
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "virtual_server_discovery",
+      "displayName": "Virtual Server Discovery",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the system auto-discovers the virtual servers for this server. When creating a new GTM server, if this parameter is not specified, the default value C(disabled) is used.",
+      "choices": [
+        "enabled",
+        "disabled",
+        "enabled-no-delete"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

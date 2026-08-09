@@ -2,6 +2,95 @@
   "fqcn": "ansible.windows.win_regedit",
   "shortDescription": "Add, change, or remove registry keys and values",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_regedit_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "data",
+      "displayName": "Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Value of the registry entry C(name) in C(path). If not specified then the value for the property will be null for the corresponding C(type). Binary and None data should be expressed in a yaml byte array or as comma separated hex values. An easy way to generate this is to run C(regedit.exe) and use the I(export) option to save the registry values to a file. In the exported file, binary value will look like C(hex:be,ef,be,ef), the C(hex:) prefix is optional. DWORD and QWORD values should either be",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_key",
+      "displayName": "Delete Key",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When C(state) is 'absent' then this will delete the entire key. If C(false) then it will only clear out the '(Default)' property for that key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hive",
+      "displayName": "Hive",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a hive key like C:\\Users\\Default\\NTUSER.DAT to load in the registry. This hive is loaded under the HKLM:\\ANSIBLE key which can then be used in I(name) like any other path. This can be used to load the default user profile registry hive or any other hive saved as a file. Using this function requires the user to have the C(SeRestorePrivilege) and C(SeBackupPrivilege) privileges enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the registry entry in the above C(path) parameters. If not provided, or empty then the '(Default)' property for the key will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the registry path. Should be in one of the following registry hives: HKCC, HKCR, HKCU, HKLM, HKU.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the registry entry.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "string",
+      "description": "The registry value data type.",
+      "choices": [
+        "none",
+        "binary",
+        "dword",
+        "expandstring",
+        "multistring",
+        "string",
+        "qword"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

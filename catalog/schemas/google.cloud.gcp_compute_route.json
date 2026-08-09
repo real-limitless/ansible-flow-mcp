@@ -2,6 +2,235 @@
   "fqcn": "google.cloud.gcp_compute_route",
   "shortDescription": "Creates a GCP Route",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/google/cloud/gcp_compute_route_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An OAuth2 access token if credential type is accesstoken.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_kind",
+      "displayName": "Auth Kind",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of credential used.",
+      "choices": [
+        "application",
+        "machineaccount",
+        "serviceaccount",
+        "accesstoken"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional description of this resource. Provide this property when you create the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest_range",
+      "displayName": "Dest Range",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The destination range of outgoing packets that this route applies to. Only IPv4 is supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "env_type",
+      "displayName": "Env Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies which Ansible environment you're running this module within. This should not be set unless you know what you're doing. This only alters the User Agent string for any API requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The network that this route applies to. This field represents a link to a Network resource in GCP. It can be specified in two ways. First, you can place a dictionary with key 'selfLink' and value of your resource's selfLink Alternatively, you can add `register: name-of-resource` to a gcp_compute_network task and then set this network field to \"{{ name-of-resource }}\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "next_hop_gateway",
+      "displayName": "Next Hop Gateway",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to a gateway that should handle matching packets. Currently, you can only specify the internet gateway, using a full or partial valid URL: * U(https://www.googleapis.com/compute/v1/projects/project/global/gateways/default-internet-gateway) * projects/project/global/gateways/default-internet-gateway * global/gateways/default-internet-gateway .",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "next_hop_ilb",
+      "displayName": "Next Hop Ilb",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The URL to a forwarding rule of type loadBalancingScheme=INTERNAL that should handle matching packets. You can only specify the forwarding rule as a partial or full URL. For example, the following are all valid URLs: U(https://www.googleapis.com/compute/v1/projects/project/regions/region/forwardingRules/forwardingRule) regions/region/forwardingRules/forwardingRule Note that this can only be used when the destinationRange is a public (non-RFC 1918) IP CIDR range. This field represents a link to a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "next_hop_instance",
+      "displayName": "Next Hop Instance",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "URL to an instance that should handle matching packets. You can specify this as a full or partial URL. For example: * U(https://www.googleapis.com/compute/v1/projects/project/zones/zone/) instances/instance * projects/project/zones/zone/instances/instance * zones/zone/instances/instance . This field represents a link to a Instance resource in GCP. It can be specified in two ways. First, you can place a dictionary with key 'selfLink' and value of your resource's selfLink Alternatively, you can ad",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "next_hop_ip",
+      "displayName": "Next Hop Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network IP address of an instance that should handle matching packets.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "next_hop_vpn_tunnel",
+      "displayName": "Next Hop Vpn Tunnel",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "URL to a VpnTunnel that should handle matching packets. This field represents a link to a VpnTunnel resource in GCP. It can be specified in two ways. First, you can place a dictionary with key 'selfLink' and value of your resource's selfLink Alternatively, you can add `register: name-of-resource` to a gcp_compute_vpn_tunnel task and then set this next_hop_vpn_tunnel field to \"{{ name-of-resource }}\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The priority of this route. Priority is used to break ties in cases where there is more than one matching route of equal prefix length. In the case of two routes with equal prefix length, the one with the lowest-numbered priority value wins. Default value is 1000. Valid range is 0 through 65535.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Google Cloud Platform project to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scopes",
+      "displayName": "Scopes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of scopes to be used",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_contents",
+      "displayName": "Service Account Contents",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_email",
+      "displayName": "Service Account Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional service account email address if machineaccount is selected and the user does not wish to use the default email.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_file",
+      "displayName": "Service Account File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of a Service Account JSON file if serviceaccount is selected as type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the given object should exist in GCP",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of instance tags to which this route applies.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

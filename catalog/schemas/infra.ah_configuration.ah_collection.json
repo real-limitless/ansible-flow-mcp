@@ -2,6 +2,197 @@
   "fqcn": "infra.ah_configuration.ah_collection",
   "shortDescription": "update, or destroy Automation Hub Collections.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/infra/ah_configuration/ah_collection_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "ah_host",
+      "displayName": "Ah Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to Ansible Galaxy or Automation Hub instance. If value not set, will try environment variable C(AH_HOST) If value not specified by any means, the value of C(127.0.0.1) will be used",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ah_password",
+      "displayName": "Ah Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for your Ansible Galaxy or Automation Hub instance. If value not set, will try environment variable C(AH_PASSWORD)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ah_path_prefix",
+      "displayName": "Ah Path Prefix",
+      "type": "string",
+      "required": false,
+      "default": "galaxy",
+      "description": "API path used to access the api. For galaxy_ng this is either 'automation-hub' or the custom prefix used on install with GALAXY_API_PATH_PREFIX For Automation Hub this is 'galaxy'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ah_token",
+      "displayName": "Ah Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Ansible Galaxy or Automation Hub API token to use. This value can be in one of two formats. A string which is the token itself. (i.e. bqV5txm97wqJqtkxlMkhQz0pKhRMMX) A dictionary structure as returned by the ah_token module. If value not set, will try environment variable C(AH_API_TOKEN)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ah_username",
+      "displayName": "Ah Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for your Ansible Galaxy or Automation Hub instance. If value not set, will try environment variable C(AH_USERNAME)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_approve",
+      "displayName": "Auto Approve",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Approves a collection. Requires version to be set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interval",
+      "displayName": "Interval",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "The interval to request an update from Automation Hub when waiting for approval.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Collection name. Must be lower case containing only alphanumeric characters and underscores.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace",
+      "displayName": "Namespace",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Namespace name. Must be lower case containing only alphanumeric characters and underscores.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "overwrite_existing",
+      "displayName": "Overwrite Existing",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Overwrites an existing collection. Requires version to be set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Collection artifact file path. If version is not specified, version will be derived from file name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "request_timeout",
+      "displayName": "Request Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specify the timeout Ansible should use in requests to the Galaxy or Automation Hub host. Defaults to 10s, but this is handled by the shared module_utils code",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the resource. If present with a path, will upload a collection artifact to Automation hub. If present will return data on a collection. If present with version, will return data on a collection version. If absent without version, will delete the collection and all versions. If absent with version, will delete only specified version.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Waiting for the approval will abort after this amount of seconds",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to allow insecure connections to Galaxy or Automation Hub Server. If C(no), SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates. If value not set, will try environment variable C(AH_VERIFY_SSL)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Collection Version. Must be lower case containing only alphanumeric characters and underscores.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Waits for the collection to be uploaded",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -2,6 +2,298 @@
   "fqcn": "community.mongodb.mongodb_user",
   "shortDescription": "Adds or removes a user from a MongoDB database",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/mongodb/mongodb_user_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "atlas_auth",
+      "displayName": "Atlas Auth",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Authentication path intended for MongoDB Atlas Instances",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_mechanism",
+      "displayName": "Auth Mechanism",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication type.",
+      "choices": [
+        "SCRAM-SHA-256",
+        "SCRAM-SHA-1",
+        "MONGODB-X509",
+        "GSSAPI",
+        "PLAIN"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authentication_restrictions",
+      "displayName": "Authentication Restrictions",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The authentication restrictions the server enforces on the user. Specifies a list of IP addresses and CIDR ranges the user is allowed to connect from and/or server addresses they can connect to. Provide a list of dictionaries with the following fields: C(clientSource) (list) and C(serverAddress) (list).\n Provide an empty list if you don't want to use the field.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_options",
+      "displayName": "Connection Options",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Additional connection options. Supply as a list of dicts or strings containing key value pairs seperated with '='.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_for_localhost_exception",
+      "displayName": "Create For Localhost Exception",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This is parmeter is only useful for handling special treatment around the localhost exception. If C(login_user) is defined, then the localhost exception is not active and this parameter has no effect. If this file is NOT present (and C(login_user) is not defined), then touch this file after successfully adding the user. If this file is present (and C(login_user) is not defined), then skip this task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database",
+      "displayName": "Database",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the database to add/remove the user from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_database",
+      "displayName": "Login Database",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "The database where login credentials are stored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "The host running MongoDB instance to login to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password used to authenticate with. Required when I(login_user) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": 27017,
+      "description": "The MongoDB server port to login to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The MongoDB user to login with. Required when I(login_password) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the user to add or remove.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to use for the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replica_set",
+      "displayName": "Replica Set",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Replica set to connect to (automatically connects to primary for writes). Leave empty if you need the localhost exception, e.g. to create the initial user",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roles",
+      "displayName": "Roles",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The database user roles valid values could either be one or more of the following strings: 'read', 'readWrite', 'dbAdmin', 'userAdmin', 'clusterAdmin', 'readAnyDatabase', 'readWriteAnyDatabase', 'userAdminAnyDatabase', 'dbAdminAnyDatabase'\n Or the following dictionary '{ db: DATABASE_NAME, role: ROLE_NAME }'. This param requires pymongo 2.5+. If it is a string, mongodb 2.4+ is also required. If it is a dictionary, mongo 2.6+ is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl",
+      "displayName": "Ssl",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to use an SSL connection when connecting to the database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_ca_certs",
+      "displayName": "Ssl Ca Certs",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ssl_ca_certs option takes a path to a CA file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_cert_reqs",
+      "displayName": "Ssl Cert Reqs",
+      "type": "string",
+      "required": false,
+      "default": "CERT_REQUIRED",
+      "description": "Specifies whether a certificate is required from the other side of the connection, and whether it will be validated if provided.",
+      "choices": [
+        "CERT_NONE",
+        "CERT_OPTIONAL",
+        "CERT_REQUIRED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_certfile",
+      "displayName": "Ssl Certfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Present a client certificate using the ssl_certfile option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_crlfile",
+      "displayName": "Ssl Crlfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ssl_crlfile option takes a path to a CRL file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_keyfile",
+      "displayName": "Ssl Keyfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Private key for the client certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_pem_passphrase",
+      "displayName": "Ssl Pem Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase to decrypt encrypted private keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The database user state.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "strict_compatibility",
+      "displayName": "Strict Compatibility",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enforce strict requirements for pymongo and MongoDB software versions",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "C(always) will always update passwords and cause the module to return changed. C(on_create) will only set the password for newly created users. This must be C(always) to use the localhost exception when adding the first admin user. This option is effectively ignored when using x.509 certs. It is defaulted to 'on_create' to maintain a           a specific module behaviour when the login_database is '$external'.",
+      "choices": [
+        "always",
+        "on_create"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

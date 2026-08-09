@@ -1,0 +1,220 @@
+{
+  "fqcn": "vmware.vmware_rest.vcenter_vmtemplate_libraryitems",
+  "shortDescription": "Creates a library item in content library from a virtual machine",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware_rest/vcenter_vmtemplate_libraryitems_module.html",
+  "options": [
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the deployed virtual machine. If unset, the deployed virtual machine has the same description as the source library item.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_storage",
+      "displayName": "Disk Storage",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Storage specification for the deployed virtual machine's disks. If both I(disk_storage_overrides) and I(disk_storage) are unset, the deployed virtual machine's disks are created with the same storage spec as the corresponding disks in the source virtual machine template contained in the library item.   If I(disk_storage_overrides) is unset and I(disk_storage) is specified, all of the deployed virtual machine's disks are created with the storage spec specified by I(disk_storage).    If I(disk_sto",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_storage_overrides",
+      "displayName": "Disk Storage Overrides",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Storage specification for individual disks in the deployed virtual machine. This is specified as a mapping between disk identifiers in the source virtual machine template contained in the library item and their storage specifications. If both I(disk_storage_overrides) and I(disk_storage) are unset, the deployed virtual machine's disks are created with the same storage spec as the corresponding disks in the source virtual machine template contained in the library item.   If I(disk_storage_overrid",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "guest_customization",
+      "displayName": "Guest Customization",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Guest customization spec to apply to the deployed virtual machine. If unset, the guest operating system is not customized after deployment. Valid attributes are:  - C(name) (str): Name of the customization specification. If unset, no guest customization is performed. (['deploy'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hardware_customization",
+      "displayName": "Hardware Customization",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Hardware customization spec which specifies updates to the deployed virtual machine. If unset, the deployed virtual machine has the same hardware configuration as the source virtual machine template contained in the library item. Valid attributes are:  - C(nics) (dict): Map of Ethernet network adapters to update. If unset, all Ethernet adapters will remain connected to the same network as they were in the source virtual machine template. An Ethernet adapter with a MacAddressType of MANUAL will n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "library",
+      "displayName": "Library",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Identifier of the library in which the new library item should be created. When clients pass a value of this structure as a parameter, the field must be the id of a resource returned by M(vmware.vmware_rest.content_library_info). Required with I(state=['present'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the deployed virtual machine. This parameter is mandatory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "placement",
+      "displayName": "Placement",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Information used to place the deployed virtual machine. This field is currently required. In the future, if this field is unset, the system will use the values from the source virtual machine template contained in the library item.   If specified, each field will be used for placement. If the fields result in disjoint placement, the operation will fail. If the fields along with the placement values of the source virtual machine template result in disjoint placement, the operation will fail. Vali",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "powered_on",
+      "displayName": "Powered On",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the deployed virtual machine should be powered on after deployment. If unset, the virtual machine will not be powered on after deployment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_timeout",
+      "displayName": "Session Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Timeout settings for client session.  The maximal number of seconds for the whole operation including connection establishment, request sending and response.  The default value is 300s.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_vm",
+      "displayName": "Source Vm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Identifier of the source virtual machine to create the library item from. When clients pass a value of this structure as a parameter, the field must be the id of a resource returned by M(vmware.vmware_rest.vcenter_vm_info). Required with I(state=['present'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "",
+      "choices": [
+        "deploy",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_library_item",
+      "displayName": "Template Library Item",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "identifier of the content library item containing the source virtual machine template to be deployed. The parameter must be the id of a resource returned by M(vmware.vmware_rest.content_library_item_info). Required with I(state=['deploy'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_hostname",
+      "displayName": "Vcenter Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter If the value is not specified in the task, the value of environment variable C(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_password",
+      "displayName": "Vcenter Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter password If the value is not specified in the task, the value of environment variable C(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_rest_log_file",
+      "displayName": "Vcenter Rest Log File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "You can use this optional parameter to set the location of a log file.  This file will be used to record the HTTP REST interaction.  The file will be stored on the host that runs the module.  If the value is not specified in the task, the value of  environment variable C(VMWARE_REST_LOG_FILE) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_username",
+      "displayName": "Vcenter Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter username If the value is not specified in the task, the value of environment variable C(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_validate_certs",
+      "displayName": "Vcenter Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to C(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable C(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_home_storage",
+      "displayName": "Vm Home Storage",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Storage location for the virtual machine template's configuration and log files. If unset, the virtual machine template's configuration and log files are placed on the default storage backing associated with the library specified by I() Valid attributes are:  - C(datastore) (str): Identifier of the datastore for the deployed virtual machine's configuration and log files. This field is currently required.   When I(storage_policy) is also specified and is incompatible with the I(datastore), then t",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,213 @@
   "fqcn": "containers.podman.podman_generate_systemd",
   "shortDescription": "Generate systemd unit from a pod or a container",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/containers/podman/podman_generate_systemd_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "after",
+      "displayName": "After",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Add the systemd unit after (C(After=)) option, that ordering dependencies between the list of dependencies and this service. This option may be specified more than once. User-defined dependencies will be appended to the generated unit file But any existing options such as needed or defined by default (e.g. C(online.target)) will not be removed or overridden. Only with Podman 4.0.0 and above",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "container_prefix",
+      "displayName": "Container Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the systemd unit name prefix for containers. If not set, use the default defined by podman, C(container). Refer to podman-generate-systemd(1) man page for more information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Destination of the generated systemd unit file(s). Use C(/etc/systemd/system) for the system-wide systemd instance. Use C(/etc/systemd/user) or C(~/.config/systemd/user) for use with per-user instances of systemd.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "env",
+      "displayName": "Env",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Set environment variables to the systemd unit files. Keys are the environment variable names, and values are the environment variable values Only with Podman 4.3.0 and above",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "executable",
+      "displayName": "Executable",
+      "type": "string",
+      "required": false,
+      "default": "podman",
+      "description": "C(Podman) executable name or full path",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Replace the systemd unit file(s) even if it already exists. This works with dest option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the pod or container to export",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new",
+      "displayName": "New",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Generate unit files that create containers and pods, not only start them. Refer to podman-generate-systemd(1) man page for more information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_header",
+      "displayName": "No Header",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Do not generate the header including meta data such as the Podman version and the timestamp.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pod_prefix",
+      "displayName": "Pod Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the systemd unit name prefix for pods. If not set, use the default defined by podman, C(pod). Refer to podman-generate-systemd(1) man page for more information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "requires",
+      "displayName": "Requires",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Set the systemd unit requires (Requires=) option. Similar to wants, but declares a stronger requirement dependency. Only with Podman 4.0.0 and above",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restart_policy",
+      "displayName": "Restart Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Restart policy of the service",
+      "choices": [
+        "no-restart",
+        "on-success",
+        "on-failure",
+        "on-abnormal",
+        "on-watchdog",
+        "on-abort",
+        "always"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restart_sec",
+      "displayName": "Restart Sec",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Configures the time to sleep before restarting a service (as configured with restart-policy). Takes a value in seconds. Only with Podman 4.0.0 and above",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "separator",
+      "displayName": "Separator",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Systemd unit name separator between the name/id of a container/pod and the prefix. If not set, use the default defined by podman, C(-). Refer to podman-generate-systemd(1) man page for more information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_timeout",
+      "displayName": "Start Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Override the default start timeout for the container with the given value in seconds. Only with Podman 4.0.0 and above",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stop_timeout",
+      "displayName": "Stop Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Override the default stop timeout for the container with the given value in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_names",
+      "displayName": "Use Names",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Use name of the containers for the start, stop, and description in the unit file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wants",
+      "displayName": "Wants",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Add the systemd unit wants (C(Wants=)) option, that this service is (weak) dependent on. This option may be specified more than once. This option does not influence the order in which services are started or stopped. User-defined dependencies will be appended to the generated unit file But any existing options such as needed or defined by default (e.g. C(online.target)) will not be removed or overridden. Only with Podman 4.0.0 and above",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -2,6 +2,248 @@
   "fqcn": "openstack.cloud.network_segment",
   "shortDescription": "Creates/removes network segments from OpenStack",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/openstack/cloud/network_segment_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "How long should the socket layer wait before timing out for API calls. If this is omitted, nothing will be passed to the requests library.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary containing auth information as needed by the cloud's auth plugin strategy. For the default I(password) plugin, this would contain I(auth_url), I(username), I(password), I(project_name) and any information about domains (for example, I(user_domain_name) or I(project_domain_name)) if the cloud supports them. For other plugins, this param will need to contain whatever parameters that auth plugin requires. This parameter is not needed if a named cloud is provided or OpenStack OS_* environ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the auth plugin to use. If the cloud uses something other than password authentication, the name of the plugin should be indicated here and the contents of the I(auth) parameter should be updated accordingly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a CA Cert bundle that can be used as part of verifying SSL API requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a client certificate to use as part of the SSL transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a client key to use as part of the SSL transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud",
+      "displayName": "Cloud",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Named cloud or cloud config to operate against. If I(cloud) is a string, it references a named cloud config as defined in an OpenStack clouds.yaml file. Provides default values for I(auth) and I(auth_type). This parameter is not needed if I(auth) is provided or if OpenStack OS_* environment variables are present. If I(cloud) is a dict, it contains a complete cloud configuration like would be in a section of clouds.yaml.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the segment",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": false,
+      "default": "public",
+      "description": "Endpoint URL type to fetch from the service catalog.",
+      "choices": [
+        "admin",
+        "internal",
+        "public"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name to be assigned to the segment. Although Neutron allows for non-unique segment names, this module enforces segment name uniqueness.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name or id of the network to which the segment should be attached",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_type",
+      "displayName": "Network Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of physical network that maps to this segment resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "physical_network",
+      "displayName": "Physical Network",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The physical network where this segment object is implemented.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region_name",
+      "displayName": "Region Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the region.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdk_log_level",
+      "displayName": "Sdk Log Level",
+      "type": "string",
+      "required": false,
+      "default": "INFO",
+      "description": "Log level of the OpenStackSDK",
+      "choices": [
+        "INFO",
+        "DEBUG"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdk_log_path",
+      "displayName": "Sdk Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the logfile of the OpenStackSDK. If empty no log is written",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "segmentation_id",
+      "displayName": "Segmentation Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "An isolated segment on the physical network. The I(network_type) attribute defines the segmentation model. For example, if the I(network_type) value is vlan, this ID is a vlan identifier. If the I(network_type) value is gre, this ID is a gre key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Indicate desired state of the resource.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "How long should ansible wait for the requested resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not SSL API requests should be verified. Before Ansible 2.3 this defaulted to C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Should ansible wait until the requested resource is complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

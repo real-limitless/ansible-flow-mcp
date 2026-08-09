@@ -1,0 +1,283 @@
+{
+  "fqcn": "dellemc.openmanage.ome_diagnostics",
+  "shortDescription": "Export technical support logs(TSR) to network share location",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/ome_diagnostics_module.html",
+  "options": [
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_group_name",
+      "displayName": "Device Group Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the device group to export C(support_assist_collection) or C(supportassist_collection) logs of all devices within the group. This is applicable for C(support_assist_collection) and C(supportassist_collection) logs. This option is not applicable for OpenManage Enterprise Modular. This option is mutually exclusive with I(device_ids) and I(device_service_tags).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_ids",
+      "displayName": "Device Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of target device IDs. This is applicable for C(support_assist_collection) and C(supportassist_collection) logs. This option is mutually exclusive with I(device_service_tags) and I(device_group_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_service_tags",
+      "displayName": "Device Service Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of target identifier. This is applicable for C(support_assist_collection) and C(supportassist_collection) logs. This option is mutually exclusive with I(device_ids) and I(device_group_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "OpenManage Enterprise or OpenManage Enterprise Modular IP address or hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to wait for the Job completion or not. The maximum wait time is I(job_wait_timeout).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "The maximum wait time of I(job_wait) in minutes. This option is applicable I(job_wait) is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lead_chassis_only",
+      "displayName": "Lead Chassis Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Extract the logs from Lead chassis only. I(lead_chassis_only) is only applicable when I(log_type) is C(application) on OpenManage Enterprise Modular.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_selectors",
+      "displayName": "Log Selectors",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "By default, the SupportAssist logs contain only hardware logs. To collect additional logs such as OS logs, RAID logs or Debug logs, specify the log types to be collected in the choices list. If the log types are not specified, only the hardware logs are exported. C(OS_LOGS) to collect OS Logs. C(RAID_LOGS) to collect RAID controller logs. C(DEBUG_LOGS) to collect Debug logs. This option is applicable only for C(support_assist_collection) and C(supportassist_collection) of I(log_type).",
+      "choices": [
+        "OS_LOGS",
+        "RAID_LOGS",
+        "DEBUG_LOGS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_type",
+      "displayName": "Log Type",
+      "type": "string",
+      "required": false,
+      "default": "support_assist_collection",
+      "description": "C(application) is applicable for OpenManage Enterprise Modular to export the application log bundle. C(support_assist_collection) and C(supportassist_collection) is applicable for one or more devices to export SupportAssist logs. C(support_assist_collection) and C(supportassist_collection) supports both OpenManage Enterprise and OpenManage Enterprise Modular. C(support_assist_collection) and C(supportassist_collection) does not support export of C(OS_LOGS) from OpenManage Enterprise. If tried to",
+      "choices": [
+        "application",
+        "support_assist_collection",
+        "supportassist_collection"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mask_sensitive_info",
+      "displayName": "Mask Sensitive Info",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Select this option to mask the personal identification information such as IPAddress, DNS, alert destination, email, gateway, inet6, MacAddress, netmask etc. This option is applicable for C(application) of I(log_type).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OpenManage Enterprise or OpenManage Enterprise Modular password. If the password is not provided, then the environment variable E(OME_PASSWORD) is used. Example: export OME_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "OpenManage Enterprise or OpenManage Enterprise Modular HTTPS port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_address",
+      "displayName": "Share Address",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Network share IP address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_domain",
+      "displayName": "Share Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network share domain name. This option is applicable for C(CIFS) if I(share_type).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_name",
+      "displayName": "Share Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Network share path. Filename is auto generated and should not be provided as part of I(share_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_password",
+      "displayName": "Share Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network share password This option is applicable for C(CIFS) of I(share_type).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_type",
+      "displayName": "Share Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Network share type",
+      "choices": [
+        "NFS",
+        "CIFS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_user",
+      "displayName": "Share User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network share username. This option is applicable for C(CIFS) of I(share_type).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_connection",
+      "displayName": "Test Connection",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Test the availability of the network share location. I(job_wait) and I(job_wait_timeout) options are not applicable for I(test_connection).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OpenManage Enterprise or OpenManage Enterprise Modular username. If the username is not provided, then the environment variable E(OME_USERNAME) is used. Example: export OME_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(OME_X_AUTH_TOKEN) is used. Example: export OME_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

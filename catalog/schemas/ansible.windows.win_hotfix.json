@@ -2,6 +2,54 @@
   "fqcn": "ansible.windows.win_hotfix",
   "shortDescription": "Install and uninstalls Windows hotfixes",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_hotfix_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "hotfix_identifier",
+      "displayName": "Hotfix Identifier",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the hotfix as shown in DISM, see examples for details. This or C(hotfix_kb) MUST be set when C(state=absent). If C(state=present) then the hotfix at C(source) will be validated against this value, if it does not match an error will occur. You can get the identifier by running 'Get-WindowsPackage -Online -PackagePath path-to-cab-in-msu' after expanding the msu file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hotfix_kb",
+      "displayName": "Hotfix Kb",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the KB the hotfix relates to, see examples for details. This or C(hotfix_identifier) MUST be set when C(state=absent). If C(state=present) then the hotfix at C(source) will be validated against this value, if it does not match an error will occur. Because DISM uses the identifier as a key and doesn't refer to a KB in all cases it is recommended to use C(hotfix_identifier) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the downloaded hotfix .msu file. This MUST be set if C(state=present) and MUST be a .msu hotfix file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether to install or uninstall the hotfix. When C(present), C(source) MUST be set. When C(absent), C(hotfix_identifier) or C(hotfix_kb) MUST be set.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

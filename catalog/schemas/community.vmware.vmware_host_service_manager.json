@@ -1,7 +1,151 @@
 {
   "fqcn": "community.vmware.vmware_host_service_manager",
-  "shortDescription": "vmware_host_service_manager",
+  "shortDescription": "Manage services on a given ESXi host",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_host_service_manager_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "cluster_name",
+      "displayName": "Cluster Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the cluster. Service settings are applied to every ESXi host system/s in given cluster. If O(esxi_hostname) is not given, this parameter is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "esxi_hostname",
+      "displayName": "Esxi Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ESXi hostname. Service settings are applied to this ESXi host system. If O(cluster_name) is not given, this parameter is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_name",
+      "displayName": "Service Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of Service to be managed. This is a brief identifier for the service, for example, ntpd, vxsyslogd etc. This value should be a valid ESXi service name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_policy",
+      "displayName": "Service Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set of valid service policy strings. If set V(on), then service should be started when the host starts up. If set V(automatic), then service should run if and only if it has open firewall ports. If set V(off), then Service should not be started when the host starts up.",
+      "choices": [
+        "automatic",
+        "off",
+        "on"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "start",
+      "description": "Desired state of service. V(start) and V(present) has same effect. V(stop) and V(absent) has same effect. V(unchanged) allows defining O(service_policy) without defining or changing service state.",
+      "choices": [
+        "absent",
+        "present",
+        "restart",
+        "start",
+        "stop",
+        "unchanged"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

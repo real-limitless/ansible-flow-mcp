@@ -1,0 +1,531 @@
+{
+  "fqcn": "community.network.netscaler_servicegroup",
+  "shortDescription": "Manage service group configuration in Netscaler",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/network/netscaler_servicegroup_module.html",
+  "options": [
+    {
+      "name": "appflowlog",
+      "displayName": "Appflowlog",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enable logging of AppFlow information for the specified service group.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autoscale",
+      "displayName": "Autoscale",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Auto scale option for a servicegroup.",
+      "choices": [
+        "DISABLED",
+        "DNS",
+        "POLICY"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cacheable",
+      "displayName": "Cacheable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use the transparent cache redirection virtual server to forward the request to the cache server. Note: Do not set this parameter if you set the Cache Type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cachetype",
+      "displayName": "Cachetype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Cache type supported by the cache server.",
+      "choices": [
+        "TRANSPARENT",
+        "REVERSE",
+        "FORWARD"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cip",
+      "displayName": "Cip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Insert the Client IP header in requests forwarded to the service.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cipheader",
+      "displayName": "Cipheader",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the HTTP header whose value must be set to the IP address of the client. Used with the Client IP parameter. If client IP insertion is enabled, and the client IP header is not specified, the value of Client IP Header parameter or the value set by the set ns config command is used as client's IP header name. Minimum length = 1",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cka",
+      "displayName": "Cka",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable client keep-alive for the service group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clttimeout",
+      "displayName": "Clttimeout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Time, in seconds, after which to terminate an idle client connection. Minimum value = C(0) Maximum value = C(31536000)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cmp",
+      "displayName": "Cmp",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable compression for the specified service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Any information about the service group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disabled",
+      "displayName": "Disabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When set to C(yes) the service group state will be set to DISABLED. When set to C(no) the service group state will be set to ENABLED. Note that due to limitations of the underlying NITRO API a C(disabled) state change alone does not cause the module result to report a changed status.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "downstateflush",
+      "displayName": "Downstateflush",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Flush all active transactions associated with all the services in the service group whose state transitions from UP to DOWN. Do not enable this option for applications that must complete their transactions.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "graceful",
+      "displayName": "Graceful",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Wait for all existing connections to the service to terminate before shutting down the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "healthmonitor",
+      "displayName": "Healthmonitor",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Monitor the health of this service. Available settings function as follows: C(yes) - Send probes to check the health of the service. C(no) - Do not send probes to check the health of the service. With the NO option, the appliance shows the service as UP at all times.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "httpprofilename",
+      "displayName": "Httpprofilename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the HTTP profile that contains HTTP configuration settings for the service group. Minimum length = 1 Maximum length = 127",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxbandwidth",
+      "displayName": "Maxbandwidth",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Maximum bandwidth, in Kbps, allocated for all the services in the service group. Minimum value = C(0) Maximum value = C(4294967287)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxclient",
+      "displayName": "Maxclient",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of simultaneous open connections for the service group. Minimum value = C(0) Maximum value = C(4294967294)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxreq",
+      "displayName": "Maxreq",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of requests that can be sent on a persistent connection to the service group. Note: Connection requests beyond this value are rejected. Minimum value = C(0) Maximum value = C(65535)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "memberport",
+      "displayName": "Memberport",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "member port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitorbindings",
+      "displayName": "Monitorbindings",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A list of monitornames to bind to this service Note that the monitors must have already been setup possibly using the M(community.network.netscaler_lb_monitor) module or some other method",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monthreshold",
+      "displayName": "Monthreshold",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Minimum sum of weights of the monitors that are bound to this service. Used to determine whether to mark a service as UP or DOWN. Minimum value = C(0) Maximum value = C(65535)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "netprofile",
+      "displayName": "Netprofile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network profile for the service group. Minimum length = 1 Maximum length = 127",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_pass",
+      "displayName": "Nitro Pass",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password with which to authenticate to the netscaler node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_protocol",
+      "displayName": "Nitro Protocol",
+      "type": "string",
+      "required": false,
+      "default": "http",
+      "description": "Which protocol to use when accessing the nitro API objects.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_timeout",
+      "displayName": "Nitro Timeout",
+      "type": "number",
+      "required": false,
+      "default": 310,
+      "description": "Time in seconds until a timeout error is thrown when establishing a new session with Netscaler",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_user",
+      "displayName": "Nitro User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username with which to authenticate to the netscaler node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nsip",
+      "displayName": "Nsip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The ip address of the netscaler appliance where the nitro API calls will be made. The port can be specified with the colon (:). E.g. 192.168.1.1:555.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pathmonitor",
+      "displayName": "Pathmonitor",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Path monitoring for clustering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pathmonitorindv",
+      "displayName": "Pathmonitorindv",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Individual Path monitoring decisions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rtspsessionidremap",
+      "displayName": "Rtspsessionidremap",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable RTSP session ID mapping for the service group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save_config",
+      "displayName": "Save Config",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(yes) the module will save the configuration on the netscaler node if it makes any changes. The module will not save the configuration on the netscaler node if it made no changes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "servicegroupname",
+      "displayName": "Servicegroupname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the service group. Must begin with an ASCII alphabetic or underscore C(_) character, and must contain only ASCII alphanumeric, underscore C(_), hash C(#), period C(.), space C( ), colon C(:), at C(@), equals C(=), and hyphen C(-) characters. Can be changed after the name is created. Minimum length = 1",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "servicemembers",
+      "displayName": "Servicemembers",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A list of dictionaries describing each service member of the service group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "servicetype",
+      "displayName": "Servicetype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Protocol used to exchange data with the service.",
+      "choices": [
+        "HTTP",
+        "FTP",
+        "TCP",
+        "UDP",
+        "SSL",
+        "SSL_BRIDGE",
+        "SSL_TCP",
+        "DTLS",
+        "NNTP",
+        "RPCSVR",
+        "DNS",
+        "ADNS",
+        "SNMP",
+        "RTSP",
+        "DHCPRA",
+        "ANY",
+        "SIP_UDP",
+        "SIP_TCP",
+        "SIP_SSL",
+        "DNS_TCP",
+        "ADNS_TCP",
+        "MYSQL",
+        "MSSQL",
+        "ORACLE",
+        "RADIUS",
+        "RADIUSListener",
+        "RDP",
+        "DIAMETER",
+        "SSL_DIAMETER",
+        "TFTP",
+        "SMPP",
+        "PPTP",
+        "GRE",
+        "SYSLOGTCP",
+        "SYSLOGUDP",
+        "FIX",
+        "SSL_FIX"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sp",
+      "displayName": "Sp",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable surge protection for the service group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the resource being configured by the module on the netscaler node. When present the resource will be created if needed and configured according to the module's parameters. When absent the resource will be deleted from the netscaler node.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "svrtimeout",
+      "displayName": "Svrtimeout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Time, in seconds, after which to terminate an idle server connection. Minimum value = C(0) Maximum value = C(31536000)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tcpb",
+      "displayName": "Tcpb",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable TCP buffering for the service group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tcpprofilename",
+      "displayName": "Tcpprofilename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the TCP profile that contains TCP configuration settings for the service group. Minimum length = 1 Maximum length = 127",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "useproxyport",
+      "displayName": "Useproxyport",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use the proxy port as the source port when initiating connections with the server. With the NO setting, the client-side connection port is used as the source port for the server-side connection. Note: This parameter is available only when the Use Source IP C(usip) parameter is set to C(yes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "usip",
+      "displayName": "Usip",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use client's IP address as the source IP address when initiating connection to the server. With the NO setting, which is the default, a mapped IP (MIP) address or subnet IP (SNIP) address is used as the source IP address to initiate server side connections.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

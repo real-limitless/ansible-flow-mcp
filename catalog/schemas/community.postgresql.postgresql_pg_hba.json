@@ -2,6 +2,332 @@
   "fqcn": "community.postgresql.postgresql_pg_hba",
   "shortDescription": "Add, remove or modify a rule in a pg_hba file",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/postgresql/postgresql_pg_hba_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "address",
+      "displayName": "Address",
+      "type": "string",
+      "required": false,
+      "default": "samehost",
+      "description": "The source address/net where the connections could come from. Will not be used for entries of I(type)=C(local). You can also use keywords C(all), C(samehost), and C(samenet).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set, create a backup of the C(pg_hba) file before it is modified. The location of the backup is returned in the (backup) variable by this module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_file",
+      "displayName": "Backup File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Write backup to a specific backupfile rather than a temp file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A comment that will be placed in the same line behind the rule. See also the I(keep_comments_at_rules) parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "contype",
+      "displayName": "Contype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of the rule. If not set, C(postgresql_pg_hba) will only return contents.",
+      "choices": [
+        "local",
+        "host",
+        "hostnossl",
+        "hostssl",
+        "hostgssenc",
+        "hostnogssenc"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create",
+      "displayName": "Create",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create an C(pg_hba) file if none exists. When set to false, an error is raised when the C(pg_hba) file doesn't exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "databases",
+      "displayName": "Databases",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "description": "Databases this line applies to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to C(pg_hba) file to modify.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keep_comments_at_rules",
+      "displayName": "Keep Comments At Rules",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This option has been deprecated and doesn't do anything. The module behaves as if this is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "method",
+      "displayName": "Method",
+      "type": "string",
+      "required": false,
+      "default": "md5",
+      "description": "Authentication method to be used.",
+      "choices": [
+        "cert",
+        "gss",
+        "ident",
+        "krb5",
+        "ldap",
+        "md5",
+        "pam",
+        "password",
+        "peer",
+        "radius",
+        "reject",
+        "scram-sha-256",
+        "sspi",
+        "trust"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "netmask",
+      "displayName": "Netmask",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The netmask of the source address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "options",
+      "displayName": "Options",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Additional options for the authentication I(method).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "overwrite",
+      "displayName": "Overwrite",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Remove all existing rules before adding rules. (Like I(state=absent) for all pre-existing rules.) Ignores all errors in the existing file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rules",
+      "displayName": "Rules",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of objects, specifying rules for the pg_hba.conf. Use this to manage multiple rules at once. Each object can have the following keys (the 'rule-specific arguments'), which are treated the same as if they were arguments of this module: C(address), C(comment), C(contype), C(databases), C(method), C(netmask), C(options), C(state), C(users) See also C(rules_behavior).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rules_behavior",
+      "displayName": "Rules Behavior",
+      "type": "string",
+      "required": false,
+      "default": "conflict",
+      "description": "Configure how the I(rules) argument works together with the rule-specific arguments outside the I(rules) argument. See I(rules) for the complete list of rule-specific arguments. When set to C(conflict), fail if I(rules) and, for example, I(address) are set. If C(combine), the normal rule-specific arguments are not defining a rule, but are used as defaults for the arguments in the I(rules) argument. Is used only when I(rules) is specified, ignored otherwise.",
+      "choices": [
+        "conflict",
+        "combine"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sort_rules",
+      "displayName": "Sort Rules",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Sorts the rules in the file only if a change is required. It will sort the rules so more specific rules are at the top. For example, a rule matching a single host will be before a rule that matches an ip-range. The order of rules is important, as they are evaluated top-down and the first one that matches is used. This means changing the order of rules in the file can change how your instance behaves. Will sort comments to the top, includes to the bottom and remove empty lines. I would advise to ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The lines will be added/modified when C(state=present) and removed when C(state=absent).",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "users",
+      "displayName": "Users",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "description": "Users this line applies to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -2,6 +2,376 @@
   "fqcn": "openstack.cloud.port",
   "shortDescription": "Add/Update/Delete ports from an OpenStack cloud.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/openstack/cloud/port_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "allowed_address_pairs",
+      "displayName": "Allowed Address Pairs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Allowed address pairs list. Allowed address pairs are supported with dictionary structure. e.g.  allowed_address_pairs: - ip_address: 10.1.0.12 mac_address: ab:cd:ef:12:34:56 - ip_address: ... The port will change during update if not all suboptions are specified, e.g. when ip_address is given but mac_address is not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "How long should the socket layer wait before timing out for API calls. If this is omitted, nothing will be passed to the requests library.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary containing auth information as needed by the cloud's auth plugin strategy. For the default I(password) plugin, this would contain I(auth_url), I(username), I(password), I(project_name) and any information about domains (for example, I(user_domain_name) or I(project_domain_name)) if the cloud supports them. For other plugins, this param will need to contain whatever parameters that auth plugin requires. This parameter is not needed if a named cloud is provided or OpenStack OS_* environ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the auth plugin to use. If the cloud uses something other than password authentication, the name of the plugin should be indicated here and the contents of the I(auth) parameter should be updated accordingly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "binding_profile",
+      "displayName": "Binding Profile",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Binding profile dict that the port should be created with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "binding_vnic_type",
+      "displayName": "Binding Vnic Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of the port that should be created",
+      "choices": [
+        "normal",
+        "direct",
+        "direct-physical",
+        "macvtap",
+        "baremetal",
+        "virtio-forwarder"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a CA Cert bundle that can be used as part of verifying SSL API requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a client certificate to use as part of the SSL transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a client key to use as part of the SSL transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud",
+      "displayName": "Cloud",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Named cloud or cloud config to operate against. If I(cloud) is a string, it references a named cloud config as defined in an OpenStack clouds.yaml file. Provides default values for I(auth) and I(auth_type). This parameter is not needed if I(auth) is provided or if OpenStack OS_* environment variables are present. If I(cloud) is a dict, it contains a complete cloud configuration like would be in a section of clouds.yaml.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_id",
+      "displayName": "Device Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Device ID of device using this port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_owner",
+      "displayName": "Device Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the entity that uses this port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_domain",
+      "displayName": "Dns Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The dns domain of the port ( only with dns-integration enabled )",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_name",
+      "displayName": "Dns Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The dns name of the port ( only with dns-integration enabled )",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extra_dhcp_opts",
+      "displayName": "Extra Dhcp Opts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Extra dhcp options to be assigned to this port. Extra options are supported with dictionary structure. Note that options cannot be removed only updated. e.g.  extra_dhcp_opts: - ip_version: 4 opt_name: bootfile-name opt_value: pxelinux.0 - opt_name: ... The port will change during update if not all suboptions are specified, e.g. when opt_name is given but ip_version is not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fixed_ips",
+      "displayName": "Fixed Ips",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Desired IP and/or subnet for this port.  Subnet is referenced by subnet_id and IP is referenced by ip_address. The port will change during update if not all suboptions are specified, e.g. when ip_address is given but subnet_id is not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": false,
+      "default": "public",
+      "description": "Endpoint URL type to fetch from the service catalog.",
+      "choices": [
+        "admin",
+        "internal",
+        "public"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_admin_state_up",
+      "displayName": "Is Admin State Up",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Sets admin state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_port_security_enabled",
+      "displayName": "Is Port Security Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to enable or disable the port security on the network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mac_address",
+      "displayName": "Mac Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "MAC address of this port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name that has to be given to the port. This port attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID or name of the network this port belongs to. Required when creating a new port. Must be a name when creating a port. This port attribute cannot be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_security_groups",
+      "displayName": "No Security Groups",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Do not associate a security group with this port. Deprecated. Use I(security_groups): C([]) instead of I(no_security_groups): C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region_name",
+      "displayName": "Region Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the region.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdk_log_level",
+      "displayName": "Sdk Log Level",
+      "type": "string",
+      "required": false,
+      "default": "INFO",
+      "description": "Log level of the OpenStackSDK",
+      "choices": [
+        "INFO",
+        "DEBUG"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdk_log_path",
+      "displayName": "Sdk Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the logfile of the OpenStackSDK. If empty no log is written",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_groups",
+      "displayName": "Security Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Security group(s) ID(s) or name(s) associated with the port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Should the resource be present or absent.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "How long should ansible wait for the requested resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not SSL API requests should be verified. Before Ansible 2.3 this defaulted to C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Should ansible wait until the requested resource is complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

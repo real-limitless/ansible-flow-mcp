@@ -2,6 +2,932 @@
   "fqcn": "oracle.oci.oci_database_autonomous_database",
   "shortDescription": "Manage an AutonomousDatabase resource in Oracle Cloud Infrastructure",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/oracle/oci/oci_database_autonomous_database_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "admin_password",
+      "displayName": "Admin Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "**Important** The `adminPassword` or `secretId` must be specified for all Autonomous Databases except for refreshable clones. The password must be between 12 and 30 characters long, and must contain at least 1 uppercase, 1 lowercase, and 1 numeric character. It cannot contain the double quote symbol (\") or the username \"admin\", regardless of casing. This cannot be used in conjunction with with OCI vault secrets (secretId). This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the user, on whose behalf, OCI APIs are invoked. If not set, then the value of the OCI_USER_ID environment variable, if any, is used. This option is required if the user is not specified through a configuration file (See C(config_file_location)). To get the user's OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_fingerprint",
+      "displayName": "Api User Fingerprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fingerprint for the key pair being used. If not set, then the value of the OCI_USER_FINGERPRINT environment variable, if any, is used. This option is required if the key fingerprint is not specified through a configuration file (See C(config_file_location)). To get the key pair's fingerprint value please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_file",
+      "displayName": "Api User Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Full path and filename of the private key (in PEM format). If not set, then the value of the OCI_USER_KEY_FILE variable, if any, is used. This option is required if the private key is not specified through a configuration file (See C(config_file_location)). If the key is encrypted with a pass-phrase, the C(api_user_key_pass_phrase) option must also be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_pass_phrase",
+      "displayName": "Api User Key Pass Phrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase used by the key referenced in C(api_user_key_file), if it is encrypted. If not set, then the value of the OCI_USER_KEY_PASS_PHRASE variable, if any, is used. This option is required if the key passphrase is not specified through a configuration file (See C(config_file_location)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "are_primary_whitelisted_ips_used",
+      "displayName": "Are Primary Whitelisted Ips Used",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "This field will be null if the Autonomous Database is not Data Guard enabled or Access Control is disabled. It's value would be `TRUE` if Autonomous Database is Data Guard enabled and Access Control is enabled and if the Autonomous Database uses primary IP access control list (ACL) for standby. It's value would be `FALSE` if Autonomous Database is Data Guard enabled and Access Control is enabled and if the Autonomous Database uses different IP access control list (ACL) for standby compared to pr",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_purpose",
+      "displayName": "Auth Purpose",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The auth purpose which can be used in conjunction with 'auth_type=instance_principal'. The default auth_purpose for instance_principal is None.",
+      "choices": [
+        "service_principal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "api_key",
+      "description": "The type of authentication to use for making API requests. By default C(auth_type=\"api_key\") based authentication is performed and the API key (see I(api_user_key_file)) in your config file will be used. If this 'auth_type' module option is not specified, the value of the OCI_ANSIBLE_AUTH_TYPE, if any, is used. Use C(auth_type=\"instance_principal\") to use instance principal based authentication when running ansible playbooks within an OCI compute instance.",
+      "choices": [
+        "api_key",
+        "instance_principal",
+        "instance_obo_user",
+        "resource_principal",
+        "security_token"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autonomous_container_database_id",
+      "displayName": "Autonomous Container Database Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Autonomous Container Database L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm). Used only by Autonomous Database on Dedicated Exadata Infrastructure.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autonomous_database_backup_id",
+      "displayName": "Autonomous Database Backup Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the source Autonomous Database Backup that you will clone to create a new Autonomous Database. Required when source is 'BACKUP_FROM_ID'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autonomous_database_id",
+      "displayName": "Autonomous Database Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the source Autonomous Database that you will clone to create a new Autonomous Database. Required for update using I(state=present) when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is not set. Required for delete using I(state=absent) when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is not set. Required when source is 'BACKUP_FROM_TIMESTAMP'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autonomous_maintenance_schedule_type",
+      "displayName": "Autonomous Maintenance Schedule Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The maintenance schedule type of the Autonomous Database Serverless. An EARLY maintenance schedule follows a schedule applying patches prior to the REGULAR schedule. A REGULAR maintenance schedule follows the normal cycle",
+      "choices": [
+        "EARLY",
+        "REGULAR"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_retention_period_in_days",
+      "displayName": "Backup Retention Period In Days",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Retention period, in days, for long-term backups This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_bundle",
+      "displayName": "Cert Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full path to a CA certificate bundle to be used for SSL verification. This will override the default CA certificate bundle. If not set, then the value of the OCI_ANSIBLE_CERT_BUNDLE variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "character_set",
+      "displayName": "Character Set",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The character set for the autonomous database. The default is AL32UTF8. Allowed values for an Autonomous Database Serverless instance as as returned by L(List Autonomous Database Character Sets,https://docs.oracle.com/iaas/autonomous-database-serverless/doc/autonomous-character-set- selection.html) For an Autonomous Database on dedicated infrastructure, the allowed values are: AL32UTF8, AR8ADOS710, AR8ADOS720, AR8APTEC715, AR8ARABICMACS, AR8ASMO8X, AR8ISO8859P6, AR8MSWIN1256, AR8MUSSAD768, AR8NA",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clone_type",
+      "displayName": "Clone Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Autonomous Database clone type. Required when source is one of ['BACKUP_FROM_TIMESTAMP', 'DATABASE', 'BACKUP_FROM_ID']",
+      "choices": [
+        "FULL",
+        "METADATA"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compartment_id",
+      "displayName": "Compartment Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the compartment of the Autonomous Database. Required for create using I(state=present). Required for update when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is set. Required for delete when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compute_count",
+      "displayName": "Compute Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The compute amount (CPUs) available to the database. Minimum and maximum values depend on the compute model and whether the database is an Autonomous Database Serverless instance or an Autonomous Database on Dedicated Exadata Infrastructure. For an Autonomous Database Serverless instance, the 'ECPU' compute model requires a minimum value of one, for databases in the elastic resource pool and minimum value of two, otherwise. Required when using the `computeModel` parameter. When using `cpuCoreCou",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compute_model",
+      "displayName": "Compute Model",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The compute model of the Autonomous Database. This is required if using the `computeCount` parameter. If using `cpuCoreCount` then it is an error to specify `computeModel` to a non-null value. ECPU compute model is the recommended model and OCPU compute model is legacy. This parameter is updatable.",
+      "choices": [
+        "ECPU",
+        "OCPU"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file_location",
+      "displayName": "Config File Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to configuration file. If not set then the value of the OCI_CONFIG_FILE environment variable, if any, is used. Otherwise, defaults to ~/.oci/config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_profile_name",
+      "displayName": "Config Profile Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The profile to load from the config file referenced by C(config_file_location). If not set, then the value of the OCI_CONFIG_PROFILE environment variable, if any, is used. Otherwise, defaults to the \"DEFAULT\" profile in C(config_file_location).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpu_core_count",
+      "displayName": "Cpu Core Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of CPU cores to be made available to the database. For Autonomous Databases on dedicated Exadata infrastructure, the maximum number of cores is determined by the infrastructure shape. See L(Characteristics of Infrastructure Shapes,https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/autonomous-database&id=ATPFG-GUID-B0F033C1-CC5A-42F0-B2E7-3CECFEDA1FD1) for shape details. **Note:** This parameter cannot be used with the `ocpuCount` parameter. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "customer_contacts",
+      "displayName": "Customer Contacts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Customer Contacts. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_storage_size_in_gbs",
+      "displayName": "Data Storage Size In Gbs",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The size, in gigabytes, of the data volume that will be created and attached to the database. This storage can later be scaled up if needed. The maximum storage value is determined by the infrastructure shape. See L(Characteristics of Infrastructure Shapes,https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/autonomous-database&id=ATPFG-GUID-B0F033C1-CC5A-42F0-B2E7-3CECFEDA1FD1) for shape details. **Notes** - This parameter is only supported for dedicated Exadata infrastructure. - This para",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_storage_size_in_tbs",
+      "displayName": "Data Storage Size In Tbs",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The size, in terabytes, of the data volume that will be created and attached to the database. This storage can later be scaled up if needed. For Autonomous Databases on dedicated Exadata infrastructure, the maximum storage value is determined by the infrastructure shape. See L(Characteristics of Infrastructure Shapes,https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/autonomous-database&id=ATPFG- GUID-B0F033C1-CC5A-42F0-B2E7-3CECFEDA1FD1) for shape details. A full Exadata service is alloc",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_edition",
+      "displayName": "Database Edition",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle Database Edition that applies to the Autonomous databases. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_name",
+      "displayName": "Db Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The database name. The name must begin with an alphabetic character and can contain a maximum of 30 alphanumeric characters. Special characters are not permitted. The database name must be unique in the tenancy. It is required in all cases except when creating a cross-region Autonomous Data Guard standby instance or a cross-region disaster recovery standby instance. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_tools_details",
+      "displayName": "Db Tools Details",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of database tools details. This cannot be updated in parallel with any of the following: licenseModel, dbEdition, cpuCoreCount, computeCount, computeModel, whitelistedIps, isMTLSConnectionRequired, openMode, permissionLevel, dbWorkload, privateEndpointLabel, nsgIds, dbVersion, isRefreshable, dbName, scheduledOperations, isLocalDataGuardEnabled, or isFreeTier. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_version",
+      "displayName": "Db Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A valid Oracle Database version for Autonomous Database. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_workload",
+      "displayName": "Db Workload",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Autonomous Database workload type. The following values are valid: - OLTP - indicates an Autonomous Transaction Processing database - DW - indicates an Autonomous Data Warehouse database - AJD - indicates an Autonomous JSON Database - APEX - indicates an Autonomous Database with the Oracle APEX Application Development workload type. This cannot be updated in parallel with any of the following: licenseModel, dbEdition, cpuCoreCount, computeCount, computeModel, adminPassword, whitelistedIps, i",
+      "choices": [
+        "OLTP",
+        "DW",
+        "AJD",
+        "APEX"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "defined_tags",
+      "displayName": "Defined Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see L(Resource Tags,https://docs.cloud.oracle.com/Content/General/Concepts/resourcetags.htm). This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-friendly name for the Autonomous Database. The name does not have to be unique. Required for create, update, delete when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is set. This parameter is updatable when C(OCI_USE_NAME_AS_IDENTIFIER) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_create",
+      "displayName": "Force Create",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to attempt non-idempotent creation of a resource. By default, create resource is an idempotent operation, and doesn't create the resource if it already exists. Setting this option to true, forcefully creates a copy of the resource, even if it already exists.This option is mutually exclusive with I(key_by).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "freeform_tags",
+      "displayName": "Freeform Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see L(Resource Tags,https://docs.cloud.oracle.com/Content/General/Concepts/resourcetags.htm). Example: `{\"Department\": \"Finance\"}` This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "in_memory_percentage",
+      "displayName": "In Memory Percentage",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The percentage of the System Global Area(SGA) assigned to In-Memory tables in Autonomous Database. This property is applicable only to Autonomous Databases on the Exadata Cloud@Customer platform. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_access_control_enabled",
+      "displayName": "Is Access Control Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates if the database-level access control is enabled. If disabled, database access is defined by the network security rules. If enabled, database access is restricted to the IP addresses defined by the rules specified with the `whitelistedIps` property. While specifying `whitelistedIps` rules is optional, if database-level access control is enabled and no rules are specified, the database will become inaccessible. The rules can be added later using the `UpdateAutonomousDatabase` API operati",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_auto_scaling_enabled",
+      "displayName": "Is Auto Scaling Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates if auto scaling is enabled for the Autonomous Database CPU core count. The default value is `TRUE`. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_auto_scaling_for_storage_enabled",
+      "displayName": "Is Auto Scaling For Storage Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates if auto scaling is enabled for the Autonomous Database storage. The default value is `FALSE`. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_data_guard_enabled",
+      "displayName": "Is Data Guard Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "**Deprecated.** Indicates whether the Autonomous Database has local (in-region) Data Guard enabled. Not applicable to cross-region Autonomous Data Guard associations, or to Autonomous Databases using dedicated Exadata infrastructure or Exadata Cloud@Customer infrastructure. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_dedicated",
+      "displayName": "Is Dedicated",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True if the database is on L(dedicated Exadata infrastructure,https://docs.oracle.com/en/cloud/paas/autonomous-database/index.html).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_free_tier",
+      "displayName": "Is Free Tier",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates if this is an Always Free resource. The default value is false. Note that Always Free Autonomous Databases have 1 CPU and 20GB of memory. For Always Free databases, memory and CPU cannot be scaled. This cannot be updated in parallel with any of the following: licenseModel, dbEdition, cpuCoreCount, computeCount, computeModel, adminPassword, whitelistedIps, isMTLSConnectionRequired, openMode, permissionLevel, privateEndpointLabel, nsgIds, dbVersion, isRefreshable, dbName, scheduledOperat",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_local_data_guard_enabled",
+      "displayName": "Is Local Data Guard Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether the Autonomous Database has local (in-region) Data Guard enabled. Not applicable to cross-region Autonomous Data Guard associations, or to Autonomous Databases using dedicated Exadata infrastructure or Exadata Cloud@Customer infrastructure. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_mtls_connection_required",
+      "displayName": "Is Mtls Connection Required",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies if the Autonomous Database requires mTLS connections. This may not be updated in parallel with any of the following: licenseModel, databaseEdition, cpuCoreCount, computeCount, dataStorageSizeInTBs, whitelistedIps, openMode, permissionLevel, db-workload, privateEndpointLabel, nsgIds, customerContacts, dbVersion, scheduledOperations, dbToolsDetails, isLocalDataGuardEnabled, or isFreeTier. Service Change: The default value of the isMTLSConnectionRequired attribute will change from true to",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_preview_version_with_service_terms_accepted",
+      "displayName": "Is Preview Version With Service Terms Accepted",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If set to `TRUE`, indicates that an Autonomous Database preview version is being provisioned, and that the preview version's terms of service have been accepted. Note that preview version software is only available for Autonomous Database Serverless instances (https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_refreshable_clone",
+      "displayName": "Is Refreshable Clone",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates if the Autonomous Database is a refreshable clone. This cannot be updated in parallel with any of the following: cpuCoreCount, computeCount, computeModel, adminPassword, whitelistedIps, openMode, permissionLevel, dbWorkload, privateEndpointLabel, nsgIds, dbVersion, dbName, scheduledOperations, dbToolsDetails, isLocalDataGuardEnabled, or isFreeTier. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_by",
+      "displayName": "Key By",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of attributes of this resource which should be used to uniquely identify an instance of the resource. By default, all the attributes of a resource are used to uniquely identify a resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kms_key_id",
+      "displayName": "Kms Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the key container that is used as the master encryption key in database transparent data encryption (TDE) operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "license_model",
+      "displayName": "License Model",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle license model that applies to the Oracle Autonomous Database. Bring your own license (BYOL) allows you to apply your current on- premises Oracle software licenses to equivalent, highly automated Oracle services in the cloud. License Included allows you to subscribe to new Oracle Database software licenses and the Oracle Database service. Note that when provisioning an L(Autonomous Database on dedicated Exadata infrastructure,https://docs.oracle.com/en/cloud/paas/autonomous- database/i",
+      "choices": [
+        "LICENSE_INCLUDED",
+        "BRING_YOUR_OWN_LICENSE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_adg_auto_failover_max_data_loss_limit",
+      "displayName": "Local Adg Auto Failover Max Data Loss Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Parameter that allows users to select an acceptable maximum data loss limit in seconds, up to which Automatic Failover will be triggered when necessary for a Local Autonomous Data Guard This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "long_term_backup_schedule",
+      "displayName": "Long Term Backup Schedule",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": " This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ncharacter_set",
+      "displayName": "Ncharacter Set",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The character set for the Autonomous Database. The default is AL32UTF8. Use L(List Autonomous Database Character Sets,https://docs.oracle.com/iaas/autonomous-database-serverless/doc/autonomous-character-set-selection.html) to list the allowed values for an Autonomous Database Serverless instance. For an Autonomous Database on dedicated Exadata infrastructure, the allowed values are: AL16UTF16 or UTF8.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nsg_ids",
+      "displayName": "Nsg Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of L(OCIDs,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) for the network security groups (NSGs) to which this resource belongs. Setting this to an empty list removes all resources from all NSGs. For more information about NSGs, see L(Security Rules,https://docs.cloud.oracle.com/Content/Network/Concepts/securityrules.htm). **NsgIds restrictions:** - A network security group (NSG) is optional for Autonomous Databases with private access. The nsgIds list can be em",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ocpu_count",
+      "displayName": "Ocpu Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of OCPU cores to be made available to the database. The following points apply: - For Autonomous Databases on Dedicated Exadata infrastructure, to provision less than 1 core, enter a fractional value in an increment of 0.1. For example, you can provision 0.3 or 0.4 cores, but not 0.35 cores. (Note that fractional OCPU values are not supported for Autonomous Database Serverless instances.) - To provision 1 or more cores, you must enter an integer between 1 and the maximum number of cor",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "open_mode",
+      "displayName": "Open Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Indicates the Autonomous Database mode. The database can be opened in `READ_ONLY` or `READ_WRITE` mode. This cannot be updated in parallel with any of the following: cpuCoreCount, computeCount, computeModel, adminPassword, whitelistedIps, isMTLSConnectionRequired, dbVersion, isRefreshable, dbName, scheduledOperations, dbToolsDetails, or isFreeTier. This parameter is updatable.",
+      "choices": [
+        "READ_ONLY",
+        "READ_WRITE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_db_id",
+      "displayName": "Peer Db Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The database OCID(/Content/General/Concepts/identifiers.htm) of the Disaster Recovery peer (source Primary) database, which is located in a different (remote) region from the current peer database. To create or delete a local (in-region) standby, see the `isDataGuardEnabled` parameter. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "permission_level",
+      "displayName": "Permission Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Autonomous Database permission level. Restricted mode allows access only by admin users. This cannot be updated in parallel with any of the following: cpuCoreCount, computeCount, computeModel, adminPassword, whitelistedIps, isMTLSConnectionRequired, nsgIds, dbVersion, isRefreshable, dbName, scheduledOperations, dbToolsDetails, or isFreeTier. This parameter is updatable.",
+      "choices": [
+        "RESTRICTED",
+        "UNRESTRICTED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_endpoint_ip",
+      "displayName": "Private Endpoint Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The private endpoint Ip address for the resource. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_endpoint_label",
+      "displayName": "Private Endpoint Label",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The resource's private endpoint label. - Setting the endpoint label to a non-empty string creates a private endpoint database. - Resetting the endpoint label to an empty string, after the creation of the private endpoint database, changes the private endpoint database to a public endpoint database. - Setting the endpoint label to a non-empty string value, updates to a new private endpoint database, when the database is disabled and re- enabled. This setting cannot be updated in parallel with any",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realm_specific_endpoint_template_enabled",
+      "displayName": "Realm Specific Endpoint Template Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable/Disable realm specific endpoint template for service client. By Default, realm specific endpoint template is disabled. If not set, then the value of the OCI_REALM_SPECIFIC_SERVICE_ENDPOINT_TEMPLATE_ENABLED variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "refreshable_mode",
+      "displayName": "Refreshable Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The refresh mode of the clone. AUTOMATIC indicates that the clone is automatically being refreshed with data from the source Autonomous Database. This parameter is updatable. Applicable when source is 'CLONE_TO_REFRESHABLE'",
+      "choices": [
+        "AUTOMATIC",
+        "MANUAL"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle Cloud Infrastructure region to use for all OCI API requests. If not set, then the value of the OCI_REGION variable, if any, is used. This option is required if the region is not specified through a configuration file (See C(config_file_location)). Please refer to U(https://docs.us-phoenix-1.oraclecloud.com/Content/General/Concepts/regions.htm) for more information on OCI regions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_disaster_recovery_type",
+      "displayName": "Remote Disaster Recovery Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Indicates the cross-region disaster recovery (DR) type of the standby Autonomous Database Serverless instance. Autonomous Data Guard (ADG) DR type provides business critical DR with a faster recovery time objective (RTO) during failover or switchover. Backup-based DR type provides lower cost DR with a slower RTO during failover or switchover. Required when source is 'CROSS_REGION_DISASTER_RECOVERY'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_pool_leader_id",
+      "displayName": "Resource Pool Leader Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The unique identifier for leader autonomous database OCID L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm). This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_pool_summary",
+      "displayName": "Resource Pool Summary",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": " This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheduled_operations",
+      "displayName": "Scheduled Operations",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of scheduled operations. Consists of values such as dayOfWeek, scheduledStartTime, scheduledStopTime. This cannot be updated in parallel with any of the following: licenseModel, dbEdition, cpuCoreCount, computeCount, computeModel, whitelistedIps, isMTLSConnectionRequired, openMode, permissionLevel, dbWorkload, privateEndpointLabel, nsgIds, dbVersion, isRefreshable, dbName, dbToolsDetails, isLocalDataGuardEnabled, or isFreeTier. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_id",
+      "displayName": "Secret Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCI vault secret [/Content/General/Concepts/identifiers.htm]OCID. This cannot be used in conjunction with adminPassword. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_version_number",
+      "displayName": "Secret Version Number",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The version of the vault secret. If no version is specified, the latest version will be used. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": false,
+      "default": "NONE",
+      "description": "The source of the database: Use `NONE` for creating a new Autonomous Database. Use `DATABASE` for creating a new Autonomous Database by cloning an existing Autonomous Database. Use `CROSS_REGION_DATAGUARD` to create a standby Data Guard database in another region. For L(Autonomous Database Serverless instances,https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/), the following cloning options are available: Use `BACKUP_FROM_ID` for creating a new Autonomous Database from a spec",
+      "choices": [
+        "DATABASE",
+        "CLONE_TO_REFRESHABLE",
+        "BACKUP_FROM_ID",
+        "CROSS_REGION_DISASTER_RECOVERY",
+        "BACKUP_FROM_TIMESTAMP",
+        "CROSS_REGION_DATAGUARD",
+        "NONE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_autonomous_database_id",
+      "displayName": "Source Autonomous Database Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the source Autonomous Database that you will clone to create a new Autonomous Database. Required when source is 'BACKUP_FROM_TIMESTAMP'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_id",
+      "displayName": "Source Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the source Autonomous Database that you will clone to create a new Autonomous Database. Required when source is one of ['DATABASE', 'CLONE_TO_REFRESHABLE', 'CROSS_REGION_DISASTER_RECOVERY', 'CROSS_REGION_DATAGUARD']",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "standby_whitelisted_ips",
+      "displayName": "Standby Whitelisted Ips",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The client IP access control list (ACL). This feature is available for L(Autonomous Database Serverless],https://docs.oracle.com/en/cloud/paas/autonomous-database/index.html) and on Exadata Cloud@Customer. Only clients connecting from an IP address included in the ACL may access the Autonomous Database instance. If `arePrimaryWhitelistedIpsUsed` is 'TRUE' then Autonomous Database uses this primary's IP access control list (ACL) for the disaster recovery peer called `standbywhitelistedips`. For A",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the AutonomousDatabase. Use I(state=present) to create or update an AutonomousDatabase. Use I(state=absent) to delete an AutonomousDatabase.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subnet_id",
+      "displayName": "Subnet Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the subnet the resource is associated with. **Subnet Restrictions:** - For bare metal DB systems and for single node virtual machine DB systems, do not use a subnet that overlaps with 192.168.16.16/28. - For Exadata and virtual machine 2-node RAC systems, do not use a subnet that overlaps with 192.168.128.0/20. - For Autonomous Database, setting this will disable public secure access to the database. These subn",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenancy",
+      "displayName": "Tenancy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OCID of your tenancy. If not set, then the value of the OCI_TENANCY variable, if any, is used. This option is required if the tenancy OCID is not specified through a configuration file (See C(config_file_location)). To get the tenancy OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timestamp",
+      "displayName": "Timestamp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The timestamp specified for the point-in-time clone of the source Autonomous Database. The timestamp must be in the past. Applicable when source is 'BACKUP_FROM_TIMESTAMP'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_latest_available_backup_time_stamp",
+      "displayName": "Use Latest Available Backup Time Stamp",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Clone from latest available backup timestamp. Applicable when source is 'BACKUP_FROM_TIMESTAMP'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_id",
+      "displayName": "Vault Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the Oracle Cloud Infrastructure L(vault,https://docs.cloud.oracle.com/Content/KeyManagement/Concepts/keyoverview.htm#concepts). This parameter and `secretId` are required for Customer Managed Keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to wait for create or delete operation to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Time, in seconds, to wait when I(wait=yes). Defaults to 1200 for most of the services but some services might have a longer wait timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "whitelisted_ips",
+      "displayName": "Whitelisted Ips",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The client IP access control list (ACL). This feature is available for L(Autonomous Database Serverless],https://docs.oracle.com/en/cloud/paas/autonomous-database/index.html) and on Exadata Cloud@Customer. Only clients connecting from an IP address included in the ACL may access the Autonomous Database instance. If `arePrimaryWhitelistedIpsUsed` is 'TRUE' then Autonomous Database uses this primary's IP access control list (ACL) for the disaster recovery peer called `standbywhitelistedips`. For A",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

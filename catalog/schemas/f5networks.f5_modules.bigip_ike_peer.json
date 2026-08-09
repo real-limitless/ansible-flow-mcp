@@ -1,0 +1,292 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_ike_peer",
+  "shortDescription": "Manage IPSec IKE Peer configuration on BIG-IP",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_ike_peer_module.html",
+  "options": [
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the IKE peer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the IKE peer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "phase1_auth_method",
+      "displayName": "Phase1 Auth Method",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the authentication method for phase 1 negotiation. When creating a new IKE peer, if this value is not specified, the default is C(rsa-signature).",
+      "choices": [
+        "pre-shared-key",
+        "rsa-signature"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "phase1_cert",
+      "displayName": "Phase1 Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the digital certificate to use for the RSA signature. When creating a new IKE peer, if this value is not specified, and C(phase1_auth_method) is C(rsa-signature), the default is C(default.crt). This parameter is invalid when C(phase1_auth_method) is C(pre-shared-key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "phase1_encryption_algorithm",
+      "displayName": "Phase1 Encryption Algorithm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the algorithm to use for IKE encryption. IKE C(version) C(v2) does not support C(blowfish), C(camellia), or C(cast128).",
+      "choices": [
+        "3des",
+        "des",
+        "blowfish",
+        "cast128",
+        "aes128",
+        "aes192",
+        "aes256",
+        "camellia"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "phase1_hash_algorithm",
+      "displayName": "Phase1 Hash Algorithm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the algorithm to use for IKE authentication.",
+      "choices": [
+        "sha1",
+        "md5",
+        "sha256",
+        "sha384",
+        "sha512"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "phase1_key",
+      "displayName": "Phase1 Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the public key the digital certificate contains. When creating a new IKE peer, if this value is not specified, and C(phase1_auth_method) is C(rsa-signature), the default is C(default.key). This parameter is invalid when C(phase1_auth_method) is C(pre-shared-key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "phase1_lifetime",
+      "displayName": "Phase1 Lifetime",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Defines the lifetime in minutes of an IKE SA which will be proposed in the phase 1 negotiations. The accepted value range is C(1 - 4294967295) minutes. When creating a new IKE peer, if this value is not specified, the default value set by the system is C(1440) minutes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "phase1_perfect_forward_secrecy",
+      "displayName": "Phase1 Perfect Forward Secrecy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the Diffie-Hellman group to use for IKE Phase 1 and Phase 2 negotiations.",
+      "choices": [
+        "ecp256",
+        "ecp384",
+        "ecp521",
+        "modp768",
+        "modp1024",
+        "modp1536",
+        "modp2048",
+        "modp3072",
+        "modp4096",
+        "modp6144",
+        "modp8192"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "phase1_verify_peer_cert",
+      "displayName": "Phase1 Verify Peer Cert",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "In IKEv2, specifies whether the certificate sent by the IKE peer is verified using the Trusted Certificate Authorities, a CRL, and/or a peer certificate. In IKEv1, specifies whether the identifier sent by the peer is verified with the credentials in the certificate, in the following manner - ASN1DN; specifies that the entire certificate subject name is compared with the identifier. Address, FQDN, or User FQDN; specifies that the certificate's subjectAltName is compared with the identifier. If th",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "presented_id_type",
+      "displayName": "Presented Id Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the identifier type the local system uses to identify itself to the peer during IKE Phase 1 negotiations.",
+      "choices": [
+        "address",
+        "asn1dn",
+        "fqdn",
+        "keyid-tag",
+        "user-fqdn",
+        "override"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "presented_id_value",
+      "displayName": "Presented Id Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a value for the identity when using a C(presented_id_type) of C(override). This is a required value when C(version) includes (Cv2).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preshared_key",
+      "displayName": "Preshared Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a string the IKE peers share for authenticating each other. This parameter is only relevant when C(phase1_auth_method) is C(pre-shared-key). This parameter is invalid when C(phase1_auth_method) is C(rsa-signature).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_address",
+      "displayName": "Remote Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Displays the IP address of the BIG-IP system that is remote to the system you are configuring.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present), ensures the resource exists. When C(absent), ensures the resource is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "C(always) allows updating passwords if the user chooses to do so. C(on_create) only sets the password for newly created IKE peers.",
+      "choices": [
+        "always",
+        "on_create"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verified_id_type",
+      "displayName": "Verified Id Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the identifier type the local system uses to identify the peer during IKE Phase 1 negotiation. This is a required value when C(version) includes (Cv2). When C(user-fqdn), value of C(verified_id_value) must be in the form of User @ DNS domain string.",
+      "choices": [
+        "address",
+        "asn1dn",
+        "fqdn",
+        "keyid-tag",
+        "user-fqdn",
+        "override"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verified_id_value",
+      "displayName": "Verified Id Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a value for the identity when using a C(verified_id_type) of C(override). This is a required value when C(version) includes (Cv2).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies which version of IKE (Internet Key Exchange) is used. If the system you are configuring is the IPsec initiator, and you select both versions, the system tries using IKEv2 for negotiation. If the remote peer does not support IKEv2, the IPsec tunnel fails. To use IKEv1 in this case, you must deselect Version 2 and try again. If the system you are configuring is the IPsec responder, and you select both versions, the IPsec initiator system determines which IKE version to use. When creating",
+      "choices": [
+        "v1",
+        "v2"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

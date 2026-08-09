@@ -2,6 +2,204 @@
   "fqcn": "community.docker.docker_node",
   "shortDescription": "Manage Docker Swarm node",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/docker/docker_node_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_version",
+      "displayName": "Api Version",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "The version of the Docker API running on the Docker Host. Defaults to the latest version of the API supported by Docker SDK for Python and the docker daemon. If the value is not specified in the task, the value of environment variable E(DOCKER_API_VERSION) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability",
+      "displayName": "Availability",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Node availability to assign. If not provided then node availability remains unchanged.",
+      "choices": [
+        "active",
+        "pause",
+        "drain"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use a CA certificate when performing server verification by providing the path to a CA certificate file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(ca.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used. This option was called O(ca_cert) and got renamed to O(ca_path) in community.docker 3.6.0. The old name has been added as an alias and can still be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client's TLS certificate file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(cert.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client's TLS key file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(key.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Debug mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_host",
+      "displayName": "Docker Host",
+      "type": "string",
+      "required": false,
+      "default": "unix:///var/run/docker.sock",
+      "description": "The URL or Unix socket path used to connect to the Docker API. To connect to a remote host, provide the TCP connection string. For example, V(tcp://192.0.2.23:2376). If TLS is used to encrypt the connection, the module will automatically replace C(tcp) in the connection URL with C(https). If the value is not specified in the task, the value of environment variable E(DOCKER_HOST) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or ID of node as registered in Swarm. If more than one node is registered using the same hostname the ID must be used, otherwise module will fail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "User-defined key/value metadata that will be assigned as node attribute. Label operations in this module apply to the docker swarm node specified by O(hostname). Use M(community.docker.docker_swarm) module to add/modify/remove swarm cluster labels. The actual state of labels assigned to the node when module completes its work depends on O(labels_state) and O(labels_to_remove) parameters values. See description below.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels_state",
+      "displayName": "Labels State",
+      "type": "string",
+      "required": false,
+      "default": "merge",
+      "description": "It defines the operation on the labels assigned to node and labels specified in O(labels) option. Set to V(merge) to combine labels provided in O(labels) with those already assigned to the node. If no labels are assigned then it will add listed labels. For labels that are already assigned to the node, it will update their values. The labels not specified in O(labels) will remain unchanged. If O(labels) is empty then no changes will be made. Set to V(replace) to replace all assigned labels with p",
+      "choices": [
+        "merge",
+        "replace"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels_to_remove",
+      "displayName": "Labels To Remove",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of labels that will be removed from the node configuration. The list has to contain only label names, not their values. If the label provided on the list is not assigned to the node, the entry is ignored. If the label is both on the O(labels_to_remove) and O(labels), then value provided in O(labels) remains assigned to the node. If O(labels_state=replace) and O(labels) is not provided or empty then all labels assigned to node are removed and O(labels_to_remove) is ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role",
+      "displayName": "Role",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Node role to assign. If not provided then node role remains unchanged.",
+      "choices": [
+        "manager",
+        "worker"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "The maximum amount of time in seconds to wait on a response from the API. If the value is not specified in the task, the value of environment variable E(DOCKER_TIMEOUT) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls",
+      "displayName": "Tls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server. Note that if O(validate_certs) is set to V(true) as well, it will take precedence. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_hostname",
+      "displayName": "Tls Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When verifying the authenticity of the Docker Host server, provide the expected name of the server. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS_HOSTNAME) will be used instead. If the environment variable is not set, the default value will be used. Note that this option had a default value V(localhost) in older versions. It was removed in community.docker 3.0.0. B(Note:) this option is no longer supported for Docker SDK for Python 7.0.0+. Specifying i",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_ssh_client",
+      "displayName": "Use Ssh Client",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "For SSH transports, use the C(ssh) CLI tool instead of paramiko. Requires Docker SDK for Python 4.4.0 or newer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS_VERIFY) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

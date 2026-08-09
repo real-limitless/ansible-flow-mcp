@@ -1,0 +1,139 @@
+{
+  "fqcn": "ibm.power_aix.suma",
+  "shortDescription": "Download/Install fixes, SP or TL from IBM Fix Central website.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/suma_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "preview",
+      "description": "Controls the SUMA action to be performed. C(download) specifies to download and install the fixes. C(preview) specifies to execute all the checks without downloading the fixes. C(list) specifies to list all SUMA tasks. C(edit) specifies to edit an exiting SUMA task. C(run) specifies to run an exiting SUMA task. C(unschedule) specifies to remove any scheduling information for the specified SUMA task. C(delete) specifies to delete a SUMA task and remove any schedules for the specified SUMA task. C",
+      "choices": [
+        "download",
+        "preview",
+        "list",
+        "edit",
+        "run",
+        "unschedule",
+        "delete",
+        "config",
+        "default"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the display name for SUMA task. This is used when viewing existing SUMA tasks in SMIT for example. If not set they will be labelled as 'I(action) request for oslevel I(oslevel)'. Can be used for I(action=download) or I(action=preview).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_dir",
+      "displayName": "Download Dir",
+      "type": "string",
+      "required": false,
+      "default": "/usr/sys/inst.images",
+      "description": "Specifies the directory to download updates files into. Can be used if I(action=download) or I(action=preview).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_only",
+      "displayName": "Download Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to perform the preview and download operation only. Do not install the updates. Can be used if I(action=download) or I(action=preview).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extend_fs",
+      "displayName": "Extend Fs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies to automatically extends the filesystem if extra space is needed. When I(extend_fs=no) and additional space is required for the download, no download occurs. When set, a filesystem could have increased while the task returns I(changed=False). Can be used if I(action=download) or I(action=preview).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "last_sp",
+      "displayName": "Last Sp",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to download the last SP of the TL specified in I(oslevel). When I(last_sp=no), only the TL is downloaded and/or installed. Can be used if I(action=download) or I(action=preview).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "metadata_dir",
+      "displayName": "Metadata Dir",
+      "type": "string",
+      "required": false,
+      "default": "/var/adm/ansible/metadata",
+      "description": "Specifies the directory where metadata files are downloaded. Can be used if I(action=download) or I(action=preview) when I(last_sp=yes) or I(oslevel) is not exact, for example I(oslevel=Latest).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oslevel",
+      "displayName": "Oslevel",
+      "type": "string",
+      "required": false,
+      "default": "Latest",
+      "description": "Specifies the Operating System level to update to; C(Latest) specifies to update the target to the latest SP suma can update for the current TL. C(xxxx-xx(-00-0000)) specifies to update the target to a specific TL. C(xxxx-xx-xx-xxxx) or C(xxxx-xx-xx) specifies to update the target to a specific SP. Required when I(action=download) or I(action=preview).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save_task",
+      "displayName": "Save Task",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to save the SUMA task allowing scheduling information to be added later. Can be used if I(action=download) or I(action=preview). If I(oslevel) is a TL and I(last_sp=yes) the task is saved with the last SP available at the time the task is saved.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sched_time",
+      "displayName": "Sched Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the schedule time for the task. When an empty or space filled string is specified, it unschedules the task. When not set, it saves the task for later scheduling. Can be used if I(action=edit).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "task_id",
+      "displayName": "Task Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the SUMA task identification number. Can be used if I(action=list) or I(action=edit) or I(action=delete) or I(action=run) or I(action=unschedule). Required when I(action=edit) or I(action=delete) or I(action=run) or I(action=unschedule).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

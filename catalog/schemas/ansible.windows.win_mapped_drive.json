@@ -2,6 +2,65 @@
   "fqcn": "ansible.windows.win_mapped_drive",
   "shortDescription": "Map network drives for users",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_mapped_drive_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "letter",
+      "displayName": "Letter",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The letter of the network path to map to. This letter must not already be in use with Windows.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for C(username) that is used when testing the initial connection. This is never saved with a mapped drive, use the M(ansible.windows.win_credential) module to persist a username and password for a host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The UNC path to map the drive to. If pointing to a WebDAV location this must still be in a UNC path in the format C(\\\\hostname\\path) and not a URL, see examples for more details. To specify a C(https) WebDAV path, add C(@SSL) after the hostname. To specify a custom WebDAV port add C(@<port num>) after the C(@SSL) or hostname portion of the UNC path, e.g. C(\\\\server@SSL@1234) or C(\\\\server@1234). This is required if C(state=present). If C(state=absent) and I(path) is not set, the module will dele",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present) will ensure the mapped drive exists. If C(absent) will ensure the mapped drive does not exist.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username that is used when testing the initial connection. This is never saved with a mapped drive, the M(ansible.windows.win_credential) module to persist a username and password for a host. This is required if the mapped drive requires authentication with custom credentials and become, or CredSSP cannot be used. If become or CredSSP is used, any credentials saved with M(ansible.windows.win_credential) will automatically be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

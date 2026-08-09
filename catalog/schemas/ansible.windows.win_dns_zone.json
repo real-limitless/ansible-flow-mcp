@@ -2,6 +2,112 @@
   "fqcn": "ansible.windows.win_dns_zone",
   "shortDescription": "Manage Windows Server DNS Zones",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_dns_zone_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "directory_partition",
+      "displayName": "Directory Partition",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of an existing custom Active Directory application directory partition where the zone should be stored. When specified, the zone will use a custom replication scope instead of the standard domain or forest partitions. This is mutually exclusive with O(replication) values of C(forest), C(domain), and C(legacy). Requires the target directory partition to already exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_servers",
+      "displayName": "Dns Servers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies an list of IP addresses of the primary servers of the zone. DNS queries for a forwarded zone are sent to primary servers. Required if l(type=secondary), l(type=forwarder) or l(type=stub), otherwise ignored. At least one server is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dynamic_update",
+      "displayName": "Dynamic Update",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies how a zone handles dynamic updates. Secure DNS updates are available only for Active Directory-integrated zones. When not specified during new zone creation, Windows will default this to l(none).",
+      "choices": [
+        "secure",
+        "none",
+        "nonsecureandsecure"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forwarder_timeout",
+      "displayName": "Forwarder Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies a length of time, in seconds, that a DNS server waits for a remote DNS server to resolve a query. Accepts integer values between 0 and 15. If the provided value is not valid, it will be omitted and a warning will be issued.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Fully qualified name of the DNS zone.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replication",
+      "displayName": "Replication",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the replication scope for the DNS zone. l(replication=forest) will replicate the DNS zone to all domain controllers in the Active Directory forest. l(replication=domain) will replicate the DNS zone to all domain controllers in the Active Directory domain. l(replication=legacy) will replicate the DNS zone to all domain controllers in the Active Directory domain and to legacy clients. l(replication=none) disables Active Directory integration and creates a local file with the name of the ",
+      "choices": [
+        "forest",
+        "domain",
+        "legacy",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Specifies the desired state of the DNS zone. When l(state=present) the module will attempt to create the specified DNS zone if it does not already exist. When l(state=absent), the module will remove the specified DNS zone and all subsequent DNS records.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the type of DNS zone. When l(type=secondary), the DNS server will immediately attempt to perform a zone transfer from the servers in this list. If this initial transfer fails, then the zone will be left in an unworkable state. This module does not verify the initial transfer.",
+      "choices": [
+        "primary",
+        "secondary",
+        "stub",
+        "forwarder"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

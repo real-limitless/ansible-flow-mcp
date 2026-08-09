@@ -1,0 +1,135 @@
+{
+  "fqcn": "ibm.power_aix.lvol",
+  "shortDescription": "Configure AIX LVM logical volumes",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/lvol_module.html",
+  "options": [
+    {
+      "name": "copies",
+      "displayName": "Copies",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Specifies number of copies of logical volume Maximum value allowed is 3 Can be used to create a logical volume, hence when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extra_opts",
+      "displayName": "Extra Opts",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Any other options to be passed by the user to mklv or chlv command",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lv",
+      "displayName": "Lv",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specified the logical volume name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lv_new_name",
+      "displayName": "Lv New Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of the logical volume to change an existing logical volume. Can be used to modify a logical volume, hence when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lv_type",
+      "displayName": "Lv Type",
+      "type": "string",
+      "required": false,
+      "default": "jfs2",
+      "description": "Specifies the type of the logical volume to create. The standard types are C(jfs) for journaled file systems, C(jfslog) for journaled file system logs, C(jfs2) for enhanced journaled file system, C(jfs2log) for enhanced journaled file system logs, C(paging) for paging spaces. But you can define other logical volume types with this flag. You B(cannot) create a striped logical volume of type C(boot). Can be used to create a logical volume, hence when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policy",
+      "displayName": "Policy",
+      "type": "string",
+      "required": false,
+      "default": "maximum",
+      "description": "Specifies the inter-physical volume allocation policy. It is the number of physical volumes to extend across, using the volumes that provide the best allocation. C(maximum) allocates across the maximum number of physical volumes. C(minimum) allocates logical partitions across the minimum number of physical volumes. Can be used to create or modify a logical volume, hence when I(state=present).",
+      "choices": [
+        "maximum",
+        "minimum"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pv_list",
+      "displayName": "Pv List",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of pysical volumes. Can be used to create a logical volume, hence when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If you do not specify its value when trying to create a logical volume, default value '1' is considered. Specifies the number of logical partitions or the size of the the logical volume in terms of K, M, or G. Can be used to create a logical volume, hence when I(state=present). Can be used to increase the size of the logical volume if it already exist. If the input I(size) is larger than the current logical volume size then extend the logical volume to match the input size. If the input I(size) ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the action to be performed on the logical volume. C(present) creates or modifies the logical volume if already exists with I(lv_attributes). C(absent) removes a logial volume.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "strip_size",
+      "displayName": "Strip Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the strip size of the striped logical volume to create. Can be used to create a logical volume, hence when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vg",
+      "displayName": "Vg",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the volume group name this logical volume is part of. Required when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

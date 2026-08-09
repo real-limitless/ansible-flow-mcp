@@ -1,0 +1,187 @@
+{
+  "fqcn": "community.proxmox.proxmox_cluster_ha_groups",
+  "shortDescription": "Management of HA groups in Proxmox VE Cluster",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/proxmox/proxmox_cluster_ha_groups_module.html",
+  "options": [
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the target host of the Proxmox VE cluster. Uses the E(PROXMOX_HOST) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_otp",
+      "displayName": "Api Otp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the OTP. Uses the E(PROXMOX_OTP) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the password to authenticate with. Uses the E(PROXMOX_PASSWORD) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_port",
+      "displayName": "Api Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specify the target port of the Proxmox VE cluster. Uses the E(PROXMOX_PORT) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Time limit for requests towards the Proxmox VE API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token_id",
+      "displayName": "Api Token Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the token ID. Uses the E(PROXMOX_TOKEN_ID) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token_secret",
+      "displayName": "Api Token Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the token secret. Uses the E(PROXMOX_TOKEN_SECRET) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the user to authenticate with. Uses the E(PROXMOX_USER) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a local certificate, which will be used to verify TLS connections. Ignored if O(validate_certs=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "group name",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nodes",
+      "displayName": "Nodes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of cluster node members, where a priority can be given to each node. A resource bound to a group will run on the available nodes with the\nhighest priority. If there are more nodes in the highest priority class, the services will get distributed to those nodes. The priorities have a\nrelative meaning only. The higher the number, the higher the priority.\nIt can either be a string C(node_name:priority,node_name:priority) or an actual list of strings.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nofailback",
+      "displayName": "Nofailback",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "The CRM tries to run services on the node with the highest priority. If a node with higher priority comes online, the CRM migrates the service to\nthat node. Setting O(nofailback=true) prevents that behavior.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restricted",
+      "displayName": "Restricted",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Resources bound to restricted groups may only run on nodes defined by the group. The resource will be placed in the stopped state if no group node\nmember is online. Resources on unrestricted groups may run on any cluster node if all group members are offline, but they will migrate back as\nsoon as a group member comes online. One can implement a 'preferred node' behavior using an unrestricted group with only one member.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Whether the HA groups should be there (created if missing) or not (deleted if they exist).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Validate the TLS certificates used for the connection to the Proxmox VE API. May be set through the environment variable E(PROXMOX_VALIDATE_CERTS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

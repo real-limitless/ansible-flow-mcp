@@ -1,0 +1,279 @@
+{
+  "fqcn": "ibm.power_aix.backup",
+  "shortDescription": "Data or system volume group backup management.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/backup_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the operation to perform on the LPAR. C(create) to create a backup image. C(restore) to restore a backup image. C(view) to get useful information about a backup image.",
+      "choices": [
+        "create",
+        "restore",
+        "view"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bootlist",
+      "displayName": "Bootlist",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies to run the bootlist command after the mksysb installation. Cannot be used if I(flags) contains the C(-r) flag. Can be used if I(action=restore) or I(type=mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_data_file",
+      "displayName": "Create Data File",
+      "type": "string",
+      "required": false,
+      "default": "no",
+      "description": "Specifies to create the data file containing information on the vloume group, logical volumes, file systems and their sizes. If I(volume_group=rootvg), then data file will be in C(/image.data). If C(volume_group) is a data volume group, data file will be in C(/tmp/vgdata/vgname/vgname.data). Specify I(create_data_file=mapfile) to create the MAPFILE containing the mapping of the logical to physical partitions for each logical volume in the volume group. This mapping can be used to allocate the sa",
+      "choices": [
+        "yes",
+        "mapfile",
+        "no"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_file",
+      "displayName": "Data File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a full path filename to use instead of the one from the image being restored. If I(type=mksysb) it specifies the image.data file. If I(type=savevg) it specifies the vgname.data file. Can be used if I(action=restore).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies the debug mode (that is the set -x output). Can be used if I(action=restore) or I(type=mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk",
+      "displayName": "Disk",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name or names of the target disk(s) where the alternate rootvg is created. This disk or these disks must not currently contain any volume group definition. Required if I(action=restore) and I(type=mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_data",
+      "displayName": "Exclude Data",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If I(action=create), specifies to exclude user data from the backup. Backs up user volume group information and administration data files. This backs up files such as /tmp/vgdata/vgname/vgname.data and map files if any exist. Cannot be used on a rootvg. If I(action=restore), specifies to recreate the volume group structure only without restoring any files or data. Can be used if I(type=savevg).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_files",
+      "displayName": "Exclude Files",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to exclude files specified in the /etc/exclude.vgname file from being backed up. The /etc/exclude.vgname file should contain patterns of file names that you do not want included in your system backup image. They are input to the pattern matching conventions of the grep command. Can be used if I(action=create).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_fs",
+      "displayName": "Exclude Fs",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a file path that contains the list of file systems to exclude from the backup. One file system mount point is listed per line. Can be used if I(action=create).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_packing_files",
+      "displayName": "Exclude Packing Files",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to exclude files specified in the /etc/exclude_packing.rootvg, /etc/exclude_packing.vgname, or /etc/exclude_packing.WPARname file from being packed. Can be used if I(action=create) and I(type=mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extend_fs",
+      "displayName": "Extend Fs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to extend the '/tmp' filesystem if needed. Can be used if I(action=create).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flags",
+      "displayName": "Flags",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies additional flag to pass to the command. Refers to IBM documentation for details. For I(action=create) and I(type=mksysb), you could use C(-a -A -b number -F filename -G|-N -M -P -t path -T -V -Z). For I(action=restore) and I(type=mksysb), you could use C(-p platform -L mksysb_level -c console -K -O -g -k -r -z -T -S -C). For I(action=create) and I(type=savevg), you could use C(-a -A -b Blocks -p -T -V -Z). For I(action=restore) and I(type=savevg), you could use C(-b Blocks -n -P PPsize",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to overwrite existing backup image. Can be used if I(action=create) and I(type=savevg).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "import_vg",
+      "displayName": "Import Vg",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to look for and import volume groupe found in mksysb backup image. Can be used if I(action=restore) or I(type=mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location",
+      "displayName": "Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the location of the backup files. It can be a device or file path. When I(type=savevg) or I(action=view), the default device is C(/dev/rmt0). Required if I(action=view) or I(type=mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minimize_lv_size",
+      "displayName": "Minimize Lv Size",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to create the logical volumes with minimum size possible to accomodate the file system. Can be used if I(action=restore) and I(type=savevg).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the targets of the operation. Discarded if I(type=mksysb). Required if I(action=create) and I(type=savevg), then it specifies the volume group to back up. If I(action=restore) and I(type=savevg), it specifies the disk device to restore to and do not use the one in the vgname.data file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "phase",
+      "displayName": "Phase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the phase(s) to execute during the invocation of the alt_disk_mksysb command. Can be used if I(action=restore) or I(type=mksysb).",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "12",
+        "23",
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remain_nim_client",
+      "displayName": "Remain Nim Client",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to remains NIM client after the mksysb installation. The /.rhosts and /etc/niminfo files are copied to the alternate rootvg's file system. Can be used if I(action=restore) or I(type=mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resolv_conf",
+      "displayName": "Resolv Conf",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the full path of a alternate resolv.conf file to replace the existing one after the mksysb installation. Can be used if I(action=restore) or I(type=mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "script",
+      "displayName": "Script",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the full path of a customization script file to run at the end of the mksysb installation. Can be used if I(action=restore) or I(type=mksysb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "savevg",
+      "description": "Specifies the type of backup object to operate. C(mksysb) operates on backup of the operating system (that is, the root volume group) of a LPAR target. C(savevg) operates on LPAR savevg, that is all files belonging to a volume group. Discarded for I(action=view) as this action only applies to savevg.",
+      "choices": [
+        "mksysb",
+        "savevg"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verbose",
+      "displayName": "Verbose",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to run the operation in verbose mode. Can be used if I(action=create) or I(action=restore).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,147 @@
+{
+  "fqcn": "community.dns.hetzner_dns_record_info",
+  "shortDescription": "Retrieve records in Hetzner DNS service",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/dns/hetzner_dns_record_info_module.html",
+  "options": [
+    {
+      "name": "hetzner_api_token",
+      "displayName": "Hetzner Api Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The token for the new Hetzner DNS API. If not provided, will be read from the environment variable E(HETZNER_API_TOKEN). Exactly one of O(hetzner_token) and O(hetzner_api_token) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hetzner_token",
+      "displayName": "Hetzner Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The token for the classic Hetzner DNS API. If not provided, will be read from the environment variable E(HETZNER_DNS_TOKEN). Exactly one of O(hetzner_token) and O(hetzner_api_token) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix",
+      "displayName": "Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The prefix of the DNS record. This is the part of O(record) before O(zone_name). For example, if the record to be modified is C(www.example.com) for the zone C(example.com), the prefix is V(www). If the record in this example would be C(example.com), the prefix would be V('') (empty string). If O(what) is V(single_record) or V(all_types_for_record), exactly one of O(record) and O(prefix) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "record",
+      "displayName": "Record",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full DNS record to retrieve. If O(what) is V(single_record) or V(all_types_for_record), exactly one of O(record) and O(prefix) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "txt_character_encoding",
+      "displayName": "Txt Character Encoding",
+      "type": "string",
+      "required": false,
+      "default": "decimal",
+      "description": "Whether to treat numeric escape sequences (V(\\\\xyz)) as octal or decimal numbers. This is only used when O(txt_transformation=quoted). The default changed to V(decimal) in community.dns 3.0.0. Before, the default used to be V(octal). The value V(decimal) is compatible to L(RFC 1035, https://www.ietf.org/rfc/rfc1035.txt).",
+      "choices": [
+        "decimal",
+        "octal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "txt_transformation",
+      "displayName": "Txt Transformation",
+      "type": "string",
+      "required": false,
+      "default": "unquoted",
+      "description": "Determines how TXT entry values are converted between the API and this module's input and output. The value V(api) means that values are returned from this module as they are returned from the API, and pushed to the API as they have been passed to this module. For idempotency checks, the input string will be compared to the strings returned by the API. The API might automatically transform some values, like splitting long values or adding quotes, which can cause problems with idempotency. The va",
+      "choices": [
+        "api",
+        "quoted",
+        "unquoted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of DNS record to retrieve. Required if O(what) is V(single_record).",
+      "choices": [
+        "A",
+        "AAAA",
+        "CAA",
+        "CNAME",
+        "DANE",
+        "DS",
+        "HINFO",
+        "HTTPS",
+        "MX",
+        "NS",
+        "PTR",
+        "RP",
+        "SOA",
+        "SRV",
+        "SVCB",
+        "TLSA",
+        "TXT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "what",
+      "displayName": "What",
+      "type": "string",
+      "required": false,
+      "default": "single_record",
+      "description": "Describes whether to fetch a single record and type combination, all types for a record, or all records. By default, a single record and type combination is fetched. Note that the return value structure depends on this option.",
+      "choices": [
+        "single_record",
+        "all_types_for_record",
+        "all_records"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone_id",
+      "displayName": "Zone Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the DNS zone to query. Exactly one of O(zone_name) and O(zone_id) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone_name",
+      "displayName": "Zone Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The DNS zone to query. Exactly one of O(zone_name) and O(zone_id) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

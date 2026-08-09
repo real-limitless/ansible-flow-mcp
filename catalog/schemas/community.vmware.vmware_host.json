@@ -1,7 +1,223 @@
 {
   "fqcn": "community.vmware.vmware_host",
-  "shortDescription": "vmware_host",
+  "shortDescription": "Add, remove, or move an ESXi host to, from, or within vCenter",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_host_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "add_connected",
+      "displayName": "Add Connected",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to V(true), then the host should be connected as soon as it is added. This parameter is ignored if not O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_name",
+      "displayName": "Cluster Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the cluster to add the host. If O(folder) is not set, then this parameter is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter_name",
+      "displayName": "Datacenter Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the datacenter to add the host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "esxi_hostname",
+      "displayName": "Esxi Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "ESXi hostname to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "esxi_password",
+      "displayName": "Esxi Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ESXi password. Required for adding a host. Optional for reconnect. Unused for removing. No longer a required parameter from version 2.5.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "esxi_ssl_thumbprint",
+      "displayName": "Esxi Ssl Thumbprint",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Specifying the hostsystem certificate's thumbprint. Use following command to get hostsystem certificate's thumbprint -  # openssl x509 -in /etc/vmware/ssl/rui.crt -fingerprint -sha1 -noout",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "esxi_username",
+      "displayName": "Esxi Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ESXi username. Required for adding a host. Optional for reconnect. If both O(esxi_username) and O(esxi_password) are used Unused for removing. No longer a required parameter from version 2.5.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fetch_ssl_thumbprint",
+      "displayName": "Fetch Ssl Thumbprint",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Fetch the thumbprint of the host's SSL certificate. This basically disables the host certificate verification (check if it was signed by a recognized CA). Disable this option if you want to allow only hosts with valid certificates to be added to vCenter. If this option is set to V(false) and the certificate can't be verified, an add or reconnect will fail. Unused when O(esxi_ssl_thumbprint) is set. Optional for reconnect, but only used if O(esxi_username) and O(esxi_password) are used. Unused fo",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder",
+      "displayName": "Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the folder under which host to add. If O(cluster_name) is not set, then this parameter is required. For example, if there is a datacenter 'dc1' under folder called 'Site1' then, this value will be '/Site1/dc1/host'. Here 'host' is an invisible folder under VMware Web Client. Another example, if there is a nested folder structure like '/myhosts/india/pune' under datacenter 'dc2', then O(folder) value will be '/dc2/host/myhosts/india/pune'. Other Examples: '/Site2/dc2/Asia-Cluster/host' or",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_connection",
+      "displayName": "Force Connection",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Force the connection if the host is already being managed by another vCenter server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reconnect_disconnected",
+      "displayName": "Reconnect Disconnected",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Reconnect disconnected hosts. This is only used if O(state=present) and if the host already exists.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If set to V(present), add the host if host is absent. If set to V(present), update the location of the host if host already exists. If set to V(absent), remove the host if host is present. If set to V(absent), do nothing if host already does not exists. If set to V(add_or_reconnect), add the host if it's absent else reconnect it and update the location. If set to V(reconnect), then reconnect the host if it's present and update the location. If set to V(disconnected), disconnect the host if the h",
+      "choices": [
+        "present",
+        "absent",
+        "add_or_reconnect",
+        "reconnect",
+        "disconnected"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

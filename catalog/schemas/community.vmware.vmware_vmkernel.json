@@ -1,7 +1,267 @@
 {
   "fqcn": "community.vmware.vmware_vmkernel",
-  "shortDescription": "vmware_vmkernel",
+  "shortDescription": "Manages a VMware VMkernel Adapter of an ESXi host.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_vmkernel_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "device",
+      "displayName": "Device",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Search VMkernel adapter by device name. The parameter is required only in case of O(network.type=dhcp).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dvswitch_name",
+      "displayName": "Dvswitch Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the vSphere Distributed Switch (vDS) where to add the VMKernel interface. Required parameter only if O(state=present). Optional parameter from version 2.8 and onwards.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_backup_nfc",
+      "displayName": "Enable Backup Nfc",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable vSphere Backup NFC traffic on the VMKernel adapter. This option is only allowed if the default TCP/IP stack is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_ft",
+      "displayName": "Enable Ft",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable Fault Tolerance traffic on the VMKernel adapter. This option is only allowed if the default TCP/IP stack is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_mgmt",
+      "displayName": "Enable Mgmt",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable Management traffic on the VMKernel adapter. This option is only allowed if the default TCP/IP stack is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_provisioning",
+      "displayName": "Enable Provisioning",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable Provisioning traffic on the VMKernel adapter. This option is only allowed if the default TCP/IP stack is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_replication",
+      "displayName": "Enable Replication",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable vSphere Replication traffic on the VMKernel adapter. This option is only allowed if the default TCP/IP stack is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_replication_nfc",
+      "displayName": "Enable Replication Nfc",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable vSphere Replication NFC traffic on the VMKernel adapter. This option is only allowed if the default TCP/IP stack is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_vmotion",
+      "displayName": "Enable Vmotion",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable vMotion traffic on the VMKernel adapter. This option is only allowed if the default TCP/IP stack is used. You cannot enable vMotion on an additional adapter if you already have an adapter with the vMotion TCP/IP stack configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_vsan",
+      "displayName": "Enable Vsan",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable VSAN traffic on the VMKernel adapter. This option is only allowed if the default TCP/IP stack is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "esxi_hostname",
+      "displayName": "Esxi Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of ESXi host to which VMKernel is to be managed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mtu",
+      "displayName": "Mtu",
+      "type": "number",
+      "required": false,
+      "default": 1500,
+      "description": "The MTU for the VMKernel interface. The default value of 1500 is valid from version 2.5 and onwards.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "dict",
+      "required": false,
+      "default": {
+        "tcpip_stack": "default",
+        "type": "static"
+      },
+      "description": "A dictionary of network details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "portgroup_name",
+      "displayName": "Portgroup Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the port group for the VMKernel interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If set to V(present), the VMKernel adapter will be created with the given specifications. If set to V(absent), the VMKernel adapter will be removed. If set to V(present) and VMKernel adapter exists, the configurations will be updated.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vswitch_name",
+      "displayName": "Vswitch Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the vSwitch where to add the VMKernel interface. Required parameter only if O(state=present). Optional parameter from version 2.5 and onwards.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

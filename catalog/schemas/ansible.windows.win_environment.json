@@ -2,6 +2,69 @@
   "fqcn": "ansible.windows.win_environment",
   "shortDescription": "Modify environment variables on windows hosts",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_environment_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "level",
+      "displayName": "Level",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The level at which to set the environment variable. Use C(machine) to set for all users. Use C(user) to set for the current user that ansible is connected as. Use C(process) to set for the current process.  Probably not that useful.",
+      "choices": [
+        "machine",
+        "process",
+        "user"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the environment variable. Required when I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set to C(present) to ensure environment variable is set. Set to C(absent) to ensure it is removed. When using I(variables), do not set this option.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "value",
+      "displayName": "Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The value to store in the environment variable. Must be set when I(state=present) and cannot be an empty string. Should be omitted for I(state=absent) and I(variables).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "variables",
+      "displayName": "Variables",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary where multiple environment variables can be defined at once. Not valid when I(state) is set. Variables with a value will be set (C(present)) and variables with an empty value will be unset (C(absent)). I(level) applies to all vars defined this way.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

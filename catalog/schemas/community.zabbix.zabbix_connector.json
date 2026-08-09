@@ -2,6 +2,309 @@
   "fqcn": "community.zabbix.zabbix_connector",
   "shortDescription": "Create/Delete/Update Zabbix connectors",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/zabbix/zabbix_connector_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "attempt_interval",
+      "displayName": "Attempt Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0 Interval between attempts in seconds (value between 0 and 10).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "HTTP authentication method used by the connector.",
+      "choices": [
+        "none",
+        "basic",
+        "ntlm",
+        "kerberos",
+        "digest",
+        "bearer"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_type",
+      "displayName": "Data Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of data being streamed.",
+      "choices": [
+        "item_values",
+        "events"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the connector.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the connector is enabled. (mapped to the I(status) property of the connector object in the Zabbix API)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_password",
+      "displayName": "Http Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_user",
+      "displayName": "Http Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth login",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_proxy",
+      "displayName": "Http Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "HTTP(S) proxy used by the connector.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "item_value_types",
+      "displayName": "Item Value Types",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0 List of value types to stream. Each element should be one of C(all), C(all+bin), C(numeric_float), C(character), C(log), C(numeric_unsigned), C(text) or C(binary). C(all) represents all types except binary I((default)). C(all+bin) represents all types, binary included.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_attempts",
+      "displayName": "Max Attempts",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of attempts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_records",
+      "displayName": "Max Records",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of records sent in one message.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_senders",
+      "displayName": "Max Senders",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of sender processes used by the connector.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the connector.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password to authenticate the connector with the receiver. Supported only if C(auth_type) is one of C(basic), C(ntlm), C(kerberos) or C(digest).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_cert_file",
+      "displayName": "Ssl Cert File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public SSL key file path for client authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_key_file",
+      "displayName": "Ssl Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Private SSL key file path for client authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_key_password",
+      "displayName": "Ssl Key Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of the private SSL key file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the connector. On C(present), it will create a connector if it does not exist or update the connector if the associated data is different. On C(absent), it will remove the connector if it exists.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags to filter streamed data.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags_eval_type",
+      "displayName": "Tags Eval Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Tag filter evaluation method.",
+      "choices": [
+        "and/or",
+        "or"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Message sending timeout in seconds (value between 1 and 60).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token to authenticate the connector with the receiver. Required when C(auth_type=bearer).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL of the receiver used by the connector.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username to authenticate the connector with the receiver. Supported only if C(auth_type) is one of C(basic), C(ntlm), C(kerberos) or C(digest).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_host",
+      "displayName": "Verify Host",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the connector should verify the receiver's hostname against the certificate's CN or SAN fields.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_peer",
+      "displayName": "Verify Peer",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the connector should verify the receiver's certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

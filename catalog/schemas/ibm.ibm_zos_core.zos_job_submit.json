@@ -1,0 +1,107 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_job_submit",
+  "shortDescription": "Submit JCL",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_job_submit_module.html",
+  "options": [
+    {
+      "name": "encoding",
+      "displayName": "Encoding",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies which encoding the local JCL file should be converted from and to, before submitting the job. This option is only supported for when I(remote_src=False). If this parameter is not provided, and the z/OS systems default encoding can not be identified, the JCL file will be converted from UTF-8 to IBM-1047 by default, otherwise the module will detect the z/OS system encoding.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_rc",
+      "displayName": "Max Rc",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum return code allowed for any job step for the submitted job.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_src",
+      "displayName": "Remote Src",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to C(false), the module searches for C(src) in the controller node. If set to C(true), the module searches for the file C(src) in the managed node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "return_output",
+      "displayName": "Return Output",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to print the DD output. If false, an empty list will be returned in the dds field.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The source file or data set containing the JCL to submit. It could be a physical sequential data set, a partitioned data set qualified by a member or a path (e.g. C(USER.TEST), ``USER.JCL(TEST)``), or a generation data set from a generation data group (for example, ``USER.TEST.GDG(-2)``). Or a USS file. (e.g C(/u/tester/demo/sample.jcl)) Or a LOCAL file in ansible control node. (e.g C(/User/tester/ansible-playbook/sample.jcl)) When using a generation data set, only already created generations ar",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_parameters",
+      "displayName": "Template Parameters",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options to set the way Jinja2 will process templates. Jinja2 already sets defaults for the markers it uses, you can find more information at its L(official documentation,https://jinja.palletsprojects.com/en/latest/templates/). These options are ignored unless C(use_template) is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_template",
+      "displayName": "Use Template",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the module should treat C(src) as a Jinja2 template and render it before continuing with the rest of the module. Only valid when C(src) is a local file or directory. All variables defined in inventory files, vars files and the playbook will be passed to the template engine, as well as L(Ansible special variables,https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html#special-variables), such as C(playbook_dir), C(ansible_version), etc. If variables defined in ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume",
+      "displayName": "Volume",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The volume serial (VOLSER) is where the data set resides. The option is required only when the data set is not cataloged on the system. When configured, the L(zos_job_submit,./zos_job_submit.html) will try to catalog the data set for the volume serial. If it is not able to, the module will fail. Ignored for I(remote_src=False).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_time",
+      "displayName": "Wait Time",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Option I(wait_time) is the total time that module L(zos_job_submit,./zos_job_submit.html) will wait for a submitted job to complete. The time begins when the module is executed on the managed node. I(wait_time) is measured in seconds and must be a value greater than 0 and less than 86400. The module can submit and forget jobs by setting I(wait_time) to 0. This way the module will not try to retrieve the job details other than job id. Job details and contents can be retrieved later by using L(zos",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

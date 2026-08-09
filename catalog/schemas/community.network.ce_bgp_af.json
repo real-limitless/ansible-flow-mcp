@@ -1,0 +1,736 @@
+{
+  "fqcn": "community.network.ce_bgp_af",
+  "shortDescription": "Manages BGP Address-family configuration on HUAWEI CloudEngine switches.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/network/ce_bgp_af_module.html",
+  "options": [
+    {
+      "name": "active_route_advertise",
+      "displayName": "Active Route Advertise",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, BGP is enabled to advertise only optimal routes in the RM to peers. If the value is false, BGP is not enabled to advertise only optimal routes in the RM to peers.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "add_path_sel_num",
+      "displayName": "Add Path Sel Num",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of Add-Path routes. The value is an integer ranging from 2 to 64.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "af_type",
+      "displayName": "Af Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Address family type of a BGP instance.",
+      "choices": [
+        "ipv4uni",
+        "ipv4multi",
+        "ipv4vpn",
+        "ipv6uni",
+        "ipv6vpn",
+        "evpn"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_invalid_as",
+      "displayName": "Allow Invalid As",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "Allow routes with BGP origin AS validation result Invalid to be selected. If the value is true, invalid routes can participate in route selection. If the value is false, invalid routes cannot participate in route selection.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "always_compare_med",
+      "displayName": "Always Compare Med",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, the MEDs of routes learned from peers in different autonomous systems are compared when BGP selects an optimal route. If the value is false, the MEDs of routes learned from peers in different autonomous systems are not compared when BGP selects an optimal route.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "as_path_neglect",
+      "displayName": "As Path Neglect",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, the AS path attribute is ignored when BGP selects an optimal route. If the value is false, the AS path attribute is not ignored when BGP selects an optimal route. An AS path with a smaller length has a higher priority.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_frr_enable",
+      "displayName": "Auto Frr Enable",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, BGP auto FRR is enabled. If the value is false, BGP auto FRR is disabled.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_local_pref",
+      "displayName": "Default Local Pref",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the Local-Preference attribute. The value is an integer. The value is an integer ranging from 0 to 4294967295.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_med",
+      "displayName": "Default Med",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the Multi-Exit-Discriminator (MED) of BGP routes. The value is an integer ranging from 0 to 4294967295.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_rt_import_enable",
+      "displayName": "Default Rt Import Enable",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, importing default routes to the BGP routing table is allowed. If the value is false, importing default routes to the BGP routing table is not allowed.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "determin_med",
+      "displayName": "Determin Med",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, BGP deterministic-MED is enabled. If the value is false, BGP deterministic-MED is disabled.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ebgp_ecmp_nexthop_changed",
+      "displayName": "Ebgp Ecmp Nexthop Changed",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, the next hop of an advertised route is changed to the advertiser itself in EBGP load-balancing scenarios. If the value is false, the next hop of an advertised route is not changed to the advertiser itself in EBGP load-balancing scenarios.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ebgp_if_sensitive",
+      "displayName": "Ebgp If Sensitive",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, after the fast EBGP interface awareness function is enabled, EBGP sessions on an interface are deleted immediately when the interface goes Down. If the value is false, after the fast EBGP interface awareness function is enabled, EBGP sessions on an interface are not deleted immediately when the interface goes Down.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ecmp_nexthop_changed",
+      "displayName": "Ecmp Nexthop Changed",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, the next hop of an advertised route is changed to the advertiser itself in BGP load-balancing scenarios. If the value is false, the next hop of an advertised route is not changed to the advertiser itself in BGP load-balancing scenarios.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ibgp_ecmp_nexthop_changed",
+      "displayName": "Ibgp Ecmp Nexthop Changed",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, the next hop of an advertised route is changed to the advertiser itself in IBGP load-balancing scenarios. If the value is false, the next hop of an advertised route is not changed to the advertiser itself in IBGP load-balancing scenarios.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "igp_metric_ignore",
+      "displayName": "Igp Metric Ignore",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, the metrics of next-hop IGP routes are not compared when BGP selects an optimal route. If the value is false, the metrics of next-hop IGP routes are not compared when BGP selects an optimal route. A route with a smaller metric has a higher priority.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "import_process_id",
+      "displayName": "Import Process Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Process ID of an imported routing protocol. The value is an integer ranging from 0 to 4294967295.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "import_protocol",
+      "displayName": "Import Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Routing protocol from which routes can be imported.",
+      "choices": [
+        "direct",
+        "ospf",
+        "isis",
+        "static",
+        "rip",
+        "ospfv3",
+        "ripng"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ingress_lsp_policy_name",
+      "displayName": "Ingress Lsp Policy Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Ingress lsp policy name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "load_balancing_as_path_ignore",
+      "displayName": "Load Balancing As Path Ignore",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "Load balancing as path ignore.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lowest_priority",
+      "displayName": "Lowest Priority",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, enable reduce priority to advertise route. If the value is false, disable reduce priority to advertise route.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mask_len",
+      "displayName": "Mask Len",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the mask length of an IP address. The value is an integer ranging from 0 to 128.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_load_ebgp_num",
+      "displayName": "Max Load Ebgp Num",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the maximum number of equal-cost EBGP routes. The value is an integer ranging from 1 to 65535.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_load_ibgp_num",
+      "displayName": "Max Load Ibgp Num",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the maximum number of equal-cost IBGP routes. The value is an integer ranging from 1 to 65535.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maximum_load_balance",
+      "displayName": "Maximum Load Balance",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the maximum number of equal-cost routes in the BGP routing table. The value is an integer ranging from 1 to 65535.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "med_none_as_maximum",
+      "displayName": "Med None As Maximum",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, when BGP selects an optimal route, the system uses 4294967295 as the MED value of a route if the route's attribute does not carry a MED value. If the value is false, the system uses 0 as the MED value of a route if the route's attribute does not carry a MED value.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_address",
+      "displayName": "Network Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the IP address advertised by BGP. The value is a string of 0 to 255 characters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "next_hop_sel_depend_type",
+      "displayName": "Next Hop Sel Depend Type",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "Next hop select depend type.",
+      "choices": [
+        "default",
+        "dependTunnel",
+        "dependIp"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nexthop_third_party",
+      "displayName": "Nexthop Third Party",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, the third-party next hop function is enabled. If the value is false, the third-party next hop function is disabled.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nhp_relay_route_policy_name",
+      "displayName": "Nhp Relay Route Policy Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the name of a route-policy for route iteration. The value is a string of 1 to 40 characters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "originator_prior",
+      "displayName": "Originator Prior",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "Originator prior.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policy_ext_comm_enable",
+      "displayName": "Policy Ext Comm Enable",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, modifying extended community attributes is allowed. If the value is false, modifying extended community attributes is not allowed.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policy_vpn_target",
+      "displayName": "Policy Vpn Target",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, VPN-Target filtering function is performed for received VPN routes. If the value is false, VPN-Target filtering function is not performed for received VPN routes.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preference_external",
+      "displayName": "Preference External",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the protocol priority of EBGP routes. The value is an integer ranging from 1 to 255.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preference_internal",
+      "displayName": "Preference Internal",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the protocol priority of IBGP routes. The value is an integer ranging from 1 to 255.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preference_local",
+      "displayName": "Preference Local",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the protocol priority of a local BGP route. The value is an integer ranging from 1 to 255.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefrence_policy_name",
+      "displayName": "Prefrence Policy Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set a routing policy to filter routes so that a configured priority is applied to the routes that match the specified policy. The value is a string of 1 to 40 characters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reflect_between_client",
+      "displayName": "Reflect Between Client",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, route reflection is enabled between clients. If the value is false, route reflection is disabled between clients.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reflect_chg_path",
+      "displayName": "Reflect Chg Path",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, the route reflector is enabled to modify route path attributes based on an export policy. If the value is false, the route reflector is disabled from modifying route path attributes based on an export policy.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reflector_cluster_id",
+      "displayName": "Reflector Cluster Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set a cluster ID. Configuring multiple RRs in a cluster can enhance the stability of the network. The value is an integer ranging from 1 to 4294967295.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reflector_cluster_ipv4",
+      "displayName": "Reflector Cluster Ipv4",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set a cluster ipv4 address. The value is expressed in the format of an IPv4 address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "relay_delay_enable",
+      "displayName": "Relay Delay Enable",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, relay delay enable. If the value is false, relay delay disable.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rib_only_enable",
+      "displayName": "Rib Only Enable",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, BGP routes cannot be advertised to the IP routing table. If the value is false, Routes preferred by BGP are advertised to the IP routing table.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rib_only_policy_name",
+      "displayName": "Rib Only Policy Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the name of a routing policy. The value is a string of 1 to 40 characters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "route_sel_delay",
+      "displayName": "Route Sel Delay",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Route selection delay. The value is an integer ranging from 0 to 3600.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "router_id",
+      "displayName": "Router Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of a router that is in IPv4 address format. The value is a string of 0 to 255 characters. The value is in dotted decimal notation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "router_id_neglect",
+      "displayName": "Router Id Neglect",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, the router ID attribute is ignored when BGP selects the optimal route. If the value is false, the router ID attribute is not ignored when BGP selects the optimal route.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rr_filter_number",
+      "displayName": "Rr Filter Number",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the number of the extended community filter supported by an RR group. The value is a string of 1 to 51 characters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Specify desired state of the resource.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "summary_automatic",
+      "displayName": "Summary Automatic",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, automatic aggregation is enabled for locally imported routes. If the value is false, automatic aggregation is disabled for locally imported routes.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "supernet_label_adv",
+      "displayName": "Supernet Label Adv",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, the function to advertise supernetwork label is enabled. If the value is false, the function to advertise supernetwork label is disabled.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "supernet_uni_adv",
+      "displayName": "Supernet Uni Adv",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, the function to advertise supernetwork unicast routes is enabled. If the value is false, the function to advertise supernetwork unicast routes is disabled.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vrf_name",
+      "displayName": "Vrf Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of a BGP instance. The name is a case-sensitive string of characters. The BGP instance can be used only after the corresponding VPN instance is created. The value is a string of 1 to 31 case-sensitive characters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vrf_rid_auto_sel",
+      "displayName": "Vrf Rid Auto Sel",
+      "type": "string",
+      "required": false,
+      "default": "no_use",
+      "description": "If the value is true, VPN BGP instances are enabled to automatically select router IDs. If the value is false, VPN BGP instances are disabled from automatically selecting router IDs.",
+      "choices": [
+        "no_use",
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

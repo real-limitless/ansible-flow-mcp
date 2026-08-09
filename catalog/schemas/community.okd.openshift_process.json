@@ -1,0 +1,320 @@
+{
+  "fqcn": "community.okd.openshift_process",
+  "shortDescription": "Process an OpenShift template.openshift.io/v1 Template",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/okd/openshift_process_module.html",
+  "options": [
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Token used to authenticate with the API. Can also be specified via K8S_AUTH_API_KEY environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a CA certificate used to authenticate with the API. The full certificate chain must be provided to avoid certificate validation errors. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a certificate used to authenticate with the API. Can also be specified via K8S_AUTH_CERT_FILE environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a key file used to authenticate with the API. Can also be specified via K8S_AUTH_KEY_FILE environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of a context found in the config file. Can also be specified via K8S_AUTH_CONTEXT environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a URL for accessing the API. Can also be specified via K8S_AUTH_HOST environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "impersonate_groups",
+      "displayName": "Impersonate Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Group(s) to impersonate for the operation. Can also be specified via K8S_AUTH_IMPERSONATE_GROUPS environment. Example: Group1,Group2",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "impersonate_user",
+      "displayName": "Impersonate User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username to impersonate for the operation. Can also be specified via K8S_AUTH_IMPERSONATE_USER environment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kubeconfig",
+      "displayName": "Kubeconfig",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to an existing Kubernetes config file. If not provided, and no other connection options are provided, the Kubernetes client will attempt to load the default configuration file from I(~/.kube/config). Can also be specified via K8S_AUTH_KUBECONFIG environment variable. Multiple Kubernetes config file can be provided using separator ';' for Windows platform or ':' for others platforms. The kubernetes configuration can be provided as dictionary. This feature requires a python kubernetes client ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the Template to process. The Template must be present in the cluster. When provided, I(namespace) is required. Mutually exclusive with I(resource_definition) or I(src)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace",
+      "displayName": "Namespace",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The namespace that the template can be found in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace_target",
+      "displayName": "Namespace Target",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The namespace that resources should be created, updated, or deleted in. Only used when I(state) is present or absent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_proxy",
+      "displayName": "No Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The comma separated list of hosts/domains/IP/CIDR that shouldn't go through proxy. Can also be specified via K8S_AUTH_NO_PROXY environment variable. Please note that this module does not pick up typical proxy settings from the environment (e.g. NO_PROXY). This feature requires kubernetes>=19.15.0. When kubernetes library is less than 19.15.0, it fails even no_proxy set in correct. example value is \"localhost,.local,.example.com,127.0.0.1,127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parameter_file",
+      "displayName": "Parameter File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a file containing template parameter values to override/set values in the Template. Corresponds to the `--param-file` argument to oc process.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parameters",
+      "displayName": "Parameters",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A set of key: value pairs that will be used to set/override values in the Template. Corresponds to the `--param` argument to oc process.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a password for authenticating with the API. Can also be specified via K8S_AUTH_PASSWORD environment variable. Please read the description of the C(username) option for a discussion of when this option is applicable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persist_config",
+      "displayName": "Persist Config",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not to save the kube config refresh tokens. Can also be specified via K8S_AUTH_PERSIST_CONFIG environment variable. When the k8s context is using a user credentials with refresh tokens (like oidc or gke/gcloud auth), the token is refreshed by the k8s python client library but not saved by default. So the old refresh token can expire and the next auth might fail. Setting this flag to true will tell the k8s python client to save the new refresh token to the kube config file. Default to ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy",
+      "displayName": "Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL of an HTTP proxy to use for the connection. Can also be specified via K8S_AUTH_PROXY environment variable. Please note that this module does not pick up typical proxy settings from the environment (e.g. HTTP_PROXY).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_headers",
+      "displayName": "Proxy Headers",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The Header used for the HTTP proxy. Documentation can be found here U(https://urllib3.readthedocs.io/en/latest/reference/urllib3.util.html?highlight=proxy_headers#urllib3.util.make_headers).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_definition",
+      "displayName": "Resource Definition",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a valid YAML definition (either as a string, list, or dict) for an object when creating or updating. NOTE: I(kind), I(api_version), I(name), and I(namespace) will be overwritten by corresponding values found in the provided I(resource_definition).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a path to a file containing a valid YAML definition of an object or objects to be created or updated. Mutually exclusive with I(resource_definition). NOTE: I(kind), I(api_version), I(name), and I(namespace) will be overwritten by corresponding values found in the configuration read in from the I(src) file. Reads from the local file system. To read from the Ansible controller's file system, including vaulted files, use the file lookup plugin or template lookup plugin, combined with the fr",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "rendered",
+      "description": "Determines what to do with the rendered Template. The state I(rendered) will render the Template based on the provided parameters, and return the rendered objects in the I(resources) field. These can then be referenced in future tasks. The state I(present) will cause the resources in the rendered Template to be created if they do not already exist, and patched if they do. The state I(absent) will delete the resources in the rendered Template.",
+      "choices": [
+        "absent",
+        "present",
+        "rendered"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a username for authenticating with the API. Can also be specified via K8S_AUTH_USERNAME environment variable. Please note that this only works with clusters configured to use HTTP Basic Auth. If your cluster has a different form of authentication (e.g. OAuth2 in OpenShift), this option will not work as expected and you should look into the M(community.okd.k8s_auth) module, as that might do what you need.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not to verify the API server's SSL certificates. Can also be specified via K8S_AUTH_VERIFY_SSL environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to wait for certain resource kinds to end up in the desired state. By default the module exits once Kubernetes has received the request. Implemented for C(state=present) for C(Deployment), C(DaemonSet) and C(Pod), and for C(state=absent) for all resource kinds. For resource kinds without an implementation, C(wait) returns immediately unless C(wait_condition) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_condition",
+      "displayName": "Wait Condition",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies a custom condition on the status to wait for. Ignored if C(wait) is not set or is set to False.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_sleep",
+      "displayName": "Wait Sleep",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Number of seconds to sleep between checks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "How long in seconds to wait for the resource to end up in the desired state. Ignored if C(wait) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

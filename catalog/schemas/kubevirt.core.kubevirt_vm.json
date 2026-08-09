@@ -1,0 +1,419 @@
+{
+  "fqcn": "kubevirt.core.kubevirt_vm",
+  "shortDescription": "Manage KubeVirt VirtualMachines",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/kubevirt/core/kubevirt_vm_module.html",
+  "options": [
+    {
+      "name": "annotations",
+      "displayName": "Annotations",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specify annotations to set on the C(VirtualMachine). Only used when O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Token used to authenticate with the API. Can also be specified via E(K8S_AUTH_API_KEY) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_version",
+      "displayName": "Api Version",
+      "type": "string",
+      "required": false,
+      "default": "kubevirt.io/v1",
+      "description": "Use this to set the API version of KubeVirt.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a CA certificate used to authenticate with the API. The full certificate chain must be provided to avoid certificate validation errors. Can also be specified via E(K8S_AUTH_SSL_CA_CERT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a certificate used to authenticate with the API. Can also be specified via E(K8S_AUTH_CERT_FILE) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a key file used to authenticate with the API. Can also be specified via E(K8S_AUTH_KEY_FILE) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of a context found in the config file. Can also be specified via E(K8S_AUTH_CONTEXT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_volume_templates",
+      "displayName": "Data Volume Templates",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specify the C(DataVolume) templates of the C(VirtualMachine). See U(https://kubevirt.io/api-reference/main/definitions.html#_v1_datavolumetemplatespec)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_options",
+      "displayName": "Delete Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configure behavior when deleting an object. Only used when O(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to O(force=yes), and O(state=present) is set, an existing object will be replaced.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "generate_name",
+      "displayName": "Generate Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the basis of the C(VirtualMachine) name and random characters will be added automatically on the cluster to generate a unique name. Only used when O(state=present). Mutually exclusive with O(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "grace_period_seconds",
+      "displayName": "Grace Period Seconds",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specify the grace period in seconds for stopping or restarting the C(VirtualMachine). Only used when O(state=stopped) or O(state=restarted). When used with O(state=restarted), the only supported values are V(null) (use the default grace period) and V(0) (force restart immediately).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hidden_fields",
+      "displayName": "Hidden Fields",
+      "type": "list",
+      "required": false,
+      "default": [
+        "metadata.annotations[kubemacpool.io/transaction-timestamp]",
+        "metadata.managedFields"
+      ],
+      "description": "Hide fields matching this option in the result. An example might be O(hidden_fields=[metadata.managedFields]) or O(hidden_fields=[metadata.annotations[kubemacpool.io/transaction-timestamp]]).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a URL for accessing the API. Can also be specified via E(K8S_AUTH_HOST) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "impersonate_groups",
+      "displayName": "Impersonate Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Group(s) to impersonate for the operation. Can also be specified via E(K8S_AUTH_IMPERSONATE_GROUPS) environment variable, e.g. C(Group1,Group2).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "impersonate_user",
+      "displayName": "Impersonate User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username to impersonate for the operation. Can also be specified via E(K8S_AUTH_IMPERSONATE_USER) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instancetype",
+      "displayName": "Instancetype",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specify the C(Instancetype) matcher of the C(VirtualMachine). Only used when O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kubeconfig",
+      "displayName": "Kubeconfig",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to an existing Kubernetes config file. If not provided, and no other connection options are provided, the Kubernetes client will attempt to load the default configuration file from I(~/.kube/config). Can also be specified via E(K8S_AUTH_KUBECONFIG) environment variable. Multiple Kubernetes config file can be provided using separator C(;) for Windows platform or C(:) for others platforms. The kubernetes configuration can be provided as dictionary. This feature requires a python kubernetes cl",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specify labels to set on the C(VirtualMachine).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the name of the C(VirtualMachine). This option is ignored when O(state=present) is not set. Mutually exclusive with O(generate_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace",
+      "displayName": "Namespace",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the namespace of the C(VirtualMachine).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_proxy",
+      "displayName": "No Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The comma separated list of hosts/domains/IP/CIDR that shouldn't go through proxy. Can also be specified via E(K8S_AUTH_NO_PROXY) environment variable. Please note that this module does not pick up typical proxy settings from the environment (e.g. E(NO_PROXY)). This feature requires C(kubernetes>=19.15.0). When kubernetes library is less than 19.15.0, it fails even no_proxy set in correct. Example value is C(localhost,.local,.example.com,127.0.0.1,127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a password for authenticating with the API. Can also be specified via E(K8S_AUTH_PASSWORD) environment variable. Please read the description of the O(username) option for a discussion of when this option is applicable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persist_config",
+      "displayName": "Persist Config",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not to save the kube config refresh tokens. Can also be specified via E(K8S_AUTH_PERSIST_CONFIG) environment variable. When the k8s context is using a user credentials with refresh tokens (like oidc or gke/gcloud auth), the token is refreshed by the k8s python client library but not saved by default. So the old refresh token can expire and the next auth might fail. Setting this flag to true will tell the k8s python client to save the new refresh token to the kube config file. Disabled",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preference",
+      "displayName": "Preference",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specify the C(Preference) matcher of the C(VirtualMachine). Only used when O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy",
+      "displayName": "Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL of an HTTP proxy to use for the connection. Can also be specified via E(K8S_AUTH_PROXY) environment variable. Please note that this module does not pick up typical proxy settings from the environment (e.g. E(HTTP_PROXY)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_headers",
+      "displayName": "Proxy Headers",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The Header used for the HTTP proxy. Documentation can be found here U(https://urllib3.readthedocs.io/en/latest/reference/urllib3.util.html?highlight=proxy_headers#urllib3.util.make_headers).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "run_strategy",
+      "displayName": "Run Strategy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the C(RunStrategy) of the C(VirtualMachine). Mutually exclusive with O(running).",
+      "choices": [
+        "Always",
+        "Halted",
+        "Manual",
+        "RerunOnFailure",
+        "Once"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "running",
+      "displayName": "Running",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specify whether the C(VirtualMachine) should be running or not. Mutually exclusive with O(run_strategy). Defaults to O(running=yes) when O(running) and O(run_strategy) are not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "spec",
+      "displayName": "Spec",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specify the template spec of the C(VirtualMachine). See U(https://kubevirt.io/api-reference/main/definitions.html#_v1_virtualmachineinstancespec)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Determines if an object should be created, patched, deleted, started, stopped, or restarted. When set to O(state=present), an object will be created, if it does not already exist. If set to O(state=absent), an existing object will be deleted. If set to O(state=present), an existing object will be patched, if its attributes differ from those specified. If set to O(state=started), it will be ensured that the C(VirtualMachine) is running. Added in version 2.3.0. If set to O(state=stopped), it will ",
+      "choices": [
+        "absent",
+        "present",
+        "restarted",
+        "started",
+        "stopped"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a username for authenticating with the API. Can also be specified via E(K8S_AUTH_USERNAME) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not to verify the API server's SSL certificates. Can also be specified via E(K8S_AUTH_VERIFY_SSL) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to wait for the C(VirtualMachine) to end up in the ready state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_sleep",
+      "displayName": "Wait Sleep",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Number of seconds to sleep between checks. Ignored if O(wait) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "How long in seconds to wait for the resource to end up in the ready state. Ignored if O(wait) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

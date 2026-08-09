@@ -1,0 +1,265 @@
+{
+  "fqcn": "netapp.ontap.na_ontap_volume_autosize",
+  "shortDescription": "NetApp ONTAP manage volume autosize",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp/ontap/na_ontap_volume_autosize_module.html",
+  "options": [
+    {
+      "name": "cert_filepath",
+      "displayName": "Cert Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client cert file (.pem). not supported with python 2.6.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "feature_flags",
+      "displayName": "Feature Flags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable a new feature. This can be used to enable an experimental feature or disable a new feature that breaks backward compatibility. Supported keys and values are subject to change without notice.  Unknown keys are ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_ontap_version",
+      "displayName": "Force Ontap Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the cluster ONTAP version when using REST. The behavior is undefined if the version does not match the target cluster. This is provided as a work-around when the cluster version cannot be read because of permission issues. See https://github.com/ansible-collections/netapp.ontap/wiki/Known-issues. This should be in the form 9.10 or 9.10.1 with each element being an integer number. When C(use_rest) is set to auto, this may force a switch to ZAPI based on the version and platform capabilit",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "grow_threshold_percent",
+      "displayName": "Grow Threshold Percent",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the percentage of the flexible volume's capacity at which autogrow is initiated. The default grow threshold varies from 85% to 98%, depending on the volume size. It is an error for the grow threshold to be less than or equal to the shrink threshold. Range between 0 and 100",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the ONTAP instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_port",
+      "displayName": "Http Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Override the default port (80 or 443) with this port",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "https",
+      "displayName": "Https",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable and disable https. Ignored when using REST as only https is supported. Ignored when using SSL certificate authentication as it requires SSL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "increment_size",
+      "displayName": "Increment Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the flexible volume's increment size using the following format < number > [k|m|g|t] The amount is the absolute size to set. The trailing 'k', 'm', 'g', and 't' indicates the desired units, namely 'kilobytes', 'megabytes', 'gigabytes', and 'terabytes' (respectively). Not supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_filepath",
+      "displayName": "Key Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client key file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lambda_config",
+      "displayName": "Lambda Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration parameters for AWS Lambda proxy functionality. These option and suboptions are only supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maximum_size",
+      "displayName": "Maximum Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the flexible volume's maximum allowed size using the following format < number > [k|m|g|t] The amount is the absolute size to set. The trailing 'k', 'm', 'g', and 't' indicates the desired units, namely 'kilobytes', 'megabytes', 'gigabytes', and 'terabytes' (respectively). The default value is 20% greater than the volume size at the time autosize was enabled. It is an error for the maximum volume size to be less than the current volume size. It is also an error for the maximum size to be",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minimum_size",
+      "displayName": "Minimum Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the flexible volume's minimum allowed size using the following format < number > [k|m|g|t] The amount is the absolute size to set. The trailing 'k', 'm', 'g', and 't' indicates the desired units, namely 'kilobytes', 'megabytes', 'gigabytes', and 'terabytes' (respectively). The default value is the size of the volume at the time the 'grow_shrink' mode was enabled. It is an error for the minimum size to be greater than or equal to the maximum size.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the flexible volume's autosize mode of operation.",
+      "choices": [
+        "grow",
+        "grow_shrink",
+        "off"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ontapi",
+      "displayName": "Ontapi",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The ontap api version to use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the specified user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset",
+      "displayName": "Reset",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Sets the values of maximum_size, increment_size, minimum_size, grow_threshold_percent, shrink_threshold_percent and mode to their defaults If reset paramater is present system will always perform reset action, so idempotency is not supported. Not supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shrink_threshold_percent",
+      "displayName": "Shrink Threshold Percent",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the percentage of the flexible volume's capacity at which autoshrink is initiated. The default shrink theshold is 50%. It is an error for the shrink threshold to be greater than or equal to the grow threshold. Range between 0 and 100",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_lambda",
+      "displayName": "Use Lambda",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies if AWS Lambda proxy functionality should be used to connect to the ONTAP system. Supported only with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_rest",
+      "displayName": "Use Rest",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "Whether to use REST or ZAPI. always -- will always use the REST API if the module supports REST. A warning is issued if the module does not support REST. An error is issued if a module option is not supported in REST. never -- will always use ZAPI if the module supports ZAPI.  An error may be issued if a REST option is not supported in ZAPI. auto -- will try to use the REST API if the module supports REST and modules options are supported.  Reverts to ZAPI otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required. For more information, please read the documentation U(https://docs.netapp.com/us-en/ontap/authentication/create-svm-user-accounts-task.html). Two authentication methods are supported 1. Basic authentication, using username and password. 2. SSL certificate authentication, using a ssl client cert file, and optionally a private key file. To use a certificate, the certificate must h",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to C(no), the SSL certificates will not be validated. This should only set to C(False) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume",
+      "displayName": "Volume",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the flexible volume for which we want to set autosize.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vserver",
+      "displayName": "Vserver",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the vserver to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,238 @@
   "fqcn": "community.windows.psexec",
   "shortDescription": "Runs commands on a remote Windows host based on the PsExec model",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/windows/psexec_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "arguments",
+      "displayName": "Arguments",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Any arguments as a single string to use when running the executable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "asynchronous",
+      "displayName": "Asynchronous",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Will run the command as a detached process and the module returns immediately after starting the process while the process continues to run in the background. The I(stdout) and I(stderr) return values will be null when this is set to C(yes). The I(stdin) option does not work with this type of process. The I(rc) return value is not set when this is C(yes)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_password",
+      "displayName": "Connection Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for I(connection_user). Required if the Kerberos requirements are not installed or the username is a local account to the Windows host. Can be omitted to use a Kerberos principal ticket for the principal set by I(connection_user) if the Kerberos library is installed and the ticket has already been retrieved with the C(kinit) command before.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_timeout",
+      "displayName": "Connection Timeout",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "The timeout in seconds to wait when receiving the initial SMB negotiate response from the server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_username",
+      "displayName": "Connection Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use when connecting to the remote Windows host. This user must be a member of the C(Administrators) group of the Windows host. Required if the Kerberos requirements are not installed or the username is a local account to the Windows host. Can be omitted to use the default Kerberos principal ticket in the local credential cache if the Kerberos library is installed. If I(process_username) is not specified, then the remote process will run under a Network Logon under this account.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encrypt",
+      "displayName": "Encrypt",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Will use SMB encryption to encrypt the SMB messages sent to and from the host. This requires the SMB 3 protocol which is only supported from Windows Server 2012 or Windows 8, older versions like Windows 7 or Windows Server 2008 (R2) must set this to C(no) and use no encryption. When setting to C(no), the packets are in plaintext and can be seen by anyone sniffing the network, any process options are included in this.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "executable",
+      "displayName": "Executable",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The executable to run on the Windows host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The remote Windows host to connect to, can be either an IP address or a hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "integrity_level",
+      "displayName": "Integrity Level",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The integrity level of the process when I(process_username) is defined and is not equal to C(System). When C(default), the default integrity level based on the system setup. When C(elevated), the command will be run with Administrative rights. When C(limited), the command will be forced to run with non-Administrative rights.",
+      "choices": [
+        "limited",
+        "default",
+        "elevated"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interactive",
+      "displayName": "Interactive",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Will run the process as an interactive process that shows a process Window of the Windows session specified by I(interactive_session). The I(stdout) and I(stderr) return values will be null when this is set to C(yes). The I(stdin) option does not work with this type of process.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interactive_session",
+      "displayName": "Interactive Session",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The Windows session ID to use when displaying the interactive process on the remote Windows host. This is only valid when I(interactive) is C(yes). The default is C(0) which is the console session of the Windows host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "load_profile",
+      "displayName": "Load Profile",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Runs the remote command with the user's profile loaded.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 445,
+      "description": "The port that the remote SMB service is listening on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "Set the command's priority on the Windows host. See U(https://msdn.microsoft.com/en-us/library/windows/desktop/ms683211.aspx) for more details.",
+      "choices": [
+        "above_normal",
+        "below_normal",
+        "high",
+        "idle",
+        "normal",
+        "realtime"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "process_password",
+      "displayName": "Process Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for I(process_username). Required if I(process_username) is defined and not C(System).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "process_timeout",
+      "displayName": "Process Timeout",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The timeout in seconds that is placed upon the running process. A value of C(0) means no timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "process_username",
+      "displayName": "Process Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user to run the process as. This can be set to run the process under an Interactive logon of the specified account which bypasses limitations of a Network logon used when this isn't specified. If omitted then the process is run under the same account as I(connection_username) with a Network logon. Set to C(System) to run as the builtin SYSTEM account, no password is required with this account. If I(encrypt) is C(no), the username and password are sent as a simple XOR scrambled byte string th",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "show_ui_on_logon_screen",
+      "displayName": "Show Ui On Logon Screen",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Shows the process UI on the Winlogon secure desktop when I(process_username) is C(System).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stdin",
+      "displayName": "Stdin",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Data to send on the stdin pipe once the process has started. This option has no effect when I(interactive) or I(asynchronous) is C(yes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "working_directory",
+      "displayName": "Working Directory",
+      "type": "string",
+      "required": false,
+      "default": "C:\\Windows\\System32",
+      "description": "Changes the working directory set when starting the process.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

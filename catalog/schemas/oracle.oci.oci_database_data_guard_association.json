@@ -2,6 +2,574 @@
   "fqcn": "oracle.oci.oci_database_data_guard_association",
   "shortDescription": "Manage a DataGuardAssociation resource in Oracle Cloud Infrastructure",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/oracle/oci/oci_database_data_guard_association_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the user, on whose behalf, OCI APIs are invoked. If not set, then the value of the OCI_USER_ID environment variable, if any, is used. This option is required if the user is not specified through a configuration file (See C(config_file_location)). To get the user's OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_fingerprint",
+      "displayName": "Api User Fingerprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fingerprint for the key pair being used. If not set, then the value of the OCI_USER_FINGERPRINT environment variable, if any, is used. This option is required if the key fingerprint is not specified through a configuration file (See C(config_file_location)). To get the key pair's fingerprint value please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_file",
+      "displayName": "Api User Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Full path and filename of the private key (in PEM format). If not set, then the value of the OCI_USER_KEY_FILE variable, if any, is used. This option is required if the private key is not specified through a configuration file (See C(config_file_location)). If the key is encrypted with a pass-phrase, the C(api_user_key_pass_phrase) option must also be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_pass_phrase",
+      "displayName": "Api User Key Pass Phrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase used by the key referenced in C(api_user_key_file), if it is encrypted. If not set, then the value of the OCI_USER_KEY_PASS_PHRASE variable, if any, is used. This option is required if the key passphrase is not specified through a configuration file (See C(config_file_location)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_purpose",
+      "displayName": "Auth Purpose",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The auth purpose which can be used in conjunction with 'auth_type=instance_principal'. The default auth_purpose for instance_principal is None.",
+      "choices": [
+        "service_principal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "api_key",
+      "description": "The type of authentication to use for making API requests. By default C(auth_type=\"api_key\") based authentication is performed and the API key (see I(api_user_key_file)) in your config file will be used. If this 'auth_type' module option is not specified, the value of the OCI_ANSIBLE_AUTH_TYPE, if any, is used. Use C(auth_type=\"instance_principal\") to use instance principal based authentication when running ansible playbooks within an OCI compute instance.",
+      "choices": [
+        "api_key",
+        "instance_principal",
+        "instance_obo_user",
+        "resource_principal",
+        "security_token"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_domain",
+      "displayName": "Availability Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the availability domain that the standby database DB system will be located in. For example- \"Uocm:PHX-AD-1\". Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_network_nsg_ids",
+      "displayName": "Backup Network Nsg Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of the L(OCIDs,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the network security groups (NSGs) that the backup network of this DB system belongs to. Setting this to an empty array after the list is created removes the resource from all NSGs. For more information about NSGs, see L(Security Rules,https://docs.cloud.oracle.com/Content/Network/Concepts/securityrules.htm). Applicable only to Exadata systems. Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_bundle",
+      "displayName": "Cert Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full path to a CA certificate bundle to be used for SSL verification. This will override the default CA certificate bundle. If not set, then the value of the OCI_ANSIBLE_CERT_BUNDLE variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file_location",
+      "displayName": "Config File Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to configuration file. If not set then the value of the OCI_CONFIG_FILE environment variable, if any, is used. Otherwise, defaults to ~/.oci/config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_profile_name",
+      "displayName": "Config Profile Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The profile to load from the config file referenced by C(config_file_location). If not set, then the value of the OCI_CONFIG_PROFILE environment variable, if any, is used. Otherwise, defaults to the \"DEFAULT\" profile in C(config_file_location).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpu_core_count",
+      "displayName": "Cpu Core Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of CPU cores available for AMD-based virtual machine DB systems. Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "creation_type",
+      "displayName": "Creation Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether to create the peer database in an existing DB system or in a new DB system. Required for create using I(state=present).",
+      "choices": [
+        "NewDbSystem",
+        "ExistingVmCluster",
+        "ExistingDbSystem"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_collection_options",
+      "displayName": "Data Collection Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": " Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_guard_association_id",
+      "displayName": "Data Guard Association Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Data Guard association's L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm). Required for update using I(state=present) when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_admin_password",
+      "displayName": "Database Admin Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A strong password for the `SYS`, `SYSTEM`, and `PDB Admin` users to apply during standby creation. The password must contain no fewer than nine characters and include: * At least two uppercase characters. * At least two lowercase characters. * At least two numeric characters. * At least two special characters. Valid special characters include \"_\", \"#\", and \"-\" only. **The password MUST be the same as the primary admin password.** Required for create using I(state=present). This parameter is upda",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_defined_tags",
+      "displayName": "Database Defined Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see L(Resource Tags,https://docs.cloud.oracle.com/Content/General/Concepts/resourcetags.htm). Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_freeform_tags",
+      "displayName": "Database Freeform Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see L(Resource Tags,https://docs.cloud.oracle.com/Content/General/Concepts/resourcetags.htm). Example: `{\"Department\": \"Finance\"}` Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_id",
+      "displayName": "Database Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The database L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_software_image_id",
+      "displayName": "Database Software Image Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The database software image L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_system_defined_tags",
+      "displayName": "Db System Defined Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see L(Resource Tags,https://docs.cloud.oracle.com/Content/General/Concepts/resourcetags.htm). Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_system_freeform_tags",
+      "displayName": "Db System Freeform Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see L(Resource Tags,https://docs.cloud.oracle.com/Content/General/Concepts/resourcetags.htm). Example: `{\"Department\": \"Finance\"}` Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-friendly name of the DB system that will contain the the standby database. The display name does not have to be unique. Required for create, update when environment variable C(OCI_USE_NAME_AS_IDENTIFIER) is set. Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fault_domains",
+      "displayName": "Fault Domains",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A Fault Domain is a grouping of hardware and infrastructure within an availability domain. Fault Domains let you distribute your instances so that they are not on the same physical hardware within a single availability domain. A hardware failure or maintenance that affects one Fault Domain does not affect DB systems in other Fault Domains. If you do not specify the Fault Domain, the system selects one for you. To change the Fault Domain for a DB system, terminate it and launch a new DB system in",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_create",
+      "displayName": "Force Create",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to attempt non-idempotent creation of a resource. By default, create resource is an idempotent operation, and doesn't create the resource if it already exists. Setting this option to true, forcefully creates a copy of the resource, even if it already exists.This option is mutually exclusive with I(key_by).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname for the DB node. Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_active_data_guard_enabled",
+      "displayName": "Is Active Data Guard Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True if active Data Guard is enabled. This parameter is updatable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_by",
+      "displayName": "Key By",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of attributes of this resource which should be used to uniquely identify an instance of the resource. By default, all the attributes of a resource are used to uniquely identify a resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "license_model",
+      "displayName": "License Model",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle license model that applies to all the databases on the dataguard standby DB system. The default is LICENSE_INCLUDED. Bring your own license (BYOL) allows you to select the DB edition using the optional parameter, for Autonomous Database Serverless. Applicable when creation_type is 'NewDbSystem'",
+      "choices": [
+        "LICENSE_INCLUDED",
+        "BRING_YOUR_OWN_LICENSE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "node_count",
+      "displayName": "Node Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of nodes to launch for the DB system of the standby in the Data Guard association. For a 2-node RAC virtual machine DB system, specify either 1 or 2. If you do not supply this parameter, the default is the node count of the primary DB system. Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nsg_ids",
+      "displayName": "Nsg Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of L(OCIDs,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) for the network security groups (NSGs) to which this resource belongs. Setting this to an empty list removes all resources from all NSGs. For more information about NSGs, see L(Security Rules,https://docs.cloud.oracle.com/Content/Network/Concepts/securityrules.htm). **NsgIds restrictions:** - A network security group (NSG) is optional for Autonomous Databases with private access. The nsgIds list can be em",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_db_home_id",
+      "displayName": "Peer Db Home Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the DB home in which to create the standby database. You must supply this value to create standby database with an existing DB home Applicable when creation_type is one of ['ExistingDbSystem', 'ExistingVmCluster']",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_db_system_id",
+      "displayName": "Peer Db System Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the DB system in which to create the standby database. You must supply this value if creationType is `ExistingDbSystem`. Applicable when creation_type is 'ExistingDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_db_unique_name",
+      "displayName": "Peer Db Unique Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the `DB_UNIQUE_NAME` of the peer database to be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_sid_prefix",
+      "displayName": "Peer Sid Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a prefix for the `Oracle SID` of the database to be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_vm_cluster_id",
+      "displayName": "Peer Vm Cluster Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the VM Cluster in which to create the standby database. You must supply this value if creationType is `ExistingVmCluster`. Applicable when creation_type is 'ExistingVmCluster'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_ip",
+      "displayName": "Private Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IPv4 address from the provided OCI subnet which needs to be assigned to the VNIC. If not provided, it will be auto-assigned with an available IPv4 address from the subnet. Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protection_mode",
+      "displayName": "Protection Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The protection mode to set up between the primary and standby databases. For more information, see L(Oracle Data Guard Protection Modes,http://docs.oracle.com/database/122/SBYDB/oracle-data-guard-protection-modes.htm#SBYDB02000) in the Oracle Data Guard documentation. **IMPORTANT** - The only protection mode currently supported by the Database service is MAXIMUM_PERFORMANCE. Required for create using I(state=present). This parameter is updatable.",
+      "choices": [
+        "MAXIMUM_AVAILABILITY",
+        "MAXIMUM_PERFORMANCE",
+        "MAXIMUM_PROTECTION"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realm_specific_endpoint_template_enabled",
+      "displayName": "Realm Specific Endpoint Template Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable/Disable realm specific endpoint template for service client. By Default, realm specific endpoint template is disabled. If not set, then the value of the OCI_REALM_SPECIFIC_SERVICE_ENDPOINT_TEMPLATE_ENABLED variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle Cloud Infrastructure region to use for all OCI API requests. If not set, then the value of the OCI_REGION variable, if any, is used. This option is required if the region is not specified through a configuration file (See C(config_file_location)). Please refer to U(https://docs.us-phoenix-1.oraclecloud.com/Content/General/Concepts/regions.htm) for more information on OCI regions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shape",
+      "displayName": "Shape",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The virtual machine DB system shape to launch for the standby database in the Data Guard association. The shape determines the number of CPU cores and the amount of memory available for the DB system. Only virtual machine shapes are valid options. If you do not supply this parameter, the default shape is the shape of the primary DB system. To get a list of all shapes, use the L(ListDbSystemShapes,https://docs.cloud.oracle.com/en- us/iaas/api/#/en/database/latest/DbSystemShapeSummary/ListDbSystem",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the DataGuardAssociation. Use I(state=present) to create or update a DataGuardAssociation.",
+      "choices": [
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_volume_performance_mode",
+      "displayName": "Storage Volume Performance Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The block storage volume performance level. Valid values are `BALANCED` and `HIGH_PERFORMANCE`. See L(Block Volume Performance,https://docs.cloud.oracle.com/Content/Block/Concepts/blockvolumeperformance.htm) for more information. Applicable when creation_type is 'NewDbSystem'",
+      "choices": [
+        "BALANCED",
+        "HIGH_PERFORMANCE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subnet_id",
+      "displayName": "Subnet Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the subnet the DB system is associated with. **Subnet Restrictions:** - For 1- and 2-node RAC DB systems, do not use a subnet that overlaps with 192.168.16.16/28 These subnets are used by the Oracle Clusterware private interconnect on the database instance. Specifying an overlapping subnet will cause the private interconnect to malfunction. This restriction applies to both the client subnet and backup subnet. Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenancy",
+      "displayName": "Tenancy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OCID of your tenancy. If not set, then the value of the OCI_TENANCY variable, if any, is used. This option is required if the tenancy OCID is not specified through a configuration file (See C(config_file_location)). To get the tenancy OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_zone",
+      "displayName": "Time Zone",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The time zone of the dataguard standby DB system. For details, see L(DB System Time Zones,https://docs.cloud.oracle.com/Content/Database/References/timezones.htm). Applicable when creation_type is 'NewDbSystem'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "transport_type",
+      "displayName": "Transport Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The redo transport type to use for this Data Guard association.  Valid values depend on the specified `protectionMode`: * MAXIMUM_AVAILABILITY - SYNC or FASTSYNC * MAXIMUM_PERFORMANCE - ASYNC * MAXIMUM_PROTECTION - SYNC For more information, see L(Redo Transport Services,http://docs.oracle.com/database/122/SBYDB/oracle-data-guard-redo-transport-services.htm#SBYDB00400) in the Oracle Data Guard documentation. **IMPORTANT** - The only transport type currently supported by the Database service is A",
+      "choices": [
+        "SYNC",
+        "ASYNC",
+        "FASTSYNC"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to wait for create or delete operation to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Time, in seconds, to wait when I(wait=yes). Defaults to 1200 for most of the services but some services might have a longer wait timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

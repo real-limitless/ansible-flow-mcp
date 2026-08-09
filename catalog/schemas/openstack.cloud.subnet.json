@@ -2,6 +2,435 @@
   "fqcn": "openstack.cloud.subnet",
   "shortDescription": "Add/Remove subnet to an OpenStack network",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/openstack/cloud/subnet_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "allocation_pool_end",
+      "displayName": "Allocation Pool End",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "From the subnet pool the last IP that should be assigned to the virtual machines.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allocation_pool_start",
+      "displayName": "Allocation Pool Start",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "From the subnet pool the starting address from which the IP should be allocated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allocation_pools",
+      "displayName": "Allocation Pools",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of allocation pools to assign to the subnet. Each element consists of a 'start' and 'end' value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "How long should the socket layer wait before timing out for API calls. If this is omitted, nothing will be passed to the requests library.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary containing auth information as needed by the cloud's auth plugin strategy. For the default I(password) plugin, this would contain I(auth_url), I(username), I(password), I(project_name) and any information about domains (for example, I(user_domain_name) or I(project_domain_name)) if the cloud supports them. For other plugins, this param will need to contain whatever parameters that auth plugin requires. This parameter is not needed if a named cloud is provided or OpenStack OS_* environ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the auth plugin to use. If the cloud uses something other than password authentication, the name of the plugin should be indicated here and the contents of the I(auth) parameter should be updated accordingly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a CA Cert bundle that can be used as part of verifying SSL API requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cidr",
+      "displayName": "Cidr",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CIDR representation of the subnet that should be assigned to the subnet. Required when I(state) is 'present' and a subnetpool is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a client certificate to use as part of the SSL transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a client key to use as part of the SSL transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud",
+      "displayName": "Cloud",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Named cloud or cloud config to operate against. If I(cloud) is a string, it references a named cloud config as defined in an OpenStack clouds.yaml file. Provides default values for I(auth) and I(auth_type). This parameter is not needed if I(auth) is provided or if OpenStack OS_* environment variables are present. If I(cloud) is a dict, it contains a complete cloud configuration like would be in a section of clouds.yaml.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the subnet",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_gateway_ip",
+      "displayName": "Disable Gateway Ip",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "The gateway IP would not be assigned for this subnet",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_nameservers",
+      "displayName": "Dns Nameservers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of DNS nameservers for this subnet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extra_attrs",
+      "displayName": "Extra Attrs",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Dictionary with extra key/value pairs passed to the API",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gateway_ip",
+      "displayName": "Gateway Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ip that would be assigned to the gateway for this subnet",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_routes",
+      "displayName": "Host Routes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of host route dictionaries for the subnet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": false,
+      "default": "public",
+      "description": "Endpoint URL type to fetch from the service catalog.",
+      "choices": [
+        "admin",
+        "internal",
+        "public"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_version",
+      "displayName": "Ip Version",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "The IP version of the subnet 4 or 6",
+      "choices": [
+        4,
+        6
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipv6_address_mode",
+      "displayName": "Ipv6 Address Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IPv6 address mode",
+      "choices": [
+        "dhcpv6-stateful",
+        "dhcpv6-stateless",
+        "slaac"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipv6_ra_mode",
+      "displayName": "Ipv6 Ra Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IPv6 router advertisement mode",
+      "choices": [
+        "dhcpv6-stateful",
+        "dhcpv6-stateless",
+        "slaac"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_dhcp_enabled",
+      "displayName": "Is Dhcp Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Whether DHCP should be enabled for this subnet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the subnet that should be created. Although Neutron allows for non-unique subnet names, this module enforces subnet name uniqueness.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name or id of the network to which the subnet should be attached Required when I(state) is 'present'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_segment",
+      "displayName": "Network Segment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name or id of the network segment to which the subnet should be associated",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix_length",
+      "displayName": "Prefix Length",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The prefix length to use for subnet allocation from a subnet pool",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Project name or ID containing the subnet (name admin-only)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region_name",
+      "displayName": "Region Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the region.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdk_log_level",
+      "displayName": "Sdk Log Level",
+      "type": "string",
+      "required": false,
+      "default": "INFO",
+      "description": "Log level of the OpenStackSDK",
+      "choices": [
+        "INFO",
+        "DEBUG"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdk_log_path",
+      "displayName": "Sdk Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the logfile of the OpenStackSDK. If empty no log is written",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Indicate desired state of the resource",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subnet_pool",
+      "displayName": "Subnet Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The subnet pool name or ID from which to obtain a CIDR",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of tags to set on the network",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "How long should ansible wait for the requested resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_default_subnet_pool",
+      "displayName": "Use Default Subnet Pool",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use the default subnetpool for I(ip_version) to obtain a CIDR.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not SSL API requests should be verified. Before Ansible 2.3 this defaulted to C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Should ansible wait until the requested resource is complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -2,6 +2,247 @@
   "fqcn": "vmware.vmware.guest_info",
   "shortDescription": "Gather guest information",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware/guest_info_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The datacenter with the VM you would like to query. This is only used if the O(folder) parameter is supplied as a relative path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder",
+      "displayName": "Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Absolute or relative folder path to search for the virtual machine. This parameter is only used if O(name) is supplied, and can help identify the machine you want to query. For example 'datacenter name/vm/path/to/folder' or 'path/to/folder'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder_paths_are_absolute",
+      "displayName": "Folder Paths Are Absolute",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, any folder path parameters are treated as absolute paths. If false, modules will try to intelligently determine if the path is absolute or relative. This option is useful when your environment has a complex folder structure. By default, modules will try to intelligently determine if the path is absolute or relative. They may mistakenly prepend the datacenter name or other folder names, and this option can be used to avoid this.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gather_tags",
+      "displayName": "Gather Tags",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, gather any tags attached to the vm(s)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "guest_password",
+      "displayName": "Guest Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the user to be used to connect to guest vm and fetch environment info.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "guest_username",
+      "displayName": "Guest Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to be used to connect to guest vm and fetch environment info.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "moid",
+      "displayName": "Moid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The MOID of the vm to gather info for Only one of name, moid, uuid is allowed",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the vm to gather info for Only one of name, moid, uuid is allowed",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name_match",
+      "displayName": "Name Match",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If using name and multiple VMs have the same name, specify which VM should be selected",
+      "choices": [
+        "first",
+        "last"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "properties",
+      "displayName": "Properties",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "If the schema is 'vsphere', gather these specific properties only",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_protocol",
+      "displayName": "Proxy Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The proxy connection protocol to use. This option is used if the correct proxy protocol cannot be automatically determined.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schema",
+      "displayName": "Schema",
+      "type": "string",
+      "required": false,
+      "default": "summary",
+      "description": "The type of info to gather from the vms",
+      "choices": [
+        "summary",
+        "vsphere"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_instance_uuid",
+      "displayName": "Use Instance Uuid",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, search by instance UUID instead of BIOS UUID. BIOS UUID may not be unique and may cause errors.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The UUID of the vm to gather info for Only one of name, moid, uuid is allowed",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -2,6 +2,233 @@
   "fqcn": "vmware.vmware.folder_template_from_vm",
   "shortDescription": "Create a template in a local VCenter folder from an existing VM",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware/folder_template_from_vm_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of datacenter in which to operate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datastore",
+      "displayName": "Datastore",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of datastore to use as storage for the template.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder_paths_are_absolute",
+      "displayName": "Folder Paths Are Absolute",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, any folder path parameters are treated as absolute paths. If false, modules will try to intelligently determine if the path is absolute or relative. This option is useful when your environment has a complex folder structure. By default, modules will try to intelligently determine if the path is absolute or relative. They may mistakenly prepend the datacenter name or other folder names, and this option can be used to avoid this.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_pool",
+      "displayName": "Resource Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The resource pool to place the template in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If the template should be present or absent",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_folder",
+      "displayName": "Template Folder",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the folder that the new template should be placed in Should be the full folder path, with or without the 'datacenter/vm/' prefix For example 'datacenter name/vm/path/to/folder' or 'path/to/folder'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_name",
+      "displayName": "Template Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name to give to the new template.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_moid",
+      "displayName": "Vm Moid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The MOID of the vm to be used to create the template One of vm_name, vm_moid, vm_uuid is required This parameter is ignored when state is 'absent'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name",
+      "displayName": "Vm Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the vm to be used to create the template One of vm_name, vm_moid, vm_uuid is required This parameter is ignored when state is 'absent'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name_match",
+      "displayName": "Vm Name Match",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If using vm_name and multiple VMs have the same name, specify which VM should be selected",
+      "choices": [
+        "first",
+        "last"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_use_instance_uuid",
+      "displayName": "Vm Use Instance Uuid",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, search by instance UUID instead of BIOS UUID. BIOS UUID may not be unique and may cause errors.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_uuid",
+      "displayName": "Vm Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The UUID of the vm to be used to create the template One of vm_name, vm_moid, vm_uuid is required This parameter is ignored when state is 'absent'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_template",
+      "displayName": "Wait For Template",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, the module will wait until the template is created to exit.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -1,0 +1,235 @@
+{
+  "fqcn": "juniper.device.srx_cluster",
+  "shortDescription": "Add or remove SRX chassis cluster configuration",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/juniper/device/srx_cluster_module.html",
+  "options": [
+    {
+      "name": "attempts",
+      "displayName": "Attempts",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "The number of times to try connecting and logging in to the Junos device. This option is only applicable when using C(mode = 'telnet') or C(mode = 'serial'). Mutually exclusive with the I(console) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "baud",
+      "displayName": "Baud",
+      "type": "number",
+      "required": false,
+      "default": 9600,
+      "description": "The serial baud rate, in bits per second, used to connect to the Junos device. This option is only applicable when using C(mode = 'serial'). Mutually exclusive with the I(console) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_id",
+      "displayName": "Cluster Id",
+      "type": "number",
+      "required": false,
+      "default": "none",
+      "description": "The cluster ID to configure. Required when I(enable) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "console",
+      "displayName": "Console",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "An alternate method of specifying a NETCONF over serial console connection to the Junos device using Telnet to a console server. The value of this option must be a string in the format C(--telnet <console_hostname>,<console_port_number>). This option is deprecated. It is present only for backwards compatibility. The string value of this option is exactly equivalent to specifying I(host) with a value of C(<console_hostname>), I(mode) with a value of C(telnet), and I(port) with a value of C(<conso",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cs_passwd",
+      "displayName": "Cs Passwd",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password used to authenticate with the console server over SSH. This option is only required if you want to connect to a device over console using SSH as transport. Mutually exclusive with the I(console) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cs_user",
+      "displayName": "Cs User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username used to authenticate with the console server over SSH. This option is only required if you want to connect to a device over console using SSH as transport. Mutually exclusive with the I(console) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable",
+      "displayName": "Enable",
+      "type": "boolean",
+      "required": true,
+      "default": "none",
+      "description": "Enable or disable cluster mode. When C(true) cluster mode is enabled and I(cluster_id) and I(node_id) must also be specified. When C(false) cluster mode is disabled and the device returns to stand-alone mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": "C({{ inventory_hostname }})",
+      "description": "The hostname or IP address of the Junos device to which the connection should be established. This is normally the Junos device itself, but is the hostname or IP address of a console server when connecting to the console of the device by setting the I(mode) option to the value C(telnet). This option is required, but does not have to be specified explicitly by the user because it defaults to C({{ inventory_hostname }}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "huge_tree",
+      "displayName": "Huge Tree",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Parse XML with very deep trees and long text content.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "level",
+      "displayName": "Level",
+      "type": "string",
+      "required": false,
+      "default": "WARNING",
+      "description": "The level of information to be logged can be modified using this option 1) By default, messages at level C(WARNING) or higher are logged. 2) If the C(-v) or C(--verbose) command-line options to the C(ansible-playbook) command are specified, messages at level C(INFO) or higher are logged. 3) If the C(-vv) (or more verbose) command-line option to the C(ansible-playbook) command is specified, or the C(ANSIBLE_DEBUG) environment variable is set, then messages at level C(DEBUG) or higher are logged. ",
+      "choices": [
+        "INFO",
+        "DEBUG"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logdir",
+      "displayName": "Logdir",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "The path to a directory, on the Ansible control machine, where debugging information for the particular task is logged. If this option is specified, debugging information is logged to a file named C({{ inventory_hostname }}.log) in the directory specified by the I(logdir) option. The log file must be writeable. If the file already exists, it is appended. It is the users responsibility to delete/rotate log files. The level of information logged in this file is controlled by Ansible's verbosity, d",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logfile",
+      "displayName": "Logfile",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "The path to a file, on the Ansible control machine, where debugging information for the particular task is logged. The log file must be writeable. If the file already exists, it is appended. It is the users responsibility to delete/rotate log files. The level of information logged in this file is controlled by Ansible's verbosity, debug options and level option in task 1) By default, messages at level C(WARNING) or higher are logged. 2) If the C(-v) or C(--verbose) command-line options to the C(",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "The PyEZ mode used to establish a NETCONF connection to the Junos device. A value of C(none) uses the default NETCONF over SSH mode. Depending on the values of the I(host) and I(port) options, a value of C(telnet) results in either a direct NETCONF over Telnet connection to the Junos device, or a NETCONF over serial console connection to the Junos device using Telnet to a console server. A value of C(serial) results in a NETCONF over serial console connection to the Junos device. Mutually exclus",
+      "choices": [
+        "none",
+        "telnet",
+        "serial"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "node_id",
+      "displayName": "Node Id",
+      "type": "number",
+      "required": false,
+      "default": "none",
+      "description": "The node ID to configure. (C(0) or C(1)) Required when I(enable) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "passwd",
+      "displayName": "Passwd",
+      "type": "string",
+      "required": false,
+      "default": "The first defined value from the following list 1) The C(ANSIBLE_NET_PASSWORD) environment variable. (used by Ansible Tower) 2) The value specified using the C(-k) or C(--ask-pass) command line arguments to the C(ansible) or C(ansible-playbook) command. 3) none (An empty password/passphrase)",
+      "description": "The password, or ssh key's passphrase, used to authenticate with the Junos device. If this option is not specified, authentication is attempted using an empty password, or ssh key passphrase.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "string",
+      "required": false,
+      "default": "C(830) if C(mode = none), C(23) if C(mode = 'telnet'), C('/dev/ttyUSB0') if (mode = 'serial')",
+      "description": "The TCP port number or serial device port used to establish the connection. Mutually exclusive with the I(console) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_config",
+      "displayName": "Ssh Config",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the SSH client configuration file. If this option is not specified, then the PyEZ Device instance by default queries file ~/.ssh/config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_private_key_file",
+      "displayName": "Ssh Private Key File",
+      "type": "string",
+      "required": false,
+      "default": "The first defined value from the following list 1) The C(ANSIBLE_NET_SSH_KEYFILE) environment variable. (used by Ansible Tower) 2) The value specified using the C(--private-key) or C(--key-file) command line arguments to the C(ansible) or C(ansible-playbook) command. 3) none (the file specified in the user's SSH configuration, or the operating-system-specific default)",
+      "description": "The path to the SSH private key file used to authenticate with the Junos device. If this option is not specified, and no default value is found using the algorithm below, then the SSH private key file specified in the user's SSH configuration, or the operating-system-specific default is used. This must be in the RSA PEM format, and not the newer OPENSSH format. To check if the private key is in the correct format, issue the command `head -n1 ~/.ssh/some_private_key` and ensure that it's RSA and ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The maximum number of seconds to wait for RPC responses from the Junos device. This option does NOT control the initial connection timeout value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": "The first defined value from the following list 1) The C(ANSIBLE_NET_USERNAME) environment variable. (used by Ansible Tower) 2) The C(remote_user) as defined by Ansible. Ansible sets this value via several methods including a) C(-u) or C(--user) command line arguments to the C(ansible) or C(ansible-playbook) command. b) C(ANSIBLE_REMOTE_USER) environment variable. c) C(remote_user) configuration setting. See the Ansible documentation for the precedence used to set the C(remote_user) value. 3) The C(USER) environment variable.",
+      "description": "The username used to authenticate with the Junos device. This option is required, but does not have to be specified explicitly by the user due to the algorithm for determining the default value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

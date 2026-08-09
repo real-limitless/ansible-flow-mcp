@@ -1,0 +1,283 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_copy",
+  "shortDescription": "Copy data to z/OS",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_copy_module.html",
+  "options": [
+    {
+      "name": "aliases",
+      "displayName": "Aliases",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to C(true), indicates that any aliases found in the source (USS file, USS dir, PDS/E library or member) are to be preserved during the copy operation. Aliases are implicitly preserved when libraries are copied over to USS destinations. That is, when C(executable=True) and C(dest) is a USS file or directory, this option will be ignored. Copying of aliases for text-based data sets from USS sources or to USS destinations is not currently supported. If the C(dest) is Unix, the alias is not vi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "asa_text",
+      "displayName": "Asa Text",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to C(true), indicates that either C(src) or C(dest) or both contain ASA control characters. When C(src) is a USS file and C(dest) is a data set, the copy will preserve ASA control characters in the destination. When C(src) is a data set containing ASA control characters and C(dest) is a USS file, the copy will put all control characters as plain text in the destination. If C(dest) is a non-existent data set, it will be created with record format Fixed Block with ANSI format (FBA). If neit",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies whether a backup of the destination should be created before copying data. When set to C(true), the module creates a backup file or data set. The backup file name will be returned on either success or failure of module execution such that data can be retrieved.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_name",
+      "displayName": "Backup Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify a unique USS file name or data set name for the destination backup. If the destination C(dest) is a USS file or path, the C(backup_name) must be an absolute path name. If the destination is an MVS data set name, the C(backup_name) provided must meet data set naming conventions of one or more qualifiers, each from one to eight characters long, that are delimited by periods. If the C(backup_name) is not provided, the default C(backup_name) will be used. If the C(dest) is a USS file or USS ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "binary",
+      "displayName": "Binary",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to C(true), indicates that the file or data set to be copied is a binary file or data set. When I(binary=true), no encoding conversion is applied to the content, all content transferred retains the original state. Use I(binary=true) when copying a Database Request Module (DBRM) to retain the original state of the serialized SQL statements of a program.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "content",
+      "displayName": "Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When used instead of C(src), sets the contents of a file or data set directly to the specified value. Works only when C(dest) is a USS file, sequential data set, or a partitioned data set member. If C(dest) is a directory, then content will be copied to C(/path/to/dest/inline_copy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The remote absolute path or data set where the content should be copied to. C(dest) can be a USS file, directory or MVS data set name. C(dest) can be a alias name of a PS, PDS or PDSE data set. If C(dest) has missing parent directories, they will be created. If C(dest) is a nonexistent USS file, it will be created. If C(dest) is a new USS file or replacement, the file will be appropriately tagged with either the system's default locale or the encoding option defined. If the USS file is a replace",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest_data_set",
+      "displayName": "Dest Data Set",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Data set attributes to customize a C(dest) data set to be copied into. Some attributes only apply when C(dest) is a generation data group (GDG).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encoding",
+      "displayName": "Encoding",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies which encodings the destination file or data set should be converted from and to. If C(encoding) is not provided, the module determines which local and remote charsets to convert the data from and to. Note that this is only done for text data and not binary data. Only valid if C(binary) is false.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "executable",
+      "displayName": "Executable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to C(true), indicates that the file or library to be copied is an executable. If I(executable=true), and C(dest) is a data set, it must be a PDS or PDSE (library). If C(dest) is a nonexistent data set, the library attributes assigned will be Undefined (U) record format with a record length of 0, block size of 32760 and the remaining attributes will be computed. If C(dest) is a file, execute permission for the user will be added to the file (``u+x``). If the C(src) executable has an alias,",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "By default, when C(dest) is a MVS data set and is being used by another process with DISP=SHR or DISP=OLD the module will fail. Use C(force) to bypass DISP=SHR and continue with the copy operation. If set to C(true) and destination is a MVS data set opened by another process then zos_copy will try to copy using DISP=SHR. Using C(force) uses operations that are subject to race conditions and can lead to data loss, use with caution. If a data set member has aliases, and is not a program object, co",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that will own the file system objects. When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership. This option is only applicable if C(dest) is USS, otherwise ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identical_gdg_copy",
+      "displayName": "Identical Gdg Copy",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to C(true), and the destination GDG does not exist, the module will copy the source GDG to the destination GDG with identical GDS absolute names. If set to C(false), the copy will be done as a normal copy, without preserving the source GDG absolute names.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_sftp_stderr",
+      "displayName": "Ignore Sftp Stderr",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "During data transfer through SFTP, the SFTP command directs content to stderr. By default, the module essentially ignores the stderr stream produced by SFTP and continues execution. The user is able to override this behavior by setting this parameter to C(false). By doing so, any content written to stderr is considered an error by Ansible and will cause the module to fail. When Ansible verbosity is set to greater than 3, either through the command line interface (CLI) using B(-vvvv) or through e",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_follow",
+      "displayName": "Local Follow",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This flag indicates that any existing filesystem links in the source tree should be followed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permission of the destination file or directory. If C(dest) is USS, this will act as Unix file mode, otherwise ignored. It should be noted that modes are octal numbers. The user must either add a leading zero so that Ansible's YAML parser knows it is an octal number (like C(0644) or C(01777))or quote it (like C('644') or C('1777')) so Ansible receives a string and can do its own conversion from string into number. Giving Ansible a number without following one of these rules will end up with ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be passed to the chown command. When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. This option is only applicable if C(dest) is USS, otherwise ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_src",
+      "displayName": "Remote Src",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to C(false), the module searches for C(src) at the local machine. If set to C(true), the module goes to the remote/target machine for C(src).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace",
+      "displayName": "Replace",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to C(true) and the remote file or data set C(dest) is empty, the C(dest) will be reused. If set to C(true) and the remote file or data set C(dest) is NOT empty, the C(dest) will be deleted and recreated with the C(src) data set attributes, otherwise it will be recreated with the C(dest) data set attributes. To backup data before any deletion, see parameters C(backup) and C(backup_name). If set to C(false), the file or data set will only be copied if the destination does not exist. If set ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file/directory or name of a data set to copy to remote z/OS system. C(src) can be a alias name of a PS, PDS or PDSE data set. If C(remote_src) is true, then C(src) must be the path to a Unix System Services (USS) file, name of a data set, or data set member. If C(src) is a local path or a USS path, it can be absolute or relative. If C(src) is a directory, C(dest) must be a partitioned data set or a USS directory. If C(src) is a file and C(dest) ends with \"/\" or is a directory, the file",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_parameters",
+      "displayName": "Template Parameters",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options to set the way Jinja2 will process templates. Jinja2 already sets defaults for the markers it uses, you can find more information at its L(official documentation,https://jinja.palletsprojects.com/en/latest/templates/). These options are ignored unless C(use_template) is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tmp_hlq",
+      "displayName": "Tmp Hlq",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the default high level qualifier (HLQ) for temporary and backup datasets. The default HLQ is the Ansible user used to execute the module and if that is not available, then the value C(TMPHLQ) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_template",
+      "displayName": "Use Template",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the module should treat C(src) as a Jinja2 template and render it before continuing with the rest of the module. Only valid when C(src) is a local file or directory. All variables defined in inventory files, vars files and the playbook will be passed to the template engine, as well as L(Ansible special variables,https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html#special-variables), such as C(playbook_dir), C(ansible_version), etc. If variables defined in ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate",
+      "displayName": "Validate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies whether to perform checksum validation for source and destination files. Valid only for USS destination, otherwise ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume",
+      "displayName": "Volume",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If C(dest) does not exist, specify which volume C(dest) should be allocated to. Only valid when the destination is an MVS data set. The volume must already be present on the device. If no volume is specified, storage management rules will be used to determine the volume where C(dest) will be allocated. If the storage administrator has specified a system default unit name and you do not set a C(volume) name for non-system-managed data sets, then the system uses the volumes associated with the def",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

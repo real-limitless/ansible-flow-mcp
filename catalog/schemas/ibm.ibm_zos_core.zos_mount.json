@@ -1,0 +1,204 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_mount",
+  "shortDescription": "Mount a z/OS file system.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_mount_module.html",
+  "options": [
+    {
+      "name": "allow_uid",
+      "displayName": "Allow Uid",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies whether the SETUID and SETGID mode bits on an executable in this file system are considered. Also determines whether the APF extended attribute or the Program Control extended attribute is honored.\n If I(allow_uid=True) the SETUID and SETGID mode bits are considered when a program in this file system is run. SETUID is the default.\n If I(allow_uid=False) the SETUID and SETGID mode bits are ignored when a program in this file system is run. The program runs as though the SETUID and SETGI",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "automove",
+      "displayName": "Automove",
+      "type": "string",
+      "required": false,
+      "default": "automove",
+      "description": "These parameters apply only in a sysplex where systems are exploiting the shared file system capability. They specify what happens to the ownership of a file system when a shutdown, PFS termination, dead system takeover, or file system move occurs. The default setting is AUTOMOVE where the file system will be randomly moved to another system (no system list used).\n I(automove=automove) indicates that ownership of the file system can be automatically moved to another system participating in a sha",
+      "choices": [
+        "automove",
+        "noautomove",
+        "unmount"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "automove_list",
+      "displayName": "Automove List",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If(automove=automove), this option will be checked.\n This specifies the list of servers to include or exclude as destinations.\n None is a valid value, meaning 'move anywhere'.\n Indicator is either INCLUDE or EXCLUDE, which can also be abbreviated as I or E.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fs_type",
+      "displayName": "Fs Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of file system that will be mounted. The physical file systems data set format to perform the logical mount. The I(fs_type) is required to be lowercase.",
+      "choices": [
+        "hfs",
+        "zfs",
+        "nfs",
+        "tfs"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mount_opts",
+      "displayName": "Mount Opts",
+      "type": "string",
+      "required": false,
+      "default": "rw",
+      "description": "Options available to the mount. If I(mount_opts=ro) on a mounted/remount, mount is performed read-only. If I(mount_opts=same) and (unmount_opts=remount), mount is opened in the same mode as previously opened. If I(mount_opts=nowait), mount is performed asynchronously. If I(mount_opts=nosecurity), security checks are not enforced for files in this file system.",
+      "choices": [
+        "ro",
+        "rw",
+        "same",
+        "nowait",
+        "nosecurity"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The absolute path name onto which the file system is to be mounted. The I(path) is case sensitive and must be less than or equal 1023 characters long.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persistent",
+      "displayName": "Persistent",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Add or remove mount command entries to provided I(name)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the file system to be added to the file system hierarchy. The file system I(src) must be a data set of type I(fs_type). The file system I(src) data set must be cataloged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src_params",
+      "displayName": "Src Params",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a parameter string to be passed to the file system type. The parameter format and content are specified by the file system type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "mounted",
+      "description": "The desired status of the described mount (choice). If I(state=mounted) and I(src) are not in use, the module will add the file system entry to the parmlib member I(persistent/name) if not present. The I(path) will be updated, the device will be mounted and the module will complete successfully with I(changed=True).\n If I(state=mounted) and I(src) are in use, the module will add the file system entry to the parmlib member I(persistent/name) if not present. The I(path) will not be updated, the de",
+      "choices": [
+        "absent",
+        "mounted",
+        "unmounted",
+        "present",
+        "remounted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sysname",
+      "displayName": "Sysname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "For systems participating in shared file system, I(sysname) specifies the particular system on which a mount should be performed. This system will then become the owner of the file system mounted. This system must be IPLed with SYSPLEX(YES).\n I(sysname) is the name of a system participating in shared file system. The name must be 1-8 characters long; the valid characters are A-Z, 0-9, $, @, and #.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tag_ccsid",
+      "displayName": "Tag Ccsid",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Identifies the coded character set identifier (ccsid) to be implicitly set for the untagged file. For more on coded character set identifiers, review the IBM documentation topic B(Coded Character Sets). Specified as a decimal value from 0 to 65535. However, when TEXT is specified, the value must be between 0 and 65535. The value is not checked as being valid and the corresponding code page is not checked as being installed. Required when I(tag_untagged=TEXT).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tag_untagged",
+      "displayName": "Tag Untagged",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If present, tags get written to any untagged file. When the file system is unmounted, the tags are lost. If I(tag_untagged=notext) none of the untagged files in the file system are automatically converted during file reading and writing. If I(tag_untagged=text) each untagged file is implicitly marked as containing pure text data that can be converted. If this flag is used, use of tag_ccsid is encouraged.",
+      "choices": [
+        "text",
+        "notext"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tmp_hlq",
+      "displayName": "Tmp Hlq",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the default high level qualifier (HLQ) for temporary and backup datasets. The default HLQ is the Ansible user used to execute the module and if that is not available, then the value C(TMPHLQ) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unmount_opts",
+      "displayName": "Unmount Opts",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "Describes how the unmount will be performed. For more on coded character set identifiers, review the IBM documentation topic B(UNMOUNT - Remove a file system from the file hierarchy).",
+      "choices": [
+        "drain",
+        "force",
+        "immediate",
+        "normal",
+        "remount",
+        "reset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

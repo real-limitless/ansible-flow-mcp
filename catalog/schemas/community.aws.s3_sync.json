@@ -1,7 +1,273 @@
 {
   "fqcn": "community.aws.s3_sync",
-  "shortDescription": "A variety of Ansible content to help automate the management of AWS services.",
+  "shortDescription": "Efficiently upload multiple files to S3",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/aws/s3_sync_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS access key ID. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_ACCESS_KEY_ID) or C(AWS_ACCESS_KEY) environment variables may also be used in decreasing order of preference. The I(aws_access_key) and I(profile) options are mutually exclusive. The I(aws_access_key_id) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_ca_bundle",
+      "displayName": "Aws Ca Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location of a CA Bundle to use when validating SSL certificates. The C(AWS_CA_BUNDLE) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_config",
+      "displayName": "Aws Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary to modify the botocore configuration. Parameters can be found in the AWS documentation U(https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html#botocore.config.Config).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bucket",
+      "displayName": "Bucket",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Bucket name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cache_control",
+      "displayName": "Cache Control",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Cache-Control header set on uploaded objects. Directives are separated by commas.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug_botocore_endpoint_logs",
+      "displayName": "Debug Botocore Endpoint Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use a C(botocore.endpoint) logger to parse the unique (rather than total) C(\"resource:action\") API calls made during a task, outputing the set to the resource_actions key in the task results. Use the C(aws_resource_action) callback to output to total list made during a playbook. The C(ANSIBLE_DEBUG_BOTOCORE_LOGS) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete",
+      "displayName": "Delete",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Remove remote files that exist in bucket but are not present in the file root.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_url",
+      "displayName": "Endpoint Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to connect to instead of the default AWS endpoints.  While this can be used to connection to other AWS-compatible services the amazon.aws and community.aws collections are only tested against AWS. The  C(AWS_URL) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude",
+      "displayName": "Exclude",
+      "type": "string",
+      "required": false,
+      "default": ".*",
+      "description": "Shell pattern-style file matching. Used after include to remove files (for instance, skip C(\"*.txt\")) For multiple patterns, comma-separate them.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_change_strategy",
+      "displayName": "File Change Strategy",
+      "type": "string",
+      "required": false,
+      "default": "date_size",
+      "description": "Difference determination method to allow changes-only syncing. Unlike rsync, files are not patched- they are fully skipped or fully uploaded. date_size will upload if file sizes don't match or if local file modified date is newer than s3's version checksum will compare etag values based on s3's implementation of chunked md5s. force will always upload all files.",
+      "choices": [
+        "force",
+        "checksum",
+        "date_size"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_root",
+      "displayName": "File Root",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "File/directory path for synchronization. This is a local path. This root path is scrubbed from the key name, so subdirectories will remain as keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include",
+      "displayName": "Include",
+      "type": "string",
+      "required": false,
+      "default": "*",
+      "description": "Shell pattern-style file matching. Used before exclude to determine eligible files (for instance, only C(\"*.gif\")) For multiple patterns, comma-separate them.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_prefix",
+      "displayName": "Key Prefix",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "In addition to file path, prepend s3 path with this prefix. Module will add slash at end of prefix if necessary.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mime_map",
+      "displayName": "Mime Map",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dict entry from extension to MIME type. This will override any default/sniffed MIME type. For example C({\".txt\": \"application/text\", \".yml\": \"application/text\"})\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": "push",
+      "description": "sync direction.",
+      "choices": [
+        "push"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "permission",
+      "displayName": "Permission",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Canned ACL to apply to synced files. Changing this ACL only changes newly synced files, it does not trigger a full reupload.",
+      "choices": [
+        "private",
+        "public-read",
+        "public-read-write",
+        "authenticated-read",
+        "aws-exec-read",
+        "bucket-owner-read",
+        "bucket-owner-full-control"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A named AWS profile to use for authentication. See the AWS documentation for more information about named profiles U(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html). The C(AWS_PROFILE) environment variable may also be used. The I(profile) option is mutually exclusive with the I(aws_access_key), I(aws_secret_key) and I(session_token) options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS region to use. For global services such as IAM, Route53 and CloudFront, I(region) is ignored. The C(AWS_REGION) environment variable may also be used. See the Amazon AWS documentation for more information U(http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_key",
+      "displayName": "Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS secret access key. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SECRET_ACCESS_KEY) or C(AWS_SECRET_KEY) environment variables may also be used in decreasing order of preference. The I(secret_key) and I(profile) options are mutually exclusive. The I(aws_secret_access_key) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_token",
+      "displayName": "Session Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS STS session token for use with temporary credentials. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SESSION_TOKEN) environment variable may also be used. The I(session_token) and I(profile) options are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_class",
+      "displayName": "Storage Class",
+      "type": "string",
+      "required": false,
+      "default": "STANDARD",
+      "description": "Storage class to be associated to each object added to the S3 bucket.",
+      "choices": [
+        "STANDARD",
+        "REDUCED_REDUNDANCY",
+        "STANDARD_IA",
+        "ONEZONE_IA",
+        "INTELLIGENT_TIERING",
+        "GLACIER",
+        "DEEP_ARCHIVE",
+        "OUTPOSTS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When set to C(false), SSL certificates will not be validated for communication with the AWS APIs. Setting I(validate_certs=false) is strongly discouraged, as an alternative, consider setting I(aws_ca_bundle) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

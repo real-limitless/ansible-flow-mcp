@@ -2,6 +2,279 @@
   "fqcn": "containers.podman.podman_network",
   "shortDescription": "Manage podman networks",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/containers/podman/podman_network_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Return additional information which can be helpful for investigations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_dns",
+      "displayName": "Disable Dns",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "disable dns plugin (default \"false\")",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns",
+      "displayName": "Dns",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Set network-scoped DNS resolver/nameserver for containers in this network. If not set, the host servers from /etc/resolv.conf is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "driver",
+      "displayName": "Driver",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Driver to manage the network (default \"bridge\")",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "executable",
+      "displayName": "Executable",
+      "type": "string",
+      "required": false,
+      "default": "podman",
+      "description": "Path to C(podman) executable if it is not in the C($PATH) on the machine running C(podman)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Remove all containers that use the network. If the container is running, it is stopped and removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gateway",
+      "displayName": "Gateway",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IPv4 or IPv6 gateway for the subnet",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface_name",
+      "displayName": "Interface Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "For bridge, it uses the bridge interface name. For macvlan, it is the parent device on the host (it is the same as 'opt.parent')",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "internal",
+      "displayName": "Internal",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Restrict external access from this network (default \"false\")",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_range",
+      "displayName": "Ip Range",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Allocate container IP from range",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipam_driver",
+      "displayName": "Ipam Driver",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the ipam driver (IP Address Management Driver) for the network. When unset podman chooses an ipam driver automatically based on the network driver",
+      "choices": [
+        "host-local",
+        "dhcp",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipv6",
+      "displayName": "Ipv6",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable IPv6 (Dual Stack) networking. You must pass a IPv6 subnet. The subnet option must be used with the ipv6 option. Idempotency is not supported because it generates subnets randomly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "macvlan",
+      "displayName": "Macvlan",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Create a Macvlan connection based on this device",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the network",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "net_config",
+      "displayName": "Net Config",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of dictionaries with network configuration. Each dictionary should contain 'subnet' and 'gateway' keys. 'ip_range' is optional.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "opt",
+      "displayName": "Opt",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Add network options. Currently 'vlan' and 'mtu' are supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quadlet_dir",
+      "displayName": "Quadlet Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the directory to write quadlet file in. By default, it will be set as C(/etc/containers/systemd/) for root user, C(~/.config/containers/systemd/) for non-root users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quadlet_file_mode",
+      "displayName": "Quadlet File Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions of the quadlet file. The O(quadlet_file_mode) can be specified as octal numbers or as a symbolic mode (for example, V(u+rwx) or V(u=rw,g=r,o=r)). For octal numbers format, you must either add a leading zero so that Ansible's YAML parser knows it is an octal number (like V(0644) or V(01777)) or quote it (like V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Giving Ansible a number without following one of these rules will e",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quadlet_filename",
+      "displayName": "Quadlet Filename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of quadlet file to write. By default it takes I(name) value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quadlet_options",
+      "displayName": "Quadlet Options",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Options for the quadlet file. Provide missing in usual network args options as a list of lines to add.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recreate",
+      "displayName": "Recreate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Recreate network even if exists.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "route",
+      "displayName": "Route",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A static route in the format <destination in CIDR notation>,<gateway>,<route metric (optional)>. This route will be added to every container in this network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of network, default 'present'",
+      "choices": [
+        "present",
+        "absent",
+        "quadlet"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subnet",
+      "displayName": "Subnet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Subnet in CIDR format",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

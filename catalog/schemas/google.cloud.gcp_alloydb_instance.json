@@ -2,6 +2,324 @@
   "fqcn": "google.cloud.gcp_alloydb_instance",
   "shortDescription": "Creates a GCP Alloydb.Instance resource",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/google/cloud/gcp_alloydb_instance_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The access token used to authenticate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "activation_policy",
+      "displayName": "Activation Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "'Specifies whether an instance needs to spin up. Once the instance is active, the activation policy can be updated to the `NEVER` to stop the instance. Likewise, the activation policy can be updated to `ALWAYS` to start the instance. There are restrictions around when an instance can/cannot be activated (for example, a read pool instance should be stopped before stopping primary etc.). Please refer to the API documentation for more details. Possible values are: `ACTIVATION_POLICY_UNSPECIFIED`, `",
+      "choices": [
+        "ACTIVATION_POLICY_UNSPECIFIED",
+        "ALWAYS",
+        "NEVER"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "annotations",
+      "displayName": "Annotations",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Annotations to allow client tools to store small amount of arbitrary data. This is distinct from labels. **Note**: This field is non-authoritative, and will only manage the annotations present in your configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_kind",
+      "displayName": "Auth Kind",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of credential used.",
+      "choices": [
+        "accesstoken",
+        "application",
+        "machineaccount",
+        "serviceaccount"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_type",
+      "displayName": "Availability Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "'Availability type of an Instance. Defaults to REGIONAL for both primary and read instances. Note that primary and read instances can have different availability types. Primary instances can be either ZONAL or REGIONAL. Read Pool instances can also be either ZONAL or REGIONAL. Read pools of size 1 can only have zonal availability. Read pools with a node count of 2 or more can have regional availability (nodes are present in 2 or more zones in a region). Possible values are: `AVAILABILITY_TYPE_UN",
+      "choices": [
+        "AVAILABILITY_TYPE_UNSPECIFIED",
+        "ZONAL",
+        "REGIONAL"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_connection_config",
+      "displayName": "Client Connection Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Client connection specific configurations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Identifies the alloydb cluster. Must be in the format 'projects/{project}/locations/{location}/clusters/{cluster_id}'. This field is a reference to a Cluster resource in GCP. It can be specified in two ways: First, you can place a dictionary with key 'name' matching your resource. Alternatively, you can add `register: name-of-resource` to a Cluster task and then set this field to `{{ name-of-resource }}`. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_pool_config",
+      "displayName": "Connection Pool Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration for Managed Connection Pool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_flags",
+      "displayName": "Database Flags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Database flags. Set at instance level. * They are copied from primary instance on read instance creation. * Read instances can set new or override existing flags that are relevant for reads, e.g. for enabling columnar cache on a read instance. Flags set on read instance may or may not be present on primary.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User-settable and human-readable display name for the Instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "env_type",
+      "displayName": "Env Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies which Ansible environment you're running this module within. This should not be set unless you know what you're doing. This only alters the User Agent string for any API requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gce_zone",
+      "displayName": "Gce Zone",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Compute Engine zone that the instance should serve from, per https://cloud.google.com/compute/docs/regions-zones This can ONLY be specified for ZONAL instances. If present for a REGIONAL instance, an error will be thrown. If this is absent for a ZONAL instance, instance is created in a random zone with available capacity.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_id",
+      "displayName": "Instance Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The ID of the alloydb instance. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_type",
+      "displayName": "Instance Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of the instance. If the instance type is SECONDARY, point to the cluster_type of the associated secondary cluster instead of mentioning SECONDARY. This property is immutable, to change it, you must delete and recreate the resource.",
+      "choices": [
+        "PRIMARY",
+        "READ_POOL",
+        "SECONDARY"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "User-defined labels for the alloydb instance. **Note**: This field is non-authoritative, and will only manage the labels present in your configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "machine_config",
+      "displayName": "Machine Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configurations for the machines that host the underlying database engine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_config",
+      "displayName": "Network Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Instance level network configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "observability_config",
+      "displayName": "Observability Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration for enhanced query insights.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Google Cloud Platform project to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "psc_instance_config",
+      "displayName": "Psc Instance Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration for Private Service Connect (PSC) for the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "query_insights_config",
+      "displayName": "Query Insights Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration for query insights.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_pool_config",
+      "displayName": "Read Pool Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Read pool specific config. If the instance type is READ_POOL, this configuration must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scopes",
+      "displayName": "Scopes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of scopes to be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_contents",
+      "displayName": "Service Account Contents",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_email",
+      "displayName": "Service Account Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional service account email address if machineaccount is selected and the user does not wish to use the default email.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_account_file",
+      "displayName": "Service Account File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of a Service Account JSON file if serviceaccount is selected as type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the resource should exist in GCP.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

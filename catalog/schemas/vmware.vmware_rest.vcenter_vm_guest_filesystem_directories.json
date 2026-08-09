@@ -1,0 +1,189 @@
+{
+  "fqcn": "vmware.vmware_rest.vcenter_vm_guest_filesystem_directories",
+  "shortDescription": "Creates a directory in the guest operating system",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware_rest/vcenter_vm_guest_filesystem_directories_module.html",
+  "options": [
+    {
+      "name": "create_parents",
+      "displayName": "Create Parents",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether any parent directories should be created. If any failure occurs, some parent directories could be left behind. If unset parent directories are not created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "credentials",
+      "displayName": "Credentials",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The guest authentication data. This parameter is mandatory. Valid attributes are:  - C(interactive_session) (bool): If set, the operation will interact with the logged-in desktop session in the guest. This requires that the logged-on user matches the user specified by the Credentials. This is currently only supported for USERNAME_PASSWORD. (['absent', 'create_temporary', 'move', 'present'])    This key is required with ['absent', 'create_temporary', 'move', 'present'].  - C(type) (str): Types of",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_path",
+      "displayName": "New Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The complete path to where the directory is moved or its new name. It cannot be a path to an existing directory or an existing file. Required with I(state=['move'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent_path",
+      "displayName": "Parent Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The complete path to the directory in which to create the new directory. Directory If unset a guest-specific default will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The complete path to the directory to be created. Required with I(state=['absent', 'move', 'present'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix",
+      "displayName": "Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The prefix to be given to the new temporary directory. Required with I(state=['create_temporary'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recursive",
+      "displayName": "Recursive",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If true, all files and subdirectories are also deleted. If false, the directory must be empty for the operation to succeed. If unset, any directory content is not deleted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_timeout",
+      "displayName": "Session Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Timeout settings for client session.  The maximal number of seconds for the whole operation including connection establishment, request sending and response.  The default value is 300s.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "",
+      "choices": [
+        "absent",
+        "create_temporary",
+        "move",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suffix",
+      "displayName": "Suffix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The suffix to be given to the new temporary directory. Required with I(state=['create_temporary'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_hostname",
+      "displayName": "Vcenter Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter If the value is not specified in the task, the value of environment variable C(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_password",
+      "displayName": "Vcenter Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter password If the value is not specified in the task, the value of environment variable C(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_rest_log_file",
+      "displayName": "Vcenter Rest Log File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "You can use this optional parameter to set the location of a log file.  This file will be used to record the HTTP REST interaction.  The file will be stored on the host that runs the module.  If the value is not specified in the task, the value of  environment variable C(VMWARE_REST_LOG_FILE) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_username",
+      "displayName": "Vcenter Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter username If the value is not specified in the task, the value of environment variable C(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_validate_certs",
+      "displayName": "Vcenter Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to C(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable C(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm",
+      "displayName": "Vm",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Virtual Machine to perform the operation on. The parameter must be the id of a resource returned by M(vmware.vmware_rest.vcenter_vm_info). This parameter is mandatory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

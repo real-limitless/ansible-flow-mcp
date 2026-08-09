@@ -2,6 +2,252 @@
   "fqcn": "vmware.vmware.vm_apply_customization",
   "shortDescription": "Applies a customization specification to a virtual machine.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware/vm_apply_customization_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "cloud_init",
+      "displayName": "Cloud Init",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The cloud-init configuration to apply to the VM. Only applicable for Linux guests. The OS must already have cloud-init and perl installed. One and only one of O(existing_spec_name), O(cloud_init), O(windows_sysprep), or O(unix_prep) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The datacenter in which to search for the VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "existing_spec_name",
+      "displayName": "Existing Spec Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the existing customization specification in vSphere to apply to the VM. One and only one of O(existing_spec_name), O(cloud_init), O(windows_sysprep), or O(unix_prep) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder",
+      "displayName": "Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Destination folder, absolute or relative path to find an existing guest. Should be the full folder path, with or without the 'datacenter/vm/' prefix For example 'datacenter_name/vm/path/to/folder' or 'path/to/folder'. You cannot use this module to modify the placement of a VM once it has been created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder_paths_are_absolute",
+      "displayName": "Folder Paths Are Absolute",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, any folder path parameters are treated as absolute paths. If false, modules will try to intelligently determine if the path is absolute or relative. This option is useful when your environment has a complex folder structure. By default, modules will try to intelligently determine if the path is absolute or relative. They may mistakenly prepend the datacenter name or other folder names, and this option can be used to avoid this.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "global_dns",
+      "displayName": "Global Dns",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The global DNS configuration to apply to the VM. These apply to any network adapter this is not explicitly configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "moid",
+      "displayName": "Moid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Managed Object ID of the instance to manage if known, this is a unique identifier only within a single vCenter instance. This is required if O(name) or O(uuid) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the virtual machine to manage. Virtual machine names in vCenter are not necessarily unique, which may be problematic, see O(name_match). This is required when the VM does not exist, or if O(moid) or O(uuid) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name_match",
+      "displayName": "Name Match",
+      "type": "string",
+      "required": false,
+      "default": "first",
+      "description": "If multiple virtual machines matching the name, use the first or last found.",
+      "choices": [
+        "first",
+        "last"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nic_specific_settings",
+      "displayName": "Nic Specific Settings",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specify settings for specific network adapters. This setting is required if O(use_dhcpv4_for_all_nics) is false or unspecified. If this setting is used, you need to specify an item in this list for all network adapters on your VM due to VMware's API requirements.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unix_prep",
+      "displayName": "Unix Prep",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The Unix Prep configuration to apply to the VM. Only applicable for Linux guests. The OS must already have perl installed. One and only one of O(existing_spec_name), O(cloud_init), O(windows_sysprep), or O(unix_prep) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_dhcpv4_for_all_nics",
+      "displayName": "Use Dhcpv4 For All Nics",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, DHCPv4 will be used for all network adapters on the VM. If false, you must specify all adapters in O(nic_specific_settings) due to VMware's API requirements.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_instance_uuid",
+      "displayName": "Use Instance Uuid",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to use the VMware instance UUID rather than the BIOS UUID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "UUID of the instance to manage if known, this is VMware's unique identifier. This is required if O(name) or O(moid) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "windows_sysprep",
+      "displayName": "Windows Sysprep",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The Windows Sysprep configuration to apply to the VM. Only applicable for Windows guests. One and only one of O(existing_spec_name), O(cloud_init), O(windows_sysprep), or O(unix_prep) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

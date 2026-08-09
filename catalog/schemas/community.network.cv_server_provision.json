@@ -1,0 +1,147 @@
+{
+  "fqcn": "community.network.cv_server_provision",
+  "shortDescription": "Provision server port by applying or removing template configuration to an Arista CloudVision Portal configlet that is applied to a switch.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/network/cv_server_provision_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "show",
+      "description": "The action for the module to take. The actions are add, which applies the specified template config to port, remove, which defaults the specified interface configuration, and show, which will return the current port configuration with no changes.",
+      "choices": [
+        "show",
+        "add",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_run",
+      "displayName": "Auto Run",
+      "type": "boolean",
+      "required": false,
+      "default": "no",
+      "description": "Flag that determines whether or not the module will execute the CVP task spawned as a result of changes to a switch configlet. When an add or remove action is taken which results in a change to a switch configlet, CVP will spawn a task that needs to be executed for the configuration to be applied to the switch. If this option is True then the module will determined the task number created by the configuration change, execute it and wait for the task to complete. If the option is False then the t",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the CVP node being connected to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the user that will be used to connect to CVP for API calls.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The port number to use when making API calls to the CVP node. This will default to the default port for the specified protocol. Port 80 for http and port 443 for https.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_vlan",
+      "displayName": "Port Vlan",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The vlan that should be applied to the port for this server. This parameter is dependent on a proper template that supports single vlan provisioning with it. If a port vlan is specified by the template specified does not support this the module will exit out with no changes. If a template is specified that requires a port vlan but no port vlan is specified the module will exit out with no changes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The protocol to use when making API calls to CVP. CVP defaults to https and newer versions of CVP no longer support http.",
+      "choices": [
+        "https",
+        "http"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_name",
+      "displayName": "Server Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or identifier for the server that is having it's switch port provisioned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "switch_name",
+      "displayName": "Switch Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname of the switch is being configured for the server being provisioned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "switch_port",
+      "displayName": "Switch Port",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The physical port number on the switch that the new server is connected to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "A path to a Jinja formatted template file that contains the configuration block that will be applied to the specified switch port. This template will have variable fields replaced by the module before being applied to the switch configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The user that will be used to connect to CVP for making API calls.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

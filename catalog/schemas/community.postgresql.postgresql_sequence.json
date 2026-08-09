@@ -2,6 +2,318 @@
   "fqcn": "community.postgresql.postgresql_sequence",
   "shortDescription": "Create, drop, or alter a PostgreSQL sequence",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/postgresql/postgresql_sequence_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of a file containing SSL certificate authority (CA) certificate(s). If the file exists, the server's certificate will be verified to be signed by one of these authorities.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cache",
+      "displayName": "Cache",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Cache specifies how many sequence numbers are to be preallocated and stored in memory for faster access. The minimum value is 1 (only one value can be generated at a time, i.e., no cache), and this is also the default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cascade",
+      "displayName": "Cascade",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Automatically drop objects that depend on the sequence, and in turn all objects that depend on those objects. Ignored if I(state=present). Only used with I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connect_params",
+      "displayName": "Connect Params",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Any additional parameters to be passed to libpg. These parameters take precedence.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cycle",
+      "displayName": "Cycle",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "The cycle option allows the sequence to wrap around when the I(maxvalue) or I(minvalue) has been reached by an ascending or descending sequence respectively. If the limit is reached, the next number generated will be the minvalue or maxvalue, respectively. If C(false) (NO CYCLE) is specified, any calls to nextval after the sequence has reached its maximum value will return an error. False (NO CYCLE) is the default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_type",
+      "displayName": "Data Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the data type of the sequence. Valid types are bigint, integer, and smallint. bigint is the default. The data type determines the default minimum and maximum values of the sequence. For more info see the documentation U(https://www.postgresql.org/docs/current/sql-createsequence.html). Supported from PostgreSQL 10.",
+      "choices": [
+        "bigint",
+        "integer",
+        "smallint"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "increment",
+      "displayName": "Increment",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Increment specifies which value is added to the current sequence value to create a new value. A positive value will make an ascending sequence, a negative one a descending sequence. The default value is 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_db",
+      "displayName": "Login Db",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Name of database to connect to and run queries against. The V(db) and V(database) aliases are deprecated and will be removed in version 5.0.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Host running the database. If you have connection issues when using C(localhost), try to use C(127.0.0.1) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The password this module should use to establish its PostgreSQL session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": 5432,
+      "description": "Database port to connect to. The C(port) alias is deprecated and will be removed in the next major release. Use C(login_port) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_unix_socket",
+      "displayName": "Login Unix Socket",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Path to a Unix domain socket for local connections.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": "postgres",
+      "description": "The username this module should use to establish its PostgreSQL session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxvalue",
+      "displayName": "Maxvalue",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maxvalue determines the maximum value for the sequence. The default for an ascending sequence is the maximum value of the data type. The default for a descending sequence is -1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minvalue",
+      "displayName": "Minvalue",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Minvalue determines the minimum value a sequence can generate. The default for an ascending sequence is 1. The default for a descending sequence is the minimum value of the data type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "newschema",
+      "displayName": "Newschema",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The new schema for the I(sequence). Will be used for moving a I(sequence) to another I(schema). Works only for existing sequences.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the owner for the I(sequence).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rename_to",
+      "displayName": "Rename To",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "DEPRECATED (see the L(discussion,https://github.com/ansible-collections/community.postgresql/issues/820)). This option will be removed in version 5.0.0. To rename a sequence, use the M(community.postgresql.postgresql_query) module. The new name for the I(sequence). Works only for existing sequences.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schema",
+      "displayName": "Schema",
+      "type": "string",
+      "required": false,
+      "default": "public",
+      "description": "The schema of the I(sequence). This is be used to create and relocate a I(sequence) in the given schema.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sequence",
+      "displayName": "Sequence",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the sequence.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_role",
+      "displayName": "Session Role",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Switch to session_role after connecting. The specified I(session_role) must be a role that the current I(login_user) is a member of. Permissions checking for SQL commands is carried out as though the I(session_role) were the one that had logged in originally.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_cert",
+      "displayName": "Ssl Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the file name of the client SSL certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_key",
+      "displayName": "Ssl Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the location for the secret key used for the client certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_mode",
+      "displayName": "Ssl Mode",
+      "type": "string",
+      "required": false,
+      "default": "prefer",
+      "description": "Determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server. See U(https://www.postgresql.org/docs/current/static/libpq-ssl.html) for more information on the modes. Default of C(prefer) matches libpq default.",
+      "choices": [
+        "allow",
+        "disable",
+        "prefer",
+        "require",
+        "verify-ca",
+        "verify-full"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start",
+      "displayName": "Start",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Start allows the sequence to begin anywhere. The default starting value is I(minvalue) for ascending sequences and I(maxvalue) for descending ones.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The sequence state. If I(state=absent) other options will be ignored except of I(name) and I(schema).",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "trust_input",
+      "displayName": "Trust Input",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), check whether values of parameters I(sequence), I(schema), I(rename_to), I(owner), I(newschema), I(session_role) are potentially dangerous. It makes sense to use C(false) only when SQL injections via the parameters are possible.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

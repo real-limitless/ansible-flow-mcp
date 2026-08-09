@@ -1,0 +1,204 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_backup_restore",
+  "shortDescription": "Backup and restore data sets and volumes",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_backup_restore_module.html",
+  "options": [
+    {
+      "name": "access",
+      "displayName": "Access",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies how the module will access data sets and z/OS UNIX files when performing a backup or restore operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_name",
+      "displayName": "Backup Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "When I(operation=backup), the destination data set or UNIX file to hold the backup. When I(operation=restore), the destination data set or UNIX file backup to restore. There are no enforced conventions for backup names. However, using a common extension like C(.dzp) for UNIX files and C(.DZP) for data sets will improve readability. GDS relative names are supported when I(operation=restore).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compress",
+      "displayName": "Compress",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When I(operation=backup), enables compression of partitioned data sets using system-level compression features. If supported, this may utilize zEDC hardware compression. This option can reduce the size of the temporary dataset generated during backup operations either before the AMATERSE step when I(terse) is True or the resulting backup when I(terse) is False.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_sets",
+      "displayName": "Data Sets",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Determines which data sets to include in the backup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "full_volume",
+      "displayName": "Full Volume",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When I(operation=backup) and I(full_volume=True), specifies that the entire volume provided to I(volume) should be backed up. When I(operation=restore) and I(full_volume=True), specifies that the volume should be restored (default is dataset). I(volume) must be provided when I(full_volume=True).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "index",
+      "displayName": "Index",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When C(operation=backup) specifies that for any VSAM cluster backup, the backup must also contain all the associated alternate index (AIX) clusters and paths. When C(operation=restore) specifies that for any VSAM cluster dumped with the SPHERE keyword, the module must also restore all associated AIX clusters and paths. The alternate index is a VSAM function that allows logical records of a KSDS or ESDS to be accessed sequentially and directly by more than one key field. The cluster that has the ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Used to specify the operation to perform.",
+      "choices": [
+        "backup",
+        "restore"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output",
+      "displayName": "Output",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies how a backup will be restored to the filesystem when I(operation=restore). Option C(output) does not perform any operations when I(operation=backup), it will be ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "overwrite",
+      "displayName": "Overwrite",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When I(operation=backup), specifies if an existing data set or UNIX file matching I(backup_name) should be deleted. When I(operation=restore), specifies if the module should overwrite existing data sets with matching name on the target device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recover",
+      "displayName": "Recover",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When I(recover=true) and I(operation=backup) then potentially recoverable errors will be ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sms",
+      "displayName": "Sms",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies how System Managed Storage (SMS) interacts with the storage class and management class when either backup or restore operations are occurring. Storage class contains performance and availability attributes related to the storage occupied by the data set. A data set that has a storage class assigned to it is defined as an 'SMS-managed' data set. Management class contains the data set attributes related to the migration and backup of the data set and the expiration date of the data set. ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space",
+      "displayName": "Space",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "If I(operation=backup), specifies the amount of space to allocate for the backup. Please note that even when backing up to a UNIX file, backup contents will be temporarily held in a data set. If I(operation=restore), specifies the amount of space to allocate for data sets temporarily created during the restore process. The unit of space used is set using I(space_type). When I(full_volume=True), I(space) defaults to C(1), otherwise default is C(25)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_type",
+      "displayName": "Space Type",
+      "type": "string",
+      "required": false,
+      "default": "m",
+      "description": "The unit of measurement to use when defining data set space. Valid units of size are C(k), C(m), C(g), C(cyl), and C(trk). When I(full_volume=True), I(space_type) defaults to C(g), otherwise default is C(m)",
+      "choices": [
+        "k",
+        "m",
+        "g",
+        "cyl",
+        "trk"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "temp_volume",
+      "displayName": "Temp Volume",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a particular volume on which the temporary data sets should be created during the backup and restore process. When I(operation=backup) and I(backup_name) is a data set, specifies the volume the backup should be placed in. When backing up a data set from one volume to another, the operation will fail if temporary data sets are created on the same volume as the volume containing the source data set(s). To avoid this, set I(temp_volume) to a different volume than the source volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "terse",
+      "displayName": "Terse",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When I(operation=backup), executes an AMATERSE step to compress and pack the temporary data set for the backup. This creates a backup with a format suitable for transferring off-platform. If I(operation=backup) and if I(dataset=False) then option I(terse) must be True.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tmp_hlq",
+      "displayName": "Tmp Hlq",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the default high level qualifier (HLQ) for temporary data sets used in the module's operation. If I(tmp_hlq) is set, this value will be applied to all temporary data sets. If I(tmp_hlq) is not set, the value will be the username who submits the ansible task, this is the default behavior. If the username can not be identified, the value C(TMPHLQ) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume",
+      "displayName": "Volume",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This applies to both data set restores and volume restores. When I(operation=backup) and I(data_sets) are provided, specifies the volume that contains the data sets to backup. When I(operation=restore), specifies the volume the backup should be restored to. I(volume) is required when restoring a full volume backup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

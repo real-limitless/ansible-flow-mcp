@@ -2,6 +2,197 @@
   "fqcn": "community.crypto.x509_certificate_convert",
   "shortDescription": "Convert X.509 certificates",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/crypto/x509_certificate_convert_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create a backup file including a timestamp so you can get the original X.509 certificate back if you overwrote it with a new one by accident.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest_path",
+      "displayName": "Dest Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the file in which the generated TLS/SSL X.509 certificate will be written.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "format",
+      "displayName": "Format",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Determines which format the destination X.509 certificate should be written in. Please note that not every key can be exported in any format, and that not every format supports encryption.",
+      "choices": [
+        "pem",
+        "der"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src_content",
+      "displayName": "Src Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The content of the file containing the X.509 certificate to convert. This must be text. If you are not sure that the input file is PEM, you must Base64 encode the value and set O(src_content_base64=true). You can use the P(ansible.builtin.b64encode#filter) filter plugin for this. Exactly one of O(src_path) or O(src_content) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src_content_base64",
+      "displayName": "Src Content Base64",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true) when O(src_content) is provided, the module assumes that the value of O(src_content) is Base64 encoded.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src_path",
+      "displayName": "Src Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the file containing the X.509 certificate to convert. Exactly one of O(src_path) or O(src_content) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "strict",
+      "displayName": "Strict",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If the input is a PEM file, ensure that it contains a single PEM object, that the header and footer match, and are of type C(CERTIFICATE) or C(X509 CERTIFICATE). See also the O(verify_cert_parsable) option, which checks whether the certificate is parsable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_cert_parsable",
+      "displayName": "Verify Cert Parsable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), ensures that the certificate can be parsed. To ensure that a PEM file does not contain multiple certificates, use the O(strict) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

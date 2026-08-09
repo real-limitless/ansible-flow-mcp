@@ -1,0 +1,210 @@
+{
+  "fqcn": "ovirt.ovirt.ovirt_snapshot",
+  "shortDescription": "Module to manage Virtual Machine Snapshots in oVirt/RHV",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ovirt/ovirt/ovirt_snapshot_module.html",
+  "options": [
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Dictionary with values needed to create HTTP/HTTPS connection to oVirt:",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_id",
+      "displayName": "Disk Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Disk id which you want to upload or download To get disk, you need to define disk_id or disk_name",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_name",
+      "displayName": "Disk Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Disk name which you want to upload or download",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disks",
+      "displayName": "Disks",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of disks which should be created with snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_image_path",
+      "displayName": "Download Image Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path on a file system where snapshot should be downloaded. Note that you must have an valid oVirt/RHV engine CA in your system trust store or you must provide it in C(ca_file) parameter. Note that the snapshot is not downloaded when the file already exists, but you can forcibly download the snapshot when using C(force) I (true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fetch_nested",
+      "displayName": "Fetch Nested",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If I(True) the module will fetch additional data from the API. It will fetch IDs of the VMs disks, snapshots, etc. User can configure to fetch other attributes of the nested entities by specifying C(nested_attributes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keep_days_old",
+      "displayName": "Keep Days Old",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of days after which should snapshot be deleted. It will check all snapshots of virtual machine and delete them, if they are older.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nested_attributes",
+      "displayName": "Nested Attributes",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specifies list of the attributes which should be fetched from the API. This parameter apply only when C(fetch_nested) is I(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "poll_interval",
+      "displayName": "Poll Interval",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Number of the seconds the module waits until another poll request on entity status is sent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_id",
+      "displayName": "Snapshot Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the snapshot to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Should the Virtual Machine snapshot be restore/present/absent.",
+      "choices": [
+        "restore",
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "The amount of time in seconds the module should wait for the instance to get into desired state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "upload_image_path",
+      "displayName": "Upload Image Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to disk image, which should be uploaded.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_memory",
+      "displayName": "Use Memory",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If I(true) and C(state) is I(present) save memory of the Virtual Machine if it's running. If I(true) and C(state) is I(restore) restore memory of the Virtual Machine. Note that Virtual Machine will be paused while saving the memory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_id",
+      "displayName": "Vm Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the Virtual Machine to manage. Required one of C(vm_name) or C(vm_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name",
+      "displayName": "Vm Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Virtual Machine to manage. Required one of C(vm_name) or C(vm_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "C(yes) if the module should wait for the entity to get into desired state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

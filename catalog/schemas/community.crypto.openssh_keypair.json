@@ -2,6 +2,240 @@
   "fqcn": "community.crypto.openssh_keypair",
   "shortDescription": "Generate OpenSSH private and public keys",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/crypto/openssh_keypair_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backend",
+      "displayName": "Backend",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Selects between the V(cryptography) library or the OpenSSH binary V(opensshbin). V(auto) will default to V(opensshbin) unless the OpenSSH binary is not installed or when using O(passphrase).",
+      "choices": [
+        "auto",
+        "cryptography",
+        "opensshbin"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provides a new comment to the public key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Should the key be regenerated even if it already exists.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "passphrase",
+      "displayName": "Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase used to decrypt an existing private key or encrypt a newly generated private key. Passphrases are not supported for O(type=rsa1). Can only be used when O(backend=cryptography), or when O(backend=auto) and a required C(cryptography) version is installed. Note that depending on the cryptography version, the C(bcrypt) package is also needed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the files containing the public and private key. The file containing the public key will have the extension C(.pub).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_format",
+      "displayName": "Private Key Format",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Used when O(backend=cryptography) to select a format for the private key at the provided O(path). When set to V(auto) this module will match the key format of the installed OpenSSH version. For OpenSSH < 7.8 private keys will be in PKCS1 format except ed25519 keys which will be in OpenSSH format. For OpenSSH >= 7.8 all private key types will be in the OpenSSH format. Using this option when O(regenerate=partial_idempotence) or O(regenerate=full_idempotence) will cause a new keypair to be generate",
+      "choices": [
+        "auto",
+        "pkcs1",
+        "pkcs8",
+        "ssh"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "regenerate",
+      "displayName": "Regenerate",
+      "type": "string",
+      "required": false,
+      "default": "partial_idempotence",
+      "description": "Allows to configure in which situations the module is allowed to regenerate private keys. The module will always generate a new key if the destination file does not exist. By default, the key will be regenerated when it does not match the module's options, except when the key cannot be read or the passphrase does not match. Please note that this B(changed) for Ansible 2.10. For Ansible 2.9, the behavior was as if V(full_idempotence) is specified. If set to V(never), the module will fail if the k",
+      "choices": [
+        "never",
+        "fail",
+        "partial_idempotence",
+        "full_idempotence",
+        "always"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of bits in the private key to create. For RSA keys, the minimum size is 1024 bits and the default is 4096 bits. Generally, 2048 bits is considered sufficient. DSA keys must be exactly 1024 bits as specified by FIPS 186-2. For ECDSA keys, size determines the key length by selecting from one of three elliptic curve sizes: 256, 384 or 521 bits. Attempting to use bit lengths other than these three values for ECDSA keys will cause this module to fail. Ed25519 keys have a fixed le",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the private and public keys should exist or not, taking action if the state is different from what is stated.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "rsa",
+      "description": "The algorithm used to generate the SSH private key. V(rsa1) is for protocol version 1. V(rsa1) is deprecated and may not be supported by every version of ssh-keygen.",
+      "choices": [
+        "rsa",
+        "dsa",
+        "rsa1",
+        "ecdsa",
+        "ed25519"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

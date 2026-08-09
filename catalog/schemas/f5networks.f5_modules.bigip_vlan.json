@@ -1,0 +1,249 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_vlan",
+  "shortDescription": "Manage VLANs on a BIG-IP system",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_vlan_module.html",
+  "options": [
+    {
+      "name": "cmp_hash",
+      "displayName": "Cmp Hash",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies how the traffic on the VLAN is disaggregated. The value you select determines the traffic disaggregation method. You can choose to disaggregate traffic based on C(source-address) (the source IP address), C(destination-address) (destination IP address), or C(default), which specifies the default CMP hash uses L4 ports. When creating a new VLAN, if this parameter is not specified, the default is C(default).",
+      "choices": [
+        "default",
+        "destination-address",
+        "source-address",
+        "dst-ip",
+        "src-ip",
+        "dest",
+        "destination",
+        "source",
+        "dst",
+        "src"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dag_round_robin",
+      "displayName": "Dag Round Robin",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether some of the stateless traffic on the VLAN should be disaggregated in a round-robin order instead of using a static hash. The stateless traffic includes non-IP L2 traffic, ICMP, some UDP protocols, and so on. When creating a new VLAN, if this parameter is not specified, the default is (false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dag_tunnel",
+      "displayName": "Dag Tunnel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies how the disaggregator (DAG) distributes received tunnel-encapsulated packets to TMM instances. Select C(inner) to distribute packets based on information in inner headers. Select C(outer) to distribute packets based on information in outer headers without inspecting inner headers. When creating a new VLAN, if this parameter is not specified, the default is C(outer). This parameter is not supported on Virtual Editions (VEs) of BIG-IP.",
+      "choices": [
+        "inner",
+        "outer"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description of the VLAN.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fail_safe",
+      "displayName": "Fail Safe",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When C(true), specifies the VLAN takes the specified C(fail_safe_action) if the system detects a loss of traffic on this VLAN's interfaces.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fail_safe_action",
+      "displayName": "Fail Safe Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the action the system takes when it does not detect any traffic on this VLAN, and the C(fail_safe_timeout) has expired.",
+      "choices": [
+        "reboot",
+        "restart-all",
+        "failover"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fail_safe_timeout",
+      "displayName": "Fail Safe Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of seconds a system can run without detecting network traffic on this VLAN before it takes the C(fail_safe_action).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hw_syn_cookie",
+      "displayName": "Hw Syn Cookie",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables hardware syncookie mode on a VLAN. When C(true), the hardware per-VLAN SYN cookie protection is triggered when the certain traffic threshold is reached on supported platforms.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interfaces",
+      "displayName": "Interfaces",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Interfaces you want to add to the VLAN. This can include both tagged and untagged interfaces, as the C(tagging) parameter specifies. This parameter is mutually exclusive with the C(untagged_interfaces) and C(tagged_interfaces) parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mtu",
+      "displayName": "Mtu",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum transmission unit (MTU) for traffic on this VLAN. When creating a new VLAN, if this parameter is not specified, the default value used is C(1500). This number must be between 576 to 9198.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The VLAN to manage. If the special VLAN C(ALL) is specified with the C(state) value of C(absent), all VLANs will be removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sflow_poll_interval",
+      "displayName": "Sflow Poll Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum interval in seconds between two pollings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sflow_sampling_rate",
+      "displayName": "Sflow Sampling Rate",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the ratio of packets observed to the samples generated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_check",
+      "displayName": "Source Check",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When C(true), specifies the system verifies the return route to an initial packet is the same VLAN from which the packet originated. The system performs this verification only if the C(auto_last_hop) option is C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the VLAN on the system. When C(present), guarantees the VLAN exists with the provided attributes. When C(absent), removes the VLAN from the system.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tag",
+      "displayName": "Tag",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Tag number for the VLAN. The tag number can be any integer between 1 and 4094. The system automatically assigns a tag number if you do not specify a value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tagged_interfaces",
+      "displayName": "Tagged Interfaces",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies a list of tagged interfaces and trunks you want to configure for the VLAN. Use tagged interfaces or trunks when you want to assign a single interface or trunk to multiple VLANs. This parameter is mutually exclusive with the C(untagged_interfaces) and C(interfaces) parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "untagged_interfaces",
+      "displayName": "Untagged Interfaces",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies a list of untagged interfaces and trunks you want to configure for the VLAN. This parameter is mutually exclusive with the C(tagged_interfaces) and C(interfaces) parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

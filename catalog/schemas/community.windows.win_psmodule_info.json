@@ -2,6 +2,51 @@
   "fqcn": "community.windows.win_psmodule_info",
   "shortDescription": "Gather information about PowerShell Modules",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/windows/win_psmodule_info_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "include_properties",
+      "displayName": "Include Properties",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of property names to include in the output. Property names should be in snake_case format (e.g., C(module_base), C(exported_functions)). If omitted, all available properties are returned. When specified, only the requested properties will be included in the output. To get minimal output similar to the old C(simplified=true), use C([name, version, author, module_base]). See the RETURN section for a complete list of available properties. Repository-related properties (repository, repository_s",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": "*",
+      "description": "The name of the module to retrieve. Supports any wildcard pattern supported by C(Get-Module). If omitted then all modules will returned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "repository",
+      "displayName": "Repository",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the PSRepository the modules were installed from. This acts as a filter against the modules that would be returned based on the I(name) option. Modules that were not installed from a repository will not be returned if this option is set. Only modules installed from a registered repository will be returned. If the repository was re-registered after module installation with a new C(SourceLocation), this will not match.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skip_module_repository_info",
+      "displayName": "Skip Module Repository Info",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When C(true), skips querying PowerShellGet for repository-related metadata. This significantly improves performance but repository properties will be C(null). Repository properties include C(repository), C(repository_source_location), C(installed_date), C(published_date), C(updated_date), C(package_management_provider), C(installed_location), C(tags), C(compatible_ps_editions), C(license_uri), C(project_uri), C(icon_uri), C(release_notes), and C(dependencies). When C(include_properties) is speci",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

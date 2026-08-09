@@ -1,0 +1,337 @@
+{
+  "fqcn": "community.network.avi_serverautoscalepolicy",
+  "shortDescription": "Module for setup of ServerAutoScalePolicy Avi RESTful Object",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/network/avi_serverautoscalepolicy_module.html",
+  "options": [
+    {
+      "name": "api_context",
+      "displayName": "Api Context",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Avi API context that includes current session ID and CSRF Token. This allows user to perform single login and re-use the session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_version",
+      "displayName": "Api Version",
+      "type": "string",
+      "required": false,
+      "default": "16.4.4",
+      "description": "Avi API version of to use for Avi API and objects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_api_patch_op",
+      "displayName": "Avi Api Patch Op",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch operation to use when using avi_api_update_method as patch.",
+      "choices": [
+        "add",
+        "replace",
+        "delete"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_api_update_method",
+      "displayName": "Avi Api Update Method",
+      "type": "string",
+      "required": false,
+      "default": "put",
+      "description": "Default method for object update is HTTP PUT. Setting to patch will override that behavior to use HTTP PATCH.",
+      "choices": [
+        "put",
+        "patch"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_credentials",
+      "displayName": "Avi Credentials",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_disable_session_cache_as_fact",
+      "displayName": "Avi Disable Session Cache As Fact",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "It disables avi session information to be cached as a fact.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller",
+      "displayName": "Controller",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP address or hostname of the controller. The default value is the environment variable C(AVI_CONTROLLER).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User defined description for the object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "intelligent_autoscale",
+      "displayName": "Intelligent Autoscale",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use avi intelligent autoscale algorithm where autoscale is performed by comparing load on the pool against estimated capacity of all the servers. Default value when not specified in API or module is interpreted by Avi Controller as False.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "intelligent_scalein_margin",
+      "displayName": "Intelligent Scalein Margin",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Maximum extra capacity as percentage of load used by the intelligent scheme. Scalein is triggered when available capacity is more than this margin. Allowed values are 1-99. Default value when not specified in API or module is interpreted by Avi Controller as 40.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "intelligent_scaleout_margin",
+      "displayName": "Intelligent Scaleout Margin",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Minimum extra capacity as percentage of load used by the intelligent scheme. Scaleout is triggered when available capacity is less than this margin. Allowed values are 1-99. Default value when not specified in API or module is interpreted by Avi Controller as 20.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_scalein_adjustment_step",
+      "displayName": "Max Scalein Adjustment Step",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of servers to scalein simultaneously. The actual number of servers to scalein is chosen such that target number of servers is always more than or equal to the min_size. Default value when not specified in API or module is interpreted by Avi Controller as 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_scaleout_adjustment_step",
+      "displayName": "Max Scaleout Adjustment Step",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of servers to scaleout simultaneously. The actual number of servers to scaleout is chosen such that target number of servers is always less than or equal to the max_size. Default value when not specified in API or module is interpreted by Avi Controller as 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_size",
+      "displayName": "Max Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of servers after scaleout. Allowed values are 0-400.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_size",
+      "displayName": "Min Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "No scale-in happens once number of operationally up servers reach min_servers. Allowed values are 0-400.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of Avi user in Avi controller. The default value is the environment variable C(AVI_PASSWORD).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scalein_alertconfig_refs",
+      "displayName": "Scalein Alertconfig Refs",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Trigger scalein when alerts due to any of these alert configurations are raised. It is a reference to an object of type alertconfig.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scalein_cooldown",
+      "displayName": "Scalein Cooldown",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Cooldown period during which no new scalein is triggered to allow previous scalein to successfully complete. Default value when not specified in API or module is interpreted by Avi Controller as 300.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scaleout_alertconfig_refs",
+      "displayName": "Scaleout Alertconfig Refs",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Trigger scaleout when alerts due to any of these alert configurations are raised. It is a reference to an object of type alertconfig.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scaleout_cooldown",
+      "displayName": "Scaleout Cooldown",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Cooldown period during which no new scaleout is triggered to allow previous scaleout to successfully complete. Default value when not specified in API or module is interpreted by Avi Controller as 300.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state that should be applied on the entity.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant",
+      "displayName": "Tenant",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Name of tenant used for all Avi API calls and context of object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_ref",
+      "displayName": "Tenant Ref",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "It is a reference to an object of type tenant.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_uuid",
+      "displayName": "Tenant Uuid",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "UUID of tenant used for all Avi API calls and context of object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Avi controller URL of the object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_predicted_load",
+      "displayName": "Use Predicted Load",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use predicted load rather than current load. Default value when not specified in API or module is interpreted by Avi Controller as False.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username used for accessing Avi controller. The default value is the environment variable C(AVI_USERNAME).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Unique object identifier of the object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

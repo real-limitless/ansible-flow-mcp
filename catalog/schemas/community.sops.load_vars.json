@@ -1,0 +1,221 @@
+{
+  "fqcn": "community.sops.load_vars",
+  "shortDescription": "Load SOPS-encrypted variables from files, dynamically within a task",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/sops/load_vars_module.html",
+  "options": [
+    {
+      "name": "age_key",
+      "displayName": "Age Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "One or more age private keys that can be used to decrypt encrypted files. Will be set as the E(SOPS_AGE_KEY) environment variable when calling SOPS. Requires SOPS 3.7.1+.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "age_key_cmd",
+      "displayName": "Age Key Cmd",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A command that SOPS will execute to obtain an age private key that SOPS can use to decrypt encrypted files. Will be set as the E(SOPS_AGE_KEY_CMD) environment variable when calling SOPS. Requires SOPS 3.10.0+. When running this command and when SOPS 3.12.0+ is used, SOPS will set the E(SOPS_AGE_RECIPIENT) variable to the identity of the key it wants to use to decrypt.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "age_keyfile",
+      "displayName": "Age Keyfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The file containing the age private keys that SOPS can use to decrypt encrypted files. Will be set as the E(SOPS_AGE_KEY_FILE) environment variable when calling SOPS. By default, SOPS looks for C(sops/age/keys.txt) inside your user configuration directory. Requires SOPS 3.7.0+.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "age_ssh_private_key_cmd",
+      "displayName": "Age Ssh Private Key Cmd",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A command that SOPS will execute to obtain an SSH private key that SOPS can use to decrypt encrypted files. Will be set as the E(SOPS_AGE_SSH_PRIVATE_KEY_CMD) environment variable when calling SOPS. When running this command, SOPS will set the E(SOPS_AGE_RECIPIENT) variable to the identity of the key it wants to use to decrypt. Requires SOPS 3.12.0+.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "age_ssh_private_keyfile",
+      "displayName": "Age Ssh Private Keyfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The file containing the SSH private key that SOPS can use to decrypt encrypted files. Will be set as the E(SOPS_AGE_SSH_PRIVATE_KEY_FILE) environment variable when calling SOPS. By default, SOPS looks for C(~/.ssh/id_ed25519) and falls back to C(~/.ssh/id_rsa). Requires SOPS 3.10.0+.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_access_key_id",
+      "displayName": "Aws Access Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS access key ID to use for requests to AWS. Sets the environment variable E(AWS_ACCESS_KEY_ID) for the SOPS call.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_profile",
+      "displayName": "Aws Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS profile to use for requests to AWS. This corresponds to the SOPS C(--aws-profile) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_secret_access_key",
+      "displayName": "Aws Secret Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS secret access key to use for requests to AWS. Sets the environment variable E(AWS_SECRET_ACCESS_KEY) for the SOPS call.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_session_token",
+      "displayName": "Aws Session Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS session token to use for requests to AWS. Sets the environment variable E(AWS_SESSION_TOKEN) for the SOPS call.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_path",
+      "displayName": "Config Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the SOPS configuration file. If not set, SOPS will recursively search for the config file starting at the file that is encrypted or decrypted. This corresponds to the SOPS C(--config) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_local_keyservice",
+      "displayName": "Enable Local Keyservice",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Tell SOPS to use local key service. When set to V(false), this corresponds to the SOPS C(--enable-local-keyservice=false) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "expressions",
+      "displayName": "Expressions",
+      "type": "string",
+      "required": false,
+      "default": "ignore",
+      "description": "This option controls how Jinja2 expressions in values in the loaded file are handled. If set to V(ignore), expressions will not be evaluated, but treated as regular strings. If set to V(evaluate-on-load), expressions will be evaluated on execution of this module, in other words, when the file is loaded. If set to V(lazy-evaluation), expressions will be lazily evaluated. This requires ansible-core 2.19 or newer and is the same behavior than M(ansible.builtin.include_vars). V(lazy-evaluation) has ",
+      "choices": [
+        "ignore",
+        "evaluate-on-load",
+        "lazy-evaluation"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file",
+      "displayName": "File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The file name from which variables should be loaded. If the path is relative, it will look for the file in C(vars/) subdirectory of a role or relative to playbook.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gcp_kms_client_type",
+      "displayName": "Gcp Kms Client Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Determine which client to use to communicate with Google Cloud Services. Will be set as the E(SOPS_GCP_KMS_CLIENT_TYPE) environment variable when calling SOPS. Requires SOPS 3.12.0+.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gcp_oauth_access_token",
+      "displayName": "Gcp Oauth Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a Google Cloud OAauth token. Will be set as the E(GOOGLE_OAUTH_ACCESS_TOKEN) environment variable when calling SOPS. Requires SOPS 3.10.0+.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keyservice",
+      "displayName": "Keyservice",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specify key services to use next to the local one. A key service must be specified in the form C(protocol://address), for example C(tcp://myserver.com:5000). This corresponds to the SOPS C(--keyservice) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of a variable into which assign the included vars. If omitted (V(null)) they will be made top level vars.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "return_method",
+      "displayName": "Return Method",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Determine how to return the results. Because of limitations of ansible-core < 2.21, the results were returned as Ansible facts. Since ansible-core 2.21, it is possible to actually set variables, similar to how M(ansible.builtin.include_vars) is working.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sops_binary",
+      "displayName": "Sops Binary",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the SOPS binary. By default uses C(sops).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

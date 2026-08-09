@@ -2,6 +2,199 @@
   "fqcn": "community.zabbix.zabbix_action",
   "shortDescription": "Create/Delete/Update Zabbix actions",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/zabbix/zabbix_action_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "acknowledge_operations",
+      "displayName": "Acknowledge Operations",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of acknowledge operations. Action acknowledge operations are known as update operations since Zabbix 4.0. C(Suboptions) are the same as for I(operations).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "conditions",
+      "displayName": "Conditions",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of conditions to use for filtering results. For more information about suboptions of this option please check out Zabbix API documentation U(https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_filter_condition)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "esc_period",
+      "displayName": "Esc Period",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default operation step duration. Must be greater than 60 seconds. Accepts seconds, time unit with suffix and user macro since => Zabbix 3.4 Required when C(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "eval_type",
+      "displayName": "Eval Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filter condition evaluation method. Defaults to C(andor) if conditions are less then 2 or if I(formula) is not specified. Defaults to C(custom_expression) when formula is specified.",
+      "choices": [
+        "andor",
+        "and",
+        "or",
+        "custom_expression"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "event_source",
+      "displayName": "Event Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of events that the action will handle. Required when C(state=present).",
+      "choices": [
+        "trigger",
+        "discovery",
+        "auto_registration",
+        "internal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "formula",
+      "displayName": "Formula",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User-defined expression to be used for evaluating conditions with a custom expression. The expression must contain IDs that reference each condition by its formulaid. The IDs used in the expression must exactly match the ones defined in the I(conditions). No condition can remain unused or omitted. Required when I(eval_type=custom_expression). Use sequential IDs that start at \"A\". If non-sequential IDs are used, Zabbix re-indexes them. This makes each module run notice the difference in IDs and u",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_password",
+      "displayName": "Http Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_user",
+      "displayName": "Http Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth login",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the action",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notify_if_canceled",
+      "displayName": "Notify If Canceled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Weather to notify when escalation is canceled. Can be used when I(event_source=trigger).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operations",
+      "displayName": "Operations",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of action operations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pause_in_maintenance",
+      "displayName": "Pause In Maintenance",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to pause escalation during maintenance periods or not. Can be used when I(event_source=trigger).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pause_symptoms",
+      "displayName": "Pause Symptoms",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to pause escalation if event is a symptom event. I(supported) if C(event_source) is set to C(trigger) Works only with >= Zabbix 7.0",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recovery_operations",
+      "displayName": "Recovery Operations",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of recovery operations. C(Suboptions) are the same as for I(operations).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the action. On C(present), it will create an action if it does not exist or update the action if the associated data is different. On C(absent), it will remove the action if it exists.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": "enabled",
+      "description": "Status of the action.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

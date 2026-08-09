@@ -2,6 +2,406 @@
   "fqcn": "community.windows.win_scheduled_task",
   "shortDescription": "Manage scheduled tasks",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/windows/win_scheduled_task_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "actions",
+      "displayName": "Actions",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of action to configure for the task. See suboptions for details on how to construct each list entry. When creating a task there MUST be at least one action but when deleting a task this can be a null or an empty list. The ordering of this list is important, the module will ensure the order is kept when modifying the task. This module only supports the C(ExecAction) type but can still delete the older legacy types.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_demand_start",
+      "displayName": "Allow Demand Start",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the task can be started by using either the Run command or the Context menu.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_hard_terminate",
+      "displayName": "Allow Hard Terminate",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the task can be terminated by using TerminateProcess.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "author",
+      "displayName": "Author",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The author of the task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compatibility",
+      "displayName": "Compatibility",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The integer value with indicates which version of Task Scheduler a task is compatible with. C(0) means the task is compatible with the AT command. C(1) means the task is compatible with Task Scheduler 1.0(Windows Vista, Windows Server 2008 and older). C(2) means the task is compatible with Task Scheduler 2.0(Windows Vista, Windows Server 2008). C(3) means the task is compatible with Task Scheduler 2.0(Windows 7, Windows Server 2008 R2). C(4) means the task is compatible with Task Scheduler 2.0(W",
+      "choices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "date",
+      "displayName": "Date",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The date when the task was registered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_expired_task_after",
+      "displayName": "Delete Expired Task After",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The amount of time that the Task Scheduler will wait before deleting the task after it expires. A task expires after the end_boundary has been exceeded for all triggers associated with the task. This is in the ISO 8601 Duration format C(P[n]Y[n]M[n]DT[n]H[n]M[n]S).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description of the task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disallow_start_if_on_batteries",
+      "displayName": "Disallow Start If On Batteries",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the task will not be started if the computer is running on battery power.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the user/group that is displayed in the Task Scheduler UI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the task is enabled, the task can only run when C(yes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "execution_time_limit",
+      "displayName": "Execution Time Limit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The amount of time allowed to complete the task. When set to C(PT0S), the time limit is infinite. When omitted, the default time limit is 72 hours. This is in the ISO 8601 Duration format C(P[n]Y[n]M[n]DT[n]H[n]M[n]S).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The group that will run the task. C(group) and C(username) are exclusive to each other and cannot be set at the same time. C(logon_type) can either be not set or equal C(group).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hidden",
+      "displayName": "Hidden",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the task will be hidden in the UI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logon_type",
+      "displayName": "Logon Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The logon method that the task will run with. C(password) means the password will be stored and the task has access to network resources. C(s4u) means the existing token will be used to run the task and no password will be stored with the task. Means no network or encrypted files access. C(interactive_token) means the user must already be logged on interactively and will run in an existing interactive session. C(group) means that the task will run as a group. C(service_account) means that a serv",
+      "choices": [
+        "none",
+        "password",
+        "s4u",
+        "interactive_token",
+        "group",
+        "service_account",
+        "token_or_password"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "multiple_instances",
+      "displayName": "Multiple Instances",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "An integer that indicates the behaviour when starting a task that is already running. C(0) will start a new instance in parallel with existing instances of that task. C(1) will wait until other instances of that task to finish running before starting itself. C(2) will not start a new instance if another is running. C(3) will stop other instances of the task and start the new one.",
+      "choices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the scheduled task without the path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for the user account to run the scheduled task as. This is required when running a task without the user being logged in, excluding the builtin service accounts and Group Managed Service Accounts (gMSA). If set, will always result in a change unless C(update_password) is set to C(no) and no other changes are required for the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": "\\",
+      "description": "Task folder in which this task will be stored. Will create the folder when C(state=present) and the folder does not already exist. Will remove the folder when C(state=absent) and there are no tasks left in the folder.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The priority level (0-10) of the task. When creating a new task the default is C(7). See U(https://msdn.microsoft.com/en-us/library/windows/desktop/aa383512.aspx) for details on the priority levels.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restart_count",
+      "displayName": "Restart Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of times that the Task Scheduler will attempt to restart the task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restart_interval",
+      "displayName": "Restart Interval",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "How long the Task Scheduler will attempt to restart the task. If this is set then C(restart_count) must also be set. The maximum allowed time is 31 days. The minimum allowed time is 1 minute. This is in the ISO 8601 Duration format C(P[n]Y[n]M[n]DT[n]H[n]M[n]S).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "run_level",
+      "displayName": "Run Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level of user rights used to run the task. If not specified the task will be created with limited rights.",
+      "choices": [
+        "limited",
+        "highest"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "run_only_if_idle",
+      "displayName": "Run Only If Idle",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the task will run the task only if the computer is in an idle state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "run_only_if_network_available",
+      "displayName": "Run Only If Network Available",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the task will run only when a network is available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The source of the task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_when_available",
+      "displayName": "Start When Available",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the task can start at any time after its scheduled time has passed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(state=present) will ensure the task exists. When C(state=absent) will ensure the task does not exist.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stop_if_going_on_batteries",
+      "displayName": "Stop If Going On Batteries",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the task will be stopped if the computer begins to run on battery power.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "triggers",
+      "displayName": "Triggers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of triggers to configure for the task. See suboptions for details on how to construct each list entry. The ordering of this list is important, the module will ensure the order is kept when modifying the task. There are multiple types of triggers, see U(https://msdn.microsoft.com/en-us/library/windows/desktop/aa383868.aspx) for a list of trigger types and their options. The suboption options listed below are not required for all trigger types, read the description for more details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to update the password even when not other changes have occurred. When C(yes) will always result in a change when executing the module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user to run the scheduled task as. Will default to the current user under an interactive token if not specified during creation. The user account specified must have the C(SeBatchLogonRight) logon right which can be added with M(ansible.windows.win_user_right).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The version number of the task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wake_to_run",
+      "displayName": "Wake To Run",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the task will wake the computer when it is time to run the task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

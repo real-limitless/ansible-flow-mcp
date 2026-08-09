@@ -1,0 +1,182 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_profile_dns",
+  "shortDescription": "Manage DNS profiles on a BIG-IP",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_profile_dns_module.html",
+  "options": [
+    {
+      "name": "cache_name",
+      "displayName": "Cache Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the user-created cache the system uses to cache DNS responses. When you select a cache for the system to use, you must also set C(enable_dns_cache) to C(true)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_cache",
+      "displayName": "Enable Cache",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the system caches DNS responses. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile. When C(true), the BIG-IP system caches DNS responses handled by the virtual servers associated with this profile. When you enable this setting, you must also specify a value for C(cache_name). When C(false), the BIG-IP system does not cache DNS responses handled by the virtual servers associated with this profile. However, the profile ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_dns_express",
+      "displayName": "Enable Dns Express",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the DNS Express engine is enabled. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile. The DNS Express engine receives zone transfers from the authoritative DNS server for the zone. If the C(enable_zone_transfer) setting is also C(true) on this profile, the DNS Express engine also responds to zone transfer requests made by the nameservers configured as zone transfer clients for the DNS Express zone.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_dns_firewall",
+      "displayName": "Enable Dns Firewall",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the DNS firewall is enabled. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_dnssec",
+      "displayName": "Enable Dnssec",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the system signs responses with DNSSEC keys and replies to DNSSEC specific queries (for example, DNSKEY query type). When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_gtm",
+      "displayName": "Enable Gtm",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the system uses Global Traffic Manager (now BIG-IP DNS) to manage the response. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_zone_transfer",
+      "displayName": "Enable Zone Transfer",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the system answers zone transfer requests for a DNS zone created on the system. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile. The C(enable_dns_express) and C(enable_zone_transfer) settings on a DNS profile affect how the system responds to zone transfer requests. When the C(enable_dns_express) and C(enable_zone_transfer) settings are both C(true), if a zone transfer request matches a DNS Express zone, DNS Express",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the DNS profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent",
+      "displayName": "Parent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the profile from which this profile inherits settings. When creating a new profile, if this parameter is not specified, the default is the system-supplied C(dns) profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "process_recursion_desired",
+      "displayName": "Process Recursion Desired",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether to process client-side DNS packets with Recursion Desired set in the header. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile. If set to C(false), processing of the packet is subject to the unhandled-query-action option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present), ensures the profile exists. When C(absent), ensures the profile is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unhandled_query_action",
+      "displayName": "Unhandled Query Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the action to take when a query does not match a Wide IP or a DNS Express Zone. When C(allow), the BIG-IP system forwards queries to a DNS server or pool member. If a pool is not associated with a listener and the Use BIND Server on BIG-IP setting is set to Enabled, requests are forwarded to the local BIND server. When C(drop), the BIG-IP system does not respond to the query. When C(reject), the BIG-IP system returns the query with the REFUSED return code. When C(hint), the BIG-IP syst",
+      "choices": [
+        "allow",
+        "drop",
+        "reject",
+        "hint",
+        "no-error"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_local_bind",
+      "displayName": "Use Local Bind",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the system forwards non-wide IP queries to the local BIND server on the BIG-IP system. For best performance, disable this setting when using a DNS cache. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

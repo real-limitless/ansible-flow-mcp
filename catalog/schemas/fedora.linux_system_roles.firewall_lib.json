@@ -1,0 +1,384 @@
+{
+  "fqcn": "fedora.linux_system_roles.firewall_lib",
+  "shortDescription": "Module for firewall role",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/fedora/linux_system_roles/firewall_lib_module.html",
+  "options": [
+    {
+      "name": "__called_from_role",
+      "displayName": "  Called From Role",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, the module is being called from the role.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_list",
+      "displayName": "Config List",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of firewall configurations to apply. Each item in the list is a dictionary containing any of the module's parameters (except config_list itself). This allows applying multiple firewall configurations in a single module call. Cannot be used together with other module parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Creates or updates the description of a new or existing service or ipset. State needs to be present for the use of this argument. Supported for ipsets and services.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination",
+      "displayName": "Destination",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of IPv4/IPv6 addresses with optional mask format - address[/mask] Currently only supported for service configuration Only one IPv4 and one IPv6 address allowed in list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "firewalld_conf",
+      "displayName": "Firewalld Conf",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Modify firewalld.conf directives",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forward_port",
+      "displayName": "Forward Port",
+      "type": "string",
+      "required": false,
+      "default": [],
+      "description": "List of forward port strings or dicts, or a single string or dict. The format of a forward port string needs to be <port>[-<port>]/<protocol>;[<to-port>];[<to-addr>].",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "helper_module",
+      "displayName": "Helper Module",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of netfiler kernel helper module names",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "icmp_block",
+      "displayName": "Icmp Block",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of ICMP type strings to block. The ICMP type names needs to be defined in firewalld configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "icmp_block_inversion",
+      "displayName": "Icmp Block Inversion",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "ICMP block inversion bool setting. It enables or disables inversion of ICMP blocks for a zone in firewalld.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "includes",
+      "displayName": "Includes",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Services to include in this one.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of interface name strings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface_pci_id",
+      "displayName": "Interface Pci Id",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of interface PCI device ID strings. PCI device ID needs to correspond to a named network interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipset",
+      "displayName": "Ipset",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the ipset being configured. Can be used to define, modify, or remove ipsets. Must set state to C(present) or C(absent) to use this argument. Must set permanent to C(true) to use this argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipset_entries",
+      "displayName": "Ipset Entries",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of addresses to add/remove from ipset. Must be compatible with the ipset type of the `ipset` being created or modified. Will only do something when set with ipset.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipset_options",
+      "displayName": "Ipset Options",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Dict of key/value pairs of ipset options for the given ipset. Will only do something when set with ipset.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipset_type",
+      "displayName": "Ipset Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of ipset being defined Will only do something when ipset argument is defined. To get the list of supported ipset types, use firewall-cmd --get-ipset-types.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "masquerade",
+      "displayName": "Masquerade",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "The masquerade bool setting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "online",
+      "displayName": "Online",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When true, use the D-Bus API to query the status from the running system. Otherwise, use firewall-offline-cmd(1). Offline mode is incompatible with \"runtime\" mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "permanent",
+      "displayName": "Permanent",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "The permanent bool flag. Ensures settings permanently across system reboots and firewalld service restarts. If the permanent flag is not enabled, runtime is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of ports or port range strings. The format of a port needs to be port=<port>[-<port>]/<protocol>.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "previous",
+      "displayName": "Previous",
+      "type": "string",
+      "required": false,
+      "default": "kept",
+      "description": "The previous state of the firewall configuration. The value \"replaced\" means that the entire firewall configuration will be replaced with the new configuration.",
+      "choices": [
+        "replaced",
+        "kept"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "list of protocols supported by managed system. Supported for service configuration only",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rich_rule",
+      "displayName": "Rich Rule",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of rich rule strings. For the format see L(Syntax for firewalld rich language rules, https://firewalld.org/documentation/man-pages/firewalld.richlanguage.html).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "runtime",
+      "displayName": "Runtime",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "The runtime bool flag. Ensures settings in the runtime environment that is not persistent across system reboots and firewalld service restarts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service",
+      "displayName": "Service",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of service name strings. The service names needs to be defined in firewalld configuration. services in firewalld configuration can be defined by setting this option to a single service name and state to present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "set_default_zone",
+      "displayName": "Set Default Zone",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets the default zone.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "short",
+      "displayName": "Short",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Creates or updates a short description, generally just a full name of a new or existing service. Supported for custom services and ipsets while state is present",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of source address, address range strings, or ipsets A source address or address range is either an IP address or a network IP address with a mask for IPv4 or IPv6. For IPv4, the mask can be a network mask or a plain number. For IPv6 the mask is a plain number. An ipset is used by prefixing \"ipset{{ \":\" }}\" to the defined ipset's name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_port",
+      "displayName": "Source Port",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of source port or port range strings. The format of a source port needs to be port=<port>[-<port>]/<protocol>.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Ensure presence or absence of entries.  Use C(present) and C(absent) only for zone-only operations, service-only operations, or target operations.",
+      "choices": [
+        "enabled",
+        "disabled",
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The firewalld Zone target. If the state is set to C(absent), this will reset the target to default.",
+      "choices": [
+        "default",
+        "ACCEPT",
+        "DROP",
+        "%%REJECT%%"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The amount of time in seconds a setting is in effect. The timeout is usable for services, ports, source ports, forward ports, masquerade, rich rules or icmp blocks for runtime only.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone",
+      "displayName": "Zone",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The zone name string. If the zone name is not given, then the default zone will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

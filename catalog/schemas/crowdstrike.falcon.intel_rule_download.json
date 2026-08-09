@@ -1,0 +1,259 @@
+{
+  "fqcn": "crowdstrike.falcon.intel_rule_download",
+  "shortDescription": "Download CrowdStrike Falcon Intel rule files",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/crowdstrike/falcon/intel_rule_download_module.html",
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The registered result of the M(crowdstrike.falcon.auth) module, or a dictionary containing the I(access_token) and I(cloud) keys. If provided, the I(client_id), I(client_secret), I(member_cid), and I(cloud) options are ignored. Useful when needing to make multiple API calls to avoid rate limiting issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike API client ID to use. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_CLIENT_ID) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_secret",
+      "displayName": "Client Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike API secret that corresponds to the client ID. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_CLIENT_SECRET) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud",
+      "displayName": "Cloud",
+      "type": "string",
+      "required": false,
+      "default": "us-1",
+      "description": "The CrowdStrike cloud region to use. All clouds are automatically discovered if not specified, except for the C(us-gov-1) cloud. The C(FALCON_CLOUD) environment variable can also be used.",
+      "choices": [
+        "us-1",
+        "us-2",
+        "us-gov-1",
+        "eu-1"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The directory path to save the rule file. If not specified, a temporary directory will be created using the system's default temporary directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ext_headers",
+      "displayName": "Ext Headers",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Extended headers that are prepended to the default headers dictionary.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "format",
+      "displayName": "Format",
+      "type": "string",
+      "required": false,
+      "default": "zip",
+      "description": "The format of the rule file to download.",
+      "choices": [
+        "zip",
+        "gzip"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "member_cid",
+      "displayName": "Member Cid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike member CID for MSSP authentication. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_MEMBER_CID) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The filename to save the rule file as. If not specified, it will use the name provided by the API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rule_id",
+      "displayName": "Rule Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of a specific rule to download. If provided, the type parameter is ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The rule news report type. Required when C(rule_id) is not provided. Used to fetch the latest rule file of this type when C(rule_id) is not specified.",
+      "choices": [
+        "common-event-format",
+        "netwitness",
+        "snort-suricata-changelog",
+        "snort-suricata-master",
+        "snort-suricata-update",
+        "yara-changelog",
+        "yara-master",
+        "yara-update",
+        "cql-master",
+        "cql-changelog",
+        "cql-update"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_agent",
+      "displayName": "User Agent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Custom User-Agent string to use for requests to the API. The user agent string is prepended to the default user agent string (C(crowdstrike-ansible/<version>)). See L(RFC 7231,https://tools.ietf.org/html/rfc7231#section-5.5.3) for more information. The C(FALCON_USER_AGENT) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

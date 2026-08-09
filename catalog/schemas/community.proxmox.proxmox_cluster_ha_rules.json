@@ -1,0 +1,237 @@
+{
+  "fqcn": "community.proxmox.proxmox_cluster_ha_rules",
+  "shortDescription": "Management of HA rules",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/proxmox/proxmox_cluster_ha_rules_module.html",
+  "options": [
+    {
+      "name": "affinity",
+      "displayName": "Affinity",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Describes whether the HA resource are supposed to be kept on the same node V(positive),\nor are supposed to be kept on separate nodes V(negative).\nRequired if O(type=resource-affinity).\n",
+      "choices": [
+        "positive",
+        "negative"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the target host of the Proxmox VE cluster. Uses the E(PROXMOX_HOST) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_otp",
+      "displayName": "Api Otp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the OTP. Uses the E(PROXMOX_OTP) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the password to authenticate with. Uses the E(PROXMOX_PASSWORD) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_port",
+      "displayName": "Api Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specify the target port of the Proxmox VE cluster. Uses the E(PROXMOX_PORT) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Time limit for requests towards the Proxmox VE API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token_id",
+      "displayName": "Api Token Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the token ID. Uses the E(PROXMOX_TOKEN_ID) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token_secret",
+      "displayName": "Api Token Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the token secret. Uses the E(PROXMOX_TOKEN_SECRET) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the user to authenticate with. Uses the E(PROXMOX_USER) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a local certificate, which will be used to verify TLS connections. Ignored if O(validate_certs=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable",
+      "displayName": "Disable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the HA rule is disabled. If not specified, the Proxmox API default C(false) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Existing rules with a specific O(type) can not be changed to the other type.\nIf V(force=true), the existing rule will be deleted and recreated with the new type.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "HA rule identifier.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nodes",
+      "displayName": "Nodes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of cluster node members, where a priority can be given to each node. A resource bound to a group will run on the\navailable nodes with the highest priority. If there are more nodes in the highest priority class, the services will\nget distributed to those nodes. The priorities have a\nrelative meaning only. The higher the number, the higher the priority.\nIt can either be a string C(node_name:priority,node_name:priority) or an actual list of strings.\nRequired if O(type=node-affinity).\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resources",
+      "displayName": "Resources",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of HA resource IDs. It can either be a string C(vm:100,ct:101) or an actual list of strings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "create or delete rule",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "strict",
+      "displayName": "Strict",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If false, the HA resource can also be moved to other nodes if there is none of the specified nodes available.\nIf not specified, the Proxmox API default C(false) will be used.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "HA rule type.",
+      "choices": [
+        "node-affinity",
+        "resource-affinity"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Validate the TLS certificates used for the connection to the Proxmox VE API. May be set through the environment variable E(PROXMOX_VALIDATE_CERTS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

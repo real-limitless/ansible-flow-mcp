@@ -1,0 +1,265 @@
+{
+  "fqcn": "ibm.power_aix.snap",
+  "shortDescription": "Run snap command on AIX.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/snap_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "snap",
+      "description": "Controls what snap-related action is performed. C(snap) collects system information and logs using snap command. C(snapcore) gathers core dumps and crash data using snapcore comamnd. C(snapsplit) splits and processes collected snap data using snapsplt command.",
+      "choices": [
+        "snap",
+        "snapcore",
+        "snapsplit"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "all_info",
+      "displayName": "All Info",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Gathers all available system information. This is a comprehensive option that includes data across all categories, such as hardware, software, configuration files, and logs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "collects_dump",
+      "displayName": "Collects Dump",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Collects dump and /unix files, along with any live dump data. This is valuable for diagnosing kernel and system crashes",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compress",
+      "displayName": "Compress",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Compresses the collected data into a single archive, typically snap.pax.gz. This is useful for easier file management and transport of the snapshot",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_system_info",
+      "displayName": "File System Info",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Gathers file system information, including details on disk usage, mount points, and file system integrity. This is crucial for diagnosing storage and disk-related issues",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "general_info",
+      "displayName": "General Info",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Gathers general information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hacmp",
+      "displayName": "Hacmp",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Gathers HACMP (High Availability Cluster Multiprocessing) error information. This is specific to AIX high-availability cluster environments and helps troubleshoot HA-related errors",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hardware_info",
+      "displayName": "Hardware Info",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Gather hardware information",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "installation_info",
+      "displayName": "Installation Info",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Gathers installation information, such as installed software packages, patches, and configurations. This helps diagnose installation-related issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kernel_info",
+      "displayName": "Kernel Info",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Collects kernel-related data, including kernel configuration and status. This is essential for debugging kernel-specific issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "live_kernel",
+      "displayName": "Live Kernel",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Collects Live kernel update information and saves it in the /tmp/ibmsupt/liveupdate directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset",
+      "displayName": "Reset",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Removes the snap output directory (default /tmp/ibmsupt). This cleans up previously gathered snapshot data, often to make room for a new snapshot",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sc_core_file",
+      "displayName": "Sc Core File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the core file to be gather. Used for diagnosing system debugging.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sc_output_dir",
+      "displayName": "Sc Output Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the directory where snapcore output files will be stored. Helps in organizing collected core files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sc_program_name",
+      "displayName": "Sc Program Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the name of the program related to the core file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sc_remove_core",
+      "displayName": "Sc Remove Core",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Determines whether the core file should be removed after processing. If set to C(true), the core file will be deleted after analysis.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_info",
+      "displayName": "Security Info",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Gathers security information, including access controls, permissions, and user data. This is important for diagnosing security issues and auditing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ss_filename",
+      "displayName": "Ss Filename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the filename for the snapsplit operation. This determines the output file name used for storing snap data.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ss_machinename",
+      "displayName": "Ss Machinename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the machine name for the snapsplit operation. Helps in identifying the source system for the collected data.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ss_rejoining",
+      "displayName": "Ss Rejoining",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Determines whether previously split snap files should be rejoined. If set to C(true), snapsplit will attempt to reconstruct snap files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ss_size",
+      "displayName": "Ss Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the size limit for snap data storage. Helps in controlling the disk space used by the snapsplit operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ss_timestamp",
+      "displayName": "Ss Timestamp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the timestamp for the snapsplit operation. This is useful for organizing and restoring snapshots based on time.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "workload_manager_info",
+      "displayName": "Workload Manager Info",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Gather workload manager (WLM) information, which includes data related to workload management on the system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

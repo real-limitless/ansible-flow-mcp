@@ -1,0 +1,157 @@
+{
+  "fqcn": "community.digitalocean.digital_ocean_block_storage",
+  "shortDescription": "Create/destroy or attach/detach Block Storage volumes in DigitalOcean",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/digitalocean/digital_ocean_block_storage_module.html",
+  "options": [
+    {
+      "name": "baseurl",
+      "displayName": "Baseurl",
+      "type": "string",
+      "required": false,
+      "default": "https://api.digitalocean.com/v2",
+      "description": "DigitalOcean API base url.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "block_size",
+      "displayName": "Block Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The size of the Block Storage volume in gigabytes. Required when I(command=create) and I(state=present). If snapshot_id is included, this will be ignored. If block_size > current size of the volume, the volume is resized.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Which operation do you want to perform.",
+      "choices": [
+        "create",
+        "attach"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the Block Storage volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "droplet_id",
+      "displayName": "Droplet Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The droplet id you want to operate on. Required when I(command=attach).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oauth_token",
+      "displayName": "Oauth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "DigitalOcean OAuth token. There are several other environment variables which can be used to provide this value. i.e., - C(DO_API_TOKEN), C(DO_API_KEY), C(DO_OAUTH_TOKEN) and C(OAUTH_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project_name",
+      "displayName": "Project Name",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Project to assign the resource to (project name, not UUID). Defaults to the default project of the account (empty string). Currently only supported when C(command=create).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The slug of the region where your Block Storage volume should be located in. If I(snapshot_id) is included, this will be ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_id",
+      "displayName": "Snapshot Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The snapshot id you would like the Block Storage volume created with. If included, I(region) and I(block_size) will be ignored and changed to C(null).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Indicate desired state of the target.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The timeout in seconds used for polling DigitalOcean's API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to C(no), the SSL certificates will not be validated. This should only set to C(no) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume_name",
+      "displayName": "Volume Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the Block Storage volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

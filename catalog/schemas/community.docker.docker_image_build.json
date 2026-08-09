@@ -2,6 +2,307 @@
   "fqcn": "community.docker.docker_image_build",
   "shortDescription": "Build Docker images using Docker buildx",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/docker/docker_image_build_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_version",
+      "displayName": "Api Version",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "The version of the Docker API running on the Docker Host. Defaults to the latest version of the API supported by this collection and the docker daemon. If the value is not specified in the task, the value of environment variable E(DOCKER_API_VERSION) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "args",
+      "displayName": "Args",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Provide a dictionary of C(key:value) build arguments that map to Dockerfile ARG directive. Docker expects the value to be a string. For convenience any non-string values will be converted to strings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use a CA certificate when performing server verification by providing the path to a CA certificate file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(ca.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cache_from",
+      "displayName": "Cache From",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of image names to consider as cache source.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cli_context",
+      "displayName": "Cli Context",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Docker CLI context to use. Mutually exclusive with O(docker_host).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client's TLS certificate file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(cert.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client's TLS key file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(key.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_cli",
+      "displayName": "Docker Cli",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the Docker CLI. If not provided, will search for Docker CLI on the E(PATH).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_host",
+      "displayName": "Docker Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL or Unix socket path used to connect to the Docker API. To connect to a remote host, provide the TCP connection string. For example, V(tcp://192.0.2.23:2376). If TLS is used to encrypt the connection, the module will automatically replace C(tcp) in the connection URL with C(https). If the value is not specified in the task, the value of environment variable E(DOCKER_HOST) will be used instead. If the environment variable is not set, the default value will be used. Mutually exclusive with ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dockerfile",
+      "displayName": "Dockerfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide an alternate name for the Dockerfile to use when building an image. This can also include a relative path (relative to O(path)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "etc_hosts",
+      "displayName": "Etc Hosts",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Extra hosts to add to C(/etc/hosts) in building containers, as a mapping of hostname to IP address. Instead of an IP address, the special value V(host-gateway) can also be used, which resolves to the host's gateway IP and allows building containers to connect to services running on the host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary of key value pairs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Image name. Name format will be one of: C(name), C(repository/name), C(registry_server:port/name). When pushing or pulling an image the name can optionally include the tag by appending C(:tag_name). Note that image IDs (hashes) and names with digest cannot be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The network to use for C(RUN) build instructions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nocache",
+      "displayName": "Nocache",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Do not use cache when building an image.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "outputs",
+      "displayName": "Outputs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Output destinations. You can provide a list of exporters to export the built image in various places. Note that not all exporters might be supported by the build driver used. Note that depending on how this option is used, no image with name O(name) and tag O(tag) might be created, which can cause the basic idempotency this module offers to not work. Providing an empty list to this option is equivalent to not specifying it at all. The default behavior is a single entry with O(outputs[].type=imag",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The path for the build environment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "platform",
+      "displayName": "Platform",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Platforms in the format C(os[/arch[/variant]]). Since community.docker 3.10.0 this can be a list of platforms, instead of just a single platform.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pull",
+      "displayName": "Pull",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When building an image downloads any updates to the FROM image in Dockerfile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rebuild",
+      "displayName": "Rebuild",
+      "type": "string",
+      "required": false,
+      "default": "never",
+      "description": "Defines the behavior of the module if the image to build (as specified in O(name) and O(tag)) already exists.",
+      "choices": [
+        "never",
+        "always"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secrets",
+      "displayName": "Secrets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Secrets to expose to the build.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shm_size",
+      "displayName": "Shm Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Size of C(/dev/shm) in format C(<number>[<unit>]). Number is positive integer. Unit can be V(B) (byte), V(K) (kibibyte, 1024B), V(M) (mebibyte), V(G) (gibibyte), V(T) (tebibyte), or V(P) (pebibyte). Omitting the unit defaults to bytes. If you omit the size entirely, Docker daemon uses V(64M).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tag",
+      "displayName": "Tag",
+      "type": "string",
+      "required": false,
+      "default": "latest",
+      "description": "Tag for the image name O(name) that is to be tagged. If O(name)'s format is C(name:tag), then the tag value from O(name) will take precedence.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When building an image specifies an intermediate build stage by name as a final stage for the resulting image.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls",
+      "displayName": "Tls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server. Note that if O(validate_certs) is set to V(true) as well, it will take precedence. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_hostname",
+      "displayName": "Tls Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When verifying the authenticity of the Docker Host server, provide the expected name of the server. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS_HOSTNAME) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS_VERIFY) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

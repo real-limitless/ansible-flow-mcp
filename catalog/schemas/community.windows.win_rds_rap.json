@@ -2,6 +2,93 @@
   "fqcn": "community.windows.win_rds_rap",
   "shortDescription": "Manage Resource Authorization Policies (RAP) on a Remote Desktop Gateway server",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/windows/win_rds_rap_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "allowed_ports",
+      "displayName": "Allowed Ports",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of port numbers through which connections are allowed for this policy. To allow connections through any port, specify 'any'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "computer_group",
+      "displayName": "Computer Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The computer group name that is associated with this resource authorization policy (RAP). This is required when I(computer_group_type) is C(rdg_group) or C(ad_network_resource_group).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "computer_group_type",
+      "displayName": "Computer Group Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The computer group type: C(rdg_group): RD Gateway-managed group C(ad_network_resource_group): Active Directory Domain Services network resource group C(allow_any): Allow users to connect to any network resource.",
+      "choices": [
+        "rdg_group",
+        "ad_network_resource_group",
+        "allow_any"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional description of the resource authorization policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the resource authorization policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of resource authorization policy. If C(absent) will ensure the policy is removed. If C(present) will ensure the policy is configured and exists. If C(enabled) will ensure the policy is configured, exists and enabled. If C(disabled) will ensure the policy is configured, exists, but disabled.",
+      "choices": [
+        "absent",
+        "disabled",
+        "enabled",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_groups",
+      "displayName": "User Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of user groups that are associated with this resource authorization policy (RAP). A user must belong to one of these groups to access the RD Gateway server. Required when a new RAP is created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

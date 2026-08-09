@@ -1,7 +1,238 @@
 {
   "fqcn": "community.vmware.vmware_content_deploy_template",
-  "shortDescription": "vmware_content_deploy_template",
+  "shortDescription": "Deploy Virtual Machine from template stored in content library.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_content_deploy_template_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the cluster in datacenter in which to place deployed VM. Required if O(resource_pool) is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the datacenter, where VM to be deployed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datastore",
+      "displayName": "Datastore",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the datastore to store deployed VM and disk. Required if O(datastore_cluster) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datastore_cluster",
+      "displayName": "Datastore Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the datastore cluster to store deployed VM and disk. Please make sure Storage DRS is active for recommended datastore from the given datastore cluster. If Storage DRS is not enabled, datastore with largest free storage space is selected. Required if O(datastore) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder",
+      "displayName": "Folder",
+      "type": "string",
+      "required": false,
+      "default": "vm",
+      "description": "Name of the folder in datacenter in which to place deployed VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the ESX Host in datacenter in which to place deployed VM. The host has to be a member of the cluster that contains the resource pool. Required with O(resource_pool) to find resource pool details. This will be used as additional information when there are resource pools with same name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "library",
+      "displayName": "Library",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the content library from where the template resides.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_level",
+      "displayName": "Log Level",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "The level of logging desired in this module.",
+      "choices": [
+        "debug",
+        "info",
+        "normal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the VM to be deployed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_protocol",
+      "displayName": "Proxy Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The proxy connection protocol to use. This option is used if the correct proxy protocol cannot be automatically determined.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_pool",
+      "displayName": "Resource Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the resource pool in datacenter in which to place deployed VM. Required if O(cluster) is not specified. For default or non-unique resource pool names, specify O(host) and O(cluster). C(Resources) is the default name of resource pool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of Virtual Machine deployed from template in content library. If set to V(present) and VM does not exists, then VM is created. If set to V(present) and VM exists, no action is taken. If set to V(poweredon) and VM does not exists, then VM is created with powered on state. If set to V(poweredon) and VM exists, no action is taken.",
+      "choices": [
+        "present",
+        "poweredon"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of template from which VM to be deployed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

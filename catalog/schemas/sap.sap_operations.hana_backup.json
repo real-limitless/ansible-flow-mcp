@@ -1,0 +1,169 @@
+{
+  "fqcn": "sap.sap_operations.hana_backup",
+  "shortDescription": "Create SAP HANA database file backup",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/sap/sap_operations/hana_backup_module.html",
+  "options": [
+    {
+      "name": "backend",
+      "displayName": "Backend",
+      "type": "string",
+      "required": false,
+      "default": "FILE",
+      "description": "Create the backup in the file or using the third-party backup tool with BACKINT interface.",
+      "choices": [
+        "FILE",
+        "BACKINT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "binary_path",
+      "displayName": "Binary Path",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Path to hdbsql binary.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Comment to be included into backup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_name",
+      "displayName": "Database Name",
+      "type": "string",
+      "required": false,
+      "default": "SYSTEMDB",
+      "description": "SAP HANA system tenant or SYSTEMDB to backup. If not provided SYSTEMDB is default value.\nFrom SYSTEMDB other tenants can be backed up. From tenant only itself can be backed up.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_user",
+      "displayName": "Database User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A user which to be used to connect to database. SYSTEM user is used if no user is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_user_password",
+      "displayName": "Database User Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for HANA SYSTEM database user. Or a user specified in C(database_user) parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination",
+      "displayName": "Destination",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Directory where where backup data are stored for file backups.\n<hanasid>adm user should have write permissions to that directory.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hdbsqluserstore_key",
+      "displayName": "Hdbsqluserstore Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "hdbuserstore record to be used to connect to database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the host on which the database instance is running.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_number",
+      "displayName": "Instance Number",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Instance number of the database engine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix",
+      "displayName": "Prefix",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The data backup files are prepended with the prefix. Previous backup files will be overwritten if prefix was already used before (for file backups).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tooloption",
+      "displayName": "Tooloption",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "String that is forwarded to the third-party backup tool. This parameter is used only in case C(type) is I(BACKINT).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "FULL",
+      "description": "Backup type. Delta backups can only be created after a data backup has been created.",
+      "choices": [
+        "INCREMENTAL",
+        "DIFFERENTIAL",
+        "FULL"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Wait for the operation to complete before returning. If set to C(true), module will wait on backup task to complete. If set to C(false), module will schedule the backup task and return immediately. Please be aware you cannot run two backups in parallel for one SAP HANA database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

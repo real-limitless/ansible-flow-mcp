@@ -1,0 +1,193 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_find",
+  "shortDescription": "Find matching data sets",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_find_module.html",
+  "options": [
+    {
+      "name": "age",
+      "displayName": "Age",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Select data sets whose age is equal to or greater than the specified time. Use a negative age to find data sets equal to or less than the specified time. You can choose days, weeks, months or years by specifying the first letter of any of those words (e.g., \"1w\"). The default is days. Age is determined by using the 'referenced date' of the data set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "age_stamp",
+      "displayName": "Age Stamp",
+      "type": "string",
+      "required": false,
+      "default": "creation_date",
+      "description": "Choose the age property against which to compare age. C(creation_date) is the date the data set was created and C(ref_date) is the date the data set was last referenced. C(ref_date) is only applicable to sequential and partitioned data sets.",
+      "choices": [
+        "creation_date",
+        "ref_date"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "contains",
+      "displayName": "Contains",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A string which should be matched against the data set content or data set member content.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "empty",
+      "displayName": "Empty",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A GDG attribute, only valid when C(resource_type=gdg). If provided, will search for data sets with I(empty) attribute set as provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "excludes",
+      "displayName": "Excludes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Data sets whose names match an excludes pattern are culled from patterns matches. Multiple patterns can be specified using a list. The pattern can be a regular expression. If the pattern is a regular expression, it must match the full data set name. To exclude members, the regular expression or pattern must be enclosed in parentheses. This expression can be used alongside a pattern to exclude data set names.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extended",
+      "displayName": "Extended",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A GDG attribute, only valid when C(resource_type=gdg). If provided, will search for data sets with I(extended) attribute set as provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fifo",
+      "displayName": "Fifo",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A GDG attribute, only valid when C(resource_type=gdg). If provided, will search for data sets with I(fifo) attribute set as provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit",
+      "displayName": "Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "A GDG attribute, only valid when C(resource_type=gdg). If provided, will search for data sets with I(limit) attribute set as provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "migrated_type",
+      "displayName": "Migrated Type",
+      "type": "list",
+      "required": false,
+      "default": [
+        "cluster",
+        "data",
+        "index",
+        "nonvsam"
+      ],
+      "description": "A migrated data set related attribute, only valid when C(resource_type=migrated). If provided, will search for only those types of migrated datasets.",
+      "choices": [
+        "nonvsam",
+        "cluster",
+        "data",
+        "index"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "patterns",
+      "displayName": "Patterns",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "One or more data set or member patterns. The patterns restrict the list of data sets or members to be returned to those names that match at least one of the patterns specified. Multiple patterns can be specified using a list. This parameter expects a list, which can be either comma separated or YAML. When searching for members within a PDS/PDSE, pattern can be a regular expression.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge",
+      "displayName": "Purge",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A GDG attribute, only valid when C(resource_type=gdg). If provided, will search for data sets with I(purge) attribute set as provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_type",
+      "displayName": "Resource Type",
+      "type": "list",
+      "required": false,
+      "default": "nonvsam",
+      "description": "The types of resources to search. C(nonvsam) refers to one of SEQ, LIBRARY (PDSE), PDS, LARGE, BASIC, EXTREQ, or EXTPREF. C(cluster) refers to a VSAM cluster. The C(data) and C(index) are the data and index components of a VSAM cluster. C(gdg) refers to Generation Data Groups. The module searches based on the GDG base name. C(migrated) refers to listing migrated datasets. Only C(excludes) and C(migrated_type) options can be used along with this option. The module only searches based on dataset p",
+      "choices": [
+        "nonvsam",
+        "cluster",
+        "data",
+        "index",
+        "gdg",
+        "migrated"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scratch",
+      "displayName": "Scratch",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A GDG attribute, only valid when C(resource_type=gdg). If provided, will search for data sets with I(scratch) attribute set as provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Select data sets whose size is equal to or greater than the specified size. Use a negative size to find files equal to or less than the specified size. Unqualified values are in bytes but b, k, m, g, and t can be appended to specify bytes, kilobytes, megabytes, gigabytes, and terabytes, respectively. Filtering by size is currently only valid for sequential and partitioned data sets.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume",
+      "displayName": "Volume",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "If provided, only the data sets allocated in the specified list of volumes will be searched.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

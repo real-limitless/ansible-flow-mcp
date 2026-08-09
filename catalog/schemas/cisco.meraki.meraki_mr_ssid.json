@@ -1,0 +1,607 @@
+{
+  "fqcn": "cisco.meraki.meraki_mr_ssid",
+  "shortDescription": "Manage wireless SSIDs in the Meraki cloud",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/meraki/meraki_mr_ssid_module.html",
+  "options": [
+    {
+      "name": "ap_availability_tags",
+      "displayName": "Ap Availability Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Set whether SSID will be broadcast by APs with tags matching any of the tags in this list. Requires C(available_on_all_aps) to be C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ap_tags_vlan_ids",
+      "displayName": "Ap Tags Vlan Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of VLAN tags. Requires C(ip_assignment_mode) to be C(Bridge mode) or C(Layer 3 roaming). Requires C(use_vlan_tagging) to be C(True).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_key",
+      "displayName": "Auth Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Authentication key provided by the dashboard. Required if environmental variable C(MERAKI_KEY) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_mode",
+      "displayName": "Auth Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set authentication mode of network.",
+      "choices": [
+        "open",
+        "psk",
+        "open-with-radius",
+        "8021x-meraki",
+        "8021x-radius"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "available_on_all_aps",
+      "displayName": "Available On All Aps",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set whether all APs should broadcast the SSID or if it should be restricted to APs matching any availability tags. Requires C(ap_availability_tags) to be defined when set to C(False).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "band_selection",
+      "displayName": "Band Selection",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set band selection mode.",
+      "choices": [
+        "Dual band operation",
+        "5 GHz band only",
+        "Dual band operation with Band Steering"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "concentrator_network_id",
+      "displayName": "Concentrator Network Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The concentrator to use for 'Layer 3 roaming with a concentrator' or 'VPN'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_vlan_id",
+      "displayName": "Default Vlan Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Default VLAN ID. Requires C(ip_assignment_mode) to be C(Bridge mode) or C(Layer 3 roaming).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable SSID network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_mode",
+      "displayName": "Encryption Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set encryption mode of network.",
+      "choices": [
+        "wpa",
+        "eap",
+        "wpa-eap"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enterprise_admin_access",
+      "displayName": "Enterprise Admin Access",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Whether SSID is accessible by enterprise administrators.",
+      "choices": [
+        "access disabled",
+        "access enabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": "api.meraki.com",
+      "description": "Hostname for Meraki dashboard. Can be used to access regional Meraki environments, such as China.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "internal_error_retry_time",
+      "displayName": "Internal Error Retry Time",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Number of seconds to retry if server returns an internal server error.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_assignment_mode",
+      "displayName": "Ip Assignment Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Method of which SSID uses to assign IP addresses.",
+      "choices": [
+        "NAT mode",
+        "Bridge mode",
+        "Layer 3 roaming",
+        "Layer 3 roaming with a concentrator",
+        "VPN"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lan_isolation_enabled",
+      "displayName": "Lan Isolation Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable Layer 2 Lan isolation. Requires C(ip_assignment_mode) to be C(Bridge mode).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_bitrate",
+      "displayName": "Min Bitrate",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Minimum bitrate (Mbps) allowed on SSID.",
+      "choices": [
+        1,
+        2,
+        5.5,
+        6,
+        9,
+        11,
+        12,
+        18,
+        24,
+        36,
+        48,
+        54
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of SSID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "net_id",
+      "displayName": "Net Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "net_name",
+      "displayName": "Net Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "number",
+      "displayName": "Number",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "SSID number within network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "org_id",
+      "displayName": "Org Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "org_name",
+      "displayName": "Org Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output_format",
+      "displayName": "Output Format",
+      "type": "string",
+      "required": false,
+      "default": "snakecase",
+      "description": "Instructs module whether response keys should be snake case (ex. C(net_id)) or camel case (ex. C(netId)).",
+      "choices": [
+        "snakecase",
+        "camelcase"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output_level",
+      "displayName": "Output Level",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "Set amount of debug output during module execution.",
+      "choices": [
+        "debug",
+        "normal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "per_client_bandwidth_limit_down",
+      "displayName": "Per Client Bandwidth Limit Down",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum bandwidth in Mbps devices on SSID can download.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "per_client_bandwidth_limit_up",
+      "displayName": "Per Client Bandwidth Limit Up",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum bandwidth in Mbps devices on SSID can upload.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "psk",
+      "displayName": "Psk",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for wireless network. Requires auth_mode to be set to psk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "radius_accounting_enabled",
+      "displayName": "Radius Accounting Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable RADIUS accounting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "radius_accounting_servers",
+      "displayName": "Radius Accounting Servers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of RADIUS servers for RADIUS accounting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "radius_coa_enabled",
+      "displayName": "Radius Coa Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable RADIUS CoA (Change of Authorization) on SSID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "radius_failover_policy",
+      "displayName": "Radius Failover Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set client access policy in case RADIUS servers aren't available.",
+      "choices": [
+        "Deny access",
+        "Allow access"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "radius_load_balancing_policy",
+      "displayName": "Radius Load Balancing Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set load balancing policy when multiple RADIUS servers are specified.",
+      "choices": [
+        "Strict priority order",
+        "Round robin"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "radius_proxy_enabled",
+      "displayName": "Radius Proxy Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable RADIUS Proxy on SSID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "radius_servers",
+      "displayName": "Radius Servers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of RADIUS servers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rate_limit_retry_time",
+      "displayName": "Rate Limit Retry Time",
+      "type": "number",
+      "required": false,
+      "default": 165,
+      "description": "Number of seconds to retry if rate limiter is triggered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "splash_guest_sponsor_domains",
+      "displayName": "Splash Guest Sponsor Domains",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of valid sponsor email domains for sponsored guest portal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "splash_page",
+      "displayName": "Splash Page",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set to enable splash page and specify type of splash.",
+      "choices": [
+        "None",
+        "Click-through splash page",
+        "Billing",
+        "Password-protected with Meraki RADIUS",
+        "Password-protected with custom RADIUS",
+        "Password-protected with Active Directory",
+        "Password-protected with LDAP",
+        "SMS authentication",
+        "Systems Manager Sentry",
+        "Facebook Wi-Fi",
+        "Google OAuth",
+        "Sponsored guest",
+        "Cisco ISE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Specifies whether SNMP information should be queried or modified.",
+      "choices": [
+        "absent",
+        "query",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Time to timeout for HTTP requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_https",
+      "displayName": "Use Https",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will use HTTP. Otherwise it will use HTTPS. Only useful for internal Meraki developers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_vlan_tagging",
+      "displayName": "Use Vlan Tagging",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set whether to use VLAN tagging. Requires C(default_vlan_id) to be set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate HTTP certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "visible",
+      "displayName": "Visible",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable whether APs should broadcast this SSID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlan_id",
+      "displayName": "Vlan Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID number of VLAN on SSID. Requires C(ip_assignment_mode) to be C(ayer 3 roaming with a concentrator) or C(VPN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "walled_garden_enabled",
+      "displayName": "Walled Garden Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable walled garden functionality.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "walled_garden_ranges",
+      "displayName": "Walled Garden Ranges",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of walled garden ranges.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wpa_encryption_mode",
+      "displayName": "Wpa Encryption Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Encryption mode within WPA specification.",
+      "choices": [
+        "WPA1 and WPA2",
+        "WPA2 only",
+        "WPA3 Transition Mode",
+        "WPA3 only"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

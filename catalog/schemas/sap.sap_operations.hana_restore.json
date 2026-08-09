@@ -1,0 +1,110 @@
+{
+  "fqcn": "sap.sap_operations.hana_restore",
+  "shortDescription": "Restore SAP HANA database backup",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/sap/sap_operations/hana_restore_module.html",
+  "options": [
+    {
+      "name": "clear_log",
+      "displayName": "Clear Log",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Prevent entries from the log area from being used for the recovery. No log entries from the log area are replayed, and the log area is initialized. As a consequence, the content of the log area is lost. For I(timestamp_backup) prevents the recovery of entries from the log area. No log entries from the log area are replayed, and the log area is initialized. As a consequence, the content of the log area is lost. You must set I(clear_log) in the following situation the log area is unusable or recov",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_name",
+      "displayName": "Database Name",
+      "type": "string",
+      "required": false,
+      "default": "SYSTEMDB",
+      "description": "SAP HANA system tenant or SYSTEMDB to restore. If not provided SYSTEMDB is default value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "full_backup",
+      "displayName": "Full Backup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to full backup to use for restore. It ends with prefix used to create full backup (full backup consists of multiple files). It can be absolute or relative path. Mutually exclusive with I(timestamp_backup).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "full_backup_type",
+      "displayName": "Full Backup Type",
+      "type": "string",
+      "required": false,
+      "default": "FILE",
+      "description": "Path to full backup to use for restore.",
+      "choices": [
+        "FILE",
+        "BACKINT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hana_db_system_password",
+      "displayName": "Hana Db System Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for HANA SYSTEM database user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hdbsqluserstore_key",
+      "displayName": "Hdbsqluserstore Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "hdbuserstore record to be used to connect to database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_directory",
+      "displayName": "Instance Directory",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Path to instance directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timestamp_backup",
+      "displayName": "Timestamp Backup",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Recovers an SAP HANA database to a specific point in time. Timestamp is always in UTC timezone. Example 2022-01-02 11:22:33. Empty string means now. Mutually exclusive with I(full_backup).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "using",
+      "displayName": "Using",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specify non-default catalog/data/log path. Use if files are mounted on different path then when they were created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

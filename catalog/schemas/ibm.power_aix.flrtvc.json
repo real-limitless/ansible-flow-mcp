@@ -1,0 +1,192 @@
+{
+  "fqcn": "ibm.power_aix.flrtvc",
+  "shortDescription": "Generate FLRTVC report, download and install security and HIPER fixes.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/flrtvc_module.html",
+  "options": [
+    {
+      "name": "apar",
+      "displayName": "Apar",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of APAR to check against. C(sec) stands for Security vulnerabilities. C(hiper) stands for Corrections to High Impact PERvasive threats. C(all) has the same behavior as C(None) hence both C(sec) and C(hiper) vulnerabilities.",
+      "choices": [
+        "sec",
+        "hiper",
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_only",
+      "displayName": "Check Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to only check if fixes are already applied on the targets. B(No download or installation) operations will be performed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clean",
+      "displayName": "Clean",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Cleanup working directory 'I(path)/work' with all temporary and downloaded files at the end of execution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "csv",
+      "displayName": "Csv",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a APAR CSV file containing the description of the C(sec) and C(hiper) fixes. This file is usually transferred from the Fix Central server; you can avoid this rather big transfer by specifying the path to an already transferred file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_only",
+      "displayName": "Download Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to perform check and download operation only. B(No installation) will be performed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extend_fs",
+      "displayName": "Extend Fs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies to increase filesystem size of the working directory when extra space is needed. When set, a filesystem could have increased while the task returns I(changed=False).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filesets",
+      "displayName": "Filesets",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filter filesets for specific phrase. Only fixes that apply to filesets matching the specified phrase will be checked and so updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flrtvczip",
+      "displayName": "Flrtvczip",
+      "type": "string",
+      "required": false,
+      "default": "https://esupport.ibm.com/customercare/sas/f/flrt3/FLRTVC-latest.zip",
+      "description": "Specifies alternative location (local repository) hosting flrtvc.zip file. When set, download of FLRTVC-Latest.zip will be attempted from this url.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to remove currently installed ifix before running the FLRTVC script.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "localpatchpath",
+      "displayName": "Localpatchpath",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Specifies local server path containing ifix patches. When set, sub paths from frltvc.ksh containing patches will replaced with localpatchpath to point to local path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "localpatchserver",
+      "displayName": "Localpatchserver",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Specifies local server ip/hostname containing ifix patches. When set, urls from frltvc.ksh will replaced with localpatchserver to point to local server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": "/var/adm/ansible",
+      "description": "Specifies the directory to save the FLRTVC report. All temporary files such as installed filesets, fixes listings and downloaded fixes files are stored in the working subdirectory named 'I(path)/work'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional setting which specifies preferred protocol to use for downloading files. When set, downloads will be attempted using set protocol.",
+      "choices": [
+        "https",
+        "http",
+        "ftp"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_server",
+      "displayName": "Proxy Server",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Specifies the proxy server that will be used as the medium to access internet for getting information about fixes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save_report",
+      "displayName": "Save Report",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to save the FLRTVC report in file 'I(path)/flrtvc.txt'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verbose",
+      "displayName": "Verbose",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Generate full FLRTVC reporting (verbose mode). It runs the FLRTVC script a second time to save the full report into file. So this option impacts the execution performance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,107 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_volume_init",
+  "shortDescription": "Initialize volumes or minidisks.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_volume_init_module.html",
+  "options": [
+    {
+      "name": "address",
+      "displayName": "Address",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "I(address) is a 3 or 4 digit hexadecimal number that specifies the address of the volume or minidisk. I(address) can be the number assigned to the device (device number) when it is installed or the virtual address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "index",
+      "displayName": "Index",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Create a volume table of contents (VTOC) index. The VTOC index enhances the performance of VTOC access. When set to I(false), no index will be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sms_managed",
+      "displayName": "Sms Managed",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies that the volume be managed by Storage Management System (SMS). If I(sms_managed) is I(true) then I(index) must also be I(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tmp_hlq",
+      "displayName": "Tmp Hlq",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the default high level qualifier (HLQ) for temporary and backup datasets. The default HLQ is the Ansible user used to execute the module and if that is not available, then the value C(TMPHLQ) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_offline",
+      "displayName": "Verify Offline",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Verify that the device is not online to any other systems, initialization does not complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_volid",
+      "displayName": "Verify Volid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Verify that the volume serial matches what is on the existing volume or minidisk. I(verify_volid) must be 1 to 6 alphanumeric characters or C(*NONE*). To verify that a volume serial number does not exist, use I(verify_volid=*NONE*). If I(verify_volid) is specified and the volume serial number does not match that found on the volume or minidisk, initialization does not complete. If I(verify_volid=*NONE*) is specified and a volume serial is found on the volume or minidisk, initialization does not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_volume_empty",
+      "displayName": "Verify Volume Empty",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Verify that no data sets other than the volume table of contents (VTOC) index or the VSAM Volume Data Set(VVDS) exist on the target volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volid",
+      "displayName": "Volid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The volume serial number used to initialize a volume or minidisk. Expects 1-6 alphanumeric, national ($,#,@) or special characters. A I(volid) with less than 6 characters will be padded with spaces. A I(volid) can also be referred to as volser or volume serial number. When I(volid) is not specified for a previously initialized volume or minidisk, the volume serial number will remain unchanged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vtoc_size",
+      "displayName": "Vtoc Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of tracks to initialize the volume table of contents (VTOC) with. The VTOC will be placed in cylinder 0 head 1. If no tracks are specified it will default to the number of tracks in a cylinder minus 1. Tracks in a cylinder vary based on direct-access storage device (DASD) models, for 3390 a cylinder is 15 tracks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,101 @@
+{
+  "fqcn": "ibm.power_aix.tunables",
+  "shortDescription": "Modify/Reset/Show tunables for various components on AIX.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/tunables_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the action to be performed for tunables of a component. C(show) shows information of tunables specified by I(component) and optional I(tunable_params). C(modify) modifies values of tunables specified by I(component) and I(tunable_params). C(reset) resets values of tunables specified by I(component) and optional I(tunable_params).",
+      "choices": [
+        "show",
+        "modify",
+        "reset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bosboot_tunables",
+      "displayName": "Bosboot Tunables",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies whether the provided I(tunable_params) or I(tunable_params_with_value) are bosboot type or not. Cannot be used when I(change_type=both).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "change_type",
+      "displayName": "Change Type",
+      "type": "string",
+      "required": false,
+      "default": "current",
+      "description": "Specifies the type of changes for the tunables. For details on valid user attributes, please refers to IBM documentation. For I(action=reset), C(change_type=current) resets the current values of tunable/s specified by I(component) and I(tunable_params) to its default value. For I(action=modify), C(change_type=current) modifies the current values of tunable/s specified by I(component) and I(tunable_params_with_value). For I(action=reset), C(change_type=reboot) resets the reboot values of tunable/",
+      "choices": [
+        "current",
+        "reboot",
+        "both"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "component",
+      "displayName": "Component",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the component name. It must be unique, you cannot use the ALL or default keywords in the component.",
+      "choices": [
+        "vmo",
+        "ioo",
+        "schedo",
+        "no",
+        "raso",
+        "nfso",
+        "asoo"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restricted_tunables",
+      "displayName": "Restricted Tunables",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "forces the display, modification, or resetting of restricted tunables.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tunable_params",
+      "displayName": "Tunable Params",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the tunables in list format whose details need to be displayed or reset. Can be used when I(action=show or action=reset). Cannot be used with I(action=modify).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tunable_params_with_value",
+      "displayName": "Tunable Params With Value",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the tunable(s) and their value(s) whose modification is required. Cannot be used when I(action=show or action=reset). Can be used with I(action=modify).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,73 @@
   "fqcn": "microsoft.ad.offline_join",
   "shortDescription": "Get the Offline Domain Join BLOB",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/microsoft/ad/offline_join_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "blob_path",
+      "displayName": "Blob Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If set, will store the blob bytes into a file at this path. This will not create the parent directory specified if it does not exist. The existence of this file is also used as an idempotency check, if the file already exists the blob will not be regenerated. If specified the module return value I(blob) will be null.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_server",
+      "displayName": "Domain Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specified the Active Directory Domain Services instance to connect to. Can be in the form of an FQDN or NetBIOS name. If not specified then the value is based on the default domain of the computer running PowerShell.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identity",
+      "displayName": "Identity",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The identity of the computer object used to generate the offline join blob for. This is mutually exclusive with I(name) and (path). The identity can be in the form of a GUID representing the C(objectGUID) value, C(sAMAccountName), C(objectSid), or C(distinguishedName). This option or I(name) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the computer object used to generate the offline join blob for. This is mutually exclusive with I(identity). The name is combined with I(path) to find the AD computer object that matches the DistinguishedName C(CN={{ name}},{{ path }}). This option or I(identity) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path where the computer object specified by C(name) is stored. By default the default computer path defined in AD is used, for example C(CN=Computers,DC=domain,DC=com).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provision_root_ca_certs",
+      "displayName": "Provision Root Ca Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Adds all the root Certificate Authority certificates on the local machine and adds them to the blob.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

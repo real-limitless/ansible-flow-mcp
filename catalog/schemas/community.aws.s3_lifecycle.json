@@ -1,7 +1,378 @@
 {
   "fqcn": "community.aws.s3_lifecycle",
-  "shortDescription": "A variety of Ansible content to help automate the management of AWS services.",
+  "shortDescription": "Manage S3 bucket lifecycle rules in AWS",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/aws/s3_lifecycle_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "abort_incomplete_multipart_upload_days",
+      "displayName": "Abort Incomplete Multipart Upload Days",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS access key ID. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_ACCESS_KEY_ID) or C(AWS_ACCESS_KEY) environment variables may also be used in decreasing order of preference. The I(aws_access_key) and I(profile) options are mutually exclusive. The I(aws_access_key_id) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_ca_bundle",
+      "displayName": "Aws Ca Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location of a CA Bundle to use when validating SSL certificates. The C(AWS_CA_BUNDLE) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_config",
+      "displayName": "Aws Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary to modify the botocore configuration. Parameters can be found in the AWS documentation U(https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html#botocore.config.Config).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug_botocore_endpoint_logs",
+      "displayName": "Debug Botocore Endpoint Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use a C(botocore.endpoint) logger to parse the unique (rather than total) C(\"resource:action\") API calls made during a task, outputing the set to the resource_actions key in the task results. Use the C(aws_resource_action) callback to output to total list made during a playbook. The C(ANSIBLE_DEBUG_BOTOCORE_LOGS) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_url",
+      "displayName": "Endpoint Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to connect to instead of the default AWS endpoints.  While this can be used to connection to other AWS-compatible services the amazon.aws and community.aws collections are only tested against AWS. The  C(AWS_URL) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "expiration_date",
+      "displayName": "Expiration Date",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Indicates the lifetime of the objects that are subject to the rule by the date they will expire. The value must be ISO-8601 format, the time must be midnight and a GMT timezone must be specified. This cannot be specified with I(expire_object_delete_marker)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "expiration_days",
+      "displayName": "Expiration Days",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer. This cannot be specified with I(expire_object_delete_marker)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "expire_object_delete_marker",
+      "displayName": "Expire Object Delete Marker",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to C(true), the delete marker will be expired; if set to C(false) the policy takes no action. This cannot be specified with I(expiration_days) or I(expiration_date).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maximum_object_size",
+      "displayName": "Maximum Object Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The maximum object size to which the rule applies.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minimum_object_size",
+      "displayName": "Minimum Object Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The minimum object size to which the rule applies.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the S3 bucket.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "noncurrent_version_expiration_days",
+      "displayName": "Noncurrent Version Expiration Days",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of days after which non-current versions should be deleted. Must be set if I(noncurrent_version_keep_newer) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "noncurrent_version_keep_newer",
+      "displayName": "Noncurrent Version Keep Newer",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The minimum number of non-current versions to retain. Requres I(noncurrent_version_expiration_days).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "noncurrent_version_storage_class",
+      "displayName": "Noncurrent Version Storage Class",
+      "type": "string",
+      "required": false,
+      "default": "glacier",
+      "description": "The storage class to which non-current versions are transitioned.",
+      "choices": [
+        "glacier",
+        "onezone_ia",
+        "standard_ia",
+        "intelligent_tiering",
+        "deep_archive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "noncurrent_version_transition_days",
+      "displayName": "Noncurrent Version Transition Days",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of days after which non-current versions will be transitioned to the storage class specified in I(noncurrent_version_storage_class).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "noncurrent_version_transitions",
+      "displayName": "Noncurrent Version Transitions",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of transition behaviors to be applied to noncurrent versions for the rule. Each storage class may be used only once. Each transition behavior contains these elements I(transition_days) I(storage_class)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix",
+      "displayName": "Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Prefix identifying one or more objects to which the rule applies. If no prefix is specified, the rule will apply to the whole bucket.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A named AWS profile to use for authentication. See the AWS documentation for more information about named profiles U(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html). The C(AWS_PROFILE) environment variable may also be used. The I(profile) option is mutually exclusive with the I(aws_access_key), I(aws_secret_key) and I(session_token) options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge_transitions",
+      "displayName": "Purge Transitions",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to replace all the current transition(s) with the new transition(s). When C(false), the provided transition(s) will be added, replacing transitions with the same storage_class. When true, existing transitions will be removed and replaced with the new transition(s)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS region to use. For global services such as IAM, Route53 and CloudFront, I(region) is ignored. The C(AWS_REGION) environment variable may also be used. See the Amazon AWS documentation for more information U(http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rule_id",
+      "displayName": "Rule Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Unique identifier for the rule. The value cannot be longer than 255 characters. A unique value for the rule will be generated if no value is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_key",
+      "displayName": "Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS secret access key. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SECRET_ACCESS_KEY) or C(AWS_SECRET_KEY) environment variables may also be used in decreasing order of preference. The I(secret_key) and I(profile) options are mutually exclusive. The I(aws_secret_access_key) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_token",
+      "displayName": "Session Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS STS session token for use with temporary credentials. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SESSION_TOKEN) environment variable may also be used. The I(session_token) and I(profile) options are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Create or remove the lifecycle rule.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": "enabled",
+      "description": "If C(enabled), the rule is currently being applied. If C(disabled), the rule is not currently being applied.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_class",
+      "displayName": "Storage Class",
+      "type": "string",
+      "required": false,
+      "default": "glacier",
+      "description": "The storage class to transition to.",
+      "choices": [
+        "glacier",
+        "onezone_ia",
+        "standard_ia",
+        "intelligent_tiering",
+        "deep_archive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "transition_date",
+      "displayName": "Transition Date",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Indicates the lifetime of the objects that are subject to the rule by the date they will transition to a different storage class. The value must be ISO-8601 format, the time must be midnight and a GMT timezone must be specified. If (transition_days) is not specified, this parameter is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "transition_days",
+      "displayName": "Transition Days",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Indicates when, in days, an object transitions to a different storage class. If I(transition_date) is not specified, this parameter is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "transitions",
+      "displayName": "Transitions",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of transition behaviors to be applied to the rule. Each storage class may be used only once. Each transition behavior may contain these elements I(transition_days) I(transition_date) I(storage_class)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When set to C(false), SSL certificates will not be validated for communication with the AWS APIs. Setting I(validate_certs=false) is strongly discouraged, as an alternative, consider setting I(aws_ca_bundle) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Wait for the configuration to complete before returning.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

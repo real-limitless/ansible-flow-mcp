@@ -1,0 +1,121 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_device_traffic_group",
+  "shortDescription": "Manages traffic groups on BIG-IP",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_device_traffic_group_module.html",
+  "options": [
+    {
+      "name": "auto_failback",
+      "displayName": "Auto Failback",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the traffic group fails back to the initial device specified in C(ha_order).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_failback_time",
+      "displayName": "Auto Failback Time",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of seconds the system delays before failing back to the initial device specified in C(ha_order). The correct value range is C(0 - 300) inclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha_group",
+      "displayName": "Ha Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a configured C(HA group) to be associated with the traffic group. Once you create an HA group on a device and associate the HA group with a traffic group, you must create an HA group and associate it with that same traffic group on every device in the device group. To disable an HA group failover method, specify an empty string value (C(\"\")) to this parameter. Disabling an HA group will revert the device back to using C(Load Aware) method (the default), unless C(ha_order) setting is al",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha_load_factor",
+      "displayName": "Ha Load Factor",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value of the load the traffic-group presents the system relative to other traffic groups. This parameter only takes effect when C(Load Aware) failover method is in use. The correct value range is C(1 - 1000) inclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha_order",
+      "displayName": "Ha Order",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the order in which you would like to assign devices for failover. If you configure this setting, you must configure the setting on every traffic group in the device group. The values should be device names of the devices that belong to the failover group configured previously. The order in which the devices are placed as arguments to this parameter determines their HA order on the device. Meaning that changing the order of the same elements will cause a change on the unit. To disable a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mac_address",
+      "displayName": "Mac Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the floating Media Access Control (MAC) address associated with the floating IP addresses defined for a traffic group. Primarily, a MAC masquerade address minimizes ARP communications or dropped packets as a result of failover. A MAC masquerade address ensures any traffic destined for a specific traffic group reaches an available device after failover, which happens because, along with the traffic group, the MAC masquerade address floats to the available device. Without a MAC masquerad",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the traffic group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present), ensures the traffic group exists. When C(absent), ensures the traffic group is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,113 @@
+{
+  "fqcn": "vyos.vyos.vyos_user",
+  "shortDescription": "Manage the collection of local users on VyOS device",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vyos/vyos/vyos_user_module.html",
+  "options": [
+    {
+      "name": "aggregate",
+      "displayName": "Aggregate",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The set of username objects to be configured on the remote VyOS device. The list entries can either be the username or a hash of username and properties. This argument is mutually exclusive with the C(name) argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configured_password",
+      "displayName": "Configured Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to be configured on the VyOS device. The password needs to be provided in clear and it will be encrypted on the device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encrypted_password",
+      "displayName": "Encrypted Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The encrypted password of the user account on the remote device. Note that unlike the C(configured_password) argument, this argument ignores the C(update_password) and updates if the value is different from the one in the device running config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "full_name",
+      "displayName": "Full Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The C(full_name) argument provides the full name of the user account to be created on the remote device. This argument accepts any text string value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to be configured on the VyOS device. This argument accepts a string value and is mutually exclusive with the C(aggregate) argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_keys",
+      "displayName": "Public Keys",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Public keys for authentiction over SSH.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge",
+      "displayName": "Purge",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Instructs the module to consider the resource definition absolute. It will remove any previously configured usernames on the device with the exception of the `admin` user (the current defined set of users).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Configures the state of the username definition as it relates to the device operational configuration. When set to I(present), the username(s) should be configured in the device active configuration and when set to I(absent) the username(s) should not be in the device active configuration",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "Since passwords are encrypted in the device running config, this argument will instruct the module when to change the password.  When set to C(always), the password will always be updated in the device and when set to C(on_create) the password will be updated only if the username is created.",
+      "choices": [
+        "on_create",
+        "always"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

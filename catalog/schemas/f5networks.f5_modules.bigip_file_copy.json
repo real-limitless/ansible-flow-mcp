@@ -1,0 +1,92 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_file_copy",
+  "shortDescription": "Manage files in datastores on a BIG-IP",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_file_copy_module.html",
+  "options": [
+    {
+      "name": "datastore",
+      "displayName": "Datastore",
+      "type": "string",
+      "required": false,
+      "default": "ifile",
+      "description": "Specifies the datastore to put the file in. There are several different datastores and each of them allows files to be exposed in different ways. When C(external-monitor), the specified file will be stored as an external monitor file and be available for use in external monitors. When C(ifile), the specified file will be stored as an iFile. When C(lw4o6-table), the specified file will be stored as a Lightweight 4 over 6 (lw4o6) tunnel binding table, which includes an IPv6 address for the lwB4, p",
+      "choices": [
+        "external-monitor",
+        "ifile",
+        "lw4o6-table"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Force overwriting a file. By default, files are only overwritten if the SHA of the file is different for the given filename. This parameter can be used to force overwriting the file even if it already exists and its SHA matches. The C(lw4o6-table) datastore does not keep checksums of its file. Therefore, you would need to provide this argument to update any of these files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the file as it should reside on the BIG-IP. If this is not specified, then the filename provided in the C(source) parameter is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the path of the file to upload. This parameter is required if C(state) is C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present), ensures the resource exists. When C(absent), ensures the resource is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

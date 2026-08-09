@@ -2,6 +2,391 @@
   "fqcn": "community.docker.docker_compose_v2",
   "shortDescription": "Manage multi-container Docker applications with Docker Compose CLI plugin",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/docker/docker_compose_v2_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_version",
+      "displayName": "Api Version",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "The version of the Docker API running on the Docker Host. Defaults to the latest version of the API supported by this collection and the docker daemon. If the value is not specified in the task, the value of environment variable E(DOCKER_API_VERSION) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "assume_yes",
+      "displayName": "Assume Yes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When O(assume_yes=true), pass C(-y)/C(--yes) to assume \"yes\" as answer to all prompts and run non-interactively. Right now a prompt is asked whenever a non-matching volume should be re-created. O(assume_yes=false) results in the question being answered by \"no\", which will simply re-use the existing volume. This option is only available on Docker Compose 2.32.0 or newer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "build",
+      "displayName": "Build",
+      "type": "string",
+      "required": false,
+      "default": "policy",
+      "description": "Whether to build images before starting containers. This is used when C(docker compose up) is run. V(always) always builds before starting containers. This is equivalent to the C(--build) option of C(docker compose up). V(never) never builds before starting containers. This is equivalent to the C(--no-build) option of C(docker compose up). V(policy) uses the policy as defined in the Compose file.",
+      "choices": [
+        "always",
+        "never",
+        "policy"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use a CA certificate when performing server verification by providing the path to a CA certificate file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(ca.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_files_existing",
+      "displayName": "Check Files Existing",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to V(false), the module will not check whether one of the files C(compose.yaml), C(compose.yml), C(docker-compose.yaml), or C(docker-compose.yml) exists in O(project_src) if O(files) is not provided. This can be useful if environment files with C(COMPOSE_FILE) are used to configure a different filename. The module currently does not check for C(COMPOSE_FILE) in environment files or the current environment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cli_context",
+      "displayName": "Cli Context",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Docker CLI context to use. Mutually exclusive with O(docker_host).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client's TLS certificate file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(cert.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client's TLS key file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(key.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "definition",
+      "displayName": "Definition",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Compose file describing one or more services, networks and volumes. Mutually exclusive with O(project_src) and O(files). One of O(project_src) and O(definition) must be provided. If provided, PyYAML must be available to this module, and O(project_name) must be specified. Note that a temporary directory will be created and deleted afterwards when using this option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dependencies",
+      "displayName": "Dependencies",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When O(state) is V(present) or V(restarted), specify whether or not to include linked services.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_cli",
+      "displayName": "Docker Cli",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the Docker CLI. If not provided, will search for Docker CLI on the E(PATH).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_host",
+      "displayName": "Docker Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL or Unix socket path used to connect to the Docker API. To connect to a remote host, provide the TCP connection string. For example, V(tcp://192.0.2.23:2376). If TLS is used to encrypt the connection, the module will automatically replace C(tcp) in the connection URL with C(https). If the value is not specified in the task, the value of environment variable E(DOCKER_HOST) will be used instead. If the environment variable is not set, the default value will be used. Mutually exclusive with ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "env_files",
+      "displayName": "Env Files",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "By default environment files are loaded from a C(.env) file located directly under the O(project_src) directory. O(env_files) can be used to specify the path of one or multiple custom environment files instead. The path is relative to the O(project_src) directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "files",
+      "displayName": "Files",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of Compose file names relative to O(project_src) to be used instead of the main Compose file (C(compose.yml), C(compose.yaml), C(docker-compose.yml), or C(docker-compose.yaml)). Files are loaded and merged in the order given. Mutually exclusive with O(definition).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_build_events",
+      "displayName": "Ignore Build Events",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Ignores image building events for change detection. If O(state=present) and O(ignore_build_events=true) and O(build=always), a rebuild that does not trigger a container restart no longer results in RV(ignore:changed=true). Note that Docker Compose 2.31.0 is the first Compose 2.x version to emit build events. For older versions, the behavior is always as if O(ignore_build_events=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profiles",
+      "displayName": "Profiles",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of profiles to enable when starting services. Equivalent to C(docker compose --profile).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project_name",
+      "displayName": "Project Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a project name. If not provided, the project name is taken from the basename of O(project_src). Required when O(definition) is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project_src",
+      "displayName": "Project Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a directory containing a Compose file (C(compose.yml), C(compose.yaml), C(docker-compose.yml), or C(docker-compose.yaml)). If O(files) is provided, will look for these files in this directory instead. Mutually exclusive with O(definition). One of O(project_src) and O(definition) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pull",
+      "displayName": "Pull",
+      "type": "string",
+      "required": false,
+      "default": "policy",
+      "description": "Whether to pull images before running. This is used when C(docker compose up) is run. V(always) ensures that the images are always pulled, even when already present on the Docker daemon. V(missing) only pulls them when they are not present on the Docker daemon. V(never) never pulls images. If they are not present, the module will fail when trying to create the containers that need them. V(policy) use the Compose file's C(pull_policy) defined for the service to figure out what to do.",
+      "choices": [
+        "always",
+        "missing",
+        "never",
+        "policy"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recreate",
+      "displayName": "Recreate",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "By default containers will be recreated when their configuration differs from the service definition. Setting to V(never) ignores configuration differences and leaves existing containers unchanged. Setting to V(always) forces recreation of all existing containers.",
+      "choices": [
+        "always",
+        "never",
+        "auto"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_images",
+      "displayName": "Remove Images",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use with O(state=absent) to remove all images or only local images.",
+      "choices": [
+        "all",
+        "local"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_orphans",
+      "displayName": "Remove Orphans",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Remove containers for services not defined in the Compose file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_volumes",
+      "displayName": "Remove Volumes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use with O(state=absent) to remove data volumes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "renew_anon_volumes",
+      "displayName": "Renew Anon Volumes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to recreate instead of reuse anonymous volumes from previous containers. V(true) is equivalent to the C(--renew-anon-volumes) option of C(docker compose up).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scale",
+      "displayName": "Scale",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Define how to scale services when running C(docker compose up). Provide a dictionary of key/value pairs where the key is the name of the service and the value is an integer count for the number of containers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "services",
+      "displayName": "Services",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies a subset of services to be targeted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the project. V(present) is equivalent to running C(docker compose up). V(stopped) is equivalent to running C(docker compose stop). V(absent) is equivalent to running C(docker compose down). V(restarted) is equivalent to running C(docker compose restart).",
+      "choices": [
+        "absent",
+        "stopped",
+        "restarted",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Timeout in seconds for container shutdown when attached or when containers are already running.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls",
+      "displayName": "Tls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server. Note that if O(validate_certs) is set to V(true) as well, it will take precedence. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_hostname",
+      "displayName": "Tls Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When verifying the authenticity of the Docker Host server, provide the expected name of the server. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS_HOSTNAME) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS_VERIFY) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When running C(docker compose up), pass C(--wait) to wait for services to be running/healthy. A timeout can be set with the O(wait_timeout) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "When O(wait=true), wait at most this amount of seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

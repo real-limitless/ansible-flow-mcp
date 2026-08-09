@@ -1,0 +1,145 @@
+{
+  "fqcn": "community.dns.infomaniak_dns_record",
+  "shortDescription": "Add or delete a single record in Infomaniak DNS service",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/dns/infomaniak_dns_record_module.html",
+  "options": [
+    {
+      "name": "infomaniak_token",
+      "displayName": "Infomaniak Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The token for Infomaniak's DNS API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix",
+      "displayName": "Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The prefix of the DNS record. This is the part of O(record) before O(zone_name). For example, if the record to be modified is C(www.example.com) for the zone C(example.com), the prefix is V(www). If the record in this example would be C(example.com), the prefix would be V('') (empty string). Exactly one of O(record) and O(prefix) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "record",
+      "displayName": "Record",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full DNS record to create or delete. Exactly one of O(record) and O(prefix) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the state of the resource record.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttl",
+      "displayName": "Ttl",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "The TTL to give the new record, in seconds. This is not used for record deletion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "txt_character_encoding",
+      "displayName": "Txt Character Encoding",
+      "type": "string",
+      "required": false,
+      "default": "decimal",
+      "description": "Whether to treat numeric escape sequences (V(\\\\xyz)) as octal or decimal numbers. This is only used when O(txt_transformation=quoted). The default changed to V(decimal) in community.dns 3.0.0. Before, the default used to be V(octal). The value V(decimal) is compatible to L(RFC 1035, https://www.ietf.org/rfc/rfc1035.txt).",
+      "choices": [
+        "decimal",
+        "octal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "txt_transformation",
+      "displayName": "Txt Transformation",
+      "type": "string",
+      "required": false,
+      "default": "unquoted",
+      "description": "Determines how TXT entry values are converted between the API and this module's input and output. The value V(api) means that values are returned from this module as they are returned from the API, and pushed to the API as they have been passed to this module. For idempotency checks, the input string will be compared to the strings returned by the API. The API might automatically transform some values, like splitting long values or adding quotes, which can cause problems with idempotency. The va",
+      "choices": [
+        "api",
+        "quoted",
+        "unquoted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of DNS record to create or delete.",
+      "choices": [
+        "A",
+        "AAAA",
+        "CAA",
+        "CNAME",
+        "DNAME",
+        "DNSKEY",
+        "DS",
+        "MX",
+        "NS",
+        "PTR",
+        "SMIMEA",
+        "SOA",
+        "SRV",
+        "SSHFP",
+        "TLSA",
+        "TXT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "value",
+      "displayName": "Value",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The new value when creating a DNS record. When deleting a record all values for the record must be specified or it will not be deleted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone_name",
+      "displayName": "Zone Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The DNS zone to modify. Note that the API does not allow to query by zone ID. Therefore, O(zone_id) is an alias of O(zone_name) for compatibility with modules and plugins for other providers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

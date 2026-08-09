@@ -1,0 +1,221 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_snmp_community",
+  "shortDescription": "Manages SNMP communities on a BIG-IP.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_snmp_community_module.html",
+  "options": [
+    {
+      "name": "access",
+      "displayName": "Access",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the user's access level to the MIB. When creating a new community, if this parameter is not specified, the default is C(ro). When C(ro), specifies the user can view the MIB, but cannot modify the MIB. When C(rw), specifies the user can view and modify the MIB.",
+      "choices": [
+        "ro",
+        "rw",
+        "read-only",
+        "read-write"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "community",
+      "displayName": "Community",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the community string (password) for access to the MIB. This parameter is only relevant when C(version) is C(v1) or C(v2c). If C(version) is something else, this parameter is ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_version",
+      "displayName": "Ip Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the record applies to IPv4 or IPv6 addresses. When creating a new community, if this value is not specified, the default is C(4). This parameter is only relevant when C(version) is C(v1) or C(v2c). If C(version) is something else, this parameter is ignored.",
+      "choices": [
+        "4",
+        "6"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name that identifies the SNMP community. When C(version) is C(v1) or C(v2c), this parameter is required. The name C(public) is a reserved name on the BIG-IP. This module handles that name differently than others. Functionally, you should not see a difference.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oid",
+      "displayName": "Oid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the object identifier (OID) for the record. When C(version) is C(v3), this parameter is required. When C(version) is either C(v1) or C(v2c), if this value is specified, then C(source) must not be set to C(all).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the port for the trap destination. This parameter is only relevant when C(version) is C(v1) or C(v2c). If C(version) is something else, this parameter is ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmp_auth_password",
+      "displayName": "Snmp Auth Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the password for the user. When creating a new SNMP C(v3) community, this parameter is required. This value must be at least 8 characters long.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmp_auth_protocol",
+      "displayName": "Snmp Auth Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the authentication method for the user. When C(md5), specifies the system uses the MD5 algorithm to authenticate the user. When C(sha), specifies the secure hash algorithm (SHA) to authenticate the user. When C(none), specifies the user does not require authentication. When creating a new SNMP C(v3) community, if this parameter is not specified, the default is C(sha).",
+      "choices": [
+        "md5",
+        "sha",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmp_privacy_password",
+      "displayName": "Snmp Privacy Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the password for the user. When creating a new SNMP C(v3) community, this parameter is required. This value must be at least 8 characters long.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmp_privacy_protocol",
+      "displayName": "Snmp Privacy Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the encryption protocol. When C(aes), specifies the system encrypts the user information using AES (Advanced Encryption Standard). When C(des), specifies the system encrypts the user information using DES (Data Encryption Standard). When C(none), specifies the system does not encrypt the user information. When creating a new SNMP C(v3) community, if this parameter is not specified, the default is C(aes).",
+      "choices": [
+        "aes",
+        "des",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmp_username",
+      "displayName": "Snmp Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of the user for whom you want to grant access to the SNMP v3 MIB. This parameter is only relevant when C(version) is C(v3). If C(version) is something else, this parameter is ignored. When creating a new SNMP C(v3) community, this parameter is required. This parameter cannot be changed once it has been set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the source address for access to the MIB. This parameter can accept a value of C(all). If this parameter is not specified, the value is C(all). This parameter is only relevant when C(version) is C(v1) or C(v2c). If C(version) is something else, this parameter is ignored. If C(source) is set to C(all), it is not possible to specify an C(oid). This will raise an error. You should provide this parameter when C(state) is C(absent), so the correct community is removed. To remove the C(publi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present), ensures the address list and entries exists. When C(absent), ensures the address list is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "C(always) allows users to update passwords. C(on_create) only sets the password for newly created resources.",
+      "choices": [
+        "always",
+        "on_create"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": "v2c",
+      "description": "Specifies to which SNMP version the trap destination applies.",
+      "choices": [
+        "v1",
+        "v2c",
+        "v3"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

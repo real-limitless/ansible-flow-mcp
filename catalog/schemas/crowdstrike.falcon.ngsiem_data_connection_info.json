@@ -1,0 +1,156 @@
+{
+  "fqcn": "crowdstrike.falcon.ngsiem_data_connection_info",
+  "shortDescription": "Get information about NG-SIEM data connections",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/crowdstrike/falcon/ngsiem_data_connection_info_module.html",
+  "options": [
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The registered result of the M(crowdstrike.falcon.auth) module, or a dictionary containing the I(access_token) and I(cloud) keys. If provided, the I(client_id), I(client_secret), I(member_cid), and I(cloud) options are ignored. Useful when needing to make multiple API calls to avoid rate limiting issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike API client ID to use. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_CLIENT_ID) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_secret",
+      "displayName": "Client Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike API secret that corresponds to the client ID. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_CLIENT_SECRET) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud",
+      "displayName": "Cloud",
+      "type": "string",
+      "required": false,
+      "default": "us-1",
+      "description": "The CrowdStrike cloud region to use. All clouds are automatically discovered if not specified, except for the C(us-gov-1) cloud. The C(FALCON_CLOUD) environment variable can also be used.",
+      "choices": [
+        "us-1",
+        "us-2",
+        "us-gov-1",
+        "eu-1"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_ids",
+      "displayName": "Connection Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of data connection IDs to get information about. If not provided, connections will be returned based on filter and pagination settings. Cannot be used together with I(filter).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ext_headers",
+      "displayName": "Ext Headers",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Extended headers that are prepended to the default headers dictionary.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filter",
+      "displayName": "Filter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FQL (Falcon Query Language) filter expression to limit results. Supported fields: C(name), C(id), C(vendor_name), C(vendor_product_name), C(status), C(type). C(status) accepts: C(Pending), C(Active), C(Disconnected), C(Error), C(Idle), C(Paused). C(type) accepts: C(PUSH), C(PULL). Examples: C(name:'*edge*'), C(status:'Active'), C(type:'PUSH'). Cannot be used together with I(connection_ids).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_status",
+      "displayName": "Include Status",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to enrich each connection with its current provisioning status. When enabled, adds a C(provisioning_status) field to each connection. This requires an additional API call per connection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit",
+      "displayName": "Limit",
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "Maximum number of data connections to return. Must be between 1 and 500.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "member_cid",
+      "displayName": "Member Cid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CrowdStrike member CID for MSSP authentication. See the L(Falcon documentation,https://falcon.crowdstrike.com/documentation/46/crowdstrike-oauth2-based-apis#understanding-api-clients) for more information about API clients. The C(FALCON_MEMBER_CID) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "offset",
+      "displayName": "Offset",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Starting index for pagination. Use with I(limit) to paginate through large result sets.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sort",
+      "displayName": "Sort",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Property to sort results by. B(Note:) Only C(name.asc) is supported by the API. Other sort values are rejected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_agent",
+      "displayName": "User Agent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Custom User-Agent string to use for requests to the API. The user agent string is prepended to the default user agent string (C(crowdstrike-ansible/<version>)). See L(RFC 7231,https://tools.ietf.org/html/rfc7231#section-5.5.3) for more information. The C(FALCON_USER_AGENT) environment variable can also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

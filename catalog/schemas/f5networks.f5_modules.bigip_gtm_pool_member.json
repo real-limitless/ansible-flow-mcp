@@ -1,0 +1,174 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_gtm_pool_member",
+  "shortDescription": "Manage GTM pool member settings",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_gtm_pool_member_module.html",
+  "options": [
+    {
+      "name": "aggregate",
+      "displayName": "Aggregate",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of GTM pool member definitions to be created, modified, or removed. When using C(aggregates), if one of the aggregate definitions is invalid, the aggregate run will fail, indicating the error it last encountered. The module will C(NOT) rollback any changes it has made prior to encountering the error. The module also will not indicate what changes were made prior to failure, therefore we strongly advise you run the module in check mode to make basic validation, prior to module execution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description of the pool member.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limits",
+      "displayName": "Limits",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies resource thresholds or limit requirements at the pool member level. When you enable one or more limit settings, the system then uses that data to take members in and out of service. You can define limits for any or all of the limit settings. However, when a member does not meet the resource threshold limit requirement, the system marks the member as unavailable and directs load balancing traffic to another resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "member_order",
+      "displayName": "Member Order",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the order in which the member will appear in the pool. The system uses this number with load balancing methods that involve prioritizing pool members, such as the Ratio load balancing method.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitor",
+      "displayName": "Monitor",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the monitor assigned to this pool member. Pool members only support a single monitor. If the C(port) of the C(gtm_virtual_server) is C(*), the accepted values of this parameter will be affected. If this parameter is not specified when creating a new pool member, the default of C(default) will be used. To remove the monitor from the pool member, use the value C(none).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool",
+      "displayName": "Pool",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the GTM pool. For pools created on different partitions, you must specify partition of the pool in the full path format, for example, C(/FooBar/pool_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ratio",
+      "displayName": "Ratio",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the weight of the pool member for load balancing purposes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace_all_with",
+      "displayName": "Replace All With",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Removes members not defined in the C(aggregate) parameter. This operation is all or none, meaning it will stop if there are some pool members that cannot be removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_name",
+      "displayName": "Server Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the GTM server which contains the C(virtual_server).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Pool member state. When C(present), ensures the pool member is created and enabled. When C(absent), ensures the pool member is removed from the system. When C(enabled) or C(disabled), ensures the pool member is enabled or disabled (respectively) on the remote device.",
+      "choices": [
+        "present",
+        "absent",
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of GTM pool that the member is in.",
+      "choices": [
+        "a",
+        "aaaa",
+        "cname",
+        "mx",
+        "naptr",
+        "srv"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "virtual_server",
+      "displayName": "Virtual Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of the GTM virtual server which is assigned to the specified C(server).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

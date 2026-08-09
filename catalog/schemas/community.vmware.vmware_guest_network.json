@@ -1,7 +1,374 @@
 {
   "fqcn": "community.vmware.vmware_guest_network",
-  "shortDescription": "vmware_guest_network",
+  "shortDescription": "Manage network adapters of specified virtual machine in given vCenter infrastructure",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_guest_network_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "allow_guest_os_mtu_change",
+      "displayName": "Allow Guest Os Mtu Change",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows the guest OS to change the MTU on a SR-IOV network adapter. This option is only compatible for SR-IOV network adapters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of cluster where VM belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connected",
+      "displayName": "Connected",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If NIC should be connected to the network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": false,
+      "default": "ha-datacenter",
+      "description": "Datacenter the VM belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_type",
+      "displayName": "Device Type",
+      "type": "string",
+      "required": false,
+      "default": "vmxnet3",
+      "description": "Type of virtual network device. Valid choices are - V(e1000), V(e1000e), V(pcnet32), V(vmxnet2), V(vmxnet3) (default), V(sriov), V(pvrdma).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directpath_io",
+      "displayName": "Directpath Io",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable Universal Pass-through (UPT). Only compatible with the O(device_type=vmxnet3).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "esxi_hostname",
+      "displayName": "Esxi Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname of the ESXi host where the VM belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder",
+      "displayName": "Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Folder location of given VM, this is only required when there's multiple VM's with the same name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Force adapter creation even if an existing adapter is attached to the same network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gather_network_info",
+      "displayName": "Gather Network Info",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Return information about current guest network adapters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "guest_control",
+      "displayName": "Guest Control",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enables guest control over whether the connectable device is connected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "label",
+      "displayName": "Label",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Label of the NIC that should be altered. O(mac_address) or O(label) should be set to get the corresponding device to reconfigure. Alter the name of the network adapter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mac_address",
+      "displayName": "Mac Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "MAC address of the NIC that should be altered, if a MAC address is not supplied a new nic will be created. Matching is case-sensitive; use the same MAC address case as reported by VMware to target an existing NIC. If the case does not match, the module can treat the adapter as missing and attempt to create a new NIC. Required when O(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "moid",
+      "displayName": "Moid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Managed Object ID of the instance to manage if known, this is a unique identifier only within a single vCenter instance. Required if O(uuid) or O(name) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of virtual machine Required if O(uuid) or O(moid) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_name",
+      "displayName": "Network Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of network in vSphere. Work faster then o(vlan_id) for big infrastructure with many networks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "physical_function_backing",
+      "displayName": "Physical Function Backing",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If set, specifies the PCI ID of the physical function to use as backing for a SR-IOV network adapter. This option is only compatible for SR-IOV network adapters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pvrdma_device_protocol",
+      "displayName": "Pvrdma Device Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The PVRDMA device protocol used. Valid choices are - V(rocev1), V(rocev2). This parameter is only used on the VM with hardware version >=14 and <= 19.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_connected",
+      "displayName": "Start Connected",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If NIC should be connected to network on startup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "NIC state. When V(present), a nic will be added if a mac address or label does not previously exists or is unset. When V(absent), the O(mac_address) parameter has to be set.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "switch",
+      "displayName": "Switch",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the (dv)switch for destination network, this is only required for dvswitches.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_instance_uuid",
+      "displayName": "Use Instance Uuid",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to use the VMware instance UUID rather than the BIOS UUID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "vm uuid Required if O(name) or O(moid) is not supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "virtual_function_backing",
+      "displayName": "Virtual Function Backing",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If set, specifies the PCI ID of the physical function to use as backing for a SR-IOV network adapter. This option is only compatible for SR-IOV network adapters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlan_id",
+      "displayName": "Vlan Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "VLAN id associated with the network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wake_onlan",
+      "displayName": "Wake Onlan",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable wake on LAN.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

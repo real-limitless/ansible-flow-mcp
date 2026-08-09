@@ -1,0 +1,568 @@
+{
+  "fqcn": "netapp.ontap.na_ontap_snapmirror",
+  "shortDescription": "NetApp ONTAP or ElementSW Manage SnapMirror",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp/ontap/na_ontap_snapmirror_module.html",
+  "options": [
+    {
+      "name": "cert_filepath",
+      "displayName": "Cert Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client cert file (.pem). not supported with python 2.6.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clean_up_failure",
+      "displayName": "Clean Up Failure",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "An optional parameter to recover from an aborted or failed restore operation. Any temporary RST relationship is removed from the destination Vserver. Only supported with ZAPI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_type",
+      "displayName": "Connection Type",
+      "type": "string",
+      "required": false,
+      "default": "ontap_ontap",
+      "description": "Type of SnapMirror relationship. Pre-requisite for either elementsw_ontap or ontap_elementsw the ElementSW volume should have enableSnapmirror option set to true. For using ontap_elementsw, elementsw_ontap snapmirror relationship should exist.",
+      "choices": [
+        "ontap_ontap",
+        "elementsw_ontap",
+        "ontap_elementsw"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_destination",
+      "displayName": "Create Destination",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Requires ONTAP 9.7 or later. Creates the destination volume if enabled and destination_volume is present or destination_path includes a volume name. Creates and peers the destination vserver for SVM DR.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_cluster",
+      "displayName": "Destination Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Requires ONTAP 9.7 or higher. Required to create the destination vserver for SVM DR or the destination volume. Deprecated as of 21.2.0, use destination_endpoint and cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_endpoint",
+      "displayName": "Destination Endpoint",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "destination endpoint of a SnapMirror relationship.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_path",
+      "displayName": "Destination Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the destination endpoint of the SnapMirror relationship. Deprecated as of 21.2.0, use destination_endpoint and path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_volume",
+      "displayName": "Destination Volume",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of the destination volume for the SnapMirror. Deprecated as of 21.2.0, use source_endpoint and path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_vserver",
+      "displayName": "Destination Vserver",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the destination vserver for the SnapMirror. Deprecated as of 21.2.0, use destination_endpoint and path, or svm.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "feature_flags",
+      "displayName": "Feature Flags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable a new feature. This can be used to enable an experimental feature or disable a new feature that breaks backward compatibility. Supported keys and values are subject to change without notice.  Unknown keys are ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_ontap_version",
+      "displayName": "Force Ontap Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the cluster ONTAP version when using REST. The behavior is undefined if the version does not match the target cluster. This is provided as a work-around when the cluster version cannot be read because of permission issues. See https://github.com/ansible-collections/netapp.ontap/wiki/Known-issues. This should be in the form 9.10 or 9.10.1 with each element being an integer number. When C(use_rest) is set to auto, this may force a switch to ZAPI based on the version and platform capabilit",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the ONTAP instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_port",
+      "displayName": "Http Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Override the default port (80 or 443) with this port",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "https",
+      "displayName": "Https",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable and disable https. Ignored when using REST as only https is supported. Ignored when using SSL certificate authentication as it requires SSL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identity_preservation",
+      "displayName": "Identity Preservation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies which configuration of the source SVM is replicated to the destination SVM. This property is applicable only for SVM data protection with \"async\" policy type. Only supported with REST and requires ONTAP 9.11.1 or later.",
+      "choices": [
+        "full",
+        "exclude_network_config",
+        "exclude_network_and_protocol_config"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identity_preserve",
+      "displayName": "Identity Preserve",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether or not the identity of the source Vserver is replicated to the destination Vserver. If this parameter is set to true, the source Vserver's configuration will additionally be replicated to the destination. If the parameter is set to false, then only the source Vserver's volumes and RBAC configuration are replicated to the destination. Not supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initialize",
+      "displayName": "Initialize",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies whether to initialize SnapMirror relation. Default is True, it can be explicitly set to False to avoid initializing SnapMirror relation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_filepath",
+      "displayName": "Key Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client key file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lambda_config",
+      "displayName": "Lambda Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration parameters for AWS Lambda proxy functionality. These option and suboptions are only supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_transfer_rate",
+      "displayName": "Max Transfer Rate",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the upper bound, in kilobytes per second, at which data is transferred. Default is unlimited, it can be explicitly set to 0 as unlimited. Not supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ontapi",
+      "displayName": "Ontapi",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The ontap api version to use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the specified user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_options",
+      "displayName": "Peer Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "IP address and connection options for the peer system. If any if these options is not specified, the corresponding source option is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policy",
+      "displayName": "Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the name of the SnapMirror policy that applies to this relationship.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quick_resync",
+      "displayName": "Quick Resync",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set to true to reduce resync time by not preserving storage efficiency. This property is applicable only for relationships with FlexVol volume endpoints and SVMDR relationships when the PATCH state is being changed to \"snapmirrored\". Only supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quiesced_time_out",
+      "displayName": "Quiesced Time Out",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "How long to wait for a relationship to quiesce. Unit is seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "relationship_info_only",
+      "displayName": "Relationship Info Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If relationship-info-only is set to true then only relationship information is removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "relationship_state",
+      "displayName": "Relationship State",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "description": "Specifies whether to break SnapMirror relation or establish a SnapMirror relationship. state must be present to use this option.",
+      "choices": [
+        "active",
+        "broken"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "relationship_type",
+      "displayName": "Relationship Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the type of SnapMirror relationship. for 'restore' unless 'source_snapshot' is specified the most recent Snapshot copy on the source volume is restored. restore SnapMirror is not idempotent. With REST, only 'extended_data_protection' and 'restore' are supported.",
+      "choices": [
+        "data_protection",
+        "load_sharing",
+        "vault",
+        "restore",
+        "transition_data_protection",
+        "extended_data_protection"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schedule",
+      "displayName": "Schedule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the name of the current schedule, which is used to update the SnapMirror relationship. Optional for create, modifiable. With REST, this option requires ONTAP 9.11.1 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_cluster",
+      "displayName": "Source Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Requires ONTAP 9.7 or higher. Required to create the peering relationship between source and destination SVMs. Deprecated as of 21.2.0, use source_endpoint and cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_endpoint",
+      "displayName": "Source Endpoint",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "source endpoint of a SnapMirror relationship.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_hostname",
+      "displayName": "Source Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "DEPRECATED - please use C(peer_options). Source hostname or management IP address for ONTAP or ElementSW cluster. If present, when state is absent, the relationship is released at the source before being deleted at destination. It is recommended to always release before deleting, so make sure this parameter is present if the source hostname is known.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_password",
+      "displayName": "Source Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "DEPRECATED - please use C(peer_options). Source password for ONTAP or ElementSW cluster. Optional if this is same as destination password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_path",
+      "displayName": "Source Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the source endpoint of the SnapMirror relationship. If the source is an ONTAP volume, format should be <[vserver:][volume]> or <[[cluster:]//vserver/]volume> If the source is an ElementSW volume, format should be <[Element_SVIP]:/lun/[Element_VOLUME_ID]> If the source is an ElementSW volume, the volume should have SnapMirror enabled. Deprecated as of 21.2.0, use source_endpoint and path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_snapshot",
+      "displayName": "Source Snapshot",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the Snapshot from the source to be restored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_username",
+      "displayName": "Source Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "DEPRECATED - please use C(peer_options). Source username for ONTAP or ElementSW cluster. Optional if this is same as destination username.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_volume",
+      "displayName": "Source Volume",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of the source volume for the SnapMirror. Deprecated as of 21.2.0, use source_endpoint and path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_vserver",
+      "displayName": "Source Vserver",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the source vserver for the SnapMirror. Deprecated as of 21.2.0, use source_endpoint and path, or svm.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the specified relationship should exist or not.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_out",
+      "displayName": "Time Out",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "With C(wait_for_completion) set, specifies time to wait for snapmirror operation in seconds. Only supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "transferring_time_out",
+      "displayName": "Transferring Time Out",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "How long to wait when a transfer is in progress (after initializing for instance).  Unit is seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update",
+      "displayName": "Update",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies whether to update the destination endpoint of the SnapMirror relationship only if the relationship is already present and active. Default is True.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_lambda",
+      "displayName": "Use Lambda",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies if AWS Lambda proxy functionality should be used to connect to the ONTAP system. Supported only with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_rest",
+      "displayName": "Use Rest",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "Whether to use REST or ZAPI. always -- will always use the REST API if the module supports REST. A warning is issued if the module does not support REST. An error is issued if a module option is not supported in REST. never -- will always use ZAPI if the module supports ZAPI.  An error may be issued if a REST option is not supported in ZAPI. auto -- will try to use the REST API if the module supports REST and modules options are supported.  Reverts to ZAPI otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required. For more information, please read the documentation U(https://docs.netapp.com/us-en/ontap/authentication/create-svm-user-accounts-task.html). Two authentication methods are supported 1. Basic authentication, using username and password. 2. SSL certificate authentication, using a ssl client cert file, and optionally a private key file. To use a certificate, the certificate must h",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to C(no), the SSL certificates will not be validated. This should only set to C(False) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_source_path",
+      "displayName": "Validate Source Path",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "The relationship is found based on the destination as it is unique. By default, the source information is verified and an error is reported if there is a mismatch. This would mean the destination is already used by another relationship. The check accounts for a local vserver name that may be different from the remote vserver name. This may be disabled in case the check is too strict, to unconditionally delete a realtionship for instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_completion",
+      "displayName": "Wait For Completion",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Set this parameter to 'true' for synchronous execution. For asynchronous, execution exits as soon as the request is sent, and the operation continues in the background. Only supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

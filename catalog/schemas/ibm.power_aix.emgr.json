@@ -1,0 +1,248 @@
+{
+  "fqcn": "ibm.power_aix.emgr",
+  "shortDescription": "System interim fixes management.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/emgr_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "list",
+      "description": "Controls what action is performed. C(install) performs an interim fix package installation. C(commit) performs a commit operation on specified interim fix. C(check) performs a check operation on installed interim fix. C(mount) mounts specified interim fix that have been mount-installed. C(unmount) unmounts specified interim fix that have been mount-installed. C(remove) performs an uninstall of the specified interim fix. C(view_package) displays all packages that are locked, their installer, and ",
+      "choices": [
+        "install",
+        "commit",
+        "check",
+        "mount",
+        "unmount",
+        "remove",
+        "view_package",
+        "display_ifix",
+        "list",
+        "emgr_sec",
+        "emgr_sec_patch"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alternate_dir",
+      "displayName": "Alternate Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies an alternative directory path for installation. Can be used if I(action) has one of following values C(list), C(install), C(remove), C(check), C(mount), C(unmount), C(view_package).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bosboot",
+      "displayName": "Bosboot",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Controls the bosboot process. C(skip) skips the usual bosboot process for ifix that require rebooting. C(load_debugger) loads the low-level debugger during AIX bosboot. C(invoke_debugger) invokes the low-level debugger for AIX bosboot. Can be used if I(action) has one of following values C(install), C(commit), C(remove).",
+      "choices": [
+        "skip",
+        "load_debugger",
+        "invoke_debugger"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "commit",
+      "displayName": "Commit",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Commits interim fix containing concurrent updates to disk after its installation. Can be used if I(action=install).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extend_fs",
+      "displayName": "Extend Fs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Attempts to resize any file systems where there is insufficient space.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Forces action. Can be used if I(action) has one of following values C(install), C(remove). When I(action=install), it specifies the interim fix installation can overwrite an existing package. When I(action=remove), it should be considered an emergency procedure because this method can create inconsistencies on the system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "from_epkg",
+      "displayName": "From Epkg",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to install an interim fix package file created with the epkg command. Can be used if I(action=install).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ifix_label",
+      "displayName": "Ifix Label",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the interim fix label that is the unique key that binds all of the different database objects. Can be used if I(action) has one of following values C(list), C(commit), C(remove), C(check), C(mount), C(unmount), C(remove). Required if I(action=remove) and I(force=True). Mutually exclusive with I(ifix_number), I(ifix_vuid), I(list_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ifix_number",
+      "displayName": "Ifix Number",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the interim fix identification number (ID). The interim fix ID is simply the order number in which the interim fix is listed in the interim fix database. Using this option may be convenient if you are performing operations on interim fixes based on interim fix listings. Can be used if I(action) has one of following values C(list), C(remove), C(check), C(mount), C(unmount), C(remove). Mutually exclusive with I(ifix_label), I(ifix_vuid), I(list_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ifix_package",
+      "displayName": "Ifix Package",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the path of the interim fix package file. If I(from_epkg=yes), then the file must be created with the epkg command and must end with the 16-bit compression extension '.Z'. Otherwise the file is manage as a concurrent update ifix package file. Can be used if I(action) has one of following values C(install), C(display_ifix). Mutually exclusive with I(list_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ifix_packages",
+      "displayName": "Ifix Packages",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies a list of interim fix package locations or labels. Each entry must be a valid path to an interim fix package file or a label. Can be used if I(action) has one of the following values C(install), C(remove), C(check), C(mount), C(unmount), C(display_ifix). Mutually exclusive with I(ifix_label), I(ifix_number), I(ifix_vuid), I(ifix_package), I(list_file). This replaces I(list_file) by directly accepting a list instead of requiring a file. It will create a temporary file containing the lis",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ifix_vuid",
+      "displayName": "Ifix Vuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the interim fix Virtually Unique ID (VUID) that can be used to differentiate packages with the same interim fix label. Can be used if I(action) has one of following values C(list), C(remove), C(check), C(mount), C(unmount). Mutually exclusive with I(ifix_label), I(ifix_number), I(list_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "list_file",
+      "displayName": "List File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a file that contains a list of package locations if I(action=install) or a list of interim fix labels for the remove, mount, unmount and check operations. The file must have one item per line, blank lines or starting with Can be used if I(action) has one of following values C(install), C(remove), C(check), C(mount), C(unmount), C(display_ifix). Mutually exclusive with I(ifix_label), I(ifix_number), I(ifix_vuid), I(ifix_package), I(ifix_packages).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mount_install",
+      "displayName": "Mount Install",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Perform a mount installation. When and interim fix is mount-installed, the interim fix files are mounted over the target files. This option is not supported for interim fix packages that require rebooting. Can be used if I(action=install). Cannot be set when I(from_epkg=no).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "package",
+      "displayName": "Package",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the package to view. Can be used if I(action=view_package)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preview",
+      "displayName": "Preview",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Perform a preview that runs all of the check operations but does not make any changes. Can be used if I(action) has one of following values C(install), C(commit), C(remove).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quiet",
+      "displayName": "Quiet",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Suppresses all output other than errors and strong warnings. Can be used if I(action) has one of following values C(install), C(commit), C(remove).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tar_file",
+      "displayName": "Tar File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the tar file containing ifixes, that are to be used with the emgr_sec_patch command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verbose",
+      "displayName": "Verbose",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the verbosity level. The verbosity increases with the value. Can be used if I(action) has one of following values C(list), C(check), C(view_package).",
+      "choices": [
+        1,
+        2,
+        3
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "working_dir",
+      "displayName": "Working Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies an alternative working directory path instead of the default /tmp directory. If not specified the emgr command will use the /tmp directory. Can be used if I(action) has one of following values C(install), C(remove), C(check), C(mount), C(unmount), C(display_ifix).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

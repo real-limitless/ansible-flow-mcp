@@ -1,7 +1,148 @@
 {
   "fqcn": "community.vmware.vcenter_folder",
-  "shortDescription": "vcenter_folder",
+  "shortDescription": "Manage folders on given datacenter",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vcenter_folder_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the datacenter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder_name",
+      "displayName": "Folder Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of folder to be managed. Folder name should be under 80 characters. This is a VMware restriction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder_type",
+      "displayName": "Folder Type",
+      "type": "string",
+      "required": false,
+      "default": "vm",
+      "description": "This is type of folder. If set to V(vm), then 'VM and Template Folder' is created under datacenter. If set to V(host), then 'Host and Cluster Folder' is created under datacenter. If set to V(datastore), then 'Storage Folder' is created under datacenter. If set to V(network), then 'Network Folder' is created under datacenter. This parameter is required, if O(state=absent) and O(parent_folder) is not set.",
+      "choices": [
+        "datastore",
+        "host",
+        "network",
+        "vm"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent_folder",
+      "displayName": "Parent Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the parent folder under which new folder needs to be created. If user wants to create a folder under '/DC0/vm/vm_folder', this value will be 'vm_folder'. If user wants to create a folder under '/DC0/vm/folder1/folder2', this value will be 'folder1/folder2'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of folder. If set to V(present) without parent folder parameter, then folder with V(folder_type) is created. If set to V(present) with parent folder parameter,  then folder in created under parent folder. V(folder_type) is ignored. If set to V(absent), then folder is unregistered and destroyed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -1,0 +1,130 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_stat",
+  "shortDescription": "Retrieve facts from MVS data sets, USS files, aggregates and generation data groups",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_stat_module.html",
+  "options": [
+    {
+      "name": "checksum_algorithm",
+      "displayName": "Checksum Algorithm",
+      "type": "string",
+      "required": false,
+      "default": "sha1",
+      "description": "Algorithm used to compute a file's checksum. Will throw an error if the managed node is unable to use the specified algorithm.",
+      "choices": [
+        "md5",
+        "sha1",
+        "sha224",
+        "sha256",
+        "sha384",
+        "sha512"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "follow",
+      "displayName": "Follow",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to follow symlinks when querying files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "get_checksum",
+      "displayName": "Get Checksum",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to compute a file's checksum and return it. Otherwise ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "get_mime",
+      "displayName": "Get Mime",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to get information about the nature of a file, such as the charset and type of media it represents.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of a data set, generation data group (GDG), aggregate, or a UNIX System Services file path, to query. Data sets can be sequential, partitioned (PDS), partitioned extended (PDSE), VSAMs or generation data sets (GDS). This option doesn't accept the use of wildcards (\\? and \\*).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recall",
+      "displayName": "Recall",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to recall a migrated data set to fully query its attributes. If set to C(false), the module will return a limited amount of information for a migrated data set. Recalling a data set will make the module take longer to execute. Ignored when the data set is not found to be migrated. The data set will not be migrated again afterwards. The data set will not get recalled when running the module in check mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sms_managed",
+      "displayName": "Sms Managed",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the data set is managed by the Storage Management Subsystem. It will cause the module to retrieve additional information, may take longer to query all attributes of a data set. If the data set is a PDSE and the Ansible user has RACF READ authority on it, retrieving SMS information will update the last referenced date of the data set. If the system finds the data set is not actually managed by SMS, the rest of the attributes will still be queried and this will be noted in the output from ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tmp_hlq",
+      "displayName": "Tmp Hlq",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the default high level qualifier (HLQ) for temporary data sets. The default HLQ is the Ansible user used to execute the module and if that is not available, then the environment variable value C(TMPHLQ) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "data_set",
+      "description": "Type of resource to query.",
+      "choices": [
+        "data_set",
+        "file",
+        "aggregate",
+        "gdg"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volumes",
+      "displayName": "Volumes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Name(s) of the volume(s) where the data set will be searched on. If omitted, the module will look up the master catalog to find all volumes where a data set is allocated. When used, if the data set is not found in at least one volume from the list, the module will fail with a \"data set not found\" message.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

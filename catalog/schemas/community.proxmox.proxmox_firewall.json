@@ -1,0 +1,270 @@
+{
+  "fqcn": "community.proxmox.proxmox_firewall",
+  "shortDescription": "Manage firewall rules in Proxmox",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/proxmox/proxmox_firewall_module.html",
+  "options": [
+    {
+      "name": "aliases",
+      "displayName": "Aliases",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of aliases. Alias can only be created/updated/deleted at cluster or VM level.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the target host of the Proxmox VE cluster. Uses the E(PROXMOX_HOST) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_otp",
+      "displayName": "Api Otp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the OTP. Uses the E(PROXMOX_OTP) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the password to authenticate with. Uses the E(PROXMOX_PASSWORD) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_port",
+      "displayName": "Api Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specify the target port of the Proxmox VE cluster. Uses the E(PROXMOX_PORT) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Time limit for requests towards the Proxmox VE API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token_id",
+      "displayName": "Api Token Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the token ID. Uses the E(PROXMOX_TOKEN_ID) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token_secret",
+      "displayName": "Api Token Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the token secret. Uses the E(PROXMOX_TOKEN_SECRET) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the user to authenticate with. Uses the E(PROXMOX_USER) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a local certificate, which will be used to verify TLS connections. Ignored if O(validate_certs=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Comment for security group. Only needed when creating group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group to which the rule belongs. Only needed when O(level=group) or O(group_conf=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_conf",
+      "displayName": "Group Conf",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether security group should be created or deleted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_sets",
+      "displayName": "Ip Sets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of IP set definitions to create, update, or remove. Each IP set is a named collection of CIDRs (with optional negation and comments).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "level",
+      "displayName": "Level",
+      "type": "string",
+      "required": false,
+      "default": "cluster",
+      "description": "Level at which the firewall rule applies.",
+      "choices": [
+        "cluster",
+        "group",
+        "vnet",
+        "node",
+        "vm"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "node",
+      "displayName": "Node",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the node. Only needed when O(level=node).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pos",
+      "displayName": "Pos",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Position of the rule in the list. Only needed if O(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rules",
+      "displayName": "Rules",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of individual rules to be applied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Create/update/delete firewall rules or security group.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update",
+      "displayName": "Update",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If O(state=present) and if one or more rule/alias/ipset already exists it will update them.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Validate the TLS certificates used for the connection to the Proxmox VE API. May be set through the environment variable E(PROXMOX_VALIDATE_CERTS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vmid",
+      "displayName": "Vmid",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the VM to which the rule applies. Only needed when O(level=vm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vnet",
+      "displayName": "Vnet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the virtual network for the rule. Only needed when O(level=vnet).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

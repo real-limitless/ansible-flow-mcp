@@ -1,7 +1,280 @@
 {
   "fqcn": "community.vmware.vmware_vspan_session",
-  "shortDescription": "vmware_vspan_session",
+  "shortDescription": "Create or remove a Port Mirroring session.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_vspan_session_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description for the session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_port",
+      "displayName": "Destination Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Destination port that received the mirrored packets. Also any port designated in the value of this property can not match the source port in any of the Distributed Port Mirroring session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_vm",
+      "displayName": "Destination Vm",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "With this parameter it is possible, to add a NIC of a VM to a port mirroring session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the session is enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encapsulation_vlan_id",
+      "displayName": "Encapsulation Vlan Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "VLAN ID used to encapsulate the mirrored traffic.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mirrored_packet_length",
+      "displayName": "Mirrored Packet Length",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "An integer that describes how much of each frame to mirror. If unset, all of the frame would be mirrored. Setting this property to a smaller value is useful when the consumer will look only at the headers. The value cannot be less than 60.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "normal_traffic_allowed",
+      "displayName": "Normal Traffic Allowed",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not destination ports can send and receive \"normal\" traffic. Setting this to false will make mirror ports be used solely for mirroring and not double as normal access ports.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sampling_rate",
+      "displayName": "Sampling Rate",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Sampling rate of the session. If its value is n, one of every n packets is mirrored. Valid values are between 1 to 65535.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_type",
+      "displayName": "Session Type",
+      "type": "string",
+      "required": false,
+      "default": "dvPortMirror",
+      "description": "Select the mirroring type. In V(encapsulatedRemoteMirrorSource) session, Distributed Ports can be used as source entities, and IP address can be used as destination entities. In V(remoteMirrorDest) session, VLAN IDs can be used as source entities, and Distributed Ports can be used as destination entities. In V(remoteMirrorSource) session, Distributed Ports can be used as source entities, and uplink ports name can be used as destination entities. In V(dvPortMirror) session, Distributed Ports can ",
+      "choices": [
+        "encapsulatedRemoteMirrorSource",
+        "remoteMirrorDest",
+        "remoteMirrorSource",
+        "dvPortMirror"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_port_received",
+      "displayName": "Source Port Received",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Source port for which received packets are mirrored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_port_transmitted",
+      "displayName": "Source Port Transmitted",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Source port for which transmitted packets are mirrored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_vm_received",
+      "displayName": "Source Vm Received",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "With this parameter it is possible, to add a NIC of a VM to a port mirroring session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_vm_transmitted",
+      "displayName": "Source Vm Transmitted",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "With this parameter it is possible, to add a NIC of a VM to a port mirroring session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Create or remove the session.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "strip_original_vlan",
+      "displayName": "Strip Original Vlan",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to strip the original VLAN tag. If false, the original VLAN tag will be preserved on the mirrored traffic. If O(encapsulation_vlan_id) has been set and this property is V(false), the frames will be double tagged with the original VLAN ID as the inner tag.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "switch",
+      "displayName": "Switch",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the distributed vSwitch on which to add or remove the mirroring session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

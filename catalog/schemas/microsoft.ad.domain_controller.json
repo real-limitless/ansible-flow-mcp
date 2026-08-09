@@ -2,6 +2,186 @@
   "fqcn": "microsoft.ad.domain_controller",
   "shortDescription": "Manage domain controller/member server state for a Windows host",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/microsoft/ad/domain_controller_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "database_path",
+      "displayName": "Database Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a directory on a fixed disk of the Windows host where the domain database will be created.. If not set then the default path is C(%SYSTEMROOT%\\NTDS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_domain_name",
+      "displayName": "Dns Domain Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When I(state=domain_controller), the DNS name of the domain for which the targeted Windows host should be a DC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_admin_password",
+      "displayName": "Domain Admin Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Password for the specified I(domain_admin_user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_admin_user",
+      "displayName": "Domain Admin User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Username of a domain admin for the target domain (necessary to promote or demote a domain controller).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_log_path",
+      "displayName": "Domain Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specified the fully qualified, non-UNC path to a directory on a fixed disk of the local computer that will contain the domain log files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "install_dns",
+      "displayName": "Install Dns",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to install the DNS service when creating the domain controller. If not specified then the C(-InstallDns) option is not supplied to C(Install-ADDSDomainController) command, see L(Install-ADDSDomainController,https://learn.microsoft.com/en-us/powershell/module/addsdeployment/install-addsdomaincontroller).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "install_media_path",
+      "displayName": "Install Media Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a directory on a fixed disk of the Windows host where the Install From Media C(IFC) data will be used. See the L(Install using IFM guide,https://social.technet.microsoft.com/wiki/contents/articles/8630.active-directory-step-by-step-guide-to-install-an-additional-domain-controller-using-ifm.aspx) for more information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_admin_password",
+      "displayName": "Local Admin Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password to be assigned to the local C(Administrator) user (required when I(state=member_server)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_only",
+      "displayName": "Read Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to install the domain controller as a read only replica for an existing domain.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot",
+      "displayName": "Reboot",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true), this will reboot the host if a reboot was required by the module. If C(false), this will not reboot the host if a reboot was required and instead sets the I(reboot_required) return value to C(true). This cannot be used with async mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot_timeout",
+      "displayName": "Reboot Timeout",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Maximum seconds to wait for machine to re-appear after a reboot and respond to a test command. This timeout is evaluated separately for both the reboot verification and test command success so the total timeout can be twice this value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replication_source_dc",
+      "displayName": "Replication Source Dc",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of an existing domain controller in the forest that will be used as the replication source for the new domain controller.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "safe_mode_password",
+      "displayName": "Safe Mode Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Safe mode password for the domain controller (required when I(state=domain_controller)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "site_name",
+      "displayName": "Site Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of an existing site where you can place the new domain controller. This option is required when I(read_only=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Whether the target host should be a domain controller or a member server.",
+      "choices": [
+        "domain_controller",
+        "member_server"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sysvol_path",
+      "displayName": "Sysvol Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a directory on a fixed disk of the Windows host where the Sysvol folder will be created. If not set then the default path is C(%SYSTEMROOT%\\SYSVOL).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

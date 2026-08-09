@@ -2,6 +2,78 @@
   "fqcn": "ansible.windows.win_file",
   "shortDescription": "Creates, touches or removes files or directories",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_file_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_time",
+      "displayName": "Access Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The desired access time for the file or directory. A DateTime string in the format specified by O(access_time_format). The timestamp is interpreted as local time on the target system. Timezone offsets are supported when included in the timestamp format. (for example, using C(z), C(zz) or C(zzz) format specifiers). When unset, the default is V(preserve) when O(state=[file, directory]) and V(now) when O(state=touch).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_time_format",
+      "displayName": "Access Time Format",
+      "type": "string",
+      "required": false,
+      "default": "yyyy-MM-dd HH:mm:ss",
+      "description": "The format to use when parsing C(access_time). Defaults to C(yyyy-MM-dd HH:mm:ss). See L(.NET DateTime format strings,https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "modification_time",
+      "displayName": "Modification Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The desired modification time for the file or directory. A DateTime string in the format specified by O(modification_time_format). The timestamp is interpreted as local time on the target system. Timezone offsets are supported when included in the timestamp format. (for example, using C(z), C(zz) or C(zzz) format specifiers). When unset, the default is V(preserve) when O(state=[file, directory]) and V(now) when O(state=touch).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "modification_time_format",
+      "displayName": "Modification Time Format",
+      "type": "string",
+      "required": false,
+      "default": "yyyy-MM-dd HH:mm:ss",
+      "description": "The format to use when parsing C(modification_time). Defaults to C(yyyy-MM-dd HH:mm:ss). See L(.NET DateTime format strings,https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the file being managed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If C(directory), all immediate subdirectories will be created if they do not exist. If C(file), the file will NOT be created if it does not exist, see the M(ansible.windows.win_copy) or M(ansible.windows.win_template) module if you want that behavior. If C(absent), directories will be recursively deleted, and files will be removed. If C(touch), an empty file will be created if the C(path) does not exist, while an existing file or directory will receive updated file access and modification times ",
+      "choices": [
+        "absent",
+        "directory",
+        "file",
+        "touch"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

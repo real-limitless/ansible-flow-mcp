@@ -1,0 +1,118 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_replace",
+  "shortDescription": "Replace all instances of a pattern within a file or data set.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_replace_module.html",
+  "options": [
+    {
+      "name": "after",
+      "displayName": "After",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "A regular expression that, if specified, determines which content will be replaced or removed B(after) the match. Option I(after) is the start position from where the module will seek to match the I(regexp) pattern. When a pattern is matched, occurrences are substituted with the value set for I(replace). If option I(after) is not set, the module will search from the beginning of the I(target). Option I(after) is a regular expression as described in the L(Python library,https://docs.python.org/3/",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies whether a backup of the destination should be created before editing the source I(target). When set to C(true), the module creates a backup file or data set. The backup file name will be returned if I(backup) is C(true) on either success or failure of module execution such that data can be retrieved.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_name",
+      "displayName": "Backup Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the USS file name or data set name for the destination backup. If I(src) is a USS file or path, backup_name must be a file or path name, and it must be an absolute path name. If the source is an MVS data set, I(backup_name) must be an MVS data set name, and the data set must B(not) be preallocated. If it is a Generation Data Set (GDS), use a relative positive name, e.g., I(SOME.CREATION(+1)). If I(backup_name) is not provided, a default name will be used. If the source is a USS file or p",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "before",
+      "displayName": "Before",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "A regular expression that if, specified, determines which content will be replaced or removed B(before) the match. Option I(before) is the end position from where the module will seek to match the I(regexp) pattern. When a pattern is matched, occurrences are substituted with the value set for I(replace). If option I(before) is not set, the module will search to the end of the I(target). Option I(before) is a regular expression as described in the L(Python library,https://docs.python.org/3/librar",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encoding",
+      "displayName": "Encoding",
+      "type": "string",
+      "required": false,
+      "default": "IBM-1047",
+      "description": "The character set for data in the I(target). Module L(zos_replace,./zos_replace.html) requires the encoding to correctly read the content of a USS file or data set. If this parameter is not provided, this module assumes that USS file or data set is encoded in IBM-1047. Supported character sets rely on the charset conversion utility (iconv) version; the most common character sets are supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "literal",
+      "displayName": "Literal",
+      "type": "string",
+      "required": false,
+      "default": [],
+      "description": "If specified, it enables the module to interpret options I(after), I(before) and I(regexp) as a literal rather than a regular expression. Option I(literal) uses any combination of V(after), V(before) and V(regexp). To interpret one option as a literal, use I(literal=regexp), I(literal=after) or I(literal=before). To interpret multiple options as a literal, use a list such as C(['after', 'before']) or C(['regex', 'after', 'before'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "regexp",
+      "displayName": "Regexp",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The regular expression to look for in the contents of the file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace",
+      "displayName": "Replace",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The string to replace I(regexp) matches with. If not set, matches are removed entirely.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The location can be a UNIX System Services (USS) file, PS (sequential data set), PDS, PDSE, member of a PDS or PDSE. The USS file must be an absolute pathname. It is possible to use a generation data set (GDS) relative name of generation already created. e.g. I(SOME.CREATION(-1)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tmp_hlq",
+      "displayName": "Tmp Hlq",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the default High Level Qualifier (HLQ) for temporary and backup data sets. The default HLQ is the Ansible user used to execute the module and if that is not available, then the value of C(TMPHLQ) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

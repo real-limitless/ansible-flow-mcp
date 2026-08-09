@@ -2,6 +2,379 @@
   "fqcn": "microsoft.ad.user",
   "shortDescription": "Manage Active Directory users",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/microsoft/ad/user_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "account_locked",
+      "displayName": "Account Locked",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "C(no) will unlock the user account if locked. Note that there is not a way to lock an account as an administrator. Accounts are locked due to user actions; as an admin, you may only unlock a locked account. If you wish to administratively disable an account, set I(enabled) to C(no).",
+      "choices": [
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "The attributes to either add, remove, or set on the AD object. The value of each attribute option should be a dictionary where the key is the LDAP attribute, e.g. C(firstName), C(comment) and the value is the value, or list of values, to set for that attribute. The attribute value(s) can either be the raw string, integer, or bool value to add, remove, or set on the attribute in question. The value can also be a dictionary with the I(type) key set to C(bytes), C(date_time), C(security_descriptor)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "city",
+      "displayName": "City",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the user's city. This is the value set on the C(l) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "company",
+      "displayName": "Company",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the user's company name. This is the value set on the C(company) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "country",
+      "displayName": "Country",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the user's country code. Note that this is a two-character ISO 3166 code. This is the value set on the C(c) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delegates",
+      "displayName": "Delegates",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The principal objects that the current AD object can trust for delegation to either add, remove or set. Each subkey value is a list of values in the form of a C(distinguishedName), C(objectGUID), C(objectSid), C(sAMAccountName), or C(userPrincipalName) string or a dictionary with the I(name) and optional I(server) key. This is the value set on the C(msDS-AllowedToActOnBehalfOfOtherIdentity) LDAP attribute. This is a highly sensitive attribute as it allows the principals specified to impersonate ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description of the AD object to set. This is the value set on the C(description) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The display name of the AD object to set. This is the value of the C(displayName) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_credentials",
+      "displayName": "Domain Credentials",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specifies the credentials that should be used when using the server specified by I(name). To specify credentials for the default domain server, use an entry without the I(name) key or use the I(domain_username) and I(domain_password) option. This can be set under the R(play's module defaults,module_defaults_groups) under the C(group/microsoft.ad.domain) group. See R(AD authentication in modules,ansible_collections.microsoft.ad.docsite.guide_ad_module_authentication) for more information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_password",
+      "displayName": "Domain Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for I(domain_username). The I(domain_credentials) sub entry without a I(name) key can also be used to specify the credentials for the default domain authentication. This can be set under the R(play's module defaults,module_defaults_groups) under the C(group/microsoft.ad.domain) group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_server",
+      "displayName": "Domain Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specified the Active Directory Domain Services instance to connect to. Can be in the form of an FQDN or NetBIOS name. If not specified then the value is based on the default domain of the computer running PowerShell. Custom credentials can be specified under a I(domain_credentials) entry without a I(name) key or through I(domain_username) and I(domain_password). This can be set under the R(play's module defaults,module_defaults_groups) under the C(group/microsoft.ad.domain) group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_username",
+      "displayName": "Domain Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use when interacting with AD. If this is not set then the user that is used for authentication will be the connection user. Ansible will be unable to use the connection user unless auth is Kerberos with credential delegation or CredSSP, or become is used on the task. The I(domain_credentials) sub entry without a I(name) key can also be used to specify the credentials for the default domain authentication. This can be set under the R(play's module defaults,module_defaults_groups) ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "email",
+      "displayName": "Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the user's email address. This is a record in AD and does not do anything to configure any email servers or systems. This is the value set on the C(mail) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "C(yes) will enable the user account. C(no) will disable the account. The default when creating a new is C(yes) if I(password) is specified. If no I(password) is specified then the user will not be enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "firstname",
+      "displayName": "Firstname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the user's first name (given name). This is the value set on the C(givenName) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "groups",
+      "displayName": "Groups",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the group membership the user is added, removed, or set to. To clear all group memberships, use I(set) with an empty list. Note that users cannot be removed from their principal group (for example, \"Domain Users\"). Attempting to do so will display a warning. Adding and removing a user from a group is done on the group AD object. If the group is an object in a different domain, then it may require explicit I(server) and I(domain_credentials) for it to work. Each subkey is set to a list ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identity",
+      "displayName": "Identity",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The identity of the AD object used to find the AD object to manage. This must be specified if; I(name) is not set, when trying to rename the object with a new I(name), or when trying to move the object into a different I(path). The identity can be in the form of a GUID representing the C(objectGUID) value, the C(userPrincipalName), C(sAMAccountName), C(objectSid), or C(distinguishedName). If omitted, the AD object to manage is selected by the C(distinguishedName) using the format C(CN={{ name }}",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The C(name) of the AD object to manage, this is not the C(sAMAccountName) of the object but the LDAP C(cn) or C(name) entry of the object in the path specified. Use I(identity) to select an object to manage by its C(sAMAccountName). If I(identity) is specified, and the name of the object found by that identity does not match this value, the object will be renamed. This must be specified if I(identity) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optionally set the user's password to this (plain text) value. To enable an account - I(enabled) - a password must already be configured on the account, or you must provide a password here. Use the I(update_password) option to control how a password is checked for idempotency.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_expired",
+      "displayName": "Password Expired",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "C(yes) will require the user to change their password at next login. C(no) will clear the expired password flag. This is mutually exclusive with I(password_never_expires).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_never_expires",
+      "displayName": "Password Never Expires",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "C(yes) will set the password to never expire. C(no) will allow the password to expire. This is mutually exclusive with I(password_expired).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of the OU or the container where the new object should exist in. If creating a new object, the new object will be created at the path specified. If no path is specified then the C(defaultNamingContext) of the domain will be used as the path for most object types. If managing an existing object found by I(identity), the path of the found object will be moved to the one specified by this option. If no path is specified, the object will not be moved. The modules M(microsoft.ad.computer), M",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "postal_code",
+      "displayName": "Postal Code",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the user's postal code / zip code. This is the value set on the C(postalcode) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protect_from_deletion",
+      "displayName": "Protect From Deletion",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Marks the object as protected from accidental deletion. This applies a deny access right from deleting the object normally and the protection needs to be removed before the object can be deleted through the GUI or any other tool outside Ansible. Using I(state=absent) will still delete the AD object even if it is marked as protected from deletion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sam_account_name",
+      "displayName": "Sam Account Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The C(sAMAccountName) value to set for the user. If omitted, the I(name) value is used when creating a new user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "spn",
+      "displayName": "Spn",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the service principal name(s) for the account to add, remove or set. This is the value set on the C(servicePrincipalName) LDAP attribute. To clear all service principal names, use I(set) with an empty list. See R(Setting list option values,ansible_collections.microsoft.ad.docsite.guide_list_values) for more information on how to add/remove/set list options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Set to C(present) to ensure the AD object exists. Set to C(absent) to remove the AD object if it exists. The option I(name) must be set when I(state=present). Using C(absent) will recursively remove the AD object and any child objects if it's a container. It will also remove the AD object even if the object is marked as protected from accidental deletion.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state_province",
+      "displayName": "State Province",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the user's state. This is the value set on the C(state) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "street",
+      "displayName": "Street",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the user's street address. This is the value set on the C(streetaddress) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "surname",
+      "displayName": "Surname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the user's last name (surname). This is the value set on the C(sn) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "C(always) will always update passwords. C(on_create) will only set the password for newly created users. C(when_changed) will only set the password when changed. Using C(when_changed) will not work if the account is not enabled or is expired.",
+      "choices": [
+        "always",
+        "on_create",
+        "when_changed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "upn",
+      "displayName": "Upn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures the User Principal Name (UPN) for the account. This is not required, but is best practice to configure for modern versions of Active Directory. The format is C(<username>@<domain>). This is the value set on the C(userPrincipalName) LDAP attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_cannot_change_password",
+      "displayName": "User Cannot Change Password",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "C(yes) will prevent the user from changing their password. C(no) will allow the user to change their password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

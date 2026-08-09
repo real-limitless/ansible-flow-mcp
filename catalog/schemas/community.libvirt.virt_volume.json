@@ -1,0 +1,117 @@
+{
+  "fqcn": "community.libvirt.virt_volume",
+  "shortDescription": "Manage libvirt volumes inside a storage pool",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/libvirt/virt_volume_module.html",
+  "options": [
+    {
+      "name": "clone_source",
+      "displayName": "Clone Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the volume to clone from. Optionally provided with C(state) C(present) or C(command) C(create).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloudinit_config",
+      "displayName": "Cloudinit Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Ansible dict of cloud-init data to create a CIDATA CDROM. The data should contain the keys C(METADATA), C(USERDATA), and/or C(NETWORK_CONFIG). This is required if C(command) is C(create_cidata_cdrom).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(create) - Analagous to C(state) / C(present) C(delete) - Analagous to C(state) / C(absent) C(wipe) - Performs a wipe *only* of the volume specified by C(name) - *does not delete* the volume. C(list_volumes) - Lists all volumes in the storage pool. C(get_xml) - Retrieves the XML of the volume specified by C(name). C(create_cidata_cdrom) - Creates a CIDATA CDROM with the provided C(cloudinit_config) data. Enables bootstrapping of cloud-init enabled VMs. Mutually exclusive with C(state).",
+      "choices": [
+        "create",
+        "delete",
+        "wipe",
+        "list_volumes",
+        "get_xml",
+        "create_cidata_cdrom"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the volume being managed. Note that the volume must be previously defined with xml.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool",
+      "displayName": "Pool",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the storage pool, where the volume is located.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If C(present), Creates a new volume with the XML provided, optionally cloning from the image in C(clone_source). The name of the volume is specified in the XML (if a C(name) parameter is provided, it is ignored). C(xml) must be provided. If C(absent), Deletes the volume specified by C(name) from the storage pool.  If C(wipe) is set to C(true), the volume will be wiped before deletion. Mutually exclusive with C(command). Can be used to resize existing volumes if C(xml) has bigger capacity than cu",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uri",
+      "displayName": "Uri",
+      "type": "string",
+      "required": false,
+      "default": "qemu:///system",
+      "description": "Libvirt connection uri.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wipe",
+      "displayName": "Wipe",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to wipe the volume before deleting it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "xml",
+      "displayName": "Xml",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "XML definition of the volume to be created. This is required if C(command) is C(create)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

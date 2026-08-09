@@ -2,6 +2,58 @@
   "fqcn": "microsoft.ad.kds_root_key",
   "shortDescription": "Manages a KDS root key in a domain",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/microsoft/ad/kds_root_key_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "effective_time_hours",
+      "displayName": "Effective Time Hours",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "The number of hours to wait before the key is effective. This is recommended to be set to a value greater than 0, so that the key can be replicated to all domain controllers. Using a key before it has been replicated will result in an error. If set to 0, the key will be effective immediately.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_id",
+      "displayName": "Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the key that should be removed when O(state) is C(absent). The ID of the key that should be matched when O(state) is C(present) and O(match_by) is C(key_id). Pay attention that the created key will not have the specified ID, the C(key_id) is used for matching existing keys only.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "match_by",
+      "displayName": "Match By",
+      "type": "string",
+      "required": false,
+      "default": "any",
+      "description": "The method used to find key for idempotency check when O(state=present). When V(any), a key will only be created when no key exists. When V(key_id), O(key_id) must be set and will create the key if one with that id does not already exist. The newly created key will not have the specified ID. When V(never), the key will always be created.",
+      "choices": [
+        "any",
+        "key_id",
+        "never"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether to ensure a key is present or absent. Note that Microsoft warns against removing KDS root keys, since it can lead to failed services and accounts.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

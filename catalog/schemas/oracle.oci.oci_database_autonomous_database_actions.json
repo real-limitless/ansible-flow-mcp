@@ -2,6 +2,404 @@
   "fqcn": "oracle.oci.oci_database_autonomous_database_actions",
   "shortDescription": "Perform actions on an AutonomousDatabase resource in Oracle Cloud Infrastructure",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/oracle/oci/oci_database_autonomous_database_actions_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The action to perform on the AutonomousDatabase.",
+      "choices": [
+        "autonomous_database_manual_refresh",
+        "change_compartment",
+        "change_disaster_recovery_configuration",
+        "configure_autonomous_database_vault_key",
+        "deregister_autonomous_database_data_safe",
+        "disable_autonomous_database_management",
+        "disable_autonomous_database_operations_insights",
+        "enable_autonomous_database_management",
+        "enable_autonomous_database_operations_insights",
+        "fail_over",
+        "generate_autonomous_database_wallet",
+        "register_autonomous_database_data_safe",
+        "restart",
+        "restore",
+        "rotate_autonomous_database_encryption_key",
+        "shrink",
+        "start",
+        "stop",
+        "switchover"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the user, on whose behalf, OCI APIs are invoked. If not set, then the value of the OCI_USER_ID environment variable, if any, is used. This option is required if the user is not specified through a configuration file (See C(config_file_location)). To get the user's OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_fingerprint",
+      "displayName": "Api User Fingerprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fingerprint for the key pair being used. If not set, then the value of the OCI_USER_FINGERPRINT environment variable, if any, is used. This option is required if the key fingerprint is not specified through a configuration file (See C(config_file_location)). To get the key pair's fingerprint value please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_file",
+      "displayName": "Api User Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Full path and filename of the private key (in PEM format). If not set, then the value of the OCI_USER_KEY_FILE variable, if any, is used. This option is required if the private key is not specified through a configuration file (See C(config_file_location)). If the key is encrypted with a pass-phrase, the C(api_user_key_pass_phrase) option must also be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user_key_pass_phrase",
+      "displayName": "Api User Key Pass Phrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase used by the key referenced in C(api_user_key_file), if it is encrypted. If not set, then the value of the OCI_USER_KEY_PASS_PHRASE variable, if any, is used. This option is required if the key passphrase is not specified through a configuration file (See C(config_file_location)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_purpose",
+      "displayName": "Auth Purpose",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The auth purpose which can be used in conjunction with 'auth_type=instance_principal'. The default auth_purpose for instance_principal is None.",
+      "choices": [
+        "service_principal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": "api_key",
+      "description": "The type of authentication to use for making API requests. By default C(auth_type=\"api_key\") based authentication is performed and the API key (see I(api_user_key_file)) in your config file will be used. If this 'auth_type' module option is not specified, the value of the OCI_ANSIBLE_AUTH_TYPE, if any, is used. Use C(auth_type=\"instance_principal\") to use instance principal based authentication when running ansible playbooks within an OCI compute instance.",
+      "choices": [
+        "api_key",
+        "instance_principal",
+        "instance_obo_user",
+        "resource_principal",
+        "security_token"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autonomous_database_id",
+      "displayName": "Autonomous Database Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The database L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_bundle",
+      "displayName": "Cert Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full path to a CA certificate bundle to be used for SSL verification. This will override the default CA certificate bundle. If not set, then the value of the OCI_ANSIBLE_CERT_BUNDLE variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compartment_id",
+      "displayName": "Compartment Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the resource to. Required for I(action=change_compartment).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file_location",
+      "displayName": "Config File Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to configuration file. If not set then the value of the OCI_CONFIG_FILE environment variable, if any, is used. Otherwise, defaults to ~/.oci/config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_profile_name",
+      "displayName": "Config Profile Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The profile to load from the config file referenced by C(config_file_location). If not set, then the value of the OCI_CONFIG_PROFILE environment variable, if any, is used. Otherwise, defaults to the \"DEFAULT\" profile in C(config_file_location).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_scn",
+      "displayName": "Database Scn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Restores using the backup with the System Change Number (SCN) specified. Applicable only for I(action=restore).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disaster_recovery_type",
+      "displayName": "Disaster Recovery Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Indicates the disaster recovery (DR) type of the Autonomous Database Serverless instance. Autonomous Data Guard (ADG) DR type provides business critical DR with a faster recovery time objective (RTO) during failover or switchover. Backup-based DR type provides lower cost DR with a slower RTO during failover or switchover. Applicable only for I(action=change_disaster_recovery_configuration).",
+      "choices": [
+        "ADG",
+        "BACKUP_BASED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Force overwriting existing wallet file when downloading wallet. Applicable only for I(action=generate_autonomous_database_wallet).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "generate_type",
+      "displayName": "Generate Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of wallet to generate. **Serverless instance usage:** * `SINGLE` - used to generate a wallet for a single database * `ALL` - used to generate wallet for all databases in the region **Dedicated Exadata infrastructure usage:** Value must be `NULL` if attribute is used. Applicable only for I(action=generate_autonomous_database_wallet).",
+      "choices": [
+        "ALL",
+        "SINGLE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_snapshot_standby",
+      "displayName": "Is Snapshot Standby",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates if user wants to convert to a snapshot standby. For example, true would set a standby database to snapshot standby database. False would set a snapshot standby database back to regular standby database. Applicable only for I(action=change_disaster_recovery_configuration).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_using_oracle_managed_keys",
+      "displayName": "Is Using Oracle Managed Keys",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True if disable Customer Managed Keys and use Oracle Managed Keys. Applicable only for I(action=configure_autonomous_database_vault_key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kms_key_id",
+      "displayName": "Kms Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OCID of the key container that is used as the master encryption key in database transparent data encryption (TDE) operations. Applicable only for I(action=configure_autonomous_database_vault_key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "latest",
+      "displayName": "Latest",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Restores to the last known good state with the least possible data loss. Applicable only for I(action=restore).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to encrypt the keys inside the wallet. The password must be at least 8 characters long and must include at least 1 letter and either 1 numeric character or 1 special character. Required for I(action=generate_autonomous_database_wallet).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pdb_admin_password",
+      "displayName": "Pdb Admin Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The admin password provided during the creation of the database. This password is between 12 and 30 characters long, and must contain at least 1 uppercase, 1 lowercase, and 1 numeric character. It cannot contain the double quote symbol (\") or the username \"admin\", regardless of casing. Required for I(action=deregister_autonomous_database_data_safe), I(action=register_autonomous_database_data_safe).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer_db_id",
+      "displayName": "Peer Db Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The database OCID(/Content/General/Concepts/identifiers.htm) of the Disaster Recovery peer (source Primary) database, which is located in a different (remote) region from the current peer database. Applicable only for I(action=fail_over)I(action=switchover).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realm_specific_endpoint_template_enabled",
+      "displayName": "Realm Specific Endpoint Template Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable/Disable realm specific endpoint template for service client. By Default, realm specific endpoint template is disabled. If not set, then the value of the OCI_REALM_SPECIFIC_SERVICE_ENDPOINT_TEMPLATE_ENABLED variable, if any, is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle Cloud Infrastructure region to use for all OCI API requests. If not set, then the value of the OCI_REGION variable, if any, is used. This option is required if the region is not specified through a configuration file (See C(config_file_location)). Please refer to U(https://docs.us-phoenix-1.oraclecloud.com/Content/General/Concepts/regions.htm) for more information on OCI regions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenancy",
+      "displayName": "Tenancy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OCID of your tenancy. If not set, then the value of the OCI_TENANCY variable, if any, is used. This option is required if the tenancy OCID is not specified through a configuration file (See C(config_file_location)). To get the tenancy OCID, please refer U(https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_refresh_cutoff",
+      "displayName": "Time Refresh Cutoff",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The timestamp to which the Autonomous Database refreshable clone will be refreshed. Changes made in the primary database after this timestamp are not part of the data refresh. Applicable only for I(action=autonomous_database_manual_refresh).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_snapshot_standby_enabled_till",
+      "displayName": "Time Snapshot Standby Enabled Till",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Time and date stored as an RFC 3339 formatted timestamp string. For example, 2022-01-01T12:00:00.000Z would set a limit for the snapshot standby to be converted back to a cross-region standby database. Applicable only for I(action=change_disaster_recovery_configuration).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timestamp",
+      "displayName": "Timestamp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The time to restore the database to. Required for I(action=restore).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_id",
+      "displayName": "Vault Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The L(OCID,https://docs.cloud.oracle.com/Content/General/Concepts/identifiers.htm) of the Oracle Cloud Infrastructure L(vault,https://docs.cloud.oracle.com/Content/KeyManagement/Concepts/keyoverview.htm#concepts). This parameter and `secretId` are required for Customer Managed Keys. Applicable only for I(action=configure_autonomous_database_vault_key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to wait for create or delete operation to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Time, in seconds, to wait when I(wait=yes). Defaults to 1200 for most of the services but some services might have a longer wait timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wallet_file",
+      "displayName": "Wallet File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The destination file path with file name when downloading wallet. The file must have 'zip' extension. I(wallet_file) is required if I(state='generate_wallet'). Required for I(action=generate_autonomous_database_wallet).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

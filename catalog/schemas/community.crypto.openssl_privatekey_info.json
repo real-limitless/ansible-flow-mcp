@@ -2,6 +2,76 @@
   "fqcn": "community.crypto.openssl_privatekey_info",
   "shortDescription": "Provide information for OpenSSL private keys",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/crypto/openssl_privatekey_info_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "check_consistency",
+      "displayName": "Check Consistency",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to check consistency of the private key. In community.crypto < 2.0.0, consistency was always checked. Since community.crypto 2.0.0, the consistency check has been disabled by default to avoid private key material to be transported around and computed with, and only do so when requested explicitly. This can potentially prevent L(side-channel attacks,https://en.wikipedia.org/wiki/Side-channel_attack). Note that consistency checks only work for certain key types, and might depend on the ver",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "content",
+      "displayName": "Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the private key file. Either O(path) or O(content) must be specified, but not both.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "passphrase",
+      "displayName": "Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The passphrase for the private key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Remote absolute path where the private key file is loaded from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "return_private_key_data",
+      "displayName": "Return Private Key Data",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to return private key data. Only set this to V(true) when you want private information about this key to leave the remote machine. B(WARNING:) you have to make sure that private key data is not accidentally logged!",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "select_crypto_backend",
+      "displayName": "Select Crypto Backend",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Determines which crypto backend to use. The default choice is V(auto), which tries to use C(cryptography) if available. If set to V(cryptography), will try to use the L(cryptography,https://cryptography.io/) library. Note that with community.crypto 3.0.0, all values behave the same. This option will be deprecated in a later version. We recommend to not set it explicitly.",
+      "choices": [
+        "auto",
+        "cryptography"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

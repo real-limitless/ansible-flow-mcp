@@ -2,6 +2,251 @@
   "fqcn": "vmware.vmware.cluster_ha",
   "shortDescription": "Manage High Availability services (HA) on VMware vSphere clusters",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware/cluster_ha_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "admission_control_cpu_reserve_percentage",
+      "displayName": "Admission Control Cpu Reserve Percentage",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Percentage of CPU resources in the cluster to reserve for failover. Only used if O(admission_control_policy) is V(cluster_resource). By default, the O(admission_control_failover_level) is used by vSphere to automatically calculate this value. Setting this option overrides that behavior.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "admission_control_dedicated_hosts",
+      "displayName": "Admission Control Dedicated Hosts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of ESXi hosts to use as dedicated failover hosts. The list should be the names of ESXi hosts as seen in vCenter. Required if (and only used if) O(admission_control_policy) is V(dedicated_host).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "admission_control_failover_level",
+      "displayName": "Admission Control Failover Level",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of host failures that should be tolerated by the cluster. The maximum is one less than the total number of hosts. If O(admission_control_policy) is V(dedicated_host), the default value is the number of dedicated failover hosts. For all other O(admission_control_policy) values, the default value is 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "admission_control_memory_reserve_percentage",
+      "displayName": "Admission Control Memory Reserve Percentage",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Percentage of memory resources in the cluster to reserve for failover. Only used if O(admission_control_policy) is V(cluster_resource). By default, the O(admission_control_failover_level) is used by vSphere to automatically calculate this value. Setting this option overrides that behavior.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "admission_control_policy",
+      "displayName": "Admission Control Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures a the policy type used for HA admission control. Admission control is a policy used by vSphere HA to ensure failover capacity within a cluster. Raising the number of potential host failures will increase the availability constraints and capacity reserved.",
+      "choices": [
+        "vm_slots",
+        "cluster_resource",
+        "dedicated_host",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "advanced_settings",
+      "displayName": "Advanced Settings",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "A dictionary of advanced HA settings. Allowed HA settings are more strict than VM allowed settings. If you get an error when managing them, compare your settings against the vSphere HA Advanced Options documentation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the cluster to be managed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the datacenter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable",
+      "displayName": "Enable",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to enable HA.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_failure_response",
+      "displayName": "Host Failure Response",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configures how VM workflows should be managed if an ESXi host is in a failure state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_isolation_response",
+      "displayName": "Host Isolation Response",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "Specify how VMs should be handled if an ESXi host determines it can no longer reach the rest of the cluster. If set to V(none), no action is taken. If set to V(powerOff), VMs are powered off via the hypervisor. If set to V(shutdown), VMs are shut down via the guest operating system.",
+      "choices": [
+        "none",
+        "powerOff",
+        "shutdown"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_apd_response",
+      "displayName": "Storage Apd Response",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configures what steps are taken when storage All Paths Down (APD) events occur.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_pdl_response_mode",
+      "displayName": "Storage Pdl Response Mode",
+      "type": "string",
+      "required": false,
+      "default": "warning",
+      "description": "Set the response in the event of permanent Device Loss (PDL) for storage. APD differs from PDL, in that APD is assumed to be a transient outage and PDL is permanent. V(disabled) means no action will be taken V(warning) means no action will be taken, but events will be generated for logging purposes. V(restart) means all VMs will be powered off. If hosts still have access to the datastore, affected VMs will be restarted on that host.",
+      "choices": [
+        "disabled",
+        "warning",
+        "restart"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_monitoring",
+      "displayName": "Vm Monitoring",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configures how VMs are monitored to determine health status, and what actions should be taken if they are unhealthy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

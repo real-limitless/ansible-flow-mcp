@@ -1,0 +1,179 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_gtm_wide_ip",
+  "shortDescription": "Manages F5 BIG-IP GTM Wide IP",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_gtm_wide_ip_module.html",
+  "options": [
+    {
+      "name": "aliases",
+      "displayName": "Aliases",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies alternate domain names for the web site content you are load balancing. You can use the same wildcard characters for aliases as you can for actual Wide IP names.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "irules",
+      "displayName": "Irules",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of rules to be applied. If you want to remove all existing iRules, specify a single empty value; C(\"\"). See the documentation for an example.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "last_resort_pool",
+      "displayName": "Last Resort Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies which GTM pool for the system to use as the last resort pool for the Wide IP. The valid pools for this parameter are those with the C(type) specified in this module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Wide IP name. This name must be formatted as a fully qualified domain name (FQDN). You can also use the alias C(wide_ip) but this is deprecated and will be removed in a future Ansible version.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persist_cidr_ipv4",
+      "displayName": "Persist Cidr Ipv4",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies a mask used to group IPv4 LDNS addresses. This feature allows one persistence record to be shared by LDNS addresses that match within this mask.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persist_cidr_ipv6",
+      "displayName": "Persist Cidr Ipv6",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies a mask used to group IPv6 LDNS addresses. This feature allows one persistence record to be shared by LDNS addresses that match within this mask.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persistence",
+      "displayName": "Persistence",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When C(true), ensures when a local DNS makes repetitive requests on behalf of a client, the system reconnects the client to the same resource as previous requests. When C(false), ensures repetitive requests do not reconnect the client to the same resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persistence_ttl",
+      "displayName": "Persistence Ttl",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the time to maintain a connection between an local DNS and a particular virtual server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool_lb_method",
+      "displayName": "Pool Lb Method",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the load balancing method used to select a pool in this wide IP. This setting is relevant only when multiple pools are configured for a Wide IP.",
+      "choices": [
+        "round-robin",
+        "ratio",
+        "topology",
+        "global-availability"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pools",
+      "displayName": "Pools",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The pools you want associated with the Wide IP. If C(ratio) is not provided when creating a new Wide IP, it will default to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present) or C(enabled), ensures the Wide IP exists and is enabled. When C(absent), ensures the Wide IP has been removed. When C(disabled), ensures the Wide IP exists and is disabled.",
+      "choices": [
+        "present",
+        "absent",
+        "disabled",
+        "enabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the type of Wide IP. GTM Wide IPs need to be keyed by query type in addition to name, because pool members need different attributes depending on the response RDATA they are meant to supply.",
+      "choices": [
+        "a",
+        "aaaa",
+        "cname",
+        "mx",
+        "naptr",
+        "srv"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

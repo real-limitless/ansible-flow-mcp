@@ -2,6 +2,493 @@
   "fqcn": "azure.azcollection.azure_rm_eventgrid_subscription",
   "shortDescription": "Manage Eventgrid Subscriptions",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/azure/azcollection/azure_rm_eventgrid_subscription_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "ad_user",
+      "displayName": "Ad User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Active Directory username. Use when authenticating with an Active Directory user rather than service principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "adfs_authority_url",
+      "displayName": "Adfs Authority Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure AD authority url. Use when authenticating with Username/password, and has your own ADFS authority.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "advanced_filter",
+      "displayName": "Advanced Filter",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "An advanced filter enables filtering of events based on a specific event property. KEY[.INNERKEY] FILTEROPERATOR VALUE [VALUE ...] Examples data.Color StringIn Blue Red Orange Yellow data.Color StringNotIn Blue Red Orange Yellow subject StringContains Blue Red subject StringNotContains Blue Red subject StringBeginsWith Blue Red subject StringNotBeginsWith Blue Red subject StringEndsWith img png jpg subject StringNotEndsWith img png jpg data.property1 NumberIn 5 10 20 data.property1 NumberInRange",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_profile",
+      "displayName": "Api Profile",
+      "type": "string",
+      "required": false,
+      "default": "latest",
+      "description": "Selects an API profile to use when communicating with Azure services. Default value of C(latest) is appropriate for public clouds; future values will allow use with Azure Stack.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_source",
+      "displayName": "Auth Source",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Controls the source of the credentials to use for authentication. Can also be set via the C(ANSIBLE_AZURE_AUTH_SOURCE) environment variable. When set to C(auto) (the default) the precedence is module parameters -> C(env) -> C(credential_file) -> C(cli). When set to C(env), the credentials will be read from the environment variables. When set to C(credential_file), it will read the profile from C(~/.azure/credentials). When set to C(cli), the credentials will be sources from the Azure CLI profile",
+      "choices": [
+        "auto",
+        "cli",
+        "credential_file",
+        "env",
+        "msi"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "azure_active_directory_application_id_or_uri",
+      "displayName": "Azure Active Directory Application Id Or Uri",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Azure Active Directory Application Id or Uri to get the access token that will be included as the bearer token in delivery requests. Applicable only for webhook as a destination.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "azure_active_directory_tenant_id",
+      "displayName": "Azure Active Directory Tenant Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Azure Active Directory Tenant Id to get the access token that will be included as the bearer token in delivery requests. Applicable only for webhook as a destination.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_validation_mode",
+      "displayName": "Cert Validation Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Controls the certificate validation behavior for Azure endpoints. By default, all modules will validate the server certificate, but when an HTTPS proxy is in use, or against Azure Stack, it may be necessary to disable this behavior by passing C(ignore). Can also be set via credential file profile or the C(AZURE_CERT_VALIDATION) environment variable.",
+      "choices": [
+        "ignore",
+        "validate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure client ID. Use when authenticating with a Service Principal or Managed Identity (msi). Can also be set via the C(AZURE_CLIENT_ID) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud_environment",
+      "displayName": "Cloud Environment",
+      "type": "string",
+      "required": false,
+      "default": "AzureCloud",
+      "description": "For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(AzureChinaCloud), C(AzureUSGovernment)), or a metadata discovery endpoint URL (required for Azure Stack). Can also be set via credential file profile or the C(AZURE_CLOUD_ENVIRONMENT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deadletter_endpoint",
+      "displayName": "Deadletter Endpoint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Azure resource ID of an Azure Storage blob container destination where EventGrid should deadletter undeliverable events for this event subscription.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delivery_attribute_mapping",
+      "displayName": "Delivery Attribute Mapping",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Add delivery attribute mapping to send additional information via HTTP headers when delivering events. This attribute is valid for all destination types except StorageQueue. Format attribute-name attribute-type attribute-value [attribute-is-secret] somename dynamic somevalue true somename2 static somevalue",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_instance_discovery",
+      "displayName": "Disable Instance Discovery",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Determines whether or not instance discovery is performed when attempting to authenticate. Setting this to true will completely disable both instance discovery and authority validation. This functionality is intended for use in scenarios where the metadata endpoint cannot be reached such as in private clouds or Azure Stack. The process of instance discovery entails retrieving authority metadata from https://login.microsoft.com/ to validate the authority. By setting this to **True**, the validati",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_advanced_filtering_on_arrays",
+      "displayName": "Enable Advanced Filtering On Arrays",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allows advanced filters to be evaluated against an array of values instead of expecting a singular value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Endpoint where EventGrid should deliver events matching this event subscription. For webhook endpoint type, this should be the corresponding webhook URL. For other endpoint types, this should be the Azure resource identifier of the endpoint. It is expected that the destination endpoint to be already created and available for use before executing any Event Grid command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_type",
+      "displayName": "Endpoint Type",
+      "type": "string",
+      "required": false,
+      "default": "webhook",
+      "description": "The type of the destination endpoint.",
+      "choices": [
+        "azurefunction",
+        "eventhub",
+        "hybridconnection",
+        "servicebusqueue",
+        "servicebustopic",
+        "storagequeue",
+        "webhook"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "event_delivery_schema",
+      "displayName": "Event Delivery Schema",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The schema in which events should be delivered for this event subscription. By default, events will be delivered in the same schema in which they are published (based on the corresponding topic's input schema).",
+      "choices": [
+        "CloudEventSchemaV1_0",
+        "CustomInputSchema",
+        "EventGridSchema"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "event_ttl",
+      "displayName": "Event Ttl",
+      "type": "number",
+      "required": false,
+      "default": 1440,
+      "description": "Event time to live (in minutes). Must be a number between 1 and 1440.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "expiration_date",
+      "displayName": "Expiration Date",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Date or datetime (in UTC, e.g. '2018-11-30T11:59:59+00:00' or '2018-11-30') after which the event subscription would expire. By default, there is no expiration for the event subscription.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "included_event_types",
+      "displayName": "Included Event Types",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of event types (e.g., Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobDeleted). In order to subscribe to all default event types, do not specify any value for this argument. For event grid topics, event types are customer defined. For Azure events, e.g., Storage Accounts, IoT Hub, etc., you can query their event types using this CLI command 'az eventgrid topic-type list-event-types'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of labels to associate with this event subscription.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_mode",
+      "displayName": "Log Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parent argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_path",
+      "displayName": "Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parent argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_delivery_attempts",
+      "displayName": "Max Delivery Attempts",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Maximum number of delivery attempts. Must be a number between 1 and 30.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_events_per_batch",
+      "displayName": "Max Events Per Batch",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of events in a batch. Must be a number between 1 and 5000.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the subscription.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oidc_token",
+      "displayName": "Oidc Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Direct OpenID Connect (OIDC) token (JWT) used for workload identity authentication. This token is exchanged with Azure AD using OIDC federated identity. Useful in CI systems (for example GitHub Actions, Azure DevOps) where an OIDC token is provided directly by the platform. Can also be set via the C(AZURE_FEDERATED_TOKEN) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oidc_token_file_path",
+      "displayName": "Oidc Token File Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file containing an OpenID Connect (OIDC) token (JWT) used for workload identity authentication. The file must contain only raw token. This method is commonly used in platforms that materialize OIDC tokens as files Can also be set via the C(AZURE_FEDERATED_TOKEN_FILE) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Active Directory user password. Use when authenticating with an Active Directory user rather than service principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preferred_batch_size_in_kilobytes",
+      "displayName": "Preferred Batch Size In Kilobytes",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Preferred batch size in kilobytes. Must be a number between 1 and 1024.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Security profile found in ~/.azure/credentials file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret",
+      "displayName": "Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure client secret. Use when authenticating with a Service Principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_resource_id",
+      "displayName": "Source Resource Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of a resource id where the subscription exists or will be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the Eventgrid Event Subscription. Use C(present) to create or update and C(absent) to delete.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_queue_msg_ttl",
+      "displayName": "Storage Queue Msg Ttl",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Storage queue message time to live in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subject_begins_with",
+      "displayName": "Subject Begins With",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional string to filter events for an event subscription based on a prefix. Wildcard characters are not supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subject_case_sensitive",
+      "displayName": "Subject Case Sensitive",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specify to indicate whether the subject fields should be compared in a case sensitive manner. True if flag present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subject_ends_with",
+      "displayName": "Subject Ends With",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional string to filter events for an event subscription based on a suffix. Wildcard characters are not supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subscription_id",
+      "displayName": "Subscription Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Your Azure subscription Id.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant",
+      "displayName": "Tenant",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure tenant ID. Use when authenticating with a Service Principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "thumbprint",
+      "displayName": "Thumbprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The thumbprint of the private key specified in I(x509_certificate_path). Use when authenticating with a Service Principal. Required if I(x509_certificate_path) is defined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x509_certificate_path",
+      "displayName": "X509 Certificate Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the X509 certificate used to create the service principal in PEM format. The certificate must be appended to the private key. Use when authenticating with a Service Principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

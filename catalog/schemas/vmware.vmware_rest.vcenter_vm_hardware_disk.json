@@ -1,0 +1,203 @@
+{
+  "fqcn": "vmware.vmware_rest.vcenter_vm_hardware_disk",
+  "shortDescription": "Adds a thin provisioned virtual disk to the virtual machine",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware_rest/vcenter_vm_hardware_disk_module.html",
+  "options": [
+    {
+      "name": "backing",
+      "displayName": "Backing",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Existing physical resource backing for the virtual disk. Exactly one of I(backing) or I(new_vmdk) must be specified. If unset, the virtual disk will not be connected to an existing backing. Required with I(state=['present']) Valid attributes are:  - C(type) (str): This option defines the valid backing types for a virtual disk. (['present'])    This key is required with ['present'].    - Accepted values:      - VMDK_FILE  - C(vmdk_file) (str): Path of the VMDK file backing the virtual disk. This ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk",
+      "displayName": "Disk",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Virtual disk identifier. The parameter must be the id of a resource returned by M(vmware.vmware_rest.vcenter_vm_hardware_disk). Required with I(state=['absent', 'present'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ide",
+      "displayName": "Ide",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Address for attaching the device to a virtual IDE adapter. If unset, the server will choose an available address; if none is available, the request will fail. Valid attributes are:  - C(primary) (bool): Flag specifying whether the device should be attached to the primary or secondary IDE adapter of the virtual machine. If unset, the server will choose a adapter with an available connection. If no IDE connections are available, the request will be rejected. (['present'])  - C(master) (bool): Flag",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "label",
+      "displayName": "Label",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the item",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_vmdk",
+      "displayName": "New Vmdk",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specification for creating a new VMDK backing for the virtual disk. Exactly one of I(backing) or I(new_vmdk) must be specified. If unset, a new VMDK backing will not be created. Valid attributes are:  - C(name) (str): Base name of the VMDK file. The name should not include the '.vmdk' file extension. If unset, a name (derived from the name of the virtual machine) will be chosen by the server. (['present'])  - C(capacity) (int): Capacity of the virtual disk backing in bytes. If unset, defaults to",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nvme",
+      "displayName": "Nvme",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Address for attaching the device to a virtual NVMe adapter. If unset, the server will choose an available address; if none is available, the request will fail. Required with I(state=['present']) Valid attributes are:  - C(bus) (int): Bus number of the adapter to which the device should be attached. (['present'])    This key is required with ['present'].  - C(unit) (int): Unit number of the device. If unset, the server will choose an available unit number on the specified adapter. If there are no",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sata",
+      "displayName": "Sata",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Address for attaching the device to a virtual SATA adapter. If unset, the server will choose an available address; if none is available, the request will fail. Required with I(state=['present']) Valid attributes are:  - C(bus) (int): Bus number of the adapter to which the device should be attached. (['present'])    This key is required with ['present'].  - C(unit) (int): Unit number of the device. If unset, the server will choose an available unit number on the specified adapter. If there are no",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scsi",
+      "displayName": "Scsi",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Address for attaching the device to a virtual SCSI adapter. If unset, the server will choose an available address; if none is available, the request will fail. Required with I(state=['present']) Valid attributes are:  - C(bus) (int): Bus number of the adapter to which the device should be attached. (['present'])    This key is required with ['present'].  - C(unit) (int): Unit number of the device. If unset, the server will choose an available unit number on the specified adapter. If there are no",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_timeout",
+      "displayName": "Session Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Timeout settings for client session.  The maximal number of seconds for the whole operation including connection establishment, request sending and response.  The default value is 300s.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The I(host_bus_adapter_type) enumerated type defines the valid types of host bus adapters that may be used for attaching a virtual storage device to a virtual machine.",
+      "choices": [
+        "IDE",
+        "NVME",
+        "SATA",
+        "SCSI"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_hostname",
+      "displayName": "Vcenter Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter If the value is not specified in the task, the value of environment variable C(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_password",
+      "displayName": "Vcenter Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter password If the value is not specified in the task, the value of environment variable C(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_rest_log_file",
+      "displayName": "Vcenter Rest Log File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "You can use this optional parameter to set the location of a log file.  This file will be used to record the HTTP REST interaction.  The file will be stored on the host that runs the module.  If the value is not specified in the task, the value of  environment variable C(VMWARE_REST_LOG_FILE) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_username",
+      "displayName": "Vcenter Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter username If the value is not specified in the task, the value of environment variable C(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_validate_certs",
+      "displayName": "Vcenter Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to C(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable C(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm",
+      "displayName": "Vm",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Virtual machine identifier. The parameter must be the id of a resource returned by M(vmware.vmware_rest.vcenter_vm_info). This parameter is mandatory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

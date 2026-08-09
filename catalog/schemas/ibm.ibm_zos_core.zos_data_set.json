@@ -1,0 +1,327 @@
+{
+  "fqcn": "ibm.ibm_zos_core.zos_data_set",
+  "shortDescription": "Manage data sets",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_core/zos_data_set_module.html",
+  "options": [
+    {
+      "name": "batch",
+      "displayName": "Batch",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Batch can be used to perform operations on multiple data sets in a single module call.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "block_size",
+      "displayName": "Block Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The block size to use for the data set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directory_blocks",
+      "displayName": "Directory Blocks",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of directory blocks to allocate to the data set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "empty",
+      "displayName": "Empty",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Sets the I(empty) attribute for Generation Data Groups. If false, removes only the oldest GDS entry when a new GDS is created that causes GDG limit to be exceeded. If true, removes all GDS entries from a GDG base when a new GDS is created that causes the GDG limit to be exceeded.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extended",
+      "displayName": "Extended",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Sets the I(extended) attribute for Generation Data Groups. If false, allow up to 255 generation data sets (GDSs) to be associated with the GDG. If true, allow up to 999 generation data sets (GDS) to be associated with the GDG.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fifo",
+      "displayName": "Fifo",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Sets the I(fifo) attribute for Generation Data Groups. If false, the order is the newest GDS defined to the oldest GDS. This is the default value. If true, the order is the oldest GDS defined to the newest GDS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies that the data set can be shared with others during a member delete operation which results in the data set you are updating to be simultaneously updated by others. This is helpful when a data set is being used in a long running process such as a started task and you are wanting to delete a member. The I(force=True) option enables sharing of data sets through the disposition I(DISP=SHR). The I(force=True) only applies to data set members when I(state=absent) and I(type=member) and when ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_length",
+      "displayName": "Key Length",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The key length to use when creating a KSDS data set. I(key_length) is required when I(type=ksds). I(key_length) should only be provided when I(type=ksds)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_offset",
+      "displayName": "Key Offset",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The key offset to use when creating a KSDS data set. I(key_offset) is required when I(type=ksds). I(key_offset) should only be provided when I(type=ksds)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit",
+      "displayName": "Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Sets the I(limit) attribute for Generation Data Groups. Specifies the maximum number, from 1 to 255(up to 999 if extended), of GDS that can be associated with the GDG being defined. I(limit) is required when I(type=gdg).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the data set being managed. (e.g C(USER.TEST)) If I(name) is not provided, a randomized data set name will be generated with the HLQ matching the module-runners username. Required if I(type=member) or I(state!=present) and not using I(batch).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge",
+      "displayName": "Purge",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Sets the I(purge) attribute for Generation Data Groups. Specifies whether to override expiration dates when a generation data set (GDS) is rolled off and the C(scratch) option is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "record_format",
+      "displayName": "Record Format",
+      "type": "string",
+      "required": false,
+      "default": "fb",
+      "description": "The format of the data set. (e.g C(FB)) Choices are case-sensitive. When I(type=ksds), I(type=esds), I(type=rrds), I(type=lds) or I(type=zfs) then I(record_format=None), these types do not have a default I(record_format).",
+      "choices": [
+        "fb",
+        "vb",
+        "fba",
+        "vba",
+        "u",
+        "f"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "record_length",
+      "displayName": "Record Length",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The length, in bytes, of each record in the data set. For variable data sets, the length must include the 4-byte prefix area. Defaults vary depending on format: If FB/FBA 80, if VB/VBA 137, if U 0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace",
+      "displayName": "Replace",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When I(replace=True), and I(state=present), existing data set matching I(name) will be replaced. Replacement is performed by deleting the existing data set and creating a new data set with the same name and desired attributes. Since the existing data set will be deleted prior to creating the new data set, no data set will exist if creation of the new data set fails.\n If I(replace=True), all data in the original data set will be lost.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scratch",
+      "displayName": "Scratch",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When C(state=absent), specifies whether to physically remove the data set from the volume. If C(scratch=true), the data set is deleted and its entry is removed from the volume's VTOC. If C(scratch=false), the data set is uncataloged but not physically removed from the volume. This is the equivalent of using C(NOSCRATCH) in an C(IDCAMS DELETE) command. When C(state=present) option B(scratch) sets the I(scratch) attribute for Generation Data Groups and is ignored for any other data set type. When ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sms_data_class",
+      "displayName": "Sms Data Class",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The data class for an SMS-managed dataset. Optional for SMS-managed datasets that do not match an SMS-rule. Not valid for datasets that are not SMS-managed. Note that all non-linear VSAM datasets are SMS-managed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sms_management_class",
+      "displayName": "Sms Management Class",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The management class for an SMS-managed dataset. Optional for SMS-managed datasets that do not match an SMS-rule. Not valid for datasets that are not SMS-managed. Note that all non-linear VSAM datasets are SMS-managed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sms_storage_class",
+      "displayName": "Sms Storage Class",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The storage class for an SMS-managed dataset. Required for SMS-managed datasets that do not match an SMS-rule. Not valid for datasets that are not SMS-managed. Note that all non-linear VSAM datasets are SMS-managed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_primary",
+      "displayName": "Space Primary",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "The amount of primary space to allocate for the dataset. The unit of space used is set using I(space_type).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_secondary",
+      "displayName": "Space Secondary",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "The amount of secondary space to allocate for the dataset. The unit of space used is set using I(space_type).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_type",
+      "displayName": "Space Type",
+      "type": "string",
+      "required": false,
+      "default": "m",
+      "description": "The unit of measurement to use when defining primary and secondary space. Valid units of size are C(k), C(m), C(g), C(cyl), and C(trk).",
+      "choices": [
+        "k",
+        "m",
+        "g",
+        "cyl",
+        "trk"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The final state desired for specified data set. If I(state=absent) and the data set does not exist on the managed node, no action taken, module completes successfully with I(changed=False).\n If I(state=absent) and the data set does exist on the managed node, remove the data set, module completes successfully with I(changed=True).\n If I(state=absent) and I(type=member) and I(force=True), the data set will be opened with I(DISP=SHR) such that the entire data set can be accessed by other processes ",
+      "choices": [
+        "present",
+        "absent",
+        "cataloged",
+        "uncataloged"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tmp_hlq",
+      "displayName": "Tmp Hlq",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the default high level qualifier (HLQ) for temporary and backup datasets. The default HLQ is the Ansible user used to execute the module and if that is not available, then the value C(TMPHLQ) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "pds",
+      "description": "The data set type to be used when creating a data set. (e.g C(pdse)). C(member) expects to be used with an existing partitioned data set. Choices are case-sensitive.",
+      "choices": [
+        "ksds",
+        "esds",
+        "rrds",
+        "lds",
+        "seq",
+        "pds",
+        "pdse",
+        "library",
+        "basic",
+        "large",
+        "member",
+        "hfs",
+        "zfs",
+        "gdg"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volumes",
+      "displayName": "Volumes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If cataloging a data set, I(volumes) specifies the name of the volume(s) where the data set is located.\n If creating a data set, I(volumes) specifies the volume(s) where the data set should be created.\n If I(volumes) is provided when I(state=present), and the data set is not found in the catalog, L(zos_data_set,./zos_data_set.html) will check the volume table of contents to see if the data set exists. If the data set does exist, it will be cataloged.\n If I(volumes) is provided when I(state=absen",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,69 @@
   "fqcn": "ansible.windows.win_hosts",
   "shortDescription": "Manages hosts file entries on Windows.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_hosts_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "set",
+      "description": "Controls the behavior of I(aliases). Only applicable when C(state=present). If C(add), each alias in I(aliases) will be added to the host entry. If C(set), each alias in I(aliases) will be added to the host entry, and other aliases will be removed from the entry.",
+      "choices": [
+        "add",
+        "remove",
+        "set"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aliases",
+      "displayName": "Aliases",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of additional names (cname records) for the host entry. Only applicable when C(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "canonical_name",
+      "displayName": "Canonical Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A canonical name for the host entry. required for C(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_address",
+      "displayName": "Ip Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ip address for the host entry. Can be either IPv4 (A record) or IPv6 (AAAA record). Required for C(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the entry should be present or absent. If only I(canonical_name) is provided when C(state=absent), then all hosts entries with the canonical name of I(canonical_name) will be removed. If only I(ip_address) is provided when C(state=absent), then all hosts entries with the ip address of I(ip_address) will be removed. If I(ip_address) and I(canonical_name) are both omitted when C(state=absent), then all hosts entries will be removed.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

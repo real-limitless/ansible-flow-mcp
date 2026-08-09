@@ -2,6 +2,167 @@
   "fqcn": "community.crypto.acme_certificate_revoke",
   "shortDescription": "Revoke certificates with the ACME protocol",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/crypto/acme_certificate_revoke_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "account_key_content",
+      "displayName": "Account Key Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the ACME account RSA or Elliptic Curve key. Note that exactly one of O(account_key_src), O(account_key_content), O(private_key_src), or O(private_key_content) must be specified. I(Warning): the content will be written into a temporary file, which will be deleted by Ansible when the module completes. Since this is an important private key \u2014 it can be used to change the account key, or to revoke your certificates without knowing their private keys \u2014, this might not be acceptable. In cas",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "account_key_passphrase",
+      "displayName": "Account Key Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase to use to decode the account key. B(Note:) this is not supported by the C(openssl) backend, only by the C(cryptography) backend.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "account_key_src",
+      "displayName": "Account Key Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file containing the ACME account RSA or Elliptic Curve key. RSA keys can be created with C(openssl rsa ...). Elliptic curve keys can be created with C(openssl ecparam -genkey ...). Any other tool creating private keys in PEM format can be used as well. Mutually exclusive with O(account_key_content). Required if O(account_key_content) is not used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "account_uri",
+      "displayName": "Account Uri",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If specified, assumes that the account URI is as given. If the account key does not match this account, or an account with this URI does not exist, the module fails.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "acme_directory",
+      "displayName": "Acme Directory",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The ACME directory to use. This is the entry point URL to access the ACME CA server API. For safety reasons the default is set to the Let's Encrypt staging server (for the ACME v1 protocol). This will create technically correct, but untrusted certificates. For Let's Encrypt, all staging endpoints can be found here: U(https://letsencrypt.org/docs/staging-environment/). For B(Let's Encrypt), the production directory URL for ACME v2 is U(https://acme-v02.api.letsencrypt.org/directory). For B(ZeroSS",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "acme_version",
+      "displayName": "Acme Version",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "The ACME version of the endpoint. Must be V(2) for standardized ACME v2 endpoints. The value V(1) is no longer supported since community.crypto 3.0.0.",
+      "choices": [
+        2
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate",
+      "displayName": "Certificate",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the certificate to revoke.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_content",
+      "displayName": "Private Key Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the certificate's private key. Note that exactly one of O(account_key_src), O(account_key_content), O(private_key_src), or O(private_key_content) must be specified. I(Warning): the content will be written into a temporary file, which will be deleted by Ansible when the module completes. Since this is an important private key \u2014 it can be used to change the account key, or to revoke your certificates without knowing their private keys \u2014, this might not be acceptable. In case C(cryptogra",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_passphrase",
+      "displayName": "Private Key Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Passphrase to use to decode the certificate's private key. B(Note:) this is not supported by the C(openssl) backend, only by the C(cryptography) backend.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_src",
+      "displayName": "Private Key Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the certificate's private key. Note that exactly one of O(account_key_src), O(account_key_content), O(private_key_src), or O(private_key_content) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "request_timeout",
+      "displayName": "Request Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "The time Ansible should wait for a response from the ACME API. This timeout is applied to all HTTP(S) requests (HEAD, GET, POST).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "revoke_reason",
+      "displayName": "Revoke Reason",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "One of the revocation reasonCodes defined in L(Section 5.3.1 of RFC5280,https://tools.ietf.org/html/rfc5280#section-5.3.1). Possible values are V(0) (unspecified), V(1) (keyCompromise), V(2) (cACompromise), V(3) (affiliationChanged), V(4) (superseded), V(5) (cessationOfOperation), V(6) (certificateHold), V(8) (removeFromCRL), V(9) (privilegeWithdrawn), V(10) (aACompromise).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "select_crypto_backend",
+      "displayName": "Select Crypto Backend",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Determines which crypto backend to use. The default choice is V(auto), which tries to use C(cryptography) if available, and falls back to C(openssl). If set to V(openssl), will try to use the C(openssl) binary. If set to V(cryptography), will try to use the L(cryptography,https://cryptography.io/) library.",
+      "choices": [
+        "auto",
+        "cryptography",
+        "openssl"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether calls to the ACME directory will validate TLS certificates. B(Warning:) Should B(only ever) be set to V(false) for testing purposes, for example when testing against a local Pebble server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

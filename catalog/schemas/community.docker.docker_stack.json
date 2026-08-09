@@ -2,6 +2,223 @@
   "fqcn": "community.docker.docker_stack",
   "shortDescription": "docker stack module",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/docker/docker_stack_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "absent_retries",
+      "displayName": "Absent Retries",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "If larger than V(0) and O(state=absent) the module will retry up to O(absent_retries) times to delete the stack until all the resources have been effectively deleted. If the last try still reports the stack as not completely removed the module will fail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "absent_retries_interval",
+      "displayName": "Absent Retries Interval",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Interval in seconds between consecutive O(absent_retries).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_version",
+      "displayName": "Api Version",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "The version of the Docker API running on the Docker Host. Defaults to the latest version of the API supported by this collection and the docker daemon. If the value is not specified in the task, the value of environment variable E(DOCKER_API_VERSION) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use a CA certificate when performing server verification by providing the path to a CA certificate file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(ca.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cli_context",
+      "displayName": "Cli Context",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Docker CLI context to use. Mutually exclusive with O(docker_host).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client's TLS certificate file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(cert.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the client's TLS key file. If the value is not specified in the task and the environment variable E(DOCKER_CERT_PATH) is set, the file C(key.pem) from the directory specified in the environment variable E(DOCKER_CERT_PATH) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compose",
+      "displayName": "Compose",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of compose definitions. Any element may be a string referring to the path of the compose file on the target host or the YAML contents of a compose file nested as dictionary.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detach",
+      "displayName": "Detach",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(false), the C(--detach=false) option is added to the C(docker stack deploy) command, allowing Docker to wait for tasks to converge before exiting. If V(true) (default), Docker exits immediately instead of waiting for tasks to converge.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_cli",
+      "displayName": "Docker Cli",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the Docker CLI. If not provided, will search for Docker CLI on the E(PATH).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_host",
+      "displayName": "Docker Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL or Unix socket path used to connect to the Docker API. To connect to a remote host, provide the TCP connection string. For example, V(tcp://192.0.2.23:2376). If TLS is used to encrypt the connection, the module will automatically replace C(tcp) in the connection URL with C(https). If the value is not specified in the task, the value of environment variable E(DOCKER_HOST) will be used instead. If the environment variable is not set, the default value will be used. Mutually exclusive with ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Stack name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prune",
+      "displayName": "Prune",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true will add the C(--prune) option to the C(docker stack deploy) command. This will have docker remove the services not present in the current stack definition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resolve_image",
+      "displayName": "Resolve Image",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If set will add the C(--resolve-image) option to the C(docker stack deploy) command. This will have docker query the registry to resolve image digest and supported platforms. If not set, docker use \"always\" by default.",
+      "choices": [
+        "always",
+        "changed",
+        "never"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Service state.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls",
+      "displayName": "Tls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server. Note that if O(validate_certs) is set to V(true) as well, it will take precedence. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_hostname",
+      "displayName": "Tls Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When verifying the authenticity of the Docker Host server, provide the expected name of the server. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS_HOSTNAME) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server. If the value is not specified in the task, the value of environment variable E(DOCKER_TLS_VERIFY) will be used instead. If the environment variable is not set, the default value will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "with_registry_auth",
+      "displayName": "With Registry Auth",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true will add the C(--with-registry-auth) option to the C(docker stack deploy) command. This will have docker send registry authentication details to Swarm agents.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

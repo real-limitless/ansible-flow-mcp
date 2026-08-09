@@ -1,0 +1,155 @@
+{
+  "fqcn": "vmware.vmware_rest.vcenter_ovf_libraryitem",
+  "shortDescription": "Creates a library item in content library from a virtual machine or virtual appliance",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware_rest/vcenter_ovf_libraryitem_module.html",
+  "options": [
+    {
+      "name": "client_token",
+      "displayName": "Client Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Client-generated token used to retry a request if the client fails to get a response from the server. If the original request succeeded, the result of that request will be returned, otherwise the operation will be retried. If unset, the server will create a token.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_spec",
+      "displayName": "Create Spec",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Information used to create the OVF package from the source virtual machine or virtual appliance. Required with I(state=['present']) Valid attributes are:  - C(name) (str): Name to use in the OVF descriptor stored in the library item. If unset, the server will use source's current name. (['present'])  - C(description) (str): Description to use in the OVF descriptor stored in the library item. If unset, the server will use source's current annotation. (['present'])  - C(flags) (list): Flags to use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deployment_spec",
+      "displayName": "Deployment Spec",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specification of how the OVF package should be deployed to the target. Required with I(state=['deploy']) Valid attributes are:  - C(name) (str): Name assigned to the deployed target virtual machine or virtual appliance. If unset, the server will use the name from the OVF package. (['deploy'])  - C(annotation) (str): Annotation assigned to the deployed target virtual machine or virtual appliance. If unset, the server will use the annotation from the OVF package. (['deploy'])  - C(accept_all_EULA)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ovf_library_item_id",
+      "displayName": "Ovf Library Item Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Identifier of the content library item containing the OVF package to be deployed. The parameter must be the id of a resource returned by M(vmware.vmware_rest.content_library_item_info). Required with I(state=['deploy', 'filter'])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_timeout",
+      "displayName": "Session Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Timeout settings for client session.  The maximal number of seconds for the whole operation including connection establishment, request sending and response.  The default value is 300s.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Identifier of the virtual machine or virtual appliance to use as the source. Required with I(state=['present']) Valid attributes are:  - C(type) (str): Type of the deployable resource. When clients pass a value of this structure as a parameter, the field must be one of VirtualMachine or VirtualApp. (['present'])    This key is required with ['present'].  - C(id) (str): Identifier of the deployable resource. When clients pass a value of this structure as a parameter, the field must be an identifi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "",
+      "choices": [
+        "deploy",
+        "filter",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Specification of the target content library and library item. This parameter is mandatory. Valid attributes are:  - C(library_id) (str): Identifier of the library in which a new library item should be created. This field is not used if the I(library_item_id) field is specified. This field is currently required.   In the future, if unset, the I(library_item_id) field must be specified.   When clients pass a value of this structure as a parameter, the field must be the id of a resource returned by",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_hostname",
+      "displayName": "Vcenter Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter If the value is not specified in the task, the value of environment variable C(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_password",
+      "displayName": "Vcenter Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter password If the value is not specified in the task, the value of environment variable C(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_rest_log_file",
+      "displayName": "Vcenter Rest Log File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "You can use this optional parameter to set the location of a log file.  This file will be used to record the HTTP REST interaction.  The file will be stored on the host that runs the module.  If the value is not specified in the task, the value of  environment variable C(VMWARE_REST_LOG_FILE) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_username",
+      "displayName": "Vcenter Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The vSphere vCenter username If the value is not specified in the task, the value of environment variable C(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcenter_validate_certs",
+      "displayName": "Vcenter Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to C(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable C(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,161 @@
+{
+  "fqcn": "juniper.device.junos_config",
+  "shortDescription": "Manage configuration on devices running Juniper JUNOS",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/juniper/device/junos_config_module.html",
+  "options": [
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This argument will cause the module to create a full backup of the current C(running-config) from the remote device before any changes are made. If the C(backup_options) value is not given, the backup file is written to the C(backup) folder in the playbook root directory or role root directory, if playbook is part of an ansible role. If the directory does not exist, it is created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_options",
+      "displayName": "Backup Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "This is a dict object containing configurable options related to backup file path. The value of this option is read only when C(backup) is set to I(true), if C(backup) is set to I(false) this option will be silently ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_commit",
+      "displayName": "Check Commit",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This argument will check correctness of syntax; do not apply changes. Note that this argument can be used to confirm verified configuration done via commit confirmed operation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": "configured by junos_config",
+      "description": "The C(comment) argument specifies a text string to be used when committing the configuration.  If the C(confirm) argument is set to False, this argument is silently ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "confirm",
+      "displayName": "Confirm",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The C(confirm) argument will configure a time out value in minutes for the commit to be confirmed before it is automatically rolled back. If the value for this argument is set to 0, the commit is confirmed immediately which is also the default behaviour.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "confirm_commit",
+      "displayName": "Confirm Commit",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This argument will execute commit operation on remote device. It can be used to confirm a previous commit.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lines",
+      "displayName": "Lines",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "This argument takes a list of C(set) or C(delete) configuration lines to push into the remote device.  Each line must start with either C(set) or C(delete).  This argument is mutually exclusive with the I(src) argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace",
+      "displayName": "Replace",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "The C(replace) argument will instruct the remote device to replace the current configuration hierarchy with the one specified in the corresponding hierarchy of the source configuration loaded from this module. Note this argument should be considered deprecated.  To achieve the equivalent, set the I(update) argument to C(replace). This argument will be removed in a future release. The C(replace) and C(update) argument is mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rollback",
+      "displayName": "Rollback",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The C(rollback) argument instructs the module to rollback the current configuration to the identifier specified in the argument.  If the specified rollback identifier does not exist on the remote device, the module will fail.  To rollback to the most recent commit, set the C(rollback) argument to 0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The I(src) argument provides a path to the configuration file to load into the remote system. The path can either be a full system path to the configuration file if the value starts with / or relative to the root of the implemented role or playbook. This argument is mutually exclusive with the I(lines) argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src_format",
+      "displayName": "Src Format",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The I(src_format) argument specifies the format of the configuration found int I(src).  If the I(src_format) argument is not provided, the module will attempt to determine the format of the configuration file specified in I(src).",
+      "choices": [
+        "xml",
+        "set",
+        "text",
+        "json"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update",
+      "displayName": "Update",
+      "type": "string",
+      "required": false,
+      "default": "merge",
+      "description": "This argument will decide how to load the configuration data particularly when the candidate configuration and loaded configuration contain conflicting statements. Following are accepted values. C(merge) combines the data in the loaded configuration with the candidate configuration. If statements in the loaded configuration conflict with statements in the candidate configuration, the loaded statements replace the candidate ones. C(override) discards the entire candidate configuration and replace",
+      "choices": [
+        "merge",
+        "override",
+        "replace",
+        "update"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zeroize",
+      "displayName": "Zeroize",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "The C(zeroize) argument is used to completely sanitize the remote device configuration back to initial defaults.  This argument will effectively remove all current configuration statements on the remote device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,205 @@
+{
+  "fqcn": "community.hrobot.storagebox_subaccount",
+  "shortDescription": "Create, update, or delete a subaccount for a storage box",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/hrobot/storagebox_subaccount_module.html",
+  "options": [
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A custom comment for the subaccount. Is required when using O(idempotence=comment) for updates or deletion of a subaccount.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "external_reachability",
+      "displayName": "External Reachability",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable external reachability (from outside Hetzner's networks).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hetzner_password",
+      "displayName": "Hetzner Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for the Robot web-service user. If O(hetzner_password) is specified, O(hetzner_user) must also be specified, and O(hetzner_token) must not be specified. This option is deprecated for this module, and support will be removed in community.hrobot 3.0.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hetzner_token",
+      "displayName": "Hetzner Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The API token for the Robot web-service user. One of O(hetzner_token) and O(hetzner_user) must be specified. This option will be required from community.hrobot 3.0.0 on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hetzner_user",
+      "displayName": "Hetzner User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username for the Robot web-service user. One of O(hetzner_token) and O(hetzner_user) must be specified. If O(hetzner_user) is specified, O(hetzner_password) must also be specified, and O(hetzner_token) must not be specified. This option is deprecated for this module, and support will be removed in community.hrobot 3.0.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "homedirectory",
+      "displayName": "Homedirectory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Home directory of the subaccount. Required only when creating a subaccount (O(state=present)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idempotence",
+      "displayName": "Idempotence",
+      "type": "string",
+      "required": false,
+      "default": "username",
+      "description": "Select which attribute to use to check subaccount existence. If set to C(username), then subaccounts are identified by their username. Note that usernames cannot be specified on creation, so you need to use different module arguments for creation and updating. If set to C(comment), then subaccounts are identified by their comment. If there already exist more than one subaccount with the given comment, the module will fail.",
+      "choices": [
+        "username",
+        "comment"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password to use or change. See O(password_mode) for how and when this is used. Will be ignored if O(password_mode=set-to-random).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_mode",
+      "displayName": "Password Mode",
+      "type": "string",
+      "required": false,
+      "default": "update-if-provided",
+      "description": "Controls how password updates are handled. If C(update-if-provided), the password always updated if provided (default). If C(ignore-if-exists), password is only used during creation. If C(set-to-random), password is reset to a randomly generated one. Note that this is not supported by the new API (when O(hetzner_token) is set). The value has been deprecated in community.hrobot 2.7.0 and will be removed from community.hrobot 3.0.0. When a new subaccount is created, the password is set to the spec",
+      "choices": [
+        "update-if-provided",
+        "ignore-if-exists",
+        "set-to-random"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rate_limit_retry_timeout",
+      "displayName": "Rate Limit Retry Timeout",
+      "type": "number",
+      "required": false,
+      "default": -1,
+      "description": "Timeout (in seconds) for waiting when rate limit exceeded errors are returned. Set to V(0) to not retry. Set to a negative value like V(-1) to retry forever.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "readonly",
+      "displayName": "Readonly",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable read-only mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "samba",
+      "displayName": "Samba",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable Samba.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh",
+      "displayName": "Ssh",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable SSH access.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of this subaccount.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storagebox_id",
+      "displayName": "Storagebox Id",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "The ID of the storage box to query.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username of the subaccount. Required when using O(idempotence=username) for updates or deletion of a subaccount. If O(idempotence=username) and this is not specified, a new subaccount will always be created. If O(idempotence=comment), this option is ignored, as the Hetzner API does not allow to chose or modify the username.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "webdav",
+      "displayName": "Webdav",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable WebDAV.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

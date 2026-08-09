@@ -2,6 +2,227 @@
   "fqcn": "operator_sdk.util.k8s_status",
   "shortDescription": "Update the status for a Kubernetes API resource",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/operator_sdk/util/k8s_status_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Token used to authenticate with the API. Can also be specified via K8S_AUTH_API_KEY environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_version",
+      "displayName": "Api Version",
+      "type": "string",
+      "required": false,
+      "default": "v1",
+      "description": "Use to specify the object's API version. Use in conjunction with I(kind), I(name), and I(namespace) to identify a specific object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a CA certificate used to authenticate with the API. The full certificate chain must be provided to avoid certificate validation errors. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a certificate used to authenticate with the API. Can also be specified via K8S_AUTH_CERT_FILE environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a key file used to authenticate with the API. Can also be specified via K8S_AUTH_KEY_FILE environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "conditions",
+      "displayName": "Conditions",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of condition objects that will be set on the status.conditions field of the specified resource. Unless I(replace) is C(true) the specified conditions will be merged with the conditions already set on the status field of the specified resource. Each element in the list will be validated according to the conventions specified in the [Kubernetes API conventions document](https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status). One of I(statu",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of a context found in the config file. Can also be specified via K8S_AUTH_CONTEXT environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a URL for accessing the API. Can also be specified via K8S_AUTH_HOST environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kind",
+      "displayName": "Kind",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Use to specify an object kind. Use in conjunction with I(api_version), I(name), and I(namespace) to identify a specific object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kubeconfig",
+      "displayName": "Kubeconfig",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to an existing Kubernetes config file. If not provided, and no other connection options are provided, the kubernetes client will attempt to load the default configuration file from I(~/.kube/config.json). Can also be specified via K8S_AUTH_KUBECONFIG environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Use to specify an object name. Use in conjunction with I(api_version), I(kind) and I(namespace) to identify a specific object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace",
+      "displayName": "Namespace",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use to specify an object namespace. Use in conjunction with I(api_version), I(kind), and I(name) to identify a specific object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a password for authenticating with the API. Can also be specified via K8S_AUTH_PASSWORD environment variable. Please read the description of the C(username) option for a discussion of when this option is applicable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "persist_config",
+      "displayName": "Persist Config",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not to save the kube config refresh tokens. Can also be specified via K8S_AUTH_PERSIST_CONFIG environment variable. When the k8s context is using a user credentials with refresh tokens (like oidc or gke/gcloud auth), the token is refreshed by the k8s python client library but not saved by default. So the old refresh token can expire and the next auth might fail. Setting this flag to true will tell the k8s python client to save the new refresh token to the kube config file. Default to ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy",
+      "displayName": "Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL of an HTTP proxy to use for the connection. Can also be specified via K8S_AUTH_PROXY environment variable. Please note that this module does not pick up typical proxy settings from the environment (e.g. HTTP_PROXY).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace",
+      "displayName": "Replace",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to C(True), the status will be set using `PUT` rather than `PATCH`, replacing the full status object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace_lists",
+      "displayName": "Replace Lists",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to C(True), any lists except `conditions` will be fully replaced if mismatched.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "An object containing key: value pairs that will be set on the status object of the specified resource. One of I(status) or I(conditions) is required. If you use I(conditions), you cannot include a conditions field beneath status. If you add a conditions field under status, it will not be validated like conditions specified through I(conditions) are.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide a username for authenticating with the API. Can also be specified via K8S_AUTH_USERNAME environment variable. Please note that this only works with clusters configured to use HTTP Basic Auth. If your cluster has a different form of authentication (e.g. OAuth2 in OpenShift), this option will not work as expected and you should look into the M(community.okd.k8s_auth) module, as that might do what you need.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not to verify the API server's SSL certificates. Can also be specified via K8S_AUTH_VERIFY_SSL environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

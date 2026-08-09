@@ -1,0 +1,433 @@
+{
+  "fqcn": "juniper.device.software",
+  "shortDescription": "Install software on a Junos device",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/juniper/device/software_module.html",
+  "options": [
+    {
+      "name": "all_re",
+      "displayName": "All Re",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether or not to install the software on all Routing Engines of the target Junos device. If C(true), and the device has multiple Routing Engines, the software is installed on all Routing Engines. If C(false), the software is only installed on the current Routing Engine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attempts",
+      "displayName": "Attempts",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "The number of times to try connecting and logging in to the Junos device. This option is only applicable when using C(mode = 'telnet') or C(mode = 'serial'). Mutually exclusive with the I(console) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "baud",
+      "displayName": "Baud",
+      "type": "number",
+      "required": false,
+      "default": 9600,
+      "description": "The serial baud rate, in bits per second, used to connect to the Junos device. This option is only applicable when using C(mode = 'serial'). Mutually exclusive with the I(console) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum",
+      "displayName": "Checksum",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "The pre-calculated checksum, using the I(checksum_algorithm) of the file specified by the I(local_package) option. Specifying this option is simply an optimization to avoid repeatedly computing the checksum of the I(local_package) file once for each target Junos host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum_algorithm",
+      "displayName": "Checksum Algorithm",
+      "type": "string",
+      "required": false,
+      "default": "md5",
+      "description": "The algorithm to use when calculating the checksum of the local and remote software packages.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum_timeout",
+      "displayName": "Checksum Timeout",
+      "type": "number",
+      "required": false,
+      "default": "300 (5 minutes)",
+      "description": "The number of seconds to wait for the calculation of the checksum to complete on the target Junos device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cleanfs",
+      "displayName": "Cleanfs",
+      "type": "boolean",
+      "required": false,
+      "default": "true (unless I(no_copy) is C(true), then C(false))",
+      "description": "Whether or not to perform a C(request system storage cleanup) prior to copying or installing the software.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cleanfs_timeout",
+      "displayName": "Cleanfs Timeout",
+      "type": "number",
+      "required": false,
+      "default": "300 (5 minutes)",
+      "description": "The number of seconds to wait for the C(request system storage cleanup) to complete on the target Junos device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "console",
+      "displayName": "Console",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "An alternate method of specifying a NETCONF over serial console connection to the Junos device using Telnet to a console server. The value of this option must be a string in the format C(--telnet <console_hostname>,<console_port_number>). This option is deprecated. It is present only for backwards compatibility. The string value of this option is exactly equivalent to specifying I(host) with a value of C(<console_hostname>), I(mode) with a value of C(telnet), and I(port) with a value of C(<conso",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cs_passwd",
+      "displayName": "Cs Passwd",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password used to authenticate with the console server over SSH. This option is only required if you want to connect to a device over console using SSH as transport. Mutually exclusive with the I(console) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cs_user",
+      "displayName": "Cs User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username used to authenticate with the console server over SSH. This option is only required if you want to connect to a device over console using SSH as transport. Mutually exclusive with the I(console) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_host",
+      "displayName": "Force Host",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Forces the upgrade of the Host Software package on QFX-series devices.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": "C({{ inventory_hostname }})",
+      "description": "The hostname or IP address of the Junos device to which the connection should be established. This is normally the Junos device itself, but is the hostname or IP address of a console server when connecting to the console of the device by setting the I(mode) option to the value C(telnet). This option is required, but does not have to be specified explicitly by the user because it defaults to C({{ inventory_hostname }}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "huge_tree",
+      "displayName": "Huge Tree",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Parse XML with very deep trees and long text content.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "install_timeout",
+      "displayName": "Install Timeout",
+      "type": "number",
+      "required": false,
+      "default": "1800 (30 minutes)",
+      "description": "The number of seconds to wait for the software installation to complete on the target Junos device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "issu",
+      "displayName": "Issu",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates if a unified in-service software upgrade (ISSU) should be attempted. ISSU enables the upgrade between two different Junos OS releases with no control plane disruption and minimal data plane traffic disruption. In order for an ISSU to succeed, ISSU must be supported. This includes support for the current to desired Junos versions, the hardware of the target Junos device, and the current software configuration of the target Junos device. The I(issu) and I(nssu) options are mutually exclu",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kwargs",
+      "displayName": "Kwargs",
+      "type": "dict",
+      "required": false,
+      "default": "none",
+      "description": "Additional keyword arguments and values which are passed to the C(<request-package-add>) RPC used to install the software package. The value of this option is a dictionary of keywords and values.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "level",
+      "displayName": "Level",
+      "type": "string",
+      "required": false,
+      "default": "WARNING",
+      "description": "The level of information to be logged can be modified using this option 1) By default, messages at level C(WARNING) or higher are logged. 2) If the C(-v) or C(--verbose) command-line options to the C(ansible-playbook) command are specified, messages at level C(INFO) or higher are logged. 3) If the C(-vv) (or more verbose) command-line option to the C(ansible-playbook) command is specified, or the C(ANSIBLE_DEBUG) environment variable is set, then messages at level C(DEBUG) or higher are logged. ",
+      "choices": [
+        "INFO",
+        "DEBUG"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_package",
+      "displayName": "Local Package",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "The path, on the local Ansible control machine, of a Junos software package. This Junos software package will be installed on the target Junos device. If this option is specified, and a file with the same MD5 checksum doesn't already exist at the I(remote_package) location on the target Junos device, then the file is copied from the local Ansible control machine to the target Junos device. If this option is not specified, it is assumed that the software package already exists on the target Junos",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logdir",
+      "displayName": "Logdir",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "The path to a directory, on the Ansible control machine, where debugging information for the particular task is logged. If this option is specified, debugging information is logged to a file named C({{ inventory_hostname }}.log) in the directory specified by the I(logdir) option. The log file must be writeable. If the file already exists, it is appended. It is the users responsibility to delete/rotate log files. The level of information logged in this file is controlled by Ansible's verbosity, d",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logfile",
+      "displayName": "Logfile",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "The path to a file, on the Ansible control machine, where debugging information for the particular task is logged. The log file must be writeable. If the file already exists, it is appended. It is the users responsibility to delete/rotate log files. The level of information logged in this file is controlled by Ansible's verbosity, debug options and level option in task 1) By default, messages at level C(WARNING) or higher are logged. 2) If the C(-v) or C(--verbose) command-line options to the C(",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "member_id",
+      "displayName": "Member Id",
+      "type": "list",
+      "required": false,
+      "default": "none",
+      "description": "install software on the specified members ids of VC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "The PyEZ mode used to establish a NETCONF connection to the Junos device. A value of C(none) uses the default NETCONF over SSH mode. Depending on the values of the I(host) and I(port) options, a value of C(telnet) results in either a direct NETCONF over Telnet connection to the Junos device, or a NETCONF over serial console connection to the Junos device using Telnet to a console server. A value of C(serial) results in a NETCONF over serial console connection to the Junos device. Mutually exclus",
+      "choices": [
+        "none",
+        "telnet",
+        "serial"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_copy",
+      "displayName": "No Copy",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates if the file containing the software package should be copied from the I(local_package) location on the local Ansible control machine to the I(remote_package) location on the target Junos device. If the value is C(true), or if the I(local_package) option is not specified, then the copy is skipped and the file must already exist at the I(remote_package) location on the target Junos device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nssu",
+      "displayName": "Nssu",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates if a non-stop software upgrade (NSSU) should be attempted. NSSU enables the upgrade between two different Junos OS releases with minimal data plane traffic disruption. NSSU is specific to EX-series Virtual Chassis systems or EX-series stand-alone systems with redundant Routing Engines. In order for an NSSU to succeed, NSSU must be supported. This includes support for the current to desired Junos versions, the hardware of the target Junos device, and the current software configuration o",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "passwd",
+      "displayName": "Passwd",
+      "type": "string",
+      "required": false,
+      "default": "The first defined value from the following list 1) The C(ANSIBLE_NET_PASSWORD) environment variable. (used by Ansible Tower) 2) The value specified using the C(-k) or C(--ask-pass) command line arguments to the C(ansible) or C(ansible-playbook) command. 3) none (An empty password/passphrase)",
+      "description": "The password, or ssh key's passphrase, used to authenticate with the Junos device. If this option is not specified, authentication is attempted using an empty password, or ssh key passphrase.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pkg_set",
+      "displayName": "Pkg Set",
+      "type": "list",
+      "required": false,
+      "default": false,
+      "description": "install software on the members in a mixed Virtual Chassis. Currently we are not doing target package check this option is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "string",
+      "required": false,
+      "default": "C(830) if C(mode = none), C(23) if C(mode = 'telnet'), C('/dev/ttyUSB0') if (mode = 'serial')",
+      "description": "The TCP port number or serial device port used to establish the connection. Mutually exclusive with the I(console) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot",
+      "displayName": "Reboot",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Indicates if the target Junos device should be rebooted after performing the software install.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot_pause",
+      "displayName": "Reboot Pause",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "The amount of time, in seconds, to wait after the reboot is issued before the module returns. This gives time for the reboot to begin. The default value of 10 seconds is designed to ensure the device is no longer reachable (because the reboot has begun) when the next task begins. The value must be an integer greater than or equal to 0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_package",
+      "displayName": "Remote Package",
+      "type": "string",
+      "required": false,
+      "default": "C(/var/tmp/) + filename portion of I(local_package)",
+      "description": "This option may take one of two formats. The first format is a URL, from the perspective of the target Junos device, from which the device retrieves the software package to be installed. The acceptable formats for the URL value may be found U(here|https://www.juniper.net/documentation/en_US/junos/topics/concept/junos-software-formats-filenames-urls.html). When using the URL format, the I(local_package) and I(no_copy) options must not be specified. The second format is a file path, on the taget J",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_config",
+      "displayName": "Ssh Config",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the SSH client configuration file. If this option is not specified, then the PyEZ Device instance by default queries file ~/.ssh/config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_private_key_file",
+      "displayName": "Ssh Private Key File",
+      "type": "string",
+      "required": false,
+      "default": "The first defined value from the following list 1) The C(ANSIBLE_NET_SSH_KEYFILE) environment variable. (used by Ansible Tower) 2) The value specified using the C(--private-key) or C(--key-file) command line arguments to the C(ansible) or C(ansible-playbook) command. 3) none (the file specified in the user's SSH configuration, or the operating-system-specific default)",
+      "description": "The path to the SSH private key file used to authenticate with the Junos device. If this option is not specified, and no default value is found using the algorithm below, then the SSH private key file specified in the user's SSH configuration, or the operating-system-specific default is used. This must be in the RSA PEM format, and not the newer OPENSSH format. To check if the private key is in the correct format, issue the command `head -n1 ~/.ssh/some_private_key` and ensure that it's RSA and ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The maximum number of seconds to wait for RPC responses from the Junos device. This option does NOT control the initial connection timeout value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": "The first defined value from the following list 1) The C(ANSIBLE_NET_USERNAME) environment variable. (used by Ansible Tower) 2) The C(remote_user) as defined by Ansible. Ansible sets this value via several methods including a) C(-u) or C(--user) command line arguments to the C(ansible) or C(ansible-playbook) command. b) C(ANSIBLE_REMOTE_USER) environment variable. c) C(remote_user) configuration setting. See the Ansible documentation for the precedence used to set the C(remote_user) value. 3) The C(USER) environment variable.",
+      "description": "The username used to authenticate with the Junos device. This option is required, but does not have to be specified explicitly by the user due to the algorithm for determining the default value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate",
+      "displayName": "Validate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether or not to have the target Junos device should validate the current configuration against the new software package.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": "Attempt to extract the version from the file name specified by the I(local_package) or I(remote_package) option values IF the package appears to be a Junos software package. Otherwise, C(none).",
+      "description": "The version of software contained in the file specified by the I(local_package) and/or I(remote_package) options. This value should match the Junos version which will be reported by the device once the new software is installed. If the device is already running a version of software which matches the I(version) option value, the software install is not necessary. In this case the module returns a I(changed) value of C(false) and an I(failed) value of C(false) and does not attempt to perform the ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vmhost",
+      "displayName": "Vmhost",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether or not this is a vmhost software installation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

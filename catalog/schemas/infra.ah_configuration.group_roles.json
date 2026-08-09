@@ -2,6 +2,110 @@
   "fqcn": "infra.ah_configuration.group_roles",
   "shortDescription": "Add roles to private automation hub user groups",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/infra/ah_configuration/group_roles_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "ah_host",
+      "displayName": "Ah Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to Ansible Galaxy or Automation Hub instance. If value not set, will try environment variable C(AH_HOST) If value not specified by any means, the value of C(127.0.0.1) will be used",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ah_password",
+      "displayName": "Ah Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for your Ansible Galaxy or Automation Hub instance. If value not set, will try environment variable C(AH_PASSWORD)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ah_path_prefix",
+      "displayName": "Ah Path Prefix",
+      "type": "string",
+      "required": false,
+      "default": "galaxy",
+      "description": "API path used to access the api. For galaxy_ng this is either 'automation-hub' or the custom prefix used on install with GALAXY_API_PATH_PREFIX For Automation Hub this is 'galaxy'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ah_username",
+      "displayName": "Ah Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for your Ansible Galaxy or Automation Hub instance. If value not set, will try environment variable C(AH_USERNAME)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "groups",
+      "displayName": "Groups",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "List of Group names that receive the permissions specified by the roles. If the group is not found, it will be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "request_timeout",
+      "displayName": "Request Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specify the timeout Ansible should use in requests to the Galaxy or Automation Hub host. Defaults to 10s, but this is handled by the shared module_utils code",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role_list",
+      "displayName": "Role List",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "List of sets of roles and targets to apply to the groups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(absent), then the module deletes the given combination of roles for given groups. The module does not fail if the combination does not exist because the state is already as expected. If C(present), then the module creates the group roles if it does not already exist. If already existing, no change is made. If C(enforced), then the module will remove any group role combinations not provided.",
+      "choices": [
+        "present",
+        "enforced",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to allow insecure connections to Galaxy or Automation Hub Server. If C(no), SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates. If value not set, will try environment variable C(AH_VERIFY_SSL)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

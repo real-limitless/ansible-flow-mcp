@@ -1,0 +1,228 @@
+{
+  "fqcn": "dellemc.openmanage.idrac_boot",
+  "shortDescription": "Configure the boot order settings.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/idrac_boot_module.html",
+  "options": [
+    {
+      "name": "boot_options",
+      "displayName": "Boot Options",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Options to enable or disable the boot devices. This is mutually exclusive with I(boot_order), I(boot_source_override_mode), I(boot_source_override_enabled) I(boot_source_override_target), and I(uefi_target_boot_source_override).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_order",
+      "displayName": "Boot Order",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "This option allows to set the boot devices in the required boot order sequences. This is mutually exclusive with I(boot_options).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_source_override_enabled",
+      "displayName": "Boot Source Override Enabled",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The state of the Boot Source Override feature. C(disabled) The system boots normally. C(once) The system boots (one time) to the I(boot_source_override_target). C(continuous) The system boots to the target specified in the I(boot_source_override_target) until this property is set to Disabled. The state is set to C(once) for the one-time boot override and C(continuous) for the remain-active-until\u2014canceled override. If the state is set C(once) or C(continuous), the value is reset to C(disabled) af",
+      "choices": [
+        "continuous",
+        "disabled",
+        "once"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_source_override_mode",
+      "displayName": "Boot Source Override Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The BIOS boot mode (either Legacy or UEFI) to be used when I(boot_source_override_target) boot source is booted from. C(legacy) The system boot in non-UEFI(Legacy) boot mode to the I(boot_source_override_target). C(uefi) The system boot in UEFI boot mode to the I(boot_source_override_target). This is read-only property for iDRAC 17G and later. This is mutually exclusive with I(boot_options).",
+      "choices": [
+        "legacy",
+        "uefi"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_source_override_target",
+      "displayName": "Boot Source Override Target",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The boot source override target device to use during the next boot instead of the normal boot device. C(pxe) performs PXE boot from the primary NIC. C(floppy), C(cd), C(hdd), C(sd_card) performs boot from their devices respectively. C(bios_setup) performs boot into the native BIOS setup. C(utilities) performs boot from the local utilities. C(uefi_target) performs boot from the UEFI device path found in I(uefi_target_boot_source_override). If the I(boot_source_override_target) is set to a value o",
+      "choices": [
+        "uefi_http",
+        "sd_card",
+        "uefi_target",
+        "utilities",
+        "bios_setup",
+        "hdd",
+        "cd",
+        "floppy",
+        "pxe",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_ip",
+      "displayName": "Idrac Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC IP Address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_password",
+      "displayName": "Idrac Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC user password. If the password is not provided, then the environment variable E(IDRAC_PASSWORD) is used. Example: export IDRAC_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_port",
+      "displayName": "Idrac Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "iDRAC port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_user",
+      "displayName": "Idrac User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC username. If the username is not provided, then the environment variable E(IDRAC_USERNAME) is used. Example: export IDRAC_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Provides the option to wait for job completion. This is applicable when I(reset_type) is C(force_reset) or C(graceful_reset).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 900,
+      "description": "The maximum wait time of I(job_wait) in seconds. The job is tracked only for this duration. This option is applicable when I(job_wait) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset_type",
+      "displayName": "Reset Type",
+      "type": "string",
+      "required": false,
+      "default": "graceful_restart",
+      "description": "C(none) Host system is not rebooted and I(job_wait) is not applicable. C(force_restart) Forcefully reboot the Host system. C(graceful_restart) Gracefully reboot the Host system.",
+      "choices": [
+        "graceful_restart",
+        "force_restart",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_id",
+      "displayName": "Resource Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Redfish ID of the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uefi_target_boot_source_override",
+      "displayName": "Uefi Target Boot Source Override",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The UEFI device path of the device from which to boot when I(boot_source_override_target) is C(uefi_target). I(boot_source_override_enabled) cannot be set to c(continuous) if I(boot_source_override_target) set to C(uefi_target) because this settings is defined in UEFI as a one-time-boot setting. Changes to this options do not alter the BIOS persistent boot order configuration. This is required if I(boot_source_override_target) is C(uefi_target). This is mutually exclusive with I(boot_options).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(IDRAC_X_AUTH_TOKEN) is used. Example: export IDRAC_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,472 @@
   "fqcn": "azure.azcollection.azure_rm_afdroute",
   "shortDescription": "Manage an Azure Front Door Route",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/azure/azcollection/azure_rm_afdroute_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "ad_user",
+      "displayName": "Ad User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Active Directory username. Use when authenticating with an Active Directory user rather than service principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "adfs_authority_url",
+      "displayName": "Adfs Authority Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure AD authority url. Use when authenticating with Username/password, and has your own ADFS authority.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_profile",
+      "displayName": "Api Profile",
+      "type": "string",
+      "required": false,
+      "default": "latest",
+      "description": "Selects an API profile to use when communicating with Azure services. Default value of C(latest) is appropriate for public clouds; future values will allow use with Azure Stack.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_source",
+      "displayName": "Auth Source",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Controls the source of the credentials to use for authentication. Can also be set via the C(ANSIBLE_AZURE_AUTH_SOURCE) environment variable. When set to C(auto) (the default) the precedence is module parameters -> C(env) -> C(credential_file) -> C(cli). When set to C(env), the credentials will be read from the environment variables. When set to C(credential_file), it will read the profile from C(~/.azure/credentials). When set to C(cli), the credentials will be sources from the Azure CLI profile",
+      "choices": [
+        "auto",
+        "cli",
+        "credential_file",
+        "env",
+        "msi"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_validation_mode",
+      "displayName": "Cert Validation Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Controls the certificate validation behavior for Azure endpoints. By default, all modules will validate the server certificate, but when an HTTPS proxy is in use, or against Azure Stack, it may be necessary to disable this behavior by passing C(ignore). Can also be set via credential file profile or the C(AZURE_CERT_VALIDATION) environment variable.",
+      "choices": [
+        "ignore",
+        "validate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure client ID. Use when authenticating with a Service Principal or Managed Identity (msi). Can also be set via the C(AZURE_CLIENT_ID) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud_environment",
+      "displayName": "Cloud Environment",
+      "type": "string",
+      "required": false,
+      "default": "AzureCloud",
+      "description": "For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(AzureChinaCloud), C(AzureUSGovernment)), or a metadata discovery endpoint URL (required for Azure Stack). Can also be set via credential file profile or the C(AZURE_CLOUD_ENVIRONMENT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "content_types_to_compress",
+      "displayName": "Content Types To Compress",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The caching configuration/compression settings for this route. List of content types (str) on which compression applies. The value should be a valid MIME type. Required together (is_compression_enabled, content_types_to_compress, query_string_caching_behavior, query_parameters)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_domains",
+      "displayName": "Custom Domains",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Domain names referenced by this endpoint. ID will be looked up based on the name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_cache_configuration",
+      "displayName": "Disable Cache Configuration",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "To disable cache configuration, set this to true and do not include cache_configuration. This will override any cache_configuration settings you include.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_instance_discovery",
+      "displayName": "Disable Instance Discovery",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Determines whether or not instance discovery is performed when attempting to authenticate. Setting this to true will completely disable both instance discovery and authority validation. This functionality is intended for use in scenarios where the metadata endpoint cannot be reached such as in private clouds or Azure Stack. The process of instance discovery entails retrieving authority metadata from https://login.microsoft.com/ to validate the authority. By setting this to **True**, the validati",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled_state",
+      "displayName": "Enabled State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'.",
+      "choices": [
+        "Enabled",
+        "Disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_name",
+      "displayName": "Endpoint Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the endpoint under the profile which is unique globally.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forwarding_protocol",
+      "displayName": "Forwarding Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Protocol this rule will use when forwarding traffic to backends.",
+      "choices": [
+        "HttpOnly",
+        "HttpsOnly",
+        "MatchRequest"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "https_redirect",
+      "displayName": "Https Redirect",
+      "type": "string",
+      "required": false,
+      "default": "Disabled",
+      "description": "Whether to automatically redirect HTTP traffic to HTTPS traffic.",
+      "choices": [
+        "Enabled",
+        "Disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_compression_enabled",
+      "displayName": "Is Compression Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "The caching configuration/compression settings for this route. Indicates whether content compression is enabled on AzureFrontDoor. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB. Required together (is_compression_enabled, content_types_to_compress, query_string_caching_behavior, query_parameters)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "link_to_default_domain",
+      "displayName": "Link To Default Domain",
+      "type": "string",
+      "required": false,
+      "default": "Disabled",
+      "description": "whether this route will be linked to the default endpoint domain.",
+      "choices": [
+        "Enabled",
+        "Disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_mode",
+      "displayName": "Log Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parent argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_path",
+      "displayName": "Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parent argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the routing rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oidc_token",
+      "displayName": "Oidc Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Direct OpenID Connect (OIDC) token (JWT) used for workload identity authentication. This token is exchanged with Azure AD using OIDC federated identity. Useful in CI systems (for example GitHub Actions, Azure DevOps) where an OIDC token is provided directly by the platform. Can also be set via the C(AZURE_FEDERATED_TOKEN) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oidc_token_file_path",
+      "displayName": "Oidc Token File Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file containing an OpenID Connect (OIDC) token (JWT) used for workload identity authentication. The file must contain only raw token. This method is commonly used in platforms that materialize OIDC tokens as files Can also be set via the C(AZURE_FEDERATED_TOKEN_FILE) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "origin_group",
+      "displayName": "Origin Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A reference to the origin group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "origin_path",
+      "displayName": "Origin Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A directory path on the origin that AzureFrontDoor can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Active Directory user password. Use when authenticating with an Active Directory user rather than service principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "patterns_to_match",
+      "displayName": "Patterns To Match",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The route patterns of the rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Security profile found in ~/.azure/credentials file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile_name",
+      "displayName": "Profile Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "query_parameters",
+      "displayName": "Query Parameters",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The caching configuration for this route. query parameters to include or exclude (comma separated). Required together (is_compression_enabled, content_types_to_compress, query_string_caching_behavior, query_parameters)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "query_string_caching_behavior",
+      "displayName": "Query String Caching Behavior",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The caching configuration for this route. Defines how Frontdoor caches requests that include query strings. You can ignore any query strings when caching, ignore specific query strings, cache every request with a unique URL, or cache specific query strings. Required together (is_compression_enabled, content_types_to_compress, query_string_caching_behavior, query_parameters)",
+      "choices": [
+        "IgnoreQueryString",
+        "IgnoreSpecifiedQueryStrings",
+        "IncludeSpecifiedQueryStrings",
+        "UseQueryString"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_group",
+      "displayName": "Resource Group",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the Resource group within the Azure subscription.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rule_sets",
+      "displayName": "Rule Sets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of rule set names referenced by this endpoint.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret",
+      "displayName": "Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure client secret. Use when authenticating with a Service Principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Assert the state of the Route. Use C(present) to create or update a CDN profile and C(absent) to delete it.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subscription_id",
+      "displayName": "Subscription Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Your Azure subscription Id.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "supported_protocols",
+      "displayName": "Supported Protocols",
+      "type": "list",
+      "required": false,
+      "default": [
+        "Http",
+        "Https"
+      ],
+      "description": "List of supported protocols for this route.",
+      "choices": [
+        "Http",
+        "Https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant",
+      "displayName": "Tenant",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure tenant ID. Use when authenticating with a Service Principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "thumbprint",
+      "displayName": "Thumbprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The thumbprint of the private key specified in I(x509_certificate_path). Use when authenticating with a Service Principal. Required if I(x509_certificate_path) is defined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x509_certificate_path",
+      "displayName": "X509 Certificate Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the X509 certificate used to create the service principal in PEM format. The certificate must be appended to the private key. Use when authenticating with a Service Principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

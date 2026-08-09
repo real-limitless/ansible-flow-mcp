@@ -1,0 +1,256 @@
+{
+  "fqcn": "ibm.power_aix.lvg",
+  "shortDescription": "Configure AIX LVM volume groups",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/lvg_module.html",
+  "options": [
+    {
+      "name": "auto_on",
+      "displayName": "Auto On",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies that the volume group is automatically available during a system restart. By default I(auto_on=yes) when creating a volume group. Can be used when creating or changing a volume group, hence when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "critical_pvs",
+      "displayName": "Critical Pvs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies the Critical PVs option for the volume group. If write request failures occur in the mirrored logical volume, the PV is marked as missing and it stops sending I/O requests to the failed mirrored logical volume. Available only in IBM AIX 7.2 with Technology Level 1, or later. Can be used when creating or changing a volume group, hence when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "critical_vg",
+      "displayName": "Critical Vg",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables the Critical VG option of the volume group. Can be used when creating or changing a volume group, hence when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_lvs",
+      "displayName": "Delete Lvs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Deallocates existing logical volume partitions and then deletes resultant empty logical volumes from the specified physical volumes. B(Attention:) using I(delete_lvs=yes) automatically deletes all logical volume data on the physical volume before removing the physical volume from the volume group. If a logical volume spans multiple physical volumes, the removal of any of those physical volumes may jeopardize the integrity of the entire logical volume. Can be used when I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enhanced_concurrent_vg",
+      "displayName": "Enhanced Concurrent Vg",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies Enhanced Concurrent Capable volume group. Cannot be used on volume groups and systems that do not use the PowerHA SystemMirror enhanced scalability (ES) product. Can be used when creating or changing a volume group, hence when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When I(state=present), forces the volume group to be created on the specified physical volume unless the physical volume is part of another volume group in the Device Configuration Database or a volume group that is active. Can be used when creating or changing a volume group, hence when I(state=present).  Discaded when I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "major_num",
+      "displayName": "Major Num",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the major number of the volume group that is created. Can be used only when creating a volume group, hence when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mirror_pool",
+      "displayName": "Mirror Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the mirror pool name to assigns the physical volumes to. After mirror pools are enabled in a volume group, the volume group can no longer be imported into a version of AIX that does not support mirror pools. Can be used only when creating/extending a volume group, hence when I(state=present). Mirror pools are only defined for I(vg_type=scalable) type volume group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mirror_pool_strict",
+      "displayName": "Mirror Pool Strict",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enables mirror pool strictness for the volume group. C(none) specifies that no restrictions are placed on the user of mirror pool. C(normal) specifies that mirror pools must be used on each logical volume in the volume group. C(strict) specifies that super-strict mirror pools are enforced on this volume group. Partitions allocated for one mirror cannot share a physical volume with the partitions from another mirror; with this setting each mirror pool must contain at least one copy of each logica",
+      "choices": [
+        "none",
+        "normal",
+        "strict"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "multi_node_vary",
+      "displayName": "Multi Node Vary",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specified that the volume group is allowed to varyon in non-concurrent mode in more than one node at the same time or not. This is the default behavior. This option is not available for volume groups varied on in the concurrent mode. This VG can no longer be imported on a version of AIX that does not support this flag. When I(multi_node_vary=no) the VG can no longer be imported on a version of AIX that does not support this mode. Can be used when creating or changing a volume group, hence when I",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "num_lvs",
+      "displayName": "Num Lvs",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of logical volumes that can be created. Can be used with I(vg_type=scalable) volume groups. Can be used when creating or changing a volume group, hence when I(state=present).",
+      "choices": [
+        256,
+        512,
+        1024,
+        2048,
+        4096
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "num_partitions",
+      "displayName": "Num Partitions",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Total number of units of 1024 partitions in the volume group. Can be used with I(vg_type=scalable) volume groups. Default when not set is 32 hence 32k (32768 partitions). Can be used when creating or changing a volume group, hence when I(state=present).",
+      "choices": [
+        32,
+        64,
+        128,
+        256,
+        512,
+        768,
+        1024,
+        2048
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pp_limit",
+      "displayName": "Pp Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Changes the limit of the number of physical partitions per physical volume. The maximum number of physical partitions per physical volume for this volume group changes to I(pp_limit) x 1016. It must be 1 - 16 for 32 PV volume groups and 1 and 64 for 128 PV volume groups. The maximum number of PVs that can be included in the volume group is MaxPVs / I(pp_limit). The default is the lowest value to remain within the physical partition limit of I(pp_limit) x 1016. Can be used when creating or changi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pp_size",
+      "displayName": "Pp Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Sets physical partition size expressed in units of megabytes from 1 (1 MB) through 131072 (128 GB). It must be equal to a power of 2 (example 1, 2, 4, 8). The default value for 32 and 128 PV volume groups is the lowest value to remain within the limitation of 1016 physical partitions per PV. The default value for scalable volume groups is the lowest value to accommodate 2040 physical partitions per PV. Can be used when creating a volume group, hence when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pvs",
+      "displayName": "Pvs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the list of physical volumes. When I(state=present) and the VG exists, adds the PVs to the existing VG; otherwise creates the VG with the PVs. When I(state=absent), removes the PVs from the VG. Can be used when I(state=present) or I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quorum",
+      "displayName": "Quorum",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables/disables quorum on the volume group. Can be used while changing an existing volume group, hence when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retry",
+      "displayName": "Retry",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables the infinite retry option of the logical volume. When (retry=no), a failing I/O of the logical volume is not retried. This is the default behavior. When (retry=yes), a failed I/O request is retried until it is successful.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Specifies the action to be performed on a volume group. C(present) creates, extends or modifies a volume group; C(absent) reduces or removes a volume group; C(varyon) activates a volume group performing a varyon operation; C(varyoff) deactivates a volume group performing a varyoff operation.",
+      "choices": [
+        "absent",
+        "present",
+        "varyoff",
+        "varyon"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vg_name",
+      "displayName": "Vg Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the volume group name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vg_type",
+      "displayName": "Vg Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the type of the volume group. Can be used when creating or changing a volume group, hence when I(state=present).",
+      "choices": [
+        "big",
+        "scalable",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

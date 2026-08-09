@@ -2,6 +2,158 @@
   "fqcn": "vmware.vmware.folder",
   "shortDescription": "Manage VMware vSphere folders",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware/folder_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "absolute_path",
+      "displayName": "Absolute Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The absolute path of the folder to create. The absolute path should include the datacenter and the folder type. The leading slash is not required. For example the absolute path could be /DC-01/vm/my/folder or DC-01/vm/my/folder One of O(relative_path) or O(absolute_path) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the datacenter where the folder should be created. Only used if the O(relative_path) option is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder_type",
+      "displayName": "Folder Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of folder that should be created. The folder type controls what resources can be held in the folder, as well as the path where the folder is created. For example, a folder at path /DC-01/vm/my/folder has folder type 'vm'. Only used if the O(relative_path) option is used.",
+      "choices": [
+        "vm",
+        "host",
+        "datastore",
+        "network"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "relative_path",
+      "displayName": "Relative Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The relative path of the folder to create. The relative path should include neither the datacenter nor the folder type. For example the relative path for the folder /DC-01/vm/my/folder is my/folder One of O(relative_path) or O(absolute_path) must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_vm_data",
+      "displayName": "Remove Vm Data",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Only used if state is V(absent) If true, any VMs in the folder tree will be completely removed. This includes any disks or data associated with the VM. If false, any VMs in the folder tree are deregistered. This means they are removed from the vSphere inventory but their data is not deleted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Create V(present) or remove V(absent) a vSphere folder. When state is V(present), all folders in the specified path will be created if they are missing. When state is V(absent), all content inside the folder will be deleted. See O(remove_vm_data)",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

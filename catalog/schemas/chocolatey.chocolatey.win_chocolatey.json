@@ -2,6 +2,386 @@
   "fqcn": "chocolatey.chocolatey.win_chocolatey",
   "shortDescription": "Manage packages using chocolatey",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/chocolatey/chocolatey/win_chocolatey_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "allow_empty_checksums",
+      "displayName": "Allow Empty Checksums",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allow empty checksums to be used for downloaded resource from non-secure locations. Use M(chocolatey.chocolatey.win_chocolatey_feature) with the name C(allowEmptyChecksums) to control this option globally.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_multiple",
+      "displayName": "Allow Multiple",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This option is deprecated and will be removed in v2.0.0 of this collection. Chocolatey CLI has L(deprecated side-by-side installations, https://github.com/chocolatey/choco/issues/2787) as of its v1.2.0 release and plans to remove them in its v2.0.0 release. Chocolatey CLI (choco) v2.0.0 and higher do not support this option. This module will return an error if this option is enabled and the installed version of Chocolatey CLI on the client is v2.0.0 or higher. Allow the installation of multiple ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_prerelease",
+      "displayName": "Allow Prerelease",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allow the installation of pre-release packages. If I(state) is C(latest), the latest pre-release package will be installed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "architecture",
+      "displayName": "Architecture",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "Force Chocolatey to install the package of a specific process architecture. When setting C(x86), will ensure Chocolatey installs the x86 package even when on an x64 bit OS.",
+      "choices": [
+        "default",
+        "x86"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bootstrap_script",
+      "displayName": "Bootstrap Script",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the bootstrap script URL that can be used to install Chocolatey if it is not already present on the system. Use this parameter when I(name) is C(chocolatey) to ensure that a custom bootstrap script is used. If neither this parameter nor I(source) is set, the bootstrap script url will be C(https://community.chocolatey.org/install.ps1) If this parameter is not set, and I(source) is set to a url, the bootstrap script url will be determined from that url instead. This parameter only defines ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bootstrap_tls_version",
+      "displayName": "Bootstrap Tls Version",
+      "type": "list",
+      "required": false,
+      "default": [
+        "tls12",
+        "tls13"
+      ],
+      "description": "Specify the TLS versions used when retrieving and invoking the I(bootstrap_script) to install Chocolatey if it is not already installed on the system. Does not change the TLS versions used by Chocolatey itself after it has already been installed. Specified TLS versions may be ignored or unused if the target TLS version is not available on the client.",
+      "choices": [
+        "tls11",
+        "tls12",
+        "tls13"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum",
+      "displayName": "Checksum",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override a package's checksums for files downloaded during installation. If the checksum is not MD5, you will need to specify the I(checksum_type) as well.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum64",
+      "displayName": "Checksum64",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override a package's checksums for 64-bit files downloaded during installation. If the checksum is not MD5, you will need to specify the I(checksum_type64) as well.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum_type",
+      "displayName": "Checksum Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override a package's checksum type for files downloaded during install. Use in conjunction with I(checksum).",
+      "choices": [
+        "md5",
+        "sha1",
+        "sha256",
+        "sha512"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum_type64",
+      "displayName": "Checksum Type64",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override a package's checksum type for files downloaded during install. Use in conjunction with I(checksum64).",
+      "choices": [
+        "md5",
+        "sha1",
+        "sha256",
+        "sha512"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "choco_args",
+      "displayName": "Choco Args",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Additional parameters to pass to choco.exe These may be any additional parameters to pass through directly to Chocolatey, in addition to the arguments already specified via other parameters. This may be used to pass licensed options to Chocolatey, for example C(--package-parameters-sensitive) or C(--install-directory). Passing licensed options may result in them being ignored or causing errors if the targeted node is unlicensed or missing the chocolatey.extension package.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Forces the install of a package, even if it already is installed. Using I(force) will cause Ansible to always report that a change was made.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_checksums",
+      "displayName": "Ignore Checksums",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Ignore the checksums provided by the package. Use M(chocolatey.chocolatey.win_chocolatey_feature) with the name C(checksumFiles) to control this option globally.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_dependencies",
+      "displayName": "Ignore Dependencies",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Ignore dependencies, only install/upgrade the package itself.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_pinned",
+      "displayName": "Ignore Pinned",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Ignores any pins and upgrades the package(s) anyway. Chocolatey CLI (choco) v2.3.0 and higher is required to use this option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "install_args",
+      "displayName": "Install Args",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "These are arguments that are passed directly to the installer run by the Chocolatey package, for example MSI properties or command-line arguments for the specific native installer used by the package. For parameters that need to be passed to the chocolateyInstall script for the Chocolatey package itself, use I(package_params).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Name of the package(s) to be installed. Set to C(all) to run the action on all the installed packages.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "override_args",
+      "displayName": "Override Args",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Override arguments of native installer with arguments provided by user. Should install arguments be used exclusively without appending to current package passed arguments.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "package_params",
+      "displayName": "Package Params",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameters to pass to the package's chocolateyInstall script. These are parameters specific to the Chocolatey package and are generally documented by the package itself. For parameters that should be passed directly to the underlying installer (for example, MSI installer properties and arguments), use I(install_args) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pinned",
+      "displayName": "Pinned",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to pin the Chocolatey package or not. If omitted then no checks on package pins are done. Will pin/unpin the specific version if I(version) is set. Will pin the latest version of a package if C(true), I(version) is not set and and no pin already exists. Will unpin all versions of a package if C(no) and I(version) is not set. This is ignored when C(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_password",
+      "displayName": "Proxy Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Proxy password used to install Chocolatey and the package. This value is exposed as a command argument and any privileged account can see this value when the module is running Chocolatey, define the password on the global config level with M(chocolatey.chocolatey.win_chocolatey_config) with name C(proxyPassword) to avoid this.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_url",
+      "displayName": "Proxy Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Proxy URL used to install chocolatey and the package. Use M(chocolatey.chocolatey.win_chocolatey_config) with the name C(proxy) to control this option globally.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_username",
+      "displayName": "Proxy Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Proxy username used to install Chocolatey and the package. Before Ansible 2.7, users with double quote characters C(\") would need to be escaped with C(\\) beforehand. This is no longer necessary. Use M(chocolatey.chocolatey.win_chocolatey_config) with the name C(proxyUser) to control this option globally.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_dependencies",
+      "displayName": "Remove Dependencies",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Remove a package's dependencies on uninstall.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skip_scripts",
+      "displayName": "Skip Scripts",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Do not run I(chocolateyInstall.ps1) or I(chocolateyUninstall.ps1) scripts when installing a package.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the source to retrieve the package from. Use M(chocolatey.chocolatey.win_chocolatey_source) to manage global sources. This value can either be the URL to a Chocolatey feed, a path to a folder containing C(.nupkg) packages or the name of a source defined by M(chocolatey.chocolatey.win_chocolatey_source). When Chocolatey is not yet installed, prefer using I(bootstrap_script) instead to determine where to pull the bootstrap script from. This value may also be used when Chocolatey is not ins",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_password",
+      "displayName": "Source Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for I(source_username). This value is exposed as a command argument and any privileged account can see this value when the module is running Chocolatey, define the credentials with a source with M(chocolatey.chocolatey.win_chocolatey_source) to avoid this.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_username",
+      "displayName": "Source Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A username to use with I(source) when accessing a feed that requires authentication. It is recommended you define the credentials on a source with M(chocolatey.chocolatey.win_chocolatey_source) instead of passing it per task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the package on the system. When C(absent), will ensure the package is not installed. When C(present), will ensure the package is installed. When C(downgrade), will allow Chocolatey to downgrade a package if I(version) is older than the installed version. When C(latest) or C(upgrade), will ensure the package is installed to the latest available version. When C(reinstalled), will uninstall and reinstall the package.",
+      "choices": [
+        "absent",
+        "downgrade",
+        "upgrade",
+        "latest",
+        "present",
+        "reinstalled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 2700,
+      "description": "The time (in seconds) to allow chocolatey to finish before timing out.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Used when downloading the Chocolatey install script if Chocolatey is not already installed, this does not affect the Chocolatey package install process. When C(no), no SSL certificates will be validated. This should only be used on personally controlled sites using self-signed certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specific version of the package to be installed. When I(state) is set to C(absent), will uninstall the specific version otherwise all versions of that package will be removed. When I(state) is set to C(present) and the package is already installed at a version that does not match, this task fails. If a different version of package is already installed, I(state) must be C(latest), C(upgrade), or C(downgrade), or I(force) must be set to C(true) to install the desired version. Provide as a string (",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

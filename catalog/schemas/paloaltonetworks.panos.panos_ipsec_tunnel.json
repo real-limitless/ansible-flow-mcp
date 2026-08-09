@@ -1,0 +1,552 @@
+{
+  "fqcn": "paloaltonetworks.panos.panos_ipsec_tunnel",
+  "shortDescription": "Manage IPSec Tunnels on the firewall with subset of settings.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/paloaltonetworks/panos/panos_ipsec_tunnel_module.html",
+  "options": [
+    {
+      "name": "ak_ike_gateway",
+      "displayName": "Ak Ike Gateway",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "Name of the existing IKE gateway (auto-key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ak_ipsec_crypto_profile",
+      "displayName": "Ak Ipsec Crypto Profile",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "Name of the existing IPsec profile or use default (auto-key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "anti_replay",
+      "displayName": "Anti Replay",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enable anti-replay check on this tunnel.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "B(Deprecated) Use I(provider) to specify PAN-OS connectivity instead. HORIZONTALLINE The API key to use instead of generating it using I(username) / I(password).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "commit",
+      "displayName": "Commit",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "B(Deprecated) Please use M(paloaltonetworks.panos.panos_commit_firewall), M(paloaltonetworks.panos.panos_commit_panorama), M(paloaltonetworks.panos.panos_commit_push) instead. HORIZONTALLINE Commit changes after creating object.  If I(ip_address) is a Panorama device, and I(device_group) or I(template) are also set, perform a commit to Panorama and a commit-all to the device group/template.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "copy_flow_label",
+      "displayName": "Copy Flow Label",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Copy IPv6 flow label for 6in6 tunnel from inner packet to IPSec packet (not recommended) (7.0+).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "copy_tos",
+      "displayName": "Copy Tos",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Copy IP TOS bits from inner packet to IPSec packet (not recommended).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disabled",
+      "displayName": "Disabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disable the IPsec tunnel.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_tunnel_monitor",
+      "displayName": "Enable Tunnel Monitor",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable tunnel monitoring on this tunnel.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gathered_filter",
+      "displayName": "Gathered Filter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When I(state=gathered). An advanced filtering option to filter results returned from PAN-OS. Refer to the guide discussing I(gathered_filter) for more information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gps_certificate_profile",
+      "displayName": "Gps Certificate Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Profile for authenticating GlobalProtect gateway certificates (global-protect-satellite).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gps_interface",
+      "displayName": "Gps Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Interface to communicate with portal (global-protect-satellite).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gps_interface_ipv4_floating_ip",
+      "displayName": "Gps Interface Ipv4 Floating Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Floating IPv4 IP address in HA Active-Active configuration (7.0+) (global-protect-satellite).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gps_interface_ipv4_ip",
+      "displayName": "Gps Interface Ipv4 Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Exact IPv4 IP address if interface has multiple IP addresses (global-protect-satellite).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gps_interface_ipv6_floating_ip",
+      "displayName": "Gps Interface Ipv6 Floating Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Floating IPv6 IP address in HA Active-Active configuration (8.0+) (global-protect-satellite).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gps_interface_ipv6_ip",
+      "displayName": "Gps Interface Ipv6 Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Exact IPv6 IP address if interface has multiple IP addresses (8.0+) (global-protect-satellite).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gps_local_certificate",
+      "displayName": "Gps Local Certificate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "GlobalProtect satellite certificate file name (global-protect-satellite).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gps_portal_address",
+      "displayName": "Gps Portal Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "GlobalProtect portal address (global-protect-satellite).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gps_prefer_ipv6",
+      "displayName": "Gps Prefer Ipv6",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Prefer to register portal in IPv6 (8.0+) (global-protect-satellite).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gps_publish_connected_routes",
+      "displayName": "Gps Publish Connected Routes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable publishing of connected and static routes (global-protect-satellite).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gps_publish_routes",
+      "displayName": "Gps Publish Routes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specify list of routes to publish to GlobalProtect gateway (global-protect-satellite).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_address",
+      "displayName": "Ip Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "B(Deprecated) Use I(provider) to specify PAN-OS connectivity instead. HORIZONTALLINE The IP address or hostname of the PAN-OS device being configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipv6",
+      "displayName": "Ipv6",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use IPv6 for the IPsec tunnel (7.0+)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mk_auth_key",
+      "displayName": "Mk Auth Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication key (manual-key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mk_auth_type",
+      "displayName": "Mk Auth Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication type for tunnel access (manual-key).",
+      "choices": [
+        "md5",
+        "sha1",
+        "sha256",
+        "sha384",
+        "sha512"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mk_esp_encryption",
+      "displayName": "Mk Esp Encryption",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Encryption algorithm for tunnel traffic (manual-key).",
+      "choices": [
+        "des",
+        "3des",
+        "aes-128-cbc",
+        "aes-192-cbc",
+        "aes-256-cbc",
+        "null"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mk_esp_encryption_key",
+      "displayName": "Mk Esp Encryption Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Encryption key (manual-key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mk_interface",
+      "displayName": "Mk Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Interface to terminate tunnel (manual-key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mk_local_address_floating_ip",
+      "displayName": "Mk Local Address Floating Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Floating IP address in HA Active-Active configuration (manual-key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mk_local_address_ip",
+      "displayName": "Mk Local Address Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Exact IP address if interface has multiple IP addresses (manual-key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mk_local_spi",
+      "displayName": "Mk Local Spi",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Outbound SPI in hex (manual-key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mk_protocol",
+      "displayName": "Mk Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Protocol for traffic through the tunnel (manual-key).",
+      "choices": [
+        "esp",
+        "ah"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mk_remote_address",
+      "displayName": "Mk Remote Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Tunnel peer IP address (manual-key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mk_remote_spi",
+      "displayName": "Mk Remote Spi",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Inbound SPI in hex (manual-key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name for the IPSec tunnel.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "B(Deprecated) Use I(provider) to specify PAN-OS connectivity instead. HORIZONTALLINE The password to use for authentication.  This is ignored if I(api_key) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "B(Deprecated) Use I(provider) to specify PAN-OS connectivity instead. HORIZONTALLINE The port number to connect to the PAN-OS device on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state.",
+      "choices": [
+        "present",
+        "absent",
+        "replaced",
+        "merged",
+        "deleted",
+        "gathered"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "(Panorama only) The template this operation should target. Mutually exclusive with I(template_stack).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_stack",
+      "displayName": "Template Stack",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "(Panorama only) The template stack this operation should target. Mutually exclusive with I(template).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tunnel_interface",
+      "displayName": "Tunnel Interface",
+      "type": "string",
+      "required": false,
+      "default": "tunnel.1",
+      "description": "Specify existing tunnel interface that will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tunnel_monitor_dest_ip",
+      "displayName": "Tunnel Monitor Dest Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Destination IP to send ICMP probe.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tunnel_monitor_profile",
+      "displayName": "Tunnel Monitor Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Monitoring action.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tunnel_monitor_proxy_id",
+      "displayName": "Tunnel Monitor Proxy Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Which proxy-id (or proxy-id-v6) the monitoring traffic will use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "auto-key",
+      "description": "Type of IPsec tunnel.",
+      "choices": [
+        "auto-key",
+        "manual-key",
+        "global-protect-satellite"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "B(Deprecated) Use I(provider) to specify PAN-OS connectivity instead. HORIZONTALLINE The username to use for authentication.  This is ignored if I(api_key) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

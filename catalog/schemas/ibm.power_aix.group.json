@@ -1,0 +1,108 @@
+{
+  "fqcn": "ibm.power_aix.group",
+  "shortDescription": "Manage presence, attributes and member of AIX groups.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/group_module.html",
+  "options": [
+    {
+      "name": "group_attributes",
+      "displayName": "Group Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the attributes for the group to be created or modified. Can be used when I(state=present)  .",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "load_module",
+      "displayName": "Load Module",
+      "type": "string",
+      "required": false,
+      "default": "files",
+      "description": "Specifies the location where the operations need to be performed on the user. C(files) creates/updates/deletes the user present in the Local machine. C(LDAP) creates/updates the user present in the LDAP server.",
+      "choices": [
+        "files",
+        "LDAP"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the group to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_keystore",
+      "displayName": "Remove Keystore",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies to remove the group's keystore information while removing the goup. Can be used when I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the action to be performed. C(present) specifies to create a group if it does not exist, otherwise it changes the attributes of the specified group. C(absent) deletes an existing group. Users who are group members are not removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_list_action",
+      "displayName": "User List Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies to add or remove members/admins from the group. C(add) to add members or admins of the group with provided I(users_list) in group I(name) C(remove) to remove members or admins of the group with provided I(users_list) from group I(name) Can be used when I(state=present).",
+      "choices": [
+        "add",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_list_type",
+      "displayName": "User List Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the type of user to add/remove. C(members) specifies the I(user_list_action) is performed on members of the group C(admins) specifies the I(user_list_action) is performed on admins of the group Can be used when I(state=present).",
+      "choices": [
+        "members",
+        "admins"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "users_list",
+      "displayName": "Users List",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies a list of user to be added/removed as members/admins of the group. Should be used along with I(user_list_action) and I(user_list_type) parameters. Can be used when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,252 @@
   "fqcn": "vmware.vmware.deploy_content_library_template",
   "shortDescription": "Deploy a virtual machine from a template in a content library.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware/deploy_content_library_template_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name or MOID of the cluster where the VM should be deployed. Changing this option will not result in the VM being redeployed (it does not affect idempotency). O(resource_pool) and O(cluster) are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name or MOID of the datacenter to use when searching for and deploying resources.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datastore",
+      "displayName": "Datastore",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name or MOID of the datastore to store deployed VM and disk. O(datastore) and O(datastore_cluster) are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datastore_cluster",
+      "displayName": "Datastore Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name or MOID of the datastore cluster to store deployed VM and disk. Please make sure Storage DRS is active for recommended datastore from the given datastore cluster. If Storage DRS is not enabled, datastore with largest free storage space is selected. O(datastore) and O(datastore_cluster) are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "esxi_host",
+      "displayName": "Esxi Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the ESXi host onto which the virtual machine should be deployed. If O(esxi_host) and O(resource_pool) are both specified, O(resource_pool) must belong to O(esxi_host). If O(esxi_host) and O(cluster) are both specified, O(esxi_host) must be a member of O(cluster). Changing this option will not result in the VM being redeployed (it does not affect idempotency).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder_paths_are_absolute",
+      "displayName": "Folder Paths Are Absolute",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, any folder path parameters are treated as absolute paths. If false, modules will try to intelligently determine if the path is absolute or relative. This option is useful when your environment has a complex folder structure. By default, modules will try to intelligently determine if the path is absolute or relative. They may mistakenly prepend the datacenter name or other folder names, and this option can be used to avoid this.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "library_id",
+      "displayName": "Library Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the content library where the template exists. This is an optional parameter, but may be required if you use O(template_name) and have multiple templates in different libraries with the same name. This option is mutually exclusive with O(library_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "library_item_id",
+      "displayName": "Library Item Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of content library template to use when deploying the VM. This option is mutually exclusive with O(library_item_name). One of either O(library_item_name) or O(library_item_id) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "library_item_name",
+      "displayName": "Library Item Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of content library template to use when deploying the VM. This option is mutually exclusive with O(library_item_id). One of either O(library_item_name) or O(library_item_id) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "library_name",
+      "displayName": "Library Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the content library where the template exists. This is an optional parameter, but may be required if you use O(template_name) and have multiple templates in different libraries with the same name. This option is mutually exclusive with O(library_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_on_after_deploy",
+      "displayName": "Power On After Deploy",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether or not the VM should be powered on once it has been deployed. This is only applied when the VM is deployed. If the VM already exists, the power state is not modified. Changing this option will not result in the VM being redeployed (it does not affect idempotency).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_protocol",
+      "displayName": "Proxy Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The proxy connection protocol to use. This option is used if the correct proxy protocol cannot be automatically determined.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_pool",
+      "displayName": "Resource Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name or MOID of a resource pool into which the virtual machine should be deployed. Changing this option will not result in the VM being redeployed (it does not affect idempotency). O(resource_pool) and O(cluster) are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_folder",
+      "displayName": "Vm Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Virtual machine folder into which the virtual machine should be deployed. This can be the absolute folder path, or a relative folder path under /<datacenter>/vm/. See the examples for more info. This option is required if you have more than one VM with the same name in the datacenter. Changing this option will result in the VM being redeployed, since it affects where the module looks for the deployed VM. If not provided, the /<datacenter>/vm/ folder is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name",
+      "displayName": "Vm Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the VM to deploy. If you have multiple VMs with the same name, you should also supply O(vm_folder)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

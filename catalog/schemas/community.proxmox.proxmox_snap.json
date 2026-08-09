@@ -1,0 +1,232 @@
+{
+  "fqcn": "community.proxmox.proxmox_snap",
+  "shortDescription": "Snapshot management of instances in Proxmox VE cluster",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/proxmox/proxmox_snap_module.html",
+  "options": [
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the target host of the Proxmox VE cluster. Uses the E(PROXMOX_HOST) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_otp",
+      "displayName": "Api Otp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the OTP. Uses the E(PROXMOX_OTP) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the password to authenticate with. Uses the E(PROXMOX_PASSWORD) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_port",
+      "displayName": "Api Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specify the target port of the Proxmox VE cluster. Uses the E(PROXMOX_PORT) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Time limit for requests towards the Proxmox VE API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token_id",
+      "displayName": "Api Token Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the token ID. Uses the E(PROXMOX_TOKEN_ID) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token_secret",
+      "displayName": "Api Token Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the token secret. Uses the E(PROXMOX_TOKEN_SECRET) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the user to authenticate with. Uses the E(PROXMOX_USER) environment variable if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a local certificate, which will be used to verify TLS connections. Ignored if O(validate_certs=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the description for the snapshot. Only used on the configuration web interface. This is saved as a comment inside the configuration file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "For removal from config file, even if removing disk snapshot fails.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The instance name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retention",
+      "displayName": "Retention",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Remove old snapshots if there are more than O(retention) snapshots. If O(retention) is set to V(0), all snapshots will be kept. This is only used when O(state=present) and when an actual snapshot is created. If no snapshot is created, all existing snapshots will be kept.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapname",
+      "displayName": "Snapname",
+      "type": "string",
+      "required": false,
+      "default": "ansible_snap",
+      "description": "Name of the snapshot that has to be created/deleted/restored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Indicate desired state of the instance snapshot.",
+      "choices": [
+        "present",
+        "absent",
+        "rollback"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Timeout for operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unbind",
+      "displayName": "Unbind",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This option only applies to LXC containers. Allows to snapshot a container even if it has configured mountpoints. Temporarily disables all configured mountpoints, takes snapshot, and finally restores original configuration. If running, the container will be stopped and restarted to apply config changes. Due to restrictions in the Proxmox API this option can only be used authenticating as V(root@pam) with O(api_password), API tokens do not work either. See U(https://pve.proxmox.com/pve-docs/api-v",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Validate the TLS certificates used for the connection to the Proxmox VE API. May be set through the environment variable E(PROXMOX_VALIDATE_CERTS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vmid",
+      "displayName": "Vmid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The instance ID. If not set, will be fetched from PromoxAPI based on the hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vmstate",
+      "displayName": "Vmstate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Snapshot includes RAM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

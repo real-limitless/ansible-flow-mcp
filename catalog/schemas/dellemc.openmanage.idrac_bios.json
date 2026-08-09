@@ -1,0 +1,236 @@
+{
+  "fqcn": "dellemc.openmanage.idrac_bios",
+  "shortDescription": "Modify and clear BIOS attributes, reset BIOS settings and configure boot sources",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/idrac_bios_module.html",
+  "options": [
+    {
+      "name": "apply_time",
+      "displayName": "Apply Time",
+      "type": "string",
+      "required": false,
+      "default": "Immediate",
+      "description": "Apply time of the I(attributes). This is applicable only to I(attributes). C(Immediate) Allows the user to immediately reboot the host and apply the changes. I(job_wait) is applicable. C(OnReset) Allows the user to apply the changes on the next reboot of the host server. C(AtMaintenanceWindowStart) Allows the user to apply at the start of a maintenance window as specified in I(maintenance_window). A reboot job will be scheduled. C(InMaintenanceWindowOnReset) Allows to apply after a manual reset ",
+      "choices": [
+        "Immediate",
+        "OnReset",
+        "AtMaintenanceWindowStart",
+        "InMaintenanceWindowOnReset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary of BIOS attributes and value pair. Attributes should be part of the Redfish Dell BIOS Attribute Registry. Use U(https://I(idrac_ip)/redfish/v1/Systems/System.Embedded.1/Bios) to view the Redfish URI. This is mutually exclusive with I(boot_sources), I(clear_pending), and I(reset_bios).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_sources",
+      "displayName": "Boot Sources",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "(deprecated)List of boot devices to set the boot sources settings. I(boot_sources) is mutually exclusive with I(attributes), I(clear_pending), and I(reset_bios). I(job_wait) is not applicable. The module waits till the completion of this task. This feature is deprecated, please use M(dellemc.openmanage.idrac_boot) for configuring boot sources.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clear_pending",
+      "displayName": "Clear Pending",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allows the user to clear all pending BIOS attributes changes. C(true) will discard any pending changes to bios attributes or remove job if in scheduled state. This operation will not create any job. C(false) will not perform any operation. This is mutually exclusive with I(boot_sources), I(attributes), and I(reset_bios). C(Note) Any BIOS job scheduled due to boot sources configuration will not be cleared.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_ip",
+      "displayName": "Idrac Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC IP Address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_password",
+      "displayName": "Idrac Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC user password. If the password is not provided, then the environment variable E(IDRAC_PASSWORD) is used. Example: export IDRAC_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_port",
+      "displayName": "Idrac Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "iDRAC port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_user",
+      "displayName": "Idrac User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC username. If the username is not provided, then the environment variable E(IDRAC_USERNAME) is used. Example: export IDRAC_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Provides the option to wait for job completion. This is applicable for I(attributes) when I(apply_time) is C(Immediate).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 1200,
+      "description": "The maximum wait time of I(job_wait) in seconds. The job is tracked only for this duration. This option is applicable when I(job_wait) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maintenance_window",
+      "displayName": "Maintenance Window",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Option to schedule the maintenance window. This is required when I(apply_time) is C(AtMaintenanceWindowStart) or C(InMaintenanceWindowOnReset).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset_bios",
+      "displayName": "Reset Bios",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Resets the BIOS to default settings and triggers a reboot of host system. This is applied to the host after the restart. This operation will not create any job. C(false) will not perform any operation. This is mutually exclusive with I(boot_sources), I(attributes), and I(clear_pending). When C(true), this action will always report as changes found to be applicable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset_type",
+      "displayName": "Reset Type",
+      "type": "string",
+      "required": false,
+      "default": "graceful_restart",
+      "description": "C(force_restart) Forcefully reboot the host system. C(graceful_restart) Gracefully reboot the host system. This is applicable for I(reset_bios), and I(attributes) when I(apply_time) is C(Immediate).",
+      "choices": [
+        "graceful_restart",
+        "force_restart"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_mnt",
+      "displayName": "Share Mnt",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "(deprecated)Local mount path of the network share with read-write permission for ansible user. This option is mandatory for network shares.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_name",
+      "displayName": "Share Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "(deprecated)Network share or a local path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_password",
+      "displayName": "Share Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "(deprecated)Network share user password. This option is mandatory for CIFS share.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_user",
+      "displayName": "Share User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "(deprecated)Network share user name. Use the format 'user@domain' or domain//user if user is part of a domain. This option is mandatory for CIFS share.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

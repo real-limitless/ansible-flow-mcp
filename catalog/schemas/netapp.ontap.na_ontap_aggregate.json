@@ -1,0 +1,478 @@
+{
+  "fqcn": "netapp.ontap.na_ontap_aggregate",
+  "shortDescription": "NetApp ONTAP manage aggregates.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp/ontap/na_ontap_aggregate_module.html",
+  "options": [
+    {
+      "name": "allow_flexgroups",
+      "displayName": "Allow Flexgroups",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "This optional parameter allows attaching object store to an aggregate containing FlexGroup constituents. The default value is false. Mixing FabricPools and non-FabricPools within a FlexGroup is not recommended. All aggregates hosting constituents of a FlexGroup should be attached to the object store.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_filepath",
+      "displayName": "Cert Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client cert file (.pem). not supported with python 2.6.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_class",
+      "displayName": "Disk Class",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Class of disk to use to build aggregate. C(capacity_flash) is listed in swagger, but rejected as invalid by ONTAP.",
+      "choices": [
+        "capacity",
+        "performance",
+        "archive",
+        "solid_state",
+        "array",
+        "virtual",
+        "data_center",
+        "capacity_flash"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_count",
+      "displayName": "Disk Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of disks to place into the aggregate, including parity disks. The disks in this newly-created aggregate come from the spare disk pool. The smallest disks in this pool join the aggregate first, unless the C(disk-size) argument is provided. Either C(disk-count) or C(disks) must be supplied. Range [0..2^31-1]. Required when C(state=present). Modifiable only if specified disk_count is larger than current disk_count. Cannot create raidgroup with 1 disk when using raid type raid4. If the disk_c",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_size",
+      "displayName": "Disk Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Disk size to use in 4K block size.  Disks within 10% of specified size will be used. With REST, this is converted to bytes using 4096.  Use C(disk_size_with_unit) to skip the conversion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_size_with_unit",
+      "displayName": "Disk Size With Unit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Disk size to use in the specified unit. It is a positive integer number followed by unit of T/G/M/K. For example, 72G, 1T and 32M. Or the unit can be omitted for bytes (REST also accepts B). This option is ignored if a specific list of disks is specified through the \"disks\" parameter. You must only use one of either \"disk-size\" or \"disk-size-with-unit\" parameters. With REST, this is converted to bytes, assuming K=1024.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_type",
+      "displayName": "Disk Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of disk to use to build aggregate. Not supported with REST - see C(disk_class). SSD-NVM, SSD-CAP were added with ONTAP 9.6. VMLUN was added with ONTAP 9.9.",
+      "choices": [
+        "ATA",
+        "BSAS",
+        "FCAL",
+        "FSAS",
+        "LUN",
+        "MSATA",
+        "SAS",
+        "SSD",
+        "SSD-CAP",
+        "SSD-NVM",
+        "VMDISK",
+        "VMLUN",
+        "VMLUN-SSD"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disks",
+      "displayName": "Disks",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specific list of disks to use for the new aggregate. To create a \"mirrored\" aggregate with a specific list of disks, both 'disks' and 'mirror_disks' options must be supplied. Additionally, the same number of disks must be supplied in both lists. Not supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption",
+      "displayName": "Encryption",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "whether to enable software encryption. this is equivalent to -encrypt-with-aggr-key when using the CLI. requires a VE license.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "feature_flags",
+      "displayName": "Feature Flags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable a new feature. This can be used to enable an experimental feature or disable a new feature that breaks backward compatibility. Supported keys and values are subject to change without notice.  Unknown keys are ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_ontap_version",
+      "displayName": "Force Ontap Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the cluster ONTAP version when using REST. The behavior is undefined if the version does not match the target cluster. This is provided as a work-around when the cluster version cannot be read because of permission issues. See https://github.com/ansible-collections/netapp.ontap/wiki/Known-issues. This should be in the form 9.10 or 9.10.1 with each element being an integer number. When C(use_rest) is set to auto, this may force a switch to ZAPI based on the version and platform capabilit",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "from_name",
+      "displayName": "From Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the aggregate to be renamed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the ONTAP instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_port",
+      "displayName": "Http Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Override the default port (80 or 443) with this port",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "https",
+      "displayName": "Https",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable and disable https. Ignored when using REST as only https is supported. Ignored when using SSL certificate authentication as it requires SSL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_pool_checks",
+      "displayName": "Ignore Pool Checks",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "only valid when I(disks) option is used. disks in a plex should belong to the same spare pool, and mirror disks to another spare pool. when set to true, these checks are ignored. Ignored with REST as I(disks) is not supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_mirrored",
+      "displayName": "Is Mirrored",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies that the new aggregate be mirrored (have two plexes). If set to true, then the indicated disks will be split across the two plexes. By default, the new aggregate will not be mirrored. This option cannot be used when a specific list of disks is supplied with either the 'disks' or 'mirror_disks' options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_filepath",
+      "displayName": "Key Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client key file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lambda_config",
+      "displayName": "Lambda Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration parameters for AWS Lambda proxy functionality. These option and suboptions are only supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mirror_disks",
+      "displayName": "Mirror Disks",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of mirror disks to use. It must contain the same number of disks specified in 'disks'. Not supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the aggregate to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nodes",
+      "displayName": "Nodes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Node(s) for the aggregate to be created on.  If no node specified, mgmt lif home will be used. ZAPI only - if multiple nodes specified an aggr stripe will be made. With REST, only one node can be specified.  If disk_count is present, node name is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_store_name",
+      "displayName": "Object Store Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the object store configuration attached to the aggregate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ontapi",
+      "displayName": "Ontapi",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The ontap api version to use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the specified user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "raid_size",
+      "displayName": "Raid Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Sets the maximum number of drives per raid group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "raid_type",
+      "displayName": "Raid Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the type of RAID groups to use in the new aggregate. raid_0 is only available on ONTAP Select.",
+      "choices": [
+        "raid4",
+        "raid_dp",
+        "raid_tec",
+        "raid_0"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_state",
+      "displayName": "Service State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Whether the specified aggregate should be enabled or disabled. Creates aggregate if doesnt exist. Supported from 9.11.1 or later in REST.",
+      "choices": [
+        "online",
+        "offline"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snaplock_type",
+      "displayName": "Snaplock Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of snaplock for the aggregate being created.",
+      "choices": [
+        "compliance",
+        "enterprise",
+        "non_snaplock"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "spare_pool",
+      "displayName": "Spare Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the spare pool from which to select spare disks to use in creation of a new aggregate. Not supported with REST.",
+      "choices": [
+        "Pool0",
+        "Pool1"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the specified aggregate should exist or not.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Tags are an optional way to track the uses of a resource. Tag values must be formatted as key:value strings, example [\"team:csi\", \"environment:test\"]",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_out",
+      "displayName": "Time Out",
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "time to wait for aggregate creation in seconds. default is set to 100 seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unmount_volumes",
+      "displayName": "Unmount Volumes",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If set to \"true\", this option specifies that all of the volumes hosted by the given aggregate are to be unmounted before the offline operation is executed. By default, the system will reject any attempt to offline an aggregate that hosts one or more online volumes. Not supported with REST, by default REST unmount volumes when trying to offline aggregate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_lambda",
+      "displayName": "Use Lambda",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies if AWS Lambda proxy functionality should be used to connect to the ONTAP system. Supported only with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_rest",
+      "displayName": "Use Rest",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "Whether to use REST or ZAPI. always -- will always use the REST API if the module supports REST. A warning is issued if the module does not support REST. An error is issued if a module option is not supported in REST. never -- will always use ZAPI if the module supports ZAPI.  An error may be issued if a REST option is not supported in ZAPI. auto -- will try to use the REST API if the module supports REST and modules options are supported.  Reverts to ZAPI otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required. For more information, please read the documentation U(https://docs.netapp.com/us-en/ontap/authentication/create-svm-user-accounts-task.html). Two authentication methods are supported 1. Basic authentication, using username and password. 2. SSL certificate authentication, using a ssl client cert file, and optionally a private key file. To use a certificate, the certificate must h",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to C(no), the SSL certificates will not be validated. This should only set to C(False) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_online",
+      "displayName": "Wait For Online",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set this parameter to 'true' for synchronous execution during create (wait until aggregate status is online). Set this parameter to 'false' for asynchronous execution. For asynchronous, execution exits as soon as the request is sent, without checking aggregate status. Ignored with REST (always wait).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,144 @@
+{
+  "fqcn": "ibm.power_aix.nim_flrtvc",
+  "shortDescription": "Use NIM to generate FLRTVC report, download and install security and HIPER fixes.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/nim_flrtvc_module.html",
+  "options": [
+    {
+      "name": "apar",
+      "displayName": "Apar",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of APAR to check or download. C(sec) stands for Security vulnerabilities. C(hiper) stands for Corrections to High Impact PERvasive threats. C(all) has the same behavior as C(None) hence both C(sec) and C(hiper) vulnerabilities.",
+      "choices": [
+        "sec",
+        "hiper",
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_only",
+      "displayName": "Check Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to only check if fixes are already applied on the targets. B(No download or installation) operations will be performed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clean",
+      "displayName": "Clean",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Cleanup working directory 'I(path)/work' with all temporary and downloaded files at the end of execution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "csv",
+      "displayName": "Csv",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a APAR CSV file containing the description of the C(sec) and C(hiper) fixes. This file is usually transferred from the Fix Central server; you can avoid this rather big transfer by specifying the path to an already transferred file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_only",
+      "displayName": "Download Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to perform check and download operation only. B(No installation) will be performed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extend_fs",
+      "displayName": "Extend Fs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies to increase filesystem size of the working directory when extra space is needed. When set, a filesystem could have increased while the task returns I(changed=False).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filesets",
+      "displayName": "Filesets",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filter filesets for specific phrase. Only fixes that apply to filesets matching the specified phrase will be checked and so updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to remove currently installed ifix before running the FLRTVC script.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": "/var/adm/ansible",
+      "description": "Specifies the directory to save the FLRTVC report. All temporary files such as installed filesets, fixes listings and downloaded fixes files are stored in the working subdirectory named 'I(path)/work'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save_report",
+      "displayName": "Save Report",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies to save the FLRTVC report in file 'I(path)/flrtvc_<nim_client_name>.txt'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "targets",
+      "displayName": "Targets",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Specifies the NIM clients to perform the action on. C(foo*) specifies all the NIM clients with name starting by C(foo). C(foo[2:4]) specifies the NIM clients among foo2, foo3 and foo4. C(*) or C(ALL) specifies all the NIM clients.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verbose",
+      "displayName": "Verbose",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Generate full FLRTVC reporting (verbose mode). It runs the FLRTVC script a second time to save the full report into file. So this option impacts the execution performance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

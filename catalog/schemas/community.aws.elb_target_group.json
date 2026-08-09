@@ -1,7 +1,500 @@
 {
   "fqcn": "community.aws.elb_target_group",
-  "shortDescription": "A variety of Ansible content to help automate the management of AWS services.",
+  "shortDescription": "Manage a target group for an Application or Network load balancer",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/aws/elb_target_group_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS access key ID. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_ACCESS_KEY_ID) or C(AWS_ACCESS_KEY) environment variables may also be used in decreasing order of preference. The I(aws_access_key) and I(profile) options are mutually exclusive. The I(aws_access_key_id) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_ca_bundle",
+      "displayName": "Aws Ca Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location of a CA Bundle to use when validating SSL certificates. The C(AWS_CA_BUNDLE) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_config",
+      "displayName": "Aws Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary to modify the botocore configuration. Parameters can be found in the AWS documentation U(https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html#botocore.config.Config).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug_botocore_endpoint_logs",
+      "displayName": "Debug Botocore Endpoint Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use a C(botocore.endpoint) logger to parse the unique (rather than total) C(\"resource:action\") API calls made during a task, outputing the set to the resource_actions key in the task results. Use the C(aws_resource_action) callback to output to total list made during a playbook. The C(ANSIBLE_DEBUG_BOTOCORE_LOGS) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deregistration_connection_termination",
+      "displayName": "Deregistration Connection Termination",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates whether the load balancer terminates connections at the end of the deregistration timeout. Using this option is only supported when attaching to a Network Load Balancer (NLB).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deregistration_delay_timeout",
+      "displayName": "Deregistration Delay Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_url",
+      "displayName": "Endpoint Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to connect to instead of the default AWS endpoints.  While this can be used to connection to other AWS-compatible services the amazon.aws and community.aws collections are only tested against AWS. The  C(AWS_URL) environment variable may also be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_check_interval",
+      "displayName": "Health Check Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The approximate amount of time, in seconds, between health checks of an individual target.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_check_path",
+      "displayName": "Health Check Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ping path that is the destination on the targets for health checks. The path must be defined in order to set a health check. Requires the I(health_check_protocol) parameter to be set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_check_port",
+      "displayName": "Health Check Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The port the load balancer uses when performing health checks on targets. Can be set to 'traffic-port' to match target port. When not defined will default to the port on which each target receives traffic from the load balancer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_check_protocol",
+      "displayName": "Health Check Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The protocol the load balancer uses when performing health checks on targets.",
+      "choices": [
+        "http",
+        "https",
+        "tcp",
+        "tls",
+        "udp",
+        "tcp_udp",
+        "HTTP",
+        "HTTPS",
+        "TCP",
+        "TLS",
+        "UDP",
+        "TCP_UDP"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_check_timeout",
+      "displayName": "Health Check Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The amount of time, in seconds, during which no response from a target means a failed health check.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "healthy_threshold_count",
+      "displayName": "Healthy Threshold Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of consecutive health checks successes required before considering an unhealthy target healthy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "load_balancing_algorithm_type",
+      "displayName": "Load Balancing Algorithm Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of load balancing algorithm to use. Changing the load balancing algorithm is only supported when used with Application Load Balancers (ALB). If not set AWS will default to C(round_robin).",
+      "choices": [
+        "round_robin",
+        "least_outstanding_requests"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "modify_targets",
+      "displayName": "Modify Targets",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether or not to alter existing targets in the group to match what is passed with the module",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the target group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target. Required when I(state) is C(present) and I(target_type) is C(instance), C(ip), or C(alb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preserve_client_ip_enabled",
+      "displayName": "Preserve Client Ip Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether client IP preservation is enabled. The default is disabled if the target group type is C(ip) address and the target group protocol is C(tcp) or C(tls). Otherwise, the default is enabled. Client IP preservation cannot be disabled for C(udp) and C(tcp_udp) target groups. I(preserve_client_ip_enabled) is supported only by Network Load Balancers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A named AWS profile to use for authentication. See the AWS documentation for more information about named profiles U(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html). The C(AWS_PROFILE) environment variable may also be used. The I(profile) option is mutually exclusive with the I(aws_access_key), I(aws_secret_key) and I(session_token) options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The protocol to use for routing traffic to the targets. Required when I(state) is C(present) and I(target_type) is C(instance), C(ip), or C(alb).",
+      "choices": [
+        "http",
+        "https",
+        "tcp",
+        "tls",
+        "udp",
+        "tcp_udp",
+        "HTTP",
+        "HTTPS",
+        "TCP",
+        "TLS",
+        "UDP",
+        "TCP_UDP"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol_version",
+      "displayName": "Protocol Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies protocol version. The protocol_version parameter is immutable and cannot be changed when updating an elb_target_group.",
+      "choices": [
+        "GRPC",
+        "HTTP1",
+        "HTTP2"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_protocol_v2_enabled",
+      "displayName": "Proxy Protocol V2 Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether Proxy Protocol version 2 is enabled. The value is C(true) or C(false). I(proxy_protocol_v2_enabled) is supported only by Network Load Balancers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge_tags",
+      "displayName": "Purge Tags",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If O(purge_tags=true) and O(tags) is set, existing tags will be purged from the resource to match exactly what is defined by O(tags) parameter. If the O(tags) parameter is not set then tags will not be modified, even if O(purge_tags=True). Tag keys beginning with V(aws:) are reserved by Amazon and can not be modified.  As such they will be ignored for the purposes of the O(purge_tags) parameter.  See the Amazon documentation for more information U(https://docs.aws.amazon.com/general/latest/gr/aw",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS region to use. For global services such as IAM, Route53 and CloudFront, I(region) is ignored. The C(AWS_REGION) environment variable may also be used. See the Amazon AWS documentation for more information U(http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_key",
+      "displayName": "Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS secret access key. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SECRET_ACCESS_KEY) or C(AWS_SECRET_KEY) environment variables may also be used in decreasing order of preference. The I(secret_key) and I(profile) options are mutually exclusive. The I(aws_secret_access_key) alias was added in release 5.1.0 for consistency with the AWS botocore SDK.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_token",
+      "displayName": "Session Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AWS STS session token for use with temporary credentials. See the AWS documentation for more information about access tokens U(https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). The C(AWS_SESSION_TOKEN) environment variable may also be used. The I(session_token) and I(profile) options are mutually exclusive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Create or destroy the target group.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stickiness_app_cookie_duration",
+      "displayName": "Stickiness App Cookie Duration",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the application-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stickiness_app_cookie_name",
+      "displayName": "Stickiness App Cookie Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the application cookie. Required if I(stickiness_type=app_cookie).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stickiness_enabled",
+      "displayName": "Stickiness Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether sticky sessions are enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stickiness_lb_cookie_duration",
+      "displayName": "Stickiness Lb Cookie Duration",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stickiness_type",
+      "displayName": "Stickiness Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of sticky sessions. Valid values are C(lb_cookie), C(app_cookie) or C(source_ip). If not set AWS will default to C(lb_cookie) for Application Load Balancers or C(source_ip) for Network Load Balancers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "successful_response_codes",
+      "displayName": "Successful Response Codes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The HTTP codes to use when checking for a successful response from a target. Accepts multiple values (for example, \"200,202\") or a range of values (for example, \"200-299\"). Requires the I(health_check_protocol) parameter to be set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dictionary representing the tags to be applied to the resource. If the O(tags) parameter is not set then tags will not be modified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_type",
+      "displayName": "Target Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of target that you must specify when registering targets with this target group. The possible values are C(instance) (targets are specified by instance ID), C(ip) (targets are specified by IP address), C(lambda) (target is specified by ARN), or C(alb) (target is specified by ARN). Note that you can't specify targets for a target group using more than one type. Target types lambda and alb only accept one target. When more than one target is specified, only the first one is used. All addi",
+      "choices": [
+        "instance",
+        "ip",
+        "lambda",
+        "alb"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "targets",
+      "displayName": "Targets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of targets to assign to the target group. This parameter defaults to an empty list. Unless you set the 'modify_targets' parameter then all existing targets will be removed from the group. The list should be an Id and a Port parameter. See the Examples for detail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unhealthy_threshold_count",
+      "displayName": "Unhealthy Threshold Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of consecutive health check failures required before considering a target unhealthy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When set to C(false), SSL certificates will not be validated for communication with the AWS APIs. Setting I(validate_certs=false) is strongly discouraged, as an alternative, consider setting I(aws_ca_bundle) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vpc_id",
+      "displayName": "Vpc Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The identifier of the virtual private cloud (VPC). Required when I(state) is C(present) and I(target_type) is C(instance), C(ip), or C(alb).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether or not to wait for the target group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 200,
+      "description": "The time to wait for the target group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

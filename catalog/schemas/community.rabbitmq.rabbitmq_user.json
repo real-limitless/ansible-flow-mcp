@@ -2,6 +2,214 @@
   "fqcn": "community.rabbitmq.rabbitmq_user",
   "shortDescription": "Manage RabbitMQ users",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/rabbitmq/rabbitmq_user_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "configure_priv",
+      "displayName": "Configure Priv",
+      "type": "string",
+      "required": false,
+      "default": "^$",
+      "description": "Regular expression to restrict configure actions on a resource for the specified vhost. By default all actions are restricted. This option will be ignored when permissions option is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Deletes and recreates the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hostname of API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Login password of the management API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "string",
+      "required": false,
+      "default": "15672",
+      "description": "login_port of access from API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_protocol",
+      "displayName": "Login Protocol",
+      "type": "string",
+      "required": false,
+      "default": "http",
+      "description": "Specify which TCP/IP protocol will be used.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Administrator's username the management API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "node",
+      "displayName": "Node",
+      "type": "string",
+      "required": false,
+      "default": "rabbit",
+      "description": "erlang node name of the rabbit we wish to configure",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of user to add. To change the password of an existing user, you must also specify C(update_password=always).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "permissions",
+      "displayName": "Permissions",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "a list of dicts, each dict contains vhost, configure_priv, write_priv, and read_priv, and represents a permission rule for that vhost. This option should be preferable when you care about all permissions of the user. You should use vhost, configure_priv, write_priv, and read_priv options instead if you care about permissions for just some vhosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_priv",
+      "displayName": "Read Priv",
+      "type": "string",
+      "required": false,
+      "default": "^$",
+      "description": "Regular expression to restrict configure actions on a resource for the specified vhost. By default all actions are restricted. This option will be ignored when permissions option is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Specify if user is to be added or removed",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User tags specified as comma delimited. The suggested tags to use are management, policymaker, monitoring and administrator.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "topic_permissions",
+      "displayName": "Topic Permissions",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of dicts, each dict contains vhost, exchange, read_priv and write_priv, and represents a topic permission rule for that vhost. By default vhost is C(/) and exchange is C(amq.topic). Supported since RabbitMQ 3.7.0. If RabbitMQ is older and topic_permissions are set, the module will fail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "string",
+      "required": false,
+      "default": "on_create",
+      "description": "C(on_create) will only set the password for newly created users.  C(always) will update passwords if they differ.",
+      "choices": [
+        "on_create",
+        "always"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of user to add",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vhost",
+      "displayName": "Vhost",
+      "type": "string",
+      "required": false,
+      "default": "/",
+      "description": "vhost to apply access privileges. This option will be ignored when permissions option is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_priv",
+      "displayName": "Write Priv",
+      "type": "string",
+      "required": false,
+      "default": "^$",
+      "description": "Regular expression to restrict configure actions on a resource for the specified vhost. By default all actions are restricted. This option will be ignored when permissions option is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

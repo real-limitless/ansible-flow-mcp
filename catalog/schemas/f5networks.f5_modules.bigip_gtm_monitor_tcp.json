@@ -1,0 +1,176 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_gtm_monitor_tcp",
+  "shortDescription": "Manages F5 BIG-IP GTM TCP monitors",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_gtm_monitor_tcp_module.html",
+  "options": [
+    {
+      "name": "ignore_down_response",
+      "displayName": "Ignore Down Response",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies the monitor allows more than one probe attempt per interval. When C(true), specifies the monitor ignores down responses for the duration of the monitor timeout. Once the monitor timeout is reached without the system receiving an up response, the system marks the object down. When C(false), specifies the monitor immediately marks an object down when it receives a down response. When creating a new monitor, if this parameter is not provided, the default value is C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interval",
+      "displayName": "Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The interval specifying how frequently the monitor instance of this template runs. If this parameter is not provided when creating a new monitor, the default value is 30. This value B(must) be less than the C(timeout) value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip",
+      "displayName": "Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP address part of the IP/port definition. If this parameter is not provided when creating a new monitor, the default value is '*'. If this value is an IP address, a C(port) number must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Monitor name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent",
+      "displayName": "Parent",
+      "type": "string",
+      "required": false,
+      "default": "/Common/tcp",
+      "description": "The parent template of this monitor template. Once this value has been set, it cannot be changed. By default, this value is the C(tcp) parent on the C(Common) partition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Port address part of the IP/port definition. If this parameter is not provided when creating a new monitor, the default value is '*'. Note that if using an IP address, you must specify a value between 1 and 65535.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "probe_timeout",
+      "displayName": "Probe Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of seconds after which the system times out the probe request to the system. When creating a new monitor, if this parameter is not provided, the default value is C(5).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "receive",
+      "displayName": "Receive",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The receive string for the monitor call.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reverse",
+      "displayName": "Reverse",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Instructs the system to mark the target resource down when the test is successful. This setting is useful, for example, if the content on your web site home page is dynamic and changes frequently, you may want to set up a reverse ECV service check that looks for the string Error. A match for this string means the web server was down. To use this option, you must specify values for C(send) and C(receive).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "send",
+      "displayName": "Send",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The send string for the monitor call.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present), ensures the monitor exists. When C(absent), ensures the monitor is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of seconds in which the node or service must respond to the monitor request. If the target responds within the set time period, it is considered up. If the target does not respond within the set time period, it is considered down. You can change this number to any number you want, however, it should be 3 times the interval number of seconds plus 1 second. If this parameter is not provided when creating a new monitor, the default value is 120.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "transparent",
+      "displayName": "Transparent",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the monitor operates in transparent mode. A monitor in transparent mode directs traffic through the associated pool members or nodes (usually a router or firewall) to the aliased destination (that is, it probes the C(ip)-C(port) combination specified in the monitor). If the monitor cannot successfully reach the aliased destination, the pool member or node through which the monitor traffic was sent is marked down. When creating a new monitor, if this parameter is not provided, t",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

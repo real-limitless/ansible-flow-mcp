@@ -2,6 +2,329 @@
   "fqcn": "community.zabbix.zabbix_host",
   "shortDescription": "Create/update/delete Zabbix hosts",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/zabbix/zabbix_host_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Required certificate issuer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the host in Zabbix.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": "yes",
+      "description": "Overwrite the host configuration, even if already present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_groups",
+      "displayName": "Host Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of host groups the host is part of. Make sure the Zabbix user used for Ansible can read these groups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_name",
+      "displayName": "Host Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the host in Zabbix. I(host_name) is the unique identifier used and cannot be updated using this module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_password",
+      "displayName": "Http Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_user",
+      "displayName": "Http Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth login",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interfaces",
+      "displayName": "Interfaces",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of interfaces to be created for the host (see example below). For more information, review host interface documentation at U(https://www.zabbix.com/documentation/current/en/manual/api/reference/hostinterface/object#host-interface)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inventory_mode",
+      "displayName": "Inventory Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configure the inventory mode.",
+      "choices": [
+        "automatic",
+        "manual",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inventory_zabbix",
+      "displayName": "Inventory Zabbix",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Add Facts for a zabbix inventory (e.g. Tag) (see example below). Please review the interface documentation for more information on the supported properties U(https://www.zabbix.com/documentation/current/en/manual/api/reference/host/object#host-inventory)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipmi_authtype",
+      "displayName": "Ipmi Authtype",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "IPMI authentication algorithm. Please review the Host object documentation for more information on the supported properties https://www.zabbix.com/documentation/3.4/manual/api/reference/host/object Possible values are, C(0) (none), C(1) (MD2), C(2) (MD5), C(4) (straight), C(5) (OEM), C(6) (RMCP+), with -1 being the API default. Please note that the Zabbix API will treat absent settings as default when updating any of the I(ipmi_)-options; this means that if you attempt to set any of the four opt",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipmi_password",
+      "displayName": "Ipmi Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IPMI password. also see the last note in the I(ipmi_authtype) documentation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipmi_privilege",
+      "displayName": "Ipmi Privilege",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "IPMI privilege level. Please review the Host object documentation for more information on the supported properties https://www.zabbix.com/documentation/3.4/manual/api/reference/host/object Possible values are C(1) (callback), C(2) (user), C(3) (operator), C(4) (admin), C(5) (OEM), with C(2) being the API default. also see the last note in the I(ipmi_authtype) documentation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipmi_username",
+      "displayName": "Ipmi Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IPMI username. also see the last note in the I(ipmi_authtype) documentation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "link_templates",
+      "displayName": "Link Templates",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of templates linked to the host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "macros",
+      "displayName": "Macros",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of user macros to assign to the zabbix host. Providing I(macros=[]) with I(force=yes) will clean all of the existing user macros from the host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitored_by",
+      "displayName": "Monitored By",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Source that is used to monitor the host.",
+      "choices": [
+        "zabbix_server",
+        "proxy",
+        "proxy_group"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy",
+      "displayName": "Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the Zabbix proxy to be used. Required if C(monitored_by) is \"proxy\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_group",
+      "displayName": "Proxy Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter introduced in Zabbix 7.0. Proxy group that is used to monitor the host. Required if C(monitored_by) is \"proxy_group\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the host. On C(present), it will create if host does not exist or update the host if the associated data is different. On C(absent) will remove a host if it exists.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": "enabled",
+      "description": "Monitoring status of the host.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of host tags to assign to the zabbix host. Providing I(tags=[]) with I(force=yes) will clean all of the tags from the host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_accept",
+      "displayName": "Tls Accept",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies what types of connections are allowed for incoming connections. The tls_accept parameter accepts values of 1 to 7 Possible values, 1 (no encryption), 2 (PSK), 4 (certificate). Values can be combined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_connect",
+      "displayName": "Tls Connect",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies what encryption to use for outgoing connections. Possible values, 1 (no encryption), 2 (PSK), 4 (certificate).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_psk",
+      "displayName": "Tls Psk",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PSK value is a hard to guess string of hexadecimal digits. The preshared key, at least 32 hex digits. Required if either I(tls_connect) or I(tls_accept) has PSK enabled. Using this parameter makes this module non-idempotent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_psk_identity",
+      "displayName": "Tls Psk Identity",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "It is a unique name by which this specific PSK is referred to by Zabbix components Do not put sensitive information in the PSK identity string, it is transmitted over the network unencrypted. Works only with >= Zabbix 3.0 Using this parameter with Zabbix >= 5.4 makes this module non-idempotent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_subject",
+      "displayName": "Tls Subject",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Required certificate subject.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "visible_name",
+      "displayName": "Visible Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Visible name of the host in Zabbix.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

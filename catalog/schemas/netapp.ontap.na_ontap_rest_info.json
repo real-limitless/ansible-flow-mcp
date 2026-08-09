@@ -1,0 +1,250 @@
+{
+  "fqcn": "netapp.ontap.na_ontap_rest_info",
+  "shortDescription": "NetApp ONTAP information gatherer using REST APIs",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp/ontap/na_ontap_rest_info_module.html",
+  "options": [
+    {
+      "name": "cert_filepath",
+      "displayName": "Cert Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client cert file (.pem). not supported with python 2.6.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "feature_flags",
+      "displayName": "Feature Flags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable a new feature. This can be used to enable an experimental feature or disable a new feature that breaks backward compatibility. Supported keys and values are subject to change without notice.  Unknown keys are ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fields",
+      "displayName": "Fields",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Request specific fields from subset. Recommended - '<list of fields>' to return specified fields, only one subset will be allowed. Discouraged - '*' to return all the fields, one or more subsets are allowed. This option can be used for discovery, but is discouraged in production. Stongly discouraged - '**' to return all the fields, one or more subsets are allowed. This option can put an extra load on the system and should not be used in production. Limited - '' to return default fields, generall",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_ontap_version",
+      "displayName": "Force Ontap Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the cluster ONTAP version when using REST. The behavior is undefined if the version does not match the target cluster. This is provided as a work-around when the cluster version cannot be read because of permission issues. See https://github.com/ansible-collections/netapp.ontap/wiki/Known-issues. This should be in the form 9.10 or 9.10.1 with each element being an integer number.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gather_subset",
+      "displayName": "Gather Subset",
+      "type": "list",
+      "required": false,
+      "default": "demo",
+      "description": "When supplied, this argument will restrict the information collected to a given subset. Either the REST API or the ZAPI info name can be given. Possible values for this argument include application/applications or application_info application/consistency-groups application/consistency-groups/metrics B(Requires the owning_resource to be set) application/consistency-groups/snapshots B(Requires the owning_resource to be set) application/templates or application_template_info cloud/targets or cloud_",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hal_linking",
+      "displayName": "Hal Linking",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "if false, HAL-encoded links are disabled in the REST calls.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the ONTAP instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_port",
+      "displayName": "Http Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Override the default port (80 or 443) with this port",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "https",
+      "displayName": "Https",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable and disable https. Ignored when using REST as only https is supported. Ignored when using SSL certificate authentication as it requires SSL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_api_errors",
+      "displayName": "Ignore Api Errors",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of substrings. If a substring is contained in an error message when fetching a subset, the module does not fail and the error is reported in the subset.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_filepath",
+      "displayName": "Key Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client key file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lambda_config",
+      "displayName": "Lambda Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration parameters for AWS Lambda proxy functionality. These option and suboptions are only supported with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_records",
+      "displayName": "Max Records",
+      "type": "number",
+      "required": false,
+      "default": 1024,
+      "description": "Maximum number of records returned in a single call.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owning_resource",
+      "displayName": "Owning Resource",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Some resources cannot be accessed directly.  You need to select them based on the owner or parent.  For instance, volume for a snapshot. The following subsets require an owning resource, and the following suboptions when uuid is not present. <application/consistency-groups/metrics> B(cg_name) is the consistency group name, B(svm_name) is the owning vserver name for the consistency group. <application/consistency-groups/snapshots> B(cg_name) is the consistency group name, B(svm_name) is the ownin",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parameters",
+      "displayName": "Parameters",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Allows for any rest option to be passed in",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the specified user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "deprecated as of 21.1.0. this option was ignored and continues to be ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_lambda",
+      "displayName": "Use Lambda",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies if AWS Lambda proxy functionality should be used to connect to the ONTAP system. Supported only with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_python_keys",
+      "displayName": "Use Python Keys",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, I(/) in the returned dictionary keys are translated to I(_). It makes it possible to use a . notation when processing the output. For instance I(ontap_info[\"svm/svms\"]) can be accessed as I(ontap_info.svm_svms).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_rest",
+      "displayName": "Use Rest",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "This module only supports REST. always -- will always use the REST API. A warning is issued if the module does not support REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required. For more information, please read the documentation U(https://docs.netapp.com/us-en/ontap/authentication/create-svm-user-accounts-task.html). Two authentication methods are supported 1. Basic authentication, using username and password. 2. SSL certificate authentication, using a ssl client cert file, and optionally a private key file. To use a certificate, the certificate must h",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to C(no), the SSL certificates will not be validated. This should only set to C(False) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

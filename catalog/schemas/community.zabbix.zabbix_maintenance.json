@@ -2,6 +2,175 @@
   "fqcn": "community.zabbix.zabbix_maintenance",
   "shortDescription": "Create Zabbix maintenance windows",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/zabbix/zabbix_maintenance_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "active_since",
+      "displayName": "Active Since",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Time when the maintenance becomes active. The given value will be rounded down to minutes. Uses `datetime.datetime.now() if not specified. NOTE - This time will not update across multiple runs unless explicitly set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "active_till",
+      "displayName": "Active Till",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Time when the maintenance stops being active. The given value will be rounded down to minutes. Gets calculated from I(minutes) if not specified when using I(minutes) only. When using I(time_periods) defaults to one year from I(active_since)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "append",
+      "displayName": "Append",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to append hosts and host groups to the existing maintenance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "collect_data",
+      "displayName": "Collect Data",
+      "type": "boolean",
+      "required": false,
+      "default": "yes",
+      "description": "Type of maintenance. With data collection, or without.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "desc",
+      "displayName": "Desc",
+      "type": "string",
+      "required": false,
+      "default": "Created by Ansible",
+      "description": "Short description of maintenance window.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_groups",
+      "displayName": "Host Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Host groups to manage maintenance window for. B(Required) option when I(state=present) and I(host_names) is not used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_names",
+      "displayName": "Host Names",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Hosts to manage maintenance window for. B(Required) option when I(state=present) and I(host_groups) is not used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_password",
+      "displayName": "Http Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_user",
+      "displayName": "Http Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth login",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minutes",
+      "displayName": "Minutes",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Length of maintenance window in minutes. Will default to 10 minutes if not explicitly set This argument has been B(DEPRECATED) and replaced by the I(time_periods) argument and will be removed in 4.0.0 B(Use of this argument only allows for the creation of a single one-time maintenance window.)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Unique name of maintenance window.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Create or remove a maintenance window. Maintenance window to remove is identified by name.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags to assign to the hosts in maintenance. Requires I(collect_data=yes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_periods",
+      "displayName": "Time Periods",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List scheduled outages within the maintenance period. This argument replaces the I(minutes) argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "visible_name",
+      "displayName": "Visible Name",
+      "type": "boolean",
+      "required": false,
+      "default": "yes",
+      "description": "Type of zabbix host name to use for identifying hosts to include in the maintenance. I(visible_name=yes) to search by visible name,  I(visible_name=no) to search by technical name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -1,0 +1,217 @@
+{
+  "fqcn": "cyberark.pas.cyberark_account",
+  "shortDescription": "Module for CyberArk Account object creation, deletion, modification, and password retrieval using PAS Web Services SDK.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cyberark/pas/cyberark_account_module.html",
+  "options": [
+    {
+      "name": "address",
+      "displayName": "Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of the endpoint where the privileged account is located.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_base_url",
+      "displayName": "Api Base Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A string containing the base URL of the server hosting CyberArk's Privileged Account Security Web Services SDK. Example U(https://<IIS_Server_Ip>/PasswordVault/api/)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cyberark_session",
+      "displayName": "Cyberark Session",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Dictionary set by a CyberArk authentication containing the different values to perform actions on a logged-on CyberArk session, please see M(cyberark.pas.cyberark_authentication) module for an example of cyberark_session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identified_by",
+      "displayName": "Identified By",
+      "type": "string",
+      "required": false,
+      "default": "username,address,platform_id",
+      "description": "When an API call is made to Get Accounts, often times the default parameters passed will identify more than one account. This parameter is used to confidently identify a single account when the default query can return multiple results.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logging_file",
+      "displayName": "Logging File",
+      "type": "string",
+      "required": false,
+      "default": "/tmp/ansible_cyberark.log",
+      "description": "Setting the log file name and location for troubleshooting logs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logging_level",
+      "displayName": "Logging Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameter used to define the level of troubleshooting output to the C(logging_file) value.",
+      "choices": [
+        "NOTSET",
+        "DEBUG",
+        "INFO"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ObjectID of the account",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_secret",
+      "displayName": "New Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The new secret/password to be stored in CyberArk Vault.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "platform_account_properties",
+      "displayName": "Platform Account Properties",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Object containing key-value pairs to associate with the account, as defined by the account platform. These properties are validated against the mandatory and optional properties of the specified platform's definition. Optional properties that do not exist on the account will not be returned here. Internal properties are not returned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "platform_id",
+      "displayName": "Platform Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The PolicyID of the Platform that is to be managing the account",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_machines_access",
+      "displayName": "Remote Machines Access",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Set of parameters for defining PSM endpoint access targets.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "safe",
+      "displayName": "Safe",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The safe in the Vault where the privileged account is to be located.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret",
+      "displayName": "Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The initial password for the creation of the account",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_management",
+      "displayName": "Secret Management",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Set of parameters associated with the management of the credential.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_type",
+      "displayName": "Secret Type",
+      "type": "string",
+      "required": false,
+      "default": "password",
+      "description": "The value that identifies what type of account it will be.",
+      "choices": [
+        "password",
+        "key"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Assert the desired state of the account C(present) to create or update and account object. Set to C(absent) for deletion of an account object. Set to C(retrieve) to get the account object including the password.",
+      "choices": [
+        "present",
+        "absent",
+        "retrieve"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username associated with the account.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), SSL certificate chain will not be validated.  This should only set to C(true) if you have a root CA certificate installed on each node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

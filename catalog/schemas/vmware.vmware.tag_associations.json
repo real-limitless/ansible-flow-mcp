@@ -2,6 +2,189 @@
   "fqcn": "vmware.vmware.tag_associations",
   "shortDescription": "Manage the tags associated with a vSphere object.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware/tag_associations_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_moid",
+      "displayName": "Object Moid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The managed object ID (MOID) of the object to manage. One of O(object_moid) or O(object_name) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_name",
+      "displayName": "Object Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the object to manage. One of O(object_moid) or O(object_name) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_type",
+      "displayName": "Object Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of the object to manage.",
+      "choices": [
+        "VirtualMachine",
+        "Datacenter",
+        "ClusterComputeResource",
+        "HostSystem",
+        "DistributedVirtualSwitch",
+        "DistributedVirtualPortgroup",
+        "Datastore",
+        "DatastoreCluster",
+        "ResourcePool",
+        "Folder"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_protocol",
+      "displayName": "Proxy Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The proxy connection protocol to use. This option is used if the correct proxy protocol cannot be automatically determined.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_extra_tags",
+      "displayName": "Remove Extra Tags",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to remove tags that are not in the list of tags to manage. If O(state) is set to C(absent), all tags will be removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether ensure the tags are present or absent on the object.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "A list of tags to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_tags_before_attaching",
+      "displayName": "Validate Tags Before Attaching",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to validate the tags before attaching them to the object. If true, additional API calls will be made to validate the tags exist and can be applied to the type of object specified. If a tag fails validation, an error will be raised. If false, the tags will be attached to the object without validation. This is faster, but may result in the module reporting changes every time. This is due to the module attempting to attach the tag, and vSphere simply ignoring the invalid request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

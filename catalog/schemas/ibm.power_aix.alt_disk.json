@@ -1,0 +1,235 @@
+{
+  "fqcn": "ibm.power_aix.alt_disk",
+  "shortDescription": "Alternate rootvg disk management.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_aix/alt_disk_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "copy",
+      "description": "Specifies the operation to perform. C(copy) to perform and alternate disk copy. C(clean) to cleanup an existing alternate disk copy. C(install) to install filesets, fixes in existing alternate disk. C(wakeup) to performs a wake-up on the root volume group located on the target_disk. C(sleep) to sleep the alternate root volume group that experienced the previous \"wake\" operation.",
+      "choices": [
+        "copy",
+        "clean",
+        "install",
+        "wakeup",
+        "sleep"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_old_rootvg",
+      "displayName": "Allow Old Rootvg",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allows the removal or cleanup of existing old rootvg as well.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "apar_fixes",
+      "displayName": "Apar Fixes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional file with a list of APARs to install after a clone of rootvg. If apar_fixes is provided then I(image_location) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bootlist",
+      "displayName": "Bootlist",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When I(action=copy), specifies to run bootlist after the alternate disk copy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bundle_name",
+      "displayName": "Bundle Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path name of optional file with a list of packages or filesets that will be installed after a rootvg clone. If specified then I(image_location) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_reset",
+      "displayName": "Device Reset",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When I(action=copy), specifies to reset any user-defined device configurations on the target C(altinst_rootvg).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_size_policy",
+      "displayName": "Disk Size Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When I(action=copy), specifies how to choose the alternate disk if I(targets) is not specified. C(minimize) smallest disk that can be selected. C(upper) first disk found bigger than the rootvg disk. C(lower) disk size less than rootvg disk size but big enough to contain the used PPs. C(nearest) disk size closest to the rootvg disk.",
+      "choices": [
+        "minimize",
+        "upper",
+        "lower",
+        "nearest"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "existing_altinst_rootvg",
+      "displayName": "Existing Altinst Rootvg",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When I(action=install), specifies the target disk where bundle_name/fixes/filesets will be installed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filesets",
+      "displayName": "Filesets",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "List of filesets to install after cloning a rootvg. If specified then I(image_location) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "first_boot_script",
+      "displayName": "First Boot Script",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When I(action=copy), specifies an optional customization script to run during the initial boot of the alternate rootvg, after all file systems are mounted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Forces removal of any existing alternate disk copy on target disks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_location",
+      "displayName": "Image Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Location of installp images or updates to apply after a clone of rootvg. This can be a directory full path name or device name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "installp_flags",
+      "displayName": "Installp Flags",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The flags to use when updating or installing new filesets into the cloned altinst_rootvg. If specified then I(image_location) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "phases_to_execute",
+      "displayName": "Phases To Execute",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When I(action=copy), specifies the phase or phases to execute during this invocation of alt_disk_copy. C(1) only phases 1 to execute C(2) only phases 2 to execute C(3) only phases 3 to execute C(12) phases 1 and phases 2 to execute C(23) phases 2 and phases 3 to execute C(all) all phases to execute (default)",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "12",
+        "23",
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rebuild_boot_image",
+      "displayName": "Rebuild Boot Image",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Rebuilds the alternate boot image before putting the volume group to sleep.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remain_nim_client",
+      "displayName": "Remain Nim Client",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When I(action=copy), specifies to copy the C(/.rhosts) and C(/etc/niminfo) files to the alternate rootvg.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resolvconf",
+      "displayName": "Resolvconf",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When I(action=copy), specifies the C(resolv.conf) file to replace the existing one after the rootvg has been cloned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skip_disk_bootability_checks",
+      "displayName": "Skip Disk Bootability Checks",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When I(action=copy), skips disk bootability checks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "targets",
+      "displayName": "Targets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the target disks. Either I(targets) or I(disk_size_policy) must be specified. If no I(targets) disk is specified, it will look for a valid candidate disk based on the provided I(disk_size_policy) policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

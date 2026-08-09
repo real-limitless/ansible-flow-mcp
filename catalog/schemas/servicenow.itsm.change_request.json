@@ -1,0 +1,269 @@
+{
+  "fqcn": "servicenow.itsm.change_request",
+  "shortDescription": "Manage ServiceNow change requests",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/servicenow/itsm/change_request_module.html",
+  "options": [
+    {
+      "name": "assignment_group",
+      "displayName": "Assignment Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the group that the change request is assigned to. Required if I(state) value is C(assess) or C(authorize) or C(scheduled) or C(implement) or C(review) or C(closed). Mutually exclusive with C(assignment_group_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "assignment_group_id",
+      "displayName": "Assignment Group Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The sys_id of the group that the change request is assigned to. Required if I(state) value is C(assess) or C(authorize) or C(scheduled) or C(implement) or C(review) or C(closed). Mutually exclusive with C(assignment_group).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attachments",
+      "displayName": "Attachments",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "ServiceNow attachments.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "category",
+      "displayName": "Category",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The category of the change request. Default choices are C(hardware), C(software), C(service), C(system_software), C(aplication_software), C(network), C(telecom), C(documentation), C(other). One can override them by setting I(change_request_mapping.category). Hard-coded choices for C(category) were removed in 2.5.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "change_request_mapping",
+      "displayName": "Change Request Mapping",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "User mapping for I(Change request) object, where user can override Choice Lists values for objects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "close_code",
+      "displayName": "Close Code",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provide information on how the change request was resolved. The change request must have this parameter set prior to transitioning to the C(closed) state.",
+      "choices": [
+        "successful",
+        "successful_issues",
+        "unsuccessful"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "close_notes",
+      "displayName": "Close Notes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Resolution notes added by the user who closed the change request. The change request must have this parameter set prior to transitioning to the C(closed) state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A detailed description of the change request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hold_reason",
+      "displayName": "Hold Reason",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Reason why change request is on hold. Required if change request's I(on_hold) value will be C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "impact",
+      "displayName": "Impact",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Impact is a measure of the effect of an incident, problem, or change on business processes. Default choices are C(high), C(medium), C(low). One can override them by setting I(change_request_mapping.impact).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance",
+      "displayName": "Instance",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "ServiceNow instance information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "number",
+      "displayName": "Number",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of the record to operate on. Note that contrary to I(sys_id), I(number) may not uniquely identify a record.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "on_hold",
+      "displayName": "On Hold",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A change request can be put on hold when I(state) is not in the C(new), C(canceled), or C(closed).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "other",
+      "displayName": "Other",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Optional remaining parameters. For more information on optional parameters, refer to the ServiceNow change request documentation at U(https://docs.servicenow.com/bundle/tokyo-it-service-management/page/product/change-management/task/t_CreateAChange.html).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Priority is based on impact and urgency, and it identifies how quickly the service desk should address the task. Default choices are C(critical), C(high), C(moderate), C(low). One can override them by setting I(change_request_mapping.priority).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "requested_by",
+      "displayName": "Requested By",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User who requested the change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "risk",
+      "displayName": "Risk",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The risk level for the change. Default choices are C(high), C(moderate), C(low). One can override them by setting I(change_request_mapping.risk).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "short_description",
+      "displayName": "Short Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A summary of the change request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The state of the change request. If I(state) value is C(assess) or C(authorize) or C(scheduled) or C(implement) or C(review) or C(closed), I(assignment_group) parameter must be filled in. For more information on state model and transition, refere to the ServiceNow documentation at U(https://docs.servicenow.com/bundle/tokyo-it-service-management/page/product/change-management/concept/c_ChangeStateModel.html) Default choices are C(new), C(assess), C(authorize), C(scheduled), C(implement), C(review",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sys_id",
+      "displayName": "Sys Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Unique identifier of the record to operate on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Predefined template name for standard change request. For more information on templates refer to ServiceNow documentation at U(https://docs.servicenow.com/bundle/tokyo-it-service-management/page/product/change-management/concept/c_StandardChangeCatalogPlugin.html) or find template names on <your_service_id>.service-now.com/nav_to.do?uri=%2Fstd_change_producer_version_list.do%3F",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify what type of change is required.",
+      "choices": [
+        "standard",
+        "normal",
+        "emergency"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "urgency",
+      "displayName": "Urgency",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The extent to which resolution of an change request can bear delay. Default choices are C(high), C(medium), C(low). One can override them by setting I(change_request_mapping.urgency).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

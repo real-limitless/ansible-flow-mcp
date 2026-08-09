@@ -1,0 +1,414 @@
+{
+  "fqcn": "netapp.ontap.na_ontap_security_certificates",
+  "shortDescription": "NetApp ONTAP manage security certificates.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp/ontap/na_ontap_security_certificates_module.html",
+  "options": [
+    {
+      "name": "algorithm",
+      "displayName": "Algorithm",
+      "type": "string",
+      "required": false,
+      "default": "rsa",
+      "description": "Asymmetric Encryption Algorithm.",
+      "choices": [
+        "rsa",
+        "ec"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_filepath",
+      "displayName": "Cert Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client cert file (.pem). not supported with python 2.6.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "common_name",
+      "displayName": "Common Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Common name of the certificate. Required for create and install. If name is present, ignored for sign and delete. If name is absent or ignored, required for sign and delete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "expiry_time",
+      "displayName": "Expiry Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Certificate expiration time. Specifying an expiration time is recommended when creating a certificate. Can be provided when signing a certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extended_key_usages",
+      "displayName": "Extended Key Usages",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of extended key usage extensions.",
+      "choices": [
+        "serverauth",
+        "clientauth",
+        "timestamping",
+        "dvcs",
+        "ocspsigning",
+        "codesigning",
+        "emailprotection",
+        "anyextendedkeyusage",
+        "critical"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "feature_flags",
+      "displayName": "Feature Flags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable a new feature. This can be used to enable an experimental feature or disable a new feature that breaks backward compatibility. Supported keys and values are subject to change without notice.  Unknown keys are ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_ontap_version",
+      "displayName": "Force Ontap Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the cluster ONTAP version when using REST. The behavior is undefined if the version does not match the target cluster. This is provided as a work-around when the cluster version cannot be read because of permission issues. See https://github.com/ansible-collections/netapp.ontap/wiki/Known-issues. This should be in the form 9.10 or 9.10.1 with each element being an integer number. When C(use_rest) is set to auto, this may force a switch to ZAPI based on the version and platform capabilit",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "generate_csr",
+      "displayName": "Generate Csr",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Generate a Certificate Signing Request (CSR) instead of creating or installing a certificate. When true, the CSR is generated based on the provided parameters and returned in the output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hash_function",
+      "displayName": "Hash Function",
+      "type": "string",
+      "required": false,
+      "default": "sha256",
+      "description": "Hashing function. Can be provided when creating a self-signed certificate, when signing a certificate, or when generating a certificate signing request. Allowed values are sha1, sha224, sha256, sha384, and sha512.",
+      "choices": [
+        "sha1",
+        "sha224",
+        "sha256",
+        "sha384",
+        "sha512"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the ONTAP instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_port",
+      "displayName": "Http Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Override the default port (80 or 443) with this port",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "https",
+      "displayName": "Https",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable and disable https. Ignored when using REST as only https is supported. Ignored when using SSL certificate authentication as it requires SSL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_name_if_not_supported",
+      "displayName": "Ignore Name If Not Supported",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "ONTAP 9.6 and 9.7 REST API does not support I(name). If set to true, no error is reported if I(name) is present, and I(name) is not used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "intermediate_certificates",
+      "displayName": "Intermediate Certificates",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Chain of intermediate Certificates in PEM format. Only valid when installing a certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_filepath",
+      "displayName": "Key Filepath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "path to SSL client key file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_size",
+      "displayName": "Key Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Key size of the certificate in bits. Specifying a strong key size is recommended when creating a certificate. Ignored for sign and delete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_usages",
+      "displayName": "Key Usages",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of key usage extensions.",
+      "choices": [
+        "digitalsignature",
+        "nonrepudiation",
+        "keyencipherment",
+        "dataencipherment",
+        "keyagreement",
+        "keycertsign",
+        "crlsign",
+        "encipheronly",
+        "decipheronly",
+        "critical"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The unique name of the security certificate per SVM. This parameter is not supported for ONTAP 9.6 or 9.7, as the REST API does not support it. If present with ONTAP 9.6 or 9.7, it is ignored by default, see I(ignore_name_if_not_supported). It is strongly recommended to use name for newer releases of ONTAP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ontapi",
+      "displayName": "Ontapi",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The ontap api version to use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the specified user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key",
+      "displayName": "Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Private key certificate in PEM format. Required when installing a CA-signed certificate.  Ignored otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_certificate",
+      "displayName": "Public Certificate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public key certificate in PEM format. Required when installing a certificate.  Ignored otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_strength",
+      "displayName": "Security Strength",
+      "type": "number",
+      "required": false,
+      "default": 112,
+      "description": "Security strength of the certificate in bits.",
+      "choices": [
+        112,
+        128,
+        192
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "signing_request",
+      "displayName": "Signing Request",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If present, the certificate identified by name and svm is used to sign the request. A signed certificate is returned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the specified security certificate should exist or not.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subject_alternatives",
+      "displayName": "Subject Alternatives",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Subject alternative names for the certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subject_name",
+      "displayName": "Subject Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Subject name details of the certificate. The format is a list of comma separated key=value pairs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "svm",
+      "displayName": "Svm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the SVM (vserver). If present, the certificate is installed in the SVM. If absent, the certificate is installed in the cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of certificate Required for create and install. If name is present, ignored for sign and delete. If name is absent or ignored, required for sign and delete.",
+      "choices": [
+        "client",
+        "server",
+        "client_ca",
+        "server_ca",
+        "root_ca"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_lambda",
+      "displayName": "Use Lambda",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies if AWS Lambda proxy functionality should be used to connect to the ONTAP system. Supported only with REST.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_rest",
+      "displayName": "Use Rest",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "Whether to use REST or ZAPI. always -- will always use the REST API if the module supports REST. A warning is issued if the module does not support REST. An error is issued if a module option is not supported in REST. never -- will always use ZAPI if the module supports ZAPI.  An error may be issued if a REST option is not supported in ZAPI. auto -- will try to use the REST API if the module supports REST and modules options are supported.  Reverts to ZAPI otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required. For more information, please read the documentation U(https://docs.netapp.com/us-en/ontap/authentication/create-svm-user-accounts-task.html). Two authentication methods are supported 1. Basic authentication, using username and password. 2. SSL certificate authentication, using a ssl client cert file, and optionally a private key file. To use a certificate, the certificate must h",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to C(no), the SSL certificates will not be validated. This should only set to C(False) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

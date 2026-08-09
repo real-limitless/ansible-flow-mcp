@@ -1,0 +1,66 @@
+{
+  "fqcn": "cloud.terraform.plan_stash",
+  "shortDescription": "Handle the base64 encoding or decoding of a terraform plan file",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cloud/terraform/plan_stash_module.html",
+  "options": [
+    {
+      "name": "binary_data",
+      "displayName": "Binary Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When O(state=load), this parameter defines the base64-encoded data of the terraform plan file. Mutually exclusive with V(var_name). Ignored when O(state=stash).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The path to the terraform plan file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "per_host",
+      "displayName": "Per Host",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the stats are per host or for all hosts in the run. Ignored when O(state=load).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "stash",
+      "description": "O(state=stash): base64-encodes the terraform plan file and saves it into ansible stats like using the M(ansible.builtin.set_stats) module. O(state=load): base64-decodes data from variable specified in O(var_name) and writes them into terraform plan file.",
+      "choices": [
+        "stash",
+        "load"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "var_name",
+      "displayName": "Var Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When O(state=stash), this parameter defines the variable name to be set into stats. When O(state=load), this parameter defines the variable from ansible facts containing the base64-encoded data of the terraform plan file. Variables must start with a letter or underscore character, and contain only letters, numbers and underscores. The module will use V(terraform_plan) as default variable name if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

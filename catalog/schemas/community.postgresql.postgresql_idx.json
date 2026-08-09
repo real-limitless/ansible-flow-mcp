@@ -2,6 +2,292 @@
   "fqcn": "community.postgresql.postgresql_idx",
   "shortDescription": "Create or drop indexes from a PostgreSQL database",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/postgresql/postgresql_idx_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of a file containing SSL certificate authority (CA) certificate(s). If the file exists, the server's certificate will be verified to be signed by one of these authorities.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cascade",
+      "displayName": "Cascade",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Automatically drop objects that depend on the index, and in turn all objects that depend on those objects. It used only with I(state=absent). Mutually exclusive with I(concurrent=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "columns",
+      "displayName": "Columns",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of index columns that need to be covered by index. Mutually exclusive with I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "concurrent",
+      "displayName": "Concurrent",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enable or disable concurrent mode (CREATE / DROP INDEX CONCURRENTLY). Pay attention, if I(concurrent=false), the table will be locked (ACCESS EXCLUSIVE) during the building process. For more information about the lock levels see U(https://www.postgresql.org/docs/current/explicit-locking.html). If the building process was interrupted for any reason when I(cuncurrent=true), the index becomes invalid. In this case it should be dropped and created again. Mutually exclusive with I(cascade=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cond",
+      "displayName": "Cond",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Index conditions. Mutually exclusive with I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connect_params",
+      "displayName": "Connect Params",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Any additional parameters to be passed to libpg. These parameters take precedence.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idxname",
+      "displayName": "Idxname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the index to create or drop.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idxtype",
+      "displayName": "Idxtype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Index type (like btree, gist, gin, etc.). Mutually exclusive with I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_db",
+      "displayName": "Login Db",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of database to connect to and where the index will be created/dropped. The V(db) alias is deprecated and will be removed in version 5.0.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Host running the database. If you have connection issues when using C(localhost), try to use C(127.0.0.1) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The password this module should use to establish its PostgreSQL session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": 5432,
+      "description": "Database port to connect to. The C(port) alias is deprecated and will be removed in the next major release. Use C(login_port) instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_unix_socket",
+      "displayName": "Login Unix Socket",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Path to a Unix domain socket for local connections.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": "postgres",
+      "description": "The username this module should use to establish its PostgreSQL session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schema",
+      "displayName": "Schema",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of a database schema where the index will be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_role",
+      "displayName": "Session Role",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Switch to session_role after connecting. The specified session_role must be a role that the current login_user is a member of. Permissions checking for SQL commands is carried out as though the session_role were the one that had logged in originally.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_cert",
+      "displayName": "Ssl Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the file name of the client SSL certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_key",
+      "displayName": "Ssl Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the location for the secret key used for the client certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_mode",
+      "displayName": "Ssl Mode",
+      "type": "string",
+      "required": false,
+      "default": "prefer",
+      "description": "Determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server. See U(https://www.postgresql.org/docs/current/static/libpq-ssl.html) for more information on the modes. Default of C(prefer) matches libpq default.",
+      "choices": [
+        "allow",
+        "disable",
+        "prefer",
+        "require",
+        "verify-ca",
+        "verify-full"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Index state. C(present) implies the index will be created if it does not exist. C(absent) implies the index will be dropped if it exists.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_params",
+      "displayName": "Storage Params",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Storage parameters like fillfactor, vacuum_cleanup_index_scale_factor, etc. Mutually exclusive with I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "table",
+      "displayName": "Table",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Table to create index on it. Mutually exclusive with I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tablespace",
+      "displayName": "Tablespace",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set a tablespace for the index. Mutually exclusive with I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "trust_input",
+      "displayName": "Trust Input",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), check whether values of parameters I(idxname), I(session_role), I(schema), I(table), I(columns), I(tablespace), I(storage_params), I(cond) are potentially dangerous. It makes sense to use C(false) only when SQL injections via the parameters are possible.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unique",
+      "displayName": "Unique",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable unique index. Only btree currently supports unique indexes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

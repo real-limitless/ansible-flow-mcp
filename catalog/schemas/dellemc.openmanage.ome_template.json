@@ -1,0 +1,220 @@
+{
+  "fqcn": "dellemc.openmanage.ome_template",
+  "shortDescription": "Create, modify, deploy, delete, export, import and clone a template on OpenManage Enterprise",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/ome_template_module.html",
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Payload data for the template operations. All the variables in this option are added as payload for C(create), C(modify), C(deploy), C(import), and C(clone) operations. It takes the following attributes. Attributes: List of dictionaries of attributes (if any) to be modified in the deployment template. This is applicable when I(command) is C(deploy) and C(modify). Use the I(Id) If the attribute Id is available. If not, use the comma separated I (DisplayName). For more details about using the I(Di",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": false,
+      "default": "create",
+      "description": "C(create) creates a new template. C(modify) modifies an existing template. C(deploy) creates a template-deployment job. C(delete) deletes an existing template. C(export) exports an existing template. C(import) creates a template from a specified configuration text in SCP XML format. C(clone) creates a clone of a existing template.",
+      "choices": [
+        "create",
+        "modify",
+        "deploy",
+        "delete",
+        "export",
+        "import",
+        "clone"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_group_names",
+      "displayName": "Device Group Names",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specify the list of groups when I (command) is C(deploy). Provide at least one of the mandatory options I(device_id), I(device_service_tag), or I(device_group_names).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_id",
+      "displayName": "Device Id",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specify the list of targeted device ID(s) when I(command) is C(deploy). When I (command) is C(create), specify the ID of a single device. Either I(device_id) or I(device_service_tag) is mandatory or both can be applicable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_service_tag",
+      "displayName": "Device Service Tag",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specify the list of targeted device service tags when I (command) is C(deploy). When I(command) is C(create), specify the service tag of a single device. Either I(device_id) or I(device_service_tag) is mandatory or both can be applicable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "OpenManage Enterprise or OpenManage Enterprise Modular IP address or hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Provides the option to wait for job completion. This option is applicable when I(command) is C(create), or C(deploy).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 1200,
+      "description": "The maximum wait time of I(job_wait) in seconds. The job is tracked only for this duration. This option is applicable when I(job_wait) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OpenManage Enterprise or OpenManage Enterprise Modular password. If the password is not provided, then the environment variable E(OME_PASSWORD) is used. Example: export OME_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "OpenManage Enterprise or OpenManage Enterprise Modular HTTPS port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_id",
+      "displayName": "Template Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the existing template. This option is applicable when I(command) is C(modify), C(deploy), C(delete), C(clone) and C(export). This option is mutually exclusive with I(template_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_name",
+      "displayName": "Template Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the existing template. This option is applicable when I(command) is C(modify), C(deploy), C(delete), C(clone) and C(export). This option is mutually exclusive with I(template_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_view_type",
+      "displayName": "Template View Type",
+      "type": "string",
+      "required": false,
+      "default": "Deployment",
+      "description": "Select the type of view of the OME template. This is applicable when I(command) is C(create),C(clone) and C(import).",
+      "choices": [
+        "Deployment",
+        "Compliance",
+        "Inventory",
+        "Sample",
+        "None"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OpenManage Enterprise or OpenManage Enterprise Modular username. If the username is not provided, then the environment variable E(OME_USERNAME) is used. Example: export OME_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(OME_X_AUTH_TOKEN) is used. Example: export OME_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

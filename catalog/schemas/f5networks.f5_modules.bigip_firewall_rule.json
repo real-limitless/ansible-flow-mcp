@@ -1,0 +1,207 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_firewall_rule",
+  "shortDescription": "Manage AFM Firewall rules",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_firewall_rule_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the action for the firewall rule. When C(accept), allows packets with the specified source, destination, and protocol to pass through the firewall. Packets that match the rule and are accepted, traverse the system as if the firewall is not present. When C(drop), drops packets with the specified source, destination, and protocol. Dropping a packet is a silent action with no notification to the source or destination systems. Dropping the packet causes the connection to be retried until t",
+      "choices": [
+        "accept",
+        "drop",
+        "reject",
+        "accept-decisively"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The rule description.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination",
+      "displayName": "Destination",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies packet destinations to which the rule applies. Leaving this field blank applies the rule to all addresses and all ports. You can specify the following destination items. An IPv4 or IPv6 address, an IPv4 or IPv6 address range, geographic location, VLAN, address list, port, port range, port list or address list. You can specify a mix of different types of items for the source address. A special value C(any) can be specified to the destination items to match any value for the respective i",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "icmp_message",
+      "displayName": "Icmp Message",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the Internet Control Message Protocol (ICMP) or ICMPv6 message C(type) and C(code) the rule uses. This parameter is only relevant when C(protocol) is either C(icmp)(1) or C(icmpv6)(58).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "irule",
+      "displayName": "Irule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies an iRule that is applied to the firewall rule. An iRule can be started when the firewall rule matches traffic.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logging",
+      "displayName": "Logging",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether logging is enabled or disabled for the firewall rule. When creating a new rule, if this parameter is not specified, the default if C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent_policy",
+      "displayName": "Parent Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The policy which contains the rule to be managed. One of either C(parent_policy) or C(parent_rule_list) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent_rule_list",
+      "displayName": "Parent Rule List",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The rule list which contains the rule to be managed. One of either C(parent_policy) or C(parent_rule_list) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the protocol to which the rule applies. Protocols may be specified by either their name or numeric value. A special protocol value C(any) can be specified to match any protocol. The numeric equivalent of this protocol is C(255).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rule_list",
+      "displayName": "Rule List",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies an existing rule list to use in the rule. This parameter is mutually exclusive with many of the other individual-rule specific settings. This includes C(logging), C(action), C(source), C(destination), C(irule'), C(protocol) and C(logging). This parameter is only used when C(parent_policy) is specified, otherwise it is ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schedule",
+      "displayName": "Schedule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a schedule for the firewall rule. You configure schedules to define days and times when the firewall rule is made active.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies packet sources to which the rule applies. Leaving this field blank applies the rule to all addresses and all ports. You can specify the following source items. An IPv4 or IPv6 address, an IPv4 or IPv6 address range, geographic location, VLAN, address list, port, port range, port list or address list. You can specify a mix of different types of items for the source address. A special value C(any) can be specified to all the source items to match any value for the respective item.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(state) is C(present), ensures the rule exists. When C(state) is C(absent), ensures the rule is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Indicates the activity state of the rule or rule list. When C(disabled), specifies the rule or rule list does not apply at all. When C(enabled), specifies the system applies the firewall rule or rule list to the given context and addresses. When C(scheduled), specifies the system applies the rule or rule list according to the specified schedule. When creating a new rule, if this parameter is not provided, the default is C(enabled).",
+      "choices": [
+        "enabled",
+        "disabled",
+        "scheduled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,90 @@
   "fqcn": "community.crypto.acme_ari_info",
   "shortDescription": "Retrieves ACME Renewal Information (ARI) for a certificate",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/crypto/acme_ari_info_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "acme_directory",
+      "displayName": "Acme Directory",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The ACME directory to use. This is the entry point URL to access the ACME CA server API. For safety reasons the default is set to the Let's Encrypt staging server (for the ACME v1 protocol). This will create technically correct, but untrusted certificates. For Let's Encrypt, all staging endpoints can be found here: U(https://letsencrypt.org/docs/staging-environment/). For B(Let's Encrypt), the production directory URL for ACME v2 is U(https://acme-v02.api.letsencrypt.org/directory). For B(ZeroSS",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "acme_version",
+      "displayName": "Acme Version",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "The ACME version of the endpoint. Must be V(2) for standardized ACME v2 endpoints. The value V(1) is no longer supported since community.crypto 3.0.0.",
+      "choices": [
+        2
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_content",
+      "displayName": "Certificate Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The content of the X.509 certificate to request information for. Exactly one of O(certificate_path) and O(certificate_content) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_path",
+      "displayName": "Certificate Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to the X.509 certificate to request information for. Exactly one of O(certificate_path) and O(certificate_content) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "request_timeout",
+      "displayName": "Request Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "The time Ansible should wait for a response from the ACME API. This timeout is applied to all HTTP(S) requests (HEAD, GET, POST).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "select_crypto_backend",
+      "displayName": "Select Crypto Backend",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Determines which crypto backend to use. The default choice is V(auto), which tries to use C(cryptography) if available, and falls back to C(openssl). If set to V(openssl), will try to use the C(openssl) binary. If set to V(cryptography), will try to use the L(cryptography,https://cryptography.io/) library.",
+      "choices": [
+        "auto",
+        "cryptography",
+        "openssl"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether calls to the ACME directory will validate TLS certificates. B(Warning:) Should B(only ever) be set to V(false) for testing purposes, for example when testing against a local Pebble server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

@@ -2,6 +2,246 @@
   "fqcn": "community.windows.win_nssm",
   "shortDescription": "Install a service using NSSM",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/windows/win_nssm_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "app_environment",
+      "displayName": "App Environment",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Key/Value pairs which will be added to the environment of the service application.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "app_rotate_bytes",
+      "displayName": "App Rotate Bytes",
+      "type": "number",
+      "required": false,
+      "default": 104858,
+      "description": "NSSM will not rotate any file which is smaller than the configured number of bytes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "app_rotate_online",
+      "displayName": "App Rotate Online",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "If set to 1, nssm can rotate files which grow to the configured file size limit while the service is running.",
+      "choices": [
+        0,
+        1
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "app_stop_method_console",
+      "displayName": "App Stop Method Console",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Time to wait after sending Control-C.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "app_stop_method_skip",
+      "displayName": "App Stop Method Skip",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "To disable service shutdown methods, set to the sum of one or more of the numbers 1 - Don't send Control-C to the console. 2 - Don't send WM_CLOSE to windows. 4 - Don't send WM_QUIT to threads. 8 - Don't call TerminateProcess().",
+      "choices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "application",
+      "displayName": "Application",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The application binary to run as a service Required when I(state) is C(present), C(started), C(stopped), or C(restarted).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "arguments",
+      "displayName": "Arguments",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parameters to be passed to the application when it starts. This can be either a simple string or a list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dependencies",
+      "displayName": "Dependencies",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Service dependencies that has to be started to trigger startup, separated by comma.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description to set for the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The display name to set for the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "executable",
+      "displayName": "Executable",
+      "type": "string",
+      "required": false,
+      "default": "nssm.exe",
+      "description": "The location of the NSSM utility (in case it is not located in your PATH).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the service to operate on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password to be used for service startup. This is not required for the well known service accounts and group managed service accounts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_mode",
+      "displayName": "Start Mode",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "If C(auto) is selected, the service will start at bootup. C(delayed) causes a delayed but automatic start after boot. C(manual) means that the service will start only when another service needs it. C(disabled) means that the service will stay off, regardless if it is needed or not.",
+      "choices": [
+        "auto",
+        "delayed",
+        "disabled",
+        "manual"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the service on the system.",
+      "choices": [
+        "absent",
+        "present",
+        "started",
+        "stopped",
+        "restarted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stderr_file",
+      "displayName": "Stderr File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to receive error output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stdout_file",
+      "displayName": "Stdout File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to receive output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User to be used for service startup. Group managed service accounts must end with C($). Before C(1.8.0), this parameter was just C(user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "working_directory",
+      "displayName": "Working Directory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The working directory to run the service executable from (defaults to the directory containing the application binary)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

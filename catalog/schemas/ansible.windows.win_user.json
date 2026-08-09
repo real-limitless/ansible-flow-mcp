@@ -2,6 +2,205 @@
   "fqcn": "ansible.windows.win_user",
   "shortDescription": "Manages local Windows user accounts",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_user_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "account_disabled",
+      "displayName": "Account Disabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "C(true) will disable the user account. C(false) will clear the disabled flag.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "account_expires",
+      "displayName": "Account Expires",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the account expiration date for the user. This value should be in the format C(%Y-%m-%d) or C(%Y-%m-%dT%H:%M:%S%z). The timezone can be omitted in the long format and will default to UTC. The format of C(%z) is C(\u00b1HHMM), C(\u00b1HH:MM), or C(Z) for UTC. Set the value to C(never) to remove the account expiration date.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "account_locked",
+      "displayName": "Account Locked",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Only C(false) can be set and it will unlock the user account if locked.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fullname",
+      "displayName": "Fullname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Full name of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "groups",
+      "displayName": "Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Adds or removes the user from this comma-separated list of groups, depending on the value of I(groups_action). When I(groups_action) is C(replace) and I(groups) is set to the empty string ('groups='), the user is removed from all groups. Since C(ansible.windows v1.5.0) it is possible to specify a group using it's security identifier.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "groups_action",
+      "displayName": "Groups Action",
+      "type": "string",
+      "required": false,
+      "default": "replace",
+      "description": "If C(add), the user is added to each group in I(groups) where not already a member. If C(replace), the user is added as a member of each group in I(groups) and removed from any other groups. If C(remove), the user is removed from each group in I(groups).",
+      "choices": [
+        "add",
+        "replace",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "home_directory",
+      "displayName": "Home Directory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The designated home directory of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_script",
+      "displayName": "Login Script",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The login script of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the user to create, remove or modify.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optionally set the user's password to this (plain text) value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_expired",
+      "displayName": "Password Expired",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "C(true) will require the user to change their password at next login. C(false) will clear the expired password flag.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_never_expires",
+      "displayName": "Password Never Expires",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "C(true) will set the password to never expire. C(false) will allow the password to expire.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The profile path of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(absent), removes the user account if it exists. When C(present), creates or updates the user account. When C(query), retrieves the user account details without making any changes.",
+      "choices": [
+        "absent",
+        "present",
+        "query"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "C(always) will update passwords if they differ. C(on_create) will only set the password for newly created users.",
+      "choices": [
+        "always",
+        "on_create"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_cannot_change_password",
+      "displayName": "User Cannot Change Password",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "C(true) will prevent the user from changing their password. C(false) will allow the user to change their password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

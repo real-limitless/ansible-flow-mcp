@@ -1,0 +1,202 @@
+{
+  "fqcn": "dellemc.openmanage.ome_devices",
+  "shortDescription": "Perform device-specific operations on target devices",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/ome_devices_module.html",
+  "options": [
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_action",
+      "displayName": "Device Action",
+      "type": "string",
+      "required": false,
+      "default": "refresh_inventory",
+      "description": "C(refresh_inventory) refreshes the inventory on the target devices. C(reset_idrac) Triggers a reset on the target iDRACs. C(clear_idrac_job_queue) Clears the job queue on the target iDRACs. A job is triggered for each action.",
+      "choices": [
+        "refresh_inventory",
+        "reset_idrac",
+        "clear_idrac_job_queue"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_ids",
+      "displayName": "Device Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "IDs of the target devices. This is mutually exclusive with I(device_service_tags).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_service_tags",
+      "displayName": "Device Service Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Service tag of the target devices. This is mutually exclusive with I(device_ids).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "OpenManage Enterprise IP address or hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_description",
+      "displayName": "Job Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional description for the job.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_name",
+      "displayName": "Job Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional name for the job.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_schedule",
+      "displayName": "Job Schedule",
+      "type": "string",
+      "required": false,
+      "default": "startnow",
+      "description": "Provide the cron string to schedule the job.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Provides an option to wait for the job completion. This option is applicable when I(state) is C(present). This is applicable when I(job_schedule) is C(startnow).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 1200,
+      "description": "The maximum wait time of I(job_wait) in seconds. The job is tracked only for this duration. This option is applicable when I(job_wait) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OpenManage Enterprise password. If the password is not provided, then the environment variable E(OME_PASSWORD) is used. Example: export OME_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "OpenManage Enterprise HTTPS port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "C(present) Allows to perform the I(device_action) on the target devices. C(absent) Removes the device from OpenManage Enterprise. Job is not triggered. I(job_wait), I(job_schedule), I(job_name), and I(job_description) are not applicable to this operation.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OpenManage Enterprise username. If the username is not provided, then the environment variable E(OME_USERNAME) is used. Example: export OME_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(OME_X_AUTH_TOKEN) is used. Example: export OME_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

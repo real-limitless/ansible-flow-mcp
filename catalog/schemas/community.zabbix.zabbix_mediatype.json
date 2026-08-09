@@ -2,6 +2,393 @@
   "fqcn": "community.zabbix.zabbix_mediatype",
   "shortDescription": "Create/Update/Delete Zabbix media types",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/zabbix/zabbix_mediatype_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "attempt_interval",
+      "displayName": "Attempt Interval",
+      "type": "string",
+      "required": false,
+      "default": "10s",
+      "description": "The interval between retry attempts. Possible range is 0-1h.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Description of the media type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "event_menu",
+      "displayName": "Event Menu",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Can be used when I(type=webhook). Includes entry in Event menu with link to created external ticket.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "event_menu_name",
+      "displayName": "Event Menu Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Requred when I(event_menu=true). Event menu entry name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "event_menu_url",
+      "displayName": "Event Menu Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Requred when I(event_menu=true). Event menu entry underlying URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gsm_modem",
+      "displayName": "Gsm Modem",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Serial device name of the gsm modem. Required when I(type=sms).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_password",
+      "displayName": "Http Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_login_user",
+      "displayName": "Http Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Basic Auth login",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_attempts",
+      "displayName": "Max Attempts",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "The maximum number of attempts to send an alert. Possible range is 0-10.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_sessions",
+      "displayName": "Max Sessions",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The maximum number of alerts that can be processed in parallel. Possible value is 1 when I(type=sms) and 0-100 otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "message_format",
+      "displayName": "Message Format",
+      "type": "string",
+      "required": false,
+      "default": "html",
+      "description": "Can be used when I(type=email).",
+      "choices": [
+        "plaintext",
+        "html"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "message_templates",
+      "displayName": "Message Templates",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Default notification messages for the event types.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "message_text_limit",
+      "displayName": "Message Text Limit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The message text limit. Required when I(type=ez_texting). 160 characters for USA and 136 characters for Canada.",
+      "choices": [
+        "USA",
+        "Canada"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the media type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication password. Required when I(type=jabber) or I(type=ez_texting). Required when I(type=email) and I(smtp_authentication=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "process_tags",
+      "displayName": "Process Tags",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Can be used when I(type=webhook). Process returned JSON property values as tags. These tags are added to the already existing (if any) problem event tags in Zabbix.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "script_name",
+      "displayName": "Script Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the executed script. Required when I(type=script).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "script_params",
+      "displayName": "Script Params",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of script parameters. Required when I(type=script).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smtp_authentication",
+      "displayName": "Smtp Authentication",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether SMTP authentication with username and password should be enabled or not. If set to C(true), C(username) and C(password) should be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smtp_email",
+      "displayName": "Smtp Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Email address from which notifications will be sent. Required when I(type=email).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smtp_helo",
+      "displayName": "Smtp Helo",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "SMTP HELO. Required when I(type=email).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smtp_security",
+      "displayName": "Smtp Security",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SMTP connection security level to use.",
+      "choices": [
+        "None",
+        "STARTTLS",
+        "SSL/TLS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smtp_server",
+      "displayName": "Smtp Server",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "SMTP server host. Required when I(type=email).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smtp_server_port",
+      "displayName": "Smtp Server Port",
+      "type": "number",
+      "required": false,
+      "default": 25,
+      "description": "SMTP server port. Required when I(type=email).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smtp_verify_host",
+      "displayName": "Smtp Verify Host",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "SSL verify host for SMTP. Can be specified when I(smtp_security=STARTTLS) or I(smtp_security=SSL/TLS)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smtp_verify_peer",
+      "displayName": "Smtp Verify Peer",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "SSL verify peer for SMTP. Can be specified when I(smtp_security=STARTTLS) or I(smtp_security=SSL/TLS)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the mediatype. On C(present), it will create a mediatype if it does not exist or update the mediatype if the associated data is different. On C(absent), it will remove the mediatype if it exists.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": "enabled",
+      "description": "Whether the media type is enabled or no.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Type of the media type. Media types I(jabber) and I(ez_texting) works only with Zabbix versions 4.2 or older.",
+      "choices": [
+        "email",
+        "script",
+        "sms",
+        "webhook",
+        "jabber",
+        "ez_texting"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username or Jabber identifier. Required when I(type=jabber) or I(type=ez_texting). Required when I(type=email) and I(smtp_authentication=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "webhook_params",
+      "displayName": "Webhook Params",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Can be used when I(type=webhook). Webhook variables that are passed to webhook script when executed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "webhook_script",
+      "displayName": "Webhook Script",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Required when I(type=webhook). JavaScript code that will perform webhook operation. This code has access to all parameters in I(webhook_params). It may perform HTTP GET, POST, PUT and DELETE requests and has control over HTTP headers and request body. It may return OK status along with an optional list of tags and tag values or an error string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "webhook_timeout",
+      "displayName": "Webhook Timeout",
+      "type": "string",
+      "required": false,
+      "default": "30s",
+      "description": "Can be used when I(type=webhook). Execution timeout for JavaScript code in I(webhook_script). Possible values are 1-60s.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

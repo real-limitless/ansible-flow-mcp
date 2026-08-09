@@ -1,0 +1,228 @@
+{
+  "fqcn": "ovirt.ovirt.ovirt_external_provider",
+  "shortDescription": "Module to manage external providers in oVirt/RHV",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ovirt/ovirt/ovirt_external_provider_module.html",
+  "options": [
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Dictionary with values needed to create HTTP/HTTPS connection to oVirt:",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authentication_keys",
+      "displayName": "Authentication Keys",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of authentication keys. When you will not pass these keys and there are already some of them defined in the system they will be removed. Applicable for I(os_volume).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authentication_url",
+      "displayName": "Authentication Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Keystone authentication URL of the openstack provider. Applicable for those types: I(os_image), I(os_volume) and I(network).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_center",
+      "displayName": "Data Center",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the data center where provider should be attached. Applicable for those type: I(os_volume).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the external provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fetch_nested",
+      "displayName": "Fetch Nested",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If I(True) the module will fetch additional data from the API. It will fetch IDs of the VMs disks, snapshots, etc. User can configure to fetch other attributes of the nested entities by specifying C(nested_attributes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the external provider to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nested_attributes",
+      "displayName": "Nested Attributes",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specifies list of the attributes which should be fetched from the API. This parameter apply only when C(fetch_nested) is I(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_type",
+      "displayName": "Network Type",
+      "type": "string",
+      "required": false,
+      "default": "external",
+      "description": "Type of the external network provider either external (for example OVN) or neutron. Applicable if C(type) is I(network).",
+      "choices": [
+        "external",
+        "neutron"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of the user specified in C(username) parameter. Applicable for all types.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "poll_interval",
+      "displayName": "Poll Interval",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Number of the seconds the module waits until another poll request on entity status is sent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_only",
+      "displayName": "Read Only",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specify if the network should be read only. Applicable if C(type) is I(network).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Should the external be present or absent When you are using absent for I(os_volume), you need to make sure that SD is not attached to the data center!",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_name",
+      "displayName": "Tenant Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the tenant. Applicable for those types: I(os_image), I(os_volume) and I(network).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "The amount of time in seconds the module should wait for the instance to get into desired state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Type of the external provider.",
+      "choices": [
+        "os_image",
+        "network",
+        "os_volume",
+        "foreman"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL where external provider is hosted. Applicable for those types: I(os_image), I(os_volume), I(network) and I(foreman).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username to be used for login to external provider. Applicable for all types.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "C(yes) if the module should wait for the entity to get into desired state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

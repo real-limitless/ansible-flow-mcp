@@ -1,0 +1,148 @@
+{
+  "fqcn": "community.libvirt.virt",
+  "shortDescription": "Manages virtual machines supported by libvirt",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/libvirt/virt_module.html",
+  "options": [
+    {
+      "name": "autostart",
+      "displayName": "Autostart",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Start VM at host startup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "In addition to state management, various non-idempotent commands are available.",
+      "choices": [
+        "create",
+        "define",
+        "destroy",
+        "freemem",
+        "get_xml",
+        "get_interfaces",
+        "info",
+        "list_vms",
+        "nodeinfo",
+        "pause",
+        "shutdown",
+        "start",
+        "status",
+        "stop",
+        "undefine",
+        "unpause",
+        "uuid",
+        "virttype",
+        "get_ifaddresses"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flags",
+      "displayName": "Flags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Pass additional parameters. Currently only implemented with command C(undefine) and C(get_ifaddresses). Specify which metadata should be removed with C(undefine). Useful option to be able to C(undefine) guests with UEFI nvram. C(nvram) and C(keep_nvram) are conflicting and mutually exclusive. Consider option C(force) if all related metadata should be removed. Specify which method to use when getting guest interface addresses using C(get_ifaddresses) from either \"lease\", \"agent\" or \"arp\" (if list",
+      "choices": [
+        "managed_save",
+        "snapshots_metadata",
+        "nvram",
+        "keep_nvram",
+        "checkpoints_metadata",
+        "delete_volumes",
+        "lease",
+        "agent",
+        "arp"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enforce an action. Currently only implemented with command C(undefine). This option can be used instead of providing all C(flags). If C(true), C(undefine) removes also any related nvram or other metadata, if existing. If C(false) or not set, C(undefine) executes only if there is no nvram or other metadata existing. Otherwise the task fails and the guest is kept defined without change. C(true) and option C(flags) should not be provided together. In this case C(undefine) ignores C(true), considers",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mutate_flags",
+      "displayName": "Mutate Flags",
+      "type": "list",
+      "required": false,
+      "default": [
+        "ADD_UUID"
+      ],
+      "description": "For each mutate_flag, we will modify the given XML in some way ADD_UUID will add an existing domain's UUID to the xml if it's missing ADD_MAC_ADDRESSES will look up interfaces in the existing domain with a matching alias and copy the MAC address over. The matching interface doesn't need to be of the same type or source network. ADD_MAC_ADDRESSES_FUZZY will try to match incoming interfaces with interfaces of the existing domain sharing the same type and source network/device. It may not always re",
+      "choices": [
+        "ADD_UUID",
+        "ADD_MAC_ADDRESSES",
+        "ADD_MAC_ADDRESSES_FUZZY"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "name of the guest VM being managed. Note that VM must be previously defined with xml. This option is required unless I(command) is C(list_vms) or C(info).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Note that there may be some lag for state requests like C(shutdown) since these refer only to VM states. After starting a guest, it may not be immediately accessible. state and command are mutually exclusive except when command=list_vms. In this case all VMs in specified state will be listed.",
+      "choices": [
+        "destroyed",
+        "paused",
+        "running",
+        "shutdown"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uri",
+      "displayName": "Uri",
+      "type": "string",
+      "required": false,
+      "default": "qemu:///system",
+      "description": "Libvirt connection uri.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "xml",
+      "displayName": "Xml",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "XML document used with the define command. Must be raw XML content using C(lookup). XML cannot be reference to a file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,491 @@
   "fqcn": "community.crypto.x509_certificate",
   "shortDescription": "Generate and/or check OpenSSL certificates",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/crypto/x509_certificate_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "acme_accountkey_path",
+      "displayName": "Acme Accountkey Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the accountkey for the V(acme) provider. This is only used by the V(acme) provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "acme_chain",
+      "displayName": "Acme Chain",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Include the intermediate certificate to the generated certificate This is only used by the V(acme) provider. Note that this is only available for older versions of C(acme-tiny). New versions include the chain automatically, and setting O(acme_chain) to V(true) results in an error.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "acme_challenge_path",
+      "displayName": "Acme Challenge Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the ACME challenge directory that is served on U(http://<HOST>:80/.well-known/acme-challenge/) This is only used by the V(acme) provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "acme_directory",
+      "displayName": "Acme Directory",
+      "type": "string",
+      "required": false,
+      "default": "https://acme-v02.api.letsencrypt.org/directory",
+      "description": "The ACME directory to use. You can use any directory that supports the ACME protocol, such as Let's Encrypt. Let's Encrypt recommends using their staging server while developing jobs. U(https://letsencrypt.org/docs/staging-environment/).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create a backup file including a timestamp so you can get the original certificate back if you overwrote it with a new one by accident.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "csr_content",
+      "displayName": "Csr Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the Certificate Signing Request (CSR) used to generate this certificate. This is mutually exclusive with O(csr_path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "csr_path",
+      "displayName": "Csr Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the Certificate Signing Request (CSR) used to generate this certificate. This is mutually exclusive with O(csr_content).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Generate the certificate, even if it already exists.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_timestamps",
+      "displayName": "Ignore Timestamps",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the \"not before\" and \"not after\" timestamps should be ignored for idempotency checks. It is better to keep the default value V(true) when using relative timestamps (like V(+0s) for now).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_content",
+      "displayName": "Ownca Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the CA (Certificate Authority) certificate. This is only used by the V(ownca) provider. This is mutually exclusive with O(ownca_path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_create_authority_key_identifier",
+      "displayName": "Ownca Create Authority Key Identifier",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Create a Authority Key Identifier from the CA's certificate. If the CSR provided a authority key identifier, it is ignored. The Authority Key Identifier is generated from the CA certificate's Subject Key Identifier, if available. If it is not available, the CA certificate's public key will be used. This is only used by the V(ownca) provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_create_subject_key_identifier",
+      "displayName": "Ownca Create Subject Key Identifier",
+      "type": "string",
+      "required": false,
+      "default": "create_if_not_provided",
+      "description": "Whether to create the Subject Key Identifier (SKI) from the public key. A value of V(create_if_not_provided) (default) only creates a SKI when the CSR does not provide one. A value of V(always_create) always creates a SKI. If the CSR provides one, that one is ignored. A value of V(never_create) never creates a SKI. If the CSR provides one, that one is used. This is only used by the V(ownca) provider.",
+      "choices": [
+        "create_if_not_provided",
+        "always_create",
+        "never_create"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_digest",
+      "displayName": "Ownca Digest",
+      "type": "string",
+      "required": false,
+      "default": "sha256",
+      "description": "The digest algorithm to be used for the V(ownca) certificate. This is only used by the V(ownca) provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_not_after",
+      "displayName": "Ownca Not After",
+      "type": "string",
+      "required": false,
+      "default": "+3650d",
+      "description": "The point in time at which the certificate stops being valid. Time can be specified either as relative time or as absolute timestamp. Time will always be interpreted as UTC. Valid format is C([+-]timespec | ASN.1 TIME) where timespec can be an integer + C([w | d | h | m | s]) (for example V(+32w1d2h)). If this value is not specified, the certificate will stop being valid 10 years from now. Note that this value is B(not used to determine whether an existing certificate should be regenerated). Thi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_not_before",
+      "displayName": "Ownca Not Before",
+      "type": "string",
+      "required": false,
+      "default": "+0s",
+      "description": "The point in time the certificate is valid from. Time can be specified either as relative time or as absolute timestamp. Time will always be interpreted as UTC. Valid format is C([+-]timespec | ASN.1 TIME) where timespec can be an integer + C([w | d | h | m | s]) (for example V(+32w1d2h)). If this value is not specified, the certificate will start being valid from now. Note that this value is B(not used to determine whether an existing certificate should be regenerated). This can be changed by s",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_path",
+      "displayName": "Ownca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Remote absolute path of the CA (Certificate Authority) certificate. This is only used by the V(ownca) provider. This is mutually exclusive with O(ownca_content).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_privatekey_content",
+      "displayName": "Ownca Privatekey Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the CA (Certificate Authority) private key to use when signing the certificate. This is only used by the V(ownca) provider. This is mutually exclusive with O(ownca_privatekey_path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_privatekey_passphrase",
+      "displayName": "Ownca Privatekey Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The passphrase for the O(ownca_privatekey_path) resp. O(ownca_privatekey_content). This is only used by the V(ownca) provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_privatekey_path",
+      "displayName": "Ownca Privatekey Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the CA (Certificate Authority) private key to use when signing the certificate. This is only used by the V(ownca) provider. This is mutually exclusive with O(ownca_privatekey_content).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownca_version",
+      "displayName": "Ownca Version",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "The version of the V(ownca) certificate. Nowadays it should almost always be V(3). This is only used by the V(ownca) provider.",
+      "choices": [
+        3
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Remote absolute path where the generated certificate file should be created or is already located.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_content",
+      "displayName": "Privatekey Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Content of the private key to use when signing the certificate. This is mutually exclusive with O(privatekey_path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_passphrase",
+      "displayName": "Privatekey Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The passphrase for the O(privatekey_path) resp. O(privatekey_content). This is required if the private key is password protected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_path",
+      "displayName": "Privatekey Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the private key to use when signing the certificate. This is mutually exclusive with O(privatekey_content).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the provider to use to generate/retrieve the OpenSSL certificate. Please see the examples on how to emulate it with M(community.crypto.x509_certificate_info), M(community.crypto.openssl_csr_info), M(community.crypto.openssl_privatekey_info) and M(ansible.builtin.assert). Required if O(state) is V(present). The V(entrust) provider has been removed from community.crypto 3.0.0 due to sunsetting of the ECS API.",
+      "choices": [
+        "acme",
+        "ownca",
+        "selfsigned"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "return_content",
+      "displayName": "Return Content",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), will return the (current or generated) certificate's content as RV(certificate).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "select_crypto_backend",
+      "displayName": "Select Crypto Backend",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Determines which crypto backend to use. The default choice is V(auto), which tries to use C(cryptography) if available. If set to V(cryptography), will try to use the L(cryptography,https://cryptography.io/) library. Note that with community.crypto 3.0.0, all values behave the same. This option will be deprecated in a later version. We recommend to not set it explicitly.",
+      "choices": [
+        "auto",
+        "cryptography"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selfsigned_create_subject_key_identifier",
+      "displayName": "Selfsigned Create Subject Key Identifier",
+      "type": "string",
+      "required": false,
+      "default": "create_if_not_provided",
+      "description": "Whether to create the Subject Key Identifier (SKI) from the public key. A value of V(create_if_not_provided) (default) only creates a SKI when the CSR does not provide one. A value of V(always_create) always creates a SKI. If the CSR provides one, that one is ignored. A value of V(never_create) never creates a SKI. If the CSR provides one, that one is used. This is only used by the V(selfsigned) provider.",
+      "choices": [
+        "create_if_not_provided",
+        "always_create",
+        "never_create"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selfsigned_digest",
+      "displayName": "Selfsigned Digest",
+      "type": "string",
+      "required": false,
+      "default": "sha256",
+      "description": "Digest algorithm to be used when self-signing the certificate. This is only used by the V(selfsigned) provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selfsigned_not_after",
+      "displayName": "Selfsigned Not After",
+      "type": "string",
+      "required": false,
+      "default": "+3650d",
+      "description": "The point in time at which the certificate stops being valid. Time can be specified either as relative time or as absolute timestamp. Time will always be interpreted as UTC. Valid format is C([+-]timespec | ASN.1 TIME) where timespec can be an integer + C([w | d | h | m | s]) (for example V(+32w1d2h)). If this value is not specified, the certificate will stop being valid 10 years from now. Note that this value is B(not used to determine whether an existing certificate should be regenerated). Thi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selfsigned_not_before",
+      "displayName": "Selfsigned Not Before",
+      "type": "string",
+      "required": false,
+      "default": "+0s",
+      "description": "The point in time the certificate is valid from. Time can be specified either as relative time or as absolute timestamp. Time will always be interpreted as UTC. Valid format is C([+-]timespec | ASN.1 TIME) where timespec can be an integer + C([w | d | h | m | s]) (for example V(+32w1d2h)). If this value is not specified, the certificate will start being valid from now. Note that this value is B(not used to determine whether an existing certificate should be regenerated). This can be changed by s",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selfsigned_version",
+      "displayName": "Selfsigned Version",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Version of the V(selfsigned) certificate. Nowadays it should almost always be V(3). This is only used by the V(selfsigned) provider.",
+      "choices": [
+        3
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the certificate should exist or not, taking action if the state is different from what is stated.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

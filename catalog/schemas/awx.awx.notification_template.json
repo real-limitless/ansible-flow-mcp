@@ -2,6 +2,198 @@
   "fqcn": "awx.awx.notification_template",
   "shortDescription": "create, update, or destroy Automation Platform Controller notification.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/awx/awx/notification_template_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "controller_config_file",
+      "displayName": "Controller Config File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the controller config file. If provided, the other locations for config files will not be considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller_host",
+      "displayName": "Controller Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to your Automation Platform Controller instance. If value not set, will try environment variable C(CONTROLLER_HOST) and then config files If value not specified by any means, the value of C(127.0.0.1) will be used",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller_oauthtoken",
+      "displayName": "Controller Oauthtoken",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OAuth token to use. This value can be in one of two formats. A string which is the token itself. (i.e. bqV5txm97wqJqtkxlMkhQz0pKhRMMX) A dictionary structure as returned by the token module. If value not set, will try environment variable C(CONTROLLER_OAUTH_TOKEN) and then config files",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller_password",
+      "displayName": "Controller Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for your controller instance. If value not set, will try environment variable C(CONTROLLER_PASSWORD) and then config files",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller_username",
+      "displayName": "Controller Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for your controller instance. If value not set, will try environment variable C(CONTROLLER_USERNAME) and then config files",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "copy_from",
+      "displayName": "Copy From",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name or id to copy the notification from. This will copy an existing notification and change any parameters supplied. The new notification name will be the one provided in the name parameter. The organization parameter is not used in this, to facilitate copy from one organization to another. Provide the id or use the lookup plugin to provide the id if multiple notifications share the same name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description of the notification.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "messages",
+      "displayName": "Messages",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Optional custom messages for notification template.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the notification.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_name",
+      "displayName": "New Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Setting this option will change the existing name (looked up via the name field.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notification_configuration",
+      "displayName": "Notification Configuration",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The notification configuration file. Note providing this field would disable all notification-configuration-related fields. username (the mail server username) sender (the sender email address) recipients (the recipients email addresses) use_tls (the TLS trigger) host (the mail server host) use_ssl (the SSL trigger) password (the mail server password) port (the mail server port) channels (the destination Slack channels) token (the access token) account_token (the Twillio account token) from_numb",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notification_type",
+      "displayName": "Notification Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of notification to be sent.",
+      "choices": [
+        "awssns",
+        "email",
+        "grafana",
+        "irc",
+        "mattermost",
+        "pagerduty",
+        "rocketchat",
+        "slack",
+        "twilio",
+        "webhook"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The organization name, ID, or named URL the notification belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "request_timeout",
+      "displayName": "Request Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specify the timeout Ansible should use in requests to the controller host. Defaults to 10s, but this is handled by the shared module_utils code",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the resource.",
+      "choices": [
+        "present",
+        "absent",
+        "exists"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to allow insecure connections to AWX. If C(no), SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates. If value not set, will try environment variable C(CONTROLLER_VERIFY_SSL) and then config files",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

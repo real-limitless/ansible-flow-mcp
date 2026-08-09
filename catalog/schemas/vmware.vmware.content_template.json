@@ -2,6 +2,269 @@
   "fqcn": "vmware.vmware.content_template",
   "shortDescription": "Manage template in content library from virtual machine.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware/content_template_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Cluster onto which the virtual machine template should be placed. If O(cluster) and O(resource_pool) are both specified, O(resource_pool) must belong to O(cluster). If O(cluster) and O(host) are both specified, O(host) must be a member of O(cluster). This attribute was added in vSphere API 6.8.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the datacenter to use when searching for the source VM. This parameter is optional, and only used if you use a relative O(vm_folder) path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder_paths_are_absolute",
+      "displayName": "Folder Paths Are Absolute",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, any folder path parameters are treated as absolute paths. If false, modules will try to intelligently determine if the path is absolute or relative. This option is useful when your environment has a complex folder structure. By default, modules will try to intelligently determine if the path is absolute or relative. They may mistakenly prepend the datacenter name or other folder names, and this option can be used to avoid this.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host onto which the virtual machine template should be placed. If O(host) and O(resource_pool) are both specified, O(resource_pool) must belong to O(host). If O(host) and O(cluster) are both specified, O(host) must be a member of O(cluster). This attribute was added in vSphere API 6.8.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "library",
+      "displayName": "Library",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the content library where the template will be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_protocol",
+      "displayName": "Proxy Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The proxy connection protocol to use. This option is used if the correct proxy protocol cannot be automatically determined.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_pool",
+      "displayName": "Resource Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Resource pool into which the virtual machine template should be placed. This attribute was added in vSphere API 6.8. If not specified, the system will attempt to choose a suitable resource pool for the virtual machine template; if a resource pool cannot be chosen, the library item creation operation will fail. If O(cluster) and O(resource_pool) are both specified, O(resource_pool) must belong to O(cluster). If O(host) and O(resource_pool) are both specified, O(resource_pool) must belong to O(hos",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the template in content library. If C(present), the template will be created in content library. If C(absent), the template will be deleted from content library.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_folder",
+      "displayName": "Template Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Virtual machine folder into which the virtual machine template should be placed. This attribute was added in vSphere API 6.8. If not specified, the virtual machine template will be placed in the same folder as the source virtual machine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_name",
+      "displayName": "Template Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of template to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_instance_uuid",
+      "displayName": "Use Instance Uuid",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to use the VMware instance UUID rather than the BIOS UUID when searching for the VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_folder",
+      "displayName": "Vm Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Destination folder, absolute or relative path to find an existing guest. Should be the full folder path, with or without the 'datacenter/vm/' prefix For example 'datacenter_name/vm/path/to/folder' or 'path/to/folder'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_moid",
+      "displayName": "Vm Moid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Managed Object ID of the instance to manage if known, this is a unique identifier only within a single vCenter instance. This is required if O(vm_name) or O(vm_uuid) is not supplied. A VM identifier is required when O(state) is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name",
+      "displayName": "Vm Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the VM to be used to create template. Virtual machine names in vCenter are not necessarily unique, which may be problematic, see O(vm_name_match). This is required if O(vm_moid) or O(vm_uuid) is not supplied. A VM identifier is required when O(state) is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name_match",
+      "displayName": "Vm Name Match",
+      "type": "string",
+      "required": false,
+      "default": "first",
+      "description": "If multiple virtual machines matching the name, use the first or last found.",
+      "choices": [
+        "first",
+        "last"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_uuid",
+      "displayName": "Vm Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "UUID of the instance to manage if known, this is VMware's unique identifier. This is required if O(vm_moid) or O(vm_name) is not supplied. A VM identifier is required when O(state) is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

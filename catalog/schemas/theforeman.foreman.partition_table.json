@@ -2,6 +2,217 @@
   "fqcn": "theforeman.foreman.partition_table",
   "shortDescription": "Manage Partition Table Templates",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/theforeman/foreman/partition_table_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted file that contains a CA certificate to be used for validation. If the value is not specified in the task, the value of environment variable C(FOREMAN_CA_PATH) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_name",
+      "displayName": "File Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of a template file, that shall be imported. Either this or I(layout) is required as a source for the Partition Template \"content\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "layout",
+      "displayName": "Layout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The content of the Partitioning Table Template Either this or I(file_name) is required as a source for the Partition Template \"content\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "locations",
+      "displayName": "Locations",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of locations the entity should be assigned to",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "locked",
+      "displayName": "Locked",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Determines whether the template shall be locked",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the Partition Table. If omited, will be determined from the C(name) header of the template or the filename (in that order). The special value \"*\" can be used to perform bulk actions (modify, delete) on all existing Partition Tables.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oauth1_consumer_key",
+      "displayName": "Oauth1 Consumer Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OAuth1 consumer key for accessing the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_OAUTH1_CONSUMER_KEY) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oauth1_consumer_secret",
+      "displayName": "Oauth1 Consumer Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OAuth1 consumer secret for accessing the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_OAUTH1_CONSUMER_SECRET) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organizations",
+      "displayName": "Organizations",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of organizations the entity should be assigned to",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os_family",
+      "displayName": "Os Family",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OS family the template shall be assigned with.",
+      "choices": [
+        "AIX",
+        "Altlinux",
+        "Archlinux",
+        "Coreos",
+        "Debian",
+        "Fcos",
+        "Freebsd",
+        "Gentoo",
+        "Junos",
+        "NXOS",
+        "Rancheros",
+        "Redhat",
+        "Rhcos",
+        "Solaris",
+        "Suse",
+        "VRP",
+        "Windows",
+        "Xenserver"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of the user accessing the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_url",
+      "displayName": "Server Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL of the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_SERVER_URL) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the entity C(present_with_defaults) will ensure the entity exists, but won't update existing ones",
+      "choices": [
+        "present",
+        "present_with_defaults",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "updated_name",
+      "displayName": "Updated Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "New name of the template. When this parameter is set, the module will not be idempotent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_gssapi",
+      "displayName": "Use Gssapi",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use GSSAPI to perform the authentication, typically this is for Kerberos or Kerberos through Negotiate authentication. Requires the Python library L(requests-gssapi,https://github.com/pythongssapi/requests-gssapi) to be installed. If the value is not specified in the task, the value of environment variable C(FOREMAN_USE_GSSAPI) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username accessing the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_USERNAME) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether or not to verify the TLS certificates of the Foreman server. If the value is not specified in the task, the value of environment variable C(FOREMAN_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

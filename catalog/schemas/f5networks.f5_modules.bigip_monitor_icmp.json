@@ -1,0 +1,223 @@
+{
+  "fqcn": "f5networks.f5_modules.bigip_monitor_icmp",
+  "shortDescription": "Manages F5 BIG-IP LTM ICMP monitors",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_modules/bigip_monitor_icmp_module.html",
+  "options": [
+    {
+      "name": "adaptive",
+      "displayName": "Adaptive",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether adaptive response time monitoring is enabled for this monitor. When C(true), the monitor determines the state of a service based on how divergent from the mean latency a monitor probe for that service is allowed to be. Also, values for the C(allowed_divergence), C(adaptive_limit), and and C(sampling_timespan) will be enforced. When C(disabled), the monitor determines the state of a service based on the C(interval), C(up_interval), C(time_until_up), and C(timeout) monitor settin",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "adaptive_limit",
+      "displayName": "Adaptive Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the absolute number of milliseconds that may not be exceeded by a monitor probe, regardless of C(allowed_divergence) setting, for a probe to be considered successful. This value applies regardless of the value of the C(allowed_divergence) setting. While this value can be configured when C(adaptive) is C(false), it will not take effect on the system until C(adaptive) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allowed_divergence_type",
+      "displayName": "Allowed Divergence Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When specifying a new monitor, if C(adaptive) is C(true), the default is C(relative). When C(absolute), the number of milliseconds the latency of a monitor probe can exceed the mean latency of a monitor probe for the service being probed. In typical cases, if the monitor detects three probes in a row that miss the latency value you set, the pool member or node is marked down. When C(relative), the percentage of deviation the latency of a monitor probe can exceed the mean latency of a monitor pro",
+      "choices": [
+        "relative",
+        "absolute"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allowed_divergence_value",
+      "displayName": "Allowed Divergence Value",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "When specifying a new monitor, if C(adaptive) is C(true), and C(type) is C(relative), the default is C(25) percent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "app_service",
+      "displayName": "App Service",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The iApp service to be associated with this profile. When no service is specified, the default is None.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description of the monitor.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interval",
+      "displayName": "Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the frequency, in seconds, at which the system issues the monitor check when either the resource is down or the status of the resource is unknown.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip",
+      "displayName": "Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the IP address of the resource that is the destination of this monitor. When set to B(*), the device performs a health check on the IP address of the node. When set to an B(<IP>) the device performs a health check on that IP address and marks the associated node up or down as a result of the response. This option is set by the device by default when not defined during monitor creation. When set to an B(<IP>) and C(transparent) is C(true), the device performs a health check on that IP a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "manual_resume",
+      "displayName": "Manual Resume",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the system automatically changes the status of a resource to B(enabled) at the next successful monitor check. If you set this option to C(true), you must manually re-enable the resource before the system can use it for load balancing connections. When C(true), specifies you must manually re-enable the resource after an unsuccessful monitor check. When C(false), specifies the system automatically changes the status of a resource to B(enabled) at the next successful monitor check",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the monitor.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent",
+      "displayName": "Parent",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The parent template of this monitor template. Once this value has been set, it cannot be changed. When creating a new monitor, if this parameter is not specified, the default is the system-supplied C(icmp) monitor.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": "Common",
+      "description": "Device partition to manage resources on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sampling_timespan",
+      "displayName": "Sampling Timespan",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the length, in seconds, of the probe history window the system uses to calculate the mean latency and standard deviation of a monitor probe. While this value can be configured when C(adaptive) is C(false), it will not take effect on the system until C(adaptive) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(present), ensures that the monitor exists. When C(absent), ensures the monitor is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_until_up",
+      "displayName": "Time Until Up",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of seconds to wait after a resource first responds correctly to the monitor before setting the resource to 'up'. During the interval, all responses from the resource must be correct. When the interval expires, the resource is marked 'up'. A value of 0 means the resource is marked up immediately upon receipt of the first correct response.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of seconds the target has in which to respond to the monitor request. If the target responds within the set time period, it is considered 'up'. If the target does not respond within the set time period, it is considered 'down'. When this value is set to 0 (zero), the system uses the interval from the parent monitor. Note that C(timeout) and C(time_until_up) combine to control when a resource is set to up.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "transparent",
+      "displayName": "Transparent",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the monitor operates in transparent mode. A monitor in transparent mode directs traffic through the associated pool members or nodes (usually a router or firewall) to the aliased destination (that is, it probes the C(ip)-C(port) combination specified in the monitor). If the monitor cannot successfully reach the aliased destination, the pool member or node through which the monitor traffic was sent is marked down. When creating a new monitor, if this parameter is not provided, t",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "up_interval",
+      "displayName": "Up Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the interval for the system to use to perform the health check when a resource is up. When C(0), specifies the system uses the interval specified in C(interval) to check the health of the resource. When any other number, enables you to specify a different interval to use when checking the health of a resource that is up.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -2,6 +2,227 @@
   "fqcn": "vmware.vmware.import_content_library_ovf",
   "shortDescription": "Import an OVF or OVA file to a content library from a remote source.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/vmware/import_content_library_ovf_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "checksum",
+      "displayName": "Checksum",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The checksum that should be used to validate the upload. O(checksum_algorithm) is required if this is provided. This is not used if the source is an OVF. In that case he local file size is used to validate the upload.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum_algorithm",
+      "displayName": "Checksum Algorithm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The checksum algorithm to use when validating uploads. This is required if O(checksum) is provided. This is not used if the source is an OVF. In that case he local file size is used to validate the upload.",
+      "choices": [
+        "SHA1",
+        "MD5",
+        "SHA512",
+        "SHA256"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A description for the OVF item in the content library.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The destination name of the OVF item in the content library. If an item with the same name already exists, the module will not update it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fail_on_warnings",
+      "displayName": "Fail On Warnings",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Cause the module to treat any warnings thrown during the file upload process as errors.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname or IP address of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "library_id",
+      "displayName": "Library Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the library to search within. One of O(library_id) or O(library_name) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "library_name",
+      "displayName": "Library Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the library to search within. One of O(library_id) or O(library_name) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_host",
+      "displayName": "Proxy Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The address of a proxy that will receive all HTTPS requests and relay them. The format is a hostname or a IP. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the HTTP proxy that will receive all HTTPS requests and relay them. If the value is not specified in the task, the value of environment variable E(VMWARE_PROXY_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_protocol",
+      "displayName": "Proxy Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The proxy connection protocol to use. This option is used if the correct proxy protocol cannot be automatically determined.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The source OVF or OVA file that should be imported to the content library. This can be a local path or a URL. If it is a local path, it should be a valid path on the Ansible host. If it is a URL, its scheme can be HTTPS, HTTP, or datastore (ds://). The file is acquired directly from the vCenter appliance. The module will not encode URLs for you. If this is a URL with special characters (like $ or ~), you should use the urlencode filter. Required when state is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_thumbprint",
+      "displayName": "Ssl Thumbprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The SSL thumbprint of the source URL, if it uses HTTPS. This is ignored for other schemes. If this is not provided, whatever certificate is presented will be trusted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Controls if the OVF file should be present or absent in the content library.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "The timeout period in seconds for uploads to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the vSphere vCenter server. If the value is not specified in the task, the value of environment variable E(VMWARE_USER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Allows connection when SSL certificates are not valid. Set to V(false) when certificates are not trusted. If the value is not specified in the task, the value of environment variable E(VMWARE_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

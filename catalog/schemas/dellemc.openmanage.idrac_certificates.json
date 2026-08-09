@@ -1,0 +1,206 @@
+{
+  "fqcn": "dellemc.openmanage.idrac_certificates",
+  "shortDescription": "Configure certificates for iDRAC",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/idrac_certificates_module.html",
+  "options": [
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_params",
+      "displayName": "Cert Params",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Certificate parameters to generate signing request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_path",
+      "displayName": "Certificate Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Absolute path of the certificate file if I(command) is C(import). Directory path with write permissions if I(command) is C(generate_csr) or C(export).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_type",
+      "displayName": "Certificate Type",
+      "type": "string",
+      "required": false,
+      "default": "HTTPS",
+      "description": "Type of the iDRAC certificate. C(HTTPS) The Dell self-signed SSL certificate. C(CA) Certificate Authority(CA) signed SSL certificate. C(CUSTOMCERTIFICATE) The custom PKCS12 certificate and private key. Export of custom certificate is supported only on iDRAC firmware version 7.00.00.00 and above. C(CSC) The custom signing SSL certificate. C(CLIENT_TRUST_CERTIFICATE) Client trust certificate.",
+      "choices": [
+        "HTTPS",
+        "CA",
+        "CUSTOMCERTIFICATE",
+        "CSC",
+        "CLIENT_TRUST_CERTIFICATE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": false,
+      "default": "generate_csr",
+      "description": "C(generate_csr), generate CSR. This requires I(cert_params) and I(certificate_path). This is applicable only for C(HTTPS) C(import), import the certificate file. This requires I(certificate_path). C(export), export the certificate. This requires I(certificate_path). C(reset), reset the certificate to default settings. This is applicable only for C(HTTPS).",
+      "choices": [
+        "import",
+        "export",
+        "generate_csr",
+        "reset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_ip",
+      "displayName": "Idrac Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC IP Address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_password",
+      "displayName": "Idrac Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC user password. If the password is not provided, then the environment variable E(IDRAC_PASSWORD) is used. Example: export IDRAC_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_port",
+      "displayName": "Idrac Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "iDRAC port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_user",
+      "displayName": "Idrac User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC username. If the username is not provided, then the environment variable E(IDRAC_USERNAME) is used. Example: export IDRAC_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "passphrase",
+      "displayName": "Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The passphrase string if the certificate to be imported is passphrase protected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset",
+      "displayName": "Reset",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "To reset the iDRAC after the certificate operation. This is applicable when I(command) is C(import) or C(reset).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_id",
+      "displayName": "Resource Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Redfish ID of the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_key",
+      "displayName": "Ssl Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Absolute path of the private or SSL key file. This is applicable only when I(command) is C(import) and I(certificate_type) is C(HTTPS). Uploading the SSL key to iDRAC is supported on firmware version 6.00.02.00 and above.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Maximum wait time for iDRAC to start after the reset, in seconds. This is applicable when I(command) is C(import) or C(reset) and I(reset) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(IDRAC_X_AUTH_TOKEN) is used. Example: export IDRAC_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

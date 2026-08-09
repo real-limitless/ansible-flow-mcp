@@ -1,0 +1,372 @@
+{
+  "fqcn": "dellemc.openmanage.idrac_server_config_profile",
+  "shortDescription": "Export or Import iDRAC Server Configuration Profile (SCP)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/idrac_server_config_profile_module.html",
+  "options": [
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": false,
+      "default": "export",
+      "description": "If C(import), the module performs SCP import operation. If C(export), the module performs SCP export operation. If C(preview), the module performs SCP preview operation. C(import_custom_defaults) allows you to import custom default iDRAC settings. C(export_custom_defaults) allows you to export custom default iDRAC settings. C(import_custom_defaults) and C(export_custom_defaults) is supported only on iDRAC9 with firmware 7.00.00.00 and above.",
+      "choices": [
+        "import",
+        "export",
+        "preview",
+        "import_custom_defaults",
+        "export_custom_defaults"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "end_host_power_state",
+      "displayName": "End Host Power State",
+      "type": "string",
+      "required": false,
+      "default": "On",
+      "description": "This option is applicable for C(import) command. If C(On), End host power state is on. If C(Off), End host power state is off.",
+      "choices": [
+        "On",
+        "Off"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "export_format",
+      "displayName": "Export Format",
+      "type": "string",
+      "required": false,
+      "default": "XML",
+      "description": "Specify the output file format. This option is applicable for C(export) or C(export_custom_defaults) command. The default export file format is always XML when the  I(command) is C(export_custom_defaults).",
+      "choices": [
+        "JSON",
+        "XML"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "export_use",
+      "displayName": "Export Use",
+      "type": "string",
+      "required": false,
+      "default": "Default",
+      "description": "Specify the type of Server Configuration Profile (SCP) to be exported. This option is applicable when I(command) is C(export). C(Default) Creates a non-destructive snapshot of the configuration. C(Replace) Replaces a server with another or restores the servers settings to a known baseline. C(Clone) Clones settings from one server to another server with the identical hardware setup. All settings except I/O identity are updated (e.g. will reset RAID). The settings in this export will be destructiv",
+      "choices": [
+        "Default",
+        "Clone",
+        "Replace"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_ip",
+      "displayName": "Idrac Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC IP Address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_password",
+      "displayName": "Idrac Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC user password. If the password is not provided, then the environment variable E(IDRAC_PASSWORD) is used. Example: export IDRAC_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_port",
+      "displayName": "Idrac Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "iDRAC port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_user",
+      "displayName": "Idrac User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC username. If the username is not provided, then the environment variable E(IDRAC_USERNAME) is used. Example: export IDRAC_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_certificate_warning",
+      "displayName": "Ignore Certificate Warning",
+      "type": "string",
+      "required": false,
+      "default": "ignore",
+      "description": "If C(ignore), it ignores the certificate warnings. If C(showerror), it shows the certificate warnings. I(ignore_certificate_warning) is considered only when I(share_name) is of type HTTPS and is supported only on iDRAC9.",
+      "choices": [
+        "ignore",
+        "showerror"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "import_buffer",
+      "displayName": "Import Buffer",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Used to import the buffer input of xml or json into the iDRAC. When the  I(command) is C(import_custom_defaults), only XML file format is supported. This option is applicable when I(command) is C(import) or C(preview) or C(import_custom_defaults). I(import_buffer) is mutually exclusive with I(share_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_in_export",
+      "displayName": "Include In Export",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "This option is applicable when I(command) is C(export). If C(default), it exports the default Server Configuration Profile. If C(readonly), it exports the SCP with readonly attributes. If C(passwordhashvalues), it exports the SCP with password hash values. If C(customtelemetry), exports the SCP with custom telemetry attributes supported only in the iDRAC9.",
+      "choices": [
+        "default",
+        "readonly",
+        "passwordhashvalues",
+        "customtelemetry"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": true,
+      "default": null,
+      "description": "Whether to wait for job completion or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 900,
+      "description": "The maximum wait time of I(job_wait) in seconds. The job is tracked only for this duration. This option is applicable when I(job_wait) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_password",
+      "displayName": "Proxy Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Proxy password to authenticate. I(proxy_password) is considered only when I(share_name) is of type HTTP or HTTPS and is supported only on iDRAC9.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "string",
+      "required": false,
+      "default": "80",
+      "description": "Proxy port to authenticate. I(proxy_port) is required when I(share_name) is of type HTTPS or HTTP and I(proxy_support) is C(true). I(proxy_port) is considered only when I(share_name) is of type HTTP or HTTPS and is supported only on iDRAC9.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_server",
+      "displayName": "Proxy Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "I(proxy_server) is required when I(share_name) is of type HTTPS or HTTP and I(proxy_support) is C(true). I(proxy_server) is considered only when I(share_name) is of type HTTP or HTTPS and is supported only on iDRAC9.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_support",
+      "displayName": "Proxy Support",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Proxy to be enabled or disabled. I(proxy_support) is considered only when I(share_name) is of type HTTP or HTTPS and is supported only on iDRAC9.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_type",
+      "displayName": "Proxy Type",
+      "type": "string",
+      "required": false,
+      "default": "http",
+      "description": "C(http) to select HTTP type proxy. C(socks4) to select SOCKS4 type proxy. I(proxy_type) is considered only when I(share_name) is of type HTTP or HTTPS and is supported only on iDRAC9.",
+      "choices": [
+        "http",
+        "socks4"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_username",
+      "displayName": "Proxy Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Proxy username to authenticate. I(proxy_username) is considered only when I(share_name) is of type HTTP or HTTPS and is supported only on iDRAC9.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scp_components",
+      "displayName": "Scp Components",
+      "type": "list",
+      "required": false,
+      "default": "ALL",
+      "description": "If C(ALL), this option exports or imports all components configurations from the SCP file. If C(IDRAC), this option exports or imports iDRAC configuration from the SCP file. If C(BIOS), this option exports or imports BIOS configuration from the SCP file. If C(NIC), this option exports or imports NIC configuration from the SCP file. If C(RAID), this option exports or imports RAID configuration from the SCP file. If C(FC), this option exports or imports FiberChannel configurations from the SCP fil",
+      "choices": [
+        "ALL",
+        "IDRAC",
+        "BIOS",
+        "NIC",
+        "RAID",
+        "FC",
+        "InfiniBand",
+        "SupportAssist",
+        "EventFilters",
+        "System",
+        "LifecycleController",
+        "AHCI",
+        "PCIeSSD"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scp_file",
+      "displayName": "Scp File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the server configuration profile (SCP) file. Only XML file format is supported when I(command) is C(import) or C(import_custom_defaults) or C(export_custom_defaults). The default format <idrac_ip>_YYmmdd_HHMMSS_scp is used if this option is not specified for C(export) or C(export_custom_defaults). I(export_format) is used if the valid extension file is not provided for C(export).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_name",
+      "displayName": "Share Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network share or local path. CIFS, NFS, HTTP, and HTTPS network share types are supported. I(share_name) is mutually exclusive with I(import_buffer). Only \"local\" is supported when the I(command) is C(import_custom_defaults) or C(export_custom_defaults).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_password",
+      "displayName": "Share Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network share user password. This option is mandatory for CIFS Network Share.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_user",
+      "displayName": "Share User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network share user in the format 'user@domain' or 'domain\\\\user' if user is part of a domain else 'user'. This option is mandatory for CIFS Network Share.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shutdown_type",
+      "displayName": "Shutdown Type",
+      "type": "string",
+      "required": false,
+      "default": "Graceful",
+      "description": "This option is applicable for C(import) command. If C(Graceful), the job gracefully shuts down the operating system and turns off the server. If C(Forced), it forcefully shuts down the server. If C(NoReboot), the job that applies the SCP will pause until you manually reboot the server.",
+      "choices": [
+        "Graceful",
+        "Forced",
+        "NoReboot"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(IDRAC_X_AUTH_TOKEN) is used. Example: export IDRAC_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

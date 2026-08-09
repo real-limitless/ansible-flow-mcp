@@ -2,6 +2,312 @@
   "fqcn": "community.crypto.openssl_privatekey",
   "shortDescription": "Generate OpenSSL private keys",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/crypto/openssl_privatekey_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create a backup file including a timestamp so you can get the original private key back if you overwrote it with a new one by accident.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cipher",
+      "displayName": "Cipher",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "The cipher to encrypt the private key. This is only used when O(passphrase) is provided. Must be V(auto).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "curve",
+      "displayName": "Curve",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Note that not all curves are supported by all versions of C(cryptography). For maximal interoperability, V(secp384r1) or V(secp256r1) should be used. We use the curve names as defined in the L(IANA registry for TLS,https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8). Please note that all curves except V(secp224r1), V(secp256k1), V(secp256r1), V(secp384r1), and V(secp521r1) are discouraged for new private keys.",
+      "choices": [
+        "secp224r1",
+        "secp256k1",
+        "secp256r1",
+        "secp384r1",
+        "secp521r1",
+        "secp192r1",
+        "brainpoolP256r1",
+        "brainpoolP384r1",
+        "brainpoolP512r1",
+        "sect163k1",
+        "sect163r2",
+        "sect233k1",
+        "sect233r1",
+        "sect283k1",
+        "sect283r1",
+        "sect409k1",
+        "sect409r1",
+        "sect571k1",
+        "sect571r1"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Should the key be regenerated even if it already exists.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "format",
+      "displayName": "Format",
+      "type": "string",
+      "required": false,
+      "default": "auto_ignore",
+      "description": "Determines which format the private key is written in. By default, PKCS1 (traditional OpenSSL format) is used for all keys which support it. Please note that not every key can be exported in any format. The value V(auto) selects a format based on the key format. The value V(auto_ignore) does the same, but for existing private key files, it will not force a regenerate when its format is not the automatically selected one for generation. Note that if the format for an existing private key mismatch",
+      "choices": [
+        "pkcs1",
+        "pkcs8",
+        "raw",
+        "auto",
+        "auto_ignore"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "format_mismatch",
+      "displayName": "Format Mismatch",
+      "type": "string",
+      "required": false,
+      "default": "regenerate",
+      "description": "Determines behavior of the module if the format of a private key does not match the expected format, but all other parameters are as expected. If set to V(regenerate) (default), generates a new private key. If set to V(convert), the key will be converted to the new format instead.",
+      "choices": [
+        "regenerate",
+        "convert"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "passphrase",
+      "displayName": "Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The passphrase for the private key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the file in which the generated TLS/SSL private key will be written. It will have V(0600) mode if O(mode) is not explicitly set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "regenerate",
+      "displayName": "Regenerate",
+      "type": "string",
+      "required": false,
+      "default": "full_idempotence",
+      "description": "Allows to configure in which situations the module is allowed to regenerate private keys. The module will always generate a new key if the destination file does not exist. By default, the key will be regenerated when it does not match the module's options, except when the key cannot be read or the passphrase does not match. Please note that this B(changed) for Ansible 2.10. For Ansible 2.9, the behavior was as if V(full_idempotence) is specified. If set to V(never), the module will fail if the k",
+      "choices": [
+        "never",
+        "fail",
+        "partial_idempotence",
+        "full_idempotence",
+        "always"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "return_content",
+      "displayName": "Return Content",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to V(true), will return the (current or generated) private key's content as RV(privatekey). Note that especially if the private key is not encrypted, you have to make sure that the returned value is treated appropriately and not accidentally written to logs, and so on! Use with care! Use Ansible's C(no_log) task option to avoid the output being shown. See also U(https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-keep-secret-data-in-my-playbook).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "select_crypto_backend",
+      "displayName": "Select Crypto Backend",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Determines which crypto backend to use. The default choice is V(auto), which tries to use C(cryptography) if available. If set to V(cryptography), will try to use the L(cryptography,https://cryptography.io/) library. Note that with community.crypto 3.0.0, all values behave the same. This option will be deprecated in a later version. We recommend to not set it explicitly.",
+      "choices": [
+        "auto",
+        "cryptography"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "number",
+      "required": false,
+      "default": 4096,
+      "description": "Size (in bits) of the TLS/SSL key to generate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the private key should exist or not, taking action if the state is different from what is stated.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "RSA",
+      "description": "The algorithm used to generate the TLS/SSL private key. Support for V(ML-DSA-44), V(ML-DSA-65), and V(ML-DSA-87) has been added in community.crypto 3.3.0. They require cryptography 47.0.0 or later, and require support in the specific cryptographic backend used by cryptography.",
+      "choices": [
+        "DSA",
+        "ECC",
+        "Ed25519",
+        "Ed448",
+        "RSA",
+        "X25519",
+        "X448",
+        "ML-DSA-44",
+        "ML-DSA-65",
+        "ML-DSA-87"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

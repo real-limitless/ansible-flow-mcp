@@ -2,6 +2,168 @@
   "fqcn": "cisco.nxos.nxos_file_copy",
   "shortDescription": "Copy a file to a remote NXOS device.",
   "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/nxos/nxos_file_copy_module.html",
-  "options": [],
-  "source": "galaxy-stub"
+  "options": [
+    {
+      "name": "connect_ssh_port",
+      "displayName": "Connect Ssh Port",
+      "type": "number",
+      "required": false,
+      "default": 22,
+      "description": "B(Deprecated) This option has been deprecated and will be removed in a release after 2024-06-01. To maintain backwards compatibility, this option will continue to override the value of I(ansible_port) until removed. HORIZONTALLINE SSH server port used for file transfer. Only used when I(file_pull) is C(True).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_pull",
+      "displayName": "File Pull",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When (False) file is copied from the Ansible controller to the NXOS device. When (True) file is copied from a remote SCP server to the NXOS device. In this mode, the file copy is initiated from the NXOS device. If the file is already present on the device it will be overwritten and therefore the operation is NOT idempotent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_pull_compact",
+      "displayName": "File Pull Compact",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When file_pull is True, this is used to compact nxos image files. This option can only be used with nxos image files. When (file_pull is False), this is not used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_pull_kstack",
+      "displayName": "File Pull Kstack",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When file_pull is True, this can be used to speed up file copies when the nxos running image supports the use-kstack option. When (file_pull is False), this is not used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_pull_protocol",
+      "displayName": "File Pull Protocol",
+      "type": "string",
+      "required": false,
+      "default": "scp",
+      "description": "When file_pull is True, this can be used to define the transfer protocol for copying file from remote to the NXOS device. When (file_pull is False), this is not used.",
+      "choices": [
+        "scp",
+        "sftp",
+        "ftp",
+        "http",
+        "https",
+        "tftp"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_pull_timeout",
+      "displayName": "File Pull Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "B(Deprecated) This option has been deprecated and will be removed in a release after 2024-06-01. To maintain backwards compatibility, this option will continue to override the value of I(ansible_command_timeout) until removed. HORIZONTALLINE Use this parameter to set timeout in seconds, when transferring large files or when the network is slow. When (file_pull is False), this is not used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_system",
+      "displayName": "File System",
+      "type": "string",
+      "required": false,
+      "default": "bootflash:",
+      "description": "The remote file system on the nxos device. If omitted, devices that support a I(file_system) parameter will use their default values.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_file",
+      "displayName": "Local File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When (file_pull is False) this is the path to the local file on the Ansible controller. The local directory must exist. When (file_pull is True) this is the target file name on the NXOS device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_file_directory",
+      "displayName": "Local File Directory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When (file_pull is True) file is copied from a remote SCP server to the NXOS device, and written to this directory on the NXOS device. If the directory does not exist, it will be created under the file_system. This is an optional parameter. When (file_pull is False), this is not used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_file",
+      "displayName": "Remote File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When (file_pull is False) this is the remote file path on the NXOS device. If omitted, the name of the local file will be used. The remote directory must exist. When (file_pull is True) this is the full path to the file on the remote SCP server to be copied to the NXOS device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_scp_server",
+      "displayName": "Remote Scp Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The remote scp server address when file_pull is True. This is required if file_pull is True. When (file_pull is False), this is not used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_scp_server_password",
+      "displayName": "Remote Scp Server Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The remote scp server password when file_pull is True. This is required if file_pull is True. When (file_pull is False), this is not used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_scp_server_user",
+      "displayName": "Remote Scp Server User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The remote scp server username when file_pull is True. This is required if file_pull is True. When (file_pull is False), this is not used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vrf",
+      "displayName": "Vrf",
+      "type": "string",
+      "required": false,
+      "default": "management",
+      "description": "The VRF used to pull the file. Useful when no vrf management is defined. This option is not applicable for MDS switches.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
 }

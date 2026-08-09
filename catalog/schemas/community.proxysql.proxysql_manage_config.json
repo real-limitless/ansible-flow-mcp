@@ -1,0 +1,140 @@
+{
+  "fqcn": "community.proxysql.proxysql_manage_config",
+  "shortDescription": "Writes the proxysql configuration settings between layers",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/proxysql/proxysql_manage_config_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The supplied I(action) combines with the supplied I(direction) to provide the semantics of how we want to move the I(config_settings) between the I(config_layers).",
+      "choices": [
+        "LOAD",
+        "SAVE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file",
+      "displayName": "Config File",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Specify a config file from which I(login_user) and I(login_password) are to be read.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_layer",
+      "displayName": "Config Layer",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "RUNTIME - represents the in-memory data structures of ProxySQL used by the threads that are handling the requests. MEMORY - (sometimes also referred as main) represents the in-memory SQLite3 database. DISK - represents the on-disk SQLite3 database. CONFIG - is the classical config file. You can only LOAD FROM the config file.",
+      "choices": [
+        "MEMORY",
+        "DISK",
+        "RUNTIME",
+        "CONFIG"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_settings",
+      "displayName": "Config Settings",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The I(config_settings) specifies which configuration we're writing.",
+      "choices": [
+        "MYSQL USERS",
+        "MYSQL SERVERS",
+        "MYSQL QUERY RULES",
+        "MYSQL VARIABLES",
+        "PGSQL USERS",
+        "PGSQL SERVERS",
+        "PGSQL QUERY RULES",
+        "PGSQL VARIABLES",
+        "ADMIN VARIABLES",
+        "SCHEDULER"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "direction",
+      "displayName": "Direction",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "FROM - denotes we're reading values FROM the supplied I(config_layer) and writing to the next layer. TO - denotes we're reading from the previous layer and writing TO the supplied I(config_layer).\"",
+      "choices": [
+        "FROM",
+        "TO"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": "127.0.0.1",
+      "description": "The host used to connect to ProxySQL admin interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password used to authenticate to ProxySQL admin interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": 6032,
+      "description": "The port used to connect to ProxySQL admin interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_unix_socket",
+      "displayName": "Login Unix Socket",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The socket used to connect to ProxySQL admin interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username used to authenticate to ProxySQL admin interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

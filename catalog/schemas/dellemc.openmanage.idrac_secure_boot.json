@@ -1,0 +1,299 @@
+{
+  "fqcn": "dellemc.openmanage.idrac_secure_boot",
+  "shortDescription": "Configure attributes, import, or export secure boot certificate, and reset keys.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/openmanage/idrac_secure_boot_module.html",
+  "options": [
+    {
+      "name": "KEK",
+      "displayName": "Kek",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of absolute paths of the Key Exchange Key (KEK) certificate file for UEFI secure boot. Directory path with write permission when I(export_certificates) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_mode",
+      "displayName": "Boot Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Boot mode of the iDRAC. Not supported for 17G iDRAC10 and later. C(Uefi) enables the secure boot in UEFI mode. C(Bios) enables the secure boot in BIOS mode.",
+      "choices": [
+        "Uefi",
+        "Bios"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Privacy Enhanced Mail (PEM) file that contains a CA certificate to be used for the validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database",
+      "displayName": "Database",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of absolute paths of the Allow Database(DB) certificate file for UEFI secure boot. Directory path with write permission when I(export_certificates) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disallow_database",
+      "displayName": "Disallow Database",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of absolute paths of the Disallow Database(DBX) certificate file for UEFI secure boot. Directory path with write permission when I(export_certificates) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "export_certificates",
+      "displayName": "Export Certificates",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Export all the available certificates in the specified directory for the given keys. I(export_cetificates) is mutually exclusive with I(import). I(export_cetificates) is C(true) either of I(platform_key) or i(key_exchange_key) or I(database) - or I(disallow_database) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_int_10",
+      "displayName": "Force Int 10",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Determines whether the system BIOS loads the legacy video (INT 10h) option ROM from the video controller. This parameter is supported only in UEFI boot mode. If UEFI Secure Boot mode is enabled, you cannot enable this parameter. This parameter is not supported for 17G iDRAC10 and later. C(Disabled) if the operating system supports UEFI video output standards. C(Enabled) if the operating system does not support UEFI video output standards.",
+      "choices": [
+        "Disabled",
+        "Enabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_ip",
+      "displayName": "Idrac Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "iDRAC IP Address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_password",
+      "displayName": "Idrac Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC user password. If the password is not provided, then the environment variable E(IDRAC_PASSWORD) is used. Example: export IDRAC_PASSWORD=password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_port",
+      "displayName": "Idrac Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "iDRAC port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "idrac_user",
+      "displayName": "Idrac User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iDRAC username. If the username is not provided, then the environment variable E(IDRAC_USERNAME) is used. Example: export IDRAC_USERNAME=username",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "import_certificates",
+      "displayName": "Import Certificates",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Import all the specified key certificates. When I(import_certificates) is C(true), then either I(platform_key), I(KEK), I(database), or I(disallow_database) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait",
+      "displayName": "Job Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to wait till completion of the secure boot certificate operation. This is applicable when I(restart) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 1200,
+      "description": "The maximum wait time of I(job_wait) in seconds. The job is tracked only for this duration. This option is applicable when I(job_wait) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "platform_key",
+      "displayName": "Platform Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The absolute path of the Platform key certificate file for UEFI secure boot. Directory path with write permission when I(export_certificates) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset_keys",
+      "displayName": "Reset Keys",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Resets the UEFI Secure Boot keys. C(DeleteAllKeys) deletes the content of all UEFI Secure Boot key databases (PK, KEK, DB, and DBX). This choice configures the system in Setup Mode. C(DeletePK) deletes the content of the PK UEFI Secure Boot database. This choice configures the system in Setup Mode. C(ResetAllKeysToDefault) resets the content of all UEFI Secure Boot key databases (PK, KEK, DB, and DBX) to their default values. C(ResetDB) resets the content of the DB UEFI Secure Boot database to i",
+      "choices": [
+        "DeleteAllKeys",
+        "DeletePK",
+        "ResetAllKeysToDefault",
+        "ResetDB",
+        "ResetDBX",
+        "ResetKEK",
+        "ResetPK"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restart",
+      "displayName": "Restart",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Secure boot certificate import operation requires a server restart. This parameter provides an option to restart the server. C(true) restarts the server. C(false) does not restart the server. I(restart) is applicable when I(import_certificates) is C(true). I(restart) will be ignored only when I(export_certificates) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restart_type",
+      "displayName": "Restart Type",
+      "type": "string",
+      "required": false,
+      "default": "GracefulRestart",
+      "description": "Restart type of the server. C(ForceRestart) forcefully restarts the server. C(GracefulRestart) gracefully restarts the server. I(restart_type) is applicable when I(restart) is C(true).",
+      "choices": [
+        "GracefulRestart",
+        "ForceRestart"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secure_boot",
+      "displayName": "Secure Boot",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "UEFI Secure Boot. The I(secure_boot) can be C(Enabled) only if I(boot_mode) is C(UEFI) and I(force_int_10) is C(Disabled). C(Disabled) disables the secure boot mode. C(Enabled) enables the secure boot mode.",
+      "choices": [
+        "Disabled",
+        "Enabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secure_boot_mode",
+      "displayName": "Secure Boot Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The UEFI Secure Boot mode configures how to use the Secure Boot Policy. C(AuditMode) sets the Secure Boot mode to an Audit mode when Platform Key is not installed on the system. The BIOS does not authenticate updates to the policy objects and transition between modes. BIOS performs a signature verification on pre-boot images and logs the results in the Image Execution Information table, where it processes the images whether the status of verification is pass or fail. C(DeployedMode) sets the Sec",
+      "choices": [
+        "AuditMode",
+        "DeployedMode",
+        "UserMode"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secure_boot_policy",
+      "displayName": "Secure Boot Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The following are the types of Secure Boot policy. C(Custom) inherits the standard certificates and image digests that are loaded in the system by default. You can modify the certificates and image digests. C(Standard) indicates that the system has default certificates, image digests, or hash loaded from the factory. When the Secure Boot Policy is set to Custom, you can perform following operations such as viewing, exporting, importing, deleting, deleting all, and resetting policies.",
+      "choices": [
+        "Custom",
+        "Standard"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), the SSL certificates will not be validated. Configure C(false) only on personally controlled sites where self-signed certificates are used. Prior to collection version C(5.0.0), the I(validate_certs) is C(false) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x_auth_token",
+      "displayName": "X Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token. If the x_auth_token is not provided, then the environment variable E(IDRAC_X_AUTH_TOKEN) is used. Example: export IDRAC_X_AUTH_TOKEN=x_auth_token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}
