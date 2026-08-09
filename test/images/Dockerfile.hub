@@ -1,0 +1,40 @@
+FROM debian:bookworm-slim
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    ANSIBLE_FLOW_ROLE=hub \
+    ANSIBLE_FLOW_HUB_DIR=/var/lib/ansible-flow/hub \
+    PATH="/usr/local/bin:${PATH}"
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      python3 python3-pip python3-venv \
+      openssh-server openssh-client \
+      ansible-core \
+      iproute2 ca-certificates curl tini \
+    && rm -rf /var/lib/apt/lists/* \
+    && ansible-galaxy collection install ansible.posix \
+    && mkdir -p /var/run/sshd /var/lib/ansible-flow/hub /lab/keys \
+    && useradd -m -s /usr/sbin/nologin mcp-hub \
+    && useradd -m -s /bin/bash mcp-join \
+    && passwd -u mcp-join 2>/dev/null || usermod -p '*' mcp-join \
+    && useradd -m -s /bin/bash labadmin
+
+WORKDIR /opt/ansible-flow-mcp
+COPY pyproject.toml README.md LICENSE ./
+COPY src ./src
+COPY catalog ./catalog
+COPY examples ./examples
+COPY test/images/entrypoint-hub.sh /usr/local/bin/entrypoint-hub.sh
+COPY test/images/sshd/hub.conf /etc/ssh/sshd_config.d/ansible-flow-hub.conf
+COPY examples/sshd/ansible-flow-hub-join.conf /etc/ssh/sshd_config.d/ansible-flow-hub-join.conf
+
+RUN python3 -m pip install --no-cache-dir --break-system-packages -e . \
+    && ln -sf /usr/local/bin/ansible-flow-mcp /usr/bin/ansible-flow-mcp \
+    && chmod +x /usr/local/bin/entrypoint-hub.sh \
+    && ssh-keygen -A \
+    && mkdir -p /home/mcp-join/.ssh \
+    && chown -R mcp-join:mcp-join /home/mcp-join \
+    && chown -R mcp-hub:mcp-hub /var/lib/ansible-flow/hub \
+    && chmod -R a+rX /opt/ansible-flow-mcp
+
+EXPOSE 22
+ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/entrypoint-hub.sh"]

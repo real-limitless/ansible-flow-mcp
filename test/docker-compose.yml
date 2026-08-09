@@ -1,0 +1,103 @@
+# Hub/spoke lab for issue #2 — 1 hub + 3 spokes over SSH ForceCommand.
+# Usage:
+#   cd test && ./scripts/up.sh
+#   ./scripts/enroll.sh
+#   ./scripts/smoke.sh
+#
+# OS matrix (default = reliable Debian family; override BASE via build args):
+#   spoke-01 debian:bookworm-slim
+#   spoke-02 ubuntu:24.04
+#   spoke-03 debian:bookworm-slim (second worker; swap to rockylinux/alpine for matrix)
+
+name: ansible-flow-hub
+
+networks:
+  hub-lab:
+    driver: bridge
+
+volumes:
+  hub-data:
+
+x-spoke: &spoke
+  networks: [hub-lab]
+  environment:
+    ANSIBLE_FLOW_ROLE: spoke
+    ANSIBLE_FLOW_SPOKE_DIR: /var/lib/ansible-flow/spoke
+  healthcheck:
+    test: ["CMD-SHELL", "ss -lnt | grep -q ':22' || netstat -lnt 2>/dev/null | grep -q ':22'"]
+    interval: 5s
+    timeout: 3s
+    retries: 24
+    start_period: 15s
+  depends_on:
+    hub:
+      condition: service_started
+
+services:
+  hub:
+    build:
+      context: ..
+      dockerfile: test/images/Dockerfile.hub
+    hostname: hub-01
+    container_name: af-hub-01
+    networks: [hub-lab]
+    volumes:
+      - hub-data:/var/lib/ansible-flow/hub
+      - ./keys:/lab/keys
+    environment:
+      ANSIBLE_FLOW_ROLE: hub
+      ANSIBLE_FLOW_HUB_DIR: /var/lib/ansible-flow/hub
+      ANSIBLE_FLOW_REQUIRE_CHECK: "0"
+    healthcheck:
+      test: ["CMD-SHELL", "ss -lnt | grep -q ':22' && test -f /var/lib/ansible-flow/hub/hub_id"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 20s
+    ports:
+      - "127.0.0.1:22001:22"
+
+  spoke-01:
+    <<: *spoke
+    build:
+      context: ..
+      dockerfile: test/images/Dockerfile.spoke
+      args:
+        BASE_IMAGE: debian:bookworm-slim
+        SPOKE_FAMILY: debian
+    hostname: spoke-01
+    container_name: af-spoke-01
+    environment:
+      ANSIBLE_FLOW_ROLE: spoke
+      ANSIBLE_FLOW_SPOKE_DIR: /var/lib/ansible-flow/spoke
+      SPOKE_NAME: spoke-01
+
+  spoke-02:
+    <<: *spoke
+    build:
+      context: ..
+      dockerfile: test/images/Dockerfile.spoke
+      args:
+        BASE_IMAGE: ubuntu:24.04
+        SPOKE_FAMILY: ubuntu
+    hostname: spoke-02
+    container_name: af-spoke-02
+    environment:
+      ANSIBLE_FLOW_ROLE: spoke
+      ANSIBLE_FLOW_SPOKE_DIR: /var/lib/ansible-flow/spoke
+      SPOKE_NAME: spoke-02
+
+  spoke-03:
+    <<: *spoke
+    build:
+      context: ..
+      dockerfile: test/images/Dockerfile.spoke
+      args:
+        BASE_IMAGE: debian:bookworm-slim
+        SPOKE_FAMILY: debian
+    hostname: spoke-03
+    container_name: af-spoke-03
+    environment:
+      ANSIBLE_FLOW_ROLE: spoke
+      ANSIBLE_FLOW_SPOKE_DIR: /var/lib/ansible-flow/spoke
+      SPOKE_NAME: spoke-03

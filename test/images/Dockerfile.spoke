@@ -1,0 +1,44 @@
+# Multi-family spoke image. BASE_IMAGE + SPOKE_FAMILY select OS packaging.
+ARG BASE_IMAGE=debian:bookworm-slim
+FROM ${BASE_IMAGE}
+
+ARG SPOKE_FAMILY=debian
+ENV SPOKE_FAMILY=${SPOKE_FAMILY} \
+    ANSIBLE_FLOW_ROLE=spoke \
+    ANSIBLE_FLOW_SPOKE_DIR=/var/lib/ansible-flow/spoke \
+    PATH="/usr/local/bin:${PATH}"
+
+COPY test/images/install-spoke-deps.sh /tmp/install-spoke-deps.sh
+RUN chmod +x /tmp/install-spoke-deps.sh && /tmp/install-spoke-deps.sh "${SPOKE_FAMILY}"
+
+WORKDIR /opt/ansible-flow-mcp
+COPY pyproject.toml README.md LICENSE ./
+COPY src ./src
+COPY catalog ./catalog
+COPY test/images/entrypoint-spoke.sh /usr/local/bin/entrypoint-spoke.sh
+COPY test/images/sshd/spoke.conf /etc/ssh/sshd_config.d/ansible-flow-spoke.conf
+COPY examples/sshd/ansible-flow-spoke.conf /etc/ssh/sshd_config.d/ansible-flow-spoke-force.conf
+
+RUN set -eux; \
+    if python3 -m pip install --no-cache-dir --break-system-packages -e . ; then :; \
+    elif pip3 install --no-cache-dir --break-system-packages -e . ; then :; \
+    else python3 -m pip install --no-cache-dir -e . ; fi; \
+    BIN="$(command -v ansible-flow-mcp)"; \
+    if [ -n "$BIN" ] && [ "$BIN" != /usr/local/bin/ansible-flow-mcp ]; then \
+      ln -sfn "$BIN" /usr/local/bin/ansible-flow-mcp; \
+    fi; \
+    test -x /usr/local/bin/ansible-flow-mcp || test -x "$BIN"; \
+    chmod +x /usr/local/bin/entrypoint-spoke.sh; \
+    mkdir -p /var/lib/ansible-flow/spoke /var/run/sshd /home/mcp-spoke/.ssh; \
+    if ! id mcp-spoke >/dev/null 2>&1; then \
+      useradd -m -s /usr/sbin/nologin mcp-spoke 2>/dev/null \
+        || adduser -D -s /sbin/nologin mcp-spoke; \
+    fi; \
+    chown -R mcp-spoke:mcp-spoke /home/mcp-spoke /var/lib/ansible-flow/spoke; \
+    chmod -R a+rX /opt/ansible-flow-mcp; \
+    ssh-keygen -A || true
+
+EXPOSE 22
+COPY test/images/spoke-init.sh /usr/local/bin/spoke-init.sh
+RUN chmod +x /usr/local/bin/spoke-init.sh
+ENTRYPOINT ["/usr/local/bin/spoke-init.sh"]
