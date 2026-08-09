@@ -25,7 +25,8 @@ def default_inventory(*, hub_name: str = "hub-01") -> dict[str, Any]:
                 "spokes": {"hosts": {}},
             },
             "vars": {
-                "ansible_user": "mcp-spoke",
+                # Shell user for ansible CLI (NOT mcp-spoke — that is ForceCommand MCP only)
+                "ansible_user": "mcp-ansible",
                 "ansible_ssh_common_args": (
                     "-o IdentitiesOnly=yes -o StrictHostKeyChecking=yes "
                     "-o BatchMode=yes -o PasswordAuthentication=no"
@@ -76,7 +77,7 @@ def add_spoke(
     name: str,
     ansible_host: str,
     ansible_port: int = 22,
-    ansible_user: str = "mcp-spoke",
+    ansible_user: str = "mcp-ansible",
     extra: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     hosts = _spokes_hosts(inv)

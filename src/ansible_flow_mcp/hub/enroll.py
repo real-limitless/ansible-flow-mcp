@@ -25,7 +25,7 @@ class JoinRequest:
     public_addr: str
     ssh_port: int = 22
     host_pubkey: str = ""
-    ansible_user: str = "mcp-spoke"
+    ansible_user: str = "mcp-ansible"
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> JoinRequest:
@@ -35,7 +35,7 @@ class JoinRequest:
             public_addr=str(data.get("public_addr") or data.get("ansible_host") or ""),
             ssh_port=int(data.get("ssh_port") or data.get("port") or 22),
             host_pubkey=str(data.get("host_pubkey") or "").strip(),
-            ansible_user=str(data.get("ansible_user") or "mcp-spoke"),
+            ansible_user=str(data.get("ansible_user") or "mcp-ansible"),
         )
 
 
@@ -46,6 +46,7 @@ class JoinResponse:
     hub_id: str
     hub_name: str
     hub_client_pubkey: str
+    ansible_client_pubkey: str
     force_command: str
     ansible_user: str
     message: str = ""
@@ -57,6 +58,7 @@ class JoinResponse:
             "hub_id": self.hub_id,
             "hub_name": self.hub_name,
             "hub_client_pubkey": self.hub_client_pubkey,
+            "ansible_client_pubkey": self.ansible_client_pubkey,
             "force_command": self.force_command,
             "ansible_user": self.ansible_user,
             "message": self.message,
@@ -96,7 +98,12 @@ def accept_join(
             audit_log(st, "known_hosts_write_failed", node_name=node_name)
 
     pub = st.client_pub_path.read_text(encoding="utf-8").strip()
-    # also expose ansible client pub (lab may use hub_client for both)
+    ansible_pub_path = st.root / "keys" / "ansible_client.pub"
+    ansible_pub = (
+        ansible_pub_path.read_text(encoding="utf-8").strip()
+        if ansible_pub_path.is_file()
+        else pub
+    )
     audit_log(
         st,
         "accept_join",
@@ -104,6 +111,7 @@ def accept_join(
         public_addr=req.public_addr,
         ssh_port=req.ssh_port,
         jti=claims.jti,
+        ansible_user=req.ansible_user,
     )
     return JoinResponse(
         ok=True,
@@ -111,6 +119,7 @@ def accept_join(
         hub_id=st.hub_id,
         hub_name=st.name,
         hub_client_pubkey=pub,
+        ansible_client_pubkey=ansible_pub,
         force_command=force_command,
         ansible_user=req.ansible_user,
         message="enrolled",

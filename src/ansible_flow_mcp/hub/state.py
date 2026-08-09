@@ -100,7 +100,7 @@ def hub_init(
         "hub_id": hub_id,
         "role": "hub",
         "created_at": datetime.now(timezone.utc).isoformat(),
-        "ansible_user": "mcp-spoke",
+        "ansible_user": "mcp-ansible",
     }
     node_path = base / "node.yml"
     node_path.write_text(yaml.safe_dump(node, sort_keys=False), encoding="utf-8")

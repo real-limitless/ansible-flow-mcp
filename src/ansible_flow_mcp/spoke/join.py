@@ -124,23 +124,25 @@ def _read_host_pubkey() -> str:
 def _install_authorized_key(
     *,
     pubkey: str,
-    force_command: str,
+    force_command: str | None,
     auth_keys_path: Path,
 ) -> None:
+    """Install a pubkey. force_command=None → plain key (ansible shell user)."""
     ensure_dir(auth_keys_path.parent, 0o700)
-    opts = (
-        "restrict,port-forwarding,x11-forwarding,agent-forwarding,pty,"
-        f'command="{force_command}"'
-    )
-    # OpenSSH: no-port-forwarding style
-    opts = (
-        f'command="{force_command}",no-port-forwarding,no-X11-forwarding,'
-        "no-agent-forwarding,no-pty"
-    )
-    line = f"{opts} {pubkey.strip()}\n"
+    pub = pubkey.strip()
+    if not pub:
+        return
+    if force_command:
+        opts = (
+            f'command="{force_command}",no-port-forwarding,no-X11-forwarding,'
+            "no-agent-forwarding,no-pty"
+        )
+        line = f"{opts} {pub}\n"
+    else:
+        # Ansible needs a real shell — never ForceCommand MCP on this key
+        line = f"no-port-forwarding,no-X11-forwarding,no-agent-forwarding {pub}\n"
     existing = auth_keys_path.read_text(encoding="utf-8") if auth_keys_path.is_file() else ""
-    # replace prior ansible-flow entries for same key material
-    key_body = pubkey.strip().split()[-1] if pubkey.strip() else ""
+    key_body = pub.split()[-1] if pub else ""
     lines = [ln for ln in existing.splitlines(True) if key_body not in ln]
     lines.append(line)
     auth_keys_path.write_text("".join(lines), encoding="utf-8")
@@ -178,6 +180,13 @@ def spoke_join(
     if not name:
         raise ValueError("node_name required")
 
+    ansible_user = (
+        os.environ.get("ANSIBLE_FLOW_ANSIBLE_USER") or "mcp-ansible"
+    ).strip() or "mcp-ansible"
+    mesh_user = (
+        os.environ.get("ANSIBLE_FLOW_MESH_USER") or "mcp-spoke"
+    ).strip() or "mcp-spoke"
+
     host_pubkey = _read_host_pubkey()
     payload = {
         "token": token,
@@ -185,7 +194,7 @@ def spoke_join(
         "public_addr": public_addr,
         "ssh_port": int(ssh_port),
         "host_pubkey": host_pubkey,
-        "ansible_user": "mcp-spoke",
+        "ansible_user": ansible_user,
     }
 
     tr = transport or (
@@ -197,23 +206,39 @@ def spoke_join(
     hub_pub = str(resp.get("hub_client_pubkey") or "").strip()
     if not hub_pub:
         raise RuntimeError("hub did not return hub_client_pubkey")
+    ansible_pub = str(resp.get("ansible_client_pubkey") or "").strip() or hub_pub
+    ansible_user = str(resp.get("ansible_user") or ansible_user).strip() or ansible_user
 
-    # default authorized_keys for mcp-spoke
+    # Mesh channel: mcp-spoke authorized_keys WITH ForceCommand (spoke_call only)
     ak = auth_keys_path
     if ak is None:
-        home = Path(os.environ.get("HOME") or f"/home/{resp.get('ansible_user') or 'mcp-spoke'}")
-        # also allow SPOKE auth keys override
+        home = Path(os.environ.get("HOME") or f"/home/{mesh_user}")
         env_ak = os.environ.get("ANSIBLE_FLOW_SPOKE_AUTHORIZED_KEYS")
         ak = Path(env_ak) if env_ak else (base / "keys" / "authorized_keys")
-        # if running as mcp-spoke, prefer ~/.ssh/authorized_keys
         ssh_ak = home / ".ssh" / "authorized_keys"
         if home.is_dir():
             ak = ssh_ak
 
     _install_authorized_key(pubkey=hub_pub, force_command=fc, auth_keys_path=ak)
 
-    # store hub pubkey copy
+    # Ansible channel: plain key on shell user (no ForceCommand — ansible needs /bin/sh)
+    ansible_ak_env = os.environ.get("ANSIBLE_FLOW_ANSIBLE_AUTHORIZED_KEYS")
+    if ansible_ak_env:
+        ansible_ak = Path(ansible_ak_env)
+    else:
+        ansible_home = Path(f"/home/{ansible_user}")
+        if ansible_home.is_dir():
+            ansible_ak = ansible_home / ".ssh" / "authorized_keys"
+        else:
+            ansible_ak = base / "keys" / "ansible_authorized_keys"
+    _install_authorized_key(
+        pubkey=ansible_pub,
+        force_command=None,
+        auth_keys_path=ansible_ak,
+    )
+
     (base / "keys" / "hub_client.pub").write_text(hub_pub + "\n", encoding="utf-8")
+    (base / "keys" / "ansible_client.pub").write_text(ansible_pub + "\n", encoding="utf-8")
 
     node = {
         "name": name,
@@ -225,17 +250,29 @@ def spoke_join(
         "ssh_port": int(ssh_port),
         "joined_at": datetime.now(timezone.utc).isoformat(),
         "force_command": fc,
+        "mesh_user": mesh_user,
+        "ansible_user": ansible_user,
+        "mesh_authorized_keys": str(ak),
+        "ansible_authorized_keys": str(ansible_ak),
     }
     node_path = base / "node.yml"
     node_path.write_text(yaml.safe_dump(node, sort_keys=False), encoding="utf-8")
     os.chmod(node_path, 0o600)
 
+    redacted = {
+        k: v
+        for k, v in resp.items()
+        if k not in {"hub_client_pubkey", "ansible_client_pubkey"}
+    }
+    redacted["hub_client_pubkey"] = hub_pub[:40] + "…"
+    redacted["ansible_client_pubkey"] = ansible_pub[:40] + "…"
+
     return {
         "ok": True,
         "node": node,
         "authorized_keys": str(ak),
-        "hub_response": {k: v for k, v in resp.items() if k != "hub_client_pubkey"}
-        | {"hub_client_pubkey": hub_pub[:40] + "…"},
+        "ansible_authorized_keys": str(ansible_ak),
+        "hub_response": redacted,
     }
 
 
