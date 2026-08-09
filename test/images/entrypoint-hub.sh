@@ -25,13 +25,19 @@ if [ ! -f "$HUB_DIR/hub_id" ]; then
   ansible-flow-mcp hub init --name hub-01
 fi
 chown -R mcp-hub:ansible-flow "$HUB_DIR" || chown -R mcp-hub:mcp-hub "$HUB_DIR" || true
-chmod -R g+rwX "$HUB_DIR" || true
+chmod -R g+rX "$HUB_DIR" || true
+# mcp-join (accept-join) must read hub_id + write inventory/tokens
+chmod 775 "$HUB_DIR" "$HUB_DIR/tokens" "$HUB_DIR/keys" 2>/dev/null || true
+chmod 664 "$HUB_DIR/hub_id" 2>/dev/null || true
 find "$HUB_DIR/keys" -type f ! -name '*.pub' -exec chmod 640 {} \; 2>/dev/null || true
+find "$HUB_DIR/keys" -name '*.pub' -exec chmod 644 {} \; 2>/dev/null || true
 find "$HUB_DIR/ca" -type f -exec chmod 640 {} \; 2>/dev/null || true
 chmod 660 "$HUB_DIR/known_hosts" 2>/dev/null || true
 chmod 660 "$HUB_DIR/inventory.yml" 2>/dev/null || true
 chmod 660 "$HUB_DIR/tokens/replay.db" 2>/dev/null || true
 chmod 660 "$HUB_DIR/audit.jsonl" 2>/dev/null || true
+# ensure group write on mutable state
+chmod g+rw "$HUB_DIR/inventory.yml" "$HUB_DIR/known_hosts" "$HUB_DIR/tokens/replay.db" "$HUB_DIR/audit.jsonl" 2>/dev/null || true
 
 # Lab join identity
 JOIN_KEY="$HUB_DIR/keys/join_client"

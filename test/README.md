@@ -14,9 +14,32 @@ When run in a real terminal, **demo drops you into a shell on the hub** after sm
 ```bash
 ./scripts/demo.sh --no-shell   # setup only (CI)
 ./scripts/shell.sh             # hub shell anytime lab is up
-./scripts/tui.sh               # operator TUI
-./scripts/opencode.sh          # OpenCode + hub MCP
+./scripts/tui.sh               # operator TUI (inside hub)
+./scripts/opencode.sh          # OpenCode *inside* hub container
+./scripts/opencode-host.sh     # OpenCode *on your machine* → lab hub MCP (see spokes)
+./scripts/reconnect.sh         # after hub rebuild: re-enroll + seed + refresh configs
 ```
+
+### After a hub rebuild, servers “disappear” in OpenCode?
+
+Usually OpenCode on the **host** is still pointed at a local empty
+`ANSIBLE_FLOW_HUB_DIR` (or a stale MCP process), not the compose hub volume.
+
+**Fix:**
+
+```bash
+cd test
+./scripts/reconnect.sh
+./scripts/opencode-host.sh
+```
+
+Then ask the agent: `hub_status` / `list_nodes` — you should see `spoke-01..03`
+and groups `prod web app data edge batch canary`.
+
+| Where you run OpenCode | Config | Inventory |
+| --- | --- | --- |
+| Host (`opencode-host.sh`) | `test/opencode-hub.host.jsonc` → `hub-mcp.sh` | Lab hub container |
+| Inside hub (`opencode.sh`) | `/var/lib/ansible-flow/hub/opencode-hub.jsonc` | Same lab volume |
 
 Inside the hub shell:
 
