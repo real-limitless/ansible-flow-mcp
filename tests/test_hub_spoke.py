@@ -128,7 +128,7 @@ def test_policy_spoke_localhost_only():
 def test_policy_hub_rejects_unenrolled(hub_root: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("ANSIBLE_FLOW_HUB_DIR", str(hub_root))
     monkeypatch.setenv("ANSIBLE_FLOW_ROLE", "hub")
-    with pytest.raises(ValueError, match="not enrolled"):
+    with pytest.raises(ValueError, match="not an enrolled spoke or registered target"):
         assert_hosts_allowed(
             "evil-host",
             enrolled={"hub-01", "spoke-02"},
@@ -148,7 +148,7 @@ def test_runner_hub_rejects_unenrolled_host(hub_root: Path, monkeypatch: pytest.
     def fake_run(argv, env, timeout):
         return 0, "", ""
 
-    with pytest.raises(ValueError, match="not enrolled"):
+    with pytest.raises(ValueError, match="not an enrolled spoke or registered target"):
         run_module(
             "ansible.builtin.ping",
             hosts="not-a-spoke",

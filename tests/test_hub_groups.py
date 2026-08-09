@@ -56,6 +56,8 @@ def test_groups_crud(hub_root: Path):
         set_group_members(inv, "web", ["not-real"])
     with pytest.raises(ValueError, match="reserved"):
         create_group(inv, "spokes")
+    with pytest.raises(ValueError, match="reserved"):
+        create_group(inv, "targets")
     assert delete_group(inv, "web") is True
 
 

@@ -59,14 +59,14 @@ def load_enrolled_hosts(inventory_path: Path) -> set[str]:
 def load_inventory_groups(inventory_path: Path) -> set[str]:
     """Targetable Ansible group names from hub inventory (system + custom)."""
     if not inventory_path.is_file():
-        return {"all", "hub", "spokes", "ungrouped"}
+        return {"all", "hub", "spokes", "targets", "ungrouped"}
     try:
         from ansible_flow_mcp.hub.inventory import inventory_group_names, load_inventory
 
         return inventory_group_names(load_inventory(inventory_path))
     except Exception:  # noqa: BLE001
         data = yaml.safe_load(inventory_path.read_text(encoding="utf-8")) or {}
-        names = {"all", "hub", "spokes", "ungrouped"}
+        names = {"all", "hub", "spokes", "targets", "ungrouped"}
         children = ((data.get("all") or {}).get("children") or {}) if isinstance(data, dict) else {}
         if isinstance(children, dict):
             names.update(str(k) for k in children.keys())
@@ -128,14 +128,14 @@ def assert_hosts_allowed(
             allowed.update({"localhost", "127.0.0.1"})
         group_set = {str(g) for g in (groups or ())}
         if not group_set:
-            group_set = {"all", "hub", "spokes", "ungrouped"}
+            group_set = {"all", "hub", "spokes", "targets", "ungrouped"}
         allowed.update(group_set)
         for p in parts:
             if p in allowed:
                 continue
             raise ValueError(
-                f"host {p!r} is not enrolled on this hub "
-                f"(enrolled: {', '.join(sorted(enrolled_set)) or 'none'}; "
+                f"host {p!r} is not an enrolled spoke or registered target on this hub "
+                f"(hosts: {', '.join(sorted(enrolled_set)) or 'none'}; "
                 f"groups: {', '.join(sorted(group_set))})"
             )
         return ",".join(parts)

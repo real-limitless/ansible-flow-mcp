@@ -39,6 +39,12 @@ def _spoke_target(state: HubState, node: str) -> tuple[str, int, str]:
     inv = load_inventory(state.inventory_path)
     children = (inv.get("all") or {}).get("children") or {}
     spokes = (children.get("spokes") or {}).get("hosts") or {}
+    targets = (children.get("targets") or {}).get("hosts") or {}
+    if node in targets:
+        raise ValueError(
+            f"{node!r} is an Ansible target (kind=target), not a mesh spoke; "
+            "spoke_call requires an enrolled spoke with ForceCommand MCP"
+        )
     if node not in spokes:
         raise ValueError(f"spoke {node!r} is not enrolled")
     meta = spokes[node] or {}

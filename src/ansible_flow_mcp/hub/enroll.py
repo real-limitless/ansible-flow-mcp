@@ -161,19 +161,114 @@ def revoke_node(
 def hub_status(*, state: HubState | None = None, root: Path | None = None) -> dict[str, Any]:
     st = state or load_hub_state(root)
     inv = load_inventory(st.inventory_path)
-    from ansible_flow_mcp.hub.inventory import list_groups, list_spoke_names, list_spokes_detail
+    from ansible_flow_mcp.hub.inventory import (
+        list_groups,
+        list_nodes_detail,
+        list_spoke_names,
+        list_target_names,
+        list_targets_detail,
+    )
 
+    spokes = list_spoke_names(inv)
+    targets = list_target_names(inv)
+    nodes = list_nodes_detail(inv)
     return {
         "role": "hub",
         "hub_id": st.hub_id,
         "name": st.name,
         "root": str(st.root),
-        "spokes": list_spoke_names(inv),
-        "nodes": list_spokes_detail(inv),
+        "spokes": spokes,
+        "targets": targets,
+        "nodes": nodes,
+        "spoke_nodes": [n for n in nodes if n.get("kind") == "spoke"],
+        "target_nodes": list_targets_detail(inv),
         "groups": list_groups(inv),
         "inventory": str(st.inventory_path),
         "known_hosts": str(st.known_hosts_path),
     }
+
+
+def register_target(
+    name: str,
+    *,
+    ansible_host: str,
+    ansible_connection: str = "ssh",
+    ansible_port: int | None = None,
+    ansible_user: str | None = None,
+    extra: dict[str, Any] | None = None,
+    state: HubState | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    from ansible_flow_mcp.hub.inventory import add_target, get_target
+
+    st = state or load_hub_state(root)
+    inv = load_inventory(st.inventory_path)
+    add_target(
+        inv,
+        name=name,
+        ansible_host=ansible_host,
+        ansible_connection=ansible_connection,
+        ansible_port=ansible_port,
+        ansible_user=ansible_user,
+        extra=extra,
+    )
+    write_inventory(st.inventory_path, inv)
+    node = get_target(inv, name) or {"name": name, "kind": "target"}
+    audit_log(
+        st,
+        "register_target",
+        node_name=name,
+        ansible_host=ansible_host,
+        ansible_connection=ansible_connection,
+        ansible_port=ansible_port,
+    )
+    return {"ok": True, "node": node}
+
+
+def update_target_node(
+    name: str,
+    *,
+    ansible_host: str | None = None,
+    ansible_port: int | None = None,
+    ansible_user: str | None = None,
+    ansible_connection: str | None = None,
+    extra: dict[str, Any] | None = None,
+    state: HubState | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    from ansible_flow_mcp.hub.inventory import update_target
+
+    st = state or load_hub_state(root)
+    inv = load_inventory(st.inventory_path)
+    node = update_target(
+        inv,
+        name,
+        ansible_host=ansible_host,
+        ansible_port=ansible_port,
+        ansible_user=ansible_user,
+        ansible_connection=ansible_connection,
+        extra=extra,
+    )
+    write_inventory(st.inventory_path, inv)
+    audit_log(st, "update_target", node_name=name, node=node)
+    return {"ok": True, "node": node}
+
+
+def remove_target_node(
+    name: str,
+    *,
+    state: HubState | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    from ansible_flow_mcp.hub.inventory import remove_target
+
+    st = state or load_hub_state(root)
+    inv = load_inventory(st.inventory_path)
+    removed = remove_target(inv, name)
+    if removed:
+        write_inventory(st.inventory_path, inv)
+    audit_log(st, "remove_target", node_name=name, removed=removed)
+    return {"ok": True, "node_name": name, "removed_from_inventory": removed}
 
 
 def update_node(

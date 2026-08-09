@@ -403,13 +403,30 @@ Cursor/Claude: same idea — `command` runs `ansible-flow-mcp hub session` with 
 
 ### C7. First multi-host agent ritual
 
-1. `hub_status` / `list_nodes` — enrolled names  
+1. `hub_status` / `list_nodes` — enrolled spokes **and** registered targets (`kind`)  
 2. `list_groups` — targeting groups  
 3. `search_modules` → `get_module_schema`  
-4. `run_module` with `hosts` = enrolled name or group, `check_mode=true`  
-5. `spoke_call` for mesh simple-exec tools (e.g. `list_collections` on a node)
+4. `run_module` with `hosts` = spoke/target name or group, `check_mode=true`  
+5. `spoke_call` for mesh simple-exec tools (spokes only — not WinRM targets)
 
 Hub mode **rejects** client-supplied `-i` and unknown hosts.
+
+### C8. Ansible targets (no agent on the box)
+
+Windows, routers, and other hosts Ansible can reach **without** `ansible-flow-mcp`:
+
+```bash
+ansible-flow-mcp hub register-target \
+  --name win-app-02 \
+  --host 10.0.4.20 \
+  --connection winrm \
+  --user Administrator
+```
+
+- No join token; hub-side register only  
+- `run_module` / groups work; **`spoke_call` does not**  
+- Do not put passwords in CLI/MCP args — use hub Ansible config or secret path refs  
+- See [HUB.md](HUB.md) and [issue #3](https://github.com/real-limitless/ansible-flow-mcp/issues/3)
 
 ---
 

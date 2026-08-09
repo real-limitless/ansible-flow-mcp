@@ -67,7 +67,7 @@ def build_parser() -> argparse.ArgumentParser:
     h_rev = hub_sub.add_parser("revoke", help="Revoke enrolled spoke")
     h_rev.add_argument("--name", required=True)
 
-    hub_sub.add_parser("status", help="Show hub status / enrolled spokes")
+    hub_sub.add_parser("status", help="Show hub status / spokes + targets")
     hub_sub.add_parser("session", help="Run hub MCP stdio session")
     hub_sub.add_parser("tui", help="Operator TUI (servers, groups, OpenCode launch)")
     hub_sub.add_parser(
@@ -81,6 +81,37 @@ def build_parser() -> argparse.ArgumentParser:
     h_call.add_argument("--tool", default="list_collections")
     h_call.add_argument("--args", default="{}", help="JSON object of tool arguments")
     h_call.add_argument("--timeout", type=float, default=60.0)
+
+    h_rt = hub_sub.add_parser(
+        "register-target",
+        help="Register Ansible-only target (WinRM/SSH/network; no spoke agent)",
+    )
+    h_rt.add_argument("--name", required=True)
+    h_rt.add_argument("--host", required=True, dest="ansible_host", help="ansible_host")
+    h_rt.add_argument(
+        "--connection",
+        default="ssh",
+        dest="ansible_connection",
+        help="ansible_connection (ssh, winrm, network_cli, ...)",
+    )
+    h_rt.add_argument("--port", type=int, default=None, dest="ansible_port")
+    h_rt.add_argument("--user", default=None, dest="ansible_user")
+    h_rt.add_argument(
+        "--extra",
+        default="{}",
+        help="JSON object of allowlisted extra host vars (no passwords)",
+    )
+
+    h_ut = hub_sub.add_parser("update-target", help="Update registered Ansible target")
+    h_ut.add_argument("--name", required=True)
+    h_ut.add_argument("--host", default=None, dest="ansible_host")
+    h_ut.add_argument("--connection", default=None, dest="ansible_connection")
+    h_ut.add_argument("--port", type=int, default=None, dest="ansible_port")
+    h_ut.add_argument("--user", default=None, dest="ansible_user")
+    h_ut.add_argument("--extra", default="{}", help="JSON object of allowlisted extra host vars")
+
+    h_rmt = hub_sub.add_parser("remove-target", help="Remove registered Ansible target")
+    h_rmt.add_argument("--name", required=True)
 
     # spoke
     spoke = sub.add_parser("spoke", help="Spoke worker commands")
@@ -248,6 +279,56 @@ def _hub_main(args: argparse.Namespace) -> None:
         _out(result.to_dict())
         if not result.ok:
             raise SystemExit(1)
+        return
+
+    if args.hub_cmd == "register-target":
+        from ansible_flow_mcp.hub.enroll import register_target
+
+        try:
+            extra = json.loads(args.extra)
+        except json.JSONDecodeError as exc:
+            raise SystemExit(f"invalid --extra JSON: {exc}") from exc
+        if extra is not None and not isinstance(extra, dict):
+            raise SystemExit("--extra must be a JSON object")
+        _out(
+            register_target(
+                args.name,
+                ansible_host=args.ansible_host,
+                ansible_connection=args.ansible_connection,
+                ansible_port=args.ansible_port,
+                ansible_user=args.ansible_user,
+                extra=extra or None,
+                root=root,
+            )
+        )
+        return
+
+    if args.hub_cmd == "update-target":
+        from ansible_flow_mcp.hub.enroll import update_target_node
+
+        try:
+            extra = json.loads(args.extra)
+        except json.JSONDecodeError as exc:
+            raise SystemExit(f"invalid --extra JSON: {exc}") from exc
+        if extra is not None and not isinstance(extra, dict):
+            raise SystemExit("--extra must be a JSON object")
+        _out(
+            update_target_node(
+                args.name,
+                ansible_host=args.ansible_host,
+                ansible_port=args.ansible_port,
+                ansible_user=args.ansible_user,
+                ansible_connection=args.ansible_connection,
+                extra=extra or None,
+                root=root,
+            )
+        )
+        return
+
+    if args.hub_cmd == "remove-target":
+        from ansible_flow_mcp.hub.enroll import remove_target_node
+
+        _out(remove_target_node(args.name, root=root))
         return
 
     raise SystemExit(f"unknown hub command: {args.hub_cmd}")

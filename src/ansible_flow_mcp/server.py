@@ -36,10 +36,14 @@ def _instructions() -> str:
     if role == Role.HUB:
         return (
             base
-            + " HUB mode: inventory is fixed to enrolled spokes; do not pass custom inventory. "
-            "Use list_nodes / issue_token / update_node / revoke_node / list_groups / "
-            "create_group / set_group_members / spoke_call for membership. "
-            "hosts must be enrolled names, inventory groups, or localhost."
+            + " HUB mode: inventory is fixed (enrolled spokes + registered Ansible targets); "
+            "do not pass custom inventory. "
+            "Spokes: issue_token → spoke join (mesh + SSH). "
+            "Targets (Windows/WinRM, network, etc. — no agent): register_target / update_target / "
+            "remove_target. "
+            "Use list_nodes / hub_status / update_node / revoke_node / list_groups / "
+            "create_group / set_group_members. spoke_call is mesh spokes only (not targets). "
+            "hosts must be spoke or target names, inventory groups, or localhost."
         )
     if role == Role.SPOKE:
         return base + " SPOKE mode: localhost execution only. No issue_token or foreign hosts."
@@ -157,21 +161,21 @@ def list_collections_tool() -> str:
 def _register_hub_tools() -> None:
     @mcp.tool(name="list_nodes")
     def list_nodes_tool() -> str:
-        """List enrolled spokes with connection fields and group membership."""
+        """List enrolled spokes and registered Ansible targets (kind, connection, groups)."""
         from ansible_flow_mcp.hub.enroll import hub_status
 
         return _json(hub_status())
 
     @mcp.tool(name="hub_status")
     def hub_status_tool() -> str:
-        """Hub controller status (inventory path, spokes, groups)."""
+        """Hub controller status (inventory path, spokes, targets, groups)."""
         from ansible_flow_mcp.hub.enroll import hub_status
 
         return _json(hub_status())
 
     @mcp.tool(name="issue_token")
     def issue_token_tool(name: str, ttl_seconds: int = 900) -> str:
-        """Issue a one-time spoke join token (hub only)."""
+        """Issue a one-time spoke join token (hub only). Not used for Ansible targets."""
         from ansible_flow_mcp.hub.tokens import issue_token
 
         issued = issue_token(name, ttl_seconds=ttl_seconds)
@@ -191,7 +195,7 @@ def _register_hub_tools() -> None:
         ansible_port: int | None = None,
         ansible_user: str | None = None,
     ) -> str:
-        """Update enrolled spoke connection fields (host/port/user)."""
+        """Update enrolled spoke connection fields (host/port/user). For targets use update_target."""
         from ansible_flow_mcp.hub.enroll import update_node
 
         return _json(
@@ -203,30 +207,86 @@ def _register_hub_tools() -> None:
             )
         )
 
+    @mcp.tool(name="register_target")
+    def register_target_tool(
+        name: str,
+        ansible_host: str,
+        ansible_connection: str = "ssh",
+        ansible_port: int | None = None,
+        ansible_user: str | None = None,
+        extra: dict[str, Any] | None = None,
+    ) -> str:
+        """Register an Ansible-only target (WinRM/SSH/network) — no spoke agent or join token.
+
+        Do not pass passwords in extra; use hub-side Ansible config or path refs under hub dir.
+        """
+        from ansible_flow_mcp.hub.enroll import register_target
+
+        return _json(
+            register_target(
+                name,
+                ansible_host=ansible_host,
+                ansible_connection=ansible_connection,
+                ansible_port=ansible_port,
+                ansible_user=ansible_user,
+                extra=extra,
+            )
+        )
+
+    @mcp.tool(name="update_target")
+    def update_target_tool(
+        name: str,
+        ansible_host: str | None = None,
+        ansible_port: int | None = None,
+        ansible_user: str | None = None,
+        ansible_connection: str | None = None,
+        extra: dict[str, Any] | None = None,
+    ) -> str:
+        """Update a registered Ansible target connection fields."""
+        from ansible_flow_mcp.hub.enroll import update_target_node
+
+        return _json(
+            update_target_node(
+                name,
+                ansible_host=ansible_host,
+                ansible_port=ansible_port,
+                ansible_user=ansible_user,
+                ansible_connection=ansible_connection,
+                extra=extra,
+            )
+        )
+
+    @mcp.tool(name="remove_target")
+    def remove_target_tool(name: str) -> str:
+        """Remove a registered Ansible target from hub inventory and groups."""
+        from ansible_flow_mcp.hub.enroll import remove_target_node
+
+        return _json(remove_target_node(name))
+
     @mcp.tool(name="list_groups")
     def list_groups_tool() -> str:
-        """List custom targeting groups and their enrolled members."""
+        """List custom targeting groups and their members (spokes and/or targets)."""
         from ansible_flow_mcp.hub.enroll import list_groups_op
 
         return _json(list_groups_op())
 
     @mcp.tool(name="create_group")
     def create_group_tool(name: str) -> str:
-        """Create an empty targeting group (members must be enrolled spokes)."""
+        """Create an empty targeting group (members must be spokes or targets)."""
         from ansible_flow_mcp.hub.enroll import create_group_op
 
         return _json(create_group_op(name))
 
     @mcp.tool(name="delete_group")
     def delete_group_tool(name: str) -> str:
-        """Delete a custom targeting group (not hub/spokes)."""
+        """Delete a custom targeting group (not hub/spokes/targets)."""
         from ansible_flow_mcp.hub.enroll import delete_group_op
 
         return _json(delete_group_op(name))
 
     @mcp.tool(name="set_group_members")
     def set_group_members_tool(name: str, hosts: list[str]) -> str:
-        """Replace group membership with enrolled spoke names only."""
+        """Replace group membership with enrolled spoke and/or registered target names."""
         from ansible_flow_mcp.hub.enroll import set_group_members_op
 
         return _json(set_group_members_op(name, hosts))
@@ -238,7 +298,7 @@ def _register_hub_tools() -> None:
         arguments: dict[str, Any] | None = None,
         timeout: float = 60,
     ) -> str:
-        """SSH to an enrolled spoke ForceCommand MCP and call one tool."""
+        """SSH to an enrolled mesh spoke ForceCommand MCP and call one tool (not for targets)."""
         from ansible_flow_mcp.ssh import spoke_call
 
         result = spoke_call(node, tool=tool, arguments=arguments or {}, timeout=timeout)

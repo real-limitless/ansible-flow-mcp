@@ -102,6 +102,8 @@ ansible-flow-mcp tui                      # same
 ansible-flow-mcp hub write-opencode-config
 ansible-flow-mcp hub spoke-call --node web-01 --tool list_collections
 ansible-flow-mcp hub revoke --name web-01
+ansible-flow-mcp hub register-target --name win-01 --host 10.0.4.20 --connection winrm
+ansible-flow-mcp hub remove-target --name win-01
 ansible-flow-mcp hub accept-join          # ForceCommand only
 
 # Spoke
@@ -139,10 +141,11 @@ Env:
 
 | Tool | Notes |
 | --- | --- |
-| `list_nodes` / `hub_status` | Spokes + groups projection |
-| `issue_token` / `revoke_node` / `update_node` | Membership |
-| `list_groups` / `create_group` / `delete_group` / `set_group_members` | Targeting groups (enrolled members only) |
-| `spoke_call` | SSH ForceCommand simple-exec JSON to spoke |
+| `list_nodes` / `hub_status` | Spokes + targets (`kind`) + groups |
+| `issue_token` / `revoke_node` / `update_node` | Spoke membership |
+| `register_target` / `update_target` / `remove_target` | Ansible-only targets (no agent; WinRM/SSH/…) |
+| `list_groups` / `create_group` / `delete_group` / `set_group_members` | Groups (spokes and/or targets) |
+| `spoke_call` | SSH ForceCommand simple-exec JSON to **mesh spoke** only |
 
 ### Spoke mode
 
@@ -155,14 +158,15 @@ Env:
 
 1. Agent attaches to **hub only** — never make spokes the agent entrypoint.  
 2. Hub inventory is source of truth — **reject client-supplied `-i`** in hub mode.  
-3. Target only **enrolled** host names or **inventory group** names (+ localhost).  
+3. Target only **enrolled spoke** or **registered target** names or **inventory group** names (+ localhost).  
 4. Host key checking **on** in hub/spoke mode.  
 5. Join tokens: signed, TTL, **one-time jti** replay cache.  
 6. Free-form modules (`command`/`shell`/`raw`/`script`) **denied** by default.  
 7. Playbooks path-jailed; subprocess **argv only** (no shell interpolation).  
 8. Check mode default **true** on `run_module`.  
 9. Never log join tokens, private keys, or secret module args.  
-10. Groups cannot reference non-enrolled hosts; reserved: `all`, `hub`, `spokes`, `ungrouped`.
+10. Groups cannot reference non-enrolled hosts; reserved: `all`, `hub`, `spokes`, `targets`, `ungrouped`.  
+11. **Targets** (`ansible_flow_kind=target`) are Ansible-only (no join, no `spoke_call`); never store passwords in inventory/MCP args.
 
 ### Dual SSH identities (critical)
 
@@ -328,14 +332,15 @@ No dedicated lint/typecheck scripts yet. CI: `.github/workflows/ci.yml`.
 - **search_modules** is linear substring over ~8k gallery entries; fine CPU-wise, but hub path can feel slow due to **compose exec + cold MCP process**. Planned: compact JSON, warm index, hybrid/synonym (RAG-like) search — not implemented until explicitly requested.  
 - Full semantic embeddings optional later.  
 - Production split of `mcp-spoke` vs Ansible shell user more strict than lab.  
-- No multi-hub HA, WinRM, or public HTTP MCP in v1.
+- No multi-hub HA or public HTTP MCP in v1.  
+- Ansible **targets** (WinRM/etc. without spoke agent): inventory + register API in progress ([#3](https://github.com/real-limitless/ansible-flow-mcp/issues/3)); TUI/creds hardening still open.
 
 ---
 
 ## Out of scope / non-goals (v1)
 
 - Full-mesh hop plane; agent attach to arbitrary spokes  
-- WinRM / non-SSH Ansible in hub mode  
+- Full WinRM credential store / AWX-style plugins (path refs + hub Ansible cfg only for now)  
 - Replacing AWX/Controller  
 - Multi-hub HA  
 - Public unauthenticated HTTP MCP  

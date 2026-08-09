@@ -74,13 +74,38 @@ After enroll, `seed_demo.sh` creates groups `prod web app data edge batch canary
 
 | Tool | Purpose |
 | --- | --- |
-| `list_nodes` / `hub_status` | Spokes + groups projection |
-| `issue_token` / `revoke_node` / `update_node` | Membership |
-| `list_groups` / `create_group` / `delete_group` / `set_group_members` | Targeting groups |
-| `spoke_call` | SSH ForceCommand tool on a spoke |
-| `search_modules` / `run_module` / … | Catalog + enrolled hosts **or** group names |
+| `list_nodes` / `hub_status` | Spokes + **targets** + groups (`kind` on each node) |
+| `issue_token` / `revoke_node` / `update_node` | Spoke membership (join token / mesh) |
+| `register_target` / `update_target` / `remove_target` | Ansible-only targets (WinRM/SSH/network — **no agent**) |
+| `list_groups` / `create_group` / `delete_group` / `set_group_members` | Targeting groups (spokes and/or targets) |
+| `spoke_call` | SSH ForceCommand tool on a **mesh spoke** only (not targets) |
+| `search_modules` / `run_module` / … | Catalog + enrolled spoke/target names **or** group names |
 
 Inventory is fixed; client `-i` rejected in hub mode.
+
+### Spokes vs Ansible targets
+
+| | **Spoke** | **Target** |
+| --- | --- | --- |
+| Install on machine | `ansible-flow-mcp` + `spoke join` | Nothing of ours |
+| Ceremony | Join token (TTL, one-time) | Hub-side `register_target` |
+| `spoke_call` | Yes | No |
+| `run_module` | Yes | Yes (native `ansible_connection`) |
+| Groups | Yes | Yes |
+
+```bash
+# Windows / device the hub can already reach with Ansible (no package on remote)
+ansible-flow-mcp hub register-target \
+  --name win-app-02 \
+  --host 10.0.4.20 \
+  --connection winrm \
+  --user Administrator \
+  --port 5986
+# Creds: hub-side Ansible config or path refs — do not put passwords in --extra / MCP args
+ansible-flow-mcp hub status
+```
+
+Plan: [issue #3](https://github.com/real-limitless/ansible-flow-mcp/issues/3).
 
 ## Lab
 
