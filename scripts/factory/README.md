@@ -42,6 +42,29 @@ Settings keys: `useProxy`, `proxy`, `proxyListUrl`, `proxyProbeLimit`, `proxyPro
 Parallel workers used to corrupt `catalog/gallery.json`. Writes are now **file-locked + atomic**.  
 On TUI start the gallery is auto-repaired. Then **QUEUE → r** requeues failed jobs.
 
+### Purge empty `galaxy-stub` schemas
+
+Stubs have **no options** (collection wasn’t installed). Wipe and redo with real `ansible-doc`:
+
+```bash
+# delete galaxy-stub files, requeue, install missing collections, start worker
+python scripts/factory/purge_stubs.py --install --start-worker
+
+# dry-run
+python scripts/factory/purge_stubs.py --dry-run
+```
+
+Worker settings (`.jobs/settings.json`):
+
+| Key | Default | Meaning |
+|-----|---------|---------|
+| `requireRealSchema` | true | Fail job instead of writing galaxy-stub |
+| `autoInstallCollections` | true | `ansible-galaxy collection install` on demand |
+| `collectionsPath` | `.jobs/collections` | Install target (gitignored) |
+| `skipCollections` | `[]` | Skip heavy collections e.g. `["oracle.oci"]` |
+
+`ANSIBLE_COLLECTIONS_PATH` is set to the factory collections dir automatically.
+
 ## Mental model
 
 ```text

@@ -38,6 +38,12 @@ DEFAULT_SETTINGS: dict = {
     "httpTimeout": 45,
     "httpRetries": 3,
     "galaxyPause": 0.15,
+    # schema quality + collections
+    "requireRealSchema": True,  # never mark galaxy-stub as done
+    "autoInstallCollections": True,
+    "collectionsPath": "",  # default: scripts/factory/.jobs/collections
+    "skipCollections": [],  # e.g. ["oracle.oci"]
+    "installTimeoutSec": 600,
 }
 
 DEFAULT_DENY = frozenset(

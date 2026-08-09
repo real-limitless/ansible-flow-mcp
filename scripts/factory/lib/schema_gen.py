@@ -1,7 +1,8 @@
-"""Generate slim module schemas (ansible-doc preferred, Galaxy stub fallback)."""
+"""Generate slim module schemas via ansible-doc (real options only when required)."""
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -24,13 +25,35 @@ def _loads_first_json(text: str) -> Any:
     raise json.JSONDecodeError("no json", text, 0)
 
 
-def run_doc_json(fqcn: str, *, timeout: float = 60) -> dict[str, Any] | None:
+def _doc_usable(doc: dict[str, Any] | None) -> bool:
+    """True if ansible-doc returned a real module payload (not {} / missing)."""
+    if not doc or not isinstance(doc, dict):
+        return False
+    # empty object from missing collection
+    if not doc:
+        return False
+    if isinstance(doc.get("doc"), dict):
+        return True
+    # already unwrapped-ish
+    if "options" in doc or "short_description" in doc or "description" in doc:
+        return True
+    # single-key wrap handled by caller before this
+    return False
+
+
+def run_doc_json(
+    fqcn: str,
+    *,
+    timeout: float = 60,
+    env: dict[str, str] | None = None,
+) -> dict[str, Any] | None:
     try:
         out = subprocess.check_output(
             ["ansible-doc", "-j", fqcn],
             text=True,
             timeout=timeout,
             stderr=subprocess.DEVNULL,
+            env=env or os.environ,
         )
         data = _loads_first_json(out)
     except (
@@ -41,20 +64,26 @@ def run_doc_json(fqcn: str, *, timeout: float = 60) -> dict[str, Any] | None:
         ValueError,
     ):
         return None
-    if isinstance(data, dict):
-        if fqcn in data and isinstance(data[fqcn], dict):
-            return data[fqcn]
-        return data
-    return None
+    if not isinstance(data, dict) or not data:
+        return None
+    if fqcn in data and isinstance(data[fqcn], dict):
+        inner = data[fqcn]
+        return inner if _doc_usable(inner) else None
+    return data if _doc_usable(data) else None
 
 
-def run_doc_list(*, timeout: float = 120) -> list[str] | None:
+def run_doc_list(
+    *,
+    timeout: float = 120,
+    env: dict[str, str] | None = None,
+) -> list[str] | None:
     try:
         out = subprocess.check_output(
             ["ansible-doc", "-l", "-j"],
             text=True,
             timeout=timeout,
             stderr=subprocess.DEVNULL,
+            env=env or os.environ,
         )
         data = _loads_first_json(out)
     except (
@@ -136,17 +165,33 @@ def stub_schema(fqcn: str, description: str = "", *, source: str = "galaxy") -> 
     }
 
 
+class SchemaUnavailable(RuntimeError):
+    """Raised when require_real and ansible-doc cannot produce a module schema."""
+
+
 def generate_schema(
     fqcn: str,
     *,
     description: str = "",
     prefer_ansible_doc: bool = True,
+    require_real: bool = True,
+    env: dict[str, str] | None = None,
 ) -> tuple[dict[str, Any], str]:
-    """Return (schema, method) where method is ansible-doc|stub."""
+    """Return (schema, method).
+
+    method is ``ansible-doc`` or ``stub``.
+    When require_real=True and ansible-doc misses, raises SchemaUnavailable
+    (does not write galaxy-stub).
+    """
     if prefer_ansible_doc:
-        doc = run_doc_json(fqcn)
+        doc = run_doc_json(fqcn, env=env)
         if doc:
             return normalize_schema(fqcn, doc), "ansible-doc"
+    if require_real:
+        raise SchemaUnavailable(
+            f"ansible-doc has no usable schema for {fqcn} "
+            f"(collection missing or module not found)"
+        )
     return stub_schema(fqcn, description, source="galaxy-stub"), "stub"
 
 
@@ -160,6 +205,16 @@ def write_schema(
     schemas_dir.mkdir(parents=True, exist_ok=True)
     fqcn = str(schema.get("fqcn") or "unknown")
     path = schemas_dir / f"{fqcn}.json"
+    src = str(schema.get("source") or "")
+    if src in ("galaxy-stub", "stub", "galaxy") and not overwrite_richer:
+        # never persist stubs when a real file already exists
+        if path.is_file():
+            try:
+                prev = json.loads(path.read_text(encoding="utf-8"))
+                if prev.get("source") == "ansible-doc":
+                    return path
+            except Exception:
+                pass
     if path.is_file() and not overwrite_richer:
         try:
             prev = json.loads(path.read_text(encoding="utf-8"))
@@ -176,10 +231,11 @@ def write_schema(
 def builtin_modules_from_doc(
     *,
     deny: set[str] | None = None,
+    env: dict[str, str] | None = None,
 ) -> list[dict[str, Any]]:
     """List ansible.builtin.* modules via ansible-doc when available."""
     deny = deny or set()
-    mods = run_doc_list()
+    mods = run_doc_list(env=env)
     if not mods:
         return []
     rows = []
@@ -194,7 +250,7 @@ def builtin_modules_from_doc(
                 "shortName": fqcn.split(".")[-1],
                 "collection": "ansible.builtin",
                 "description": fqcn.split(".")[-1],
-                "downloadCount": 10**12,  # rank above galaxy
+                "downloadCount": 10**12,
                 "collectionRank": 0,
                 "source": "ansible-doc",
             }

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Drain factory queue: generate schemas + merge gallery.
+"""Drain factory queue: install collection if needed → ansible-doc schema → gallery.
 
   python scripts/factory/queue_worker.py
   python scripts/factory/queue_worker.py --once
-  python scripts/factory/queue_worker.py --concurrency 6
+  python scripts/factory/queue_worker.py --concurrency 2
 """
 from __future__ import annotations
 
@@ -22,6 +22,10 @@ from lib.catalog_io import (  # noqa: E402
     ensure_collection_allowlisted,
     upsert_gallery_entry,
 )
+from lib.install_collections import (  # noqa: E402
+    ansible_env,
+    ensure_collection_for_fqcn,
+)
 from lib.job_store import (  # noqa: E402
     append_log,
     claim_next_pending,
@@ -34,7 +38,7 @@ from lib.job_store import (  # noqa: E402
     write_worker_pid,
 )
 from lib.paths import SCHEMAS  # noqa: E402
-from lib.schema_gen import generate_schema, write_schema  # noqa: E402
+from lib.schema_gen import SchemaUnavailable, generate_schema, write_schema  # noqa: E402
 
 _STOP = False
 
@@ -50,14 +54,31 @@ def process_job(job: dict, settings: dict) -> None:
     fqcn = str(job["fqcn"])
     prefer = bool(settings.get("preferAnsibleDoc", True))
     auto_al = bool(settings.get("autoAllowlist", True))
+    require_real = bool(settings.get("requireRealSchema", True))
     try:
+        ok_inst, inst_msg = ensure_collection_for_fqcn(fqcn, settings)
+        if not ok_inst and require_real:
+            update_job(
+                jid,
+                status="failed",
+                error=f"collection install: {inst_msg}"[:400],
+                detail="install-failed",
+            )
+            append_log(f"FAIL {fqcn}: install {inst_msg}")
+            return
+
+        env = ansible_env(settings)
         schema, method = generate_schema(
             fqcn,
             description=str(job.get("description") or ""),
             prefer_ansible_doc=prefer,
+            require_real=require_real,
+            env=env,
         )
+        if method == "stub" and require_real:
+            raise SchemaUnavailable(f"refusing stub for {fqcn}")
+
         path = write_schema(schema, SCHEMAS)
-        # job artifact
         nd = node_dir(fqcn)
         (nd / "schema.json").write_text(path.read_text(encoding="utf-8"), encoding="utf-8")
         (nd / "status.json").write_text(
@@ -78,21 +99,24 @@ def process_job(job: dict, settings: dict) -> None:
         coll = str(job.get("collection") or ".".join(fqcn.split(".")[:2]))
         if auto_al and coll:
             ensure_collection_allowlisted(coll)
+        nopt = len(schema.get("options") or [])
         update_job(
             jid,
             status="done",
-            detail=f"{method} options={len(schema.get('options') or [])}",
+            detail=f"{method} options={nopt}",
             error="",
             method=method,
         )
-        append_log(f"DONE {fqcn} via {method} opts={len(schema.get('options') or [])}")
+        append_log(f"DONE {fqcn} via {method} opts={nopt}")
+    except SchemaUnavailable as e:
+        update_job(jid, status="failed", error=str(e)[:400], detail="no-real-schema")
+        append_log(f"FAIL {fqcn}: {e}")
     except Exception as e:
         update_job(jid, status="failed", error=str(e)[:400], detail="exception")
         append_log(f"FAIL {fqcn}: {e}")
 
 
 def run_batch(concurrency: int, settings: dict) -> int:
-    """Claim and process up to concurrency jobs. Returns jobs started."""
     jobs = []
     for _ in range(max(1, concurrency)):
         j = claim_next_pending()
@@ -101,6 +125,7 @@ def run_batch(concurrency: int, settings: dict) -> int:
         jobs.append(j)
     if not jobs:
         return 0
+    # Install is process-global locked; keep concurrency modest
     if concurrency <= 1 or len(jobs) == 1:
         for j in jobs:
             if _STOP:
@@ -136,16 +161,19 @@ def main() -> int:
     signal.signal(signal.SIGTERM, _handle_sig)
 
     settings = load_settings()
-    conc = args.concurrency or int(settings.get("concurrency") or 4)
+    conc = args.concurrency or int(settings.get("concurrency") or 2)
     write_worker_pid()
-    append_log(f"worker start pid={Path(sys.argv[0]).name} conc={conc}")
+    append_log(
+        f"worker start conc={conc} requireReal={settings.get('requireRealSchema', True)} "
+        f"autoInstall={settings.get('autoInstallCollections', True)}"
+    )
     print(f"Factory worker started conc={conc}", file=sys.stderr)
 
     idle = 0
     try:
         while not _STOP:
             settings = load_settings()
-            conc = args.concurrency or int(settings.get("concurrency") or 4)
+            conc = args.concurrency or int(settings.get("concurrency") or 2)
             n = run_batch(conc, settings)
             if n == 0:
                 idle += 1
@@ -160,7 +188,6 @@ def main() -> int:
             else:
                 idle = 0
                 if args.once:
-                    # keep draining one more? once = one batch
                     break
                 time.sleep(0.05)
     finally:
