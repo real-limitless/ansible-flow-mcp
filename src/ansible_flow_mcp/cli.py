@@ -60,6 +60,10 @@ def build_parser() -> argparse.ArgumentParser:
     hub_sub.add_parser("status", help="Show hub status / enrolled spokes")
     hub_sub.add_parser("session", help="Run hub MCP stdio session")
     hub_sub.add_parser("tui", help="Operator TUI (servers, groups, OpenCode launch)")
+    hub_sub.add_parser(
+        "write-opencode-config",
+        help="Write OpenCode MCP config pointing at hub session",
+    )
     hub_sub.add_parser("accept-join", help="ForceCommand: accept spoke join JSON on stdin")
 
     h_call = hub_sub.add_parser("spoke-call", help="SSH ForceCommand MCP tool call on spoke")
@@ -182,6 +186,13 @@ def _hub_main(args: argparse.Namespace) -> None:
         from ansible_flow_mcp.tui import run_tui
 
         run_tui(hub_root=root)
+        return
+
+    if args.hub_cmd == "write-opencode-config":
+        from ansible_flow_mcp.tui import App, write_opencode_hub_config
+
+        path = write_opencode_hub_config(App(hub_root=root, hub_ok=True))
+        _out({"ok": True, "path": str(path)})
         return
 
     if args.hub_cmd == "session":

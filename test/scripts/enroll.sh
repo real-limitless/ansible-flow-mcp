@@ -84,3 +84,8 @@ done
 
 echo "== hub status after enroll =="
 run_hub ansible-flow-mcp hub status
+
+# Pretty demo groups + OpenCode config
+if [ -x "$ROOT/scripts/seed_demo.sh" ]; then
+  "$ROOT/scripts/seed_demo.sh"
+fi

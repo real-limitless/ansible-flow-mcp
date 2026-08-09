@@ -51,7 +51,18 @@ ansible-flow-mcp tui
 - **Servers** — list enrolled spokes; invite (join token); edit host/port/user; revoke; ping  
 - **Groups** — create/delete targeting groups; set members (enrolled spokes only)  
 - **A** — write hub OpenCode MCP config and launch `opencode` with hub session  
-- Static example: `examples/opencode-hub.jsonc`
+- Static example: `examples/opencode-hub.jsonc`  
+- Config helper: `ansible-flow-mcp hub write-opencode-config`
+
+### Compose lab (TUI + OpenCode + demo inventory)
+
+```bash
+cd test && ./scripts/demo.sh
+./scripts/tui.sh          # interactive TUI on hub
+./scripts/opencode.sh     # OpenCode with hub MCP
+```
+
+After enroll, `seed_demo.sh` creates groups `prod web app data edge batch canary` on the three lab spokes.
 
 ### Hub MCP tools (agent + TUI parity)
 

@@ -38,6 +38,8 @@ services:
     build:
       context: ..
       dockerfile: test/images/Dockerfile.hub
+      args:
+        INSTALL_OPENCODE: "${INSTALL_OPENCODE:-1}"
     hostname: hub-01
     container_name: af-hub-01
     networks: [hub-lab]
@@ -48,6 +50,8 @@ services:
       ANSIBLE_FLOW_ROLE: hub
       ANSIBLE_FLOW_HUB_DIR: /var/lib/ansible-flow/hub
       ANSIBLE_FLOW_REQUIRE_CHECK: "0"
+      # Optional: pass through provider keys for real OpenCode chat in lab
+      OPENCODE_API_KEY: ${OPENCODE_API_KEY:-}
     healthcheck:
       test: ["CMD-SHELL", "ss -lnt | grep -q ':22' && test -f /var/lib/ansible-flow/hub/hub_id"]
       interval: 5s

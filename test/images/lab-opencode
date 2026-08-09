@@ -1,0 +1,27 @@
+#!/bin/sh
+# Lab wrapper: OpenCode with hub MCP session pre-wired.
+set -eu
+export PATH="/root/.opencode/bin:/usr/local/bin:${PATH}"
+HUB_DIR="${ANSIBLE_FLOW_HUB_DIR:-/var/lib/ansible-flow/hub}"
+export ANSIBLE_FLOW_HUB_DIR="$HUB_DIR"
+export ANSIBLE_FLOW_ROLE=hub
+
+CFG="${OPENCODE_CONFIG:-$HUB_DIR/opencode-hub.jsonc}"
+if [ ! -f "$CFG" ]; then
+  ansible-flow-mcp --hub-dir "$HUB_DIR" hub write-opencode-config >/dev/null 2>&1 || true
+fi
+if [ -f "$CFG" ]; then
+  export OPENCODE_CONFIG="$CFG"
+fi
+
+OC="$(command -v opencode || true)"
+if [ -z "$OC" ] && [ -x /root/.opencode/bin/opencode ]; then
+  OC=/root/.opencode/bin/opencode
+fi
+if [ -z "$OC" ]; then
+  echo "opencode not installed in this image (rebuild hub with INSTALL_OPENCODE=1)" >&2
+  exit 127
+fi
+
+cd "$HUB_DIR" 2>/dev/null || cd /
+exec "$OC" "$@"

@@ -12,7 +12,6 @@ chmod 700 /home/mcp-join/.ssh
 groupadd -f ansible-flow 2>/dev/null || true
 usermod -aG ansible-flow mcp-hub 2>/dev/null || true
 usermod -aG ansible-flow mcp-join 2>/dev/null || true
-# nologin/locked accounts are rejected by sshd — unlock join user (ForceCommand is the jail)
 usermod -s /bin/bash mcp-join 2>/dev/null || true
 passwd -u mcp-join 2>/dev/null || usermod -p '*' mcp-join 2>/dev/null || true
 
@@ -27,7 +26,6 @@ if [ ! -f "$HUB_DIR/hub_id" ]; then
 fi
 chown -R mcp-hub:ansible-flow "$HUB_DIR" || chown -R mcp-hub:mcp-hub "$HUB_DIR" || true
 chmod -R g+rwX "$HUB_DIR" || true
-# private keys stay group-readable for mcp-join accept-join path
 find "$HUB_DIR/keys" -type f ! -name '*.pub' -exec chmod 640 {} \; 2>/dev/null || true
 find "$HUB_DIR/ca" -type f -exec chmod 640 {} \; 2>/dev/null || true
 chmod 660 "$HUB_DIR/known_hosts" 2>/dev/null || true
@@ -35,21 +33,17 @@ chmod 660 "$HUB_DIR/inventory.yml" 2>/dev/null || true
 chmod 660 "$HUB_DIR/tokens/replay.db" 2>/dev/null || true
 chmod 660 "$HUB_DIR/audit.jsonl" 2>/dev/null || true
 
-# Lab join identity: generate once, publish pubkey for spokes to use when joining
+# Lab join identity
 JOIN_KEY="$HUB_DIR/keys/join_client"
 if [ ! -f "$JOIN_KEY" ]; then
   ssh-keygen -t ed25519 -N "" -C "lab-join" -f "$JOIN_KEY" -q
 fi
-# Also place under /lab/keys if mounted writable — spokes read via docker network from hub file share
-# Publish join pubkey into mcp-join authorized_keys (no ForceCommand override beyond Match User)
 JOIN_PUB=$(cat "${JOIN_KEY}.pub")
 AUTH=/home/mcp-join/.ssh/authorized_keys
-# accept-join only via sshd Match ForceCommand
 echo "$JOIN_PUB" >"$AUTH"
 chmod 600 "$AUTH"
 chown mcp-join:mcp-join "$AUTH" /home/mcp-join/.ssh
 
-# Export join key material for enroll script (shared volume optional)
 if [ -d /lab/keys ] && [ -w /lab/keys ]; then
   cp -f "$JOIN_KEY" /lab/keys/join_client
   cp -f "${JOIN_KEY}.pub" /lab/keys/join_client.pub
@@ -57,8 +51,36 @@ if [ -d /lab/keys ] && [ -w /lab/keys ]; then
   chmod 644 /lab/keys/*.pub 2>/dev/null || true
 fi
 
-# Ensure ansible_client can hop: copy hub_client to ansible_client if ansible empty — already separate keys
-# For lab simplicity, also authorize hub ansible_client on spokes during enroll (enroll.sh installs hub_client)
+# OpenCode hub MCP config (for TUI key A + lab-opencode)
+export PATH="/root/.opencode/bin:/usr/local/bin:${PATH}"
+if ! ansible-flow-mcp --hub-dir "$HUB_DIR" hub write-opencode-config; then
+  python3 - <<'PY'
+import json, shutil
+from pathlib import Path
+import os
+hub = Path(os.environ.get("ANSIBLE_FLOW_HUB_DIR", "/var/lib/ansible-flow/hub"))
+bin_path = shutil.which("ansible-flow-mcp") or "/usr/local/bin/ansible-flow-mcp"
+cfg = {
+    "$schema": "https://opencode.ai/config.json",
+    "mcp": {
+        "ansible-flow-hub": {
+            "type": "local",
+            "command": [bin_path, "hub", "session"],
+            "enabled": True,
+            "environment": {
+                "ANSIBLE_FLOW_HUB_DIR": str(hub),
+                "ANSIBLE_FLOW_ROLE": "hub",
+            },
+        }
+    },
+}
+path = hub / "opencode-hub.jsonc"
+path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+print("wrote", path)
+PY
+fi
+# ensure group can read config
+chmod 664 "$HUB_DIR/opencode-hub.jsonc" 2>/dev/null || true
 
-echo "[hub] starting sshd; hub_id=$(cat "$HUB_DIR/hub_id")"
+echo "[hub] starting sshd; hub_id=$(cat "$HUB_DIR/hub_id"); opencode=$(command -v opencode || echo missing); cfg=$HUB_DIR/opencode-hub.jsonc"
 exec /usr/sbin/sshd -D -e
