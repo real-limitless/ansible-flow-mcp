@@ -67,11 +67,18 @@ def get_module_schema_tool(module: str) -> str:
     fqcn = policy.assert_module_allowed(module)
     schema = get_module_schema(fqcn)
     if schema is None:
+        from ansible_flow_mcp.catalog import catalog_dir
+
         return _json(
             {
                 "fqcn": fqcn,
                 "schema": None,
-                "message": "No committed schema; pass args as a free-form object to run_module.",
+                "catalogDir": str(catalog_dir()),
+                "message": (
+                    "No committed schema JSON for this FQCN under catalog/schemas/. "
+                    "Pass args as a free-form object to run_module, or rebuild the "
+                    "install/image so catalog/schemas is included."
+                ),
             }
         )
     return _json(schema)
