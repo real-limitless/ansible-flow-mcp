@@ -59,7 +59,7 @@ ansible-flow-mcp tui
 ### Compose lab (TUI + OpenCode + demo inventory)
 
 ```bash
-cd test && ./scripts/demo.sh
+cd lab && ./scripts/demo.sh
 ./scripts/tui.sh          # interactive TUI on hub
 ./scripts/opencode.sh     # OpenCode with hub MCP
 ```
@@ -80,7 +80,7 @@ Inventory is fixed; client `-i` rejected in hub mode.
 
 ## Lab
 
-See `test/README.md` and `test/docker-compose.yml` for a full hub + multi-OS spoke compose lab.
+See `lab/README.md` and `lab/docker-compose.yml` for a full hub + multi-OS spoke compose lab.
 
 ## Spoke SSH users (critical)
 

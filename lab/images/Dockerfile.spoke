@@ -8,15 +8,15 @@ ENV SPOKE_FAMILY=${SPOKE_FAMILY} \
     ANSIBLE_FLOW_SPOKE_DIR=/var/lib/ansible-flow/spoke \
     PATH="/usr/local/bin:${PATH}"
 
-COPY test/images/install-spoke-deps.sh /tmp/install-spoke-deps.sh
+COPY lab/images/install-spoke-deps.sh /tmp/install-spoke-deps.sh
 RUN chmod +x /tmp/install-spoke-deps.sh && /tmp/install-spoke-deps.sh "${SPOKE_FAMILY}"
 
 WORKDIR /opt/ansible-flow-mcp
 COPY pyproject.toml README.md LICENSE ./
 COPY src ./src
 COPY catalog ./catalog
-COPY test/images/entrypoint-spoke.sh /usr/local/bin/entrypoint-spoke.sh
-COPY test/images/sshd/spoke.conf /etc/ssh/sshd_config.d/ansible-flow-spoke.conf
+COPY lab/images/entrypoint-spoke.sh /usr/local/bin/entrypoint-spoke.sh
+COPY lab/images/sshd/spoke.conf /etc/ssh/sshd_config.d/ansible-flow-spoke.conf
 COPY examples/sshd/ansible-flow-spoke.conf /etc/ssh/sshd_config.d/ansible-flow-spoke-force.conf
 
 RUN set -eux; \
@@ -56,6 +56,6 @@ RUN set -eux; \
     ssh-keygen -A || true
 
 EXPOSE 22
-COPY test/images/spoke-init.sh /usr/local/bin/spoke-init.sh
+COPY lab/images/spoke-init.sh /usr/local/bin/spoke-init.sh
 RUN chmod +x /usr/local/bin/spoke-init.sh
 ENTRYPOINT ["/usr/local/bin/spoke-init.sh"]

@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && passwd -u mcp-join 2>/dev/null || usermod -p '*' mcp-join \
     && useradd -m -s /bin/bash labadmin
 
-COPY test/images/install-opencode.sh /tmp/install-opencode.sh
+COPY lab/images/install-opencode.sh /tmp/install-opencode.sh
 RUN chmod +x /tmp/install-opencode.sh \
     && if [ "$INSTALL_OPENCODE" = "1" ]; then /tmp/install-opencode.sh; fi \
     && rm -f /tmp/install-opencode.sh \
@@ -32,9 +32,9 @@ COPY pyproject.toml README.md LICENSE ./
 COPY src ./src
 COPY catalog ./catalog
 COPY examples ./examples
-COPY test/images/entrypoint-hub.sh /usr/local/bin/entrypoint-hub.sh
-COPY test/images/lab-opencode /usr/local/bin/lab-opencode
-COPY test/images/sshd/hub.conf /etc/ssh/sshd_config.d/ansible-flow-hub.conf
+COPY lab/images/entrypoint-hub.sh /usr/local/bin/entrypoint-hub.sh
+COPY lab/images/lab-opencode /usr/local/bin/lab-opencode
+COPY lab/images/sshd/hub.conf /etc/ssh/sshd_config.d/ansible-flow-hub.conf
 COPY examples/sshd/ansible-flow-hub-join.conf /etc/ssh/sshd_config.d/ansible-flow-hub-join.conf
 
 RUN python3 -m pip install --no-cache-dir --break-system-packages -e . \

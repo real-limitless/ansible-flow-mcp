@@ -11,11 +11,11 @@ Guidance for AI coding agents working in this repository.
 | **Core MCP** | `search_modules` → `get_module_schema` → `run_module` / `run_playbook` (check-first) |
 | **Hub/spoke** ([issue #2](https://github.com/real-limitless/ansible-flow-mcp/issues/2)) | Agent attaches to **hub only**; spokes enroll with join tokens; hub→spoke is SSH only |
 | **Operator TUI** | Curses UI on hub: servers/groups CRUD, invite tokens, launch OpenCode |
-| **Compose lab** (`test/`) | Full hub + 3 spokes, smoke scripts, OpenCode bridge from host |
+| **Compose lab** (`lab/`) | Full hub + 3 spokes, smoke scripts, OpenCode bridge from host |
 
 Not affiliated with Red Hat/Ansible beyond the public CLI. Dual-tracked with [OpenFlow](https://github.com/real-limitless/OpenFlow) gallery concepts.
 
-**Product docs:** `README.md`, `docs/HUB.md`, `docs/SECURITY.md`, `test/README.md`.
+**Product docs:** `README.md`, `docs/HUB.md`, `docs/SECURITY.md`, `lab/README.md`.
 
 ---
 
@@ -54,7 +54,7 @@ examples/
   opencode-hub.jsonc          # in-process hub MCP for OpenCode
   sshd/ hub/                  # drop-ins + systemd examples
 
-test/                         # integration lab (compose), NOT pytest
+lab/                          # integration lab (compose), NOT pytest
   docker-compose.yml
   images/                     # Dockerfile.hub|spoke, entrypoints, lab-opencode
   scripts/                    # demo, enroll, smoke, tui, opencode-host, …
@@ -178,7 +178,7 @@ Env:
 - Putting Ansible’s interactive expectations on a ForceCommand-only user deadlocks runs and can hang the hub MCP session.
 
 Join channel on hub: user `mcp-join`, ForceCommand → `hub accept-join`.  
-Hub volume perms: `mcp-join` in group `ansible-flow` must **read** `hub_id` and **write** inventory/tokens (see `test/images/entrypoint-hub.sh` + enroll perm fixup).
+Hub volume perms: `mcp-join` in group `ansible-flow` must **read** `hub_id` and **write** inventory/tokens (see `lab/images/entrypoint-hub.sh` + enroll perm fixup).
 
 ---
 
@@ -195,14 +195,14 @@ ansible-flow-mcp tui
 
 ---
 
-## Compose lab (`test/`) — primary integration suite
+## Compose lab (`lab/`) — primary integration suite
 
 **Not pytest.** Docker or Podman Compose. Full fabric + OpenCode wiring.
 
 ### One-shot
 
 ```bash
-cd test
+cd lab
 ./scripts/demo.sh              # up → enroll → seed → smoke → hub shell (if TTY)
 ./scripts/demo.sh --no-shell   # CI / non-interactive
 ```
@@ -210,7 +210,7 @@ cd test
 ### After hub image rebuild (spokes “missing” in OpenCode)
 
 ```bash
-cd test
+cd lab
 ./scripts/reconnect.sh         # re-enroll + seed + refresh configs
 ./scripts/opencode-host.sh     # OpenCode on HOST → lab hub via bridge
 ```
@@ -230,7 +230,7 @@ cd test
 | `opencode.sh` | OpenCode **inside** hub (`lab-opencode`) |
 | `opencode-host.sh` | OpenCode **on host** → `hub-mcp.sh` bridge |
 | `hub-mcp.sh` | stdio MCP: `compose exec -T hub hub session` |
-| `write-host-opencode-config.sh` | writes `test/opencode-hub.host.jsonc` |
+| `write-host-opencode-config.sh` | writes `lab/opencode-hub.host.jsonc` |
 | `reconnect.sh` | rebuild recovery |
 
 ### Demo inventory (after seed)
@@ -245,7 +245,7 @@ cd test
 
 | Where OpenCode runs | Config | Sees lab spokes? |
 | --- | --- | --- |
-| **Host** | `OPENCODE_CONFIG=test/opencode-hub.host.jsonc` via `opencode-host.sh` | Yes (bridge into container volume) |
+| **Host** | `OPENCODE_CONFIG=lab/opencode-hub.host.jsonc` via `opencode-host.sh` | Yes (bridge into container volume) |
 | **Inside hub** | `/var/lib/ansible-flow/hub/opencode-hub.jsonc` via `opencode.sh` | Yes |
 | Host with default local `ANSIBLE_FLOW_HUB_DIR` empty | local empty hub | **No** — looks like “no servers” |
 
@@ -259,7 +259,7 @@ cd test
 ### Manual lab checks
 
 ```bash
-cd test
+cd lab
 podman compose exec -T hub ansible-flow-mcp hub status
 podman compose exec -T hub ansible-flow-mcp hub spoke-call --node spoke-01 --tool list_collections
 podman compose exec -T hub python3 -c "from ansible_flow_mcp.catalog import get_module_schema; print(bool(get_module_schema('community.general.cloudflare_dns')))"
@@ -293,9 +293,9 @@ Prefer **pytest green** before claiming done. Lab smokes are separate and slower
 | Install editable | `pip install -e ".[dev]"` |
 | Dev MCP | `ansible-flow-mcp` |
 | Hub MCP | `ANSIBLE_FLOW_HUB_DIR=… ansible-flow-mcp hub session` |
-| Lab full | `cd test && ./scripts/demo.sh --no-shell` |
-| Lab after rebuild | `cd test && ./scripts/reconnect.sh` |
-| Host OpenCode → lab | `cd test && ./scripts/opencode-host.sh` |
+| Lab full | `cd lab && ./scripts/demo.sh --no-shell` |
+| Lab after rebuild | `cd lab && ./scripts/reconnect.sh` |
+| Host OpenCode → lab | `cd lab && ./scripts/opencode-host.sh` |
 | Regen catalog | `python scripts/generate_catalog.py` (needs `ansible-doc`) |
 | Campaign PNGs | `cd docs/campaign && ./capture.sh` |
 
@@ -309,7 +309,7 @@ No dedicated lint/typecheck scripts yet. CI: `.github/workflows/ci.yml`.
 - Concise style; few comments unless security/SSH non-obvious.  
 - Prefer extending `hub/`, `spoke/`, `server.py`, `catalog.py` over new top-level packages.  
 - Catalog allowlist: `catalog/collections-allowlist.yml`.  
-- Runtime state **not in git**: hub/spoke dirs, `test/keys/*`, `test/opencode-hub.host.jsonc`.  
+- Runtime state **not in git**: hub/spoke dirs, `lab/keys/*`, `lab/opencode-hub.host.jsonc`.  
 - Commit style when asked: `feat(hub):`, `fix(lab):`, `test(lab):`, `docs:`.  
 - Feature branch for hub work: `feature/2-ssh-hub-spoke`.
 
@@ -319,7 +319,7 @@ No dedicated lint/typecheck scripts yet. CI: `.github/workflows/ci.yml`.
 
 - Product story: `README.md` (campaign embeds under `docs/images/campaign-*.png`).  
 - Generate PNGs: `docs/campaign/capture.sh` — do **not** reintroduce old OpenFlow `architecture.png` / `gallery-concept.png`.  
-- Ops: `docs/HUB.md`. Security: `docs/SECURITY.md`. Lab: `test/README.md`.
+- Ops: `docs/HUB.md`. Security: `docs/SECURITY.md`. Lab: `lab/README.md`.
 
 ---
 
@@ -344,7 +344,7 @@ No dedicated lint/typecheck scripts yet. CI: `.github/workflows/ci.yml`.
 
 ## Git hygiene
 
-- Do not commit secrets, `test/keys/*` private material, hub/spoke private keys, join tokens.  
+- Do not commit secrets, `lab/keys/*` private material, hub/spoke private keys, join tokens.  
 - Commit only when the user asks.  
 - Never force-push protected branches unless asked.
 
@@ -352,10 +352,10 @@ No dedicated lint/typecheck scripts yet. CI: `.github/workflows/ci.yml`.
 
 ## When stuck
 
-1. Read `docs/HUB.md`, `docs/SECURITY.md`, `test/README.md`.  
+1. Read `docs/HUB.md`, `docs/SECURITY.md`, `lab/README.md`.  
 2. Trace: `cli.py` → `server.py` → `runner.py` / `hub/*` / `ssh.py` / `spoke/*`.  
 3. Unit: `pytest tests/test_hub_spoke.py tests/test_hub_groups.py -q`.  
-4. Lab: `cd test && ./scripts/smoke.sh && ./scripts/smoke_tui_opencode.sh`.  
+4. Lab: `cd lab && ./scripts/smoke.sh && ./scripts/smoke_tui_opencode.sh`.  
 5. Empty servers in OpenCode: use `./scripts/opencode-host.sh` or `./scripts/reconnect.sh` — not a random local hub dir.  
 6. Missing schemas in lab: ensure `.dockerignore` does **not** exclude `catalog/schemas`.  
 7. Issues: [#2](https://github.com/real-limitless/ansible-flow-mcp/issues/2) hub/spoke, [#1](https://github.com/real-limitless/ansible-flow-mcp/issues/1) core MCP.

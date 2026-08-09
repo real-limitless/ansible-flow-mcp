@@ -103,11 +103,11 @@ ansible-flow-mcp hub spoke-call --node web-03 --tool list_collections
 ### Lab one-shot
 
 ```bash
-cd test && ./scripts/demo.sh
+cd lab && ./scripts/demo.sh
 # then: ./scripts/tui.sh  |  ./scripts/opencode-host.sh
 ```
 
-See [test/README.md](test/README.md).
+See [lab/README.md](lab/README.md).
 
 ---
 

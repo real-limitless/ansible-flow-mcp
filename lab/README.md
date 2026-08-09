@@ -1,11 +1,11 @@
-# Hub/spoke lab (`test/`)
+# Hub/spoke lab (`lab/`)
 
 Docker/Podman Compose lab for hub/spoke: **1 hub + 3 spokes**, operator TUI, OpenCode + hub MCP, demo inventory/groups.
 
 ## One-shot demo (recommended)
 
 ```bash
-cd test
+cd lab
 ./scripts/demo.sh
 ```
 
@@ -28,7 +28,7 @@ Usually OpenCode on the **host** is still pointed at a local empty
 **Fix:**
 
 ```bash
-cd test
+cd lab
 ./scripts/reconnect.sh
 ./scripts/opencode-host.sh
 ```
@@ -38,7 +38,7 @@ and groups `prod web app data edge batch canary`.
 
 | Where you run OpenCode | Config | Inventory |
 | --- | --- | --- |
-| Host (`opencode-host.sh`) | `test/opencode-hub.host.jsonc` → `hub-mcp.sh` | Lab hub container |
+| Host (`opencode-host.sh`) | `lab/opencode-hub.host.jsonc` → `hub-mcp.sh` | Lab hub container |
 | Inside hub (`opencode.sh`) | `/var/lib/ansible-flow/hub/opencode-hub.jsonc` | Same lab volume |
 
 Inside the hub shell:
@@ -53,7 +53,7 @@ ansible-flow-mcp hub spoke-call --node spoke-01 --tool list_collections
 ## Step by step
 
 ```bash
-cd test
+cd lab
 ./scripts/up.sh
 ./scripts/enroll.sh       # join spokes + seed_demo groups
 ./scripts/smoke.sh
@@ -96,7 +96,7 @@ Groups: **prod web app data edge batch canary**
 ## Layout
 
 ```text
-test/
+lab/
   docker-compose.yml
   images/          # Dockerfile.hub (+ OpenCode), spoke, entrypoints
   scripts/

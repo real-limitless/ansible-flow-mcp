@@ -1,6 +1,6 @@
 # Hub/spoke lab — 1 hub + 3 spokes over SSH ForceCommand.
 # Usage:
-#   cd test && ./scripts/up.sh
+#   cd lab && ./scripts/up.sh
 #   ./scripts/enroll.sh
 #   ./scripts/smoke.sh
 #
@@ -37,7 +37,7 @@ services:
   hub:
     build:
       context: ..
-      dockerfile: test/images/Dockerfile.hub
+      dockerfile: lab/images/Dockerfile.hub
       args:
         INSTALL_OPENCODE: "${INSTALL_OPENCODE:-1}"
     hostname: hub-01
@@ -65,7 +65,7 @@ services:
     <<: *spoke
     build:
       context: ..
-      dockerfile: test/images/Dockerfile.spoke
+      dockerfile: lab/images/Dockerfile.spoke
       args:
         BASE_IMAGE: debian:bookworm-slim
         SPOKE_FAMILY: debian
@@ -80,7 +80,7 @@ services:
     <<: *spoke
     build:
       context: ..
-      dockerfile: test/images/Dockerfile.spoke
+      dockerfile: lab/images/Dockerfile.spoke
       args:
         BASE_IMAGE: ubuntu:24.04
         SPOKE_FAMILY: ubuntu
@@ -95,7 +95,7 @@ services:
     <<: *spoke
     build:
       context: ..
-      dockerfile: test/images/Dockerfile.spoke
+      dockerfile: lab/images/Dockerfile.spoke
       args:
         BASE_IMAGE: debian:bookworm-slim
         SPOKE_FAMILY: debian
