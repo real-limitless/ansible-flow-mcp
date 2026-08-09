@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hub/spoke — ansible-flow-mcp</title>
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body class="frame-body">
+    <div class="canvas" id="frame">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div class="brand-name">ansible-flow<span>-mcp</span></div>
+        </div>
+        <div class="meta-pills">
+          <span class="pill copper">Issue #2</span>
+          <span class="pill on">SSH hub / spoke</span>
+        </div>
+      </header>
+
+      <div class="main two-col" style="margin-top: 8px; gap: 36px">
+        <div>
+          <p class="eyebrow">Multi-host fabric</p>
+          <h2 class="section-title" style="margin-bottom: 12px; max-width: 16ch">
+            One bastion. Enrolled children only.
+          </h2>
+          <p class="lede" style="margin-bottom: 20px">
+            Not full mesh. Agent → hub MCP. Hub → spokes over SSH only. Spokes never open the
+            fabric to peers.
+          </p>
+
+          <div class="topo">
+            <div class="topo-agent">Agent · Cursor / CLI / OpenCode</div>
+            <div class="topo-line"></div>
+            <div class="topo-hub">
+              <div class="name">HUB</div>
+              <div class="sub">inventory SoT · issue-token · run_* · spoke_call</div>
+            </div>
+            <div class="topo-fork"></div>
+            <div class="topo-spokes">
+              <div class="topo-spoke">
+                <div class="n">spoke-01</div>
+                <div class="r">local exec</div>
+              </div>
+              <div class="topo-spoke">
+                <div class="n">spoke-02</div>
+                <div class="r">local exec</div>
+              </div>
+              <div class="topo-spoke">
+                <div class="n">spoke-03</div>
+                <div class="r">local exec</div>
+              </div>
+            </div>
+            <div class="topo-deny">✗ no spoke → spoke MCP · ✗ no agent on workers</div>
+          </div>
+        </div>
+
+        <div class="stack" style="padding-top: 8px">
+          <div class="enroll">
+            <div class="enroll-step">
+              <div class="n">Hub</div>
+              <div class="t">init</div>
+              <div class="d">Keys, CA path, inventory with self</div>
+            </div>
+            <div class="enroll-step">
+              <div class="n">Hub</div>
+              <div class="t">issue-token</div>
+              <div class="d">TTL · one-time jti · signed</div>
+            </div>
+            <div class="enroll-step">
+              <div class="n">Spoke</div>
+              <div class="t">join</div>
+              <div class="d">Token + SSH identity exchange</div>
+            </div>
+            <div class="enroll-step">
+              <div class="n">Runtime</div>
+              <div class="t">ForceCommand</div>
+              <div class="d">MCP session · no shell</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <span class="title">CLI</span>
+            </div>
+            <div class="panel-body mono" style="font-size: 12px; line-height: 1.7; color: var(--mute)">
+              <div><span style="color: var(--copper)">$</span> ansible-flow-mcp hub init --name ctrl-01</div>
+              <div><span style="color: var(--copper)">$</span> ansible-flow-mcp hub issue-token --name web-03 --ttl 15m</div>
+              <div><span style="color: var(--copper)">$</span> ansible-flow-mcp spoke join --token … --hub user@hub:22</div>
+              <div><span style="color: var(--copper)">$</span> ansible-flow-mcp hub spoke-call --node web-03 --tool list_collections</div>
+            </div>
+          </div>
+
+          <div class="panel" style="padding: 14px 16px">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 12px">
+              <div>
+                <div class="mono" style="color: var(--phosphor); margin-bottom: 4px">GAINS</div>
+                <div style="color: var(--mute); line-height: 1.45">
+                  Non-enrolled hosts untargetable<br />
+                  Host key checking on<br />
+                  No lateral MCP fabric
+                </div>
+              </div>
+              <div>
+                <div class="mono" style="color: var(--warn); margin-bottom: 4px">HONEST</div>
+                <div style="color: var(--mute); line-height: 1.45">
+                  Hub compromise = fleet<br />
+                  Same class as any<br />
+                  Ansible control node
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="frame-foot">
+        <span>Campaign · Hub / spoke</span>
+        <span>docs/HUB.md</span>
+      </footer>
+    </div>
+  </body>
+</html>

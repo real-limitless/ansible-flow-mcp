@@ -1,24 +1,121 @@
 # ansible-flow-mcp
 
-MCP server that exposes **Ansible modules and playbooks** to AI agents:
+**Give agents Ansible. Not the keys.**
 
-**search → schema → check → execute**
+MCP server that exposes real Ansible modules and playbooks to AI agents — and a **SSH hub/spoke fabric** so multi-host automation is enrolled, bastion-scoped, and check-first by default.
 
 <p align="center">
-  <img src="docs/images/architecture.png" alt="Dual-track architecture with OpenFlow" width="720" />
+  <img src="docs/images/campaign-hero.png" alt="ansible-flow-mcp: agent hub session and enrolled inventory rail" width="900" />
 </p>
 
-Dual-tracked with [OpenFlow](https://github.com/real-limitless/OpenFlow) Ansible canvas gallery  
-([plan](https://github.com/real-limitless/ansible-flow-mcp/issues/1) · [OpenFlow umbrella](https://github.com/real-limitless/OpenFlow/issues/56) · [validation](https://github.com/real-limitless/ansible-flow-mcp/issues/1#issuecomment-5227918129)).
+| Track | What you get |
+| --- | --- |
+| **Agent loop** | `search → schema → check → execute` on allowlisted collections |
+| **Fleet fabric** | One hub · join tokens · SSH ForceCommand spokes · fixed inventory |
+
+[Issue #2 · hub/spoke](https://github.com/real-limitless/ansible-flow-mcp/issues/2) · [OpenFlow dual-track](https://github.com/real-limitless/OpenFlow) · Apache-2.0
 
 Not affiliated with Red Hat or the Ansible project beyond using the public Ansible CLI and docs.
 
-## Requirements
+---
+
+## Why this exists
+
+Agents on a god-mode control node invent inventory, reach for `shell`, and treat every worker as an entrypoint. That is not a security model.
+
+<p align="center">
+  <img src="docs/images/campaign-why.png" alt="Without a fabric vs ansible-flow-mcp controls" width="900" />
+</p>
+
+**You need this when:**
+
+- You want Cursor / Claude / OpenCode to run Ansible **like an operator**, not freestyle root across the fleet
+- Multi-host must mean **bastion ops you already understand** (SSH, inventory, enrollment) — not a mesh hop plane
+- Prompt injection will still *ask* for bad ops — **policy and topology must refuse**
+
+---
+
+## Two tracks
+
+### 1. Agent loop — search → schema → check → execute
+
+Curated module gallery. Slim argSpec before any run. Check mode default. Free-form modules denied. Playbooks path-jailed.
+
+<p align="center">
+  <img src="docs/images/campaign-agent-loop.png" alt="Agent ritual and MCP tools" width="900" />
+</p>
+
+| Tool | Purpose |
+| --- | --- |
+| `search_modules` | Gallery search |
+| `get_module_schema` | Slim argSpec for FQCN |
+| `run_module` | Ad-hoc Ansible (`check_mode` default **true**) |
+| `run_playbook` | `ansible-playbook` on a path-jailed `.yml` |
+| `list_collections` | Collections in gallery |
+
+**Ritual (modules):** `search_modules` → `get_module_schema` → `run_module(..., check_mode=true)` → apply only if appropriate.
+
+**Ritual (playbooks):** confirm path under allowlisted roots → check → apply.
+
+### 2. Hub/spoke — nothing is a target until enrolled
+
+Secure multi-host mode from [issue #2](https://github.com/real-limitless/ansible-flow-mcp/issues/2): **agent attaches to the hub only**. Hub reaches spokes over **SSH only**. Spokes execute **localhost** and cannot lateral-move via this fabric.
+
+<p align="center">
+  <img src="docs/images/campaign-hub-spoke.png" alt="SSH hub/spoke topology and enrollment" width="900" />
+</p>
+
+| | Full mesh (withdrawn) | **Hub/spoke (shipped)** |
+| --- | --- | --- |
+| Worker compromise | Could MCP-hop fleet-wide | **No lateral MCP** |
+| Inventory | Gossip / replicas | **Hub is source of truth** |
+| Agent attach | Any node | **Hub only** |
+| Ops model | Mesh OS | **Classic Ansible bastion** |
+
+**Enrollment:** `hub init` → `issue-token` (TTL, one-time jti) → `spoke join` (token + SSH identity) → hub inventory. Runtime: ForceCommand MCP session — **no shell** on the hub→spoke path.
+
+**Hub tools:** `list_nodes` / `hub_status`, `issue_token`, `revoke_node`, groups (`create_group`, `set_group_members`, …), `spoke_call`, plus catalog `run_*` against **enrolled hosts or groups only**. Client-supplied `-i` is rejected in hub mode.
+
+Deep ops: **[docs/HUB.md](docs/HUB.md)**.
+
+---
+
+## Operators
+
+Day-2 surface matches the agent: enroll, group, hand the hub to OpenCode.
+
+<p align="center">
+  <img src="docs/images/campaign-operator.png" alt="Operator TUI, hub MCP tools, lab demo" width="900" />
+</p>
+
+```bash
+ansible-flow-mcp hub init --name ctrl-01
+ansible-flow-mcp hub issue-token --name web-03 --ttl 15m
+ansible-flow-mcp spoke join --token "$TOKEN" --hub user@hub:22 --public-addr web-03.example.com
+ansible-flow-mcp hub session          # MCP stdio for the agent
+ansible-flow-mcp tui                  # servers · groups · invite · OpenCode
+ansible-flow-mcp hub spoke-call --node web-03 --tool list_collections
+```
+
+### Lab one-shot
+
+```bash
+cd test && ./scripts/demo.sh
+# then: ./scripts/tui.sh  |  ./scripts/opencode-host.sh
+```
+
+See [test/README.md](test/README.md).
+
+---
+
+## Quick start (single-node / dev)
+
+### Requirements
 
 - Python ≥ 3.11
-- `ansible` / `ansible-core` on `PATH` for real runs (unit tests mock the CLI)
-- Collection **`ansible.posix`** (JSON stdout callback `ansible.posix.json` on ansible-core ≥ 2.15)
-- Other collections you intend to use installed on the control node
+- `ansible` / `ansible-core` on `PATH` for real runs
+- Collection **`ansible.posix`** (JSON callback)
+- Collections you intend to use installed on the control node
 
 ```bash
 python3 -m pip install --user 'ansible-core>=2.16,<2.19'
@@ -26,28 +123,21 @@ export PATH="$HOME/.local/bin:$PATH"
 ansible-galaxy collection install ansible.posix
 ```
 
-## Install (dev)
+### Install & run
 
 ```bash
 cd ansible-flow-mcp
-python -m venv .venv
-source .venv/bin/activate
+python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 pytest
-```
-
-## Run (stdio MCP)
-
-```bash
 ansible-flow-mcp
 # or: python -m ansible_flow_mcp.server
 ```
 
-### Cursor / Claude Desktop
+### Cursor / Claude Desktop / OpenCode
 
-See `examples/cursor-mcp.json` and `examples/claude-desktop.json`.
-
-Local path example:
+- `examples/cursor-mcp.json`, `examples/claude-desktop.json`
+- Hub + OpenCode: `examples/opencode-hub.jsonc` · `ansible-flow-mcp hub write-opencode-config`
 
 ```json
 {
@@ -59,105 +149,72 @@ Local path example:
 }
 ```
 
-## Tools
+---
 
-| Tool | Purpose |
+## Security (honest)
+
+| Control | Behavior |
 | --- | --- |
-| `search_modules` | Gallery search |
-| `get_module_schema` | Slim argSpec for FQCN |
-| `run_module` | Ad-hoc ansible (`check_mode` default **true**) |
-| `run_playbook` | `ansible-playbook` on a path-jailed `.yml` |
-| `list_collections` | Collections in gallery |
+| Collection allowlist | Only configured collections |
+| Module deny list | `command` / `shell` / `raw` / `script` denied by default |
+| Check mode | Default **true** on `run_module` |
+| Playbook jail | Allowlisted roots · size limit · `.yml`/`.yaml` only |
+| No shell interpolation | argv-only subprocess |
+| Hub inventory | Enrolled hosts only · no client `-i` · host key checking on |
+| Spoke path | SSH ForceCommand · localhost exec · no peer fabric |
 
-### Agent ritual (modules)
+**Residual:** hub compromise = fleet (same class as any Ansible control node). Harden the bastion — see [docs/SECURITY.md](docs/SECURITY.md) and hub hardening in issue #2 / [docs/HUB.md](docs/HUB.md).
 
-1. `search_modules`  
-2. `get_module_schema`  
-3. `run_module(..., check_mode=true)`  
-4. `run_module(..., check_mode=false)` if appropriate  
+Campaign storyboard (re-shoot PNGs): [docs/campaign/](docs/campaign/).
 
-### Agent ritual (playbooks)
+---
 
-1. Confirm playbook path is under an allowlisted root  
-2. `run_playbook(..., check_mode=true)`  
-3. `run_playbook(..., check_mode=false)` if appropriate  
+## Catalog & OpenFlow
 
-<p align="center">
-  <img src="docs/images/gallery-concept.png" alt="Module gallery concept (shared with OpenFlow)" width="640" />
-</p>
+- `catalog/collections-allowlist.yml` — allowlist + deny free-form modules  
+- `catalog/gallery.json` + `catalog/schemas/` — searchable gallery  
+- Regenerate: `python scripts/generate_catalog.py`  
+- Galaxy factory TUI: [scripts/factory/README.md](scripts/factory/README.md)
 
-## Catalog
-
-- `catalog/collections-allowlist.yml` — allowed collections + denied free-form modules  
-- `catalog/gallery.json` — searchable module list  
-- `catalog/schemas/*.json` — optional UI/agent schemas (full gallery coverage)
-
-Regenerate when `ansible-doc` is available:
-
-```bash
-pip install pyyaml
-python scripts/generate_catalog.py
-```
-
-### Galaxy factory (top collections)
-
-Scrape **top Galaxy collections by download count**, queue module schema jobs, merge into the gallery — OpenFlow-style TUI:
-
-```bash
-python scripts/factory/tui.py
-# or headless:
-python scripts/factory/scrape_galaxy.py --top 40 --enqueue
-python scripts/factory/queue_worker.py
-```
-
-See [scripts/factory/README.md](scripts/factory/README.md).
-
-## Env
-
-| Variable | Meaning |
-| --- | --- |
-| `ANSIBLE_FLOW_CATALOG_DIR` | Override catalog path |
-| `ANSIBLE_FLOW_COLLECTIONS` | Comma-separated collection allowlist override |
-| `ANSIBLE_FLOW_INVENTORY` | Default `-i` inventory |
-| `ANSIBLE_FLOW_TIMEOUT` | Seconds (default 120 module / 300 playbook) |
-| `ANSIBLE_FLOW_PLAYBOOK_ROOTS` | Extra colon-separated playbook path roots |
-| `OPENFLOW_ANSIBLE_PLAYBOOK_ROOTS` | Same roots (OpenFlow-compatible alias) |
-
-Default playbook roots include cwd, `./playbooks`, `./ansible`, `/data/ansible`, and the system temp dir. Max playbook size 2MB; `.yml` / `.yaml` only.
-
-## Security
-
-See [docs/SECURITY.md](docs/SECURITY.md). Free-form modules (`command`/`shell`/`raw`/`script`) are **denied** by default. Playbooks are path-jailed. CLI is argv-only (no shell interpolation). Structured output uses **`ansible.posix.json`**.
-
-## OpenFlow parity
+Dual-tracked with [OpenFlow](https://github.com/real-limitless/OpenFlow) Ansible canvas gallery  
+([plan](https://github.com/real-limitless/ansible-flow-mcp/issues/1) · [umbrella](https://github.com/real-limitless/OpenFlow/issues/56)).
 
 | OpenFlow | This MCP server |
 | --- | --- |
 | Palette Ansible gallery | `search_modules` |
-| Form \| JSON module options | `get_module_schema` + `run_module` args |
+| Form \| JSON module options | `get_module_schema` + `run_module` |
 | Playbook resource | `run_playbook` |
-| `ansibleSsh` / become | Inventory / Ansible config on the control node |
+| Control-node SSH / become | Inventory + Ansible config · hub→spoke SSH in hub mode |
 
-Golden runner fixtures under `tests/fixtures/` define the shared result shape for OpenFlow’s `openflow-node-base.ansible` executor (TypeScript port).
+<p align="center">
+  <img src="docs/images/architecture.png" alt="Dual-track architecture with OpenFlow" width="720" />
+</p>
 
-OpenFlow docs: [docs/ansible.md](https://github.com/real-limitless/OpenFlow/blob/main/docs/ansible.md)
+---
 
-## License
+## Env (common)
+
+| Variable | Meaning |
+| --- | --- |
+| `ANSIBLE_FLOW_CATALOG_DIR` | Override catalog path |
+| `ANSIBLE_FLOW_COLLECTIONS` | Comma-separated allowlist override |
+| `ANSIBLE_FLOW_INVENTORY` | Default `-i` (non-hub / dev) |
+| `ANSIBLE_FLOW_TIMEOUT` | Seconds (default 120 module / 300 playbook) |
+| `ANSIBLE_FLOW_PLAYBOOK_ROOTS` | Extra playbook roots (`:`-separated) |
+| `ANSIBLE_FLOW_HUB_DIR` | Hub state (default `/var/lib/ansible-flow/hub`) |
+| `ANSIBLE_FLOW_SPOKE_DIR` | Spoke state (default `/var/lib/ansible-flow/spoke`) |
+
+---
+
+## License & publish
 
 Apache-2.0
 
-## Publish (PyPI)
-
 ```bash
-pip install build twine
-python -m build
+pip install build twine && python -m build
 # twine upload dist/*
 ```
-
-Or from git:
 
 ```bash
 uvx --from ansible-flow-mcp ansible-flow-mcp
 ```
-
-Schemas cover the full committed gallery (builtin + popular collections). Regenerate with `scripts/generate_catalog.py` when `ansible-doc` is available.

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hero — ansible-flow-mcp</title>
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body class="frame-body">
+    <div class="canvas" id="frame">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div class="brand-name">ansible-flow<span>-mcp</span></div>
+        </div>
+        <div class="meta-pills">
+          <span class="pill copper">MCP</span>
+          <span class="pill on">Hub / Spoke</span>
+          <span class="pill">Apache-2.0</span>
+        </div>
+      </header>
+
+      <div class="inv-rail" aria-label="Inventory rail">
+        <div class="inv-slot hub">
+          <span class="role">Controller</span>
+          <span class="host">ctrl-01</span>
+          <span class="led"></span>
+        </div>
+        <div class="inv-slot enrolled">
+          <span class="role">Spoke · web</span>
+          <span class="host">spoke-01</span>
+          <span class="led"></span>
+        </div>
+        <div class="inv-slot enrolled">
+          <span class="role">Spoke · app</span>
+          <span class="host">spoke-02</span>
+          <span class="led"></span>
+        </div>
+        <div class="inv-slot enrolled">
+          <span class="role">Spoke · data</span>
+          <span class="host">spoke-03</span>
+          <span class="led"></span>
+        </div>
+        <div class="inv-slot empty">
+          <span class="role">Empty bay</span>
+          <span class="host">— not enrolled</span>
+          <span class="led"></span>
+        </div>
+      </div>
+
+      <div class="main two-col" style="margin-top: 28px">
+        <div class="stack" style="gap: 22px; padding-top: 8px">
+          <div>
+            <p class="eyebrow">AI agents · real Ansible · bastion fabric</p>
+            <h1 class="display">Give agents Ansible.<br /><em>Not the keys.</em></h1>
+          </div>
+          <p class="lede">
+            MCP tools that search, schema, check, then execute — on a hub that only reaches
+            hosts you enroll over SSH.
+          </p>
+          <div class="tag-row">
+            <span class="tag hot">search → schema → check → apply</span>
+            <span class="tag">join tokens</span>
+            <span class="tag">ForceCommand</span>
+            <span class="tag">enrolled inventory only</span>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="panel">
+            <div class="panel-head">
+              <span class="title">Agent · hub session</span>
+              <span class="title" style="color: var(--phosphor)">stdio</span>
+            </div>
+            <div class="panel-body chat">
+              <div class="bubble user">Install nginx on the web group — check first.</div>
+              <div class="bubble agent">
+                <span class="tool">list_nodes → groups: web ⊂ prod</span>
+                <span class="tool">search_modules → ansible.builtin.package</span>
+                <span class="tool">run_module(hosts="web", check_mode=true)</span>
+                <span class="ok">ok · changed=0 · would install nginx on spoke-01</span>
+              </div>
+              <div class="bubble user">Apply.</div>
+              <div class="bubble agent">
+                <span class="tool">run_module(..., check_mode=false)</span>
+                <span class="ok">ok · changed=1 · spoke-01 only · inventory fixed</span>
+              </div>
+            </div>
+          </div>
+          <div class="panel" style="padding: 12px 14px">
+            <div style="display: flex; justify-content: space-between; align-items: center">
+              <span class="mono" style="font-size: 12px; color: var(--mute)"
+                >Agent attaches <strong style="color: var(--copper-hot)">hub only</strong></span
+              >
+              <span class="mono" style="font-size: 11px; color: var(--phosphor)"
+                >spokes · localhost exec</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="frame-foot">
+        <span>Campaign · Hero</span>
+        <span>Issue #2 · SSH hub/spoke</span>
+      </footer>
+    </div>
+  </body>
+</html>

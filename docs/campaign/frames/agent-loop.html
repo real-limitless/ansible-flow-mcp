@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Agent loop — ansible-flow-mcp</title>
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body class="frame-body">
+    <div class="canvas" id="frame">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div class="brand-name">ansible-flow<span>-mcp</span></div>
+        </div>
+        <div class="meta-pills">
+          <span class="pill copper">How agents use it</span>
+          <span class="pill on">check before apply</span>
+        </div>
+      </header>
+
+      <div class="main two-col" style="margin-top: 20px">
+        <div>
+          <p class="eyebrow">Core MCP loop</p>
+          <h2 class="section-title" style="margin-bottom: 14px">
+            Search → schema → check → execute
+          </h2>
+          <p class="lede" style="margin-bottom: 22px">
+            Real Ansible modules from a curated gallery. Slim argSpec before any run. Check mode
+            default. No freestyle shell.
+          </p>
+
+          <div class="panel">
+            <div class="panel-head">
+              <span class="title">Agent ritual · modules</span>
+            </div>
+            <div class="panel-body ritual">
+              <div class="ritual-step">
+                <div class="step-idx">01</div>
+                <div>
+                  <div class="step-cmd">search_modules</div>
+                  <div class="step-note">Gallery search across allowlisted collections</div>
+                </div>
+              </div>
+              <div class="ritual-step">
+                <div class="step-idx">02</div>
+                <div>
+                  <div class="step-cmd">get_module_schema</div>
+                  <div class="step-note">Slim argSpec for the FQCN — form the args correctly</div>
+                </div>
+              </div>
+              <div class="ritual-step">
+                <div class="step-idx">03</div>
+                <div>
+                  <div class="step-cmd">run_module(..., check_mode=true)</div>
+                  <div class="step-note">Dry-run first — default path for agents</div>
+                </div>
+              </div>
+              <div class="ritual-step">
+                <div class="step-idx">04</div>
+                <div>
+                  <div class="step-cmd">run_module(..., check_mode=false)</div>
+                  <div class="step-note">Apply only when the check looks right</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="panel">
+            <div class="panel-head">
+              <span class="title">Tools</span>
+              <span class="title">stdio MCP</span>
+            </div>
+            <div class="panel-body" style="padding: 0">
+              <table style="width: 100%; border-collapse: collapse; font-size: 13px">
+                <tbody>
+                  <tr style="border-bottom: 1px solid var(--rail)">
+                    <td class="mono" style="padding: 12px 14px; color: var(--signal)">search_modules</td>
+                    <td style="padding: 12px 14px; color: var(--mute)">Gallery search</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--rail)">
+                    <td class="mono" style="padding: 12px 14px; color: var(--signal)">get_module_schema</td>
+                    <td style="padding: 12px 14px; color: var(--mute)">Slim argSpec</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--rail)">
+                    <td class="mono" style="padding: 12px 14px; color: var(--signal)">run_module</td>
+                    <td style="padding: 12px 14px; color: var(--mute)">Ad-hoc · check default on</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--rail)">
+                    <td class="mono" style="padding: 12px 14px; color: var(--signal)">run_playbook</td>
+                    <td style="padding: 12px 14px; color: var(--mute)">Path-jailed .yml</td>
+                  </tr>
+                  <tr>
+                    <td class="mono" style="padding: 12px 14px; color: var(--signal)">list_collections</td>
+                    <td style="padding: 12px 14px; color: var(--mute)">Allowlisted catalog</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel" style="padding: 16px 18px">
+            <div class="mono" style="font-size: 11px; color: var(--copper); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px">
+              Hard stops
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--mute)">
+              <div><span style="color: var(--deny)" class="mono">denied</span> · command / shell / raw / script</div>
+              <div><span style="color: var(--phosphor)" class="mono">jailed</span> · playbook roots only</div>
+              <div><span style="color: var(--signal)" class="mono">argv</span> · no shell interpolation</div>
+            </div>
+          </div>
+
+          <div class="panel" style="padding: 14px 18px">
+            <div class="mono" style="font-size: 12px; color: var(--mute)">
+              Playbooks:
+              <span style="color: var(--ink)">confirm path → check → apply</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="frame-foot">
+        <span>Campaign · Agent loop</span>
+        <span>OpenFlow gallery parity</span>
+      </footer>
+    </div>
+  </body>
+</html>

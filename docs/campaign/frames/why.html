@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Why — ansible-flow-mcp</title>
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body class="frame-body">
+    <div class="canvas" id="frame">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div class="brand-name">ansible-flow<span>-mcp</span></div>
+        </div>
+        <div class="meta-pills">
+          <span class="pill copper">Why it exists</span>
+          <span class="pill">Trust boundary</span>
+        </div>
+      </header>
+
+      <div class="main" style="margin-top: 12px">
+        <p class="eyebrow">The failure mode we refuse</p>
+        <h2 class="section-title" style="max-width: 22ch; margin-bottom: 10px">
+          Agents on a god-mode control node invent inventory.
+        </h2>
+        <p class="lede" style="margin-bottom: 28px">
+          Prompt injection still asks for bad ops. Policy has to refuse — topology and allowlists,
+          not vibes.
+        </p>
+
+        <div class="compare">
+          <div class="panel col bad">
+            <h3>Without a fabric</h3>
+            <ul>
+              <li>Agent supplies <span class="mono">hosts=all</span> and a custom <span class="mono">-i</span></li>
+              <li>Free-form <span class="mono">command</span> / <span class="mono">shell</span> modules</li>
+              <li>Every worker is an MCP entrypoint → lateral hop risk</li>
+              <li>“Hope the model behaves” as the security model</li>
+            </ul>
+          </div>
+          <div class="panel col good">
+            <h3>With ansible-flow-mcp</h3>
+            <ul>
+              <li>Nothing is a target until enrolled (token + SSH identity)</li>
+              <li>Hub inventory is source of truth — client <span class="mono">-i</span> rejected</li>
+              <li>Agent attaches to the hub only; spokes cannot MCP-hop peers</li>
+              <li>Module deny list + check-mode default + path-jailed playbooks</li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="panel"
+          style="margin-top: 20px; padding: 16px 20px; display: flex; gap: 32px; align-items: center"
+        >
+          <div style="flex: 1">
+            <div class="mono" style="font-size: 11px; color: var(--copper); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px">
+              Why you need it
+            </div>
+            <div style="font-size: 16px; line-height: 1.4; color: var(--ink)">
+              You want agents that run Ansible like an operator — not shell as root across the fleet.
+            </div>
+          </div>
+          <div class="mono" style="font-size: 12px; color: var(--mute); text-align: right; line-height: 1.6">
+            Bastion ops you already know<br />
+            <span style="color: var(--phosphor)">SSH · ForceCommand · fixed inventory</span>
+          </div>
+        </div>
+      </div>
+
+      <footer class="frame-foot">
+        <span>Campaign · Why</span>
+        <span>Security is topology + policy</span>
+      </footer>
+    </div>
+  </body>
+</html>

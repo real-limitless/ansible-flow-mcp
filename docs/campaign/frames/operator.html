@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Operator — ansible-flow-mcp</title>
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body class="frame-body">
+    <div class="canvas" id="frame">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div class="brand-name">ansible-flow<span>-mcp</span></div>
+        </div>
+        <div class="meta-pills">
+          <span class="pill copper">Operators</span>
+          <span class="pill on">TUI · OpenCode · groups</span>
+        </div>
+      </header>
+
+      <div class="main two-col" style="margin-top: 16px">
+        <div>
+          <p class="eyebrow">Day-2 surface</p>
+          <h2 class="section-title" style="margin-bottom: 12px">
+            Enroll. Group. Hand the hub to an agent.
+          </h2>
+          <p class="lede" style="margin-bottom: 18px">
+            Operator TUI for servers and targeting groups. Same membership tools on the hub MCP
+            session your agent uses.
+          </p>
+
+          <div class="tui">
+            <div class="tui-bar">ANSIBLE-FLOW · HUB TUI · ctrl-01</div>
+            <div class="dim">[S]ervers  [G]roups  [A] OpenCode  [Q]uit</div>
+            <div style="margin-top: 10px" class="dim">── Servers ──────────────────────────────</div>
+            <div class="sel"> › spoke-01   10.0.0.11  web,edge,prod     ●</div>
+            <div class="hl">   spoke-02   10.0.0.12  app,canary,prod   ●</div>
+            <div class="hl">   spoke-03   10.0.0.13  data,batch,prod   ●</div>
+            <div style="margin-top: 12px" class="dim">── Actions ──────────────────────────────</div>
+            <div><span class="cu">i</span> invite (issue-token)   <span class="cu">r</span> revoke   <span class="cu">e</span> edit</div>
+            <div><span class="cu">p</span> ping                  <span class="cu">g</span> groups  <span class="ok">ok 3/3</span></div>
+            <div style="margin-top: 14px" class="dim">── Groups ───────────────────────────────</div>
+            <div class="hl"> prod  web  app  data  edge  batch  canary</div>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="panel">
+            <div class="panel-head">
+              <span class="title">Hub MCP tools</span>
+              <span class="title">agent parity</span>
+            </div>
+            <div class="panel-body" style="padding: 0">
+              <table style="width: 100%; border-collapse: collapse; font-size: 12.5px">
+                <tbody>
+                  <tr style="border-bottom: 1px solid var(--rail)">
+                    <td class="mono" style="padding: 10px 14px; color: var(--signal)">list_nodes / hub_status</td>
+                    <td style="padding: 10px 14px; color: var(--mute)">Spokes + groups</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--rail)">
+                    <td class="mono" style="padding: 10px 14px; color: var(--signal)">issue_token / revoke_node</td>
+                    <td style="padding: 10px 14px; color: var(--mute)">Membership</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--rail)">
+                    <td class="mono" style="padding: 10px 14px; color: var(--signal)">create_group / set_group_members</td>
+                    <td style="padding: 10px 14px; color: var(--mute)">Targeting</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--rail)">
+                    <td class="mono" style="padding: 10px 14px; color: var(--signal)">spoke_call</td>
+                    <td style="padding: 10px 14px; color: var(--mute)">SSH ForceCommand tool</td>
+                  </tr>
+                  <tr>
+                    <td class="mono" style="padding: 10px 14px; color: var(--signal)">run_module / run_playbook</td>
+                    <td style="padding: 10px 14px; color: var(--mute)">Enrolled hosts or groups</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <span class="title">Lab one-shot</span>
+            </div>
+            <div class="panel-body mono" style="font-size: 13px; line-height: 1.7; color: var(--mute)">
+              <div><span style="color: var(--copper)">$</span> cd test && ./scripts/demo.sh</div>
+              <div class="dim"># hub + 3 spokes · enroll · smoke · shell</div>
+              <div style="margin-top: 8px"><span style="color: var(--copper)">$</span> ./scripts/tui.sh</div>
+              <div><span style="color: var(--copper)">$</span> ./scripts/opencode-host.sh</div>
+            </div>
+          </div>
+
+          <div class="panel" style="padding: 16px 18px">
+            <div class="mono" style="font-size: 11px; color: var(--copper); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px">
+              Attach the agent
+            </div>
+            <div style="font-size: 14px; color: var(--ink); line-height: 1.4">
+              <span class="mono" style="color: var(--signal)">hub session</span>
+              — write OpenCode config, launch against the bastion, never against a spoke.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="frame-foot">
+        <span>Campaign · Operator</span>
+        <span>test/scripts/demo.sh</span>
+      </footer>
+    </div>
+  </body>
+</html>
