@@ -284,6 +284,18 @@ cd lab
 docker compose down            # add -v to drop hub-data volume
 ```
 
+### B9. Windows lab (opt-in WinRM targets)
+
+Needs **KVM**, large disk, and a long first boot. Guests are **targets** (not mesh spokes).
+
+```bash
+cd lab
+./scripts/demo-windows.sh
+# or: up-windows.sh → wait-windows.sh → enroll-windows.sh → smoke-windows.sh
+```
+
+See [lab/README.md](../lab/README.md) § Windows lab. Plan notes on [#3](https://github.com/real-limitless/ansible-flow-mcp/issues/3).
+
 ---
 
 ## Path C — Bare-metal hub/spoke

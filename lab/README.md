@@ -95,15 +95,58 @@ Groups: **prod web app data edge batch canary**
   `OPENCODE_API_KEY=… ./scripts/opencode.sh`  
   (compose passes `OPENCODE_API_KEY` through).
 
+## Windows lab (opt-in, WinRM **targets**)
+
+[dockur/windows](https://github.com/dockur/windows) guests: **Windows 11** (`win-client`) + **Server 2022** (`win-server`).  
+They are **Ansible targets** (WinRM) — not mesh spokes. No `ansible-flow-mcp` on Windows. No `spoke_call`.
+
+### Requirements
+
+- Linux host with **KVM** (`/dev/kvm` r/w)
+- ~8–16 GB free RAM, ~80+ GB disk
+- First boot: ISO download + unattended install (**tens of minutes**)
+- You must comply with **Microsoft licensing** (images are not shipped in this repo)
+
+Not supported on Docker Desktop macOS / typical CI without nested virt.
+
+### Commands
+
+```bash
+cd lab
+cp windows/.env.example windows/.env   # optional overrides (gitignored)
+
+./scripts/demo-windows.sh              # Linux fabric if needed + Windows path
+# or step by step:
+./scripts/up-windows.sh
+./scripts/wait-windows.sh              # long poll for WinRM :5985
+./scripts/enroll-windows.sh            # hub register-target + host_vars secrets
+./scripts/smoke-windows.sh             # win_ping + spoke_call rejected
+```
+
+| Guest | SKU | Web UI | RDP (host) | Groups |
+| --- | --- | --- | --- | --- |
+| `win-client` | Win 11 | http://127.0.0.1:8006 | 3389 | `windows`, `win-clients` |
+| `win-server` | Server 2022 | http://127.0.0.1:8007 | 3390 | `windows`, `win-servers` |
+
+Default lab creds: user `Docker` / password `admin` (override via `windows/.env`).  
+Passwords live in hub `host_vars/*.yml` (0600 on volume) — not in git or `hub status`.
+
+OEM scripts under `windows/oem-*/` enable WinRM at first boot (`install.bat`).
+
+Compose overlay: `docker-compose.windows.yml` (use with base `docker-compose.yml`).
+
 ## Layout
 
 ```text
 lab/
   docker-compose.yml
-  images/          # Dockerfile.hub (+ OpenCode), spoke, entrypoints
+  docker-compose.windows.yml   # opt-in dockur Win11 + Server2022
+  images/          # Dockerfile.hub (+ OpenCode + pywinrm), spoke, entrypoints
   scripts/
-    demo.sh enroll.sh seed_demo.sh smoke.sh smoke_tui_opencode.sh
-    tui.sh opencode.sh up.sh
+    demo.sh demo-windows.sh enroll.sh enroll-windows.sh
+    seed_demo.sh smoke.sh smoke-windows.sh …
+    up.sh up-windows.sh wait-windows.sh
+  windows/         # oem-*, storage (gitignored), .env.example
   keys/            # gitignored
 ```
 

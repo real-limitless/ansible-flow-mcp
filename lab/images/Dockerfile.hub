@@ -14,7 +14,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       iproute2 ca-certificates curl tini \
       gnupg bash \
     && rm -rf /var/lib/apt/lists/* \
-    && ansible-galaxy collection install ansible.posix \
+    && ansible-galaxy collection install ansible.posix ansible.windows \
+    && python3 -m pip install --no-cache-dir --break-system-packages \
+         'pywinrm>=0.4.3' 'requests-ntlm>=1.2.0' \
     && mkdir -p /var/run/sshd /var/lib/ansible-flow/hub /lab/keys \
     && useradd -m -s /usr/sbin/nologin mcp-hub \
     && useradd -m -s /bin/bash mcp-join \

@@ -1,0 +1,66 @@
+# Opt-in Windows lab (dockur/windows) — WinRM Ansible targets, not mesh spokes.
+# Requires KVM. Use with base compose:
+#   docker compose -f docker-compose.yml -f docker-compose.windows.yml up -d
+# Or: ./scripts/up-windows.sh
+#
+# Licensing: you must comply with Microsoft terms; this repo does not ship Windows.
+
+name: ansible-flow-hub
+
+x-win: &win
+  image: dockurr/windows
+  networks: [hub-lab]
+  devices:
+    - /dev/kvm
+    - /dev/net/tun
+  cap_add:
+    - NET_ADMIN
+  environment: &win_env
+    RAM_SIZE: ${WIN_RAM_SIZE:-4G}
+    CPU_CORES: ${WIN_CPU_CORES:-2}
+    DISK_SIZE: ${WIN_DISK_SIZE:-64G}
+    USERNAME: ${WIN_USERNAME:-Docker}
+    PASSWORD: ${WIN_PASSWORD:-admin}
+    # Forward WinRM into the guest (user-mode / NAT networking)
+    USER_PORTS: "5985 5986"
+    LANGUAGE: "English"
+  stop_grace_period: 2m
+  restart: unless-stopped
+  depends_on:
+    hub:
+      condition: service_started
+
+services:
+  win-client:
+    <<: *win
+    container_name: af-win-client
+    hostname: win-client
+    environment:
+      <<: *win_env
+      VERSION: ${WIN_CLIENT_VERSION:-11}
+      HOST: win-client
+    volumes:
+      - ./windows/client:/storage
+      - ./windows/oem-client:/oem
+    ports:
+      - "127.0.0.1:8006:8006"
+      - "127.0.0.1:3389:3389/tcp"
+      - "127.0.0.1:3389:3389/udp"
+      - "127.0.0.1:15985:5985"
+
+  win-server:
+    <<: *win
+    container_name: af-win-server
+    hostname: win-server
+    environment:
+      <<: *win_env
+      VERSION: ${WIN_SERVER_VERSION:-2022}
+      HOST: win-server
+    volumes:
+      - ./windows/server:/storage
+      - ./windows/oem-server:/oem
+    ports:
+      - "127.0.0.1:8007:8006"
+      - "127.0.0.1:3390:3389/tcp"
+      - "127.0.0.1:3390:3389/udp"
+      - "127.0.0.1:15986:5985"

@@ -107,6 +107,14 @@ ansible-flow-mcp hub status
 
 Plan: [issue #3](https://github.com/real-limitless/ansible-flow-mcp/issues/3).
 
+### Lab: Windows WinRM targets (opt-in)
+
+```bash
+cd lab && ./scripts/demo-windows.sh
+```
+
+Uses [dockur/windows](https://github.com/dockur/windows) (KVM) for Win11 + Server 2022, OEM WinRM enablement, then `register-target`. See [lab/README.md](../lab/README.md).
+
 ## Lab
 
 See `lab/README.md` and `lab/docker-compose.yml` for a full hub + multi-OS spoke compose lab.

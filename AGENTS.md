@@ -56,8 +56,10 @@ examples/
 
 lab/                          # integration lab (compose), NOT pytest
   docker-compose.yml
+  docker-compose.windows.yml  # opt-in dockur Windows (WinRM targets)
+  windows/                    # oem WinRM scripts; storage gitignored
   images/                     # Dockerfile.hub|spoke, entrypoints, lab-opencode
-  scripts/                    # demo, enroll, smoke, tui, opencode-host, …
+  scripts/                    # demo, enroll, smoke, *-windows, tui, …
   README.md
 
 tests/                        # unit tests (pytest)
@@ -236,6 +238,7 @@ cd lab
 | `hub-mcp.sh` | stdio MCP: `compose exec -T hub hub session` |
 | `write-host-opencode-config.sh` | writes `lab/opencode-hub.host.jsonc` |
 | `reconnect.sh` | rebuild recovery |
+| `up-windows.sh` / `wait-windows.sh` / `enroll-windows.sh` / `smoke-windows.sh` / `demo-windows.sh` | Opt-in dockur Win11+Server2022 as **WinRM targets** (KVM) |
 
 ### Demo inventory (after seed)
 
