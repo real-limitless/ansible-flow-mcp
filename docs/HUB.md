@@ -15,9 +15,12 @@ Product overview and campaign visuals: [README.md](../README.md) · storyboard [
 ## Bootstrap
 
 ```bash
-# On hub
-sudo mkdir -p /var/lib/ansible-flow/hub
-sudo chown "$USER" /var/lib/ansible-flow/hub
+# On hub — default state is user-writable:
+#   ~/.local/share/ansible-flow/hub
+# Optional production path:
+#   sudo mkdir -p /var/lib/ansible-flow/hub && sudo chown "$USER" $_
+#   export ANSIBLE_FLOW_HUB_DIR=/var/lib/ansible-flow/hub
+
 ansible-flow-mcp hub init --name ctrl-01
 
 # Issue join token

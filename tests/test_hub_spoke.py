@@ -188,3 +188,22 @@ def test_runner_require_check(monkeypatch: pytest.MonkeyPatch):
             policy=pol,
             run_fn=lambda *a, **k: (0, "", ""),
         )
+
+
+def test_default_hub_dir_falls_back_when_prod_unwritable(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+):
+    from ansible_flow_mcp import paths as paths_mod
+
+    monkeypatch.delenv("ANSIBLE_FLOW_HUB_DIR", raising=False)
+    monkeypatch.setenv("XDG_DATA_HOME", str(tmp_path / "xdg"))
+    blocked = tmp_path / "blocked"
+    blocked.mkdir()
+    blocked.chmod(0o500)
+    monkeypatch.setattr(paths_mod, "PROD_HUB_DIR", blocked / "ansible-flow" / "hub")
+    try:
+        d = paths_mod.default_hub_dir()
+        assert d == tmp_path / "xdg" / "ansible-flow" / "hub"
+        assert paths_mod.hub_dir() == d.resolve()
+    finally:
+        blocked.chmod(0o700)

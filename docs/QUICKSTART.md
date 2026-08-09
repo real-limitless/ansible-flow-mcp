@@ -305,13 +305,19 @@ Put `ansible-flow-mcp` on `PATH` for the service users you configure.
 
 ### C2. Initialize the hub
 
-```bash
-sudo mkdir -p /var/lib/ansible-flow/hub
-sudo chown "$USER" /var/lib/ansible-flow/hub   # or a dedicated service user
+Default state dir is **user-writable** (`~/.local/share/ansible-flow/hub`) when
+`/var/lib/ansible-flow/hub` is not available. No sudo required for a laptop/Pi trial.
 
-export ANSIBLE_FLOW_HUB_DIR=/var/lib/ansible-flow/hub
+```bash
+# Simple (recommended first run)
 ansible-flow-mcp hub init --name ctrl-01
 ansible-flow-mcp hub status
+
+# Production-style path (optional)
+# sudo mkdir -p /var/lib/ansible-flow/hub
+# sudo chown "$USER" /var/lib/ansible-flow/hub
+# export ANSIBLE_FLOW_HUB_DIR=/var/lib/ansible-flow/hub
+# ansible-flow-mcp hub init --name ctrl-01
 ```
 
 ### C3. Configure SSH (operator-managed)

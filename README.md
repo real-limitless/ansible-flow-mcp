@@ -198,8 +198,8 @@ Dual-tracked with [OpenFlow](https://github.com/real-limitless/OpenFlow) Ansible
 | `ANSIBLE_FLOW_INVENTORY` | Default `-i` (non-hub / dev) |
 | `ANSIBLE_FLOW_TIMEOUT` | Seconds (default 120 module / 300 playbook) |
 | `ANSIBLE_FLOW_PLAYBOOK_ROOTS` | Extra playbook roots (`:`-separated) |
-| `ANSIBLE_FLOW_HUB_DIR` | Hub state (default `/var/lib/ansible-flow/hub`) |
-| `ANSIBLE_FLOW_SPOKE_DIR` | Spoke state (default `/var/lib/ansible-flow/spoke`) |
+| `ANSIBLE_FLOW_HUB_DIR` | Hub state (default: `/var/lib/…` if writable, else `~/.local/share/ansible-flow/hub`) |
+| `ANSIBLE_FLOW_SPOKE_DIR` | Spoke state (same pattern under `…/spoke`) |
 
 ---
 
