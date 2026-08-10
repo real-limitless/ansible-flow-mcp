@@ -50,10 +50,13 @@ services:
       ANSIBLE_FLOW_ROLE: hub
       ANSIBLE_FLOW_HUB_DIR: /var/lib/ansible-flow/hub
       ANSIBLE_FLOW_REQUIRE_CHECK: "0"
+      # 1 = skip hub init (manual.sh --blank); default auto-init
+      ANSIBLE_FLOW_SKIP_HUB_INIT: ${ANSIBLE_FLOW_SKIP_HUB_INIT:-0}
       # Optional: pass through provider keys for real OpenCode chat in lab
       OPENCODE_API_KEY: ${OPENCODE_API_KEY:-}
     healthcheck:
-      test: ["CMD-SHELL", "ss -lnt | grep -q ':22' && test -f /var/lib/ansible-flow/hub/hub_id"]
+      # sshd only — hub_id optional when ANSIBLE_FLOW_SKIP_HUB_INIT=1
+      test: ["CMD-SHELL", "ss -lnt | grep -q ':22'"]
       interval: 5s
       timeout: 3s
       retries: 20

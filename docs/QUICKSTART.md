@@ -253,7 +253,22 @@ Provider keys for real chat (example):
 OPENCODE_API_KEY=… ./scripts/opencode.sh
 ```
 
-### B6. Step-by-step without `demo.sh`
+### B6. Manual practice (containers only)
+
+Bring the lab up **without** auto enroll so you can invite/join yourself:
+
+```bash
+cd lab
+./scripts/manual.sh                 # hub ready; spokes not joined
+./scripts/manual.sh --blank         # you run hub init too
+./scripts/manual.sh --fresh         # wipe hub-data first
+./scripts/manual.sh --windows       # also start WinRM guests (not registered)
+```
+
+Then on the hub: TUI **i** invite (copy-paste `spoke join`), or CLI `hub issue-token` / `spoke join`.  
+Windows targets: `wait-windows.sh` then hand `register-target` or `enroll-windows.sh`.
+
+### B7. Step-by-step without `demo.sh`
 
 ```bash
 cd lab
@@ -264,7 +279,7 @@ cd lab
 ./scripts/smoke_tui_opencode.sh
 ```
 
-### B7. Manual compose checks
+### B8. Manual compose checks
 
 ```bash
 cd lab
@@ -277,14 +292,14 @@ docker compose exec -T hub python3 -c \
 
 If `get_module_schema` is always `null`, the hub image is missing `catalog/schemas` — do not dockerignore that tree (see lab README).
 
-### B8. Tear down
+### B9. Tear down
 
 ```bash
 cd lab
 docker compose down            # add -v to drop hub-data volume
 ```
 
-### B9. Windows lab (opt-in WinRM targets)
+### B10. Windows lab (opt-in WinRM targets)
 
 Needs **KVM**, large disk, and a long first boot. Guests are **targets** (not mesh spokes).
 

@@ -22,6 +22,30 @@ When run in a real terminal, **demo drops you into a shell on the hub** after sm
 ./scripts/reconnect.sh         # after hub rebuild: re-enroll + seed + refresh configs
 ```
 
+## Manual lab (containers only — you enroll)
+
+Spin up hub + spokes **without** enroll / seed / smoke. Practice invite, `spoke join`, and (optionally) Windows `register-target` yourself.
+
+```bash
+cd lab
+./scripts/manual.sh                 # hub init done; no spokes enrolled
+./scripts/manual.sh --blank         # skip hub init too
+./scripts/manual.sh --fresh         # wipe hub-data volume first
+./scripts/manual.sh --windows       # also start dockur guests (no register)
+./scripts/manual.sh --no-shell      # CI / no hub shell
+```
+
+| Mode | Hub | Spokes | Windows targets |
+| --- | --- | --- | --- |
+| `manual.sh` | initialized | containers up, **not** joined | — |
+| `manual.sh --blank` | **not** initialized | same | — |
+| `manual.sh --windows` | as above | as above | containers up, **not** registered |
+| `demo.sh` | full auto fabric | enrolled + seeded + smoked | — |
+| `demo-windows.sh` | full Linux if needed | enrolled | registered + smoked |
+
+After manual boot: `./scripts/tui.sh` → **i** invite (copy-paste join command), or CLI `hub issue-token` / `spoke join`.  
+Targets: `./scripts/wait-windows.sh` then hand `register-target` or `./scripts/enroll-windows.sh`.
+
 ### After a hub rebuild, servers “disappear” in OpenCode?
 
 Usually OpenCode on the **host** is still pointed at a local empty
@@ -56,8 +80,9 @@ ansible-flow-mcp hub spoke-call --node spoke-01 --tool list_collections
 
 ```bash
 cd lab
-./scripts/up.sh
-./scripts/enroll.sh       # join spokes + seed_demo groups
+./scripts/up.sh                 # containers only (same as manual without banner)
+./scripts/manual.sh --no-shell  # up + banner; still no enroll
+./scripts/enroll.sh             # join spokes + seed_demo groups
 ./scripts/smoke.sh
 ./scripts/smoke_tui_opencode.sh
 ```
@@ -143,8 +168,9 @@ lab/
   docker-compose.windows.yml   # opt-in dockur Win11 + Server2022
   images/          # Dockerfile.hub (+ OpenCode + pywinrm), spoke, entrypoints
   scripts/
-    demo.sh demo-windows.sh enroll.sh enroll-windows.sh
-    seed_demo.sh smoke.sh smoke-windows.sh …
+    demo.sh manual.sh demo-windows.sh
+    enroll.sh enroll-windows.sh seed_demo.sh
+    smoke.sh smoke-windows.sh …
     up.sh up-windows.sh wait-windows.sh
   windows/         # oem-*, storage (gitignored), .env.example
   keys/            # gitignored
