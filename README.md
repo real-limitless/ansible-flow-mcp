@@ -141,6 +141,17 @@ pytest -q
 ansible-flow-mcp
 ```
 
+Or install via pypi.org
+
+```bash
+pip install ansible-flow-mcp
+ansible-galaxy collection install ansible.posix
+pytest -q
+ansible-flow-mcp
+```
+
+
+
 Editor snippets: `examples/cursor-mcp.json`, `examples/claude-desktop.json`.  
 Hub + OpenCode: `examples/opencode-hub.jsonc` · `ansible-flow-mcp hub write-opencode-config`.
 
