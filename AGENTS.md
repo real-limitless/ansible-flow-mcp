@@ -43,7 +43,7 @@ src/ansible_flow_mcp/
 
 catalog/           # MUST ship in wheel/image (do not dockerignore schemas/)
   collections-allowlist.yml
-  gallery.json     # ~8k modules
+  gallery.json     # ~25k modules
   schemas/*.json   # arg schemas for get_module_schema
 
 docs/
@@ -339,7 +339,7 @@ No dedicated lint/typecheck scripts yet. CI: `.github/workflows/ci.yml`.
 
 ## Known gaps / next work (do not assume done)
 
-- **search_modules** is linear substring over ~8k gallery entries; fine CPU-wise, but hub path can feel slow due to **compose exec + cold MCP process**. Planned: compact JSON, warm index, hybrid/synonym (RAG-like) search — not implemented until explicitly requested.  
+- **search_modules** is linear substring over ~25k gallery entries; fine CPU-wise, but hub path can feel slow due to **compose exec + cold MCP process**. Planned: compact JSON, warm index, hybrid/synonym (RAG-like) search — not implemented until explicitly requested.  
 - Full semantic embeddings optional later.  
 - Production split of `mcp-spoke` vs Ansible shell user more strict than lab.  
 - No multi-hub HA or public HTTP MCP in v1.  
