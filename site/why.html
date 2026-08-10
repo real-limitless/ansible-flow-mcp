@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-base="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Why — ansible-flow-mcp</title>
+    <meta
+      name="description"
+      content="Agents on a god-mode control node invent inventory. Enrollment is the perimeter."
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="site-nav" id="site-nav"></header>
+    <main>
+      <div class="wrap page-hero">
+        <p class="eyebrow">Act I · Perimeter</p>
+        <h1 class="page-title">Agents on a god-mode control node invent inventory.</h1>
+        <p class="lede">
+          Prompt injection will still <em style="color: var(--ink); font-style: normal">ask</em> for
+          bad ops. Policy and topology must refuse — not hope the model behaves.
+        </p>
+      </div>
+
+      <section class="section" style="padding-top: 0">
+        <div class="wrap">
+          <div class="compare">
+            <div class="panel col bad">
+              <h3>Without a fabric</h3>
+              <ul>
+                <li>
+                  Agent supplies <span class="mono">hosts=all</span> and a custom
+                  <span class="mono">-i</span>
+                </li>
+                <li>Free-form <span class="mono">command</span> / <span class="mono">shell</span> modules</li>
+                <li>Every worker is an MCP entrypoint → lateral hop risk</li>
+                <li>“Hope the model behaves” as the security model</li>
+              </ul>
+            </div>
+            <div class="panel col good">
+              <h3>With ansible-flow-mcp</h3>
+              <ul>
+                <li>Nothing is a target until enrolled (token + SSH identity)</li>
+                <li>Hub inventory is source of truth — client <span class="mono">-i</span> rejected</li>
+                <li>Agent attaches to the hub only; spokes cannot MCP-hop peers</li>
+                <li>Module deny list + check-mode default + path-jailed playbooks</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="eyebrow" style="margin-top: 48px">You need this when</p>
+          <ul class="need-when">
+            <li>
+              You want Cursor / Claude / OpenCode to run Ansible <strong style="color: var(--ink)">like an
+              operator</strong>, not freestyle root across the fleet
+            </li>
+            <li>
+              Multi-host must mean <strong style="color: var(--ink)">bastion ops you already understand</strong>
+              (SSH, inventory, enrollment) — not a mesh hop plane
+            </li>
+            <li>
+              Prompt injection is inevitable — <strong style="color: var(--ink)">structure has to refuse</strong>
+            </li>
+          </ul>
+
+          <div class="callout" style="margin-top: 32px">
+            <strong>Enrollment is the perimeter.</strong> An empty bay is not a target. A join token is a
+            one-time key, not a permanent god mode. The hub is the only door the agent ever sees.
+          </div>
+
+          <div class="btn-row" style="margin-top: 32px">
+            <a class="btn primary" href="how.html">Next: ArgSpec before action</a>
+            <a class="btn ghost" href="fabric.html">Skip to fabric</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="assets/chrome.js"></script>
+    <script src="assets/site.js"></script>
+  </body>
+</html>

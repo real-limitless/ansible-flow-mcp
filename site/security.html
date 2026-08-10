@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-base="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Security — ansible-flow-mcp</title>
+    <meta
+      name="description"
+      content="Allowlist, deny shell, check-first, hub inventory gates. Residual risk is honest: hub compromise equals fleet."
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="site-nav" id="site-nav"></header>
+    <main>
+      <div class="wrap page-hero">
+        <p class="eyebrow">Trust boundary</p>
+        <h1 class="page-title">Controls you can name</h1>
+        <p class="lede">
+          ansible-flow-mcp runs the local <span class="mono">ansible</span> CLI on the control node.
+          Anyone who can call the MCP tools can change systems that control node can reach. Treat MCP
+          access like SSH to your automation host.
+        </p>
+      </div>
+
+      <section class="section" style="padding-top: 0">
+        <div class="wrap">
+          <div class="panel">
+            <div class="panel-head"><span class="title">Controls</span></div>
+            <div class="panel-body" style="padding: 0">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Control</th>
+                    <th>Behavior</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Collection allowlist</td>
+                    <td style="color: var(--mute)">Only modules under configured collections</td>
+                  </tr>
+                  <tr>
+                    <td>Module deny list</td>
+                    <td style="color: var(--mute)">
+                      <span class="mono">command</span> / <span class="mono">shell</span> /
+                      <span class="mono">raw</span> / <span class="mono">script</span> denied by default
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Check mode</td>
+                    <td style="color: var(--mute)">Default <strong style="color: var(--phosphor)">true</strong> on <span class="mono">run_module</span></td>
+                  </tr>
+                  <tr>
+                    <td>Playbook jail</td>
+                    <td style="color: var(--mute)">Allowlisted roots · size limit · .yml only</td>
+                  </tr>
+                  <tr>
+                    <td>No shell interpolation</td>
+                    <td style="color: var(--mute)">argv-only subprocess</td>
+                  </tr>
+                  <tr>
+                    <td>Hub inventory</td>
+                    <td style="color: var(--mute)">Enrolled hosts only · no client <span class="mono">-i</span> · host keys on</td>
+                  </tr>
+                  <tr>
+                    <td>Spoke path</td>
+                    <td style="color: var(--mute)">SSH ForceCommand · localhost exec · no peer fabric</td>
+                  </tr>
+                  <tr>
+                    <td>Join tokens</td>
+                    <td style="color: var(--mute)">Signed · TTL · one-time jti replay cache</td>
+                  </tr>
+                  <tr>
+                    <td>Secret redaction</td>
+                    <td style="color: var(--mute)">Common password/token keys redacted in results</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="callout warn" style="margin-top: 28px">
+            <strong>Residual risk (honest):</strong> hub compromise equals fleet — the same class as any
+            Ansible control node. Harden the bastion. Do not expose unauthenticated MCP on the public
+            internet.
+          </div>
+
+          <div class="btn-row" style="margin-top: 32px">
+            <a class="btn primary" href="start.html">Get started</a>
+            <a
+              class="btn ghost"
+              href="https://github.com/real-limitless/ansible-flow-mcp/blob/main/docs/SECURITY.md"
+              rel="noopener"
+              >SECURITY.md</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="assets/chrome.js"></script>
+    <script src="assets/site.js"></script>
+  </body>
+</html>

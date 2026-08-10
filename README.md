@@ -11,11 +11,15 @@ MCP server that exposes real Ansible modules and playbooks to AI agents — and 
 | **Agent loop** | `search → schema → check → execute` on allowlisted collections |
 | **Fleet fabric** | One hub · join tokens · SSH ForceCommand spokes · fixed inventory |
 
-[OpenFlow dual-track](https://github.com/real-limitless/OpenFlow) · [Campaign storyboard](docs/campaign/) · [Hub/spoke ops](docs/HUB.md) · Apache-2.0
+[OpenFlow dual-track](https://github.com/real-limitless/OpenFlow) · [Marketing site](site/) · [Campaign storyboard](docs/campaign/) · [Hub/spoke ops](docs/HUB.md) · Apache-2.0
 
 Not affiliated with Red Hat or the Ansible project beyond using the public Ansible CLI and docs.
 
-**New here?** Full step-by-step: **[docs/QUICKSTART.md](docs/QUICKSTART.md)** — local MCP · compose lab · bare-metal hub/spoke · editor wiring.
+**New here?** **[Marketing site](site/)** (story + Schema Lab) · full step-by-step **[docs/QUICKSTART.md](docs/QUICKSTART.md)** — local MCP · compose lab · bare-metal hub/spoke · editor wiring.
+
+```bash
+./scripts/site_preview.sh   # http://127.0.0.1:8765/  (gallery + live schemas)
+```
 
 ---
 

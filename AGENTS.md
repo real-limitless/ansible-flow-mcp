@@ -49,6 +49,10 @@ catalog/           # MUST ship in wheel/image (do not dockerignore schemas/)
 docs/
   HUB.md SECURITY.md campaign/ images/
 
+site/                 # marketing site (GitHub Pages) + Schema Lab
+  index|why|how|fabric|security|start.html
+  assets/             # Copper Busbar CSS + lab.js gallery/schema UI
+
 examples/
   cursor-mcp.json claude-desktop.json
   opencode-hub.jsonc          # in-process hub MCP for OpenCode
@@ -211,6 +215,7 @@ ansible-flow-mcp tui
 cd lab
 ./scripts/demo.sh              # up → enroll → seed → smoke → hub shell (if TTY)
 ./scripts/demo.sh --no-shell   # CI / non-interactive
+./scripts/manual.sh            # up only — you enroll (TUI/CLI); --blank / --windows / --fresh
 ```
 
 ### After hub image rebuild (spokes “missing” in OpenCode)
@@ -226,6 +231,7 @@ cd lab
 | Script | Purpose |
 | --- | --- |
 | `up.sh` | compose up --build |
+| `manual.sh` | up only (no enroll/seed/smoke); `--blank` skip hub init; `--windows` dockur up; `--fresh` wipe volume |
 | `enroll.sh` | issue-token + spoke join each spoke; calls `seed_demo.sh` |
 | `seed_demo.sh` | groups: prod/web/app/data/edge/batch/canary + labels |
 | `smoke.sh` | spoke_call, no shell leak, reject unenrolled host |

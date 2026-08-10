@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" data-base="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quick start — ansible-flow-mcp</title>
+    <meta
+      name="description"
+      content="Install ansible-flow-mcp, wire MCP editors, run the compose lab hub + spokes."
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="site-nav" id="site-nav"></header>
+    <main>
+      <div class="wrap page-hero">
+        <p class="eyebrow">Get started</p>
+        <h1 class="page-title">From zero to agent loop</h1>
+        <p class="lede">
+          Local MCP for a single node, compose lab for full hub/spoke, or bare-metal enrollment.
+          Full guide lives in the repo.
+        </p>
+        <div class="btn-row">
+          <a
+            class="btn primary"
+            href="https://github.com/real-limitless/ansible-flow-mcp"
+            rel="noopener"
+            >Clone on GitHub</a
+          >
+          <a
+            class="btn"
+            href="https://github.com/real-limitless/ansible-flow-mcp/blob/main/docs/QUICKSTART.md"
+            rel="noopener"
+            >QUICKSTART.md</a
+          >
+        </div>
+      </div>
+
+      <section class="section" style="padding-top: 0">
+        <div class="wrap">
+          <div class="grid-3">
+            <div class="card">
+              <span class="act">Path A</span>
+              <h3>Local MCP</h3>
+              <p>Single-node dev. Wire Cursor, Claude Desktop, or OpenCode to stdio MCP.</p>
+            </div>
+            <div class="card">
+              <span class="act">Path B</span>
+              <h3>Compose lab</h3>
+              <p>Hub + 3 spokes, enroll, smoke, OpenCode bridge. Primary integration suite.</p>
+            </div>
+            <div class="card">
+              <span class="act">Path C</span>
+              <h3>Bare metal</h3>
+              <p>Real bastion + join tokens + ForceCommand. Production-shaped topology.</p>
+            </div>
+          </div>
+
+          <p class="eyebrow" style="margin-top: 48px">uvx / pip</p>
+          <h2 class="section-title">Install &amp; run MCP</h2>
+          <p class="lede">Requires Python ≥ 3.11 and <span class="mono">ansible-core</span> on PATH for real runs.</p>
+          <pre class="code-block"># one-shot
+uvx --from ansible-flow-mcp ansible-flow-mcp
+
+# editable dev
+git clone https://github.com/real-limitless/ansible-flow-mcp.git
+cd ansible-flow-mcp
+python -m venv .venv && source .venv/bin/activate
+pip install -e ".[dev]"
+pytest -q
+ansible-flow-mcp</pre>
+
+          <p class="eyebrow" style="margin-top: 40px">Editor MCP</p>
+          <h2 class="section-title">Cursor example</h2>
+          <pre class="code-block">{
+  "mcpServers": {
+    "ansible-flow": {
+      "command": "uvx",
+      "args": ["--from", "ansible-flow-mcp", "ansible-flow-mcp"],
+      "env": {
+        "ANSIBLE_FLOW_TIMEOUT": "120"
+      }
+    }
+  }
+}</pre>
+          <p style="color: var(--mute); font-size: 14px; margin-top: 12px">
+            Also: <span class="mono">examples/claude-desktop.json</span>,
+            <span class="mono">examples/opencode-hub.jsonc</span>,
+            <span class="mono">ansible-flow-mcp hub write-opencode-config</span>.
+          </p>
+
+          <p class="eyebrow" style="margin-top: 40px">Lab one-shot</p>
+          <h2 class="section-title">Hub + three spokes</h2>
+          <pre class="code-block">cd lab && ./scripts/demo.sh
+# then: ./scripts/tui.sh  |  ./scripts/opencode-host.sh</pre>
+
+          <div class="callout" style="margin-top: 28px">
+            <strong>Empty servers in OpenCode?</strong> Use the lab bridge
+            (<span class="mono">./scripts/opencode-host.sh</span>) or
+            <span class="mono">reconnect.sh</span> after rebuilds — not a random empty local hub dir.
+          </div>
+
+          <div class="btn-row" style="margin-top: 32px">
+            <a class="btn primary" href="how.html">Try Schema Lab</a>
+            <a
+              class="btn ghost"
+              href="https://github.com/real-limitless/ansible-flow-mcp/blob/main/docs/HUB.md"
+              rel="noopener"
+              >Hub ops</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="assets/chrome.js"></script>
+    <script src="assets/site.js"></script>
+  </body>
+</html>

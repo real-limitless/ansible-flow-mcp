@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" data-base="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How it works · Schema Lab — ansible-flow-mcp</title>
+    <meta
+      name="description"
+      content="Search → schema → check → execute. Interactive Schema Lab over the full Ansible module gallery."
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="site-nav" id="site-nav"></header>
+    <main>
+      <div class="wrap page-hero">
+        <p class="eyebrow">Act II · Contract</p>
+        <h1 class="page-title">ArgSpec before action</h1>
+        <p class="lede">
+          Real Ansible modules from a curated gallery. Slim argSpec before any run. Check mode
+          default. No freestyle shell. The Schema Lab loads the same
+          <span class="mono">gallery.json</span> and <span class="mono">catalog/schemas/*.json</span>
+          the MCP server ships.
+        </p>
+      </div>
+
+      <section class="section" style="padding-top: 0">
+        <div class="wrap">
+          <div class="grid-2" style="margin-bottom: 28px">
+            <div class="panel">
+              <div class="panel-head"><span class="title">Agent ritual · modules</span></div>
+              <div class="panel-body ritual">
+                <div class="ritual-step">
+                  <div class="step-idx">01</div>
+                  <div>
+                    <div class="step-cmd">search_modules</div>
+                    <div class="step-note">Gallery search across allowlisted collections</div>
+                  </div>
+                </div>
+                <div class="ritual-step">
+                  <div class="step-idx">02</div>
+                  <div>
+                    <div class="step-cmd">get_module_schema</div>
+                    <div class="step-note">Slim argSpec for the FQCN — form the args correctly</div>
+                  </div>
+                </div>
+                <div class="ritual-step">
+                  <div class="step-idx">03</div>
+                  <div>
+                    <div class="step-cmd">run_module(..., check_mode=true)</div>
+                    <div class="step-note">Dry-run first — default path for agents</div>
+                  </div>
+                </div>
+                <div class="ritual-step">
+                  <div class="step-idx">04</div>
+                  <div>
+                    <div class="step-cmd">run_module(..., check_mode=false)</div>
+                    <div class="step-note">Apply only when the check looks right</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><span class="title">MCP tools</span><span class="title">stdio</span></div>
+              <div class="panel-body" style="padding: 0">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="mono">search_modules</td>
+                      <td style="color: var(--mute)">Gallery search</td>
+                    </tr>
+                    <tr>
+                      <td class="mono">get_module_schema</td>
+                      <td style="color: var(--mute)">Slim argSpec JSON</td>
+                    </tr>
+                    <tr>
+                      <td class="mono">run_module</td>
+                      <td style="color: var(--mute)">Ad-hoc · check default true</td>
+                    </tr>
+                    <tr>
+                      <td class="mono">run_playbook</td>
+                      <td style="color: var(--mute)">Path-jailed .yml</td>
+                    </tr>
+                    <tr>
+                      <td class="mono">list_collections</td>
+                      <td style="color: var(--mute)">Collections in gallery</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <p class="eyebrow">Schema Lab</p>
+          <h2 class="section-title" style="margin-bottom: 8px">Pull the contract. Then dry-run.</h2>
+          <p class="lede" style="margin-bottom: 16px">
+            Search the full gallery. Select a module. Load its committed slim schema — the same shape
+            agents receive from <span class="mono">get_module_schema</span>. Try typing
+            <span class="mono">shell</span> to see the deny path.
+          </p>
+          <div id="lab-status" class="lab-status">Initializing…</div>
+
+          <div class="lab" id="schema-lab">
+            <div class="lab-search">
+              <label for="lab-q">search_modules</label>
+              <input
+                id="lab-q"
+                class="lab-input"
+                type="search"
+                placeholder="file, cloudflare, package, posix…"
+                autocomplete="off"
+                spellcheck="false"
+              />
+              <div id="lab-meta" class="lab-meta">—</div>
+              <ul id="lab-results" class="lab-results" aria-label="Module results"></ul>
+            </div>
+            <div class="lab-schema">
+              <div id="lab-schema-head" class="lab-schema-head">
+                <h3>get_module_schema</h3>
+                <p>Select a module from the gallery to load its slim argSpec.</p>
+              </div>
+              <div id="lab-schema-body" class="lab-schema-body">
+                <div class="schema-empty">
+                  Schema options render here — name, type, required, choices, no_log.
+                </div>
+              </div>
+              <div class="lab-controls">
+                <label>
+                  <input type="checkbox" id="lab-check" checked />
+                  check_mode (default true)
+                </label>
+                <div id="lab-preview" class="lab-preview">Select a module to preview the agent ritual</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout" style="margin-top: 28px">
+            <strong>Schemas are not vibes.</strong> Each FQCN ships a committed JSON slim argSpec under
+            <span class="mono">catalog/schemas/</span> — options with types, required flags, choices, and
+            <span class="mono">noLog</span> markers. Agents form args against the contract before
+            <span class="mono">run_module</span> ever touches Ansible.
+          </div>
+
+          <div class="btn-row" style="margin-top: 32px">
+            <a class="btn primary" href="fabric.html">Next: the hub is the only door</a>
+            <a class="btn ghost" href="start.html">Install &amp; run</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="assets/chrome.js"></script>
+    <script src="assets/site.js"></script>
+    <script src="assets/lab.js"></script>
+  </body>
+</html>

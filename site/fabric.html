@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-base="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hub / spoke fabric — ansible-flow-mcp</title>
+    <meta
+      name="description"
+      content="Agent attaches to the hub only. Join tokens. SSH ForceCommand spokes. Inventory is source of truth."
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="site-nav" id="site-nav"></header>
+    <main>
+      <div class="wrap page-hero">
+        <p class="eyebrow">Act III · Keys</p>
+        <h1 class="page-title">The hub is the only door</h1>
+        <p class="lede">
+          Secure multi-host mode: the agent attaches to the hub only. Hub reaches spokes over SSH
+          only. Spokes execute localhost and cannot lateral-move via this fabric.
+        </p>
+      </div>
+
+      <section class="section" style="padding-top: 0">
+        <div class="wrap">
+          <div class="topo" aria-label="Hub spoke topology">
+            <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" role="img">
+              <title>Agent to hub to spokes over SSH</title>
+              <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#4a9fd4" />
+                </marker>
+                <marker id="arrow-c" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#c4784a" />
+                </marker>
+              </defs>
+              <!-- agent -->
+              <rect x="40" y="100" width="140" height="72" fill="#121a22" stroke="#243140" />
+              <text x="110" y="130" text-anchor="middle" fill="#8494a6" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">AGENT</text>
+              <text x="110" y="150" text-anchor="middle" fill="#e6eef4" font-family="IBM Plex Mono, monospace" font-size="13">OpenCode / MCP</text>
+              <line x1="180" y1="136" x2="280" y2="136" stroke="#c4784a" stroke-width="2" marker-end="url(#arrow-c)" />
+              <text x="230" y="124" text-anchor="middle" fill="#c4784a" font-family="IBM Plex Mono, monospace" font-size="10">stdio hub session</text>
+              <!-- hub -->
+              <rect x="290" y="88" width="160" height="96" fill="#18232e" stroke="#c4784a" stroke-width="1.5" />
+              <text x="370" y="118" text-anchor="middle" fill="#c4784a" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">HUB</text>
+              <text x="370" y="140" text-anchor="middle" fill="#e6eef4" font-family="IBM Plex Mono, monospace" font-size="14">ctrl-01</text>
+              <text x="370" y="160" text-anchor="middle" fill="#8494a6" font-family="IBM Plex Mono, monospace" font-size="11">inventory SoT</text>
+              <!-- spokes -->
+              <line x1="450" y1="120" x2="560" y2="60" stroke="#4a9fd4" stroke-width="1.5" marker-end="url(#arrow)" />
+              <line x1="450" y1="136" x2="560" y2="136" stroke="#4a9fd4" stroke-width="1.5" marker-end="url(#arrow)" />
+              <line x1="450" y1="152" x2="560" y2="212" stroke="#4a9fd4" stroke-width="1.5" marker-end="url(#arrow)" />
+              <text x="500" y="100" fill="#4a9fd4" font-family="IBM Plex Mono, monospace" font-size="9">SSH</text>
+              <rect x="570" y="28" width="150" height="56" fill="#121a22" stroke="#5fb88a" />
+              <text x="645" y="52" text-anchor="middle" fill="#5fb88a" font-family="IBM Plex Mono, monospace" font-size="10">SPOKE</text>
+              <text x="645" y="70" text-anchor="middle" fill="#e6eef4" font-family="IBM Plex Mono, monospace" font-size="12">spoke-01 · localhost</text>
+              <rect x="570" y="108" width="150" height="56" fill="#121a22" stroke="#5fb88a" />
+              <text x="645" y="132" text-anchor="middle" fill="#5fb88a" font-family="IBM Plex Mono, monospace" font-size="10">SPOKE</text>
+              <text x="645" y="150" text-anchor="middle" fill="#e6eef4" font-family="IBM Plex Mono, monospace" font-size="12">spoke-02 · localhost</text>
+              <rect x="570" y="188" width="150" height="56" fill="#121a22" stroke="#5fb88a" />
+              <text x="645" y="212" text-anchor="middle" fill="#5fb88a" font-family="IBM Plex Mono, monospace" font-size="10">SPOKE</text>
+              <text x="645" y="230" text-anchor="middle" fill="#e6eef4" font-family="IBM Plex Mono, monospace" font-size="12">spoke-03 · localhost</text>
+              <!-- empty -->
+              <rect x="750" y="108" width="120" height="56" fill="#0a1016" stroke="#243140" stroke-dasharray="4 3" />
+              <text x="810" y="132" text-anchor="middle" fill="#5a6a7c" font-family="IBM Plex Mono, monospace" font-size="10">EMPTY BAY</text>
+              <text x="810" y="148" text-anchor="middle" fill="#5a6a7c" font-family="IBM Plex Mono, monospace" font-size="11">not enrolled</text>
+            </svg>
+          </div>
+
+          <div class="grid-2" style="margin-top: 28px">
+            <div class="panel">
+              <div class="panel-head"><span class="title">Enrollment</span></div>
+              <div class="panel-body ritual">
+                <div class="ritual-step">
+                  <div class="step-idx">01</div>
+                  <div>
+                    <div class="step-cmd">hub init --name ctrl-01</div>
+                    <div class="step-note">Keys, hub identity, empty inventory</div>
+                  </div>
+                </div>
+                <div class="ritual-step">
+                  <div class="step-idx">02</div>
+                  <div>
+                    <div class="step-cmd">hub issue-token --name web-03 --ttl 15m</div>
+                    <div class="step-note">Signed, TTL, one-time jti replay cache</div>
+                  </div>
+                </div>
+                <div class="ritual-step">
+                  <div class="step-idx">03</div>
+                  <div>
+                    <div class="step-cmd">spoke join --token … --hub user@hub:22</div>
+                    <div class="step-note">Token + SSH identity → inventory bay fills</div>
+                  </div>
+                </div>
+                <div class="ritual-step">
+                  <div class="step-idx">04</div>
+                  <div>
+                    <div class="step-cmd">ForceCommand → spoke session</div>
+                    <div class="step-note">Mesh path is not a login shell</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><span class="title">Mesh vs bastion</span></div>
+              <div class="panel-body" style="padding: 0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Full mesh</th>
+                      <th>Hub/spoke</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Worker compromise</td>
+                      <td style="color: var(--deny)">MCP-hop fleet</td>
+                      <td style="color: var(--phosphor)">No lateral MCP</td>
+                    </tr>
+                    <tr>
+                      <td>Inventory</td>
+                      <td style="color: var(--mute)">Gossip / replicas</td>
+                      <td style="color: var(--phosphor)">Hub is SoT</td>
+                    </tr>
+                    <tr>
+                      <td>Agent attach</td>
+                      <td style="color: var(--deny)">Any node</td>
+                      <td style="color: var(--phosphor)">Hub only</td>
+                    </tr>
+                    <tr>
+                      <td>Ops model</td>
+                      <td style="color: var(--mute)">Mesh OS</td>
+                      <td style="color: var(--phosphor)">Classic bastion</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout" style="margin-top: 28px">
+            <strong>Dual SSH identities — never conflate them.</strong> Mesh hop uses the hub client key
+            + ForceCommand user for <span class="mono">spoke_call</span>. Ansible runs use a separate
+            identity. Putting interactive Ansible expectations on a ForceCommand-only user deadlocks runs.
+          </div>
+
+          <p class="eyebrow" style="margin-top: 40px">Operators</p>
+          <h2 class="section-title">Same surface as the agent</h2>
+          <p class="lede">Enroll, group, hand the hub to OpenCode. Day-2 is a TUI, not a second product.</p>
+          <pre class="code-block">ansible-flow-mcp hub init --name ctrl-01
+ansible-flow-mcp hub issue-token --name web-03 --ttl 15m
+ansible-flow-mcp spoke join --token "$TOKEN" --hub user@hub:22 --public-addr web-03.example.com
+ansible-flow-mcp hub session          # MCP stdio for the agent
+ansible-flow-mcp tui                  # servers · groups · invite · OpenCode
+ansible-flow-mcp hub spoke-call --node web-03 --tool list_collections</pre>
+
+          <div class="btn-row" style="margin-top: 32px">
+            <a class="btn primary" href="security.html">Security model</a>
+            <a
+              class="btn ghost"
+              href="https://github.com/real-limitless/ansible-flow-mcp/blob/main/docs/HUB.md"
+              rel="noopener"
+              >Hub ops docs</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="assets/chrome.js"></script>
+    <script src="assets/site.js"></script>
+  </body>
+</html>

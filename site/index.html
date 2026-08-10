@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" data-base="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ansible-flow-mcp — Give agents Ansible. Not the keys.</title>
+    <meta
+      name="description"
+      content="MCP server that exposes real Ansible to AI agents — search, schema, check, execute — on a SSH hub/spoke fabric. Enrollment is the perimeter."
+    />
+    <meta property="og:title" content="ansible-flow-mcp — Give agents Ansible. Not the keys." />
+    <meta
+      property="og:description"
+      content="Schema before action. Hub-only attach. Check mode default. Free-form shell denied."
+    />
+    <meta property="og:image" content="https://raw.githubusercontent.com/real-limitless/ansible-flow-mcp/main/docs/images/campaign-hero.png" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="site-nav" id="site-nav"></header>
+
+    <main>
+      <div class="wrap hero">
+        <div class="inv-rail" aria-label="Inventory rail">
+          <div class="inv-slot hub">
+            <span class="role">Controller</span>
+            <span class="host">ctrl-01</span>
+            <span class="led"></span>
+          </div>
+          <div class="inv-slot enrolled">
+            <span class="role">Spoke · web</span>
+            <span class="host">spoke-01</span>
+            <span class="led"></span>
+          </div>
+          <div class="inv-slot enrolled">
+            <span class="role">Spoke · app</span>
+            <span class="host">spoke-02</span>
+            <span class="led"></span>
+          </div>
+          <div class="inv-slot enrolled">
+            <span class="role">Spoke · data</span>
+            <span class="host">spoke-03</span>
+            <span class="led"></span>
+          </div>
+          <div class="inv-slot empty">
+            <span class="role">Empty bay</span>
+            <span class="host">— not enrolled</span>
+            <span class="led"></span>
+          </div>
+        </div>
+
+        <p class="eyebrow">AI agents · real Ansible · bastion fabric</p>
+        <h1 class="display">Give agents Ansible.<br /><em>Not the keys.</em></h1>
+        <p class="lede">
+          MCP tools that search, schema, check, then execute — on a hub that only reaches hosts you
+          enroll over SSH. Trust is topology and argSpec, not vibes.
+        </p>
+        <div class="tag-row">
+          <span class="pill copper">MCP</span>
+          <span class="pill on">Hub / Spoke</span>
+          <span class="pill">check-first</span>
+          <span class="pill">Apache-2.0</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" href="how.html">Open Schema Lab</a>
+          <a class="btn" href="https://github.com/real-limitless/ansible-flow-mcp" rel="noopener">GitHub</a>
+          <a class="btn ghost" href="start.html">Run the lab</a>
+        </div>
+
+        <div class="grid-3" style="margin-top: 56px">
+          <a class="card" href="why.html">
+            <span class="act">Act I · Perimeter</span>
+            <h3>Enrollment is the perimeter</h3>
+            <p>
+              Empty bay means not real. Agents on a god-mode control node invent inventory and reach
+              for shell. Policy and topology must refuse.
+            </p>
+            <span class="go">Why it exists →</span>
+          </a>
+          <a class="card" href="how.html">
+            <span class="act">Act II · Contract</span>
+            <h3>ArgSpec before action</h3>
+            <p>
+              Curated gallery. Slim schema before any run. Check mode default. Free-form modules
+              denied. Browse ~8k real module contracts live.
+            </p>
+            <span class="go">Schema Lab →</span>
+          </a>
+          <a class="card" href="fabric.html">
+            <span class="act">Act III · Keys</span>
+            <h3>The hub is the only door</h3>
+            <p>
+              Agent attaches to the hub only. Spokes join with tokens. Hub→spoke is SSH ForceCommand
+              — no lateral MCP hop plane.
+            </p>
+            <span class="go">See the fabric →</span>
+          </a>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="wrap">
+          <p class="eyebrow">Two tracks</p>
+          <h2 class="section-title">Agent loop + fleet fabric</h2>
+          <div class="grid-2" style="margin-top: 24px">
+            <div class="panel">
+              <div class="panel-head"><span class="title">Agent ritual</span></div>
+              <div class="panel-body ritual">
+                <div class="ritual-step">
+                  <div class="step-idx">01</div>
+                  <div>
+                    <div class="step-cmd">search_modules</div>
+                    <div class="step-note">Gallery search across allowlisted collections</div>
+                  </div>
+                </div>
+                <div class="ritual-step">
+                  <div class="step-idx">02</div>
+                  <div>
+                    <div class="step-cmd">get_module_schema</div>
+                    <div class="step-note">Slim argSpec for the FQCN — form args correctly</div>
+                  </div>
+                </div>
+                <div class="ritual-step">
+                  <div class="step-idx">03</div>
+                  <div>
+                    <div class="step-cmd">run_module(..., check_mode=true)</div>
+                    <div class="step-note">Dry-run first — default path for agents</div>
+                  </div>
+                </div>
+                <div class="ritual-step">
+                  <div class="step-idx">04</div>
+                  <div>
+                    <div class="step-cmd">run_module(..., check_mode=false)</div>
+                    <div class="step-note">Apply only when the check looks right</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><span class="title">Hub / spoke</span></div>
+              <div class="panel-body">
+                <p style="color: var(--mute); font-size: 14px; margin-bottom: 16px; line-height: 1.5">
+                  Nothing is a target until enrolled. Hub inventory is source of truth — client
+                  <span class="mono">-i</span> rejected. Spokes execute localhost only.
+                </p>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Mesh (no)</th>
+                      <th>Hub/spoke</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Agent attach</td>
+                      <td style="color: var(--deny)">Any node</td>
+                      <td style="color: var(--phosphor)">Hub only</td>
+                    </tr>
+                    <tr>
+                      <td>Lateral MCP</td>
+                      <td style="color: var(--deny)">Possible</td>
+                      <td style="color: var(--phosphor)">None</td>
+                    </tr>
+                    <tr>
+                      <td>Inventory</td>
+                      <td style="color: var(--mute)">Gossip</td>
+                      <td style="color: var(--phosphor)">Hub SoT</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="assets/chrome.js"></script>
+    <script src="assets/site.js"></script>
+  </body>
+</html>
