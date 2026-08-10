@@ -44,7 +44,7 @@ hub_fix_perms() {
   chmod g+rw "$HUB_DIR/inventory.yml" "$HUB_DIR/known_hosts" "$HUB_DIR/tokens/replay.db" "$HUB_DIR/audit.jsonl" 2>/dev/null || true
 }
 
-# Lab join identity + mcp-join authorized_keys (needs hub keys/ after init)
+# Lab join identity + mcp-join authorized_keys
 ensure_join_channel() {
   mkdir -p "$HUB_DIR/keys"
   JOIN_KEY="$HUB_DIR/keys/join_client"
@@ -96,12 +96,28 @@ PY
   chmod 664 "$HUB_DIR/opencode-hub.jsonc" 2>/dev/null || true
 }
 
-if [ "$SKIP_INIT" = "1" ] && [ ! -f "$HUB_DIR/hub_id" ]; then
-  echo "[hub] ANSIBLE_FLOW_SKIP_HUB_INIT=1 — skipping hub init (run: ansible-flow-mcp hub init)"
-  mkdir -p "$HUB_DIR/keys"
-  hub_fix_perms
-  # join SSH identity still installed so accept-join works after manual hub init
-  ensure_join_channel
+if [ "$SKIP_INIT" = "1" ]; then
+  # Truly blank: sshd + empty hub dir only. No hub init, join keys, or opencode.
+  # (manual.sh --blank wipes hub-data so hub_id should not exist.)
+  if [ -f "$HUB_DIR/hub_id" ]; then
+    echo "[hub] WARNING: SKIP_HUB_INIT=1 but hub_id already exists on volume — not wiping."
+    echo "[hub]          Use: ./scripts/manual.sh --fresh --blank"
+    hub_fix_perms
+    ensure_join_channel
+    ensure_opencode_config
+  else
+    echo "[hub] BLANK mode: no hub init, no join channel, no opencode config"
+    echo "[hub]   next: ansible-flow-mcp hub init --name hub-01"
+    echo "[hub]   then:  compose restart hub   # installs join keys + opencode"
+    mkdir -p "$HUB_DIR"
+    # leave volume empty aside from the mount point
+    chown mcp-hub:ansible-flow "$HUB_DIR" 2>/dev/null || true
+    chmod 775 "$HUB_DIR" 2>/dev/null || true
+    # empty mcp-join authorized_keys until post-init restart
+    : >/home/mcp-join/.ssh/authorized_keys
+    chmod 600 /home/mcp-join/.ssh/authorized_keys
+    chown mcp-join:mcp-join /home/mcp-join/.ssh/authorized_keys
+  fi
 else
   if [ ! -f "$HUB_DIR/hub_id" ]; then
     ansible-flow-mcp hub init --name hub-01

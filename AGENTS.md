@@ -231,7 +231,7 @@ cd lab
 | Script | Purpose |
 | --- | --- |
 | `up.sh` | compose up --build |
-| `manual.sh` | up only (no enroll/seed/smoke); `--blank` skip hub init; `--windows` dockur up; `--fresh` wipe volume |
+| `manual.sh` | up only (no enroll/seed/smoke); `--blank` wipe volume + skip hub init/join/opencode; `--windows` dockur up; `--fresh` wipe volume; force-recreate |
 | `enroll.sh` | issue-token + spoke join each spoke; calls `seed_demo.sh` |
 | `seed_demo.sh` | groups: prod/web/app/data/edge/batch/canary + labels |
 | `smoke.sh` | spoke_call, no shell leak, reject unenrolled host |

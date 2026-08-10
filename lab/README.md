@@ -29,21 +29,31 @@ Spin up hub + spokes **without** enroll / seed / smoke. Practice invite, `spoke 
 ```bash
 cd lab
 ./scripts/manual.sh                 # hub init done; no spokes enrolled
-./scripts/manual.sh --blank         # skip hub init too
-./scripts/manual.sh --fresh         # wipe hub-data volume first
+./scripts/manual.sh --blank         # wipe hub-data + true empty hub (no init/join keys)
+./scripts/manual.sh --fresh         # wipe hub-data then up (hub still auto-inits)
 ./scripts/manual.sh --windows       # also start dockur guests (no register)
 ./scripts/manual.sh --no-shell      # CI / no hub shell
 ```
 
 | Mode | Hub | Spokes | Windows targets |
 | --- | --- | --- | --- |
-| `manual.sh` | initialized | containers up, **not** joined | — |
-| `manual.sh --blank` | **not** initialized | same | — |
+| `manual.sh` | initialized + join channel | containers up, **not** joined | — |
+| `manual.sh --blank` | **empty volume**, no `hub_id`, no join keys | same | — |
 | `manual.sh --windows` | as above | as above | containers up, **not** registered |
 | `demo.sh` | full auto fabric | enrolled + seeded + smoked | — |
 | `demo-windows.sh` | full Linux if needed | enrolled | registered + smoked |
 
-After manual boot: `./scripts/tui.sh` → **i** invite (copy-paste join command), or CLI `hub issue-token` / `spoke join`.  
+**`--blank` always wipes `hub-data`** (same as `--fresh`) so a previous demo cannot leave you “already configured.” After blank:
+
+```bash
+./scripts/shell.sh
+# inside hub:
+ansible-flow-mcp hub init --name hub-01
+exit
+ANSIBLE_FLOW_SKIP_HUB_INIT=0 ./scripts/up.sh   # install join keys + opencode
+```
+
+Then: `./scripts/tui.sh` → **i** invite, or CLI `hub issue-token` / `spoke join`.  
 Targets: `./scripts/wait-windows.sh` then hand `register-target` or `./scripts/enroll-windows.sh`.
 
 ### After a hub rebuild, servers “disappear” in OpenCode?

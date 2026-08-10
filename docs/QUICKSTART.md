@@ -260,12 +260,15 @@ Bring the lab up **without** auto enroll so you can invite/join yourself:
 ```bash
 cd lab
 ./scripts/manual.sh                 # hub ready; spokes not joined
-./scripts/manual.sh --blank         # you run hub init too
-./scripts/manual.sh --fresh         # wipe hub-data first
+./scripts/manual.sh --blank         # wipe hub-data + empty hub (you hub init)
+./scripts/manual.sh --fresh         # wipe hub-data; hub still auto-inits
 ./scripts/manual.sh --windows       # also start WinRM guests (not registered)
 ```
 
-Then on the hub: TUI **i** invite (copy-paste `spoke join`), or CLI `hub issue-token` / `spoke join`.  
+`--blank` wipes the hub volume and skips init/join keys. After `hub init`, run  
+`ANSIBLE_FLOW_SKIP_HUB_INIT=0 ./scripts/up.sh` once so join channel + opencode are installed.
+
+Then: TUI **i** invite (copy-paste `spoke join`), or CLI `hub issue-token` / `spoke join`.  
 Windows targets: `wait-windows.sh` then hand `register-target` or `enroll-windows.sh`.
 
 ### B7. Step-by-step without `demo.sh`
