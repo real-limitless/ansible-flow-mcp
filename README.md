@@ -129,16 +129,14 @@ See [lab/README.md](lab/README.md).
 
 ### Single-node / dev (short form)
 
-Requirements: Python ≥ 3.11 · `ansible-core` on `PATH` · collection **`ansible.posix`** · collections you will run.
+Requirements: Python ≥ 3.11 · collection **`ansible.posix`** (JSON callback) · collections you will run.  
+`pip install` pulls **`ansible-core`** (provides `ansible` / `ansible-playbook`).
 
 ```bash
-python3 -m pip install --user 'ansible-core>=2.16,<2.19'
-export PATH="$HOME/.local/bin:$PATH"
-ansible-galaxy collection install ansible.posix
-
 cd ansible-flow-mcp
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
+ansible-galaxy collection install ansible.posix
 pytest -q
 ansible-flow-mcp
 ```

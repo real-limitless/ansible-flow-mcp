@@ -87,7 +87,8 @@ pytest -q
 ```
 
 - Python ≥ 3.11  
-- Real Ansible runs: `ansible-core` + collection `ansible.posix` on `PATH`  
+- `ansible-core` is a package dependency (`pip install` puts `ansible` on `PATH`)  
+- Real runs also need Galaxy collection `ansible.posix` (JSON callback)  
 - Unit tests mock the Ansible CLI  
 
 ---

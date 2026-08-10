@@ -34,7 +34,7 @@ Read **[Security notes](#security-notes)** before production. Deep ops: [HUB.md]
 | Requirement | Local MCP (A) | Lab (B) | Bare metal (C) |
 | --- | :---: | :---: | :---: |
 | Python **≥ 3.11** | ✓ | on host optional* | ✓ on hub & spokes |
-| `ansible-core` + **`ansible.posix`** | ✓ | inside images | ✓ |
+| `ansible-core` (via pip) + **`ansible.posix`** (Galaxy) | ✓ | inside images | ✓ |
 | Git + clone of this repo | ✓ | ✓ | ✓ |
 | Docker **or** Podman + Compose | | ✓ | |
 | SSH between hub and spokes | | (compose network) | ✓ |
@@ -42,11 +42,12 @@ Read **[Security notes](#security-notes)** before production. Deep ops: [HUB.md]
 
 \* Lab images install Ansible inside containers; host only needs Compose (and OpenCode if you use host bridge).
 
-### Install Ansible on a control node (A or C)
+### Collections on a control node (A or C)
+
+`pip install ansible-flow-mcp` (or editable install) already installs **`ansible-core`**.  
+Still install the JSON callback collection and anything you will execute:
 
 ```bash
-python3 -m pip install --user 'ansible-core>=2.16,<2.19'
-export PATH="$HOME/.local/bin:$PATH"
 ansible-galaxy collection install ansible.posix
 # Plus any collections you will run (match catalog allowlist)
 ansible --version
@@ -67,14 +68,15 @@ cd ansible-flow-mcp
 python3 -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -U pip
-pip install -e ".[dev]"
+pip install -e ".[dev]"             # pulls ansible-core
+ansible-galaxy collection install ansible.posix
 ```
 
 ### A2. Sanity check
 
 ```bash
 pytest -q
-which ansible-flow-mcp
+which ansible ansible-flow-mcp
 ansible-flow-mcp --help            # or: ansible-flow-mcp -h
 ```
 
@@ -327,8 +329,9 @@ Use when you have real machines. Operator installs package + sshd drop-ins; agen
 git clone https://github.com/real-limitless/ansible-flow-mcp.git
 cd ansible-flow-mcp
 python3 -m venv .venv && source .venv/bin/activate
-pip install -e .
-# Ensure ansible-core + ansible.posix on hub (and spokes if they run modules locally)
+pip install -e .   # installs ansible-core
+ansible-galaxy collection install ansible.posix
+# Plus collections you will run on hub (and spokes if they run modules locally)
 ```
 
 Put `ansible-flow-mcp` on `PATH` for the service users you configure.
