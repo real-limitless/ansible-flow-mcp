@@ -146,7 +146,6 @@ Or install via pypi.org
 ```bash
 pip install ansible-flow-mcp
 ansible-galaxy collection install ansible.posix
-pytest -q
 ansible-flow-mcp
 ```
 
