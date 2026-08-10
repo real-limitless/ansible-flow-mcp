@@ -1,0 +1,106 @@
+{
+  "fqcn": "graphiant.naas.graphiant_lag_interfaces",
+  "shortDescription": "Manage Graphiant LAG (Link Aggregation Group) configuration",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_lag_interfaces_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging output for troubleshooting and monitoring. When enabled, provides comprehensive logs of all LAG operations. Logs are captured and included in the result_msg for display using M(ansible.builtin.debug) module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lag_config_file",
+      "displayName": "Lag Config File",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the LAG configuration YAML file. Required for all operations. Can be an absolute path or relative path. Relative paths are resolved using the configured config_path. Configuration files support Jinja2 templating syntax for dynamic generation. File must contain LAG definitions with device names, LAG name/alias, segment, mtu, ipv4, ipv6, lacpMode, lacpTimer, member interfaces, and optional subinterfaces.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The specific LAG operation to perform. V(configure): Configure LAG for devices in the config file. \"V(deconfigure): Delete ALL subinterfaces (if present) and then delete the main LAG interface. Complete cleanup operation.\"\n V(add_lag_members): Add member interfaces to an existing LAG. V(remove_lag_members): Remove member interfaces from an existing LAG. V(update_lacp_configs): Update LACP mode/timer. V(delete_lag_subinterfaces): Delete VLAN subinterfaces under the LAG. Note: To add/configure LAG",
+      "choices": [
+        "configure",
+        "deconfigure",
+        "add_lag_members",
+        "remove_lag_members",
+        "update_lacp_configs",
+        "delete_lag_subinterfaces"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the LAG configuration. V(present): Maps to V(configure) when O(operation) is not specified. V(absent): Maps to V(deconfigure) when O(operation) is not specified.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

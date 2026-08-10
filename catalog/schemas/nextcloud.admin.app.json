@@ -1,0 +1,58 @@
+{
+  "fqcn": "nextcloud.admin.app",
+  "shortDescription": "Manage external applications in a Nextcloud server",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/nextcloud/admin/app_module.html",
+  "options": [
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Manage the following nextcloud application from the [nextcloud app store](https://apps.nextcloud.com/). Attention! Use the application `technical` name (available at the end of the app's page url).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nextcloud_path",
+      "displayName": "Nextcloud Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the nextcloud instance's location in the host. If not specified, the module will attempt to use the `nextcloud_path` var if it exists. In last resort, read the `NEXTCLOUD_PATH` environment variable on the ansible host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "php_runtime",
+      "displayName": "Php Runtime",
+      "type": "string",
+      "required": false,
+      "default": "php",
+      "description": "Specify the php runtime used to run the occ tool. Can be an absolute or relative path if the runtime is available in the remote host PATH. If not specified, the module will attempt to use the `nextcloud_php_runtime` var if it exists, then the `NEXTCLOUD_PHP_RUNTIME` environment variable on the ansible host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state for the application. If set to `present`, the application is installed and set to enabled. If set to `absent` or `removed`, the application will be removed. If set to `disabled`, disable the application if it is present or else install it _but do not enable it_. If set to `updated`, equivalent to `present` if the app is absent or update to the version proposed by the server.",
+      "choices": [
+        "present",
+        "absent",
+        "removed",
+        "disabled",
+        "updated"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

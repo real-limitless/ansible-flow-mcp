@@ -1,0 +1,100 @@
+{
+  "fqcn": "graphiant.naas.graphiant_data_exchange_info",
+  "shortDescription": "Query Graphiant Data Exchange services, customers, and health information",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_data_exchange_info_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging output for troubleshooting and monitoring. When enabled, provides comprehensive logs of all query operations. Logs are captured and included in the RV(msg) return value for display using M(ansible.builtin.debug) module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_provider",
+      "displayName": "Is Provider",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to get provider view for service health monitoring. When V(false), returns health from consumer/customer perspective. When V(true), returns health from service provider perspective. Only applicable to V(service_health) query.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "query",
+      "displayName": "Query",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The specific information to query. V(services_summary): Get summary of all Data Exchange services with tabulated output. Returns service details including IDs, names, I(type) (V(peering_service) or V(client_to_server)), status, role, and matched customers count. V(customers_summary): Get summary of all Data Exchange customers with tabulated output. Returns customer details including IDs, names, type, status, and matched services count. V(service_health): Get service health monitoring information",
+      "choices": [
+        "services_summary",
+        "customers_summary",
+        "service_health"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_name",
+      "displayName": "Service Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Service name for health monitoring operations. Required for V(service_health) query. Must be an existing Data Exchange service name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

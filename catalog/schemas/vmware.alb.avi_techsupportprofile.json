@@ -1,0 +1,283 @@
+{
+  "fqcn": "vmware.alb.avi_techsupportprofile",
+  "shortDescription": "Module for setup of TechSupportProfile Avi RESTful Object",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/alb/avi_techsupportprofile_module.html",
+  "options": [
+    {
+      "name": "api_context",
+      "displayName": "Api Context",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Avi API context that includes current session ID and CSRF Token. This allows user to perform single login and re-use the session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_version",
+      "displayName": "Api Version",
+      "type": "string",
+      "required": false,
+      "default": "20.1.7",
+      "description": "Avi API version of to use for Avi API and objects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "archive_rules",
+      "displayName": "Archive Rules",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Define the policy for techsupport archive rules. These rules allow you to specify files that should be collected in the techsupport bundle, even if they exceed the default file size threshold. E.g. To ensure a 450mb file, such as /var/sample.log, is collected with every invocation, configure and add its path to the techsupportprofile. Field introduced in 31.2.1. Allowed with any value in enterprise, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_api_patch_op",
+      "displayName": "Avi Api Patch Op",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch operation to use when using avi_api_update_method as patch.",
+      "choices": [
+        "add",
+        "replace",
+        "delete",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_api_update_method",
+      "displayName": "Avi Api Update Method",
+      "type": "string",
+      "required": false,
+      "default": "put",
+      "description": "Default method for object update is HTTP PUT. Setting to patch will override that behavior to use HTTP PATCH.",
+      "choices": [
+        "put",
+        "patch"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_credentials",
+      "displayName": "Avi Credentials",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_deactivate_session_cache_as_fact",
+      "displayName": "Avi Deactivate Session Cache As Fact",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "It disables avi session information to be cached as a fact.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_patch_path",
+      "displayName": "Avi Patch Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch path to use when using avi_api_update_method as patch.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_patch_value",
+      "displayName": "Avi Patch Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch value to use when using avi_api_update_method as patch.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller",
+      "displayName": "Controller",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "IP address or hostname of the controller. The default value is the environment variable C(AVI_CONTROLLER).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "event_params",
+      "displayName": "Event Params",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specify this params to set threshold for event files. User provided parameters will take precedence over the profile parameters. Field introduced in 31.2.1. Allowed with any value in enterprise, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_size_threshold",
+      "displayName": "File Size Threshold",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Max file size threshold to archive in techsupport collection. Files above this threshold will not be collected and an warning will be flagged. Allowed values are 128-512. Field introduced in 31.2.1. Unit is mb. Allowed with any value in enterprise, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 128.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_disk_size_percent",
+      "displayName": "Max Disk Size Percent",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Max disk size in percent of total disk size reserved for the techsupport. The value is in percentage to make it agnostic of controller flavors. E.g. Small [disk=5 gb, ts space available = 500mb] large [ disk= 100gb, ts space available= 10gb] xl [disk=1tb, ts space available=100gb]. Allowed values are 10-25. Field introduced in 31.2.1. Unit is percent. Allowed with any value in enterprise, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_free_disk_required",
+      "displayName": "Min Free Disk Required",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Min free disk required for the techsupport invocation. The value is in percentage to make it agnostic of controller flavors. E.g. Small [disk=5 gb, ts space available = 250mb] large [ disk= 100gb, ts space available= 5gb] xl [disk=1tb, ts space available=50gb]. Allowed values are 5-10. Field introduced in 31.2.1. Unit is percent. Allowed with any value in enterprise, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 5.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_of_techsupport_retentions",
+      "displayName": "No Of Techsupport Retentions",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of techsupport to retain from techsupport cleanup policy. Allowed values are 1-5. Field introduced in 31.2.1. Allowed with any value in enterprise, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Password of Avi user in Avi controller. The default value is the environment variable C(AVI_PASSWORD).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "simultaneous_invocations",
+      "displayName": "Simultaneous Invocations",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of simultaneous techsupport invocation allowed. Allowed values are 1-2. Field introduced in 31.2.1. Allowed with any value in enterprise, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state that should be applied on the entity.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "task_timeout",
+      "displayName": "Task Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Generic timeout for techsupport task collection. This can be used for task, script executions etc. Tweak the timeout value in cases of timeout observation in the logs. Field introduced in 31.2.1. Unit is sec. Allowed with any value in enterprise, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 180.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant",
+      "displayName": "Tenant",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Name of tenant used for all Avi API calls and context of object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_uuid",
+      "displayName": "Tenant Uuid",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "UUID of tenant used for all Avi API calls and context of object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Avi controller URL of the object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Username used for accessing Avi controller. The default value is the environment variable C(AVI_USERNAME).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Uuid identifier for the techsupport profile. Field introduced in 31.2.1. Allowed with any value in enterprise, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

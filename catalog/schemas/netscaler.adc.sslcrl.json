@@ -1,0 +1,458 @@
+{
+  "fqcn": "netscaler.adc.sslcrl",
+  "shortDescription": "Configuration for Certificate Revocation List resource.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netscaler/adc/sslcrl_module.html",
+  "options": [
+    {
+      "name": "api_path",
+      "displayName": "Api Path",
+      "type": "string",
+      "required": false,
+      "default": "nitro/v1/config",
+      "description": "Base NITRO API path. Define only in case of an ADM service proxy call",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "basedn",
+      "displayName": "Basedn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Base distinguished name (DN), which is used in an LDAP search to search for a CRL. Citrix recommends searching for the Base DN instead of the Issuer Name from the CA certificate, because the Issuer Name field might not exactly match the LDAP directory structure's DN.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "binary",
+      "displayName": "Binary",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the LDAP-based CRL retrieval mode to binary.",
+      "choices": [
+        "YES",
+        "NO"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "binddn",
+      "displayName": "Binddn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bind distinguished name (DN) to be used to access the CRL object in the LDAP repository if access to the LDAP repository is restricted or anonymous access is not allowed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cacert",
+      "displayName": "Cacert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "CA certificate that has issued the CRL. Required if CRL Auto Refresh is selected. Install the CA certificate on the appliance before adding the CRL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cacertfile",
+      "displayName": "Cacertfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of and, optionally, path to the CA certificate file. /nsconfig/ssl/ is the default path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cakeyfile",
+      "displayName": "Cakeyfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of and, optionally, path to the CA key file. /nsconfig/ssl/ is the default path",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "crlname",
+      "displayName": "Crlname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name for the Certificate Revocation List (CRL). Must begin with an ASCII alphanumeric or underscore (_) character, and must contain only ASCII alphanumeric, underscore, hash (#), period (.), space, colon (:), at (@), equals (=), and hyphen (-) characters. Cannot be changed after the CRL is created.  The following requirement applies only to the Citrix ADC CLI: If the name includes one or more spaces, enclose the name in double or single quotation marks (for example, \"my crl\" or 'my crl').",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "crlpath",
+      "displayName": "Crlpath",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the CRL file. /var/netscaler/ssl/ is the default path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "day",
+      "displayName": "Day",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Day on which to refresh the CRL, or, if the Interval parameter is not set, the number of days after which to refresh the CRL. If Interval is set to MONTHLY, specify the date. If Interval is set to WEEKLY, specify the day of the week (for example, Sun=0 and Sat=6). This parameter is not applicable if the Interval is set to DAILY.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gencrl",
+      "displayName": "Gencrl",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of and, optionally, path to the CRL file to be generated. The list of certificates that have been revoked is obtained from the index file. /nsconfig/ssl/ is the default path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "indexfile",
+      "displayName": "Indexfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of and, optionally, path to the file containing the serial numbers of all the certificates that are revoked. Revoked certificates are appended to the file. /nsconfig/ssl/ is the default path",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inform",
+      "displayName": "Inform",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Input format of the CRL file. The two formats supported on the appliance are: C(PEM) - Privacy Enhanced Mail. C(DER) - Distinguished Encoding Rule.",
+      "choices": [
+        "DER",
+        "PEM"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interval",
+      "displayName": "Interval",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "CRL refresh interval. Use the C(NONE) setting to unset this parameter.",
+      "choices": [
+        "MONTHLY",
+        "WEEKLY",
+        "DAILY",
+        "NOW",
+        "NONE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "managed_netscaler_instance_id",
+      "displayName": "Managed Netscaler Instance Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the managed NetScaler instance to which NetScaler Console has to configure as a proxy server. Define only in case of an ADM service proxy call",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "managed_netscaler_instance_ip",
+      "displayName": "Managed Netscaler Instance Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IP of the managed NetScaler instance to which NetScaler Console has to configure as a proxy server. Define only in case of an ADM service proxy call",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "managed_netscaler_instance_name",
+      "displayName": "Managed Netscaler Instance Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the managed NetScaler instance to which NetScaler Console has to configure as a proxy server. Define only in case of an ADM service proxy call",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "managed_netscaler_instance_password",
+      "displayName": "Managed Netscaler Instance Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the managed NetScaler instance. Define only in case of an ADM service proxy call In Settings > Administration > System Configurations > Basic Settings, if you select Prompt Credentials for Instance Login, ensure to configure username and password of a managed instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "managed_netscaler_instance_username",
+      "displayName": "Managed Netscaler Instance Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the managed NetScaler instance. Define only in case of an ADM service proxy call In Settings > Administration > System Configurations > Basic Settings, if you select Prompt Credentials for Instance Login, ensure to configure username and password of a managed instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "method",
+      "displayName": "Method",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Method for CRL refresh. If C(LDAP) is selected, specify the method, CA certificate, base DN, port, and C(LDAP) server name. If C(HTTP) is selected, specify the CA certificate, method, URL, and port. Cannot be changed after a CRL is added.",
+      "choices": [
+        "HTTP",
+        "LDAP"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "netscaler_console_as_proxy_server",
+      "displayName": "Netscaler Console As Proxy Server",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "The IP address of the NetScaler ADC appliance acting as a proxy server. Define only in case of an ADM service proxy call",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_auth_token",
+      "displayName": "Nitro Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The authentication token provided by a login operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_pass",
+      "displayName": "Nitro Pass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password with which to authenticate to the NetScaler ADC node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_protocol",
+      "displayName": "Nitro Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "Which protocol to use when accessing the nitro API objects.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_user",
+      "displayName": "Nitro User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username with which to authenticate to the NetScaler ADC node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nsip",
+      "displayName": "Nsip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The ip address of the NetScaler ADC appliance where the nitro API calls will be made. The port can be specified with the colon (:). E.g. 192.168.1.1:555.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password to access the CRL in the LDAP repository if access to the LDAP repository is restricted or anonymous access is not allowed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Port for the LDAP server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "refresh",
+      "displayName": "Refresh",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set CRL auto refresh.",
+      "choices": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_non_updatable_params",
+      "displayName": "Remove Non Updatable Params",
+      "type": "string",
+      "required": false,
+      "default": "no",
+      "description": "When given yes, the module will remove any parameters that are not updatable in the resource. If no, the module will return error if any non-updatable parameters are provided.",
+      "choices": [
+        "yes",
+        "no"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "revoke",
+      "displayName": "Revoke",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of and, optionally, path to the certificate to be revoked. /nsconfig/ssl/ is the default path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save_config",
+      "displayName": "Save Config",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true) the module will save the configuration on the NetScaler ADC node if it makes any changes. The module will not save the configuration on the NetScaler ADC node if it made no changes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scope",
+      "displayName": "Scope",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Extent of the search operation on the LDAP server. Available settings function as follows: C(One) - C(One) level below C(Base) DN. C(Base) - Exactly the same level as C(Base) DN.",
+      "choices": [
+        "Base",
+        "One"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server",
+      "displayName": "Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP address of the LDAP server from which to fetch the CRLs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the resource being configured by the module on the NetScaler ADC node. When C(present), the resource will be added/updated configured according to the module's parameters. When C(absent), the resource will be deleted from the NetScaler ADC node. When C(created), the `create` operation will be applied on the resource. When C(unset), the resource will be unset on the NetScaler ADC node.",
+      "choices": [
+        "present",
+        "absent",
+        "created",
+        "unset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time",
+      "displayName": "Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Time, in hours (1-24) and minutes (1-60), at which to refresh the CRL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL of the CRL distribution point.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

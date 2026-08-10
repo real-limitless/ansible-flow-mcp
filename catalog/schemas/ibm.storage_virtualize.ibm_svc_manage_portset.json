@@ -1,0 +1,223 @@
+{
+  "fqcn": "ibm.storage_virtualize.ibm_svc_manage_portset",
+  "shortDescription": "This module manages portset configuration on IBM Storage Virtualize family systems",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/storage_virtualize/ibm_svc_manage_portset_module.html",
+  "options": [
+    {
+      "name": "autozoneenabled",
+      "displayName": "Autozoneenabled",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enables automatic zone creation when the portset is used during host creation or modification.",
+      "choices": [
+        "yes",
+        "no"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autozonepolicy",
+      "displayName": "Autozonepolicy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the auto zone policy to be applied when C(autozoneenabled) is set to yes. C(one_to_one) zones each host WWPN to exactly one IO port from its portset on the same fabric. C(one_to_one_all_fabrics) zones each host WWPN to one IO port per fabric and does not require the host WWPN and IO port to be on the same fabric.",
+      "choices": [
+        "one_to_one",
+        "one_to_one_all_fabrics"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clustername",
+      "displayName": "Clustername",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or management IP of the Storage Virtualize system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Domain for the Storage Virtualize system. Valid when hostname is used for the parameter I(clustername).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_path",
+      "displayName": "Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path of debug log file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of portset.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "noownershipgroup",
+      "displayName": "Noownershipgroup",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specify to remove the ownership group from portset. Parameters I(ownershipgroup) and I(noownershipgroup) are mutually exclusive. Applies only during updation of portset.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "old_name",
+      "displayName": "Old Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the old name of the portset while renaming. Valid when I(state=present), to rename an existing host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownershipgroup",
+      "displayName": "Ownershipgroup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the ownership group to which the portset object is being mapped. Parameters I(ownershipgroup) and I(noownershipgroup) are mutually exclusive. Applies when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "REST API password for the Storage Virtualize system. The parameters I(username) and I(password) are required if not using I(token) to authenticate a user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "portset_type",
+      "displayName": "Portset Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the type for the portset. Applies only during creation of portset. If not specified, I(portset_type=host) will be used.",
+      "choices": [
+        "host",
+        "replication",
+        "highspeedreplication",
+        "management"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "porttype",
+      "displayName": "Porttype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the type of port that can be mapped to the portset. Applies when I(state=present). If not specified, I(porttype=ethernet) will be used to manage IP portset.",
+      "choices": [
+        "fc",
+        "ethernet"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replicationportsetlinkuid",
+      "displayName": "Replicationportsetlinkuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Change the replication_portset_link_uid parameter of the portset.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resetreplicationportsetlinkuid",
+      "displayName": "Resetreplicationportsetlinkuid",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Reset the replication_portset_link_uid parameter to a newly generated portset link UID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Creates (C(present)) or Deletes (C(absent)) the IP portset.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The authentication token to verify a user on the Storage Virtualize system. To generate a token, use the M(ibm.storage_virtualize.ibm_svc_auth) module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "REST API username for the Storage Virtualize system. The parameters I(username) and I(password) are required if not using I(token) to authenticate a user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Validates certification.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

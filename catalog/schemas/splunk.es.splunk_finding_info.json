@@ -1,0 +1,96 @@
+{
+  "fqcn": "splunk.es.splunk_finding_info",
+  "shortDescription": "Gather information about Splunk Enterprise Security Findings",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/splunk/es/splunk_finding_info_module.html",
+  "options": [
+    {
+      "name": "api_app",
+      "displayName": "Api App",
+      "type": "string",
+      "required": false,
+      "default": "SplunkEnterpriseSecuritySuite",
+      "description": "The app portion of the Splunk API path for the findings endpoint. Override this if your environment uses a different app name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_namespace",
+      "displayName": "Api Namespace",
+      "type": "string",
+      "required": false,
+      "default": "servicesNS",
+      "description": "The namespace portion of the Splunk API path. Override this if your environment uses a different namespace.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": "nobody",
+      "description": "The user portion of the Splunk API path. Override this if your environment requires a different user context.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "earliest",
+      "displayName": "Earliest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The earliest time for findings to return. All findings returned have a _time greater than or equal to this value. Accepts relative time (e.g. C(-30m), C(-7d), C(-1w)), epoch time, or ISO 8601 time. If not provided, defaults to the last 24 hours (C(-24h)). Ignored when querying by C(ref_id) (time is extracted from ref_id automatically). Applies when querying by C(title) or all findings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "latest",
+      "displayName": "Latest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The latest time for findings to return. All findings returned have a _time less than or equal to this value. Accepts relative time (e.g. C(-30m), C(now)), epoch time, or ISO 8601 time. If not provided, defaults to the current time (C(now)). Ignored when querying by C(ref_id) (time is extracted from ref_id automatically). Applies when querying by C(title) or all findings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit",
+      "displayName": "Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of findings to return. If not specified, all matching findings are returned. Use this to limit large result sets.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ref_id",
+      "displayName": "Ref Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Reference ID (finding ID) to query a specific finding. If specified, returns only the finding with this ID. Takes precedence over C(title) if both are provided. The time is automatically extracted from the ref_id (format uuid@@notable@@time{timestamp}). When querying by ref_id, the C(earliest) and C(latest) parameters are ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "title",
+      "displayName": "Title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Title name to filter findings. Returns all findings with an exact title match. Ignored if C(ref_id) is provided. The C(earliest) and C(latest) time filters still apply when querying by title.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

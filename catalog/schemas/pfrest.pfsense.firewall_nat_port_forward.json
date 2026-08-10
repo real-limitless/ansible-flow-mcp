@@ -1,0 +1,299 @@
+{
+  "fqcn": "pfrest.pfsense.firewall_nat_port_forward",
+  "shortDescription": "Manage individual Port Forwards.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/pfrest/pfsense/firewall_nat_port_forward_module.html",
+  "options": [
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the pfSense device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An API key to use for authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": "pfsense",
+      "description": "The password to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_port",
+      "displayName": "Api Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_protocol",
+      "displayName": "Api Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The protocol to use when connecting to the pfSense API.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "The username to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "associated_rule_id",
+      "displayName": "Associated Rule Id",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The associated firewall rule mode. Use an empty string to require a separate firewall rule to be created to pass traffic matching this port forward rule. Use `new` to create a new associated firewall rule to pass traffic matching this port forward rule. Use `pass` to automatically pass traffic matching this port forward rule without the need for a firewall rule. Otherwise, you can specify the `associated_rule_id` of an existing firewall rule to associate with this port forward rule.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "descr",
+      "displayName": "Descr",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "A description for this port forward rule.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination",
+      "displayName": "Destination",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The destination address this rule applies to. Valid value options are: an existing interface, an IP address, a subnet CIDR, an existing alias, `any`, `(self)`, `l2tp`, `pppoe`. The context of this address can be inverted by prefixing the value with `!`. For interface values, the `:ip` modifier can be appended to the value to use the interface's IP address instead of its entire subnet.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_port",
+      "displayName": "Destination Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The destination port this port forward rule applies to. Set to `null` to allow any destination port. Valid options are: a TCP/UDP port number, a TCP/UDP port range separated by `:`, an existing port type firewall alias",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disabled",
+      "displayName": "Disabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disables this port forward rule.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The interface this port forward rule applies to.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipprotocol",
+      "displayName": "Ipprotocol",
+      "type": "string",
+      "required": false,
+      "default": "inet",
+      "description": "The IP protocol this port forward rule should match.",
+      "choices": [
+        "inet",
+        "inet6",
+        "inet46"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_port",
+      "displayName": "Local Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The port on the internal host to forward matching traffic to. In most cases, this must match the `destination_port` value. In the event that the `desintation_port` is a range, this value should be the first value in that range. Valid options are: a TCP/UDP port number, an existing port type firewall alias",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lookup_fields",
+      "displayName": "Lookup Fields",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "The list of fields to use when looking up existing resources. This should be a list of field names that uniquely identify a resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "natreflection",
+      "displayName": "Natreflection",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The NAT reflection mode to use for traffic matching this port forward rule. Set to `null` to use the system default.",
+      "choices": [
+        "enable",
+        "disable",
+        "purenat"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nordr",
+      "displayName": "Nordr",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disables redirection for traffic matching this rule.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nosync",
+      "displayName": "Nosync",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Prevents this port forward rule from being synced to non-primary CARP members.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The IP/transport protocol this port forward rule should match.",
+      "choices": [
+        "any",
+        "tcp",
+        "udp",
+        "tcp/udp",
+        "icmp",
+        "esp",
+        "ah",
+        "gre",
+        "ipv6",
+        "igmp",
+        "pim",
+        "ospf"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The source address this port forward rule applies to. Valid value options are: an existing interface, an IP address, a subnet CIDR, an existing alias, `any`, `(self)`, `l2tp`, `pppoe`. The context of this address can be inverted by prefixing the value with `!`. For interface values, the `:ip` modifier can be appended to the value to use the interface's IP address instead of its entire subnet.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_port",
+      "displayName": "Source Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The source port this port forward rule applies to. Set to `null` to allow any source port. Valid options are: a TCP/UDP port number, a TCP/UDP port range separated by `:`, an existing port type firewall alias",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the resource should be present or absent.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The IP address or alias of the internal host to forward matching traffic to. Valid value options are: an IP address, an existing alias. For interface values, the `:ip` modifier can be appended to the value to use the interface's IP address instead of its entire subnet.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate SSL certificates when connecting to the API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

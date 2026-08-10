@@ -1,0 +1,157 @@
+{
+  "fqcn": "infra.quay_configuration.quay_repository_prune",
+  "shortDescription": "Manage auto-pruning policies for repositories",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/infra/quay_configuration/quay_repository_prune_module.html",
+  "options": [
+    {
+      "name": "append",
+      "displayName": "Append",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(true), then add the auto-pruning policy to the existing policies. If V(false), then the module deletes all the existing auto-pruning policies before adding the specified policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "method",
+      "displayName": "Method",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Method to use for the auto-pruning tags policy. If V(tags), then the policy keeps only the number of tags that you specify in O(value). If V(date), then the policy deletes the tags older than the time period that you specify in O(value).",
+      "choices": [
+        "tags",
+        "date"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_host",
+      "displayName": "Quay Host",
+      "type": "string",
+      "required": false,
+      "default": "http://127.0.0.1",
+      "description": "URL for accessing the API. U(https://quay.example.com:8443) for example. If you do not set the parameter, then the module uses the E(QUAY_HOST) environment variable. If you do no set the environment variable either, then the module uses the U(http://127.0.0.1) URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_password",
+      "displayName": "Quay Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to use for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_PASSWORD) environment variable. If you set O(quay_password), then you also need to set O(quay_username). Mutually exclusive with O(quay_token).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_token",
+      "displayName": "Quay Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OAuth access token for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_TOKEN) environment variable. Mutually exclusive with O(quay_username) and O(quay_password).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_username",
+      "displayName": "Quay Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_USERNAME) environment variable. If you set O(quay_username), then you also need to set O(quay_password). Mutually exclusive with O(quay_token).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "repository",
+      "displayName": "Repository",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the existing repository to configure. The format for the name is C(namespace)/C(shortname). The namespace can be an organization or your personal namespace. If you omit the namespace part in the name, then the module looks for the repository in your personal namespace. You can manage auto-pruning policies for repositories in your personal namespace, but not in the personal namespace of other users. The token you use in O(quay_token) determines the user account you are using.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If V(absent), then the module deletes the auto-pruning policy that matches the provided parameters. The module does not fail if the policy does not exist, because the state is already as expected. If V(present), then the module creates the auto-pruning policy if it does not already exist.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tag_pattern",
+      "displayName": "Tag Pattern",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Regular expression to select the tags to process. If you do not set the parameter, then Quay processes all the tags.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tag_pattern_matches",
+      "displayName": "Tag Pattern Matches",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(true), then Quay processes the tags matching the O(tag_pattern) parameter. If V(false), then Quay excludes the tags matching the O(tag_pattern) parameter. V(true) by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10.0,
+      "description": "Number of seconds to wait for Quay to send data before giving up. If you do not set the parameter, then the module tries the E(QUAY_TIMEOUT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to allow insecure connections to the API. If V(false), then the module does not validate SSL certificates. If you do not set the parameter, then the module tries the E(QUAY_VERIFY_SSL) environment variable (V(yes), V(1), and V(True) mean true, and V(no), V(0), V(False), and no value mean false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "value",
+      "displayName": "Value",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Number of tags to keep when O(method) is V(tags). The value must be 1 or more. Period of time when O(method) is V(date). The value must be 1 or more, and must be followed by a suffix; s (for second), m (for minute), h (for hour), d (for day), or w (for week).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

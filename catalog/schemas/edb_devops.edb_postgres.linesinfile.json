@@ -1,0 +1,138 @@
+{
+  "fqcn": "edb_devops.edb_postgres.linesinfile",
+  "shortDescription": "Manage a list of lines in text files",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/edb_devops/edb_postgres/linesinfile_module.html",
+  "options": [
+    {
+      "name": "create",
+      "displayName": "Create",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Used with C(state=present). If specified, the file will be created if it does not already exist. By default it will fail if the file is missing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lines",
+      "displayName": "Lines",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Array of lines to be managed",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lines[N].backrefs",
+      "displayName": "Lines[N].Backrefs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Used with C(state=present). If set, C(line) can contain backreferences (both positional and named) that will get populated if the C(regexp) matches. This parameter changes the operation of the module slightly; C(insertbefore) and C(insertafter) will be ignored, and if the C(regexp) does not match anywhere in the file, the file will be left unchanged. If the C(regexp) does match, the last matching line will be replaced by the expanded line parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lines[N].firstmatch",
+      "displayName": "Lines[N].Firstmatch",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Used with C(insertafter) or C(insertbefore). If set, C(insertafter) and C(insertbefore) will work with the first line that matches the given regular expression.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lines[N].insertafter",
+      "displayName": "Lines[N].Insertafter",
+      "type": "string",
+      "required": false,
+      "default": "EOF",
+      "description": "Used with C(state=present). If specified, the line will be inserted after the last match of specified regular expression. If the first match is required, use(firstmatch=yes). A special value is available; C(EOF) for inserting the line at the end of the file. If specified regular expression has no matches, EOF will be used instead. If C(insertbefore) is set, default value C(EOF) will be ignored. If regular expressions are passed to both C(regexp) and C(insertafter), C(insertafter) is only honored",
+      "choices": [
+        "EOF",
+        "*regex*"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lines[N].insertbefore",
+      "displayName": "Lines[N].Insertbefore",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Used with C(state=present). If specified, the line will be inserted before the last match of specified regular expression. If the first match is required, use C(firstmatch=yes). A value is available; C(BOF) for inserting the line at the beginning of the file. If specified regular expression has no matches, the line will be inserted at the end of the file. If regular expressions are passed to both C(regexp) and C(insertbefore), C(insertbefore) is only honored if no match for C(regexp) is found. M",
+      "choices": [
+        "BOF",
+        "*regex*"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lines[N].line",
+      "displayName": "Lines[N].Line",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The line to insert/replace into the file. Required for C(state=present). If C(backrefs) is set, may contain backreferences that will get expanded with the C(regexp) capture groups if the regexp matches.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "others",
+      "displayName": "Others",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "All arguments accepted by the M(ansible.builtin.file) module also work here.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The file to modify.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "regexp",
+      "displayName": "Regexp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The regular expression to look for in every line of the file. For C(state=present), the pattern to replace if found. Only the last line found will be replaced. For C(state=absent), the pattern of the line(s) to remove. If the regular expression is not matched, the line will be added to the file in keeping with C(insertbefore) or C(insertafter) settings. When modifying a line the regexp should typically match both the initial state of the line as well as its state after replacement by C(line) to ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the line should be there or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

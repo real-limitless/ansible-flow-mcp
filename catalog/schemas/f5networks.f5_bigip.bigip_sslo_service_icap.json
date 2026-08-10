@@ -1,0 +1,206 @@
+{
+  "fqcn": "f5networks.f5_bigip.bigip_sslo_service_icap",
+  "shortDescription": "Manage an SSL Orchestrator ICAP security device",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_bigip/bigip_sslo_service_icap_module.html",
+  "options": [
+    {
+      "name": "allow_http10",
+      "displayName": "Allow Http10",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables HTTP/1.0 support to ICAP. When creating an ICAP service, if the parameter is not provided a default value of C(false) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpm_policies",
+      "displayName": "Cpm Policies",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the ICAP Policy. The ICAP policy is defined by the Central Policy Manager (CPM) policy from BIG-IP LTM. Local traffic policies and centralized management interfaces collectively as CPM. The default value is C(\"\"). The policy mentioned should be avialable in the Big-IP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "devices",
+      "displayName": "Devices",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies a list of listening IP:ports for each ICAP security device. This parameter is required when creating a new ICAP service object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dump_json",
+      "displayName": "Dump Json",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Sets the module to output a JSON blob for further consumption. When C(true), does not make any changes on the device and always returns C(changed=False). The output provided is idempotent in nature, meaning if there are no changes to be made during C(MODIFY) on an existing service, no JSON output is generated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_one_connect",
+      "displayName": "Enable One Connect",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables OneConnect optimization to the ICAP server. When creating an ICAP service, if the parameter is not provided a default value of C(true) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "headers",
+      "displayName": "Headers",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Settings related to custom headers to be inserted to the ICAP server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_family",
+      "displayName": "Ip Family",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the IP family used for attaching ICAP security devices. When creating an ICAP service, if the parameter is not provided a default of C(ipv4) is assumed.",
+      "choices": [
+        "ipv4",
+        "ipv6",
+        "both"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitor",
+      "displayName": "Monitor",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the monitor attached the ICAP security device pool. The monitor must already exist on the BIG-IP. When creating an ICAP service, if the parameter is not provided a default of C(/Common/tcp) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the ICAP service object. The configuration auto-prepends C(ssloS_) to the object. Names should be less than 14 characters and not contain dashes C(-).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preview_length",
+      "displayName": "Preview Length",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the ICAP preview length value, in bytes. Valid value range is from C(0) to C(51200) bytes. When creating an ICAP service, if the parameter is not provided a default value of C(1024) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "request_uri",
+      "displayName": "Request Uri",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the ICAP request URI. This URI must always start with a forward slash C(/) e.g. C(/avscan). When creating an ICAP service, if the parameter is not provided a default value of C(/) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "response_uri",
+      "displayName": "Response Uri",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the ICAP response URI. This URI must always start with a forward slash C(/) e.g. C(/avscan). When creating an ICAP service, if the parameter is not provided a default value of C(/) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_down_action",
+      "displayName": "Service Down Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the action to take on monitor failure. Setting to C(ignore) bypasses the security device in the service chain. Setting to C(reset) or C(drop) resets or drops the connection, respectively, if the service monitor fails. When creating an ICAP service, if the parameter is not provided a default value of C(ignore) is assumed.",
+      "choices": [
+        "ignore",
+        "reset",
+        "drop"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_entry_ssl_profile",
+      "displayName": "Service Entry Ssl Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the Server SSL profile to be used for re-encrypting the traffic. The selected Server SSL profile will be attached to the service virtual server. The default value is C(\"\").",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(state) is C(present), ensures the object is created or modified. When C(state) is C(absent), ensures the service is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "The amount of time to wait for the C(CREATE), C(MODIFY) or C(DELETE) task to complete, in seconds. The accepted value range is between C(10) and C(1800) seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vendor_info",
+      "displayName": "Vendor Info",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the vendor-specific service used. The default is C(\"Generic ICAP Service\").",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

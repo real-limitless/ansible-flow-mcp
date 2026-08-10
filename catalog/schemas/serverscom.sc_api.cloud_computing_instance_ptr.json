@@ -1,0 +1,122 @@
+{
+  "fqcn": "serverscom.sc_api.cloud_computing_instance_ptr",
+  "shortDescription": "Manage cloud instances PTR records",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/serverscom/sc_api/cloud_computing_instance_ptr_module.html",
+  "options": [
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PTR domain name to accociate with IP address(es). Required for I(state)=C(present). I(ip) or I(domain) required for I(state)=C(absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.servers.com/v1",
+      "description": "Endpoint to use to connect to API. Do not change until specifically asked to do otherwise. If not set, the value of the C(SERVERSCOM_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_id",
+      "displayName": "Instance Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Id of the instance to manage PTR records for. Mutually exclusive with I(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip",
+      "displayName": "Ip",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "description": "Public IP address for PTR record. IP address must belong to instance. Only public IP addresses support PTR records. Private IP addresses cannot have PTR records. Reserved keyword C(all) can be used to automatically set PTR for all public IP addresses of the instance. Required for I(state)=C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the instance to set PTR records for. If more than one server with a given name found, module will fail. Use I(instance_id) for precise identification. Mutually exclusive with I(instance_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Priority of the PTR record. Default API value C(0) is used if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region_id",
+      "displayName": "Region Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Region ID to search instance by name. All regions are searched if not specified. Used only if I(name) present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "State of the ptr record. C(query) does not change anything and returns current list of PTRs for instance.",
+      "choices": [
+        "present",
+        "absent",
+        "query"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Token to use. You can create token for your account in https://portal.servers.com in Profile -> Public API section. If not set, the value of the C(SERVERSCOM_API_TOKEN) or C(SC_TOKEN) environment variable is used (C(SERVERSCOM_API_TOKEN) takes precedence). Value is not logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttl",
+      "displayName": "Ttl",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "TTL (time to live) value for PTR caching. Default API value C(60) is used if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

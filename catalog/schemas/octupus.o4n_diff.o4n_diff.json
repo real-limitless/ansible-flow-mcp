@@ -1,0 +1,116 @@
+{
+  "fqcn": "octupus.o4n_diff.o4n_diff",
+  "shortDescription": "Analiza compliance entre configuraciones de red, ejecutando algoritmo Diff",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/octupus/o4n_diff/o4n_diff_module.html",
+  "options": [
+    {
+      "name": "current",
+      "displayName": "Current",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Archivo que contiene la configuraci\u00f3n actual del dispositivo",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lines_in_context",
+      "displayName": "Lines In Context",
+      "type": "string",
+      "required": false,
+      "default": "3",
+      "description": "N\u00famero de l\u00edneas de contexto a mostrar en el diff",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "list_char_ignore",
+      "displayName": "List Char Ignore",
+      "type": "list",
+      "required": false,
+      "default": [
+        "!",
+        "#"
+      ],
+      "description": "Lista de caracteres a ignorar en la comparaci\u00f3n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "match_type",
+      "displayName": "Match Type",
+      "type": "string",
+      "required": false,
+      "default": "full",
+      "description": "Estrategia de matching para comparaci\u00f3n de contextos Solo aplica cuando type_diff=context",
+      "choices": [
+        {
+          "full": "Verifica coincidencia exacta de las l\u00edneas"
+        },
+        {
+          "include": "Verifica que las l\u00edneas del contexto est\u00e9n incluidas en la config"
+        },
+        {
+          "var": "Permite variables tipo {{ var }} en el contexto"
+        }
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "original",
+      "displayName": "Original",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Archivo que contiene la configuraci\u00f3n master o template de contexto Para type_diff=config, es la golden config Para type_diff=context, es el template de contexto",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type_diff",
+      "displayName": "Type Diff",
+      "type": "string",
+      "required": false,
+      "default": "config",
+      "description": "Tipo de an\u00e1lisis de compliance a realizar",
+      "choices": [
+        {
+          "config": "Compara configuraci\u00f3n completa contra master config"
+        },
+        {
+          "context": "Compara un contexto espec\u00edfico contra la config del dispositivo"
+        }
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "var_diff",
+      "displayName": "Var Diff",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Offset para c\u00e1lculo de posiciones en ACLs Solo aplica para ACLs cuando match_type=var",
+      "choices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

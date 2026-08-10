@@ -1,0 +1,216 @@
+{
+  "fqcn": "ngine_io.cloudstack.host",
+  "shortDescription": "Manages hosts on Apache CloudStack based clouds.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ngine_io/cloudstack/host_module.html",
+  "options": [
+    {
+      "name": "allocation_state",
+      "displayName": "Allocation State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Allocation state of the host.",
+      "choices": [
+        "enabled",
+        "disabled",
+        "maintenance"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_http_method",
+      "displayName": "Api Http Method",
+      "type": "string",
+      "required": false,
+      "default": "get",
+      "description": "HTTP method used to query the API endpoint. If not given, the C(CLOUDSTACK_METHOD) env variable is considered.",
+      "choices": [
+        "get",
+        "post"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of the CloudStack API. If not given, the C(CLOUDSTACK_KEY) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_secret",
+      "displayName": "Api Secret",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Secret key of the CloudStack API. If not set, the C(CLOUDSTACK_SECRET) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "HTTP timeout in seconds. If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL of the CloudStack API e.g. https://cloud.example.com/client/api. If not given, the C(CLOUDSTACK_ENDPOINT) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_verify_ssl_cert",
+      "displayName": "Api Verify Ssl Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Verify CA authority cert file. If not given, the C(CLOUDSTACK_VERIFY) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_tags",
+      "displayName": "Host Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Tags of the host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hypervisor",
+      "displayName": "Hypervisor",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the cluster. Required if I(state=present) and host does not yet exist. Possible values are C(KVM), C(VMware), C(BareMetal), C(XenServer), C(LXC), C(HyperV), C(UCS), C(OVM), C(Simulator).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the host. Required if I(state=present) and host does not yet exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pod",
+      "displayName": "Pod",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the pod. Required if I(state=present) and host does not yet exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the host.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Url of the host used to create a host. If not provided, C(http://) and param I(name) is used as url. Only considered if I(state=present) and host does not yet exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for the host. Required if I(state=present) and host does not yet exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(false), SSL certificates will not be validated. If not given, the C(CLOUDSTACK_DANGEROUS_NO_TLS_VERIFY) env variable is considered. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone",
+      "displayName": "Zone",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the zone in which the host should be deployed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

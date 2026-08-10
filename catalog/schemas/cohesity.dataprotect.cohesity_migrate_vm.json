@@ -1,0 +1,291 @@
+{
+  "fqcn": "cohesity.dataprotect.cohesity_migrate_vm",
+  "shortDescription": "Migrate one or more Virtual Machines from Cohesity Migrate Jobs",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cohesity/dataprotect/cohesity_migrate_vm_module.html",
+  "options": [
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP or FQDN for the Cohesity Cluster",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_compute_resource",
+      "displayName": "Cluster Compute Resource",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If the cluster compute resource is specified, VM will be recovered to resource pool under the specified compute resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cohesity_admin",
+      "displayName": "Cohesity Admin",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username with which Ansible will connect to the Cohesity Cluster. Domain Specific credentails can be configured in following formats AD.domain.com/username AD.domain.com/username@tenant LOCAL/username@tenant",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cohesity_password",
+      "displayName": "Cohesity Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password belonging to the selected Username.  This parameter will not be logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If multiple datastore exists, datacenter and cluster resource details are used to uniquely identify the resourcepool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datastore_name",
+      "displayName": "Datastore Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the datastore where the files should be recovered to. This field is required to recover objects to a different resource pool or to a different parent source. If not specified, objects are recovered to their original datastore locations in the parent source.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detach_network",
+      "displayName": "Detach Network",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If this is set to true, then the network will be detached from the recovered VMs. All the other networking parameters set will be ignored if set to true",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_network",
+      "displayName": "Enable Network",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies whether the attached network should be left in enabled state",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "end_time",
+      "displayName": "End Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Restore tasks will be filtered by a start time specified. If not provided the end time is the current time.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the network endpoint of the Protection Source where it is reachable. It could be an URL or hostname or an IP address of the Protection Source or a NAS Share/Export Path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "environment",
+      "displayName": "Environment",
+      "type": "string",
+      "required": false,
+      "default": "VMware",
+      "description": "Specifies the environment type (such as VMware) of the Protection Source this Job is protecting. Supported environment types include 'VMware'",
+      "choices": [
+        "VMware"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface_group_name",
+      "displayName": "Interface Group Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the interface name to connect after restoring the VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_vm_pair",
+      "displayName": "Job Vm Pair",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Key value pair with job names as key and list of Virtual Machines to migrate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Descriptor to assign to the Recovery Job.  The Recovery Job name will consist of the name_date_time format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_name",
+      "displayName": "Network Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a network name to be attached to the migrated object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_state",
+      "displayName": "Power State",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies the power state of the recovered objects. By default, the migrated objects are powered off.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix",
+      "displayName": "Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a prefix to prepended to the source object name to derive a new name for the recovered object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preserve_mac_address",
+      "displayName": "Preserve Mac Address",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies whether to preserve the MAC address of the migrated VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recovery_process_type",
+      "displayName": "Recovery Process Type",
+      "type": "string",
+      "required": false,
+      "default": "CopyRecovery",
+      "description": "Specifies the recovery type.",
+      "choices": [
+        "CopyRecovery",
+        "InstantRecovery"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_pool_name",
+      "displayName": "Resource Pool Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the resource pool name where the migrated objects are attached.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_time",
+      "displayName": "Start Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Restore tasks will be filtered by a start time specified. If not provided the start time is set to the last week. Provide value as \"origin\" for using cluster creation date.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Determines the state of the Recovery Job. (C)present a recovery job will be created and started. (C)absent is currently not implemented",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suffix",
+      "displayName": "Suffix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a suffix to appended to the original source object name to derive a new name for the migrated object",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Switch determines if SSL Validation should be enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_folder_name",
+      "displayName": "Vm Folder Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a folder name where the VMs should be restored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,95 @@
+{
+  "fqcn": "rapyutarobotics.rr_io.packages",
+  "shortDescription": "Module to interact with rapyuta_io packages",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/rapyutarobotics/rr_io/packages_module.html",
+  "options": [
+    {
+      "name": "executables_info",
+      "displayName": "Executables Info",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "This option lets the user modify parameters of the executables present in the package manifest depending on the name of the executable. Make sure the name of the executable is present in the package manifest.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "manifest_path",
+      "displayName": "Manifest Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Required when I('present=true'). The path of the package manifest relative to the playbook. Absolute path of the package manifest can also be given, useful when executing on remote servers. Use the copy module to transfer your manifest files to remote servers when executing on remote servers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the package.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "package_from",
+      "displayName": "Package From",
+      "type": "string",
+      "required": false,
+      "default": "manifest_path",
+      "description": "There are 2 methods to get manifests. If I(package_from=manifest_path) then C(manifest_path) option is required. If I(package_from=io_project) then C(source_io_project_info) option is required.",
+      "choices": [
+        "manifest_path",
+        "io_project"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "present",
+      "displayName": "Present",
+      "type": "boolean",
+      "required": true,
+      "default": null,
+      "description": "Whether the package should be present in rapyuta.io.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_io_project_info",
+      "displayName": "Source Io Project Info",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Required when I(package_from=io_project). This option will take in the source project information from which the package manifest will be taken to use in this playbook and the auth credentials to access the package in the io project. Either the package name or the package uid to clone from the source project. NOTE Package id takes precedence over package name in cloning if both are specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": true,
+      "default": "max",
+      "description": "Use I('auto') to increment the package version upon the existing packages by updating the patch number of the highest versioned package. Use I('max') to check the existence of a package. Use semantical version number to create a package with the specified version. The package number specified in the package manifest json is discarded, so specify the version only in the playbook yaml. When present is set to false, all the packages get deleted when version is set to auto and only the highest versi",
+      "choices": [
+        "max",
+        "auto",
+        "vx.y.z"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

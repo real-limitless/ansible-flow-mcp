@@ -1,0 +1,190 @@
+{
+  "fqcn": "ibre5041.ansible_oracle_modules.oracle_tde",
+  "shortDescription": "Manage Oracle Transparent Data Encryption (TDE)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibre5041/ansible_oracle_modules/oracle_tde_module.html",
+  "options": [
+    {
+      "name": "algorithm",
+      "displayName": "Algorithm",
+      "type": "string",
+      "required": false,
+      "default": "AES256",
+      "description": "Encryption algorithm for master key or tablespace encryption AES256 is the default and recommended algorithm 3DES168, GOST256, SEED128 are desupported in Oracle 26ai",
+      "choices": [
+        "AES128",
+        "AES192",
+        "AES256",
+        "ARIA128",
+        "ARIA192",
+        "ARIA256"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "container",
+      "displayName": "Container",
+      "type": "string",
+      "required": false,
+      "default": "current",
+      "description": "Container clause for multitenant environments",
+      "choices": [
+        "current",
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "export_file",
+      "displayName": "Export File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "File path for key export/import operations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "export_secret",
+      "displayName": "Export Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Secret passphrase for key export/import file encryption",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_name_convert",
+      "displayName": "File Name Convert",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary mapping old datafile names to new names for online conversion Example: {'old_file.dbf': 'new_file.dbf'}",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_keystore",
+      "displayName": "Force Keystore",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use FORCE KEYSTORE clause (temporarily opens auto-login keystore)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_tag",
+      "displayName": "Key Tag",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User-defined tag for the master encryption key",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keystore_password",
+      "displayName": "Keystore Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the keystore (required for most operations)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "master_key_action",
+      "displayName": "Master Key Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Action to perform on master encryption key",
+      "choices": [
+        "set_key",
+        "rotate_key",
+        "create_key",
+        "export_keys",
+        "import_keys"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "online",
+      "displayName": "Online",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to perform online (true) or offline (false) tablespace conversion",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The intended state",
+      "choices": [
+        "present",
+        "absent",
+        "status"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tablespace",
+      "displayName": "Tablespace",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the tablespace to encrypt, decrypt, or rekey",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tablespace_encryption_policy",
+      "displayName": "Tablespace Encryption Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Database-level tablespace encryption policy parameter AUTO_ENABLE encrypts all new tablespaces automatically MANUAL_ENABLE requires explicit ENCRYPTION clause in CREATE TABLESPACE DECRYPT_ONLY allows decryption but prevents new encryption",
+      "choices": [
+        "AUTO_ENABLE",
+        "MANUAL_ENABLE",
+        "DECRYPT_ONLY"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tablespace_state",
+      "displayName": "Tablespace State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Desired encryption state of the tablespace",
+      "choices": [
+        "encrypted",
+        "decrypted",
+        "rekeyed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

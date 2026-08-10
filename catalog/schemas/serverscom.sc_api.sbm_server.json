@@ -1,0 +1,209 @@
+{
+  "fqcn": "serverscom.sc_api.sbm_server",
+  "shortDescription": "Create or delete an SBM (Scalable Baremetal) server",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/serverscom/sc_api/sbm_server_module.html",
+  "options": [
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.servers.com/v1",
+      "description": "Endpoint to use to connect to API. Do not change until specifically asked to do otherwise. If not set, the value of the C(SERVERSCOM_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flavor_id",
+      "displayName": "Flavor Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the SBM flavor model to order. Mutually exclusive with I(flavor_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flavor_name",
+      "displayName": "Flavor Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Human-readable name of the SBM flavor model (e.g. V(DL-01)). Mutually exclusive with I(flavor_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hostname for the new server (I(state)=C(present)). Can also be used to identify the server for I(state)=C(absent) instead of I(server_id). The hostname is resolved to a server ID via exact match on the server title.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location_code",
+      "displayName": "Location Code",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Code of the location to order the server in (e.g. V(AMS7)). Mutually exclusive with I(location_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location_id",
+      "displayName": "Location Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the location to order the server in. Mutually exclusive with I(location_code).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operating_system_id",
+      "displayName": "Operating System Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the operating system to install. Mutually exclusive with I(operating_system_name) and I(operating_system_regex).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operating_system_name",
+      "displayName": "Operating System Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Full name of the operating system to install (exact match on C(full_name)). Mutually exclusive with I(operating_system_id) and I(operating_system_regex).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operating_system_regex",
+      "displayName": "Operating System Regex",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Regular expression to match an operating system by C(full_name) (case insensitive). Must match exactly one OS option. Mutually exclusive with I(operating_system_id) and I(operating_system_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retry_on_conflicts",
+      "displayName": "Retry On Conflicts",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Retry delete request for I(state)=C(absent) if server is in conflicting state (HTTP 409). Retries are controlled by I(wait) and I(update_interval).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_id",
+      "displayName": "Server Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the SBM server for I(state)=C(absent). Mutually exclusive with I(hostname) when I(state)=C(absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_key_fingerprints",
+      "displayName": "Ssh Key Fingerprints",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of SSH key fingerprints to install on the server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "State of the SBM server. C(present) orders a new SBM server. C(absent) releases (deletes) an existing SBM server. C(present) requires I(hostname) and one of each pair I(location_id)/I(location_code), I(flavor_id)/I(flavor_name), I(operating_system_id)/I(operating_system_name)/I(operating_system_regex). C(absent) requires I(server_id) or I(hostname).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Token to use. You can create token for your account in https://portal.servers.com in Profile -> Public API section. If not set, the value of the C(SERVERSCOM_API_TOKEN) or C(SC_TOKEN) environment variable is used (C(SERVERSCOM_API_TOKEN) takes precedence). Value is not logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_interval",
+      "displayName": "Update Interval",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Polling interval (in seconds) for waiting. Every polling request reduces API rate limits.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_data",
+      "displayName": "User Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User data to pass to the newly created server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "number",
+      "required": false,
+      "default": 86400,
+      "description": "Time to wait (in seconds) until server reaches desired state. For I(state)=C(present), waits for server to become ready (active, powered_on, normal). For I(state)=C(absent), controls retry timeout when I(retry_on_conflicts) is enabled. Does not wait for server disappearance unless I(wait_for_deletion) is set. Value C(0) disables waiting (fire-and-forget mode). SBM provisioning can be slow, so the default is 86400 (24 hours).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_deletion",
+      "displayName": "Wait For Deletion",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "For I(state)=C(absent), whether to wait for the server to actually disappear after the delete request is accepted. SBM server deletion is not instant; the server is released at the end of the current billing hour. When C(false) (default), the module returns as soon as the API accepts the delete request. When C(true), the module polls until the server is gone, subject to I(wait) and I(update_interval).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

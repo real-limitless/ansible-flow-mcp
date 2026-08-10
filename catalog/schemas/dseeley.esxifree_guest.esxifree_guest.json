@@ -1,0 +1,225 @@
+{
+  "fqcn": "dseeley.esxifree_guest.esxifree_guest",
+  "shortDescription": "Manages virtual machines in ESXi without a dependency on the vSphere/ vCenter API.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dseeley/esxifree_guest/esxifree_guest_module.html",
+  "options": [
+    {
+      "name": "cdrom",
+      "displayName": "Cdrom",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of cdrom to add. A CD-ROM configuration for the virtual machine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloudinit_userdata",
+      "displayName": "Cloudinit Userdata",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A list of userdata (per user) as defined U(https://cloudinit.readthedocs.io/en/latest/topics/examples.html).  The VM must already have cloud-init-vmware-guestinfo installed U(https://github.com/vmware/cloud-init-vmware-guestinfo)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "customvalues",
+      "displayName": "Customvalues",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Define a list of custom values to set on virtual machine. A custom value object takes two fields C(key) and C(value). Incorrect key and values will be ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datastore",
+      "displayName": "Datastore",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify datastore or datastore cluster to provision virtual machine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_cloudinit",
+      "displayName": "Delete Cloudinit",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Delete the cloud-init config after creation.  If you do this, you will need to remove cloud-init from the system, or it will overwrite with defaults on next boot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disks",
+      "displayName": "Disks",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of disks to add (or create via cloning). Support resizing disks after added. Removing existing disks of the virtual machine is not supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Delete the existing host if it exists.  Use with extreme care!",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "guest_id",
+      "displayName": "Guest Id",
+      "type": "string",
+      "required": false,
+      "default": "ubuntu-64",
+      "description": "Set the guest ID. This parameter is case sensitive. {'Examples': None}   virtual machine with RHEL7 64 bit, will be 'rhel7-64'   virtual machine with CentOS 7 (64-bit), will be 'centos7-64'   virtual machine with Debian 9 (Stretch) 64 bit, will be 'debian9-64'   virtual machine with Ubuntu 64 bit, will be 'ubuntu-64'   virtual machine with Windows 10 (64 bit), will be 'windows9-64'   virtual machine with Other (64 bit), will be 'other-64' This field is required when creating a virtual machine, n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hardware",
+      "displayName": "Hardware",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Manage virtual machine's hardware attributes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the ESXi server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "moid",
+      "displayName": "Moid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Managed Object ID of the virtual machine to manage This is required if C(name) is not supplied. If virtual machine does not exists, then this parameter is ignored. Will be ignored on virtual machine creation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the virtual machine to work with. Virtual machine names in ESXi are unique This parameter is required, if C(state) is set to C(present) and virtual machine does not exists. This parameter is case sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "networks",
+      "displayName": "Networks",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A list of networks (in the order of the NICs). Removing NICs is not allowed, while reconfiguring the virtual machine. All parameters and VMware object names are case sensetive. {'One of the below parameters is required per entry': None} [{'C(networkName) (string)': 'Name of the portgroup for this interface.'}] [{'C(virtualDev) (string)': 'Virtual network device (one of C(e1000e), C(vmxnet3) (default), C(sriov)).'}] {'Optional parameters per entry (used for OS customization)': None} [{'C(cloudini",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of C(username) for the ESXi server, or the password for the private key (if required).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Specify the state the virtual machine should be in. If C(state) is set to C(present) and virtual machine exists, ensure the virtual machine configurations conforms to task arguments. If C(state) is set to C(absent) and virtual machine exists, then the specified virtual machine is removed with its associated components. If C(state) is set to one of the following C(poweredon), C(poweredoff), C(present) and virtual machine does not exists, then virtual machine is deployed with given parameters. If ",
+      "choices": [
+        "present",
+        "absent",
+        "poweredon",
+        "poweredoff",
+        "shutdownguest",
+        "rebootguest",
+        "unchanged"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Template or existing virtual machine used to create new virtual machine. If this value is not set, virtual machine is created without using a template. If the virtual machine already exists, this parameter will be ignored. This parameter is case sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username to access the ESXi server at C(hostname).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "On creation, wait for the instance to obtain its IP address before returning.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "How long before wait gives up, in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

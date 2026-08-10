@@ -1,0 +1,60 @@
+{
+  "fqcn": "ibm.power_vios.alt_root_vg",
+  "shortDescription": "Create/Cleanup an alternate rootvg disk on a VIOS",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_vios/alt_root_vg_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "copy",
+      "description": "Specifies the operation to perform on the VIOS. C(copy) to perform and alternate disk copy. C(clean) to cleanup an existing alternate disk copy.",
+      "choices": [
+        "copy",
+        "clean"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_size_policy",
+      "displayName": "Disk Size Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When I(action=copy), specifies how to choose the alternate disk if I(targets) is not specified. C(minimize) smallest disk that can be selected. C(upper) first disk found bigger than the rootvg disk. C(lower) disk size less than rootvg disk size but big enough to contain the used PPs. C(nearest) disk size closest to the rootvg disk.",
+      "choices": [
+        "minimize",
+        "upper",
+        "lower",
+        "nearest"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Forces removal of any existing alternate disk copy on target disks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "targets",
+      "displayName": "Targets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the target disks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

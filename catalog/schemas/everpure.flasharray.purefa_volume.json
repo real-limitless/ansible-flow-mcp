@@ -1,0 +1,363 @@
+{
+  "fqcn": "everpure.flasharray.purefa_volume",
+  "shortDescription": "Manage volumes on Everpure FlashArrays",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/everpure/flasharray/purefa_volume_module.html",
+  "options": [
+    {
+      "name": "add_to_pgs",
+      "displayName": "Add To Pgs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A new volume will be added to the specified protection groups on creation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token",
+      "displayName": "Api Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FlashArray API token for admin privileged user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bw_qos",
+      "displayName": "Bw Qos",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bandwidth limit for volume in M or G units. M will set MB/s G will set GB/s To clear an existing QoS setting use 0 (zero)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the API Client that issues the identity token. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Name of fleet member on which to perform the operation. This requires the array receiving the request is a member of a fleet and the context name to be a member of the same fleet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "count",
+      "displayName": "Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of volumes to be created in a multiple volume creation Only supported from Purity//FA v6.0.0 and higher",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "digits",
+      "displayName": "Digits",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Number of digits to use for multiple volume count. This will pad the index number with zeros where necessary Only supported from Purity//FA v6.0.0 and higher Range is between 1 and 10",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_warnings",
+      "displayName": "Disable Warnings",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disable insecure certificate warnings in debug logs",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "eradicate",
+      "displayName": "Eradicate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Define whether to eradicate the volume on delete or leave in trash.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fa_url",
+      "displayName": "Fa Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FlashArray management IPv4 address or Hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id_token",
+      "displayName": "Id Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A pre-signed JWT to authenticate with, as an alternative to I(api_token). The token is exchanged by the array for a short-lived access token. Requires a matching API Client to be registered on the array (see M(everpure.flasharray.purefa_apiclient)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iops_qos",
+      "displayName": "Iops Qos",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IOPs limit for volume - use value or K or M K will mean 1000 M will mean 1000000 To clear an existing IOPs setting use 0 (zero)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "issuer",
+      "displayName": "Issuer",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The API Client's trusted identity issuer registered on the array. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_id",
+      "displayName": "Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Key ID of the API Client that issues the identity token. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "move",
+      "displayName": "Move",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Move a volume in and out of a pod or vgroup Provide the name of pod or vgroup to move the volume to Pod and Vgroup names must be unique in the array To move to the local array, specify C(local) This is not idempotent - use C(ignore_errors) in the play",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the volume. Volume could be created in a POD with this syntax POD_NAME::VOLUME_NAME. Volume could be created in a volume group with this syntax VG_NAME/VOLUME_NAME. Multi-volume support available from Purity//FA 6.0.0 B(***NOTE***) Manual deletion or eradication of individual volumes created using multi-volume will cause idempotency to fail Multi-volume support only exists for volume creation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "overwrite",
+      "displayName": "Overwrite",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Define whether to overwrite a target volume if it already exists.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pgroup",
+      "displayName": "Pgroup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of existing, not deleted, protection group to add volume to Only application for volume(s) creation Superseded from Purity//FA 6.3.4 by I(add_to_pgs)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority_operator",
+      "displayName": "Priority Operator",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "DMM Priority Adjustment operator",
+      "choices": [
+        "=",
+        "+",
+        "-"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority_value",
+      "displayName": "Priority Value",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "DMM Priority Adjustment value",
+      "choices": [
+        -10,
+        0,
+        10
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_file",
+      "displayName": "Private Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the PEM RSA private key used to sign an identity token, as an alternative to I(api_token). Requires I(client_id), I(key_id), I(issuer) and I(username).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_password",
+      "displayName": "Private Key Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password protecting I(private_key_file), if encrypted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "promotion_state",
+      "displayName": "Promotion State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Promote or demote the volume so that the volume starts or stops accepting write requests.",
+      "choices": [
+        "promoted",
+        "demoted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rename",
+      "displayName": "Rename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Value to rename the specified volume to. Rename only applies to the container the current volumes is in. There is no requirement to specify the pod or vgroup name as this is implied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Volume size in M, G, T or P units.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start",
+      "displayName": "Start",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Number at which to start the multiple volume creation index Only supported from Purity//FA v6.0.0 and higher",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Define whether the volume should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suffix",
+      "displayName": "Suffix",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Suffix string, if required, for multiple volume create Volume names will be formed as I(<name>#I<suffix>), where I(#) is a placeholder for the volume index See associated descriptions Only supported from Purity//FA v6.0.0 and higher",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the target volume, if copying.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username the issued token should be granted to. Must be a valid user on the array. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "with_default_protection",
+      "displayName": "With Default Protection",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to add the default container protection groups to those specified in I(add_to_pgs) as the initial protection of a new volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

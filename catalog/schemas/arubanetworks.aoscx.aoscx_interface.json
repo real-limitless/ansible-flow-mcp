@@ -1,0 +1,263 @@
+{
+  "fqcn": "arubanetworks.aoscx.aoscx_interface",
+  "shortDescription": "Module for configuring Interfaces in AOS-CX switches.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/arubanetworks/aoscx/aoscx_interface_module.html",
+  "options": [
+    {
+      "name": "acl_direction",
+      "displayName": "Acl Direction",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Direction for which the ACL is to be applied or removed.",
+      "choices": [
+        "in",
+        "out",
+        "routed-in",
+        "routed-out"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "acl_name",
+      "displayName": "Acl Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the ACL being applied or removed from the VLAN.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "acl_type",
+      "displayName": "Acl Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of ACL being applied or removed from the VLAN.",
+      "choices": [
+        "ipv4",
+        "ipv6",
+        "mac"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autoneg",
+      "displayName": "Autoneg",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Configure the auto-negotiation state of the interface. If `off` both `speeds`, and `duplex` are required.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configure_speed",
+      "displayName": "Configure Speed",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Option to configure speed/duplex in the interface. It `true`, `autoneg` is required.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "duplex",
+      "displayName": "Duplex",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configure the interface for full duplex or half duplex. If `autoneg`is `on` this must be omitted.\n",
+      "choices": [
+        "full",
+        "half"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Administrative state of the interface. Use true to administratively enable it.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mtu",
+      "displayName": "Mtu",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Configure MTU value of the interface",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Interface name, should be in the format chassis/slot/port, e.g. 1/2/3, 1/2/32.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_qos",
+      "displayName": "No Qos",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Flag to remove the existing QoS schedule profile of the interface. use true to remove it. This option is mutually exclusive with the qos option.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "qos",
+      "displayName": "Qos",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of existing QoS schedule profile to apply to interface. This option is mutually exclusive with the no_qos option.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "qos_rate",
+      "displayName": "Qos Rate",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The rate limit value configured for broadcast/multicast/unknown unicast traffic.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "qos_trust_mode",
+      "displayName": "Qos Trust Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the interface QoS Trust Mode. 'global' configures the interface to use the global configuration.\n",
+      "choices": [
+        "cos",
+        "dscp",
+        "none",
+        "global"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "queue_profile",
+      "displayName": "Queue Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of queue profile to apply to interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "speeds",
+      "displayName": "Speeds",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Configure the speeds of the interface in megabits per second. If `duplex` is defined only one speed may be specified.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "create",
+      "description": "Create, Update or Delete the Interface.",
+      "choices": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_global_queue_profile",
+      "displayName": "Use Global Queue Profile",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Option to use the switch's global Queue Profile. This option is mutually exclusive with the queue_profile option.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vsx_sync",
+      "displayName": "Vsx Sync",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Controls which attributes should be synchronized between VSX peers.\n",
+      "choices": [
+        "acl",
+        "irdp",
+        "qos",
+        "rate_limits",
+        "vlan",
+        "vsx_virtual",
+        "virtual_gw_l3_src_mac_enable",
+        "policy",
+        "threshold_profile",
+        "macsec_policy",
+        "mka_policy",
+        "portfilter",
+        "client_ip_track_configuration",
+        "mgmd_acl",
+        "mgmd_enable",
+        "mgmd_robustness",
+        "mgmd_querier_max_response_time",
+        "mgmd_mld_version",
+        "mgmd_querier_interval",
+        "mgmd_last_member_query_interval",
+        "mgmd_querier_enable",
+        "mgmd_mld_static_groups",
+        "mgmd_igmp_static_groups",
+        "mgmd_igmp_version"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

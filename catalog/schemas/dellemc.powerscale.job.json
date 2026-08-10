@@ -1,0 +1,205 @@
+{
+  "fqcn": "dellemc.powerscale.job",
+  "shortDescription": "Manage jobs on PowerScale",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/powerscale/job_module.html",
+  "options": [
+    {
+      "name": "allow_dup",
+      "displayName": "Allow Dup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to allow starting a duplicate job of the same type. If set to C(false) and a running job of the same type exists, the operation is a no-op.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "the password of the PowerScale cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "username of the PowerScale cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_id",
+      "displayName": "Job Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The ID of an existing job to control. Mutually exclusive with I(job_type). Required if I(job_type) is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_params",
+      "displayName": "Job Params",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Additional parameters to pass when starting the job.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_state",
+      "displayName": "Job State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The desired control state of the job. C(started) - Start a new job (used with I(job_type)). C(paused) - Pause a running job. C(running) - Resume a paused job. C(cancelled) - Cancel a running or paused job.",
+      "choices": [
+        "started",
+        "paused",
+        "running",
+        "cancelled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_type",
+      "displayName": "Job Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of job to start (e.g. C(SmartPools), C(TreeDelete)). Mutually exclusive with I(job_id). Required if I(job_id) is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "onefs_host",
+      "displayName": "Onefs Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP address or FQDN of the PowerScale cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "paths",
+      "displayName": "Paths",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of filesystem paths for the job. Required when starting a new job with I(job_type).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policy",
+      "displayName": "Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The impact policy name to associate with the job.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_no",
+      "displayName": "Port No",
+      "type": "string",
+      "required": false,
+      "default": "8080",
+      "description": "Port number of the PowerScale cluster.It defaults to 8080 if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The priority of the job. Must be between 1 and 10.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the job resource. C(present) - Indicates the job should exist or be controlled.",
+      "choices": [
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_ssl",
+      "displayName": "Verify Ssl",
+      "type": "boolean",
+      "required": true,
+      "default": null,
+      "description": "boolean variable to specify whether to validate SSL certificate or not. C(true) - indicates that the SSL certificate should be verified. C(false) - indicates that the SSL certificate should not be verified.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to wait for the job to complete after starting it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_interval",
+      "displayName": "Wait Interval",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Interval in seconds between polling for job status during wait.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "Maximum time in seconds to wait for job completion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

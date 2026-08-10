@@ -1,0 +1,246 @@
+{
+  "fqcn": "digitalocean.cloud.load_balancer",
+  "shortDescription": "Create or delete load balancers",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/digitalocean/cloud/load_balancer_module.html",
+  "options": [
+    {
+      "name": "client_override_options",
+      "displayName": "Client Override Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Client override options (developer use). For example, can be used to override the DigitalOcean API endpoint for an internal test suite. If provided, these options will knock out existing options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_lets_encrypt_dns_records",
+      "displayName": "Disable Lets Encrypt Dns Records",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "A boolean value indicating whether to disable automatic DNS record creation for\nLet's Encrypt certificates that are added to the load balancer.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "droplet_ids",
+      "displayName": "Droplet Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "An array containing the IDs of the Droplets assigned to the load balancer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_backend_keepalive",
+      "displayName": "Enable Backend Keepalive",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "A boolean value indicating whether HTTP keepalive connections are maintained to target\nDroplets.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_proxy_protocol",
+      "displayName": "Enable Proxy Protocol",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "A boolean value indicating whether PROXY Protocol is in use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "firewall",
+      "displayName": "Firewall",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "An object specifying allow and deny rules to control traffic to the load balancer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forwarding_rules",
+      "displayName": "Forwarding Rules",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "An array of objects specifying the forwarding rules for a load balancer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_checks",
+      "displayName": "Health Checks",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "An object specifying health check settings for the load balancer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_idle_timeout_seconds",
+      "displayName": "Http Idle Timeout Seconds",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "An integer value which configures the idle timeout for HTTP requests to the target droplets.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "module_override_options",
+      "displayName": "Module Override Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Module override options (developer use). Can be used to override module options to support experimental or future options. If provided, these options will knock out existing options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A human-readable name for a load balancer instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project_id",
+      "displayName": "Project Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default\nproject.\n If an invalid project ID is provided, the load balancer will not be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "redirect_http_to_https",
+      "displayName": "Redirect Http To Https",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "A boolean value indicating whether HTTP requests to the load balancer on port 80 will\nbe redirected to HTTPS on port 443.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The slug identifier for the region where the resource will initially be available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": false,
+      "default": "lb-small",
+      "description": "Deprecated. This field has been replaced by the size_unit field for all regions except in AMS2, NYC2,\nand SFO1.\n Each available load balancer size now equates to the load balancer having a set number of nodes. C(lb-small) = 1 node, C(lb-medium) = 3 nodes, C(lb-large) = 6 nodes.",
+      "choices": [
+        "lb-small",
+        "lb-medium",
+        "lb-large"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size_unit",
+      "displayName": "Size Unit",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once\nper hour.\n This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the size field to scale load balancers that reside in these regions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the resource, C(present) to create, C(absent) to destroy.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sticky_sessions",
+      "displayName": "Sticky Sessions",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "An object specifying sticky sessions settings for the load balancer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "Polling timeout in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "DigitalOcean API token. There are several environment variables which can be used to provide this value. C(DIGITALOCEAN_ACCESS_TOKEN), C(DIGITALOCEAN_TOKEN), C(DO_API_TOKEN), C(DO_API_KEY), C(DO_OAUTH_TOKEN) and C(OAUTH_TOKEN)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vpc_uuid",
+      "displayName": "Vpc Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A string specifying the UUID of the VPC to which the load balancer is assigned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

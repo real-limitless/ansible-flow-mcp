@@ -1,0 +1,207 @@
+{
+  "fqcn": "dellemc.powerstore.snapshotrule",
+  "shortDescription": "Snapshot Rule operations on a PowerStore storage system",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/powerstore/snapshotrule_module.html",
+  "options": [
+    {
+      "name": "array_ip",
+      "displayName": "Array Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the PowerStore management system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "days_of_week",
+      "displayName": "Days Of Week",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of strings to specify days of the week on which the Snapshot rule should be applied. Must be applied for Snapshot rules where the I(time_of_day) parameter is set. Optional for the Snapshot rule created with an interval. When I(days_of_week) is not specified for a new Snapshot rule, the rule is applied on every day of the week.",
+      "choices": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_snaps",
+      "displayName": "Delete Snaps",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Boolean variable to specify whether all Snapshots previously created by this rule should also be deleted when this rule is removed. C(true) specifies to delete all previously created Snapshots by this rule while deleting this rule. C(false) specifies to retain all previously created Snapshots while deleting this rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "desired_retention",
+      "displayName": "Desired Retention",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Integer variable. Indicates the desired Snapshot retention period. It is required when creating a new Snapshot rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interval",
+      "displayName": "Interval",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "String variable. Indicates the interval between Snapshots. When creating a Snapshot rule, specify either I(interval) or I(time_of_day), but not both.",
+      "choices": [
+        "Five_Minutes",
+        "Fifteen_Minutes",
+        "Thirty_Minutes",
+        "One_Hour",
+        "Two_Hours",
+        "Three_Hours",
+        "Four_Hours",
+        "Six_Hours",
+        "Eight_Hours",
+        "Twelve_Hours",
+        "One_Day"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_secure",
+      "displayName": "Is Secure",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether snapshots created by this rule will be secure snapshots. Secure snapshots cannot be deleted or have their retention reduced until the retention period expires. Once set to C(true), this is a one-way operation and cannot be reverted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "String variable. Indicates the name of the Snapshot rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_name",
+      "displayName": "New Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "String variable. Indicates the new name of the Snapshot rule. Used for renaming operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the PowerStore host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Port number for the PowerStore array. If not passed, it will take 443 as default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshotrule_id",
+      "displayName": "Snapshotrule Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "String variable. Indicates the ID of the Snapshot rule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "String variable indicates the state of Snapshot rule. For \"Delete\" operation only, it should be set to C(absent). For all Create, Modify or Get details operation it should be set to C(present).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_of_day",
+      "displayName": "Time Of Day",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "String variable. Indicates the time of the day to take a daily Snapshot, with the format \"hh:mm\" in 24 hour time format. When creating a Snapshot rule, specify either I(interval) or I(time_of_day) but not both.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Time after which the connection will get terminated. It is to be mentioned in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the PowerStore host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean variable to specify whether to validate SSL certificate or not. C(true) - indicates that the SSL certificate should be verified. Set the environment variable REQUESTS_CA_BUNDLE to the path of the SSL certificate. C(false) - indicates that the SSL certificate should not be verified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

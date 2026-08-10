@@ -1,0 +1,325 @@
+{
+  "fqcn": "maxhoesel.smallstep.step_ca_certificate",
+  "shortDescription": "Generate a new private key and certificate signed by the root certificate",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/maxhoesel/smallstep/step_ca_certificate_module.html",
+  "options": [
+    {
+      "name": "acme",
+      "displayName": "Acme",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ACME directory url to be used for requesting certificates via the ACME protocol. Use this parameter to define an ACME server other than the Step CA. If this flag is absent and an ACME provisioner has been selected then the I(ca_url) parameter must be defined.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_config",
+      "displayName": "Ca Config",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the certificate authority configuration file on the host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_url",
+      "displayName": "Ca Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URI of the targeted Step Certificate Authority. Used if the module is run in online mode (default) and the hosts C(step-cli) is not configured to trust the CA.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "contact",
+      "displayName": "Contact",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The email-address used for contact as part of the ACME protocol. These contacts may be used to warn of certificate expiration or other certificate lifetime events. Must be a list\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "crt_file",
+      "displayName": "Crt File",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "File to write the certificate (PEM format)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "curve",
+      "displayName": "Curve",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The elliptic curve to use for EC and OKP key types. Corresponds to the \"crv\" JWK parameter. Valid curves are defined in JWA [RFC7518]. If unset, default is P-256 for EC keys and Ed25519 for OKP keys.\n",
+      "choices": [
+        "P-256",
+        "P-384",
+        "P-521",
+        "Ed25519"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Force the overwrite of files without asking.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_listen",
+      "displayName": "Http Listen",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use a non-standard http address, behind a reverse proxy or load balancer, for serving ACME challenges. The default address is :80, which requires super user (sudo) privileges. This flag must be used in conjunction with the I(standalone) param.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "k8ssa_token_path",
+      "displayName": "K8Ssa Token Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configure the file from which to read the kubernetes service account token.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_file",
+      "displayName": "Key File",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "File to write the private key (PEM format)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kty",
+      "displayName": "Kty",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The kty to build the certificate upon. If unset, default is EC. I(kty) is a case-sensitive string.\n",
+      "choices": [
+        "EC",
+        "OKP",
+        "RSA"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Common Name, DNS Name, or IP address that will be set as the Subject Common Name for the certificate. If no Subject Alternative Names (SANs) are configured (via the san parameter) then the subject will be set as the only SAN.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "not_after",
+      "displayName": "Not After",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The time/duration when the certificate validity period ends. If a time is used it is expected to be in RFC 3339 format. If a duration is used, it is a sequence of decimal numbers, each with optional fraction and a unit suffix, such as \"300ms\", \"-1.5h\" or \"2h45m\". Valid time units are \"ns\", \"us\" (or \"\u00b5s\"), \"ms\", \"s\", \"m\", \"h\".\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "not_before",
+      "displayName": "Not Before",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The time/duration when the certificate validity period starts. If a time is used it is expected to be in RFC 3339 format. If a duration is used, it is a sequence of decimal numbers, each with optional fraction and a unit suffix, such as \"300ms\", \"-1.5h\" or \"2h45m\". Valid time units are \"ns\", \"us\" (or \"\u00b5s\"), \"ms\", \"s\", \"m\", \"h\".\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "offline",
+      "displayName": "Offline",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Don't contact the CA. Offline mode uses the configuration, certificates, and keys created with step ca init, but can accept a different configuration file using the I(ca_config) flag.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provisioner",
+      "displayName": "Provisioner",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The provisioner name to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provisioner_password_file",
+      "displayName": "Provisioner Password File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the file containing the password to decrypt the one-time token generating key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "root",
+      "displayName": "Root",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the PEM file used as the root certificate authority. Used if the module is run in online mode (default) and the hosts C(step-cli) is not configured to trust the CA.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "san",
+      "displayName": "San",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Add dns/ip/email/uri Subject Alternative Name(s) (SANs) that should be authorized. The I(san) parameter and the I(token) parameter are mutually exclusive. Must be a list.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "set",
+      "displayName": "Set",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The key=value pair with template data variables to send to the CA. Must be a list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "set_file",
+      "displayName": "Set File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path of a JSON file with the template data to send to the CA.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The size (in bits) of the key for RSA and oct key types. RSA keys require a minimum key size of 2048 bits. If unset, default is 2048 bits for RSA keys and 128 bits for oct keys.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "standalone",
+      "displayName": "Standalone",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Get a certificate using the ACME protocol and standalone mode for validation. Standalone is a mode in which the step process will run a server that will will respond to ACME challenge validation requests. Standalone is the default mode for serving challenge validation requests.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "step_cli_executable",
+      "displayName": "Step Cli Executable",
+      "type": "string",
+      "required": false,
+      "default": "step-cli",
+      "description": "Name (or absolute path) of the C(step-cli) executable to use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The one-time token used to authenticate with the CA in order to create the certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "webroot",
+      "displayName": "Webroot",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify a path to use as a 'web root' for validation in the ACME protocol. Webroot is a mode in which the step process will write a challenge file to a location being served by an existing fileserver in order to respond to ACME challenge validation requests.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x5c_cert",
+      "displayName": "X5C Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Certificate (chain) in PEM format to store in the 'x5c' header of a JWT.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x5c_key",
+      "displayName": "X5C Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Private key path, used to sign a JWT, corresponding to the certificate that will be stored in the 'x5c' header.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

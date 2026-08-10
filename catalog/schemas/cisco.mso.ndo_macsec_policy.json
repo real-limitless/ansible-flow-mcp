@@ -1,0 +1,298 @@
+{
+  "fqcn": "cisco.mso.ndo_macsec_policy",
+  "shortDescription": "Manage MACsec Policies on Cisco Nexus Dashboard Orchestrator (NDO).",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/mso/ndo_macsec_policy_module.html",
+  "options": [
+    {
+      "name": "admin_state",
+      "displayName": "Admin State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The administrative state of the MACsec Policy. (Enables or disables the policy) The default value is C(enabled).",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cipher_suite",
+      "displayName": "Cipher Suite",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The cipher suite to be used for encryption. The default value is C(256_gcm_aes_xpn).",
+      "choices": [
+        "128_gcm_aes",
+        "128_gcm_aes_xpn",
+        "256_gcm_aes",
+        "256_gcm_aes_xpn"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "confidentiality_offset",
+      "displayName": "Confidentiality Offset",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The confidentiality offset for the MACsec Policy. The default value is 0. This parameter is only available for type C(access).",
+      "choices": [
+        0,
+        30,
+        50
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description of the MACsec Policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP Address or hostname of the ACI Multi Site Orchestrator host. If the value is not specified in the task, the value of environment variable C(MSO_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface_type",
+      "displayName": "Interface Type",
+      "type": "string",
+      "required": false,
+      "default": "fabric",
+      "description": "The type of the interfaces this policy will be applied to.",
+      "choices": [
+        "fabric",
+        "access"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_server_priority",
+      "displayName": "Key Server Priority",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The key server priority for the MACsec Policy. The value must be between 0 and 255. The default value 16 for type C(access). This parameter is only available for type C(access).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_domain",
+      "displayName": "Login Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The login domain name to use for authentication. The default value is Local. If the value is not specified in the task, the value of environment variable C(MSO_LOGIN_DOMAIN) will be used instead. When using a HTTPAPI connection plugin the inventory variable C(ansible_httpapi_login_domain) will be used if this attribute is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "macsec_keys",
+      "displayName": "Macsec Keys",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of the MACsec Keys. Providing an empty list will remove the O(macsec_keys) from the MACsec Policy. The old O(macsec_keys) entries will be replaced with the new entries during update.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "macsec_policy",
+      "displayName": "Macsec Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the MACsec Policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "macsec_policy_uuid",
+      "displayName": "Macsec Policy Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The UUID of the MACsec Policy. This parameter is required when the O(macsec_policy) needs to be updated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output_level",
+      "displayName": "Output Level",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "Influence the output of this MSO module. C(normal) means the standard output, incl. C(current) dict C(info) adds informational output, incl. C(previous), C(proposed) and C(sent) dicts C(debug) adds debugging output, incl. C(filter_string), C(method), C(response), C(status) and C(url) information If the value is not specified in the task, the value of environment variable C(MSO_OUTPUT_LEVEL) will be used instead.",
+      "choices": [
+        "debug",
+        "info",
+        "normal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to use for authentication. If the value is not specified in the task, the value of environment variables C(MSO_PASSWORD) or C(ANSIBLE_NET_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Port number to be used for the REST connection. The default value depends on parameter `use_ssl`. If the value is not specified in the task, the value of environment variable C(MSO_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sak_expiry_time",
+      "displayName": "Sak Expiry Time",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The expiry time for the Security Association Key (SAK) for the MACsec Policy. The value must be 0 or between 60 and 2592000. The default value is 0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_policy",
+      "displayName": "Security Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The security policy to allow traffic on the link for the MACsec Policy. The default value is C(should_secure).",
+      "choices": [
+        "should_secure",
+        "must_secure"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "query",
+      "description": "Use C(absent) for removing. Use C(query) for listing an object or multiple objects. Use C(present) for creating or updating.",
+      "choices": [
+        "absent",
+        "query",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the template. The template must be a fabric policy template.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The socket level timeout in seconds. The default value is 30 seconds. If the value is not specified in the task, the value of environment variable C(MSO_TIMEOUT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If C(false), it will not use a proxy, even if one is defined in an environment variable on the target hosts. If the value is not specified in the task, the value of environment variable C(MSO_USE_PROXY) will be used instead. The default is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_ssl",
+      "displayName": "Use Ssl",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If C(false), an HTTP connection will be used instead of the default HTTPS connection. If the value is not specified in the task, the value of environment variable C(MSO_USE_SSL) will be used instead. When using a HTTPAPI connection plugin the inventory variable C(ansible_httpapi_use_ssl) will be used if this attribute is not specified. The default is C(false) when using a HTTPAPI connection plugin (mso or nd) and C(true) when using the legacy connection method (only for mso).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use for authentication. If the value is not specified in the task, the value of environment variables C(MSO_USERNAME) or C(ANSIBLE_NET_USERNAME) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If C(false), SSL certificates will not be validated. This should only set to C(false) when used on personally controlled sites using self-signed certificates. If the value is not specified in the task, the value of environment variable C(MSO_VALIDATE_CERTS) will be used instead. The default is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "window_size",
+      "displayName": "Window Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The window size defines the maximum number of frames that can be received out of order before a replay attack is detected. The value must be between 0 and 4294967295. The default value is 0 for type C(fabric) and 64 for type C(access).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

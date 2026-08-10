@@ -1,0 +1,200 @@
+{
+  "fqcn": "community.clickhouse.clickhouse_row_policy",
+  "shortDescription": "Creates, removes or modify a ClickHouse row policy using the clickhouse-driver Client interface",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/clickhouse/clickhouse_row_policy_module.html",
+  "options": [
+    {
+      "name": "apply_to",
+      "displayName": "Apply To",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The users or roles to which the row policy applies.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "apply_to_all",
+      "displayName": "Apply To All",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the row policy applies to all users or roles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "apply_to_except",
+      "displayName": "Apply To Except",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The users or roles to which the row policy does not apply. Can only be used if C(apply_to_all) is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_kwargs",
+      "displayName": "Client Kwargs",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Any additional keyword arguments you want to pass to the Client interface when instantiating its object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the cluster where the row policy is defined. If not provided, the row policy will be managed on the local server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database",
+      "displayName": "Database",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the database where the row policy is defined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_db",
+      "displayName": "Login Db",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The same as the V(Client(database='...'\\)) argument. If not passed, relies on the driver's default argument value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "The same as the V(Client(host='...'\\)) argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The same as the V(Client(password='...'\\)) argument. If not passed, relies on the driver's default argument value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The same as the V(Client(port='...'\\)) argument. If not passed, relies on the driver's default argument value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The same as the V(Client(user='...'\\)) argument. If not passed, relies on the driver's default argument value. Be sure your the user has permissions to read the system tables listed in the RETURN section.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the row policy to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restrictive",
+      "displayName": "Restrictive",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the row policy is restrictive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the row policy should be present or not. If C(present), the module will create or update the row policy to match the provided parameters. If C(absent), the module will remove the row policy if it exists.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "success_on",
+      "displayName": "Success On",
+      "type": "list",
+      "required": false,
+      "default": [
+        497
+      ],
+      "description": "List of L(server error codes,https://github.com/ClickHouse/ClickHouse/blob/master/src/Common/ErrorCodes.cpp) that will be treated as success, otherwise throw errors.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "table",
+      "displayName": "Table",
+      "type": "string",
+      "required": false,
+      "default": "*",
+      "description": "The name of the table where the row policy is defined. Can be C(*),",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "using",
+      "displayName": "Using",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The condition that defines the row policy. This is a required parameter when C(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

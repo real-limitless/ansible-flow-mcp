@@ -1,0 +1,84 @@
+{
+  "fqcn": "ibm.ibm_zos_cics.td_intrapartition",
+  "shortDescription": "Create and remove the CICS transient data intrapartition data set",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_cics/td_intrapartition_module.html",
+  "options": [
+    {
+      "name": "region_data_sets",
+      "displayName": "Region Data Sets",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The location of the region data sets to be created by using a template, for example, C(REGIONS.ABCD0001.<< data_set_name >>). If you want to use a data set that already exists, ensure that the data set is a transient data intrapartition data set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_primary",
+      "displayName": "Space Primary",
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "The size of the primary space allocated to the transient data intrapartition data set. Note that this is just the value; the unit is specified with O(space_type). This option takes effect only when the transient data intrapartition data set is being created. If the data set already exists, the option has no effect.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_secondary",
+      "displayName": "Space Secondary",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "The size of the secondary space allocated to the transient data intrapartition data set. Note that this is just the value; the unit is specified with O(space_type). This option takes effect only when the transient data intrapartition data set is being created. If the data set already exists, the option has no effect.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_type",
+      "displayName": "Space Type",
+      "type": "string",
+      "required": false,
+      "default": "rec",
+      "description": "The unit portion of the transient data intrapartition data set size. Note that this is just the unit; the value for the primary space is specified with O(space_primary) and the value for the secondary space is specified with O(space_secondary). This option takes effect only when the transient data intrapartition data set is being created. If the data set already exists, the option has no effect. The size can be specified in megabytes (V(m)), kilobytes (V(k)), records (V(rec)), cylinders (V(cyl))",
+      "choices": [
+        "m",
+        "k",
+        "rec",
+        "cyl",
+        "trk"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The intended state for the transient data intrapartition data set, which the module aims to achieve. Specify V(absent) to remove the transient data intrapartition data set entirely, if it exists. Specify V(initial) to create the transient data intrapartition data set if it does not exist. If the specified data set exists but is empty, the module leaves the data set as is. If the specified data set exists and has contents, the module deletes the data set and then creates a new, empty one. Specify",
+      "choices": [
+        "initial",
+        "absent",
+        "warm"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volumes",
+      "displayName": "Volumes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The volume(s) where the data set is created. Use a string to define a singular volume or a list of strings for multiple volumes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

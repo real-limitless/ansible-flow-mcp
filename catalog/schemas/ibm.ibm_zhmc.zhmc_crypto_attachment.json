@@ -1,0 +1,154 @@
+{
+  "fqcn": "ibm.ibm_zhmc.zhmc_crypto_attachment",
+  "shortDescription": "Manage the crypto configuration of a partition (DPM mode)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zhmc/zhmc_crypto_attachment_module.html",
+  "options": [
+    {
+      "name": "_faked_session",
+      "displayName": " Faked Session",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An internal parameter used for testing the module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_mode",
+      "displayName": "Access Mode",
+      "type": "string",
+      "required": false,
+      "default": "usage",
+      "description": "Only for O(state=attached): The access mode in which the crypto domains specified in O(domain_range) need to be attached.",
+      "choices": [
+        "usage",
+        "control"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "adapter_count",
+      "displayName": "Adapter Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Only for O(state=attached): The number of crypto adapters the partition needs to have attached. The special value -1 means all adapters of the desired crypto type in the CPC. The O(adapter_names) and O(adapter_count) parameters are mutually exclusive and one of them must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "adapter_names",
+      "displayName": "Adapter Names",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Only for O(state=attached): The names of the crypto adapters the partition needs to have attached. The O(adapter_names) and O(adapter_count) parameters are mutually exclusive and one of them must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpc_name",
+      "displayName": "Cpc Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the CPC that has the partition and the crypto adapters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "crypto_type",
+      "displayName": "Crypto Type",
+      "type": "string",
+      "required": false,
+      "default": "ep11",
+      "description": "Only for O(state=attached): The crypto type of the crypto adapters that will be selected from when O(adapter_count) is specified. Ignored when O(adapter_names) is specified.",
+      "choices": [
+        "ep11",
+        "cca",
+        "acc"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_range",
+      "displayName": "Domain Range",
+      "type": "list",
+      "required": false,
+      "default": [
+        0,
+        -1
+      ],
+      "description": "Only for O(state=attached): The domain range the partition needs to have attached, as a tuple of integers (min, max) that specify the inclusive range of domain index numbers. Other domains attached to the partition remain unchanged. The special value -1 for the max item means the maximum supported domain index number.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_auth",
+      "displayName": "Hmc Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The authentication credentials for the HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_host",
+      "displayName": "Hmc Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostnames or IP addresses of a single HMC or of a list of redundant HMCs. A single HMC can be specified as a string type or as an HMC list with one item. An HMC list can be specified as a list type or as a string type containing a Python list representation. The first available HMC of a list of redundant HMCs is used for the entire execution of the module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_file",
+      "displayName": "Log File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "File path of a log file to which the logic flow of this module as well as interactions with the HMC are logged. If null, logging will be propagated to the Python root logger.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition_name",
+      "displayName": "Partition Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the partition to which the crypto domains and crypto adapters are attached.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The desired state for the crypto attachment. All states are fully idempotent within the limits of the properties that can be changed: * V(attached): Ensures that the specified number of crypto adapters of the specified crypto type, and the specified range of domain index numbers in the specified access mode are attached to the partition. * V(detached): Ensures that no crypto adapter and no crypto domains are attached to the partition. * V(facts): Returns the crypto configuration of the partition",
+      "choices": [
+        "attached",
+        "detached",
+        "facts"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

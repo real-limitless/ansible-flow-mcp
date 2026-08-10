@@ -1,0 +1,209 @@
+{
+  "fqcn": "arensb.truenas.pool_snapshot_task",
+  "shortDescription": "Maintain periodic disk pool snapshot tasks.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/arensb/truenas/pool_snapshot_task_module.html",
+  "options": [
+    {
+      "name": "allow_empty",
+      "displayName": "Allow Empty",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When true, empty snapshots may be created. This can be useful when\nthere are two overlapping sets of snapshots, e.g., a daily set\nand a weekly set: the weekly snapshot may be empty because the daily\none already contains the changes to the filesystem, but you still\nwant to keep the weekly snapshot when the daily one has expired.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "begin_time",
+      "displayName": "Begin Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Time at which to begin taking snapshots. This is a string in the form \"HH:MM\" See also C(end_time).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dataset",
+      "displayName": "Dataset",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the dataset to snapshot. This can be a pool, ZFS dataset, or zvol.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "day",
+      "displayName": "Day",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Day of month when the task should run, in cron format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Whether this snapshot task is enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "end_time",
+      "displayName": "End Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Time at which to stop taking snapshots. This is a string in the form \"HH:MM\" See also C(begin_time).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude",
+      "displayName": "Exclude",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of child datasets to exclude from snapshotting. If a snapshot task is non-recursive, it may not have an exclude list, so if you specify a non-empty exclude list to a non-recursive task, this module will silently clear it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hour",
+      "displayName": "Hour",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hour when the task should run, in cron format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lifetime_unit",
+      "displayName": "Lifetime Unit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A unit of time for the snapshot lifetime before it is deleted.\nOne of the following units of time:\nC(hour), C(day), C(week), C(month), C(year),\noptionally pluralized.\n Along with C(lifetime_value), specifies the length of time a snapshot will be kept before being deleted.",
+      "choices": [
+        "hour",
+        "hours",
+        "day",
+        "days",
+        "week",
+        "weeks",
+        "month",
+        "months",
+        "year",
+        "years"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lifetime_value",
+      "displayName": "Lifetime Value",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of units of time that the snapshot will exist before it is deleted. Used in conjunction with C(lifetime_unit).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "match",
+      "displayName": "Match",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "A snapshot task does not have a name or other visible unique identifier, so the C(match) option provides a way of specifying which of several tasks the play is configuring, as well as telling whether the task exists yet or not. The C(match) option is a dict with one or more keywords identifying the task. At least one must be provided. If the C(state) option is C(present), only the first matching dataset will be updated. If C(state) is C(absent), all matching datasets will be deleted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minute",
+      "displayName": "Minute",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Minute when the task should run, in cron format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "month",
+      "displayName": "Month",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Month when the task should run, in cron format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name_format",
+      "displayName": "Name Format",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "A template specifying the name of the snapshot. This must include\nthe strings \"%Y\", \"%m\", \"%d\", \"%H\", and \"%M\". Their meanings are\nas in C(strftime): year, month, date, hour, and minute.\nOther C(strftime) sequences may also be included.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recursive",
+      "displayName": "Recursive",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to take snapshots of the child datasets, as well as of the dataset itself.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the task should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "weekday",
+      "displayName": "Weekday",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Day of week when the task should run, in cron format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

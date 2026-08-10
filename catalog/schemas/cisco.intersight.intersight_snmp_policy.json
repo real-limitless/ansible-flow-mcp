@@ -1,0 +1,268 @@
+{
+  "fqcn": "cisco.intersight.intersight_snmp_policy",
+  "shortDescription": "SNMP Policy configuration for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_snmp_policy_module.html",
+  "options": [
+    {
+      "name": "access_community_string",
+      "displayName": "Access Community String",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The default SNMPv1, SNMPv2c community name or SNMPv3 username to include on any trap messages sent to the SNMP host. The name can be 32 characters long. Used with SNMPv2c access only.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "community_access",
+      "displayName": "Community Access",
+      "type": "string",
+      "required": false,
+      "default": "Disabled",
+      "description": "Controls access to the information in the inventory tables. Applicable only for SNMPv2c users. For SNMPv3, this is always set to C(Disabled). For SNMPv2c, valid choices are C(Disabled), C(Limited), and C(Full). Required when C(enabled) is C(true).",
+      "choices": [
+        "Disabled",
+        "Limited",
+        "Full"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description for the SNMP Policy. Description can contain letters(a-z, A-Z), numbers(0-9), hyphen(-), period(.), colon(:), or an underscore(_).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "State of the SNMP Policy on the endpoint. If enabled, the endpoint sends SNMP traps to the designated host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "engine_input_id",
+      "displayName": "Engine Input Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User-defined unique identification of the static engine. Used with SNMPv3 only.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the SNMP Policy. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Profiles, Policies, and Pools that are created within a Custom Organization are applicable only to devices in the same Organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmp_port",
+      "displayName": "Snmp Port",
+      "type": "number",
+      "required": false,
+      "default": 161,
+      "description": "Port on which Cisco IMC SNMP agent runs. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmp_traps",
+      "displayName": "Snmp Traps",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of SNMP trap destinations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmp_users",
+      "displayName": "Snmp Users",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of SNMP users for SNMPv3 authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sys_contact",
+      "displayName": "Sys Contact",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Contact person responsible for the SNMP implementation. Enter a string up to 64 characters, such as an email address or a name and telephone number. Required when C(enabled) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sys_location",
+      "displayName": "Sys Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Location of the host on which the SNMP agent (server) runs. Required when C(enabled) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "trap_community",
+      "displayName": "Trap Community",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "v2c_enabled",
+      "displayName": "V2C Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "State of the SNMPv2c protocol. When enabled, SNMPv2c access is available for the associated servers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "v3_enabled",
+      "displayName": "V3 Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "State of the SNMPv3 protocol. When enabled, SNMPv3 access is available for the associated servers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

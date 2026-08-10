@@ -1,0 +1,89 @@
+{
+  "fqcn": "serverscom.sc_api.dedicated_server_ipxe",
+  "shortDescription": "Manage iPXE boot feature on dedicated servers",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/serverscom/sc_api/dedicated_server_ipxe_module.html",
+  "options": [
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.servers.com/v1",
+      "description": "Endpoint to use to connect to API. Do not change until specifically asked to do otherwise. If not set, the value of the C(SERVERSCOM_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipxe_config",
+      "displayName": "Ipxe Config",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "iPXE script content (max 64 KB). Required when I(state) is C(public) or C(private). When the feature is already activated the configuration is updated via the server update endpoint.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_id",
+      "displayName": "Server Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "ID of the dedicated server. Use M(serverscom.sc_api.dedicated_server_info) to retrieve servers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Desired state of the iPXE boot feature. C(public) activates the public_ipxe_boot feature (or updates iPXE config if already active). Automatically deactivates private_ipxe_boot if it is active. C(private) activates the private_ipxe_boot feature (or updates iPXE config if already active). Automatically deactivates public_ipxe_boot if it is active. C(absent) deactivates whichever iPXE boot feature is currently active.",
+      "choices": [
+        "absent",
+        "public",
+        "private"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Token to use. You can create token for your account in https://portal.servers.com in Profile -> Public API section. If not set, the value of the C(SERVERSCOM_API_TOKEN) or C(SC_TOKEN) environment variable is used (C(SERVERSCOM_API_TOKEN) takes precedence). Value is not logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_interval",
+      "displayName": "Update Interval",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Polling interval in seconds when waiting for the feature status change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Maximum time in seconds to wait for the feature to reach the desired status after activation or deactivation. Set to C(0) to return immediately without waiting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

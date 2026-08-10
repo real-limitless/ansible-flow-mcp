@@ -1,0 +1,121 @@
+{
+  "fqcn": "jm1.libvirt.volume_snapshot",
+  "shortDescription": "Snapshot or clone a libvirt storage volume.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/jm1/libvirt/volume_snapshot_module.html",
+  "options": [
+    {
+      "name": "backing_vol",
+      "displayName": "Backing Vol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the source backing volume to be used if taking a snapshot or clone of an existing volume. Required if C(state) is C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backing_vol_format",
+      "displayName": "Backing Vol Format",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Format of the backing volume; raw, bochs, qcow, qcow2, qed, vmdk, host_device. These are, however, meant for file based storage pools.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "capacity",
+      "displayName": "Capacity",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Size of the volume to be created, as a scaled integer (see NOTES in `man virsh`), defaulting to size of backing volume and defaulting to bytes if there is no suffix.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "format",
+      "displayName": "Format",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Used in file based storage pools to specify the volume file format to use; raw, bochs, qcow, qcow2, vmdk, qed. Use extended for disk storage pools in order to create an extended partition (other values are validity checked but not preserved when libvirtd is restarted or the pool is refreshed).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "linked",
+      "displayName": "Linked",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Create a copy-on-write storage volume I(name), I(linked) to the specified backing volume I(backing_vol). This snapshot will record only the differences from I(backing_vol), the latter will never be modified. If I(linked) is C(no), then volume I(name) will be a independent copy, a clone, of I(backing_vol).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the new volume. For a disk pool, this must match the partition name as determined from the pool's source device path and the next available partition. For example, a source device path of /dev/sdb and there are no partitions on the disk, then the name must be sdb1 with the next name being sdb2 and so on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool",
+      "displayName": "Pool",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name or UUID of the storage pool to create the volume in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prealloc_metadata",
+      "displayName": "Prealloc Metadata",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Preallocate metadata (for qcow2 images which don't support full allocation). This option creates a sparse image file with metadata, resulting in higher performance compared to images with no preallocation and only slightly higher initial disk space usage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Should the volume be present or absent.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uri",
+      "displayName": "Uri",
+      "type": "string",
+      "required": false,
+      "default": "qemu:///system",
+      "description": "libvirt connection uri.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

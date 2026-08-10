@@ -1,0 +1,319 @@
+{
+  "fqcn": "cisco.intersight.intersight_domain",
+  "shortDescription": "Manage UCS Domain Profiles in Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_domain_module.html",
+  "options": [
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "assigned_switch_a_serial",
+      "displayName": "Assigned Switch A Serial",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The serial number of the Fabric Interconnect to assign to SwitchProfile A. Resolved via the C(/network/ElementSummaries) API endpoint using the C(Serial) field.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "assigned_switch_b_serial",
+      "displayName": "Assigned Switch B Serial",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The serial number of the Fabric Interconnect to assign to SwitchProfile B. Resolved via the C(/network/ElementSummaries) API endpoint using the C(Serial) field.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auditd_policy",
+      "displayName": "Auditd Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Audit Log Policy to associate with both Fabric Interconnects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_management_policy",
+      "displayName": "Certificate Management Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Certificate Management Policy to associate with both Fabric Interconnects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description of the UCS Domain Profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_policy",
+      "displayName": "Ldap Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the LDAP Policy to associate with both Fabric Interconnects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the UCS Domain Profile. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_. SwitchProfiles are automatically named C({name}-A) and C({name}-B).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_connectivity_policy",
+      "displayName": "Network Connectivity Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Network Connectivity (DNS) Policy to associate with both Fabric Interconnects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ntp_policy",
+      "displayName": "Ntp Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the NTP Policy to associate with both Fabric Interconnects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Profiles and Policies that are created within a Custom Organization are applicable only to devices in the same Organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_policy_fi_a",
+      "displayName": "Port Policy Fi A",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Port Policy to associate with Fabric Interconnect A.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_policy_fi_b",
+      "displayName": "Port Policy Fi B",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Port Policy to associate with Fabric Interconnect B.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmp_policy",
+      "displayName": "Snmp Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the SNMP Policy to associate with both Fabric Interconnects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "switch_control_policy",
+      "displayName": "Switch Control Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Switch Control Policy to associate with both Fabric Interconnects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "syslog_policy",
+      "displayName": "Syslog Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Syslog Policy to associate with both Fabric Interconnects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system_qos_policy",
+      "displayName": "System Qos Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the System QoS Policy to associate with both Fabric Interconnects. This policy is mandatory for UCS Domain Profiles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlan_policy_fi_a",
+      "displayName": "Vlan Policy Fi A",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the VLAN Policy to associate with Fabric Interconnect A.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlan_policy_fi_b",
+      "displayName": "Vlan Policy Fi B",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the VLAN Policy to associate with Fabric Interconnect B.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vsan_policy_fi_a",
+      "displayName": "Vsan Policy Fi A",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the VSAN Policy to associate with Fabric Interconnect A.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vsan_policy_fi_b",
+      "displayName": "Vsan Policy Fi B",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the VSAN Policy to associate with Fabric Interconnect B.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

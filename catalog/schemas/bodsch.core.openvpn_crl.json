@@ -1,0 +1,88 @@
+{
+  "fqcn": "bodsch.core.openvpn_crl",
+  "shortDescription": "Manage and inspect an OpenVPN certificate revocation list.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/bodsch/core/openvpn_crl_module.html",
+  "options": [
+    {
+      "name": "expire_in_days",
+      "displayName": "Expire In Days",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Threshold in days used to determine whether the CRL is near expiry. If C(next_update - now <= expire_in_days), the module returns C(expired=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Reserved for compatibility with existing playbooks. Currently not used by the module logic.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "list_revoked_certificates",
+      "displayName": "List Revoked Certificates",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Include the parsed list of revoked certificates in the module result.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pki_dir",
+      "displayName": "Pki Dir",
+      "type": "string",
+      "required": false,
+      "default": "/etc/easy-rsa/pki",
+      "description": "Path to the Easy-RSA PKI directory. The module expects the CRL file at C(<pki_dir>/crl.pem).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "status",
+      "description": "Operation mode of the module. Use C(status) to inspect the current CRL. Use C(renew) to regenerate the CRL using Easy-RSA.",
+      "choices": [
+        "status",
+        "renew"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "warn_for_expire",
+      "displayName": "Warn For Expire",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Evaluate whether the CRL is near expiry based on O(expire_in_days). Adds C(expired) to the result. Adds C(warn=true) when the CRL is considered near expiry.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "working_dir",
+      "displayName": "Working Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Working directory used before running Easy-RSA commands. Useful when Easy-RSA must be executed from a specific directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

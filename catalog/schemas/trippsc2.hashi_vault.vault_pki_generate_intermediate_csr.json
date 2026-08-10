@@ -1,0 +1,677 @@
+{
+  "fqcn": "trippsc2.hashi_vault.vault_pki_generate_intermediate_csr",
+  "shortDescription": "Generates an certificate signing request (CSR) for a PKI secret engine",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/trippsc2/hashi_vault/vault_pki_generate_intermediate_csr_module.html",
+  "options": [
+    {
+      "name": "add_basic_constraints",
+      "displayName": "Add Basic Constraints",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to include the basic constraints extension in the certificate signing request (CSR). If set to V(true), the CSR will include the basic constraints extension. If not provided, the CSR will not include the basic constraints extension. This option is only needed for compatibility with certain systems, such as Active Directory Certificate Services as the signing CA.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alt_names",
+      "displayName": "Alt Names",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of Subject Alternative Names (SANs) to include in the certificate signing request (CSR). Each element should be a hostname (DNS name) or an email address. If this does not include the common name and O(exclude_cn_from_sans=false), the common name will be added to the list of SANs. If not provided, an empty list will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_method",
+      "displayName": "Auth Method",
+      "type": "string",
+      "required": false,
+      "default": "token",
+      "description": "Authentication method to be used. C(none) auth method was added in collection version C(1.2.0). C(cert) auth method was added in collection version C(1.4.0). C(aws_iam_login) was renamed C(aws_iam) in collection version C(2.1.0) and was removed in C(3.0.0). C(azure) auth method was added in collection version C(3.2.0).",
+      "choices": [
+        "token",
+        "userpass",
+        "ldap",
+        "approle",
+        "aws_iam",
+        "azure",
+        "jwt",
+        "cert",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_access_key",
+      "displayName": "Aws Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS access key to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_iam_server_id",
+      "displayName": "Aws Iam Server Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If specified, sets the value to use for the C(X-Vault-AWS-IAM-Server-ID) header as part of C(GetCallerIdentity) request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_profile",
+      "displayName": "Aws Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS profile",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_secret_key",
+      "displayName": "Aws Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS secret key that corresponds to the access key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aws_security_token",
+      "displayName": "Aws Security Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS security token if using temporary access and secret keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "azure_client_id",
+      "displayName": "Azure Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The client ID (also known as application ID) of the Azure AD service principal or managed identity. Should be a UUID. If not specified, will use the system assigned managed identity.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "azure_client_secret",
+      "displayName": "Azure Client Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The client secret of the Azure AD service principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "azure_resource",
+      "displayName": "Azure Resource",
+      "type": "string",
+      "required": false,
+      "default": "https://management.azure.com/",
+      "description": "The resource URL for the application registered in Azure Active Directory. Usually should not be changed from the default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "azure_tenant_id",
+      "displayName": "Azure Tenant Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Azure Active Directory Tenant ID (also known as the Directory ID) of the service principal. Should be a UUID. Required when using a service principal to authenticate to Vault, e.g. required when both I(azure_client_id) and I(azure_client_secret) are specified. Optional when using managed identity to authenticate to Vault.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to certificate to use for authentication. If not specified by any other means, the C(VAULT_CACERT) environment variable will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_auth_private_key",
+      "displayName": "Cert Auth Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "For C(cert) auth, path to the private key file to authenticate with, in PEM format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_auth_public_key",
+      "displayName": "Cert Auth Public Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "For C(cert) auth, path to the certificate file to authenticate with, in PEM format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "common_name",
+      "displayName": "Common Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The requested common name (CN) attribute for the certificate signing request (CSR).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "country",
+      "displayName": "Country",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The Country (C) values to include in the CA certificate. If not provided, this defaults to an empty list on new roles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "engine_mount_point",
+      "displayName": "Engine Mount Point",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The path where the secret backend is mounted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_cn_from_sans",
+      "displayName": "Exclude Cn From Sans",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to exclude the common name from the Subject Alternate Names (SANs). If set to V(true), the given O(common_name) will not be added to the list of SANs. If set to V(false), the given O(common_name) will be added to the list of SANs and parsed as a DNS name or email address. If not provided, the common name will not be excluded.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "format",
+      "displayName": "Format",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The format of the returned certificate data. If V(pem_bundle), the certificate will contain the private key and certificate concatenated. If not provided, the certificate will be returned in PEM format.",
+      "choices": [
+        "pem",
+        "der",
+        "pem_bundle"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_sans",
+      "displayName": "Ip Sans",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of IP Subject Alternative Names (IP SANs) to include in the certificate signing request (CSR). Each element should be a valid IP address. If not provided, an empty list will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "jwt",
+      "displayName": "Jwt",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The JSON Web Token (JWT) to use for JWT authentication to Vault.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_bits",
+      "displayName": "Key Bits",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of bits to use for generated keys. If O(key_type=rsa), the allowed values are V(2048), V(3072), V(4096), and V(8192). If not provided and O(key_type=rsa), this defaults to V(2048) on new roles. If O(key_type=ec), the allowed values are V(224), V(256), V(384), and V(521). If not provided and O(key_type=ec), this defaults to V(256) on new roles. If O(key_type=ed25519), this should not be provided.",
+      "choices": [
+        224,
+        256,
+        384,
+        521,
+        2048,
+        3072,
+        4096,
+        8192
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_name",
+      "displayName": "Key Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the private key to store in the storage backend. Should only be defined if O(type=internal). If set to V(default), the private key will be stored as the default key. If not provided, the private key will not be stored as the default key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_ref",
+      "displayName": "Key Ref",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The identifier of the existing private key to use for generating the certificate signing request (CSR). Should only be provided if O(type=existing). If a private key with this identifier does not exist, the module will fail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_type",
+      "displayName": "Key Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of private key to generate. Should only be defined if O(type=internal). If HashiCorp Vault is running in FIPS mode, using the V(ed25519) value will cause the module to fail, as it is not a certified algorithm. If not provided, the private key will be generated using the RSA algorithm.",
+      "choices": [
+        "rsa",
+        "ed25519",
+        "ec"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_usage",
+      "displayName": "Key Usage",
+      "type": "list",
+      "required": false,
+      "default": [
+        "CertSign",
+        "CRLSign"
+      ],
+      "description": "The list of key usage constraints to include in the certificate signing request (CSR). If not provided, no key usage constraints will be included in the CSR.",
+      "choices": [
+        "DigitalSignature",
+        "ContentCommitment",
+        "KeyEncipherment",
+        "DataEncipherment",
+        "KeyAgreement",
+        "CertSign",
+        "CRLSign",
+        "EncipherOnly",
+        "DecipherOnly"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "locality",
+      "displayName": "Locality",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The Locality (L) values to include in the CA certificate. If not provided, this defaults to an empty list on new roles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mount_point",
+      "displayName": "Mount Point",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Vault mount point. If not specified, the default mount point for a given auth method is used. Does not apply to token authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace",
+      "displayName": "Namespace",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Vault namespace where secrets reside. This option requires HVAC 0.7.0+ and Vault 0.11+. Optionally, this may be achieved by prefixing the authentication mount point and/or secret path with the namespace (e.g C(mynamespace/secret/mysecret)). If environment variable C(VAULT_NAMESPACE) is set, its value will be used last among all ways to specify I(namespace).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The Organization (O) values to include in the CA certificate. If not provided, this defaults to an empty list on new roles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "other_sans",
+      "displayName": "Other Sans",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of custom OID/UTF8-string SANs. If not provided, an empty list will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ou",
+      "displayName": "Ou",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The Organizational Unit (OU) values to include in the CA certificate. If not provided, this defaults to an empty list on new roles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "postal_code",
+      "displayName": "Postal Code",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The Postal Code values to include in the CA certificate. If not provided, this defaults to an empty list on new roles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_format",
+      "displayName": "Private Key Format",
+      "type": "string",
+      "required": false,
+      "default": "der",
+      "description": "The format for marshaling the private key. If set to V(der) and O(format=pem) or O(format=pem_bundle), the private key will be returned in PEM-encoded DER format. If set to V(der) and O(format=der), the private key will be returned in base64-encoded DER format. If set to V(pkcs8), the private key will be returned in PEM-encoded PKCS8 format.",
+      "choices": [
+        "der",
+        "pkcs8"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "province",
+      "displayName": "Province",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The Province or State (ST) values to include in the CA certificate. If not provided, this defaults to an empty list on new roles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxies",
+      "displayName": "Proxies",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL(s) to the proxies used to access the Vault service. It can be a string or a dict. If it's a dict, provide the scheme (eg. C(http) or C(https)) as the key, and the URL as the value. If it's a string, provide a single URL that will be used as the proxy for both C(http) and C(https) schemes. A string that can be interpreted as a dictionary will be converted to one (see examples). You can specify a different proxy for HTTP and HTTPS resources. If not specified, L(environment variables from the R",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AWS region for which to create the connection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retries",
+      "displayName": "Retries",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Allows for retrying on errors, based on the L(Retry class in the urllib3 library,https://urllib3.readthedocs.io/en/latest/reference/urllib3.util.html#urllib3.util.Retry). This collection defines recommended defaults for retrying connections to Vault. This option can be specified as a positive number (integer) or dictionary. If this option is not specified or the number is C(0), then retries are disabled. A number sets the total number of retries, and uses collection defaults for the other settin",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retry_action",
+      "displayName": "Retry Action",
+      "type": "string",
+      "required": false,
+      "default": "warn",
+      "description": "Controls whether and how to show messages on I(retries). This has no effect if a request is not retried.",
+      "choices": [
+        "ignore",
+        "warn"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role_id",
+      "displayName": "Role Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Vault Role ID or name. Used in C(approle), C(aws_iam), C(azure) and C(cert) auth methods. For C(cert) auth, if no I(role_id) is supplied, the default behavior is to try all certificate roles and return any one that matches. For C(azure) auth, I(role_id) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_id",
+      "displayName": "Secret Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Secret ID to be used for Vault AppRole authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serial_number",
+      "displayName": "Serial Number",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The serial number of the CA certificate. If you want more than one, specify alternative names in the alt_names map using OID 2.5.4.5. If not provided, HashiCorp Vault will generate a random serial number for the certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "signature_bits",
+      "displayName": "Signature Bits",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The signature algorithm bit length for the signed certificates. Should only be provided when O(key_type=rsa). If not provided and O(key_type=rsa), this defaults to V(2048).",
+      "choices": [
+        256,
+        384,
+        512
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "street_address",
+      "displayName": "Street Address",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The Street Address values to include in the CA certificate. If not provided, this defaults to an empty list on new roles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Sets the connection timeout in seconds. If not set, then the C(hvac) library's default is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Vault token. Token may be specified explicitly, through the listed [env] vars, and also through the C(VAULT_TOKEN) env var. If no token is supplied, explicitly or through env, then the plugin will check for a token file, as determined by I(token_path) and I(token_file). The order of token loading (first found wins) is C(token param -> ansible var -> ANSIBLE_HASHI_VAULT_TOKEN -> VAULT_TOKEN -> token file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token_file",
+      "displayName": "Token File",
+      "type": "string",
+      "required": false,
+      "default": ".vault-token",
+      "description": "If no token is specified, will try to read the token from this file in I(token_path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token_path",
+      "displayName": "Token Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If no token is specified, will try to read the I(token_file) from this path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token_validate",
+      "displayName": "Token Validate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "For token auth, will perform a C(lookup-self) operation to determine the token's validity before using it. Disable if your token does not have the C(lookup-self) capability.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "internal",
+      "description": "The private key type to use for generating the certificate signing request (CSR). If set to V(internal), the private key will be generated by HashiCorp Vault and stored. If set to V(existing), the O(key_ref) option is required and the private key with that identifier will be used. KMS-backed keys are not supported with this module.",
+      "choices": [
+        "internal",
+        "existing"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uri_sans",
+      "displayName": "Uri Sans",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of URI Subject Alternative Names (URI SANs) to include in the certificate signing request (CSR). Each element should be a valid URI. If not provided, an empty list will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to the Vault service. If not specified by any other means, the value of the C(VAULT_ADDR) environment variable will be used. If C(VAULT_ADDR) is also not defined then an error will be raised.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication user name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Controls verification and validation of SSL certificates, mostly you only want to turn off with self signed ones. Will be populated with the inverse of C(VAULT_SKIP_VERIFY) if that is set and I(validate_certs) is not explicitly provided. Will default to C(true) if neither I(validate_certs) or C(VAULT_SKIP_VERIFY) are set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

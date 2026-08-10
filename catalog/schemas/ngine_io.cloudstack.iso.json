@@ -1,0 +1,320 @@
+{
+  "fqcn": "ngine_io.cloudstack.iso",
+  "shortDescription": "Manages ISO images on Apache CloudStack based clouds.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ngine_io/cloudstack/iso_module.html",
+  "options": [
+    {
+      "name": "account",
+      "displayName": "Account",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Account the ISO is related to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_http_method",
+      "displayName": "Api Http Method",
+      "type": "string",
+      "required": false,
+      "default": "get",
+      "description": "HTTP method used to query the API endpoint. If not given, the C(CLOUDSTACK_METHOD) env variable is considered.",
+      "choices": [
+        "get",
+        "post"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of the CloudStack API. If not given, the C(CLOUDSTACK_KEY) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_secret",
+      "displayName": "Api Secret",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Secret key of the CloudStack API. If not set, the C(CLOUDSTACK_SECRET) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "HTTP timeout in seconds. If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL of the CloudStack API e.g. https://cloud.example.com/client/api. If not given, the C(CLOUDSTACK_ENDPOINT) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_verify_ssl_cert",
+      "displayName": "Api Verify Ssl Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Verify CA authority cert file. If not given, the C(CLOUDSTACK_VERIFY) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bootable",
+      "displayName": "Bootable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Register the ISO to be bootable. Only used if I(state) is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum",
+      "displayName": "Checksum",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The MD5 checksum value of this ISO. If set, we search by checksum instead of name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cross_zones",
+      "displayName": "Cross Zones",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the ISO should be synced or removed across zones. Mutually exclusive with I(zone).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_text",
+      "displayName": "Display Text",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Display text of the ISO. If not specified, I(name) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Domain the ISO is related to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_dynamically_scalable",
+      "displayName": "Is Dynamically Scalable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Register the ISO having XS/VMware tools installed inorder to support dynamic scaling of VM cpu/memory. Only used if I(state) is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_featured",
+      "displayName": "Is Featured",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Register the ISO to be featured. Only used if I(state) is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_public",
+      "displayName": "Is Public",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Register the ISO to be publicly available to all users. Only used if I(state) is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_ready",
+      "displayName": "Is Ready",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This flag is used for searching existing ISOs. If set to C(true), it will only list ISO ready for deployment e.g. successfully downloaded and installed. Recommended to set it to C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iso_filter",
+      "displayName": "Iso Filter",
+      "type": "string",
+      "required": false,
+      "default": "self",
+      "description": "Name of the filter used to search for the ISO.",
+      "choices": [
+        "featured",
+        "self",
+        "selfexecutable",
+        "sharedexecutable",
+        "executable",
+        "community"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the ISO.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os_type",
+      "displayName": "Os Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the OS that best represents the OS of this ISO. If the iso is bootable this parameter needs to be passed. Required if I(state) is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "poll_async",
+      "displayName": "Poll Async",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Poll async jobs until job has finished.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the project the ISO to be registered in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the ISO. C(attached) and C(detached) was added in version 3.1.0.",
+      "choices": [
+        "present",
+        "absent",
+        "attached",
+        "detached"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags. Tags are a list of dictionaries having keys I(key) and I(value). To delete all tags, set a empty list e.g. I(tags: []).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL where the ISO can be downloaded from. Required if I(state) is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(false), SSL certificates will not be validated. If not given, the C(CLOUDSTACK_DANGEROUS_NO_TLS_VERIFY) env variable is considered. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm",
+      "displayName": "Vm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Virtual machine to attach or detach the ISO from. Required when I(state) is C(attached) or C(detached).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone",
+      "displayName": "Zone",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the zone you wish the ISO to be registered or deleted from. Required when I(cross_zones) is C(false)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

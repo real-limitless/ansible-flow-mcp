@@ -1,0 +1,272 @@
+{
+  "fqcn": "netautomate.netorca.netorca_pack_pipeline_info",
+  "shortDescription": "Query NetOrca Pack pipeline runs",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netautomate/netorca/netorca_pack_pipeline_info_module.html",
+  "options": [
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of your NetOrca team. The NetOrca API supports API-key authentication only - there is no username/password mode. Treat the key like a password - supply it via the E(NETORCA_API_KEY) environment variable (for example from a CI/CD secret) or from Ansible Vault, never as a literal in a playbook. If not set, the value of the E(NETORCA_API_KEY) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Base URL of the NetOrca API, for example C(https://api.example.netorca.io). The URL is normalised to end in a single C(/v1), so passing it with or without the suffix both work. If not set, the value of the E(NETORCA_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "application_id",
+      "displayName": "Application Id",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by ID of the consumer application the pipelines' service items belong to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "applied",
+      "displayName": "Applied",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Filter by the applied flag - whether an executor has marked the pipeline's output as deployed. C(applied=false) with C(state=OK) is the work queue of the executor loop.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "consumer_team_id",
+      "displayName": "Consumer Team Id",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by ID of the consuming team.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": "serviceowner",
+      "description": "Point of view for the request. The same query returns different data depending on which side of the service relationship your team is on. V(serviceowner) operates on the services your team I(offers) - the requests made against them, their service items and deployed items. This is the side that validates, approves, deploys and completes changes. V(consumer) operates on what your team I(consumes) - the service items your applications declared and the change instances tracking your own requests. If",
+      "choices": [
+        "serviceowner",
+        "consumer"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "declaration",
+      "displayName": "Declaration",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Filter by exact match on fields of the pipeline's C(config) stage data, for example C({\"targets\": [{\"bigip_name\": \"BigIPWAF-D\"}]}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "declaration_contains",
+      "displayName": "Declaration Contains",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Filter by containment match on fields of the C(config) stage data.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "declaration_regex",
+      "displayName": "Declaration Regex",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Filter by regular expression match on fields of the C(config) stage data.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "end_date",
+      "displayName": "End Date",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Only return pipelines created at or before this ISO 8601 timestamp.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Return only the pipeline with this ID. When set, all other options are ignored. If the ID does not exist, an empty list is returned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "latest",
+      "displayName": "Latest",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Return only the newest pipeline of the object selected by O(object_id) / O(object_type) - the run your executor should act on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit",
+      "displayName": "Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of results to return. Results are auto-paginated, so by default all matching records are returned regardless of the API's page size.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_id",
+      "displayName": "Object Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the service item (or service) whose pipelines O(latest) / O(versions) look up.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_type",
+      "displayName": "Object Type",
+      "type": "string",
+      "required": false,
+      "default": "service_item",
+      "description": "What O(object_id) refers to.",
+      "choices": [
+        "service_item",
+        "service"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ordering",
+      "displayName": "Ordering",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Server-side field to order results by, for example V(created) or V(modified). Prefix with C(-) for descending order - V(-modified) returns the most recently changed records first.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_id",
+      "displayName": "Service Id",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by ID of the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_item_id",
+      "displayName": "Service Item Id",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by ID of the service item the pipelines ran for.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_date",
+      "displayName": "Start Date",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Only return pipelines created at or after this ISO 8601 timestamp.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by pipeline state.",
+      "choices": [
+        "OK",
+        "FAILED",
+        "SCHEDULED",
+        "WAITING_FOR_RESPONSE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate TLS certificates when talking to the API. Only disable this for lab instances with self-signed certificates. If not set, the value of the E(NETORCA_VALIDATE_CERTS) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by run version.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "versions",
+      "displayName": "Versions",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Return the run history of the object selected by O(object_id) / O(object_type) as a bare C({version, id}) list, newest first - a cheap way to detect a new run without fetching full pipelines.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

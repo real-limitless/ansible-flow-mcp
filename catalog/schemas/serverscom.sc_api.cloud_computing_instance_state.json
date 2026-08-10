@@ -1,0 +1,123 @@
+{
+  "fqcn": "serverscom.sc_api.cloud_computing_instance_state",
+  "shortDescription": "Manage instance states",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/serverscom/sc_api/cloud_computing_instance_state_module.html",
+  "options": [
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.servers.com/v1",
+      "description": "Endpoint to use to connect to API. Do not change until specifically asked to do otherwise. If not set, the value of the C(SERVERSCOM_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_id",
+      "displayName": "Image Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Image id to use for I(state)=C(rescue) Mutually exclusive with I(image_regexp) Original instance image will be used if I(image_id) and I(image_regexp) are not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_regexp",
+      "displayName": "Image Regexp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Regular expression to search image by name to use for I(state)=C(rescue). Original instance image will be used if I(image_id) and I(image_regexp) are not specified. Mutually exclusive with I(image_id). First matching image is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_id",
+      "displayName": "Instance Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Id of the instance to manage PTR records for. Mutually exclusive with I(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the instance to set PTR records for. If more than one server with a given name found, module will fail. Use I(instance_id) for precise identification. Mutually exclusive with I(instance_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region_id",
+      "displayName": "Region Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Region ID to search instance by name. All regions are searched if not specified. Used only if I(name) present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Make sure instance in I(state) mode. Module will fail if operation is impossible (f.e. migrating) or absent. C(shutdown) shutdown instance. C(rescue) reboot instance in rescue mode. C(normal) turn instanse on or exit in rescue mode. C(rebooted) reboot instance. This state cause non non-idempotent action.",
+      "choices": [
+        "shutdown",
+        "rescue",
+        "normal",
+        "rebooted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Token to use. You can create token for your account in https://portal.servers.com in Profile -> Public API section. If not set, the value of the C(SERVERSCOM_API_TOKEN) or C(SC_TOKEN) environment variable is used (C(SERVERSCOM_API_TOKEN) takes precedence). Value is not logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_interval",
+      "displayName": "Update Interval",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Polling interval for waiting. Every polling request is reducing API ratelimits.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Time to wait until instance get to the desired state. I(state)=C(shutdown) waits for SWITCHED_OFF. I(state)=C(rescue) waits for RESCUE. I(state)=C(normal) waits for ACTIVE. I(state)=C(rebooted) waits for ACTIVE. Value C(0) is used to disable wait. If C(0) is set, module works in 'fire-and-forget' mode. ACTIVE state doesn't mean that instance is ready to accept ssh connections. Use M(ansible.builtin.wait_for_connection) module wait until instance finishes booting. handlers or when statement may b",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,221 @@
+{
+  "fqcn": "community.openwrt.template",
+  "shortDescription": "Template a file out to remote OpenWrt target",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/openwrt/template_module.html",
+  "options": [
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered it incorrectly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "block_end_string",
+      "displayName": "Block End String",
+      "type": "string",
+      "required": false,
+      "default": "%}",
+      "description": "The string marking the end of a block.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "block_start_string",
+      "displayName": "Block Start String",
+      "type": "string",
+      "required": false,
+      "default": "{%",
+      "description": "The string marking the beginning of a block.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment_end_string",
+      "displayName": "Comment End String",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The string marking the end of a comment statement.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment_start_string",
+      "displayName": "Comment Start String",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The string marking the beginning of a comment statement.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Location to render the template to on the remote machine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "follow",
+      "displayName": "Follow",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Determine whether symbolic links should be followed. When set to V(true) symbolic links are followed, if they exist. When set to V(false) symbolic links are not followed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Determine when the file is being transferred if the destination already exists. When set to C(yes), replace the remote file when contents are different than the source. When set to C(no), the file will only be transferred if the destination does not exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Group name that should own the file or directory. Passed directly to the C(chgrp) command. If not specified, group ownership is not changed. Not applied to symlinks when O(follow=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lstrip_blocks",
+      "displayName": "Lstrip Blocks",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Determine when leading spaces and tabs should be stripped. When set to V(yes) leading spaces and tabs are stripped from the start of a line to a block.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Permissions for the file or directory. Can be specified as an octal number (for example, V('0644'), V('1777')) or symbolic mode (like V('u+rwx')). When using octal notation, quote the value to ensure it is treated as a string. If not specified, permissions may be determined by the system default C(umask) or remain unchanged. Not applied to symlinks when O(follow=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "newline_sequence",
+      "displayName": "Newline Sequence",
+      "type": "string",
+      "required": false,
+      "default": "\\n",
+      "description": "Specify the newline sequence to use for templating files.",
+      "choices": [
+        "\\n",
+        "\\r",
+        "\\r\\n"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output_encoding",
+      "displayName": "Output Encoding",
+      "type": "string",
+      "required": false,
+      "default": "utf-8",
+      "description": "Overrides the encoding used to write the template file defined by O(dest). It defaults to C(utf-8), but any encoding supported by python can be used. The source template file must always be encoded using C(utf-8), for homogeneity.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User name that should own the file or directory. Passed directly to the C(chown) command. If not specified, ownership is not changed. Not applied to symlinks when O(follow=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path of a Jinja2 formatted template on the Ansible controller. This can be a relative or an absolute path. The file must be encoded with C(utf-8) but O(output_encoding) can be used to control the encoding of the output template.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "trim_blocks",
+      "displayName": "Trim Blocks",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Determine when newlines should be removed from blocks. When set to V(yes) the first newline after a block is removed (block, not variable tag!).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate",
+      "displayName": "Validate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The validation command to run before copying the updated file into the final destination. A temporary file path is used to validate, passed in through C(%s) which must be present as in the examples below. Also, the command is passed securely so shell features such as expansion and pipes will not work. For an example on how to handle more complex validation than what this option provides, see R(handling complex validation,complex_configuration_validation).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "variable_end_string",
+      "displayName": "Variable End String",
+      "type": "string",
+      "required": false,
+      "default": "}}",
+      "description": "The string marking the end of a print statement.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "variable_start_string",
+      "displayName": "Variable Start String",
+      "type": "string",
+      "required": false,
+      "default": "{{",
+      "description": "The string marking the beginning of a print statement.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

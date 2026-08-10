@@ -1,0 +1,130 @@
+{
+  "fqcn": "graphiant.naas.graphiant_interfaces",
+  "shortDescription": "Manage Graphiant interfaces and circuits",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_interfaces_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "circuit_config_file",
+      "displayName": "Circuit Config File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the circuit configuration YAML file. Required for WAN and circuit operations (V(configure_wan_circuits_interfaces), V(deconfigure_wan_circuits_interfaces), V(configure_circuits), V(deconfigure_circuits)). Optional for LAN-only operations. Can be an absolute path or relative path. Relative paths are resolved using the configured config_path. Configuration files support Jinja2 templating syntax for dynamic generation. File must contain circuit definitions with static routes and circuit con",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "circuits_only",
+      "displayName": "Circuits Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If V(true), perform a circuits-only deconfigure (static route removal) and skip interface changes. Supported for V(deconfigure_interfaces) and V(deconfigure_wan_circuits_interfaces). When V(true), static routes are removed from referenced circuits, but interfaces remain configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging output for troubleshooting and monitoring. When enabled, provides comprehensive logs of all interface operations. Logs are captured and included in the result_msg for display using M(ansible.builtin.debug) module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface_config_file",
+      "displayName": "Interface Config File",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the interface configuration YAML file. Required for all operations. Can be an absolute path or relative path. Relative paths are resolved using the configured config_path. Configuration files support Jinja2 templating syntax for dynamic generation. File must contain interface definitions with device names, interface names, and subinterface configurations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The specific interface operation to perform. V(configure_interfaces): Configure all interfaces (LAN and WAN) in one operation. V(deconfigure_interfaces): Deconfigure all interfaces. Removes WAN static routes first (when circuit config provided), then resets parent interface to default LAN and deletes subinterfaces. V(configure_lan_interfaces): Configure LAN interfaces (subinterfaces) only. V(deconfigure_lan_interfaces): Deconfigure LAN interfaces (subinterfaces) only. V(configure_wan_circuits_in",
+      "choices": [
+        "configure_interfaces",
+        "deconfigure_interfaces",
+        "configure_lan_interfaces",
+        "deconfigure_lan_interfaces",
+        "configure_wan_circuits_interfaces",
+        "deconfigure_wan_circuits_interfaces",
+        "configure_circuits",
+        "deconfigure_circuits"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the interfaces. V(present): Maps to V(configure_interfaces) when O(operation) not specified. V(absent): Maps to V(deconfigure_interfaces) when O(operation) not specified.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

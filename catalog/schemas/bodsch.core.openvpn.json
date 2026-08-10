@@ -1,0 +1,99 @@
+{
+  "fqcn": "bodsch.core.openvpn",
+  "shortDescription": "Generate OpenVPN tls-auth key or create an Easy-RSA client and inline .ovpn configuration",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/bodsch/core/openvpn_module.html",
+  "options": [
+    {
+      "name": "chdir",
+      "displayName": "Chdir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Change into this directory before executing commands and accessing the PKI structure. For C(state=create_user), paths are expected relative to this working directory (e.g. C(pki/private), C(pki/issued), C(pki/reqs)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "creates",
+      "displayName": "Creates",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If this path exists, the module returns early with no changes. With C(state=genkey), the early-return message is C(tls-auth key already created). With C(force=true) and C(creates) set, the marker file is removed before the check.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_directory",
+      "displayName": "Destination Directory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Target directory where the generated client configuration C(<username>.ovpn) is written when C(state=create_user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "easyrsa_directory",
+      "displayName": "Easyrsa Directory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Reserved for future use (currently not used by the module implementation).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If enabled and C(creates) is set, removes the marker file before checking C(creates).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret",
+      "displayName": "Secret",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Destination path for the generated OpenVPN static key when C(state=genkey). Required by the module interface even if C(state=create_user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "genkey",
+      "description": "Operation mode. C(genkey) generates a static key file using the OpenVPN binary. C(create_user) creates an Easy-RSA client (key/cert) and generates an inline C(.ovpn) file using a template.",
+      "choices": [
+        "genkey",
+        "create_user"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Client username to create when C(state=create_user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

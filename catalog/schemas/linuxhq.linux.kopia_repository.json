@@ -1,0 +1,85 @@
+{
+  "fqcn": "linuxhq.linux.kopia_repository",
+  "shortDescription": "Manage the kopia repository connection",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/linuxhq/linux/kopia_repository_module.html",
+  "options": [
+    {
+      "name": "config_file",
+      "displayName": "Config File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the kopia configuration file describing the connection. Defaults to kopia's own configuration path when unset.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "options",
+      "displayName": "Options",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Storage provider flags passed to C(kopia repository create) and C(kopia repository connect), given as snake_case keys. Each key becomes the matching kebab-case CLI flag, so V(bucket) becomes C(--bucket) and V(storage_account) becomes C(--storage-account). Booleans toggle the flag, V(true) emits C(--flag) and V(false) emits C(--no-flag), and a list repeats the flag once per element. Put credential-carrying flags in O(secrets) instead so they stay out of logs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Password securing the kopia repository. Exported to the kopia CLI as E(KOPIA_PASSWORD), never on the command line.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secrets",
+      "displayName": "Secrets",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Storage provider flags whose values are secrets, such as V(secret_access_key) or V(key). Converted to CLI flags exactly like O(options), but kept out of logs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage",
+      "displayName": "Storage",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Storage provider backing the repository.",
+      "choices": [
+        "azure",
+        "b2",
+        "filesystem",
+        "from-config",
+        "gcs",
+        "gdrive",
+        "rclone",
+        "s3",
+        "sftp",
+        "webdav"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_provider",
+      "displayName": "Validate Provider",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Run C(kopia repository validate-provider) after creating a repository. Only runs on creation, never for an existing repository.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

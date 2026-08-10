@@ -1,0 +1,122 @@
+{
+  "fqcn": "f5networks.f5_bigip.bigip_ucs",
+  "shortDescription": "Manage upload, installation, and removal of UCS files",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_bigip/bigip_ucs_module.html",
+  "options": [
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true), the system uploads the file every time and replaces the file on the device. If C(false), the file is only uploaded if it does not already exist. Generally it should only be C(true) in cases where you believe the image was corrupted during upload.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_chassis_level_config",
+      "displayName": "Include Chassis Level Config",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "During restoration of the UCS file, includes chassis level configuration that is shared among boot volume sets. For example, the cluster default configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_license",
+      "displayName": "No License",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Performs a full restore of the UCS file and all the files it contains, with the exception of the license file. This option must be used to restore a UCS on RMA (Returned Materials Authorization) devices.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_platform_check",
+      "displayName": "No Platform Check",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Bypasses the platform check and allows installation of a UCS that was created using a different platform. By default (without this option), installation of a UCS created from a different platform is not allowed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "passphrase",
+      "displayName": "Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the passphrase necessary to load the specified UCS file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset_trust",
+      "displayName": "Reset Trust",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When specified, the device and trust domain certificates and keys are not loaded from the UCS. Instead, a new set is generated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(installed), ensures the UCS is uploaded and installed on the system. When C(present), ensures the UCS is uploaded. When C(absent), the UCS is removed from the system. When C(installed), the uploading of the UCS is idempotent, however the installation of that configuration is not idempotent.",
+      "choices": [
+        "absent",
+        "installed",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "task_id",
+      "displayName": "Task Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the async task as returned by the system in a previous module run. Used to query the status of the task on the device, useful with longer running operations that require restarting services. This parameter is only usable when C(state) is C(installed) This parameter assumes a load ucs task has been started ond device, therefore it does not check for existence of the UCS file beforehand. Adding this parameter incorrectly to a module run leads to confusing error messages. Refer to the exa",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 150,
+      "description": "This parameter is used when installing uploaded UCS file on the device. The amount of time to wait for the API async interface to complete its task, in seconds. The accepted value range is between C(150) and C(1800) seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ucs",
+      "displayName": "Ucs",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The path to the UCS file to install. This parameter must be provided if the C(state) is either C(installed) or C(activated). When C(state) is C(absent), the full path for this parameter is ignored and only the filename is used to select a UCS for removal. Therefore you could specify C(/foo/bar/test.ucs) and this module would only look for C(test.ucs).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

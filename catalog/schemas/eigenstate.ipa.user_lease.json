@@ -1,0 +1,144 @@
+{
+  "fqcn": "eigenstate.ipa.user_lease",
+  "shortDescription": "Manage IdM user expiry attributes as lease-like access boundaries",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/eigenstate/ipa/user_lease_module.html",
+  "options": [
+    {
+      "name": "clear_password_expiration",
+      "displayName": "Clear Password Expiration",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When C(state=cleared), also remove C(krbPasswordExpiration). Ignored for other states.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipaadmin_password",
+      "displayName": "Ipaadmin Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the principal. Used to obtain a Kerberos ticket via C(kinit). Not required if C(kerberos_keytab) is set or a valid ticket already exists.",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "ipaadmin_principal",
+      "displayName": "Ipaadmin Principal",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Kerberos principal to authenticate as.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kerberos_keytab",
+      "displayName": "Kerberos Keytab",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a Kerberos keytab file. Takes precedence over C(ipaadmin_password). Required for non-interactive use in AAP Execution Environments.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_expiration",
+      "displayName": "Password Expiration",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Desired C(krbPasswordExpiration) when C(state=present). Uses the same input formats as C(principal_expiration). Leave unset to avoid changing the password-expiry attribute.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_expiration_matches_principal",
+      "displayName": "Password Expiration Matches Principal",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When true, set C(krbPasswordExpiration) to the same effective time as C(krbPrincipalExpiration). Defaults to C(true) because leaving password expiry behind the principal lease is generally unsafe for temporary-access workflows. With C(state=expired), this expires both attributes immediately. Mutually exclusive with an explicit C(password_expiration).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "principal_expiration",
+      "displayName": "Principal Expiration",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Desired lease end for C(krbPrincipalExpiration) when C(state=present). Accepts UTC generalized time C(YYYYmmddHHMMSSZ), ISO 8601 UTC C(YYYY-MM-DDTHH:MM[:SS]Z), C(now), or a relative C(HH:MM) duration. Relative durations are evaluated at runtime and therefore are not stable across repeated runs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "require_groups",
+      "displayName": "Require Groups",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Require the target user to be a direct member of all listed IdM groups before mutating the expiry attributes. Useful when the authenticated principal only has delegated write rights for members of a governed group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server",
+      "displayName": "Server",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "FQDN of the IPA server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "C(present) ensures one or both expiry attributes are set. C(expired) sets C(krbPrincipalExpiration) to the current UTC time. C(cleared) removes C(krbPrincipalExpiration) and, when C(clear_password_expiration=true), also removes C(krbPasswordExpiration).",
+      "choices": [
+        "present",
+        "expired",
+        "cleared"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IdM username to modify.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify",
+      "displayName": "Verify",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the IPA CA certificate for TLS verification. Auto-detected from C(/etc/ipa/ca.crt) when not set. If neither is available, the module fails unless C(verify) is set to C(false) explicitly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

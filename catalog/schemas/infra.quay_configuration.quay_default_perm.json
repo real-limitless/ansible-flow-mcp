@@ -1,0 +1,150 @@
+{
+  "fqcn": "infra.quay_configuration.quay_default_perm",
+  "shortDescription": "Manage Quay Container Registry default repository permissions",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/infra/quay_configuration/quay_default_perm_module.html",
+  "options": [
+    {
+      "name": "creator",
+      "displayName": "Creator",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Quay applies the default permission only when repositories are created by the user that you define in O(creator). By default, if you do not provide that O(creator) parameter, then Quay applies the default permission to all new repositories, whoever creates them. You cannot use robot accounts or teams for the O(creator) parameter. You can only use regular user accounts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the user or team that gets permission to new created repositories in the organization. For robot accounts use the C(namespace)+C(shortrobotname) format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the organization for the default permission. This organization must exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_host",
+      "displayName": "Quay Host",
+      "type": "string",
+      "required": false,
+      "default": "http://127.0.0.1",
+      "description": "URL for accessing the API. U(https://quay.example.com:8443) for example. If you do not set the parameter, then the module uses the E(QUAY_HOST) environment variable. If you do no set the environment variable either, then the module uses the U(http://127.0.0.1) URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_password",
+      "displayName": "Quay Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to use for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_PASSWORD) environment variable. If you set O(quay_password), then you also need to set O(quay_username). Mutually exclusive with O(quay_token).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_token",
+      "displayName": "Quay Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OAuth access token for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_TOKEN) environment variable. Mutually exclusive with O(quay_username) and O(quay_password).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_username",
+      "displayName": "Quay Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_USERNAME) environment variable. If you set O(quay_username), then you also need to set O(quay_password). Mutually exclusive with O(quay_token).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role",
+      "displayName": "Role",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Permission that Quay automatically grants to the user or team on new created repositories in the organization. If you do not provide that parameter, then the module uses V(read) by default.",
+      "choices": [
+        "read",
+        "write",
+        "admin"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If V(absent), then the module deletes the default permission. If V(present), then the module creates the default permission if it does not already exist. If the default permission already exists, then the module updates its role parameter (V(read), V(write), or V(admin)).",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10.0,
+      "description": "Number of seconds to wait for Quay to send data before giving up. If you do not set the parameter, then the module tries the E(QUAY_TIMEOUT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "user",
+      "description": "Type of the account defined in O(name). Choose V(user) for both user and robot accounts.",
+      "choices": [
+        "user",
+        "team"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to allow insecure connections to the API. If V(false), then the module does not validate SSL certificates. If you do not set the parameter, then the module tries the E(QUAY_VERIFY_SSL) environment variable (V(yes), V(1), and V(True) mean true, and V(no), V(0), V(False), and no value mean false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

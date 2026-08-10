@@ -1,0 +1,308 @@
+{
+  "fqcn": "vastdata.vms.quotas",
+  "shortDescription": "Create, update, or delete VAST Quota resources",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vastdata/vms/quotas_module.html",
+  "options": [
+    {
+      "name": "create_dir",
+      "displayName": "Create Dir",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set to true to create the directory if the directory was not created yet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_dir_mode",
+      "displayName": "Create Dir Mode",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Unix permissions mode for the new directory",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_email",
+      "displayName": "Default Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Emails are sent to users if and when they exceed their user/group quota limits. default_email is a default email\naddress that is used instead of a user's email address in the event that no email address is found for the user\non a provider and no email suffix is set.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_group_quota",
+      "displayName": "Default Group Quota",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "If is_user_quota is true, this parameter can be used to specify a default rule for all groups. If not specified,\neach group is only limited individually by group rules applied to the group through group_quotas.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_user_quota",
+      "displayName": "Default User Quota",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "If is_user_quota is true, this parameter can be used to specify a default rule to limit individual quota usage\nfor all users. If not specified, each user is only limited individually by user and group rules applied to the\nuser through user_quotas and group_quotas.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_alarms",
+      "displayName": "Enable Alarms",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True by default. Enables alarms on relevant events for user and group quotas. Applicable only if is_user_quota is\ntrue. Raises alarms reporting the number of users that exceed their quotas and when one or more users is/are\nblocked from writing to the quota directory.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_email_providers",
+      "displayName": "Enable Email Providers",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set to true to enable querying Active Directory and LDAP services for user emails when sending user notifications\nto users if they exceed their user/group quota limits. If enabled, the provider query is the first priority\nsource for a user's email. If a user's email is not found on the provider, a global suffix is used to form an\nemail. If no suffix is set, default_email is used.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "grace_period",
+      "displayName": "Grace Period",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Quota enforcement grace period. An alarm is triggered and write operations are blocked if storage usage continues\nto exceed the soft limit for the grace period. Format: [DD] [HH:[MM:]]s\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_quotas",
+      "displayName": "Group Quotas",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Group Quotas",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hard_limit",
+      "displayName": "Hard Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Storage usage limit beyond which no writes will be allowed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hard_limit_inodes",
+      "displayName": "Hard Limit Inodes",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of directories and unique files under the path beyond which no writes will be allowed. A file with\nmultiple hardlinks is counted only once.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iam_role_quotas",
+      "displayName": "Iam Role Quotas",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Iam Role Quotas",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Resource ID for direct lookup. Mutually exclusive with name-based identification.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inherit_acl",
+      "displayName": "Inherit Acl",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether the directory should inherit ACLs from its parent directory",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_physical_quota",
+      "displayName": "Is Physical Quota",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to limit by Physical Capacity. Default is Logical. Cannot be updated. Requires VMS 5.5 or later.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_user_quota",
+      "displayName": "Is User Quota",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Is User Quota",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Quota name",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The directory path on which to enforce the quota",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quota_groups_ids",
+      "displayName": "Quota Groups Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Quota Groups Ids Requires VMS 5.5 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "soft_limit",
+      "displayName": "Soft Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Storage usage limit at which warnings of exceeding the quota are issued.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "soft_limit_inodes",
+      "displayName": "Soft Limit Inodes",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of directories and unique files under the path at which warnings of exceeding the quota will be issued. A\nfile with multiple hardlinks is counted only once.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the resource.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_id",
+      "displayName": "Tenant Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Tenant ID",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_quotas",
+      "displayName": "User Quotas",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "An array of user quota rule objects. A user quota rule overrides a default user quota rule for the specified\nuser.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vms",
+      "displayName": "Vms",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "VAST VMS connection parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Wait for async operations to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "Timeout in seconds for async operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,261 @@
+{
+  "fqcn": "netapp_eseries.santricity.netapp_e_storagepool",
+  "shortDescription": "NetApp E-Series manage volume groups and disk pools",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp_eseries/santricity/netapp_e_storagepool_module.html",
+  "options": [
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The url to the SANtricity Web Services Proxy or Embedded Web Services API. Example https://prod-1.wahoo.acme.com/devmgr/v2",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "criteria_drive_count",
+      "displayName": "Criteria Drive Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of disks to use for building the storage pool. When I(state==\"present\") then I(criteria_drive_count) or I(criteria_min_usable_capacity) must be specified. The pool will be expanded if this number exceeds the number of disks already in place (See expansion note below)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "criteria_drive_interface_type",
+      "displayName": "Criteria Drive Interface Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The interface type to use when selecting drives for the storage pool If not provided then all interface types will be considered.",
+      "choices": [
+        "sas",
+        "sas4k",
+        "fibre",
+        "fibre520b",
+        "scsi",
+        "sata",
+        "pata"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "criteria_drive_min_size",
+      "displayName": "Criteria Drive Min Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The minimum individual drive size (in size_unit) to consider when choosing drives for the storage pool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "criteria_drive_require_da",
+      "displayName": "Criteria Drive Require Da",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Ensures the storage pool will be created with only data assurance (DA) capable drives. Only available for new storage pools; existing storage pools cannot be converted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "criteria_drive_require_fde",
+      "displayName": "Criteria Drive Require Fde",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether full disk encryption ability is required for drives to be added to the storage pool",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "criteria_drive_type",
+      "displayName": "Criteria Drive Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of disk (hdd or ssd) to use when searching for candidates to use. When not specified each drive type will be evaluated until successful drive candidates are found starting with the most prevalent drive type.",
+      "choices": [
+        "hdd",
+        "ssd"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "criteria_min_usable_capacity",
+      "displayName": "Criteria Min Usable Capacity",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The minimum size of the storage pool (in size_unit). When I(state==\"present\") then I(criteria_drive_count) or I(criteria_min_usable_capacity) must be specified. The pool will be expanded if this value exceeds its current size. (See expansion note below)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "criteria_size_unit",
+      "displayName": "Criteria Size Unit",
+      "type": "string",
+      "required": false,
+      "default": "gb",
+      "description": "The unit used to interpret size parameters",
+      "choices": [
+        "bytes",
+        "b",
+        "kb",
+        "mb",
+        "gb",
+        "tb",
+        "pb",
+        "eb",
+        "zb",
+        "yb"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "erase_secured_drives",
+      "displayName": "Erase Secured Drives",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If I(state==\"absent\") then all storage pool drives will be erase If I(state==\"present\") then delete all available storage array drives that have security enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the storage pool to manage",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "raid_level",
+      "displayName": "Raid Level",
+      "type": "string",
+      "required": false,
+      "default": "raidDiskPool",
+      "description": "The RAID level of the storage pool to be created. Required only when I(state==\"present\"). When I(raid_level==\"raidDiskPool\") then I(criteria_drive_count >= 10 or criteria_drive_count >= 11) is required depending on the storage array specifications. When I(raid_level==\"raid0\") then I(1<=criteria_drive_count) is required. When I(raid_level==\"raid1\") then I(2<=criteria_drive_count) is required. When I(raid_level==\"raid3\") then I(3<=criteria_drive_count<=30) is required. When I(raid_level==\"raid5\") ",
+      "choices": [
+        "raidAll",
+        "raid0",
+        "raid1",
+        "raid3",
+        "raid5",
+        "raid6",
+        "raidDiskPool"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_volumes",
+      "displayName": "Remove Volumes",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Prior to removing a storage pool, delete all volumes in the pool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reserve_drive_count",
+      "displayName": "Reserve Drive Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Set the number of drives reserved by the storage pool for reconstruction operations. Only valid on raid disk pools.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secure_pool",
+      "displayName": "Secure Pool",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables security at rest feature on the storage pool. Will only work if all drives in the pool are security capable (FDE, FIPS, or mix) Warning, once security is enabled it is impossible to disable without erasing the drives.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssid",
+      "displayName": "Ssid",
+      "type": "string",
+      "required": false,
+      "default": "1",
+      "description": "The ID of the array to manage. This value must be unique for each array.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Whether the specified storage pool should exist or not. Note that removing a storage pool currently requires the removal of all defined volumes first.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Should https certificates be validated?",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

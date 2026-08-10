@@ -1,0 +1,360 @@
+{
+  "fqcn": "middleware_automation.common.maven_artifact",
+  "shortDescription": "Downloads an Artifact from a Maven Repository",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/middleware_automation/common/maven_artifact_module.html",
+  "options": [
+    {
+      "name": "artifact_id",
+      "displayName": "Artifact Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The maven artifactId coordinate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum_alg",
+      "displayName": "Checksum Alg",
+      "type": "string",
+      "required": false,
+      "default": "md5",
+      "description": "If V(md5), checksums will use the MD5 algorithm. This is the default. If V(sha1), checksums will use the SHA1 algorithm. This can be used on systems configured to use FIPS-compliant algorithms, since MD5 will be blocked on such systems.",
+      "choices": [
+        "md5",
+        "sha1"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "classifier",
+      "displayName": "Classifier",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The maven classifier coordinate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted certificate chain file to be used for SSL client authentication. This file can also include the key as well, and if the key is included, O(client_key) is not required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted file that contains your private key to be used for SSL client authentication. If O(client_cert) contains both the certificate and key, this option is not required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The path where the artifact should be written to If file mode or ownerships are specified and destination path already exists, they affect the downloaded file",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directory_mode",
+      "displayName": "Directory Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filesystem permission mode applied recursively to O(dest) when it is a directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extension",
+      "displayName": "Extension",
+      "type": "string",
+      "required": false,
+      "default": "jar",
+      "description": "The maven type/extension coordinate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_basic_auth",
+      "displayName": "Force Basic Auth",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "httplib2, the library used by the uri module only sends authentication information when a webservice responds to an initial request with a 401 status. Since some basic auth services do not properly send a 401, logins will fail. This option forces the sending of the Basic authentication header upon initial request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_id",
+      "displayName": "Group Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Maven groupId coordinate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "headers",
+      "displayName": "Headers",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Add custom HTTP headers to a request in hash/dict format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keep_name",
+      "displayName": "Keep Name",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If V(true), the downloaded artifact's name is preserved, i.e the version number remains part of it. This option only has effect when O(dest) is a directory and O(version) is set to V(latest) or O(version_by_spec) is defined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to authenticate with to the Maven Repository.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "repository_url",
+      "displayName": "Repository Url",
+      "type": "string",
+      "required": false,
+      "default": "https://repo1.maven.org/maven2",
+      "description": "The URL of the Maven Repository to download from. Use file://... if the repository is local, added in version 2.6",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the artifact",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Specifies a timeout in seconds for the connection attempt",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unredirected_headers",
+      "displayName": "Unredirected Headers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of headers that should not be included in the redirection. This headers are sent to the C(fetch_url) function. On ansible-core version 2.12 or later, the default of this option is V([Authorization, Cookie]). Useful if the redirection URL does not need to have sensitive headers in the request. Requires ansible-core version 2.12 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to authenticate as to the Maven Repository.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(false), SSL certificates will not be validated. This should only be set to V(false) when no other option exists.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_checksum",
+      "displayName": "Verify Checksum",
+      "type": "string",
+      "required": false,
+      "default": "download",
+      "description": "If V(never), the MD5/SHA1 checksum will never be downloaded and verified. If V(download), the MD5/SHA1 checksum will be downloaded and verified only after artifact download. This is the default. If V(change), the MD5/SHA1 checksum will be downloaded and verified if the destination already exist, to verify if they are identical. This was the behaviour before 2.6. Since it downloads the checksum before (maybe) downloading the artifact, and since some repository software, when acting as a proxy/cac",
+      "choices": [
+        "never",
+        "download",
+        "change",
+        "always"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The maven version coordinate Mutually exclusive with O(version_by_spec).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version_by_spec",
+      "displayName": "Version By Spec",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The maven dependency version ranges. See supported version ranges on U(https://cwiki.apache.org/confluence/display/MAVENOLD/Dependency+Mediation+and+Conflict+Resolution) The range type \"(,1.0],[1.2,)\" and \"(,1.1),(1.1,)\" is not supported. Mutually exclusive with O(version).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,99 @@
+{
+  "fqcn": "serverscom.sc_api.ssh_key",
+  "shortDescription": "Manage ssh key",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/serverscom/sc_api/ssh_key_module.html",
+  "options": [
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.servers.com/v1",
+      "description": "Endpoint to use to connect to API. Do not change until specifically asked to do otherwise. If not set, the value of the C(SERVERSCOM_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fingerprint",
+      "displayName": "Fingerprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fingerprint of the key. Used for I(state)=C(absent). If both I(fingerprint) and I(public_keys) are given, module returns error if they are from different keys. Derived automatically from I(public_key) if needed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Labels to attach to the key. Used for I(state)=C(present). If not specified, no labels will be attached.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the key. Required for I(state)=C(present). Used for I(state)=C(absent) to remove keys by name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_key",
+      "displayName": "Public Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "public key in base64 (with type prefix, f.e. ssh-rss). Used to calculate I(fingerprint). Required for I(state)=C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace",
+      "displayName": "Replace",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Used for I(state)=C(present). If set to C(false), module fails if other keys with the same name or fingerprint are present. If set to C(true), remove conflicting keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "State of the key. If I(state)=C(present), module checks if there are other keys with the same name or fingerprint. If they are but are different (f.e. existing key with a given nave have different fingerprint) they are replaced with I(name) and I(public_key) values. If I(state)=C(absent), module removes keys based both on name and fingerprint or fail if I(replace) is C(false).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Token to use. You can create token for your account in https://portal.servers.com in Profile -> Public API section. If not set, the value of the C(SERVERSCOM_API_TOKEN) or C(SC_TOKEN) environment variable is used (C(SERVERSCOM_API_TOKEN) takes precedence). Value is not logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

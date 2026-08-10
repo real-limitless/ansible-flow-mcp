@@ -1,0 +1,236 @@
+{
+  "fqcn": "ngine_io.cloudstack.vpc",
+  "shortDescription": "Manages VPCs on Apache CloudStack based clouds.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ngine_io/cloudstack/vpc_module.html",
+  "options": [
+    {
+      "name": "account",
+      "displayName": "Account",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Account the VPC is related to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_http_method",
+      "displayName": "Api Http Method",
+      "type": "string",
+      "required": false,
+      "default": "get",
+      "description": "HTTP method used to query the API endpoint. If not given, the C(CLOUDSTACK_METHOD) env variable is considered.",
+      "choices": [
+        "get",
+        "post"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of the CloudStack API. If not given, the C(CLOUDSTACK_KEY) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_secret",
+      "displayName": "Api Secret",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Secret key of the CloudStack API. If not set, the C(CLOUDSTACK_SECRET) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "HTTP timeout in seconds. If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL of the CloudStack API e.g. https://cloud.example.com/client/api. If not given, the C(CLOUDSTACK_ENDPOINT) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_verify_ssl_cert",
+      "displayName": "Api Verify Ssl Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Verify CA authority cert file. If not given, the C(CLOUDSTACK_VERIFY) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cidr",
+      "displayName": "Cidr",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "CIDR of the VPC, e.g. 10.1.0.0/16 All VPC guest networks' CIDRs must be within this CIDR. Required on I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clean_up",
+      "displayName": "Clean Up",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to redeploy a VPC router or not when I(state=restarted)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_text",
+      "displayName": "Display Text",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Display text of the VPC. If not set, I(name) will be used for creating.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Domain the VPC is related to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the VPC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_domain",
+      "displayName": "Network Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network domain for the VPC. All networks inside the VPC will belong to this domain. Only considered while creating the VPC, can not be changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "poll_async",
+      "displayName": "Poll Async",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Poll async jobs until job has finished.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the project the VPC is related to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the VPC. The state C(present) creates a started VPC. The state C(stopped) is only considered while creating the VPC, added in version 2.6.",
+      "choices": [
+        "present",
+        "absent",
+        "stopped",
+        "restarted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags. Tags are a list of dictionaries having keys I(key) and I(value). For deleting all tags, set an empty list e.g. I(tags: []).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(false), SSL certificates will not be validated. If not given, the C(CLOUDSTACK_DANGEROUS_NO_TLS_VERIFY) env variable is considered. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vpc_offering",
+      "displayName": "Vpc Offering",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the VPC offering. If not set, default VPC offering is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone",
+      "displayName": "Zone",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the zone.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

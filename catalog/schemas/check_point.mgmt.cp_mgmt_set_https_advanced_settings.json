@@ -1,0 +1,237 @@
+{
+  "fqcn": "check_point.mgmt.cp_mgmt_set_https_advanced_settings",
+  "shortDescription": "Configure advanced settings for HTTPS Inspection.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/check_point/mgmt/cp_mgmt_set_https_advanced_settings_module.html",
+  "options": [
+    {
+      "name": "auto_publish_session",
+      "displayName": "Auto Publish Session",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Publish the current session if changes have been performed after task completes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "blocked_certificate_tracking",
+      "displayName": "Blocked Certificate Tracking",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Controls whether to log and send a notification for dropped traffic.<br><ul style=\"list-style-type,square\"><li>None - Does not record the event.</li><li>Log - Records the event details in SmartView.</li><li>Alert - Logs the event and executes a command.</li><li>Mail - Sends an email to the administrator.</li><li>SNMP Trap - Sends an SNMP alert to the SNMP GU.</li><li>User Defined Alert - Sends customized alerts.</li></ul>.",
+      "choices": [
+        "none",
+        "log",
+        "popup alert",
+        "mail alert",
+        "snmp trap alert",
+        "user defined alert no.1",
+        "user defined alert no.2",
+        "user defined alert no.3"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "blocked_certificates",
+      "displayName": "Blocked Certificates",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Collection of certificates objects identified by serial number.<br>Drop traffic from servers using the blocked certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bypass_on_client_failure",
+      "displayName": "Bypass On Client Failure",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether all requests should be bypassed or blocked-in case of client errors (Client closes the connection due to authentication issues during handshake)<br><ul style=\"list-style-type,square\"><li>true - Fail-open (bypass all requests).</li><li>false - Fail-close (block all requests.</li></ul><br>The default value is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bypass_on_failure",
+      "displayName": "Bypass On Failure",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether all requests should be bypassed or blocked-in case of server errors (for example validation error during GW-Server authentication)<br><ul style=\"list-style-type,square\"><li>true - Fail-open (bypass all requests).</li><li>false - Fail-close (block all requests.</li></ul><br>The default value is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bypass_under_load",
+      "displayName": "Bypass Under Load",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Bypass the HTTPS Inspection temporarily to improve connectivity during a heavy load on the Security Gateway. The HTTPS Inspection would resume as soon as the load decreases.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bypass_update_services",
+      "displayName": "Bypass Update Services",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Configure the value \"true\" to bypass traffic to well-known software update services.<br>The default value is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_pinned_apps_action",
+      "displayName": "Certificate Pinned Apps Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configure the value \"bypass\" to bypass traffic from certificate-pinned applications approved by Check Point.<br>HTTPS Inspection cannot inspect connections initiated by certificate-pinned applications.<br>Configure the value \"detect\" to send logs for traffic from certificate-pinned applications approved by Check Point.<br>The default value is bypass.",
+      "choices": [
+        "bypass",
+        "detect",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "details_level",
+      "displayName": "Details Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level of detail for some of the fields in the response can vary from showing only the UID value of the object to a fully detailed representation of the object.",
+      "choices": [
+        "uid",
+        "standard",
+        "full"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domains_to_process",
+      "displayName": "Domains To Process",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Indicates which domains to process the commands on. It cannot be used with the details-level full, must be run from the System Domain only and with ignore-warnings true. Valid values are, CURRENT_DOMAIN, ALL_DOMAINS_ON_THIS_SERVER.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_errors",
+      "displayName": "Ignore Errors",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Apply changes ignoring errors. You won't be able to publish such a changes. If ignore-warnings flag was omitted - warnings will also be ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_warnings",
+      "displayName": "Ignore Warnings",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Apply changes ignoring warnings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_sessions",
+      "displayName": "Log Sessions",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "The value \"true\" configures the Security Gateway to send HTTPS Inspection session logs.<br>The default value is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retrieve_intermediate_ca_certificates",
+      "displayName": "Retrieve Intermediate Ca Certificates",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Configure the value \"true\" to use the \"Certificate Authority Information Access\" extension to retrieve certificates that are missing from the certificate chain.<br>The default value is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_certificate_validation_actions",
+      "displayName": "Server Certificate Validation Actions",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "When a Security Gateway receives an untrusted certificate from a website server, define when to drop the connection and how to track it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "site_categorization_allow_mode",
+      "displayName": "Site Categorization Allow Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Whether all requests should be allowed or blocked until categorization is complete.<br><ul style=\"list-style-type,square\"><li>Background - to allow requests until categorization is complete.</li><li>Hold- to block requests until categorization is complete.</li></ul><br>The default value is hold.",
+      "choices": [
+        "background",
+        "hold"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Version of checkpoint. If not given one, the latest version taken.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_task",
+      "displayName": "Wait For Task",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Wait for the task to end. Such as publish task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_task_timeout",
+      "displayName": "Wait For Task Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "How many minutes to wait until throwing a timeout error.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,521 @@
+{
+  "fqcn": "vastdata.vms.ldaps",
+  "shortDescription": "Create, update, or delete VAST Ldap resources",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vastdata/vms/ldaps_module.html",
+  "options": [
+    {
+      "name": "abac_read_only_value_name",
+      "displayName": "Abac Read Only Value Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attribute to use when querying a provider for a read only attribute access check.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "abac_read_write_value_name",
+      "displayName": "Abac Read Write Value Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attribute to use when querying a provider for a read-write attribute access check.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "advanced_filter",
+      "displayName": "Advanced Filter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use this parameter to specify manual filters for the BaseDN. This is useful when accounts are distributed across\nOUs and the baseDN needs to be wide to include all accounts, while there are also accounts that you would like to\nexclude from user queries.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "binddn",
+      "displayName": "Binddn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The bind DN for authenticating to the LDAP domain. You can specify any user account that has read access to the\ndomain.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bindpw",
+      "displayName": "Bindpw",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password used with the Bind DN to authenticate to the LDAP server. (Note: This field is not returned by the\nAPI and only used during operations)\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_name",
+      "displayName": "Domain Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FQDN of Active Directory domain. Must be resolvable in DNS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domains_with_posix_attributes",
+      "displayName": "Domains With Posix Attributes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Allows to enumerate specific domains for POSIX attributes in case posix_attributes_source is set to\nSPECIFIC_DOMAINS.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gid_number",
+      "displayName": "Gid Number",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override 'gidNumber' as the attribute of a group entry that contains the group's GID number. When binding VAST\nCluster to AD, you may need to set this to 'gidnumber' (case sensitive).\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_login_name",
+      "displayName": "Group Login Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attribute used to query Active Directory for the group login name in NFS ID mapping. Applicable only with\nActive Directory and NFSv4.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_searchbase",
+      "displayName": "Group Searchbase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Base DN for group queries within the joined domain only. When auto discovery is enabled, group queries outside\nthe joined domain use auto-discovered Base DNs.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Resource ID for direct lookup. Mutually exclusive with name-based identification.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_abac_provider",
+      "displayName": "Is Abac Provider",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "is this Ldap used for ABAC Requires VMS 5.5 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_vms_auth_provider",
+      "displayName": "Is Vms Auth Provider",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables use of the LDAP for VMS authentication. Two LDAP configurations per cluster can be used for VMS\nauthentication: one with Active Directory and one without.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mail_property_name",
+      "displayName": "Mail Property Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attribute to use for the user's email address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "match_user",
+      "displayName": "Match User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attribute to use when querying a provider for a user that matches a user that was already retrieved from\nanother provider. A user entry that contains a matching value in this attribute will be considered the same user\nas the user previously retrieved.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "method",
+      "displayName": "Method",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The authentication method configured on the LDAP server for authenticating clients.",
+      "choices": [
+        "anonymous",
+        "simple",
+        "sasl",
+        "krbv4",
+        "krbv41",
+        "krbv42"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitor_action",
+      "displayName": "Monitor Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of periodic health check that VAST Cluster performs for the LDAP provider. PING (default, less overhead\nand impact on the provider) = pings the provider. BIND = binds to the provider.\n",
+      "choices": [
+        "PING",
+        "BIND"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the LDAP configuration",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "netgroup_searchbase",
+      "displayName": "Netgroup Searchbase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Base DN for netgroup queries. Requires VMS 5.5 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The port of the remote LDAP server. Typical values: 389, 636.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "posix_account",
+      "displayName": "Posix Account",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override 'posixAccount'as the object class that defines a user entry on the LDAP server. When binding VAST\nCluster to AD, set this parameter to 'user' in order for authorization to work properly.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "posix_attributes_source",
+      "displayName": "Posix Attributes Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines which domains POSIX attributes will be supported from.",
+      "choices": [
+        "JOINED_DOMAIN",
+        "ALL_DOMAINS",
+        "SPECIFIC_DOMAINS",
+        "GC"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "posix_group",
+      "displayName": "Posix Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override 'posixGroup' as the object class that defines a group entry on the LDAP server. When binding VAST\nCluster to AD, set this parameter to 'group' in order for authorization to work properly.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "query_groups_mode",
+      "displayName": "Query Groups Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A mode setting for how groups are queried: Set to COMPATIBLE to look up user groups using the 'memberOf' and\n'memberUid' attributes. Set to RFC2307BIS_ONLY to look up user groups using only the 'memberOf' attribute. Set to\nRFC2307_ONLY to look up user groups using only the 'memberUid' attribute. Set to NONE not to look up user groups\nother than by leading GID and primary group SID.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "query_posix_attributes_from_gc",
+      "displayName": "Query Posix Attributes From Gc",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When set to True - users/groups from non-joined domain POSIX attributes are supported, when set to False - Posix\nattributes of users/groups from non-joined domain are not supported. As a condition Global catalog needs to be\nconfigured to support Posix attributes. (deprecated since 4.6)\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reverse_lookup",
+      "displayName": "Reverse Lookup",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "resolve netgroups into hostnames",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "searchbase",
+      "displayName": "Searchbase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The entry in the LDAP directory tree to use as a starting point for user queries.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the resource.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "super_admin_groups",
+      "displayName": "Super Admin Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of groups on the LDAP provider. Members of these groups can log into VMS as cluster admin users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_certificate",
+      "displayName": "Tls Certificate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "TLS certificate to use for verifying the remote LDAP server's TLS certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uid",
+      "displayName": "Uid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override 'uid' as the attribute of a user entry on the LDAP server that contains the user name. When binding VAST\nCluster to AD, you may need to set this to 'sAMAccountname'.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uid_member",
+      "displayName": "Uid Member",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override 'memberUid' as the attribute of a group entry on the LDAP server that contains names of group members.\nWhen binding VAST Cluster to AD, you may need to set this to 'memberUID'\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uid_member_value_property_name",
+      "displayName": "Uid Member Value Property Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attribute which represents the value of the LDAP group's member property.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uid_number",
+      "displayName": "Uid Number",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override 'uidNumber' as the attribute of a user entry on the LDAP server that contains the UID number. Often when\nbinding VAST Cluster to Active Directory this does not need to be set.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "urls",
+      "displayName": "Urls",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Comma separated list of URIs of LDAP servers in the format SCHEME://ADDRESS. The order of listing defines the\npriority order. The URI with highest priority that has a good health status is used.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_auto_discovery",
+      "displayName": "Use Auto Discovery",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When enabled, Active Directory Domain Controllers (DCs) and Active Directory domains are auto discovered. Queries\nextend beyond the joined domain to all domains in the forest. When disabled, queries are restricted to the joined\ndomain and DCs must be provided in the URLs field.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_ldaps",
+      "displayName": "Use Ldaps",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use LDAPS for Auto-Discovery",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_multi_forest",
+      "displayName": "Use Multi Forest",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allow access for users from trusted domains on other forests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_posix",
+      "displayName": "Use Posix",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "POSIX support",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_tls",
+      "displayName": "Use Tls",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set to true to enable use of TLS to secure communication between VAST Cluster and the LDAP server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_login_name",
+      "displayName": "User Login Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attribute used to query Active Directory for the user login name in NFS ID mapping. Applicable only with\nActive Directory and NFSv4.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username_property_name",
+      "displayName": "Username Property Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attribute to use for querying users in VMS user-initated user queries. Default is 'name'. Sometimes set to\n'cn'\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vms",
+      "displayName": "Vms",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "VAST VMS connection parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Wait for async operations to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "Timeout in seconds for async operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

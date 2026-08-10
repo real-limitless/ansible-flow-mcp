@@ -1,0 +1,201 @@
+{
+  "fqcn": "dellemc.unity.snapshot",
+  "shortDescription": "Manage snapshots on the Unity storage system",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/unity/snapshot_module.html",
+  "options": [
+    {
+      "name": "auto_delete",
+      "displayName": "Auto Delete",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "This option specifies whether the snapshot is auto deleted or not. If set to C(true), snapshot will expire based on the pool auto deletion policy. If set to (false), snapshot will not be auto deleted based on the pool auto deletion policy. Option I(auto_delete) can not be set to C(true), if I(expiry_time) is specified. If during creation neither I(auto_delete) nor I(expiry_time) is mentioned then snapshot will be created keeping I(auto_delete) as C(true). Once the I(expiry_time) is set then snap",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cg_name",
+      "displayName": "Cg Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the Consistency Group for which snapshot is created. For creation of a snapshot either I(vol_name) or I(cg_name) is required. Not required for other operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The additional information about the snapshot can be provided using this option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "expiry_time",
+      "displayName": "Expiry Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This option is for specifying the date and time after which the snapshot will expire. The time is to be mentioned in UTC timezone. The format is \"MM/DD/YYYY HH:MM\". Year must be in 4 digits.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_id",
+      "displayName": "Host Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The id of the host. Either I(host_name) or I(host_id) is required to map or unmap a snapshot from a host. Snapshot can be attached to multiple hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_name",
+      "displayName": "Host Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the host. Either I(host_name) or I(host_id) is required to map or unmap a snapshot from a host. Snapshot can be attached to multiple hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_state",
+      "displayName": "Host State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The I(host_state) option is used to mention the existence of the host for snapshot. It is required when a snapshot is mapped or unmapped from host.",
+      "choices": [
+        "mapped",
+        "unmapped"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_snapshot_name",
+      "displayName": "New Snapshot Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "New name for the snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port number through which communication happens with Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_id",
+      "displayName": "Snapshot Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The id of the snapshot. For all operations other than creation either I(snapshot_name) or I(snapshot_id) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_name",
+      "displayName": "Snapshot Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the snapshot. Mandatory parameter for creating a snapshot. For all other operations either I(snapshot_name) or I(snapshot_id) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The I(state) option is used to mention the existence of the snapshot.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unispherehost",
+      "displayName": "Unispherehost",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean variable to specify whether or not to validate SSL certificate. C(true) - Indicates that the SSL certificate should be verified. C(false) - Indicates that the SSL certificate should not be verified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vol_name",
+      "displayName": "Vol Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the volume for which snapshot is created. For creation of a snapshot either I(vol_name) or I(cg_name) is required. Not required for other operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

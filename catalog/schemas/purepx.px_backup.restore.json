@@ -1,0 +1,292 @@
+{
+  "fqcn": "purepx.px_backup.restore",
+  "shortDescription": "Manage restores in PX-Backup",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/purepx/px_backup/restore_module.html",
+  "options": [
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "PX-Backup API URL",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_object_type",
+      "displayName": "Backup Object Type",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Type of backup objects to restore",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_ref",
+      "displayName": "Backup Ref",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Reference to backup",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name or UID of the cluster",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_ref",
+      "displayName": "Cluster Ref",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Reference to cluster",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_resources",
+      "displayName": "Exclude Resources",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of specific resources to exclude from restore",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_level_restore_info",
+      "displayName": "File Level Restore Info",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "File level restore configuration for VM backups",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filter",
+      "displayName": "Filter",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Advanced filtering options for restore operations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_optional_resource_types",
+      "displayName": "Include Optional Resource Types",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of optional resource types to include in the restore By default, some resource types may be excluded Use this to explicitly include specific resource types Example: [\"v1/Secret\", \"v1/ConfigMap\"]",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_resources",
+      "displayName": "Include Resources",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of specific resources to include in restore",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_sfr",
+      "displayName": "Is Sfr",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set to true for VirtualMachine file level restore Enables restoration of specific files/directories from VM backups Requires file_level_restore_info when set to true",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the restore Required for all operations except INSPECT_ALL",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace_mapping",
+      "displayName": "Namespace Mapping",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Mapping of source and destination namespaces during restore Should be used only when restore is done WITHOUT using filter Mutually exclusive with target_namespace_prefix Set namespace_mapping equal if is_sfr is set to true Example: {\"source-ns\": \"target-ns\", \"app-prod\": \"app-prod-restored\"}",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Operation to perform on the restore - CREATE: creates a new restore - DELETE: removes a restore - INSPECT_ONE: retrieves details of a specific restore - INSPECT_ALL: lists all restores",
+      "choices": [
+        "CREATE",
+        "DELETE",
+        "INSPECT_ONE",
+        "INSPECT_ALL"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "org_id",
+      "displayName": "Org Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Organization ID",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rancher_project_mapping",
+      "displayName": "Rancher Project Mapping",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Mapping of rancher projects from the backup to which restore should be done Format is source_project_id:target_project_id Can specify multiple project mappings Example: {\"c-abc123:p-xyz789\": \"c-def456:p-uvw012\", \"c-abc123:p-xyz790\": \"c-def456:p-uvw013\"}",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rancher_project_name_mapping",
+      "displayName": "Rancher Project Name Mapping",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Mapping of source rancher project display names to target rancher project display names Format is source_project_name:target_project_name Can specify multiple project name mappings Example: {\"Production Project\": \"DR Production Project\", \"Staging Project\": \"DR Staging Project\"}",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace_policy",
+      "displayName": "Replace Policy",
+      "type": "string",
+      "required": false,
+      "default": "Invalid",
+      "description": "Policy for handling existing resources during restore Invalid: No policy specified (default) Retain: Keep existing resources, skip restore if resource exists Delete: Delete existing resources before restore",
+      "choices": [
+        "Invalid",
+        "Retain",
+        "Delete"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sort_option",
+      "displayName": "Sort Option",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Sorting configuration for restore enumeration",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_config",
+      "displayName": "Ssl Config",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "SSL configuration dictionary containing certificate settings Contains validate_certs, ca_cert, client_cert, and client_key options If not provided, defaults to standard SSL verification",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_class_mapping",
+      "displayName": "Storage Class Mapping",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Mapping of source and destination storage classes during restore Example: {\"fast-ssd\": \"standard-ssd\", \"slow-hdd\": \"standard-hdd\"}",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_namespace_prefix",
+      "displayName": "Target Namespace Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Prefix to be added to all target namespaces during granular restore with filters Only used when restore is performed WITH filter.namespace_filter Will be ignored when restore is done without using filter For example, if prefix is \"dr-\" and source namespace is \"app-prod\", target will be \"dr-app-prod\" Mutually exclusive with namespace_mapping",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Authentication token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uid",
+      "displayName": "Uid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Unique identifier of the restore",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "virtual_machine_restore_options",
+      "displayName": "Virtual Machine Restore Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Virtual machine specific restore options",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,170 @@
+{
+  "fqcn": "kpfleming.powerdns_auth.cryptokey",
+  "shortDescription": "Manages a CryptoKey in a zone of PowerDNS Authoritative server",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/kpfleming/powerdns_auth/cryptokey_module.html",
+  "options": [
+    {
+      "name": "active",
+      "displayName": "Active",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the CryptoKey is active or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "algorithm",
+      "displayName": "Algorithm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Algorithm for CryptoKey generation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Key (token) used to authenticate to the API endpoint in the server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_spec_path",
+      "displayName": "Api Spec Path",
+      "type": "string",
+      "required": false,
+      "default": "/api/docs",
+      "description": "Path of the OpenAPI (Swagger) API spec document in C(api_url).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": false,
+      "default": "http://localhost:8081",
+      "description": "URL of the API endpoint in the server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bits",
+      "displayName": "Bits",
+      "type": "number",
+      "required": false,
+      "default": 4096,
+      "description": "Size of the CryptoKey in bits when O(algorithm) is a variant of RSA.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dnskey",
+      "displayName": "Dnskey",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The DNSKEY record for the CryptoKey. Required alongside O(privatekey) for CryptoKey creation if O(algorithm) is not present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The CryptoKey id.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keytype",
+      "displayName": "Keytype",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of CryptoKey, either zone signing key (zsk), key signing key (ksk) or combined signing key (csk) Note that by default if only one CryptoKey is present it will be used as a csk regardless of the provided type. For the CryptoKey to assume its role another CryptoKey of the opposite type has to be present (zsk for ksk and vice-versa).",
+      "choices": [
+        "zsk",
+        "ksk",
+        "csk"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey",
+      "displayName": "Privatekey",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The privatekey in ISC format. Required if O(dnskey)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "published",
+      "displayName": "Published",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the CryptoKey is published or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_id",
+      "displayName": "Server Id",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "ID of the server instance which holds the key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If V(present) the CryptoKey will be created If V(present) and O(id) the CryptoKey will be updated If V(absent) the CryptoKey will be deleted If V(exists) lists all the keys in the zone If V(exists) and O(id) returns the corresponding CryptoKey",
+      "choices": [
+        "present",
+        "absent",
+        "exists"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone_name",
+      "displayName": "Zone Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the zone",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,180 @@
+{
+  "fqcn": "purepx.px_backup.role",
+  "shortDescription": "Manage roles in PX-Backup",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/purepx/px_backup/role_module.html",
+  "options": [
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "PX-Backup API URL",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_url",
+      "displayName": "Auth Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Keycloak authentication server URL For CREATE operation: required if role_id is not provided (used to automatically create Keycloak roles) For DELETE operation: optional (if provided, the associated Keycloak role will also be deleted; if not provided, only PX-Backup role is deleted) Note: skip_keycloak_deletion takes precedence over auth_url for DELETE operations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keycloak_attributes",
+      "displayName": "Keycloak Attributes",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Custom attributes for the auto-created Keycloak role Only used when role_id is not provided for CREATE operation Dictionary of key-value pairs",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keycloak_description",
+      "displayName": "Keycloak Description",
+      "type": "string",
+      "required": false,
+      "default": "Role created via ansible",
+      "description": "Description for the auto-created Keycloak role Only used when role_id is not provided for CREATE operation Default: \"Role created via ansible\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Labels to attach to the role",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the role Required for all operations except INSPECT_ALL",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "- Operation to perform on the role  - CREATE creates a new role  - UPDATE modifies an existing role  - DELETE removes a role  - INSPECT_ONE retrieves details of a specific role  - INSPECT_ALL lists all roles  - PERMISSION returns list of services, APIs permission for given user",
+      "choices": [
+        "CREATE",
+        "UPDATE",
+        "DELETE",
+        "INSPECT_ONE",
+        "INSPECT_ALL",
+        "PERMISSION"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "org_id",
+      "displayName": "Org Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Organization ID",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownership",
+      "displayName": "Ownership",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Ownership configuration for the role",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role_id",
+      "displayName": "Role Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Keycloak role ID to associate with the PX-Backup role This Keycloak role ID will be associated with the PX-Backup role If not provided for CREATE operation, a Keycloak role will be automatically created This ensures proper integration between PX-Backup roles and Keycloak authentication Format: UUID string (e.g., 3fe6c733-6df6-4058-91b8-bcd3344c8564)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rules",
+      "displayName": "Rules",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of rules",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skip_keycloak_deletion",
+      "displayName": "Skip Keycloak Deletion",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Skip deletion of the associated Keycloak role during DELETE operation When set to true, only the PX-Backup role will be deleted, preserving the Keycloak role This is useful when the Keycloak role is shared across multiple systems or when you want to preserve it for other purposes Takes precedence over auth_url setting for DELETE operations Only applicable for DELETE operation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_config",
+      "displayName": "Ssl Config",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "SSL configuration dictionary containing certificate settings Contains validate_certs, ca_cert, client_cert, and client_key options If not provided, defaults to standard SSL verification",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Authentication token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uid",
+      "displayName": "Uid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Unique identifier of the role Required for UPDATE, DELETE, VALIDATE, INSPECT_ONE, and PERMISSION operations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

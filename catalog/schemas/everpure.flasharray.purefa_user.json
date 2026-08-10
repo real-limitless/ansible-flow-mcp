@@ -1,0 +1,225 @@
+{
+  "fqcn": "everpure.flasharray.purefa_user",
+  "shortDescription": "Create, modify or delete FlashArray local user account",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/everpure/flasharray/purefa_user_module.html",
+  "options": [
+    {
+      "name": "ad_user",
+      "displayName": "Ad User",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the user is in the AD system Not required for local users",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api",
+      "displayName": "Api",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Define whether to create an API token for this user Token can be exposed using the I(debug) module",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token",
+      "displayName": "Api Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FlashArray API token for admin privileged user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the API Client that issues the identity token. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_warnings",
+      "displayName": "Disable Warnings",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disable insecure certificate warnings in debug logs",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fa_url",
+      "displayName": "Fa Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FlashArray management IPv4 address or Hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id_token",
+      "displayName": "Id Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A pre-signed JWT to authenticate with, as an alternative to I(api_token). The token is exchanged by the array for a short-lived access token. Requires a matching API Client to be registered on the array (see M(everpure.flasharray.purefa_apiclient)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "issuer",
+      "displayName": "Issuer",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The API Client's trusted identity issuer registered on the array. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_id",
+      "displayName": "Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Key ID of the API Client that issues the identity token. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the local user account",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "old_password",
+      "displayName": "Old Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If changing an existing password, you must provide the old password for security",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the local user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_file",
+      "displayName": "Private Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the PEM RSA private key used to sign an identity token, as an alternative to I(api_token). Requires I(client_id), I(key_id), I(issuer) and I(username).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_password",
+      "displayName": "Private Key Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password protecting I(private_key_file), if encrypted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_key",
+      "displayName": "Public Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public key for SSH access. To remove existing key use an empty string",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role",
+      "displayName": "Role",
+      "type": "string",
+      "required": false,
+      "default": "readonly",
+      "description": "Sets the local user's access level to the array",
+      "choices": [
+        "readonly",
+        "ops_admin",
+        "storage_admin",
+        "array_admin"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Create, delete or update local user account",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "description": "The duration of API token validity. Valid values are weeks (w), days(d), hours(h), minutes(m) and seconds(s).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username the issued token should be granted to. Must be a valid user on the array. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

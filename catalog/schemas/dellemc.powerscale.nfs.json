@@ -1,0 +1,552 @@
+{
+  "fqcn": "dellemc.powerscale.nfs",
+  "shortDescription": "Manage NFS exports on a PowerScale Storage System",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/powerscale/nfs_module.html",
+  "options": [
+    {
+      "name": "access_zone",
+      "displayName": "Access Zone",
+      "type": "string",
+      "required": false,
+      "default": "System",
+      "description": "Specifies the zone in which the export is valid. Access zone once set cannot be changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "the password of the PowerScale cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "username of the PowerScale cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "block_size",
+      "displayName": "Block Size",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the block size returned by the NFS statfs procedure (size dict).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "can_set_time",
+      "displayName": "Can Set Time",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True if the client can set file times through the NFS set attribute request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_state",
+      "displayName": "Client State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines whether the clients can access the NFS export. Value C(present-in-export) indicates that the clients can access the NFS export. Value C(absent-in-export) indicates that the client cannot access the NFS export. Required when adding or removing access of clients from the export. While removing clients, only the specified clients will be removed from the export, others will remain as is.",
+      "choices": [
+        "present-in-export",
+        "absent-in-export"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clients",
+      "displayName": "Clients",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the clients to the export. The type of access to clients in this list is determined by the I(read_only) parameter. This list can be changed anytime during the lifetime of the NFS export. I(client_state) is not provided, then the host machine will replicate the values provided in the I(clients).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "commit_asynchronous",
+      "displayName": "Commit Asynchronous",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True if NFS commit requests execute asynchronously.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional description field for the NFS export. Can be modified by passing a new value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directory_transfer_size",
+      "displayName": "Directory Transfer Size",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the preferred size for directory read operations (size dict).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encoding",
+      "displayName": "Encoding",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Encoding type for filenames returned to clients.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_name_max_size",
+      "displayName": "File Name Max Size",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the reported maximum length of a file name (size dict).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_unresolvable_hosts",
+      "displayName": "Ignore Unresolvable Hosts",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Does not present an error condition on unresolvable hosts when creating or modifying an export.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "map_failure",
+      "displayName": "Map Failure",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the user/group mapping to apply after a failed auth attempt for this export.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "map_lookup_uid",
+      "displayName": "Map Lookup Uid",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True if incoming user IDs (UIDs) are mapped to users in the OneFS user database. When set to False, incoming UIDs are applied directly to file operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "map_non_root",
+      "displayName": "Map Non Root",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the users and groups to which non-root and root clients are mapped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "map_root",
+      "displayName": "Map Root",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the users and groups to which non-root and root clients are mapped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_file_size",
+      "displayName": "Max File Size",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum file size for any file accessed from the export (size dict).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "onefs_host",
+      "displayName": "Onefs Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP address or FQDN of the PowerScale cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the filesystem path. It is the absolute path for System access zone and it is relative if using non-system access zone. For example, if your access zone is 'Ansible' and it has a base path '/ifs/ansible' and the path specified is '/user1', then the effective path would be '/ifs/ansible/user1'. If your access zone is System, and you have 'directory1' in the access zone, the path provided should be '/ifs/directory1'. The directory on the path must exist - the NFS module will not create t",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_no",
+      "displayName": "Port No",
+      "type": "string",
+      "required": false,
+      "default": "8080",
+      "description": "Port number of the PowerScale cluster.It defaults to 8080 if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_only",
+      "displayName": "Read Only",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether the export is read-only or read-write. This parameter only has effect on the 'clients' list and not the other three types of clients. This setting can be modified any time. If it is not set at the time of creation, the export will be of type read/write.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_only_clients",
+      "displayName": "Read Only Clients",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the clients with read-only access to the export, even when the export is read/write. This list can be changed anytime during the lifetime of the NFS export. I(client_state) is not provided, then the host machine will replicate the values provided in the I(read_only_clients).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_transfer_max_size",
+      "displayName": "Read Transfer Max Size",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum buffer size that clients should use on NFS read requests (size dict).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_transfer_multiple",
+      "displayName": "Read Transfer Multiple",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the preferred multiple size for NFS read requests (size dict).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_transfer_size",
+      "displayName": "Read Transfer Size",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the preferred size for NFS read requests (size dict).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_write_clients",
+      "displayName": "Read Write Clients",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the clients with both read and write access to the export, even when the export is set to read-only. This list can be changed anytime during the lifetime of the NFS export. I(client_state) is not provided, then the host machine will replicate the values provided in the I(read_write_clients).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "readdirplus",
+      "displayName": "Readdirplus",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True if 'readdirplus' requests are enabled. Enabling this property might improve network performance and is only available for NFSv3.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "return_32bit_file_ids",
+      "displayName": "Return 32Bit File Ids",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Limits the size of file identifiers returned by NFSv3+ to 32-bit values (may require remount).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "root_clients",
+      "displayName": "Root Clients",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the clients with root access to the export. This list can be changed anytime during the lifetime of the NFS export. I(client_state) is not provided, then the host machine will replicate the values provided in the I(root_clients).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_flavors",
+      "displayName": "Security Flavors",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the authentication types that are supported for this export.",
+      "choices": [
+        "unix",
+        "kerberos",
+        "kerberos_integrity",
+        "kerberos_privacy"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setattr_asynchronous",
+      "displayName": "Setattr Asynchronous",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True if set attribute operations execute asynchronously.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Defines whether the NFS export should exist or not. Value C(present) indicates that the NFS export should exist in system. Value C(absent) indicates that the NFS export should not exist in system.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sub_directories_mountable",
+      "displayName": "Sub Directories Mountable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "C(true) if all directories under the specified paths are mountable. If not set, sub-directories will not be mountable. This setting can be modified any time.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "symlinks",
+      "displayName": "Symlinks",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True if symlinks are supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_delta",
+      "displayName": "Time Delta",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Time delta object expressing time skew; expects a dict with time_value and time_unit.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_ssl",
+      "displayName": "Verify Ssl",
+      "type": "boolean",
+      "required": true,
+      "default": null,
+      "description": "boolean variable to specify whether to validate SSL certificate or not. C(true) - indicates that the SSL certificate should be verified. C(false) - indicates that the SSL certificate should not be verified.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_datasync_action",
+      "displayName": "Write Datasync Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the synchronization type for datasync action.",
+      "choices": [
+        "DATASYNC",
+        "FILESYNC",
+        "UNSTABLE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_datasync_reply",
+      "displayName": "Write Datasync Reply",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the synchronization type for datasync reply.",
+      "choices": [
+        "DATASYNC",
+        "FILESYNC",
+        "UNSTABLE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_filesync_action",
+      "displayName": "Write Filesync Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the synchronization type for filesync action.",
+      "choices": [
+        "DATASYNC",
+        "FILESYNC",
+        "UNSTABLE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_filesync_reply",
+      "displayName": "Write Filesync Reply",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the synchronization type for filesync reply.",
+      "choices": [
+        "DATASYNC",
+        "FILESYNC",
+        "UNSTABLE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_transfer_max_size",
+      "displayName": "Write Transfer Max Size",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the maximum buffer size that clients should use on NFS write requests (size dict).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_transfer_multiple",
+      "displayName": "Write Transfer Multiple",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the preferred multiple size for NFS write requests (size dict).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_transfer_size",
+      "displayName": "Write Transfer Size",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the preferred multiple size for NFS write requests (size dict).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_unstable_action",
+      "displayName": "Write Unstable Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the synchronization type for unstable action.",
+      "choices": [
+        "DATASYNC",
+        "FILESYNC",
+        "UNSTABLE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_unstable_reply",
+      "displayName": "Write Unstable Reply",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the synchronization type for unstable reply.",
+      "choices": [
+        "DATASYNC",
+        "FILESYNC",
+        "UNSTABLE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

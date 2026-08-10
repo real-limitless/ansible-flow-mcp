@@ -1,0 +1,174 @@
+{
+  "fqcn": "netautomate.netorca.netorca_ai_processor",
+  "shortDescription": "Manage NetOrca Pack AI processors",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netautomate/netorca/netorca_ai_processor_module.html",
+  "options": [
+    {
+      "name": "action_type",
+      "displayName": "Action Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The processor type - its role in the pack pipeline (V(config), V(verify), V(execution)), the V(optimiser), or the V(change_instance_validator) that reviews incoming C(PENDING) changes. Part of the processor's identity; required when selecting by O(service_id).",
+      "choices": [
+        "config",
+        "verify",
+        "execution",
+        "optimiser",
+        "change_instance_validator"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "active",
+      "displayName": "Active",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the processor participates in pipeline runs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of your NetOrca team. The NetOrca API supports API-key authentication only - there is no username/password mode. Treat the key like a password - supply it via the E(NETORCA_API_KEY) environment variable (for example from a CI/CD secret) or from Ansible Vault, never as a literal in a playbook. If not set, the value of the E(NETORCA_API_KEY) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Base URL of the NetOrca API, for example C(https://api.example.netorca.io). The URL is normalised to end in a single C(/v1), so passing it with or without the suffix both work. If not set, the value of the E(NETORCA_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": "serviceowner",
+      "description": "Point of view for the request. The same query returns different data depending on which side of the service relationship your team is on. V(serviceowner) operates on the services your team I(offers) - the requests made against them, their service items and deployed items. This is the side that validates, approves, deploys and completes changes. V(consumer) operates on what your team I(consumes) - the service items your applications declared and the change instances tracking your own requests. If",
+      "choices": [
+        "serviceowner",
+        "consumer"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extra_data",
+      "displayName": "Extra Data",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The processor's behaviour switches - context enrichment (C(enable_pack_context), C(include_change_instance), C(include_service_config), ...), scheduling (C(schedule_enabled), C(schedule_crontab)), generative UI, and for validators C(allow_auto_approval) / C(allow_auto_rejection). Compared and written key by key - keys you omit keep their current values. Unlike the LLM model catalogue, this C(extra_data) carries no credentials and is returned unmasked.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of an existing AI processor. With O(state=present) the processor must exist; use O(service_id) plus O(action_type) to create one.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "llm_model",
+      "displayName": "Llm Model",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the LLM model the processor runs on (see M(netautomate.netorca.netorca_llm_model_info)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Human-readable processor name. Required when creating.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prompt",
+      "displayName": "Prompt",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The service owner prompt - the instructions the processor combines with the platform prompt, the declaration and any retrieved knowledge on every run.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "response_schema",
+      "displayName": "Response Schema",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "JSON Schema the processor's output must conform to, making the stage output machine-parseable. Ignored by the platform for V(change_instance_validator) and V(optimiser) processors, which use internal formats.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_id",
+      "displayName": "Service Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the service the processor belongs to. Selects the processor together with O(action_type).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the AI processor should exist.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate TLS certificates when talking to the API. Only disable this for lab instances with self-signed certificates. If not set, the value of the E(NETORCA_VALIDATE_CERTS) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

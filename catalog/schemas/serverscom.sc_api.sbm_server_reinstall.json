@@ -1,0 +1,151 @@
+{
+  "fqcn": "serverscom.sc_api.sbm_server_reinstall",
+  "shortDescription": "Reinstall SBM (Scalable Baremetal) server.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/serverscom/sc_api/sbm_server_reinstall_module.html",
+  "options": [
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.servers.com/v1",
+      "description": "Endpoint to use to connect to API. Do not change until specifically asked to do otherwise. If not set, the value of the C(SERVERSCOM_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hostname for the server after reinstall. Module will retrieve old server title if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operating_system_id",
+      "displayName": "Operating System Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the operating system to install on the server. Module will retrieve and reuse old operating system if not specified. Mutually exclusive with I(operating_system_regex) and I(operating_system_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operating_system_name",
+      "displayName": "Operating System Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Full name of the operating system to install (exact match on C(full_name)). Mutually exclusive with I(operating_system_id) and I(operating_system_regex).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operating_system_regex",
+      "displayName": "Operating System Regex",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Regular expression to filter operating systems by name. If specified, the module will install operating system that matches the provided regex (case insensitive). Mutually exclusive with I(operating_system_id) and I(operating_system_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_hostname",
+      "displayName": "Server Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hostname of the SBM server to reinstall (exact match on server title). Mutually exclusive with I(server_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_id",
+      "displayName": "Server Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the SBM server to reinstall. Mutually exclusive with I(server_hostname).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_key_name",
+      "displayName": "Ssh Key Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of a single ssh key to add to root user. Mutually exclusive with I(ssh_keys). Server is reinstalled with root password only if no I(ssh_keys) or I(ssh_key_name) specified. Name is used to search fingerprint through ssh keys API requests. Key should be registered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_keys",
+      "displayName": "Ssh Keys",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of fingerprints of public ssh keys to add for root user. Keys must be registered before use by module M(serverscom.sc_api.ssh_key). Mutually exclusive with I(ssh_key_name). Server is reinstalled with root password only if no I(ssh_keys) or I(ssh_key_name) specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Token to use. You can create token for your account in https://portal.servers.com in Profile -> Public API section. If not set, the value of the C(SERVERSCOM_API_TOKEN) or C(SC_TOKEN) environment variable is used (C(SERVERSCOM_API_TOKEN) takes precedence). Value is not logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_interval",
+      "displayName": "Update Interval",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Interval in seconds for requests for server status. Each update request reduces number of available API requests in accordance with ratelimit. Minimal value is 10. Ignored if I(wait)=C(0).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_data",
+      "displayName": "User Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User data content that will be processed by cloud-init during server's initialization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "number",
+      "required": false,
+      "default": 86400,
+      "description": "Time to wait for server to change status to 'ready'. If wait is 0 or absent, task succeeds after sending request to API without waiting. When server becomes 'ready' after reinstallation, it can still be in booting state for some time and not answer ssh/ping requests. Use M(ansible.builtin.wait_for_connection) module to wait for the server to become available through ssh.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

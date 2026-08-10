@@ -1,0 +1,286 @@
+{
+  "fqcn": "ngine_io.cloudstack.firewall",
+  "shortDescription": "Manages firewall rules on Apache CloudStack based clouds.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ngine_io/cloudstack/firewall_module.html",
+  "options": [
+    {
+      "name": "account",
+      "displayName": "Account",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Account the firewall rule is related to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_http_method",
+      "displayName": "Api Http Method",
+      "type": "string",
+      "required": false,
+      "default": "get",
+      "description": "HTTP method used to query the API endpoint. If not given, the C(CLOUDSTACK_METHOD) env variable is considered.",
+      "choices": [
+        "get",
+        "post"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of the CloudStack API. If not given, the C(CLOUDSTACK_KEY) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_secret",
+      "displayName": "Api Secret",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Secret key of the CloudStack API. If not set, the C(CLOUDSTACK_SECRET) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "HTTP timeout in seconds. If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL of the CloudStack API e.g. https://cloud.example.com/client/api. If not given, the C(CLOUDSTACK_ENDPOINT) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_verify_ssl_cert",
+      "displayName": "Api Verify Ssl Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Verify CA authority cert file. If not given, the C(CLOUDSTACK_VERIFY) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cidrs",
+      "displayName": "Cidrs",
+      "type": "list",
+      "required": false,
+      "default": "0.0.0.0/0",
+      "description": "List of CIDRs (full notation) to be used for firewall rule. Since version 2.5, it is a list of CIDR.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest_cidrs",
+      "displayName": "Dest Cidrs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of destination CIDRs (full notation) to forward traffic to if I(type=egress).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Domain the firewall rule is related to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "end_port",
+      "displayName": "End Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "End port for this rule. Considered if I(protocol=tcp) or I(protocol=udp). If not specified, equal I(start_port).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "icmp_code",
+      "displayName": "Icmp Code",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Error code for this icmp message. Considered if I(protocol=icmp).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "icmp_type",
+      "displayName": "Icmp Type",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Type of the icmp message being sent. Considered if I(protocol=icmp).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_address",
+      "displayName": "Ip Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public IP address the ingress rule is assigned to. Required if I(type=ingress).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network the egress rule is related to. Required if I(type=egress).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "poll_async",
+      "displayName": "Poll Async",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Poll async jobs until job has finished.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the project the firewall rule is related to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": "tcp",
+      "description": "Protocol of the firewall rule. C(all) is only available if I(type=egress).",
+      "choices": [
+        "tcp",
+        "udp",
+        "icmp",
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_port",
+      "displayName": "Start Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Start port for this rule. Considered if I(protocol=tcp) or I(protocol=udp).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the firewall rule.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags. Tags are a list of dictionaries having keys I(key) and I(value). To delete all tags, set an empty list e.g. I(tags: []).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "ingress",
+      "description": "Type of the firewall rule.",
+      "choices": [
+        "ingress",
+        "egress"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(false), SSL certificates will not be validated. If not given, the C(CLOUDSTACK_DANGEROUS_NO_TLS_VERIFY) env variable is considered. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone",
+      "displayName": "Zone",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the zone in which the virtual machine is in.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

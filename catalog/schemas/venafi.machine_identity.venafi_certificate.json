@@ -1,0 +1,453 @@
+{
+  "fqcn": "venafi.machine_identity.venafi_certificate",
+  "shortDescription": "Venafi certificate module for working with Venafi as a Service or Venafi Trust Protection Platform",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/venafi/machine_identity/venafi_certificate_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The oauth token to authenticate at Venafi TPP. Use it instead of user/password combination. Ignored for VaaS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alt_name",
+      "displayName": "Alt Name",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "SAN extension to attach to the certificate signing request This can either be a 'comma separated string' or a YAML list. Values should be prefixed by their options. (IP:,email:,DNS:).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "before_expired_hours",
+      "displayName": "Before Expired Hours",
+      "type": "number",
+      "required": false,
+      "default": 72,
+      "description": "If certificate will expire in less hours than this value, module will try to renew it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_path",
+      "displayName": "Cert Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Remote absolute path where the generated certificate file should be created or is already located.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chain_option",
+      "displayName": "Chain Option",
+      "type": "string",
+      "required": false,
+      "default": "last",
+      "description": "Specify ordering certificates in chain.",
+      "choices": [
+        "first",
+        "last"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chain_path",
+      "displayName": "Chain Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Remote absolute path where the generated certificate chain file should be created or is already located. If set certificate and chain will be in separated files.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "common_name",
+      "displayName": "Common Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "CommonName field of the certificate signing request subject.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "csr_origin",
+      "displayName": "Csr Origin",
+      "type": "string",
+      "required": false,
+      "default": "local",
+      "description": "Indicates the source of the CSR used for a certificate request. C(provided) - The CSR at I(csr_path) will be used to request a new certificate. C(local) - The CSR will be generated locally using the values provided through I(privatekey_x) fields. C(service) - The CSR will be generated on the service side (TPP or VaaS).",
+      "choices": [
+        "provided",
+        "local",
+        "service"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "csr_path",
+      "displayName": "Csr Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the Certificate Signing Request to use when requesting a new certificate. This field is required when I(csr_origin) is C(provided).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_fields",
+      "displayName": "Custom Fields",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A key-value map of customer-defined attributes for the certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Execute the task regardless of changes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "issuer_hint",
+      "displayName": "Issuer Hint",
+      "type": "string",
+      "required": false,
+      "default": "DEFAULT",
+      "description": "Issuer of the certificate. Ignored when platform is not TPP. Use in combination with I(validity_hours) to specify the validity period of a certificate on TPP.",
+      "choices": [
+        "DEFAULT",
+        "DIGICERT",
+        "ENTRUST",
+        "MICROSOFT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to authenticate at Venafi TPP. This option is deprecated. Use I(access_token) instead. Ignored for VaaS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_curve",
+      "displayName": "Privatekey Curve",
+      "type": "string",
+      "required": false,
+      "default": "P521",
+      "description": "Curve name for ECDSA algorithm.",
+      "choices": [
+        "P256",
+        "P384",
+        "P521"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_passphrase",
+      "displayName": "Privatekey Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The passphrase for the privatekey.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_path",
+      "displayName": "Privatekey Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the private key to use when signing the certificate signing request. If not set, the private key will be placed near certificate with key suffix.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_reuse",
+      "displayName": "Privatekey Reuse",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If set to false new key won't be generated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_size",
+      "displayName": "Privatekey Size",
+      "type": "number",
+      "required": false,
+      "default": 2048,
+      "description": "Size (in bits) of the TLS/SSL key to generate. Used only for RSA.",
+      "choices": [
+        2048,
+        3072,
+        4096,
+        8192
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "privatekey_type",
+      "displayName": "Privatekey Type",
+      "type": "string",
+      "required": false,
+      "default": "RSA",
+      "description": "Type of private key.",
+      "choices": [
+        "RSA",
+        "ECDSA"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "renew",
+      "displayName": "Renew",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Try to renew certificate if is existing but not valid.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Creates or deletes the resource, taking action if the resource's state is different from what is stated.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_mode",
+      "displayName": "Test Mode",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true) a Fake connection will be created. Use only for testing purposes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The api key to authenticate at VaaS platform. Required for VaaS. Ignored for Venafi TPP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "trust_bundle",
+      "displayName": "Trust Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "the path to a PEM file to be used as trust anchor when communicating with Venafi TPP. Ignored for VaaS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The url of the Venafi platform to connect to. B(Required) for Venafi TPP. Optional for VaaS. Only set the url when trying to reach a custom VaaS platform (dev, QA, staging, etc.).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_pkcs12_format",
+      "displayName": "Use Pkcs12 Format",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use PKCS12 format to serialize the certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to authenticate at Venafi TPP. This option is deprecated. Use I(access_token) instead. Ignored for VaaS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validity_hours",
+      "displayName": "Validity Hours",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Indicates the validity period of the certificate before it expires. When the platform is TPP, an issuer can be defined as well. See I(issuer_hint).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone",
+      "displayName": "Zone",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The location of the certificate on the Venafi platform.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

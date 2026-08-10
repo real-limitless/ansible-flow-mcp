@@ -1,0 +1,242 @@
+{
+  "fqcn": "arensb.truenas.user",
+  "shortDescription": "Manage user accounts",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/arensb/truenas/user_module.html",
+  "options": [
+    {
+      "name": "append",
+      "displayName": "Append",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, the user will be added to the groups listed in C(groups), but not removed from any other groups. If false, the user will be added to the groups listed in C(groups), and removed from any other groups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "append_pubkeys",
+      "displayName": "Append Pubkeys",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, the keys specified in C(ssh_authorized_keys) will be added to the user's C(~/.ssh/authorized_keys), but any others that might be there will not be removed. If false, any keys not explicitly listed in C(ssh_authorized_keys) will be removed from the user's C(~/.ssh/authorized_keys).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The full name (I(GECOS) field) of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_group",
+      "displayName": "Create Group",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, create a new group with the same name as the user. If such a group already exists, it is used and no new group is created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_group",
+      "displayName": "Delete Group",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, delete the user's primary group if it is not being used by any other users. If false, the primary group stays, even if it is now empty. Only used when deleting a user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "email",
+      "displayName": "Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User's email address, in the form I(user@dom.ain).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the user's primary group. Required unless C(create_group) is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "groups",
+      "displayName": "Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of additional groups user will be added to. If C(append) is true, the user will be added to all of the groups listed here. If C(append) is false, then in addition, the user will be removed from all other groups (except the primary).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "home",
+      "displayName": "Home",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User's home directory. Note that TrueNAS has restrictions on what this can be. As of this writing, the home directory has to begin with \"/mnt\", or be \"/nonexistent\". Note that if you create a user with home directory C(\"/nonexistent\"), then later change it to a real directory, that directory will not be populated with dot files. Note: If you create an account with a home directory that does not end in the username (e.g., if C(name: bob) and C(home: /mnt/pool0/homes)), TrueNAS will append the use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the user to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User's password, as a plaintext string. Required unless C(password_disabled) is true. This should be kept encrypted, in a secure location, e.g., Ansible Vault, or as appropriate for your situation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_disabled",
+      "displayName": "Password Disabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, the user's password is disabled. They can still log in through other methods (e.g., ssh key). This is not a flag: if you set C(password_disabled=true) on a user, the password field in C(/etc/master.passwd) is set to C(*), so if you set C(password_disabled=false) again, they won't be able to log in with their old password. Note that under TrueNAS SCALE, a user with C(password_disabled) may not use SMB, so be sure to set C(smb: false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shell",
+      "displayName": "Shell",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User's shell. Must be one of the allowed shells from C(/etc/shells).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smb",
+      "displayName": "Smb",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies whether user should have access to SMB shares. Under TrueNAS SCALE, a user with C(smb) enabled may not have their password disabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_authorized_keys",
+      "displayName": "Ssh Authorized Keys",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of ssh public keys to put in the user's C(.ssh/authorized_keys) file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the user should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sudo",
+      "displayName": "Sudo",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Deprecated. Use I(sudo_commands) and/or I(sudo_commands_nopasswd) instead. Whether the user is allowed to sudo (see also I(sudo_nopasswd) and I(sudo_commands)). Note: this defaults to false. So if you create a user with I(sudo: yes), then comment out that line, the user will be removed from sudo.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sudo_commands",
+      "displayName": "Sudo Commands",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of commands the user is allowed to execute using C(sudo). Each command must use an absolute path, except for the special value \"ALL\", which allows executing any command. Commands may include options, e.g., C(\"/bin/ls -l\"). In TrueNAS CORE, and in older versions of SCALE, only one of I(sudo_commands) and I(sudo_commands_nopasswd) may be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sudo_commands_nopasswd",
+      "displayName": "Sudo Commands Nopasswd",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of commands the user is allowed to execute using C(sudo), without having to give a password. Each command must use an absolute path, except for the special value \"ALL\", which allows executing any command. Commands may include options, e.g., C(\"/bin/ls -l\"). In TrueNAS CORE, and in older versions of SCALE, only one of I(sudo_commands) and I(sudo_commands_nopasswd) may be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sudo_nopasswd",
+      "displayName": "Sudo Nopasswd",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Deprecated. Use I(sudo_commands_nopasswd) instead. Allows user to sudo without a password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uid",
+      "displayName": "Uid",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Set the I(UID) of the user. If the I(IUID) is already taken, this will create a second user with the same I(UID).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

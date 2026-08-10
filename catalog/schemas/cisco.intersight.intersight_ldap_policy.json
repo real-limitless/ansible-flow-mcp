@@ -1,0 +1,374 @@
+{
+  "fqcn": "cisco.intersight.intersight_ldap_policy",
+  "shortDescription": "Manage LDAP Policies for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_ldap_policy_module.html",
+  "options": [
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attribute",
+      "displayName": "Attribute",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Role and locale information of the user. Required when state is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "base_dn",
+      "displayName": "Base Dn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Base Distinguished Name (DN). Starting point from where server will search for users and groups. Required when state is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bind_dn",
+      "displayName": "Bind Dn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Distinguished Name (DN) of the user, that is used to authenticate against LDAP servers. Required when bind_method is configuredcredentials.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bind_method",
+      "displayName": "Bind Method",
+      "type": "string",
+      "required": false,
+      "default": "logincredentials",
+      "description": "Authentication method to access LDAP servers. C(logincredentials) uses the user credentials entered at login. C(anonymous) uses no credentials to access the LDAP server. C(configuredcredentials) uses a specific set of credentials configured for the LDAP server.",
+      "choices": [
+        "logincredentials",
+        "anonymous",
+        "configuredcredentials"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description for the LDAP Policy. Description can contain letters(a-z, A-Z), numbers(0-9), hyphen(-), period(.), colon(:), or an underscore(_).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_source",
+      "displayName": "Dns Source",
+      "type": "string",
+      "required": false,
+      "default": "extracted",
+      "description": "Source of the domain name used for the DNS SRV request. C(extracted) extracts the domain name from the login ID entered by the user. C(configured) uses the configured search domain. C(configuredextracted) uses configured search domain first, then extracted. Only applicable when enable_dns is true.",
+      "choices": [
+        "extracted",
+        "configured",
+        "configuredextracted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IPv4 domain that all users must be in. Required when state is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_dns",
+      "displayName": "Enable Dns",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables DNS to access LDAP servers. When enabled, LDAP providers cannot be specified (DNS discovery is used instead). When disabled, at least one LDAP provider must be configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_encryption",
+      "displayName": "Enable Encryption",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If enabled, the endpoint encrypts all information it sends to the LDAP server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_ldap",
+      "displayName": "Enable Ldap",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If enabled, LDAP server performs authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filter",
+      "displayName": "Filter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Criteria to identify entries in search requests. Required when state is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_attribute",
+      "displayName": "Group Attribute",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Groups to which an LDAP entry belongs. Required when state is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_authorization",
+      "displayName": "Group Authorization",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If enabled, user authorization is also done at the group level for LDAP users not in the local user database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_groups",
+      "displayName": "Ldap Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of LDAP groups to be created and attached to the LDAP policy. Each group defines the mapping between LDAP server groups and Intersight roles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_providers",
+      "displayName": "Ldap Providers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of LDAP providers (servers) to be created and attached to the LDAP policy. Providers define the LDAP servers to connect to. Cannot be specified when enable_dns is true (DNS discovery is used instead). Required when enable_dns is false (at least one provider must be specified).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the LDAP Policy. Must be unique within the organization. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nested_group_search",
+      "displayName": "Nested Group Search",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If enabled, an extended search walks the chain of ancestry all the way to the root. Returns all the groups and subgroups, each of those groups belong to recursively.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nested_group_search_depth",
+      "displayName": "Nested Group Search Depth",
+      "type": "number",
+      "required": false,
+      "default": 128,
+      "description": "Search depth to look for a nested LDAP group in an LDAP group map. Valid range is 1-128. Only applicable when nested_group_search is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Policies created within a Custom Organization are applicable only to devices in the same Organization. Use 'default' for the default organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the user for initial bind process. Can have any character except spaces, tabs, line breaks. Cannot be more than 254 characters. Required when bind_method is configuredcredentials.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search_domain",
+      "displayName": "Search Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Domain name that acts as a source for a DNS query. Required when dns_source is configured or configuredextracted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search_forest",
+      "displayName": "Search Forest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Forest name that acts as a source for a DNS query. Required when dns_source is configured or configuredextracted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "LDAP authentication timeout duration, in seconds. Valid range is 0-180.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_search_precedence",
+      "displayName": "User Search Precedence",
+      "type": "string",
+      "required": false,
+      "default": "localuserdb",
+      "description": "Search precedence between local user database and LDAP user database. C(localuserdb) searches local user database first. C(ldapuserdb) searches LDAP user database first.",
+      "choices": [
+        "localuserdb",
+        "ldapuserdb"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

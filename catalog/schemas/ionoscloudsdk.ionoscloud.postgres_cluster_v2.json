@@ -1,0 +1,353 @@
+{
+  "fqcn": "ionoscloudsdk.ionoscloud.postgres_cluster_v2",
+  "shortDescription": "Allows operations with IONOS CLOUD Postgres Clusters (DBaaS PostgreSQL v2 API).",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ionoscloudsdk/ionoscloud/postgres_cluster_v2_module.html",
+  "options": [
+    {
+      "name": "allow_replace",
+      "displayName": "Allow Replace",
+      "type": "string",
+      "required": false,
+      "default": false,
+      "description": "Boolean indicating if the resource should be recreated when the state cannot be reached in another way. This may be used to prevent resources from being deleted from specifying a different value to an immutable property. An error will be thrown instead",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Ionos API base URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_id",
+      "displayName": "Backup Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the backup to initialize the cluster from when creating (restore from an existing backup).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_location",
+      "displayName": "Backup Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Object Storage location where the backup will be created. The BackupLocations provides a list of supported locations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_retention_days",
+      "displayName": "Backup Retention Days",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures how many days cluster backups are retained.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_fingerprint",
+      "displayName": "Certificate Fingerprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Ionos API certificate fingerprint.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection",
+      "displayName": "Connection",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Connection information of the PostgreSQL cluster. A dict with keys `datacenter` (ID or name), `lan` (ID or name) and `primary_instance_address` (IP and netmask of the cluster's primary instance, e.g. 192.168.1.101/24).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_pooler",
+      "displayName": "Connection Pooler",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines how database connections are managed and reused. Default value is DISABLED. DISABLED: No connection pooling is used. Each request opens a new connection, which is closed immediately after use. It ensures isolation but may impact performance due to frequent connection setup and teardown. TRANSACTION: Connections are pooled and reused for the duration of a transaction. Once the transaction completes, the connection is returned to the pool. This mode balances efficiency with transactional i",
+      "choices": [
+        "DISABLED",
+        "TRANSACTION",
+        "SESSION"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cores",
+      "displayName": "Cores",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The number of CPU cores per instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_database",
+      "displayName": "Db Database",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the initial database to be created. Must be 63 characters or less and must include only alphanumeric characters (`[a-z0-9A-Z]`) and underscores (`_`).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_password",
+      "displayName": "Db Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for the master database user. Must meet the following requirements: - At least 8 characters long. - Contains at least one lowercase letter. - Contains at least one uppercase letter. - Contains at least one digit (0-9). - Contains at least one special character from the set: @$!%*?&",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "db_username",
+      "displayName": "Db Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the master database user. Must be 16 characters or less and must include only alphanumeric characters (`[A-Za-z0-9_]`) and underscores (`_`).",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "instances",
+      "displayName": "Instances",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The total number of instances in the cluster (one primary and n-1 secondary).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location",
+      "displayName": "Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location (region) in which the cluster will be created. Different service endpoints are used based on location, possible options are: \"de/fra\", \"de/txl\", \"es/vit\", \"fr/par\", \"gb/lhr\", \"gb/bhx\", \"us/ewr\", \"us/las\", \"us/mci\". If not set, the endpoint will be the one corresponding to \"de/txl\". The api_url, if set, overrides this.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logs_enabled",
+      "displayName": "Logs Enabled",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Allows or disallows the collection and reporting of logs for this cluster's observability. If the observability service is not activated on the contract, this setting is accepted but has no effect; log collection will not be enabled until the observability service is activated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maintenance_window",
+      "displayName": "Maintenance Window",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A weekly 4 hour-long window, during which maintenance might occur. A dict with keys `time` (start of the maintenance window in UTC, e.g. \"16:30:00\") and `day_of_the_week` (e.g. \"Sunday\").",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "metrics_enabled",
+      "displayName": "Metrics Enabled",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Allows or disallows the collection and reporting of metrics for this cluster's observability. If the observability service is not activated on the contract, this setting is accepted but has no effect; metric collection will not be enabled until the observability service is activated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of your PostgreSQL cluster. Must be 63 characters or less and must begin and end with an alphanumeric character (`[a-z0-9A-Z]`) with dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Ionos password. Overrides the IONOS_PASSWORD environment variable.",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "postgres_cluster",
+      "displayName": "Postgres Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID or name of an existing Postgres Cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "postgres_version",
+      "displayName": "Postgres Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The PostgreSQL version for the cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ram",
+      "displayName": "Ram",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The amount of memory per instance in gigabytes (GB).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recovery_target_time",
+      "displayName": "Recovery Target Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Recovery target time (ISO 8601). Used to replay backups up to the specified time on creation, or for an in-place restore when state is `restore`.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replication_mode",
+      "displayName": "Replication Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the replication mode across instances. - `ASYNCHRONOUS`: Propagates updates to other instances without waiting for confirmation. Offers higher performance but may result in temporary data inconsistencies during replication delays. - `STRICTLY_SYNCHRONOUS`: Only supported for clusters with at least 3 instances. Requires all instances to acknowledge the update before it is committed, guaranteeing strong consistency at the cost of potential performance impact in high-latency environments.",
+      "choices": [
+        "ASYNCHRONOUS",
+        "STRICTLY_SYNCHRONOUS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Indicate desired state of the resource.",
+      "choices": [
+        "present",
+        "absent",
+        "update",
+        "restore"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_size",
+      "displayName": "Storage Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The amount of storage per instance in gigabytes (GB).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Ionos token. Overrides the IONOS_TOKEN environment variable.",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Ionos username. Overrides the IONOS_USERNAME environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "string",
+      "required": false,
+      "default": true,
+      "description": "Wait for the resource to be created before returning.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "string",
+      "required": false,
+      "default": 600,
+      "description": "How long before wait gives up, in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,149 @@
+{
+  "fqcn": "ktdreyer.koji_ansible.koji_tag",
+  "shortDescription": "Create and manage Koji tags",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ktdreyer/koji_ansible/koji_tag_module.html",
+  "options": [
+    {
+      "name": "arches",
+      "displayName": "Arches",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "space-separated string of arches this Koji tag supports. Note, the order in which you specify architectures does matter in a few subtle cases. For example, the SRPM that Koji includes in the build is the one built on the first arch in this list. Likewise, rpmdiff compares RPMs built on the first arch with RPMs built on other arches.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "blocked_packages",
+      "displayName": "Blocked Packages",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The list of packages to block in this tag. Each blocked package must be present in the tag directly or inherited through this tag's parent(s). If you omit this \"blocked_packages\" setting, Ansible will not edit the existing blocked packages for this tag. For example, if you have already manually blocked packages with \"koji block-pkg\", you may want to omit this setting in Ansible until you've captured the exact list of already-blocked packages in Ansible. If you explicitly set \"blocked_packages\" t",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "external_repos",
+      "displayName": "External Repos",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "list of Koji external repos to set for this tag. Each element of the list should have a \"repo\" (the external repo name) and \"priority\" (integer). You may optionally set a \"merge_mode\" for this external repo (\"koji\", \"simple\", or \"bare\"). For backwards compatibility, if you do not set a \"merge_mode\" and the external repository already exists at the given priority, then Ansible will not edit the existing merge mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extra",
+      "displayName": "Extra",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "set any extra parameters on this tag.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "groups",
+      "displayName": "Groups",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A tag's \"groups\" tell Koji what packages will be present in the tag's buildroot. For example, the \"build\" group defines the packages that Koji will put into a \"build\" task's buildroot. You may set other package groups on a tag as well, like \"srpm-build\" or \"applicance-build\". This should be a dict of groups and packages to set for this tag. Each dict key will be the name of the group. Each dict value should be a list of package names to include in the comps for this group. If a group or package ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inheritance",
+      "displayName": "Inheritance",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A list of parents for this tag. Each parent list item must have a \"parent\" tag name and a \"priority\". Optionally you may specify \"maxdepth\", \"intransitive\", \"noconfig\", \"pkg_filter\" settings for each parent. For more information about these settings, see the M(koji_tag_inheritance) module documentation. If you omit this \"inheritance\" setting, Ansible will not modify any of inheritance for this tag. If you explicitly set \"inheritance\" to an empty list, Ansible will remove all the parents for this",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "locked",
+      "displayName": "Locked",
+      "type": "string",
+      "required": false,
+      "default": false,
+      "description": "whether to lock this tag or not.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maven_include_all",
+      "displayName": "Maven Include All",
+      "type": "string",
+      "required": false,
+      "default": false,
+      "description": "include every build in this tag (including multiple versions of the same package) in the Maven repo.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maven_support",
+      "displayName": "Maven Support",
+      "type": "string",
+      "required": false,
+      "default": false,
+      "description": "whether Maven repos should be generated for the tag.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the Koji tag to create and manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "packages",
+      "displayName": "Packages",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "dict of package owners and the a lists of packages each owner maintains. If you omit this \"packages\" setting, Ansible will not edit the existing package list for this tag. For example, if you have another system that already manages the package list for this tag, you may want to omit this setting in Ansible. https://github.com/project-ncl/causeway is one example of a system that independently manages the package lists for individual Koji tags. If you explicitly set \"packages\" to an empty dict, A",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "perm",
+      "displayName": "Perm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "permission (string or int) for this Koji tag.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

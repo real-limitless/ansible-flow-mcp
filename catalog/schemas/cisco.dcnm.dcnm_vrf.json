@@ -1,0 +1,72 @@
+{
+  "fqcn": "cisco.dcnm.dcnm_vrf",
+  "shortDescription": "Add and remove VRFs from a ND managed VXLAN fabric.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/dcnm/dcnm_vrf_module.html",
+  "options": [
+    {
+      "name": "config",
+      "displayName": "Config",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of details of vrfs being managed. Not required for state deleted",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deploy_mode",
+      "displayName": "Deploy Mode",
+      "type": "string",
+      "required": false,
+      "default": "switch",
+      "description": "Controls the deployment method when deploy is enabled When set to 'switch' (default), deployments use switch-level API with serial numbers When set to 'resource', deployments use resource-level API with VRF names This parameter is ignored for multicluster parent fabrics which always use switch-level deployment Applies to both create/deploy and delete/undeploy operations",
+      "choices": [
+        "switch",
+        "resource"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fabric",
+      "displayName": "Fabric",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the target fabric for vrf operations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fabric_details",
+      "displayName": "Fabric Details",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "INTERNAL USE ONLY - Populated automatically by the action plugin Contains fabric metadata required for multisite and multicluster operations This parameter is constructed by the module's action plugin and should not be set manually in playbooks Includes controller version, fabric type (standalone, multisite_parent, multisite_child, multicluster_parent, multicluster_child), member fabrics, and cluster information",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "merged",
+      "description": "The state of ND after module completion.",
+      "choices": [
+        "merged",
+        "replaced",
+        "overridden",
+        "deleted",
+        "query"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,190 @@
+{
+  "fqcn": "arubanetworks.aoscx.aoscx_config",
+  "shortDescription": "Logs in and executes configuration commands on AOS-CX device via SSH connection.\n",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/arubanetworks/aoscx/aoscx_config_module.html",
+  "options": [
+    {
+      "name": "after",
+      "displayName": "After",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Commands to be executed following the execution of the parent and child lines. This option can be used to guarantee idempotency.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies whether a full backup of the existing running-config on the device will be performed before any changes are potentially made. If the \"backup_options\" value is not specified, the backup file is written to the \"backup\" folder in the playbook root directory. If the directory does not exist, it is created.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_options",
+      "displayName": "Backup Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "File path and name options for backing up the existing running-config. To be used with \"backup\".\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "before",
+      "displayName": "Before",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Commands to be executed prior to execution of the parent and child lines. This option can be used to guarantee idempotency.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "diff_against",
+      "displayName": "Diff Against",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When using the \"ansible-playbook --diff\" command line argument this module can generate diffs against different sources. This argument specifies the particular config against which a diff of the running-config will be performed. If \"diff_against\" is set to \"startup\", the module will return the diff of the running-config against the startup configuration. If \"diff_against\" is set to \"intended\", the module will return the diff of the running-config against the configuration provided in the \"intend",
+      "choices": [
+        "startup",
+        "intended",
+        "running"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "diff_ignore_lines",
+      "displayName": "Diff Ignore Lines",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies one or more lines that should be ignored during the diff. This is used to ignore lines in the configuration that are automatically updated by the system. This argument takes a list of regular expressions or exact commands.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "intended_config",
+      "displayName": "Intended Config",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to file containing the intended configuration that the device should conform to, and that is used to check the final running-config against. To be used with \"diff_against\", which should be set to \"intended\".\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lines",
+      "displayName": "Lines",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of configuration commands to be executed. If \"parents\" is specified, these are the child lines contained under/within the parent entry. If \"parents\" is not specified, these lines will be checked and/or placed under the global config level. These commands must correspond with what would be found in the device's running-config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "match",
+      "displayName": "Match",
+      "type": "string",
+      "required": false,
+      "default": "line",
+      "description": "Specifies the method of matching. Matching is the comparison against the existing running-config to determine whether changes need to be applied. If \"match\" is set to \"line\", commands are matched line by line. If \"match\" is set to \"strict\", command lines are matched with respect to position. If \"match\" is set to \"exact\", command lines must be an equal match. If \"match\" is set to \"none\", the module will not attempt to compare the source configuration with the running-config on the remote device.\n",
+      "choices": [
+        "line",
+        "strict",
+        "exact",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parents",
+      "displayName": "Parents",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Parent lines that identify the configuration section or context under which the \"lines\" lines should be checked and/or placed.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace",
+      "displayName": "Replace",
+      "type": "string",
+      "required": false,
+      "default": "line",
+      "description": "Specifies the approach the module will take when performing configuration on the device. If \"replace\" is set to \"line\", then only the differing and missing configuration lines are pushed to the device. If \"replace\" is set to \"block\", then the entire command block is pushed to the device if there is any differing or missing line at all.",
+      "choices": [
+        "line",
+        "block"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "running_config",
+      "displayName": "Running Config",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies an alternative running-config to be used as the base config for matching. The module, by default, will connect to the device and retrieve the current running-config to use as the basis for comparison against the source. This argument is handy for times when it is not desirable to have the task get the current running-config, and instead use another config for matching.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save_when",
+      "displayName": "Save When",
+      "type": "string",
+      "required": false,
+      "default": "never",
+      "description": "Specifies when to copy the running-config to the startup-config. When changes are made to the device running-configuration, the changes are not copied to non-volatile storage by default. If \"save_when\" is set to \"always\", the running-config will unconditionally be copied to startup-config. If \"save_when\" is set to \"never\", the running-config will never be copied to startup-config. If \"save_when\" is set to \"modified\", the running-config will be copied to startup-config if the two differ. If \"save",
+      "choices": [
+        "always",
+        "never",
+        "modified",
+        "changed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the file containing the configuration to load into the device. The path can be either a full system path to the configuration file if the value starts with \"/\" or a path relative to the directory containing the playbook. This argument is mutually exclusive with the \"lines\" and \"parents\" arguments. This src file must have same indentation as a live switch config. The operation is purely additive, as it doesn't remove any lines that are present in the existing running-config, but not in th",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

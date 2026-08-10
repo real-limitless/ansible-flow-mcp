@@ -1,0 +1,347 @@
+{
+  "fqcn": "kembitnl.topdesk.call",
+  "shortDescription": "Manipulate calls in Topdesk",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/kembitnl/topdesk/call_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The text of the action to be added to a call. Can be multiline.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "actionInvisibleForCaller",
+      "displayName": "Actioninvisibleforcaller",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the action is visible for the caller or not. If this option is used, O(action) must also be present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allowDuplicate",
+      "displayName": "Allowduplicate",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If this setting is V(False) and a call with the O(externalNumber) is found, a new call will not be created. Only relevant when O(operation=new). Also requires the option O(externalNumber).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "briefDescription",
+      "displayName": "Briefdescription",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The short description of the call. Will be trucated to 80 characters when longer. Required when O(operation=new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "callId",
+      "displayName": "Callid",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "ID of an existing call. Required when O(operation<>new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "callTypeId",
+      "displayName": "Calltypeid",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The ID of type of the call. The ID can be found by the lookup plugin P(kembitnl.topdesk.call_searchlist#lookup). Mutually exclusive with O(callTypeName). Either O(callTypeId) or O(callTypeName) is required when O(operation=new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "callTypeName",
+      "displayName": "Calltypename",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The name of type of the call.  Mutually exclusive with O(callTypeId). Either O(callTypeId) or O(callTypeName) is required when O(operation=new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "callerLookupId",
+      "displayName": "Callerlookupid",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The ID of the caller. The ID can be found by the lookup plugin P(kembitnl.topdesk.person#lookup). Required when O(operation=new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "categoryId",
+      "displayName": "Categoryid",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The ID of the category. The ID can be found by the lookup plugin P(kembitnl.topdesk.call_searchlist#lookup). Mutually exclusive with O(categoryName). Required when O(operation=new), or when O(subcategoryId) or O(subcategoryName) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "categoryName",
+      "displayName": "Categoryname",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The name of the category. Mutually exclusive with O(categoryId). Required when O(operation=new), or when O(subcategoryId) or O(subcategoryName) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to include debug information in the output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "entryTypeId",
+      "displayName": "Entrytypeid",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The ID of the entry type. The ID can be found by the lookup plugin P(kembitnl.topdesk.call_searchlist#lookup). Mutually exclusive with O(entryTypeName). Either O(entryTypeId) or O(entryTypeName) is required when O(operation=new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "entryTypeName",
+      "displayName": "Entrytypename",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The name of the entry type. Mutually exclusive with O(entryTypeId). Either O(entryTypeId) or O(entryTypeName) is required when O(operation=new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "externalNumber",
+      "displayName": "Externalnumber",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The text to add to the external number field. Required if O(allowDuplicate=True).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file",
+      "displayName": "File",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The filename of the file to upload. Required when O(operation=upload), ignored in all other cases.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filehidden",
+      "displayName": "Filehidden",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the uploaded file is visible for the caller or not. Only relevant when O(operation='upload'), ignored in all other cases. If this option is present, O(file) must also be present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "impactId",
+      "displayName": "Impactid",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The ID of the impact. The ID can be found by the lookup plugin P(kembitnl.topdesk.call_searchlist#lookup). Mutually exclusive with O(impactName). Either O(impactId) or O(impactName) is required when O(operation=new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "impactName",
+      "displayName": "Impactname",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The name of the impact. Mutually exclusive with O(impactId). Either O(impactId) or O(impactName) is required when O(operation=new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "objectName",
+      "displayName": "Objectname",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The name of the asset to link to. Use the P(kembitnl.topdesk.asset#lookup) lookup plugin for wildcard lookups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The operation that should be performed on the call.",
+      "choices": [
+        "new",
+        "update",
+        "upload",
+        "escalate",
+        "deescalate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operatorGroupId",
+      "displayName": "Operatorgroupid",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The ID of the operator group to assign the call to. The ID can be found by the lookup plugin P(kembitnl.topdesk.operatorgroup#lookup). Required when O(operation=new), O(operation=escalate), or O(operation=deescalate), or when O(operatorId) is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operatorId",
+      "displayName": "Operatorid",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The ID of the operator. Can be an operatorgroup ID. The ID can be found by the lookup plugin P(kembitnl.topdesk.operator#lookup). Required when O(operation=new), O(operation=escalate), or O(operation=deescalate), or when O(operatorGroupId) is present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "processingStatusId",
+      "displayName": "Processingstatusid",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The ID of the processing status. The ID can be found by the lookup plugin P(kembitnl.topdesk.call_searchlist#lookup). Mutually exclusive with O(processingStatusName).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "processingStatusName",
+      "displayName": "Processingstatusname",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The name of the processing status. Mutually exclusive with O(processingStatusId).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "request",
+      "displayName": "Request",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The full text of the request. Can be multiline. Required when O(operation=new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The call tier (V(firstline) or V(secondline)). Required when O(operation=new).",
+      "choices": [
+        "firstLine",
+        "secondLine"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subcategoryId",
+      "displayName": "Subcategoryid",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The ID of the subcategory. The ID can be found by the lookup plugin P(kembitnl.topdesk.call_searchlist#lookup). Mutually exclusive with O(subcategoryName). Either O(subcategoryId) or O(subcategoryName) is required when O(operation=new), or when either O(categoryId) or O(categoryName) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subcategoryName",
+      "displayName": "Subcategoryname",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The name of the subcategory. Mutually exclusive with O(subcategoryId). Either O(subcategoryId) or O(subcategoryName) is required when O(operation=new), or when either O(categoryId) or O(categoryName) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "urgencyId",
+      "displayName": "Urgencyid",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The ID of the urgency. The ID can be found by the lookup plugin P(kembitnl.topdesk.call_searchlist#lookup). Mutually exclusive with O(urgencyName). Either O(urgencyId) or O(urgencyName) is required when O(operation=new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "urgencyName",
+      "displayName": "Urgencyname",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The name of the urgency. Mutually exclusive with O(urgencyId). Either O(urgencyId) or O(urgencyName) is required when O(operation=new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

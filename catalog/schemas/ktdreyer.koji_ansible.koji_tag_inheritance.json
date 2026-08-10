@@ -1,0 +1,99 @@
+{
+  "fqcn": "ktdreyer.koji_ansible.koji_tag_inheritance",
+  "shortDescription": "Manage a Koji tag inheritance relationship",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ktdreyer/koji_ansible/koji_tag_inheritance_module.html",
+  "options": [
+    {
+      "name": "child_tag",
+      "displayName": "Child Tag",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the Koji tag that will be the child.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "intransitive",
+      "displayName": "Intransitive",
+      "type": "string",
+      "required": false,
+      "default": false,
+      "description": "Prevents inheritance link from being used by the child tag's children. In other words, the link is only used to determine parent tags for the child tag directly, but not to determine \"grandparent\" tags for the child tag's children.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxdepth",
+      "displayName": "Maxdepth",
+      "type": "string",
+      "required": false,
+      "default": "null (unlimited depth)",
+      "description": "By default, a tag's inheritance chain is unlimited. This means that Koji will look back through an unlimited chain of parent and grandparent tags to determine the contents of the tag. You may use this maxdepth parameter to limit the maximum depth of the inheritance. For example \"0\" means that only the parent tag itself will be available in the inheritance - parent tags of the parent tag won't be available. To restore the default umlimited depth behavior on a tag, you can set ``maxdepth: null`` o",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "noconfig",
+      "displayName": "Noconfig",
+      "type": "string",
+      "required": false,
+      "default": false,
+      "description": "Prevents tag options (\"extra\") from being inherited.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent_tag",
+      "displayName": "Parent Tag",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the Koji tag that will be the parent of the child.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pkg_filter",
+      "displayName": "Pkg Filter",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Regular expression selecting the packages for which builds can be inherited through this inheritance link. Don't forget to use ``^`` and ``$`` when limiting to exact package names; they are not implicit. The default empty string allows all packages to be inherited through this link.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The priority of this parent for this child. Parents with smaller numbers will override parents with bigger numbers. When defining an inheritance relationship with \"state: present\", you must specify a priority. When deleting an inheritance relationship with \"state: absent\", you should not specify a priority. Ansible will simply remove the parent_tag link, regardless of its priority.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether to add or remove this inheritance link.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

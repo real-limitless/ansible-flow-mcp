@@ -1,0 +1,119 @@
+{
+  "fqcn": "netautomate.netorca.netorca_pack_trigger",
+  "shortDescription": "Trigger or retrigger a NetOrca Pack pipeline run",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netautomate/netorca/netorca_pack_trigger_module.html",
+  "options": [
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of your NetOrca team. The NetOrca API supports API-key authentication only - there is no username/password mode. Treat the key like a password - supply it via the E(NETORCA_API_KEY) environment variable (for example from a CI/CD secret) or from Ansible Vault, never as a literal in a playbook. If not set, the value of the E(NETORCA_API_KEY) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Base URL of the NetOrca API, for example C(https://api.example.netorca.io). The URL is normalised to end in a single C(/v1), so passing it with or without the suffix both work. If not set, the value of the E(NETORCA_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Service owner feedback folded into the prompts of the retriggered run - tell the AI what went wrong (\"the VLAN in the rendered config does not exist, use vlan 210\"). Only valid with O(retrigger=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": "serviceowner",
+      "description": "Point of view for the request. The same query returns different data depending on which side of the service relationship your team is on. V(serviceowner) operates on the services your team I(offers) - the requests made against them, their service items and deployed items. This is the side that validates, approves, deploys and completes changes. V(consumer) operates on what your team I(consumes) - the service items your applications declared and the change instances tracking your own requests. If",
+      "choices": [
+        "serviceowner",
+        "consumer"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_id",
+      "displayName": "Object Id",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "ID of the service item (or service) to run processors for.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_type",
+      "displayName": "Object Type",
+      "type": "string",
+      "required": false,
+      "default": "service_item",
+      "description": "What O(object_id) refers to.",
+      "choices": [
+        "service_item",
+        "service"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retrigger",
+      "displayName": "Retrigger",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Restart the object's pipeline from C(config) instead of starting one stage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stage",
+      "displayName": "Stage",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Which processor to start - a pipeline stage (V(config), V(verify), V(execution)), the V(optimiser), or the V(change_instance_validator). Required unless O(retrigger=true); a retrigger always restarts at C(config).",
+      "choices": [
+        "config",
+        "verify",
+        "execution",
+        "optimiser",
+        "change_instance_validator"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate TLS certificates when talking to the API. Only disable this for lab instances with self-signed certificates. If not set, the value of the E(NETORCA_VALIDATE_CERTS) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,127 @@
+{
+  "fqcn": "ravendb.ravendb.index",
+  "shortDescription": "Manage RavenDB indexes",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ravendb/ravendb/index_module.html",
+  "options": [
+    {
+      "name": "ca_cert_path",
+      "displayName": "Ca Cert Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a trusted CA certificate file to verify the RavenDB server's certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_path",
+      "displayName": "Certificate Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a client certificate (PEM format) for secured communication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_wide",
+      "displayName": "Cluster Wide",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to apply enable/disable operations cluster-wide.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_name",
+      "displayName": "Database Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the database. Must be a valid name containing only letters, numbers, dashes, and underscores.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "index_configuration",
+      "displayName": "Index Configuration",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Per-index configuration key/value pairs to reconcile. Keys and values are normalized to strings and compared against the current index definition's configuration. If differences exist, the module updates the definition with the merged configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "index_definition",
+      "displayName": "Index Definition",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary defining the index (C(map) list and optional C(reduce) string). Required when creating a new index. When present for an existing index, differences are applied idempotently.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "index_name",
+      "displayName": "Index Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the index to create, delete, or modify. Must consist only of letters, numbers, dashes, and underscores.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Operational mode to apply to an existing index (one of enable/disable/pause/resume/reset). If the index does not exist and only C(mode) is provided, the task fails with guidance to create it first.",
+      "choices": [
+        "resumed",
+        "paused",
+        "enabled",
+        "disabled",
+        "reset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Desired state of the index. If C(present), the index will be created if it does not exist, and the definition/configuration will be reconciled. If C(absent), the index will be deleted if it exists. If omitted (C(null)), the module operates in \"reconcile\" mode on existing indexes only (definition, configuration, and/or C(mode)). If the index does not exist and only C(mode) is provided, the task fails with guidance to use C(state=present).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL of the RavenDB server. Must include the scheme (http or https), hostname, and port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

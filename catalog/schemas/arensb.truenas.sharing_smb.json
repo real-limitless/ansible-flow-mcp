@@ -1,0 +1,264 @@
+{
+  "fqcn": "arensb.truenas.sharing_smb",
+  "shortDescription": "Manage SMB sharing",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/arensb/truenas/sharing_smb_module.html",
+  "options": [
+    {
+      "name": "abe",
+      "displayName": "Abe",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable Access Based Share Enumeration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "acl",
+      "displayName": "Acl",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When set, enables ACL support for the share.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "apple_encoding",
+      "displayName": "Apple Encoding",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use Apple-style character encoding. By default, Samba uses a hashing algorithm for filename characters that are illegal in NTFS. This option causes it to translate such characters to the Unicode private range.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auxsmbconf",
+      "displayName": "Auxsmbconf",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Additional smb4.conf options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "browsable",
+      "displayName": "Browsable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If true, share is visible when browsing shares.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the share, for the system maintainer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "durablehandle",
+      "displayName": "Durablehandle",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables using file handles that can withstand short disconnections. Enables support for POSIX byte-range locks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If true, the share is enabled. Otherwise, it is present but disabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fsrvp",
+      "displayName": "Fsrvp",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable File Server Remote VSS Protocol (FSRVP). This allows RPC clients to manage snapshots for the share.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "guestok",
+      "displayName": "Guestok",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enables guest access (no login).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "home",
+      "displayName": "Home",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If true, this share may be used for home directories. Only one such share is allowed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostsallow",
+      "displayName": "Hostsallow",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of hostnames/IP addresses of hosts that are allowed access to the share. If C(hostsallow) and C(hostsdeny) conflict, C(hostsallow) takes precedence.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostsdeny",
+      "displayName": "Hostsdeny",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of hostnames/IP addresses of hosts that are denied access to the share. If C(hostsallow) and C(hostsdeny) conflict, C(hostsallow) takes precedence.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the share, as seen by the SMB client.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Directory to share, on the server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path_suffix",
+      "displayName": "Path Suffix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Suffix appended to the share connection path. This may contain macros, as defined in smb.conf(5).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purpose",
+      "displayName": "Purpose",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a family of configuration parameters for different use\ncases. Legal values include:\n C(NO_PRESET), C(DEFAULT_SHARE), C(ENHANCED_TIMEMACHINE), C(MULTI_PROTOCOL_APP), C(MULTI_PROTOCOL_NFS), C(PRIVATE_DATASETS), C(WORM_DROPBOX). Note that the C(purpose) parameter may override other parameters. In particular, C(DEFAULT_SHARE) specifies an empty C(hostsallow) and C(hostsdeny). Under SCALE 25.10, C(NO_PRESET) has been dropped, so this module silently replaces it with C(DEFAULT_SHARE).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recyclebin",
+      "displayName": "Recyclebin",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If true, enables Windows Recycle Bin: deleted files are moved to the\nRecycle Bin. If false, deleted files are immediately deleted.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ro",
+      "displayName": "Ro",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If true, share is read-only.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shadowcopy",
+      "displayName": "Shadowcopy",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When set, export ZFS snapshots as VSS shadow copies.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the share should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "streams",
+      "displayName": "Streams",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Allow multiple NTFS data streams.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timemachine",
+      "displayName": "Timemachine",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables support for Apple Time Machine backups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

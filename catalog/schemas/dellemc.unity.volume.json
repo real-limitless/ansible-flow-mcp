@@ -1,0 +1,311 @@
+{
+  "fqcn": "dellemc.unity.volume",
+  "shortDescription": "Manage volume on Unity storage system",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/unity/volume_module.html",
+  "options": [
+    {
+      "name": "advanced_dedup",
+      "displayName": "Advanced Dedup",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Boolean variable, Indicates whether or not to enable advanced deduplication. Compression should be enabled to enable advanced deduplication. It can only be enabled on the all flash high end platforms. Deduplicated data will remain as is even after advanced deduplication is disabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cap_unit",
+      "displayName": "Cap Unit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The unit of the volume size. It defaults to C(GB), if not specified.",
+      "choices": [
+        "GB",
+        "TB"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compression",
+      "displayName": "Compression",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Boolean variable, Specifies whether or not to enable compression. Compression is supported only for thin volumes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description about the volume. Description can be removed by passing empty string (\"\").",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hlu",
+      "displayName": "Hlu",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Host Lun Unit to be mapped/unmapped with this volume. It is an optional parameter, hlu can be specified along with I(host_name) or I(host_id) and I(mapping_state). If I(hlu) is not specified, unity will choose it automatically. The maximum value supported is C(255).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_id",
+      "displayName": "Host Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the host to be mapped/unmapped with this volume. Either I(host_name) or I(host_id) can be specified in one task along with I(mapping_state).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_name",
+      "displayName": "Host Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the host to be mapped/unmapped with this volume. Either I(host_name) or I(host_id) can be specified in one task along with I(mapping_state).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hosts",
+      "displayName": "Hosts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Name of hosts for mapping to a volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "io_limit_policy",
+      "displayName": "Io Limit Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IO limit policy associated with this volume. Once it is set, it cannot be removed through ansible module but it can be changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_thin",
+      "displayName": "Is Thin",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Boolean variable, Specifies whether or not it is a thin volume. The value is set as C(true) by default if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mapping_state",
+      "displayName": "Mapping State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "State of host access for volume.",
+      "choices": [
+        "mapped",
+        "unmapped"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_vol_name",
+      "displayName": "New Vol Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "New name of the volume for rename operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool_id",
+      "displayName": "Pool Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This is the id of the pool where the volume will be created. Either the I(pool_name) or I(pool_id) must be provided to create a new volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool_name",
+      "displayName": "Pool Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This is the name of the pool where the volume will be created. Either the I(pool_name) or I(pool_id) must be provided to create a new volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port number through which communication happens with Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The size of the volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snap_schedule",
+      "displayName": "Snap Schedule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Snapshot schedule assigned to the volume. Add/Remove/Modify the snapshot schedule for the volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sp",
+      "displayName": "Sp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Storage Processor for this volume.",
+      "choices": [
+        "SPA",
+        "SPB"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "State variable to determine whether volume will exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tiering_policy",
+      "displayName": "Tiering Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Tiering policy choices for how the storage resource data will be distributed among the tiers available in the pool.",
+      "choices": [
+        "AUTOTIER_HIGH",
+        "AUTOTIER",
+        "HIGHEST",
+        "LOWEST"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unispherehost",
+      "displayName": "Unispherehost",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean variable to specify whether or not to validate SSL certificate. C(true) - Indicates that the SSL certificate should be verified. C(false) - Indicates that the SSL certificate should not be verified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vol_id",
+      "displayName": "Vol Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The id of the volume. It can be used only for get, modify, map/unmap host, or delete operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vol_name",
+      "displayName": "Vol Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the volume. Mandatory only for create operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

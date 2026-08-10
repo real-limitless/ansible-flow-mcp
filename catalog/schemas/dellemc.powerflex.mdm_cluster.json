@@ -1,0 +1,219 @@
+{
+  "fqcn": "dellemc.powerflex.mdm_cluster",
+  "shortDescription": "Manage MDM cluster on Dell PowerFlex",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/powerflex/mdm_cluster_module.html",
+  "options": [
+    {
+      "name": "clear_interfaces",
+      "displayName": "Clear Interfaces",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Clear all virtual IP interfaces. The I(clear_interfaces) is mutually exclusive with I(virtual_ip_interfaces).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_mode",
+      "displayName": "Cluster Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Mode of the cluster.",
+      "choices": [
+        "OneNode",
+        "ThreeNodes",
+        "FiveNodes"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the PowerFlex host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_primary",
+      "displayName": "Is Primary",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set I(is_primary) as C(true) to change MDM cluster ownership from the current master MDM to different MDM. Set I(is_primary) as C(false), will return MDM cluster details. New owner MDM must be an MDM with a manager role.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mdm",
+      "displayName": "Mdm",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies parameters to add/remove MDMs to/from the MDM cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mdm_id",
+      "displayName": "Mdm Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the MDM. Mutually exclusive with I(mdm_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mdm_name",
+      "displayName": "Mdm Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the MDM. It is unique across the PowerFlex array. Mutually exclusive with I(mdm_id). If mdm_name passed in add standby operation, then same name will be assigned to the new standby mdm.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mdm_new_name",
+      "displayName": "Mdm New Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "To rename the MDM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mdm_state",
+      "displayName": "Mdm State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Mapping state of MDM.",
+      "choices": [
+        "present-in-cluster",
+        "absent-in-cluster"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the PowerFlex host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "performance_profile",
+      "displayName": "Performance Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Apply performance profile to cluster MDMs.",
+      "choices": [
+        "Compact",
+        "HighPerformance"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port number through which communication happens with PowerFlex host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "standby_mdm",
+      "displayName": "Standby Mdm",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies add standby MDM parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "State of the MDM cluster.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Time after which connection will get terminated. It is to be mentioned in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the PowerFlex host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean variable to specify whether or not to validate SSL certificate. C(true) - Indicates that the SSL certificate should be verified. C(false) - Indicates that the SSL certificate should not be verified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "virtual_ip_interfaces",
+      "displayName": "Virtual Ip Interfaces",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of interfaces to be used for virtual IPs. The order of interfaces must be matched with virtual IPs assigned to the cluster. Interfaces of the primary and secondary type MDMs are allowed to modify. The I(virtual_ip_interfaces) is mutually exclusive with I(clear_interfaces).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

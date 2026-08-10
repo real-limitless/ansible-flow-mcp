@@ -1,0 +1,143 @@
+{
+  "fqcn": "ravendb.ravendb.database",
+  "shortDescription": "Manage RavenDB databases",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ravendb/ravendb/database_module.html",
+  "options": [
+    {
+      "name": "ca_cert_path",
+      "displayName": "Ca Cert Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a trusted CA certificate file to verify the RavenDB server's certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_path",
+      "displayName": "Certificate Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a client certificate (PEM format) for secured communication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_name",
+      "displayName": "Database Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the database. Must be a valid name containing only letters, numbers, dashes, and underscores.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_settings",
+      "displayName": "Database Settings",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Dictionary of database-level settings to apply. Keys and values are normalized to strings and compared against current customized settings. When differences exist, the module updates settings and toggles the database state to reload them safely.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encrypted",
+      "displayName": "Encrypted",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create the database as encrypted. When C(true), the module ensures a secret key is assigned (generated or read from file) and distributed to all cluster nodes before creation. Requires C(certificate_path) to access admin endpoints.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_key",
+      "displayName": "Encryption Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file that contains the raw encryption key (plain text). Mutually exclusive with C(generate_encryption_key). Used only when C(encrypted=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_key_output_path",
+      "displayName": "Encryption Key Output Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When C(generate_encryption_key=true), write the generated key to this local file with safe permissions. Ignored if C(generate_encryption_key=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "generate_encryption_key",
+      "displayName": "Generate Encryption Key",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true), asks the server to generate a new encryption key via the admin API. Mutually exclusive with C(encryption_key). Used only when C(encrypted=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replication_factor",
+      "displayName": "Replication Factor",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of server nodes to replicate the database to. Must be a positive integer. Only used when creating a database. Required on creation; ignored for existing databases.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Desired state of the database. If C(present), the database will be created if it does not exist, and settings will be reconciled. If C(absent), the database will be deleted if it exists. If omitted (C(null)), the module reconciles settings on an existing database but will not create or delete it. If the database does not exist and C(state) is omitted, the task fails with guidance to use C(state=present).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "topology_members",
+      "displayName": "Topology Members",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Optional list of cluster node tags to host this database (fixed placement). When provided, its length must equal C(replication_factor). Honored only on creation. If the database already exists, providing C(topology_members) will fail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL of the RavenDB server. Must include the scheme (http or https), hostname, and port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,104 @@
+{
+  "fqcn": "ibm.power_hmc.vios_alt_root_vg",
+  "shortDescription": "Create/Cleanup an alternate rootvg disk on a VIOS",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_hmc/vios_alt_root_vg_module.html",
+  "options": [
+    {
+      "name": "disk_size_policy",
+      "displayName": "Disk Size Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "When I(state=copy), specifies how to choose the alternate disk if I(targets) is not specified. C(minimize) smallest disk that can be selected. C(upper) first disk found bigger than the rootvg disk. C(lower) disk size less than rootvg disk size but big enough to contain the used physical partitions. C(nearest) disk size closest to the rootvg disk.",
+      "choices": [
+        "minimize",
+        "upper",
+        "lower",
+        "nearest"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Forces removal of any existing alternate disk copy on target disks. valid only for I(state) = C(copy)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_auth",
+      "displayName": "Hmc Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Username and Password credential of the HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_host",
+      "displayName": "Hmc Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The IP Address or hostname of the HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(copy) to create alternate rootvg disk. C(clean) to cleanup an existing alternate disk copy.",
+      "choices": [
+        "copy",
+        "clean"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system_name",
+      "displayName": "System Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name or mtms (machine type model serial) of the managed system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "targets",
+      "displayName": "Targets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Provided with C(copy), an alternate rootvg will be created on these targets. Provided with C(clean), it removes the owning volume manager from the target disk(s).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vios_name",
+      "displayName": "Vios Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the VirtualIOServer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

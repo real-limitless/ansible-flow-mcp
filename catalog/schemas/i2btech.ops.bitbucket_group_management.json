@@ -1,0 +1,114 @@
+{
+  "fqcn": "i2btech.ops.bitbucket_group_management",
+  "shortDescription": "Manage groups in Bitbucket Cloud",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/i2btech/ops/bitbucket_group_management_module.html",
+  "options": [
+    {
+      "name": "members",
+      "displayName": "Members",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Desired list of account UUIDs to maintain as group members. UUIDs must include curly braces, e.g. C({c423e13e-b541-3e77-b363-3e0b458u8226}). The module reconciles membership to exactly match this list \u2014 missing members are added and extra members are removed. When omitted, existing membership is left unchanged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The display name of the group. Required when C(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "App password used for authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "permission",
+      "displayName": "Permission",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default permission automatically granted to the group on all newly created repositories in the workspace.",
+      "choices": [
+        "read",
+        "write",
+        "admin"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "repo_permissions",
+      "displayName": "Repo Permissions",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of repositories and the privilege level the group should have on each of them. The module reconciles permissions to exactly match this list \u2014 missing privileges are added, out-of-date ones are updated, and privileges on repositories not in the list are revoked. When omitted (C(null)), existing repository permissions are left unchanged. Pass an empty list C([]) to revoke all existing repository permissions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "slug",
+      "displayName": "Slug",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The group slug (identifier) used to look up an existing group. When omitted the slug is derived from C(name) by replacing spaces with dashes and lowercasing. Useful when C(state=absent) and the group name is not known.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "C(present) ensures the group exists and is configured as specified. C(absent) ensures the group does not exist.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Username used for authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "workspace",
+      "displayName": "Workspace",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The workspace ID (slug) that owns the group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

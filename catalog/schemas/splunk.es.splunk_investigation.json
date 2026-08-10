@@ -1,0 +1,179 @@
+{
+  "fqcn": "splunk.es.splunk_investigation",
+  "shortDescription": "Manage Splunk Enterprise Security investigations",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/splunk/es/splunk_investigation_module.html",
+  "options": [
+    {
+      "name": "api_app",
+      "displayName": "Api App",
+      "type": "string",
+      "required": false,
+      "default": "missioncontrol",
+      "description": "The app portion of the Splunk API path for the investigations endpoint. Override this if your environment uses a different app name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_namespace",
+      "displayName": "Api Namespace",
+      "type": "string",
+      "required": false,
+      "default": "servicesNS",
+      "description": "The namespace portion of the Splunk API path. Override this if your environment uses a different namespace.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": "nobody",
+      "description": "The user portion of the Splunk API path. Override this if your environment requires a different user context.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description of the investigation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disposition",
+      "displayName": "Disposition",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The disposition of the investigation. Can be updated on existing investigations.",
+      "choices": [
+        "unassigned",
+        "true_positive",
+        "benign_positive",
+        "false_positive",
+        "false_positive_inaccurate_data",
+        "other",
+        "undetermined"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "finding_ids",
+      "displayName": "Finding Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of finding IDs (event_ids) to attach to the investigation. When updating, findings are added to the investigation via a separate API call. Finding IDs can only be added, removal is not supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "investigation_ref_id",
+      "displayName": "Investigation Ref Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Reference ID of an existing investigation. If provided, the module will update the existing investigation. If not provided, a new investigation is created. When updating, all fields except C(name) can be modified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "investigation_type",
+      "displayName": "Investigation Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of the investigation. If not specified, the default investigation type is used. Can be updated on existing investigations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the investigation. Required when creating a new investigation (without C(investigation_ref_id)). Cannot be updated after creation. Note that names are not unique - multiple investigations can have the same name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The owner of the investigation. Use C(admin) for the administrator user. Use C(unassigned) to leave the investigation unassigned. Can be updated on existing investigations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sensitivity",
+      "displayName": "Sensitivity",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The sensitivity of the investigation. Can be updated on existing investigations.",
+      "choices": [
+        "white",
+        "green",
+        "amber",
+        "red",
+        "unassigned"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The status of the investigation. Can be updated on existing investigations.",
+      "choices": [
+        "unassigned",
+        "new",
+        "in_progress",
+        "pending",
+        "resolved",
+        "closed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "urgency",
+      "displayName": "Urgency",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The urgency of the investigation. Can be updated on existing investigations.",
+      "choices": [
+        "informational",
+        "low",
+        "medium",
+        "high",
+        "critical",
+        "unknown"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,147 @@
+{
+  "fqcn": "splunk.es.splunk_notes",
+  "shortDescription": "Manage notes for findings, investigations, and response plan tasks",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/splunk/es/splunk_notes_module.html",
+  "options": [
+    {
+      "name": "api_app",
+      "displayName": "Api App",
+      "type": "string",
+      "required": false,
+      "default": "missioncontrol",
+      "description": "The app portion of the Splunk API path. Override this if your environment uses a different app name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_namespace",
+      "displayName": "Api Namespace",
+      "type": "string",
+      "required": false,
+      "default": "servicesNS",
+      "description": "The namespace portion of the Splunk API path. Override this if your environment uses a different namespace.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": "nobody",
+      "description": "The user portion of the Splunk API path. Override this if your environment requires a different user context.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "content",
+      "displayName": "Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The content/body of the note. Required when C(state=present) (creating or updating a note).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "finding_ref_id",
+      "displayName": "Finding Ref Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The reference ID of the finding to attach the note to. Required when C(target_type=finding). Format is typically C(uuid@@notable@@time{timestamp}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "investigation_ref_id",
+      "displayName": "Investigation Ref Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The investigation UUID. Required when C(target_type=investigation) or C(target_type=response_plan_task).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "note_id",
+      "displayName": "Note Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of an existing note. Required when updating or deleting a note. When C(state=present) and C(note_id) is provided, the note is updated. When C(state=absent), C(note_id) is required to identify the note to delete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "phase_id",
+      "displayName": "Phase Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the phase containing the task. Required when C(target_type=response_plan_task).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "response_plan_id",
+      "displayName": "Response Plan Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the applied response plan. Required when C(target_type=response_plan_task).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the note. Use C(present) to create or update a note. Use C(absent) to delete a note (requires C(note_id)).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_type",
+      "displayName": "Target Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of object to attach the note to. Use C(finding) to attach a note to a security finding. Use C(investigation) to attach a note to an investigation. Use C(response_plan_task) to attach a note to a task within an applied response plan.",
+      "choices": [
+        "finding",
+        "investigation",
+        "response_plan_task"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "task_id",
+      "displayName": "Task Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the task to attach the note to. Required when C(target_type=response_plan_task).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

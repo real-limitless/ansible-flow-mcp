@@ -1,0 +1,595 @@
+{
+  "fqcn": "netapp.cloudmanager.na_cloudmanager_cvo_azure",
+  "shortDescription": "NetApp Cloud Manager CVO/working environment in single or HA mode for Azure.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp/cloudmanager/na_cloudmanager_cvo_azure_module.html",
+  "options": [
+    {
+      "name": "allow_deploy_in_existing_rg",
+      "displayName": "Allow Deploy In Existing Rg",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates if to allow creation in existing resource group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_zone",
+      "displayName": "Availability Zone",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The availability zone on the location configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_zone_node1",
+      "displayName": "Availability Zone Node1",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The node1 availability zone on the location configuration for HA.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_zone_node2",
+      "displayName": "Availability Zone Node2",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The node2 availability zone on the location configuration for HA.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "azure_encryption_parameters",
+      "displayName": "Azure Encryption Parameters",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "AZURE encryption parameters. It is required if using AZURE encryption.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "azure_tag",
+      "displayName": "Azure Tag",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Additional tags for the AZURE CVO working environment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_volumes_to_cbs",
+      "displayName": "Backup Volumes To Cbs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Automatically enable back up of all volumes to S3.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "capacity_package_name",
+      "displayName": "Capacity Package Name",
+      "type": "string",
+      "required": false,
+      "default": "Essential",
+      "description": "Capacity package name is required when selecting a capacity based license. Essential only available with Bring Your Own License Capacity-Based. Professional available as an annual contract from a cloud provider or Bring Your Own License Capacity-Based.",
+      "choices": [
+        "Professional",
+        "Essential",
+        "Freemium"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "capacity_tier",
+      "displayName": "Capacity Tier",
+      "type": "string",
+      "required": false,
+      "default": "Blob",
+      "description": "Whether to enable data tiering for the first data aggregate.",
+      "choices": [
+        "Blob",
+        "NONE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cidr",
+      "displayName": "Cidr",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The CIDR of the VNET. If not provided, resource needs az login to authorize and fetch the cidr details from Azure.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The connector ID of the Cloud Manager Connector. You can find the ID from the Connector tab on [https://cloudmanager.netapp.com].",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud_provider_account",
+      "displayName": "Cloud Provider Account",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The cloud provider credentials id to use when deploying the Cloud Volumes ONTAP system. You can find the ID in Cloud Manager from the Settings > Credentials page. If not specified, Cloud Manager uses the instance profile of the Connector.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_encryption_type",
+      "displayName": "Data Encryption Type",
+      "type": "string",
+      "required": false,
+      "default": "AZURE",
+      "description": "The type of encryption to use for the working environment.",
+      "choices": [
+        "AZURE",
+        "NONE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_size",
+      "displayName": "Disk Size",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Azure volume size for the first data aggregate. For GB, the value can be [100, 500]. For TB, the value can be [1,2,4,8,16].",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_size_unit",
+      "displayName": "Disk Size Unit",
+      "type": "string",
+      "required": false,
+      "default": "TB",
+      "description": "The unit for disk size.",
+      "choices": [
+        "GB",
+        "TB"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_compliance",
+      "displayName": "Enable Compliance",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable the Cloud Compliance service on the working environment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_monitoring",
+      "displayName": "Enable Monitoring",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable the Monitoring service on the working environment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "environment",
+      "displayName": "Environment",
+      "type": "string",
+      "required": false,
+      "default": "prod",
+      "description": "The environment for NetApp Cloud Manager API operations.",
+      "choices": [
+        "prod",
+        "stage"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "feature_flags",
+      "displayName": "Feature Flags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable a new feature. This can be used to enable an experimental feature or disable a new feature that breaks backward compatibility. Supported keys and values are subject to change without notice.  Unknown keys are ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha_enable_https",
+      "displayName": "Ha Enable Https",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "For HA, enable the HTTPS connection from CVO to storage accounts. This can impact write performance. The default is false.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_type",
+      "displayName": "Instance Type",
+      "type": "string",
+      "required": false,
+      "default": "Standard_DS4_v2",
+      "description": "The type of instance to use, which depends on the license type you chose. Explore ['Standard_DS3_v2']. Standard ['Standard_DS4_v2, Standard_DS13_v2, Standard_L8s_v2']. Premium ['Standard_DS5_v2', 'Standard_DS14_v2']. For more supported instance types, refer to Cloud Volumes ONTAP Release Notes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_ha",
+      "displayName": "Is Ha",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicate whether the working environment is an HA pair or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "license_type",
+      "displayName": "License Type",
+      "type": "string",
+      "required": false,
+      "default": "capacity-paygo",
+      "description": "The type of license to use. For single node by Capacity ['capacity-paygo']. For single node by Node paygo ['azure-cot-explore-paygo', 'azure-cot-standard-paygo', 'azure-cot-premium-paygo']. For single node by Node byol ['azure-cot-premium-byol']. For HA by Capacity ['ha-capacity-paygo']. For HA by Node paygo ['azure-ha-cot-standard-paygo', 'azure-ha-cot-premium-paygo']. For HA by Node byol ['azure-ha-cot-premium-byol'].",
+      "choices": [
+        "azure-cot-standard-paygo",
+        "azure-cot-premium-paygo",
+        "azure-cot-premium-byol",
+        "azure-cot-explore-paygo",
+        "azure-ha-cot-standard-paygo",
+        "azure-ha-cot-premium-paygo",
+        "azure-ha-cot-premium-byol",
+        "capacity-paygo",
+        "ha-capacity-paygo"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location",
+      "displayName": "Location",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The location where the working environment will be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the Cloud Manager CVO for AZURE to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nss_account",
+      "displayName": "Nss Account",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The NetApp Support Site account ID to use with this Cloud Volumes ONTAP system. If the license type is BYOL and an NSS account isn't provided, Cloud Manager tries to use the first existing NSS account.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ontap_version",
+      "displayName": "Ontap Version",
+      "type": "string",
+      "required": false,
+      "default": "latest",
+      "description": "The required ONTAP version. Ignored if 'use_latest_version' is set to true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "platform_serial_number_node1",
+      "displayName": "Platform Serial Number Node1",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "For HA BYOL, the serial number for the first node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "platform_serial_number_node2",
+      "displayName": "Platform Serial Number Node2",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "For HA BYOL, the serial number for the second node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provided_license",
+      "displayName": "Provided License",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Using a NLF license file for BYOL deployment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "refresh_token",
+      "displayName": "Refresh Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The refresh token for NetApp Cloud Manager API operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_group",
+      "displayName": "Resource Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The resource_group where Cloud Volumes ONTAP will be created. If not provided, Cloud Manager generates the resource group name (name of the working environment/CVO with suffix '-rg'). If the resource group does not exist, it is created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sa_client_id",
+      "displayName": "Sa Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The service account secret client ID for NetApp Cloud Manager API operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sa_secret_key",
+      "displayName": "Sa Secret Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The service account secret key for NetApp Cloud Manager API operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_group_id",
+      "displayName": "Security Group Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the security group for the working environment. If not provided, Cloud Manager creates the security group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serial_number",
+      "displayName": "Serial Number",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The serial number for the cluster. Required when using one of these, 'azure-cot-premium-byol' or 'azure-ha-cot-premium-byol'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the specified Cloud Manager CVO for AZURE should exist or not.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_type",
+      "displayName": "Storage Type",
+      "type": "string",
+      "required": false,
+      "default": "Premium_LRS",
+      "description": "The type of storage for the first data aggregate.",
+      "choices": [
+        "Premium_LRS",
+        "Standard_LRS",
+        "StandardSSD_LRS",
+        "Premium_ZRS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subnet_id",
+      "displayName": "Subnet Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the subnet for the Cloud Volumes ONTAP system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subscription_id",
+      "displayName": "Subscription Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The ID of the Azure subscription.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "svm_name",
+      "displayName": "Svm Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the SVM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "svm_password",
+      "displayName": "Svm Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The admin password for Cloud Volumes ONTAP. It will be updated on each run.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tier_level",
+      "displayName": "Tier Level",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "If capacity_tier is Blob, this argument indicates the tiering level.",
+      "choices": [
+        "normal",
+        "cool"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_svm_password",
+      "displayName": "Update Svm Password",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates whether to update svm_password on the CVO. When set to true, the module is not idempotent, as we cannot read the current password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "upgrade_ontap_version",
+      "displayName": "Upgrade Ontap Version",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates whether to upgrade ONTAP image on the CVO. If the current version already matches the desired version, no action is taken.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_latest_version",
+      "displayName": "Use Latest Version",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Indicates whether to use the latest available ONTAP version.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vnet_id",
+      "displayName": "Vnet Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the virtual network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vnet_resource_group",
+      "displayName": "Vnet Resource Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The resource group in Azure associated to the virtual network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "workspace_id",
+      "displayName": "Workspace Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the Cloud Manager workspace where you want to deploy Cloud Volumes ONTAP. If not provided, Cloud Manager uses the first workspace. You can find the ID from the Workspace tab on [https://cloudmanager.netapp.com].",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "writing_speed_state",
+      "displayName": "Writing Speed State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The write speed setting for Cloud Volumes ONTAP ['NORMAL','HIGH']. This argument is not relevant for HA pairs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,99 @@
+{
+  "fqcn": "ibm.ibm_zos_ims.ims_dbd_gen",
+  "shortDescription": "Generate IMS DBD",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_ims/ims_dbd_gen_module.html",
+  "options": [
+    {
+      "name": "batch",
+      "displayName": "Batch",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Batch can be used to perform multiple operations in a single module call. Expects a list of the location(s) of the IMS Database Descriptor (DBD) source to be compiled. The source can reference a PDS or PDSE member, sequential data set or UNIX System Services file path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dbd_name",
+      "displayName": "Dbd Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Target name of the generated DBD member. This parameter is only required and applies if src is a sequential data set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The target output DBDLIB partitioned data set where the DBD members will be generated to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location",
+      "displayName": "Location",
+      "type": "string",
+      "required": false,
+      "default": "DATA_SET",
+      "description": "The DBD source location. Supported options are DATA_SET or USS. The default is DATA_SET. The DATA_SET option can be used for a PDS, PDSE, or sequential data set.",
+      "choices": [
+        "DATA_SET",
+        "USS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "member_list",
+      "displayName": "Member List",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A list of member names if the source specified is a data set. Optionally, proceeding the source_member, a colon with a target name for the generated DBD member can be specified. If no target name is specified, source_name will be used as the target name. If 'member_list' is empty and location is set to 'DATA_SET' or not specified, then src is expected to be a sequential data set. Elements are of the list are str or dict with single key-value pair",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace",
+      "displayName": "Replace",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When 'replace' is 'true', an existing DBD member matching the name in the input DBD source will be overwitten.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The src field can reference a PDS, PDSE member, sequential data set, or UNIX System Services file path. If a PDS is specified, all members within the PDS will be treated as individual DBD source members to be processed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sys_lib",
+      "displayName": "Sys Lib",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "A list of required macro libraries that are needed to compile the DBD source. These libraries will be used as the sys_lib at compile time.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,187 @@
+{
+  "fqcn": "ibm.ibm_zos_cics.cmci_update",
+  "shortDescription": "Update CICS and CICSPlex resources and definitions",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_cics/cmci_update_module.html",
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The resource attributes to be created or updated. Available attributes can be found in the CICSPlex\u00ae SM resource table reference for the target resource type, for example, L(PROGDEF resource table reference,https://www.ibm.com/docs/en/cics-ts/latest?topic=tables-progdef-resource-table).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cmci_ca",
+      "displayName": "Cmci Ca",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Location of the certificate authority (CA) bundle used to update the list of trusted CA's for HTTPS client authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cmci_cert",
+      "displayName": "Cmci Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Location of the PEM-formatted certificate chain file to be used for HTTPS client authentication. Can also be specified using the environment variable CMCI_CERT. Required if I(cmci_key) is specified. Authentication prioritises certificate authentication if I(cmci_cert) and I(cmci_key) are provided, then basic authentication if I(cmci_user) and I(cmci_password) are provided, and then unauthenticated if none is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cmci_host",
+      "displayName": "Cmci Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The TCP/IP host name of CMCI connection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cmci_key",
+      "displayName": "Cmci Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Location of the PEM-formatted file storing your private key to be used for HTTPS client authentication. Can also be specified using the environment variable CMCI_KEY. Required if I(cmci_cert) is specified. Authentication prioritises certificate authentication if I(cmci_cert) and I(cmci_key) are provided, then basic authentication if I(cmci_user) and I(cmci_password) are provided, and then unauthenticated if none is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cmci_password",
+      "displayName": "Cmci Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of I(cmci_user) to pass HTTP basic authentication. Can also be specified using the environment variable CMCI_PASSWORD. Required if I(cmci_user) is specified. Authentication prioritises certificate authentication if I(cmci_cert) and I(cmci_key) are provided, then basic authentication if I(cmci_user) and I(cmci_password) are provided, and then unauthenticated if none is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cmci_port",
+      "displayName": "Cmci Port",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "The port number of the CMCI connection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cmci_user",
+      "displayName": "Cmci User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user ID under which the CMCI request will run. Can also be specified using the environment variable CMCI_USER. Required if I(cmci_password) is specified. Authentication prioritises certificate authentication if I(cmci_cert) and I(cmci_key) are provided, then basic authentication if I(cmci_user) and I(cmci_password) are provided, and then unauthenticated if none is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "If CMCI is installed in a CICSPlex\u00ae SM environment, I(context) is the name of the CICSplex or CMAS associated with the request, for example, C(PLEX1). To determine whether a CMAS can be specified as I(context), see the B(CMAS context) entry in the CICSPlex SM resource table reference of a resource. For example, according to the L(PROGRAM resource table,https://www.ibm.com/docs/en/cics-ts/latest?topic=tables-program-resource-table), CMAS context is not supported for PROGRAM. If CMCI is installed ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "insecure",
+      "displayName": "Insecure",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When set to C(true), disables SSL certificate trust chain verification when using HTTPS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resources",
+      "displayName": "Resources",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options that specify a target resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheme",
+      "displayName": "Scheme",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The HTTP scheme to use when establishing a connection to the CMCI REST API.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scope",
+      "displayName": "Scope",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of a CICSplex, CICS region group, CICS region, or logical scope that is associated with the query. I(scope) is a subset of I(context) and limits the request to particular CICS systems or resources. I(scope) is optional. If it's not specified, the request is limited by the value of I(context) alone. The value of I(scope) must contain no spaces. I(scope) is not case-sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "HTTP request timeout in seconds",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The CMCI external resource name that maps to the target CICS or CICSPlex SM resource type. For a list of CMCI external resource names, see L(CMCI resource names,https://www.ibm.com/docs/en/cics-ts/latest?topic=reference-cmci-resource-names).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_parameters",
+      "displayName": "Update Parameters",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of one or more parameters that control the I(update) operation. Eligible parameters for the UPDATE operation can be found in the resource table reference for the target resource type, as listed in the UPDATE operation section of the \"Valid CPSM operations\" table. For example, the only valid parameter for a PROGDEF UPDATE operation is CSD, as found in the L(PROGDEF resource table reference,https://www.ibm.com/docs/en/cics-ts/latest?topic=tables-progdef-resource-table).\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

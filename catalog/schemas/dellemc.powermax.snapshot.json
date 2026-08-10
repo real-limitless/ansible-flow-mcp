@@ -1,0 +1,226 @@
+{
+  "fqcn": "dellemc.powermax.snapshot",
+  "shortDescription": "Manage Snapshots on PowerMax/VMAX Storage System",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/powermax/snapshot_module.html",
+  "options": [
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to force delete the snapshot. Force deletion is required when the snapshot has a different number of source volumes than the current storage group configuration. This can occur when LUNs are added to a storage group after a snapshot is taken. The I(force) option is only supported with I(snapshot_id), not with I(generation).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "generation",
+      "displayName": "Generation",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The generation number of the snapshot. Generation is required for link, unlink, rename and delete operations. Optional for Get snapshot details. Create snapshot will always create a new snapshot with a generation number 0. Rename is supported only for generation number 0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "link_status",
+      "displayName": "Link Status",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Describes the link status of the snapshot.",
+      "choices": [
+        "linked",
+        "unlinked"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_snapshot_name",
+      "displayName": "New Snapshot Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The new name of the snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the Unisphere host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 8443,
+      "description": "The port of the Unisphere host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restore",
+      "displayName": "Restore",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to restore a storage group to its snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serial_no",
+      "displayName": "Serial No",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The serial number of the PowerMax/VMAX array. It is a required parameter for all array-specific operations except for getting a list of arrays in the Gatherfacts module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sg_name",
+      "displayName": "Sg Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the storage group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_id",
+      "displayName": "Snapshot Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Unique ID of the snapshot. I(snapshot_id) is required for link, unlink, rename and delete operations. Optional for Get snapshot details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_name",
+      "displayName": "Snapshot Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Define whether the snapshot should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_sg_name",
+      "displayName": "Target Sg Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The target storage group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Time after which the connection will get terminated. It is to be mentioned in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttl",
+      "displayName": "Ttl",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Time To Live (TTL) value for the snapshot. If the TTL is not specified, the storage group snap details are returned. However, to create a SG snap - TTL must be given. If the SG snap should not have any TTL - specify TTL as C(None).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttl_unit",
+      "displayName": "Ttl Unit",
+      "type": "string",
+      "required": false,
+      "default": "days",
+      "description": "The unit for the I(ttl). If no I(ttl_unit) is specified, C(days) is taken as default I(ttl_unit).",
+      "choices": [
+        "hours",
+        "days"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unispherehost",
+      "displayName": "Unispherehost",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the Unisphere host",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the Unisphere host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verifycert",
+      "displayName": "Verifycert",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies system whether to validate SSL certificate or not, Values can be True or False or a custom file path for SSL certificate with .pem extension or .cer with base 64 encoding.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

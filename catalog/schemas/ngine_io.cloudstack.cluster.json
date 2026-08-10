@@ -1,0 +1,311 @@
+{
+  "fqcn": "ngine_io.cloudstack.cluster",
+  "shortDescription": "Manages host clusters on Apache CloudStack based clouds.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ngine_io/cloudstack/cluster_module.html",
+  "options": [
+    {
+      "name": "api_http_method",
+      "displayName": "Api Http Method",
+      "type": "string",
+      "required": false,
+      "default": "get",
+      "description": "HTTP method used to query the API endpoint. If not given, the C(CLOUDSTACK_METHOD) env variable is considered.",
+      "choices": [
+        "get",
+        "post"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of the CloudStack API. If not given, the C(CLOUDSTACK_KEY) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_secret",
+      "displayName": "Api Secret",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Secret key of the CloudStack API. If not set, the C(CLOUDSTACK_SECRET) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "HTTP timeout in seconds. If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL of the CloudStack API e.g. https://cloud.example.com/client/api. If not given, the C(CLOUDSTACK_ENDPOINT) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_verify_ssl_cert",
+      "displayName": "Api Verify Ssl Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Verify CA authority cert file. If not given, the C(CLOUDSTACK_VERIFY) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_type",
+      "displayName": "Cluster Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of the cluster. Required if I(state=present)",
+      "choices": [
+        "CloudManaged",
+        "ExternalManaged"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "guest_vswitch_name",
+      "displayName": "Guest Vswitch Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of virtual switch used for guest traffic in the cluster. This would override zone wide traffic label setting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "guest_vswitch_type",
+      "displayName": "Guest Vswitch Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of virtual switch used for guest traffic in the cluster. Allowed values are, vmwaresvs (for VMware standard vSwitch) and vmwaredvs (for VMware distributed vSwitch)",
+      "choices": [
+        "vmwaresvs",
+        "vmwaredvs"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hypervisor",
+      "displayName": "Hypervisor",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name the hypervisor to be used. Required if I(state=present). Possible values are C(KVM), C(VMware), C(BareMetal), C(XenServer), C(LXC), C(HyperV), C(UCS), C(OVM), C(Simulator).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "name of the cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ovm3_cluster",
+      "displayName": "Ovm3 Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Ovm3 native OCFS2 clustering enabled for cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ovm3_pool",
+      "displayName": "Ovm3 Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Ovm3 native pooling enabled for cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ovm3_vip",
+      "displayName": "Ovm3 Vip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Ovm3 vip to use for pool (and cluster).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pod",
+      "displayName": "Pod",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the pod in which the cluster belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_vswitch_name",
+      "displayName": "Public Vswitch Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of virtual switch used for public traffic in the cluster. This would override zone wide traffic label setting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_vswitch_type",
+      "displayName": "Public Vswitch Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of virtual switch used for public traffic in the cluster. Allowed values are, vmwaresvs (for VMware standard vSwitch) and vmwaredvs (for VMware distributed vSwitch)",
+      "choices": [
+        "vmwaresvs",
+        "vmwaredvs"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the cluster.",
+      "choices": [
+        "present",
+        "absent",
+        "disabled",
+        "enabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL for the cluster",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for the cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(false), SSL certificates will not be validated. If not given, the C(CLOUDSTACK_DANGEROUS_NO_TLS_VERIFY) env variable is considered. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vms_ip_address",
+      "displayName": "Vms Ip Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP address of the VSM associated with this cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vms_password",
+      "displayName": "Vms Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the VSM associated with this cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vms_username",
+      "displayName": "Vms Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for the VSM associated with this cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone",
+      "displayName": "Zone",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the zone in which the cluster belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

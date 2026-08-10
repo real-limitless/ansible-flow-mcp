@@ -1,0 +1,966 @@
+{
+  "fqcn": "pfrest.pfsense.vpn_openvpn_server",
+  "shortDescription": "Manage individual OpenVPN Servers.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/pfrest/pfsense/vpn_openvpn_server_module.html",
+  "options": [
+    {
+      "name": "allow_compression",
+      "displayName": "Allow Compression",
+      "type": "string",
+      "required": false,
+      "default": "no",
+      "description": "The compression mode allowed by this OpenVPN server. Compression can potentially increase throughput but may allow an attacker to extract secrets if they can control compressed plaintext traversing the VPN (e.g. HTTP)",
+      "choices": [
+        "no",
+        "yes",
+        "asym"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the pfSense device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An API key to use for authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": "pfsense",
+      "description": "The password to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_port",
+      "displayName": "Api Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_protocol",
+      "displayName": "Api Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The protocol to use when connecting to the pfSense API.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "The username to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authmode",
+      "displayName": "Authmode",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The name of the authentication server to use as the authentication backend for this OpenVPN server",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "caref",
+      "displayName": "Caref",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The `refid` of the CA object to assume as the peer CA.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_depth",
+      "displayName": "Cert Depth",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The depth of the certificate chain to check when a certificate based client signs in. Certificates below this depth are not accepted. This is useful for denying certificates made with intermediate CAs generated from the same CA as the server. Set to null to use system default.",
+      "choices": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certref",
+      "displayName": "Certref",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The `refid` of the certificate object to assume as the OpenVPN server certificate.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client2client",
+      "displayName": "Client2Client",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables or disables allowing communication between clients connected to this server.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connlimit",
+      "displayName": "Connlimit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of concurrent connections a single user can have.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_gw",
+      "displayName": "Create Gw",
+      "type": "string",
+      "required": false,
+      "default": "both",
+      "description": "The gateway type(s) that will be created when a virtual interface is assigned to this OpenVPN server",
+      "choices": [
+        "both",
+        "v4only",
+        "v6only"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_options",
+      "displayName": "Custom Options",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Additional options to add to the OpenVPN server configuration.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_ciphers",
+      "displayName": "Data Ciphers",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "The encryption algorithms/ciphers allowed by this OpenVPN server.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_ciphers_fallback",
+      "displayName": "Data Ciphers Fallback",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The fallback encryption algorithm/cipher used for data channel packets when communicating with clients that do not support data encryption algorithm negotiation (e.g. Shared Key).",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The description for this OpenVPN server.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dev_mode",
+      "displayName": "Dev Mode",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The carrier mode for this OpenVPN server. `tun` mode carries IPv4 and IPv6 (layer 3) and is the most common and compatible mode across all platforms. `tap` mode is capable of carrying 802.3 (layer 2).",
+      "choices": [
+        "tun",
+        "tap"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dh_length",
+      "displayName": "Dh Length",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Diffie-Hellman (DH) parameter set used for key exchange.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "digest",
+      "displayName": "Digest",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The algorithm used to authenticate data channel packets, and control channel packets if a TLS Key is present.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable",
+      "displayName": "Disable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disables this OpenVPN server.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_domain",
+      "displayName": "Dns Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The default domain to provide to clients.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_server1",
+      "displayName": "Dns Server1",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The primary DNS server to provide to clients.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_server2",
+      "displayName": "Dns Server2",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The secondary DNS server to provide to clients.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_server3",
+      "displayName": "Dns Server3",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The tertiary DNS server to provide to clients.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_server4",
+      "displayName": "Dns Server4",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The quaternary DNS server to provide to clients.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "duplicate_cn",
+      "displayName": "Duplicate Cn",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables or disable allowing the same user to connect multiple times.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dynamic_ip",
+      "displayName": "Dynamic Ip",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables or disables allowing connected clients to retain their connections if their IP address changes.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ecdh_curve",
+      "displayName": "Ecdh Curve",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Elliptic Curve to use for key exchange. The curve from the server certificate is used by default when the server uses an ECDSA certificate. Otherwise, secp384r1 is used as a fallback.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gwredir",
+      "displayName": "Gwredir",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable forcing all client-generated IPv4 traffic through the tunnel.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gwredir6",
+      "displayName": "Gwredir6",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable forcing all client-generated IPv6 traffic through the tunnel.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inactive_seconds",
+      "displayName": "Inactive Seconds",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "The amount of time (in seconds) until a client connection is closed for inactivity.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The interface or Virtual IP address where OpenVPN will receive client connections.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keepalive_interval",
+      "displayName": "Keepalive Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The keepalive interval parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keepalive_timeout",
+      "displayName": "Keepalive Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The keepalive timeout parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_network",
+      "displayName": "Local Network",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The IPv4 networks that will be accessible from the remote endpoint. Expressed as a list of one or more CIDR ranges or host/network type aliases. This may be left blank if not adding a route to the local network through this tunnel on the remote machine. This is generally set to the LAN network.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_networkv6",
+      "displayName": "Local Networkv6",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The IPv6 networks that will be accessible from the remote endpoint. Expressed as a list of one or more CIDR ranges or host/network type aliases. This may be left blank if not adding a route to the local network through this tunnel on the remote machine. This is generally set to the LAN network.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_port",
+      "displayName": "Local Port",
+      "type": "string",
+      "required": false,
+      "default": "1194",
+      "description": "The port used by OpenVPN to receive client connections. Valid options are: a TCP/UDP port number",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lookup_fields",
+      "displayName": "Lookup Fields",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "The list of fields to use when looking up existing resources. This should be a list of field names that uniquely identify a resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxclients",
+      "displayName": "Maxclients",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The maximum number of clients allowed to concurrently connect to this server.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The OpenVPN server mode.",
+      "choices": [
+        "p2p_tls",
+        "server_tls",
+        "server_user",
+        "server_tls_user"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "netbios_enable",
+      "displayName": "Netbios Enable",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables NetBIOS over TCP/IP.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "netbios_ntype",
+      "displayName": "Netbios Ntype",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The NetBIOS node type.",
+      "choices": [
+        0,
+        1,
+        2,
+        4,
+        8
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "netbios_scope",
+      "displayName": "Netbios Scope",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The NetBIOS Scope ID. This provides an extended naming service for NetBIOS over TCP/IP. The NetBIOS scope ID isolates NetBIOS traffic on a single network to only those nodes with the same NetBIOS scope ID.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ntp_server1",
+      "displayName": "Ntp Server1",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The primary NTP server to provide to clients.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ntp_server2",
+      "displayName": "Ntp Server2",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The secondary NTP server to provide to clients.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "passtos",
+      "displayName": "Passtos",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables or disables setting the TOS IP header value of tunnel packets to match the encapsulated packet value.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ping_action",
+      "displayName": "Ping Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The action to take after a ping to the remote peer times-out.",
+      "choices": [
+        "ping_restart",
+        "ping_exit"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ping_action_push",
+      "displayName": "Ping Action Push",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables pushing the ping action to the VPN client.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ping_action_seconds",
+      "displayName": "Ping Action Seconds",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of seconds that must elapse before the ping is considered a timeout and the configured `ping_action` is performed.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ping_method",
+      "displayName": "Ping Method",
+      "type": "string",
+      "required": false,
+      "default": "keepalive",
+      "description": "The method used to define ping configuration.",
+      "choices": [
+        "keepalive",
+        "ping"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ping_push",
+      "displayName": "Ping Push",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables push ping to the VPN client.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ping_seconds",
+      "displayName": "Ping Seconds",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of seconds to accept no packets before sending a ping to the remote peer over the TCP/UDP control channel.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The protocol used by this OpenVPN server.",
+      "choices": [
+        "UDP4",
+        "UDP6",
+        "UDP",
+        "TCP4",
+        "TCP6",
+        "TCP"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "push_blockoutsidedns",
+      "displayName": "Push Blockoutsidedns",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables blocking Windows 10 clients' access to DNS servers except across OpenVPN while connected, forcing clients to use only VPN DNS servers.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "push_register_dns",
+      "displayName": "Push Register Dns",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables running `net stop dnscache`, `net start dnscache`, `ipconfig /flushdns` and `ipconfig /registerdns` on connection initiation for Windows clients.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_cert_tls",
+      "displayName": "Remote Cert Tls",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enables or disables requiring hosts to have a client certificate to connect.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_network",
+      "displayName": "Remote Network",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "IPv4 networks that will be routed through the tunnel, so that a site-to-site VPN can be established without manually changing the routing tables. Expressed as a list of one or more CIDR ranges or host/network type aliases. If this is a site-to-site VPN, enter the remote LAN/s here. May be left empty for non site-to-site VPN.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_networkv6",
+      "displayName": "Remote Networkv6",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "IPv6 networks that will be routed through the tunnel, so that a site-to-site VPN can be established without manually changing the routing tables. Expressed as a list of one or more CIDR ranges or host/network type aliases. If this is a site-to-site VPN, enter the remote LAN/s here. May be left empty for non site-to-site VPN.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serverbridge_dhcp",
+      "displayName": "Serverbridge Dhcp",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables clients on the bridge to obtain DHCP.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serverbridge_dhcp_end",
+      "displayName": "Serverbridge Dhcp End",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The bridge DHCP range's end address.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serverbridge_dhcp_start",
+      "displayName": "Serverbridge Dhcp Start",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The bridge DHCP range's start address.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serverbridge_interface",
+      "displayName": "Serverbridge Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The interface to which this TAP instance will be bridged. This is not done automatically. This interface must be assigned and the bridge created separately. This setting controls which existing IP address and subnet mask are used by OpenVPN for the bridge.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serverbridge_routegateway",
+      "displayName": "Serverbridge Routegateway",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables pushing the bridge interface's IPv4 address to connecting clients as a route gateway.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sndrcvbuf",
+      "displayName": "Sndrcvbuf",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The send and receive buffer size for OpenVPN. Set to null to use the system default.",
+      "choices": [
+        65536,
+        131072,
+        262144,
+        524288,
+        1048576,
+        2097152
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the resource should be present or absent.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "strictusercn",
+      "displayName": "Strictusercn",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables enforcing a match between the common name of the client certificate and the username given at login.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls",
+      "displayName": "Tls",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The TLS key this OpenVPN server will use to sign control channel packets with an HMAC signature for authentication when establishing the tunnel.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_type",
+      "displayName": "Tls Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The TLS key usage type. In `auth` mode, the TLS key is used only as HMAC authentication for the control channel, protecting the peers from unauthorized connections. The `crypt` mode encrypts the control channel communication in addition to providing authentication, providing more privacy and traffic control channel obfuscation.",
+      "choices": [
+        "auth",
+        "crypt"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tlsauth_keydir",
+      "displayName": "Tlsauth Keydir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The TLS key direction. This must be set to complementary values on the client and server. For example, if the server is set to 0, the client must be set to 1. Both may be set to omit the direction, in which case the TLS Key will be used bidirectionally.",
+      "choices": [
+        "default",
+        "0",
+        "1",
+        "2"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "topology",
+      "displayName": "Topology",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The method used to supply a virtual adapter IP address to clients when using TUN mode on IPv4.",
+      "choices": [
+        "subnet",
+        "net30"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tunnel_network",
+      "displayName": "Tunnel Network",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The IPv4 virtual network used for private communications between this server and client hosts.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tunnel_networkv6",
+      "displayName": "Tunnel Networkv6",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The IPv6 virtual network used for private communications between this server and client hosts.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_tls",
+      "displayName": "Use Tls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables or disables the use of a TLS key for this OpenVPN server.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username_as_common_name",
+      "displayName": "Username As Common Name",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disable the username of the client being used in place of the certificate common name for purposes such as determining Client Specific Overrides.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate SSL certificates when connecting to the API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verbosity_level",
+      "displayName": "Verbosity Level",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The OpenVPN logging verbosity level.",
+      "choices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wins_server1",
+      "displayName": "Wins Server1",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The primary WINS server to provide to clients.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wins_server2",
+      "displayName": "Wins Server2",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The secondary WINS server to provide to clients.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

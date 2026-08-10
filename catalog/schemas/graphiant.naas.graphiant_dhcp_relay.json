@@ -1,0 +1,168 @@
+{
+  "fqcn": "graphiant.naas.graphiant_dhcp_relay",
+  "shortDescription": "Manage Graphiant DHCP relay on interfaces and subinterfaces",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_dhcp_relay_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging output for troubleshooting and monitoring.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device",
+      "displayName": "Device",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Portal device hostname for single-device or loop execution. When combined with O(dhcp_relay_config_file), overrides that device's interface list in the file. Required when O(dhcp_relay_config_file) is omitted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dhcpRelayIpv4",
+      "displayName": "Dhcprelayipv4",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of IPv4 DHCP relay server addresses for the interface named by O(name). Ignored when O(interfaces) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dhcpRelayIpv6",
+      "displayName": "Dhcprelayipv6",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of IPv6 DHCP relay server addresses for the interface named by O(name). Ignored when O(interfaces) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dhcp_relay_config_file",
+      "displayName": "Dhcp Relay Config File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the DHCP relay configuration YAML file. Optional when O(device) is set with at least O(name) or O(interfaces). Can be an absolute path or relative path. Relative paths are resolved using the configured config_path. File must contain a C(dhcp_relay_config) list; each entry maps a device name to a dict with an C(interfaces) key (list of interface entries with C(name), C(vlan), C(dhcpRelayIpv4), C(dhcpRelayIpv6)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interfaces",
+      "displayName": "Interfaces",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of interface entries for multi-interface module-param mode. Each entry may contain C(name), C(vlan), C(dhcpRelayIpv4), and C(dhcpRelayIpv6). When set, takes precedence over O(name) / O(vlan) / O(dhcpRelayIpv4) / O(dhcpRelayIpv6).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Interface name for single-interface module-param mode (e.g. C(GigabitEthernet4/0/0)). Required when O(dhcp_relay_config_file) is omitted and O(interfaces) is not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The specific DHCP relay operation to perform. V(configure): Configure DHCP relay on interfaces and subinterfaces. V(deconfigure): Remove DHCP relay from interfaces and subinterfaces.",
+      "choices": [
+        "configure",
+        "deconfigure"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the DHCP relay configuration. V(present): Maps to V(configure) when O(operation) is not specified. V(absent): Maps to V(deconfigure) when O(operation) is not specified.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlan",
+      "displayName": "Vlan",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "VLAN ID for subinterface relay. Omit for main interface. Used together with O(name) in single-interface mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

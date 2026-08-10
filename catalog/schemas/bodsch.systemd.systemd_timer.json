@@ -1,0 +1,201 @@
+{
+  "fqcn": "bodsch.systemd.systemd_timer",
+  "shortDescription": "Manage systemd timer unit files",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/bodsch/systemd/systemd_timer_module.html",
+  "options": [
+    {
+      "name": "daemon_reload",
+      "displayName": "Daemon Reload",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to run C(systemctl daemon-reload) after the unit file has changed. For I(scope=user) the reload is issued against the target user's service manager.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Convenience shortcut for the C(Description) key of the [Unit] section. Only applied when C(unit.Description) is not set explicitly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the timer should be enabled or disabled using C(systemctl enable/disable). C(null) means the enable state is not changed. For I(scope=user) the target user's service manager is used (C(systemctl --user --machine=<user>@.host)), which must be running.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Group of the .timer file. When unset, defaults to C(root) for I(scope=system) and to the primary group of I(user) for I(scope=user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "install",
+      "displayName": "Install",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options for the [Install] section as a key/value mapping.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": "0644",
+      "description": "File mode of the .timer file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Base name of the timer unit (without \".timer\"). The file is written to I(path)/<name>.timer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Owner of the .timer file. When unset, defaults to C(root) for I(scope=system) and to I(user) for I(scope=user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Base directory for the .timer file. When unset, defaults to C(/lib/systemd/system) for I(scope=system) and to C(~<user>/.config/systemd/user) for I(scope=user). When set explicitly, it overrides the scope-based default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schedule",
+      "displayName": "Schedule",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Structured definition for a single OnCalendar specification. Ignored when C(timer.OnCalendar) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schedules",
+      "displayName": "Schedules",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of multiple structured OnCalendar definitions. Each list item becomes its own C(OnCalendar=) entry.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scope",
+      "displayName": "Scope",
+      "type": "string",
+      "required": false,
+      "default": "system",
+      "description": "Defines whether a system-wide or a per-user timer unit is managed. C(system) writes the unit into the system manager directory (see I(path)). C(user) writes the unit into the C(.config/systemd/user) directory of the user given in I(user), owned by that user.",
+      "choices": [
+        "system",
+        "user"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the timer unit file should be present.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timer",
+      "displayName": "Timer",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options for the [Timer] section as a key/value mapping. If C(OnCalendar) is set here, it overrides schedule/schedules.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timer_validation",
+      "displayName": "Timer Validation",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether timespan-like [Timer] options are validated via C(systemd-analyze timespan). When C(false), timespans are only checked for being non-empty.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unit",
+      "displayName": "Unit",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options for the [Unit] section as a key/value mapping. Values can be scalars or lists; booleans are converted to C(true)/C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Target user when I(scope=user). The .timer file is written to C(~<user>/.config/systemd/user/<name>.timer) and the file (including any directories created below the user's home) is owned by this user. Required when I(scope=user), ignored when I(scope=system).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

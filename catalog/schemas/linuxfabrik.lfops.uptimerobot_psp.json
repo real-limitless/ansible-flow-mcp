@@ -1,0 +1,140 @@
+{
+  "fqcn": "linuxfabrik.lfops.uptimerobot_psp",
+  "shortDescription": "Create, update or delete an UptimeRobot Public Status Page",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/linuxfabrik/lfops/uptimerobot_psp_module.html",
+  "options": [
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "UptimeRobot API key. See C(uptimerobot_monitor) for the resolution order.",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_file",
+      "displayName": "Api Key File",
+      "type": "string",
+      "required": false,
+      "default": "~/.uptimerobot",
+      "description": "Path to a file whose first line is the UptimeRobot API key. Tilde-expanded.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_domain",
+      "displayName": "Custom Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Custom domain to host the status page under (e.g. C(status.example.com)). Mutually exclusive with I(custom_url).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_url",
+      "displayName": "Custom Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Backward-compatible alias for I(custom_domain) - this is also the field name UptimeRobot uses on the read side. Mutually exclusive with I(custom_domain).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "friendly_name",
+      "displayName": "Friendly Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Display name of the status page. Used as the idempotency key, so it must be unique on the account.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hide_url_links",
+      "displayName": "Hide Url Links",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When C(true), the rendered page does not show the underlying monitor URLs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitors",
+      "displayName": "Monitors",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Monitors to display on the status page. Each item references an existing monitor. When an item has I(id), it is used directly. Otherwise I(friendly_name) is resolved against C(getMonitors); an unknown name fails the play.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password to protect the status page. UptimeRobot never returns the stored value, so re-running the task with I(password) set always reports C(changed=true). Omit to keep the previous password.",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "sort",
+      "displayName": "Sort",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sort order of the monitors on the page.",
+      "choices": [
+        "a-z",
+        "down-up-paused",
+        "up-down-paused",
+        "z-a"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "C(present) creates the PSP when missing, or updates it in place when present. C(absent) deletes it; when the PSP does not exist, the module exits with C(changed=false).",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(active) un-pauses the page, C(paused) pauses it. Only honoured on edit; UptimeRobot rejects this field on create.",
+      "choices": [
+        "active",
+        "paused"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

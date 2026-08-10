@@ -1,0 +1,71 @@
+{
+  "fqcn": "ansible.yang.get",
+  "shortDescription": "Fetch the device configuration and render it in JSON format defined by RFC7951",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/yang/get_module.html",
+  "options": [
+    {
+      "name": "file",
+      "displayName": "File",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "The file path of the YANG model that corresponds to the configuration fetch from the remote host. This options accepts wildcard (*) as well for the filename in case the configuration requires to parse multiple yang file. For example \"openconfig/public/tree/master/release/models/interfaces/*.yang\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filter",
+      "displayName": "Filter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This argument specifies the XML string which acts as a filter to restrict the portions of the data to be are retrieved from the remote device. If this option is not specified entire configuration or state data is returned in result depending on the value of C(source) option. The C(filter) value can be either XML string or XPath, if the filter is in XPath format the NETCONF server running on remote host should support xpath capability else it will result in an error.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lock",
+      "displayName": "Lock",
+      "type": "string",
+      "required": false,
+      "default": "never",
+      "description": "Instructs the module to explicitly lock the datastore specified as C(source). If no I(source) is defined, the I(running) datastore will be locked. By setting the option value I(always) is will explicitly lock the datastore mentioned in C(source) option. By setting the option value I(never) it will not lock the C(source) datastore. The value I(if-supported) allows better interworking with NETCONF servers, which do not support the (un)lock operation for all supported datastores.",
+      "choices": [
+        "never",
+        "always",
+        "if-supported"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search_path",
+      "displayName": "Search Path",
+      "type": "string",
+      "required": false,
+      "default": "~/.ansible/yang/spec",
+      "description": "is a colon C(:) separated list of directories to search for imported yang modules in the yang file mentioned in C(path) option. If the value is not given it will search in the default directory path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This argument specifies the datastore from which configuration data should be fetched. Valid values are I(running), I(candidate) and I(startup). If the C(source) value is not set both configuration and state information are returned in response from running datastore.",
+      "choices": [
+        "running",
+        "candidate",
+        "startup"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

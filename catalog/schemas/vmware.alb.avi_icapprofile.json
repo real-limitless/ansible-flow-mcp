@@ -1,0 +1,382 @@
+{
+  "fqcn": "vmware.alb.avi_icapprofile",
+  "shortDescription": "Module for setup of IcapProfile Avi RESTful Object",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/alb/avi_icapprofile_module.html",
+  "options": [
+    {
+      "name": "allow_204",
+      "displayName": "Allow 204",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allow icap server to send 204 response as described in rfc 3507 section 4.5. Service engine will buffer the complete request if alllow_204 is enabled. If disabled, preview_size request body will be buffered if enable_preview is set to true, and rest of the request body will be streamed to the icap server. Field introduced in 20.1.3. Allowed with any value in enterprise, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as T",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_context",
+      "displayName": "Api Context",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Avi API context that includes current session ID and CSRF Token. This allows user to perform single login and re-use the session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_version",
+      "displayName": "Api Version",
+      "type": "string",
+      "required": false,
+      "default": "20.1.7",
+      "description": "Avi API version of to use for Avi API and objects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_api_patch_op",
+      "displayName": "Avi Api Patch Op",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch operation to use when using avi_api_update_method as patch.",
+      "choices": [
+        "add",
+        "replace",
+        "delete",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_api_update_method",
+      "displayName": "Avi Api Update Method",
+      "type": "string",
+      "required": false,
+      "default": "put",
+      "description": "Default method for object update is HTTP PUT. Setting to patch will override that behavior to use HTTP PATCH.",
+      "choices": [
+        "put",
+        "patch"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_credentials",
+      "displayName": "Avi Credentials",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_deactivate_session_cache_as_fact",
+      "displayName": "Avi Deactivate Session Cache As Fact",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "It disables avi session information to be cached as a fact.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_patch_path",
+      "displayName": "Avi Patch Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch path to use when using avi_api_update_method as patch.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_patch_value",
+      "displayName": "Avi Patch Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch value to use when using avi_api_update_method as patch.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "buffer_size",
+      "displayName": "Buffer Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The maximum buffer size for the http request body. If the request body exceeds this size, the request will not be checked by the icap server. In this case, the configured action will be executed and a significant log entry will be generated. Allowed values are 1-51200. Field introduced in 20.1.1. Unit is kb. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 51200.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "buffer_size_exceed_action",
+      "displayName": "Buffer Size Exceed Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Decide what should happen if the request body size exceeds the configured buffer size. If this is set to fail open, the request will not be checked by the icap server. If this is set to fail closed, the request will be rejected with 413 status code. Enum options - ICAP_FAIL_OPEN, ICAP_FAIL_CLOSED. Field introduced in 20.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Cont",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud_ref",
+      "displayName": "Cloud Ref",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The cloud where this object belongs to. This must match the cloud referenced in the pool group below. It is a reference to an object of type cloud. Field introduced in 20.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configpb_attributes",
+      "displayName": "Configpb Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Protobuf versioning for config pbs. Field introduced in 21.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller",
+      "displayName": "Controller",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "IP address or hostname of the controller. The default value is the environment variable C(AVI_CONTROLLER).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A description for this icap profile. Field introduced in 20.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_preview",
+      "displayName": "Enable Preview",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use the icap preview feature as described in rfc 3507 section 4.5. Field introduced in 20.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as True.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fail_action",
+      "displayName": "Fail Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Decide what should happen if there is a problem with the icap server like communication timeout, protocol error, pool error, etc. If the icap server responds with 4xx-5xx error code the configured fail action is performed. If this is set to fail open, the request will continue, but will create a significant log entry. If this is set to fail closed, the request will be rejected with a 500 status code. Enum options - ICAP_FAIL_OPEN, ICAP_FAIL_CLOSED. Field introduced in 20.1.1. Allowed with any va",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the icap profile. Field introduced in 20.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nsx_defender_config",
+      "displayName": "Nsx Defender Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Nsxdefender specific icap configurations. Field introduced in 21.1.1. Allowed with any value in enterprise, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Password of Avi user in Avi controller. The default value is the environment variable C(AVI_PASSWORD).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool_group_ref",
+      "displayName": "Pool Group Ref",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The pool group which is used to connect to icap servers. It is a reference to an object of type poolgroup. Field introduced in 20.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preview_size",
+      "displayName": "Preview Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The icap preview size as described in rfc 3507 section 4.5. This should not exceed the size supported by the icap server. If this is set to 0, only the http header will be sent to the icap server as a preview. To disable preview completely, set the enable-preview option to false.if vendor is lastline, recommended preview size is 1000 bytes,minimum preview size is 10 bytes. Allowed values are 0-5000. Field introduced in 20.1.1. Unit is bytes. Allowed with any value in enterprise, essentials, basi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "response_timeout",
+      "displayName": "Response Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum time, clients request will be paused for icap processing. If this timeout is exceeded, the request to the icap server will be aborted and the configured fail action is executed. Allowed values are 50-3600000. Field introduced in 20.1.1. Unit is milliseconds. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 60000.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_uri",
+      "displayName": "Service Uri",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The path and query component of the icap url. Host name and port will be taken from the pool. Field introduced in 20.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "slow_response_warning_threshold",
+      "displayName": "Slow Response Warning Threshold",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "If the icap request takes longer than this value, this request will generate a significant log entry. Allowed values are 50-3600000. Field introduced in 20.1.1. Unit is milliseconds. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 10000.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state that should be applied on the entity.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant",
+      "displayName": "Tenant",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Name of tenant used for all Avi API calls and context of object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_ref",
+      "displayName": "Tenant Ref",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Tenant which this object belongs to. It is a reference to an object of type tenant. Field introduced in 20.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_uuid",
+      "displayName": "Tenant Uuid",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "UUID of tenant used for all Avi API calls and context of object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Avi controller URL of the object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Username used for accessing Avi controller. The default value is the environment variable C(AVI_USERNAME).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Uuid of the icap profile. Field introduced in 20.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vendor",
+      "displayName": "Vendor",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The vendor of the icap server. Enum options - ICAP_VENDOR_GENERIC, ICAP_VENDOR_OPSWAT, ICAP_VENDOR_LASTLINE. Field introduced in 20.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as ICAP_VENDOR_OPSWAT.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

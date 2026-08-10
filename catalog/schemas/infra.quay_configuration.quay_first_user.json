@@ -1,0 +1,85 @@
+{
+  "fqcn": "infra.quay_configuration.quay_first_user",
+  "shortDescription": "Create the first user account",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/infra/quay_configuration/quay_first_user_module.html",
+  "options": [
+    {
+      "name": "create_token",
+      "displayName": "Create Token",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If V(true), then an OAuth access token is created and returned. You can use that returned token with the other Quay modules, by setting it in the C(quay_token) parameter. The token is valid for 2 hours 30 minutes. If V(false), then no access token is created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "email",
+      "displayName": "Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User's email address. If your Quay administrator has enabled the mailing capability of your Quay installation (C(FEATURE_MAILING) to C(true) in C(config.yaml)), then this O(email) parameter is mandatory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "User's password as a clear string. The password must be at least eight characters long and must not contain white spaces.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_host",
+      "displayName": "Quay Host",
+      "type": "string",
+      "required": false,
+      "default": "http://127.0.0.1",
+      "description": "URL for accessing the API. U(https://quay.example.com:8443) for example. If you do not set the parameter, then the module uses the E(QUAY_HOST) environment variable. If you do no set the environment variable either, then the module uses the U(http://127.0.0.1) URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10.0,
+      "description": "Number of seconds to wait for Quay to send data before giving up. If you do not set the parameter, then the module tries the E(QUAY_TIMEOUT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the user account to create. You probably want that user account to have superuser permissions so that you can use the returned token to create additional objects. To do so, add the account name to the C(SUPER_USERS) section in the C(config.yaml) file before using the M(infra.quay_configuration.quay_first_user) module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to allow insecure connections to the API. If V(false), then the module does not validate SSL certificates. If you do not set the parameter, then the module tries the E(QUAY_VERIFY_SSL) environment variable (V(yes), V(1), and V(True) mean true, and V(no), V(0), V(False), and no value mean false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

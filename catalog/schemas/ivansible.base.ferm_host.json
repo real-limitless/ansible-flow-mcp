@@ -1,0 +1,141 @@
+{
+  "fqcn": "ivansible.base.ferm_host",
+  "shortDescription": "Manage ferm host rules",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ivansible/base/ferm_host_module.html",
+  "options": [
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Backup changed configurations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host comment (optional).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ferm_dir",
+      "displayName": "Ferm Dir",
+      "type": "string",
+      "required": false,
+      "default": "/etc/ferm",
+      "description": "Ferm configuration directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "List of host/net descriptors, where each item is either IPv4/IPv6 address or a DNS hostname, optionally followed by C(/) and C(prefixlen) (overrides the C(prefixlen) parameter), then optionally followed by C(/) and C(proto) (overrides the C(proto) parameter). Descriptors can override C(comment) by adding C(;) and custom comment. Descriptors prepended by C(-) will be removed (overrides C(state)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefixlen",
+      "displayName": "Prefixlen",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "CIDR subnet prefix length to apply to the host address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proto",
+      "displayName": "Proto",
+      "type": "string",
+      "required": false,
+      "default": "any",
+      "description": "Limits DNS search in case of symbolic hostname; Ignored in case of IPv4 or IPv6 address.",
+      "choices": [
+        "any",
+        "ipv4",
+        "ipv6"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reload",
+      "displayName": "Reload",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Reload firewall rules in case of changes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "solo_comment",
+      "displayName": "Solo Comment",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If this is I(true) and C(state) is I(present), then adding an item will remove other items with the same comment. This has no effect if C(state) is I(absent) or C(comment) is empty.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "solo_zone",
+      "displayName": "Solo Zone",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If this is I(true) and C(state) is I(present), then adding item to a zone will remove it from other zones. This has no effect if item C(state) is I(absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the rule should be added or removed.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone",
+      "displayName": "Zone",
+      "type": "string",
+      "required": false,
+      "default": "external",
+      "description": "C(internal) add host to the internal list; C(media) add host to the media list; C(nat) perform nat for this host; C(blocked) blocks the host.",
+      "choices": [
+        "internal",
+        "blocked",
+        "nat",
+        "media"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

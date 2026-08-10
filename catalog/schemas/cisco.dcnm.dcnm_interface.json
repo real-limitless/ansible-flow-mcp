@@ -1,0 +1,90 @@
+{
+  "fqcn": "cisco.dcnm.dcnm_interface",
+  "shortDescription": "DCNM Ansible Module for managing interfaces.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/dcnm/dcnm_interface_module.html",
+  "options": [
+    {
+      "name": "check_deploy",
+      "displayName": "Check Deploy",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Deploy operations may take considerable time in certain cases based on the configuration included in the playbook. A success response from DCNM server does not guarantee the completion of deploy operation. This flag if set indicates that the module should verify if the configured state is in sync with what is requested in playbook. If not set the module will return without verifying the state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config",
+      "displayName": "Config",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A dictionary of interface operations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deploy",
+      "displayName": "Deploy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Flag indicating if the configuration must be pushed to the switch. This flag is used to decide the deploy behavior in 'deleted' and 'overridden' states as mentioned below In 'overridden' state this flag will be used to deploy deleted interfaces. In 'deleted' state this flag will be used to deploy deleted interfaces when a specific 'config' block is not included. The 'deploy' flags included with individual interface configuration elements under the 'config' block will take precedence over this gl",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fabric",
+      "displayName": "Fabric",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the target fabric for interface operations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "override_intf_types",
+      "displayName": "Override Intf Types",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of interface types which will be deleted/defaulted in overridden/deleted state. If this list is empty, then during overridden/deleted state, all interface types will be defaulted/deleted. If this list includes specific interface types, then only those interface types that are included in the list will be deleted/defaulted.",
+      "choices": [
+        "pc",
+        "vpc",
+        "sub_int",
+        "lo",
+        "eth",
+        "svi",
+        "st_fex",
+        "aa_fex",
+        "breakout"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "merged",
+      "description": "The required state of the configuration after module completion.",
+      "choices": [
+        "merged",
+        "replaced",
+        "overridden",
+        "deleted",
+        "query"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

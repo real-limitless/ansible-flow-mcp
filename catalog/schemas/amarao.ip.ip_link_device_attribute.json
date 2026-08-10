@@ -1,0 +1,187 @@
+{
+  "fqcn": "amarao.ip.ip_link_device_attribute",
+  "shortDescription": "Set link-level properties for network interfaces for Linux",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/amarao/ip/ip_link_device_attribute_module.html",
+  "options": [
+    {
+      "name": "address",
+      "displayName": "Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The MAC address (L2 address) for the interface. Some interfaces can not have L2 address. Module will fail if address is specified for interface without L2 address support (for example 'type vcan').",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alias",
+      "displayName": "Alias",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set or change the alias for the interface. If no alias is specified, it does not change. Removing aliases from an interface is not currently supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "arp",
+      "displayName": "Arp",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable ARP on an interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "broadcast",
+      "displayName": "Broadcast",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The broadcast (L2) address for the interface. The usual value is 'ff:ff:ff:ff:ff:ff'. Some addresses have no broadcast support. Module will fail if broadcast is specified for interface without broadcast support (for example 'type vcan').",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set or change group id for ther interface. Interfaces in the same group can be addressed by I(group_id) parameter. Group is a number or a name from /etc/iproute2/groups. You can not change a group for a pre-existing group of interfaces (the I(group) and I(group_id) options are mutually exclusive).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_id",
+      "displayName": "Group Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Id of group of interfaces. Settings are applied for all interfaces in the group. Exactly one of I(name) or I(group_id) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "master",
+      "displayName": "Master",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify a device to become a master for this interface. Normally used to plug device into a bridge or a bond. Device become a slave of that device. Master should be a compound device. Cause 'not supported' error if target device can not be a master. If no master is specified, it does not change anything. To remove master use I(nomaster) option. If device is a slave of a different device (have other device as master) it changes master. Conflicts with I(nomaster) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mtu",
+      "displayName": "Mtu",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Set MTU value for interface. Default value is defined by the kernel and it is 1500. This is the L3 MTU (limit on size of IP packets).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "multicast",
+      "displayName": "Multicast",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable mutliscast for the interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the network device. Exactly one of I(name) or I(group_id) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace",
+      "displayName": "Namespace",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of namespace where interface is present. To modify the namespace use I(netns) options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "netns",
+      "displayName": "Netns",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the namespace for an interface. If both I(namespace) and I(netns) are set, the module will try to move interface from namespace I(namespace) into namespace I(netns). Note, when the interface changes namespace it loses many of its properties (group, state, etc). This option should not be mixed up with I(namespace).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nomaster",
+      "displayName": "Nomaster",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Remove device from been master for other compound device. Remove only if nomaster is set to True. If value is false, it's ignored. Conflicts with I(master) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "promisc",
+      "displayName": "Promisc",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable promiscuous mode for the interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Controls the state of interface. Up or down.",
+      "choices": [
+        "up",
+        "down"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "txqueuelen",
+      "displayName": "Txqueuelen",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Set transmit queue length of the interface. Default value for kernel is usually 1000.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

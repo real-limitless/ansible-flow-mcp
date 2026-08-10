@@ -1,0 +1,165 @@
+{
+  "fqcn": "scale_computing.hypercore.vm_params",
+  "shortDescription": "Manage VM's parameters",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/scale_computing/hypercore/vm_params_module.html",
+  "options": [
+    {
+      "name": "cluster_instance",
+      "displayName": "Cluster Instance",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Scale Computing HyperCore instance information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "VM's description.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_reboot",
+      "displayName": "Force Reboot",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Can VM be forced to power off and on. Only used when modifications to the VM require it to be powered off and VM does not respond to a shutdown request within I(shutdown_timeout) limit. Before this is utilized, a shutdown request is sent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "machine_type",
+      "displayName": "Machine Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Changes VM machine type. Before this is utilized, a shutdown request is sent. The UEFI machine types require NVRAM disk attached to VM.\nThe vTPM machine types require vTPM disk attached to VM.\nIf such disk is not present, module will reject machine type change and fail with error.\n",
+      "choices": [
+        "BIOS",
+        "UEFI",
+        "vTPM+UEFI",
+        "vTPM+UEFI-compatible"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "memory",
+      "displayName": "Memory",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Amount of memory reserved, in bytes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operating_system",
+      "displayName": "Operating System",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Operating system name. Used to select drivers package",
+      "choices": [
+        "os_windows_server_2012",
+        "os_other"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_state",
+      "displayName": "Power State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Desired VM state. States C(PAUSE) and C(LIVEMIGRATE) are not exposed in this module (this can be done with raw api module). Note that - I(shutdown) will trigger a graceful ACPI shutdown. - I(reboot) will trigger a graceful ACPI reboot. - I(stop) will trigger an abrupt shutdown (force power off). VM might loose data, and filesystem might be corrupted afterwards. - I(reset) will trigger an abrupt reset (force power reset). VM might loose data, and filesystem might be corrupted afterwards.",
+      "choices": [
+        "start",
+        "shutdown",
+        "stop",
+        "reboot",
+        "reset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shutdown_timeout",
+      "displayName": "Shutdown Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "How long does ansible controller wait for VMs response to a shutdown request. In seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_schedule",
+      "displayName": "Snapshot Schedule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of an existing snapshot_schedule to assign to VM. VM can have 0 or 1 snapshot schedules assigned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "User-modifiable words for organizing a group of VMs. Multiple tags should be provided as list. All existing tags will be overwritten, so group tag should always be included.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcpu",
+      "displayName": "Vcpu",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of allotted virtual CPUs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name",
+      "displayName": "Vm Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Virtual machine name. Used to identify selected virtual machine by name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name_new",
+      "displayName": "Vm Name New",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "VM's new name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

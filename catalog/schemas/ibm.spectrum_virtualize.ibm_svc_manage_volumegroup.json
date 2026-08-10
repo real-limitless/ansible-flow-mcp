@@ -1,0 +1,306 @@
+{
+  "fqcn": "ibm.spectrum_virtualize.ibm_svc_manage_volumegroup",
+  "shortDescription": "This module manages volume groups on IBM Spectrum Virtualize family storage systems",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/spectrum_virtualize/ibm_svc_manage_volumegroup_module.html",
+  "options": [
+    {
+      "name": "clustername",
+      "displayName": "Clustername",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or management IP of the Spectrum Virtualize storage system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Domain for the Spectrum Virtualize storage system. Valid when hostname is used for the parameter I(clustername).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fromsourcegroup",
+      "displayName": "Fromsourcegroup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the parent volume group of the snapshot. This is used to prepopulate the new volume in the new volume group. Valid during creation of host accessible volume group from an existing snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignoreuserfcmaps",
+      "displayName": "Ignoreuserfcmaps",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Allows user to create snapshots through the scheduler or manually with `addsnapshot`. This can only be used if a volume in the volume group is used as a source of a user legacy FlashCopy mapping. Valid during creation and update of a volume group. Supported from Spectrum Virtualize family storage systems 8.5.2.0 or later.",
+      "choices": [
+        "yes",
+        "no"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iogrp",
+      "displayName": "Iogrp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the I/O group for new volumes. Valid during creation of host accessible volume group from an existing snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_path",
+      "displayName": "Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path of debug log file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name for the volume group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "noownershipgroup",
+      "displayName": "Noownershipgroup",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If specified `True`, the object is removed from the ownership group to which it belongs. Parameters I(ownershipgroup) and I(noownershipgroup) are mutually exclusive. Applies when I(state=present) to modify an existing volume group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "noreplicationpolicy",
+      "displayName": "Noreplicationpolicy",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If specified `True`, removes the replication policy assigned to the volume group. Parameters I(replicationpolicy) and I(noreplicationpolicy) are mutually exclusive. Applies when I(state=present) to modify an existing volume group. Supported from Spectrum Virtualize family storage systems 8.5.2.1 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nosafeguardpolicy",
+      "displayName": "Nosafeguardpolicy",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If specified `True`, removes the Safeguarded policy assigned to the volume group. Parameters I(safeguardpolicyname) and I(nosafeguardpolicy) are mutually exclusive. Applies when I(state=present) to modify an existing volume group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nosnapshotpolicy",
+      "displayName": "Nosnapshotpolicy",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If specified `True`, removes the snapshot policy assigned to the volume group. Parameters I(snapshotpolicy) and I(nosnapshotpolicy) are mutually exclusive. Applies when I(state=present) to modify an existing volume group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownershipgroup",
+      "displayName": "Ownershipgroup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of the ownership group to which the object is being added. I(ownershipgroup) is mutually exclusive with parameters I(safeguardpolicyname) and I(noownershipgroup). Applies when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "REST API password for the Spectrum Virtualize storage system. The parameters I(username) and I(password) are required if not using I(token) to authenticate a user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policystarttime",
+      "displayName": "Policystarttime",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the time when the first Safeguarded backup is to be taken. This parameter can also be associated with snapshot policy. I(safeguardpolicyname) is required when using I(policystarttime). The accepted format is YYMMDDHHMM. Applies when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool",
+      "displayName": "Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the pool name where the target volumes are to be created. Valid during creation of host accessible volume group from an existing snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replicationpolicy",
+      "displayName": "Replicationpolicy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of the replication policy to be assigned to the volume group. Applies when I(state=present). Supported from Spectrum Virtualize family storage systems 8.5.2.1 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "safeguarded",
+      "displayName": "Safeguarded",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If specified, the snapshot policy creates safeguarded snapshots. Should be specified along with I(snapshotpolicy). Valid during creation and update of a volume group. Supported from Spectrum Virtualize family storage systems 8.5.2.0 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "safeguardpolicyname",
+      "displayName": "Safeguardpolicyname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the Safeguarded policy to be assigned to the volume group. I(safeguardpolicyname) is mutually exclusive with parameters I(nosafeguardpolicy) and I(ownershipgroup). Applies when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot",
+      "displayName": "Snapshot",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of the snapshot used to prepopulate the new volumes in the new volume group. Required when creating a host accessible volume group from an existing snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshotpolicy",
+      "displayName": "Snapshotpolicy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the snapshot policy to be assigned to the volume group. I(snapshotpolicy) is mutually exclusive with parameters I(nosnapshotpolicy) and I(ownershipgroup). Applies when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshotpolicysuspended",
+      "displayName": "Snapshotpolicysuspended",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether to suspend (C(yes)) or resume (C(no)) the snapshot policy on this volume group. Applies when I(state=present) to modify an existing volume group.",
+      "choices": [
+        "yes",
+        "no"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Creates or updates (C(present)) or removes (C(absent)) a volume group.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The authentication token to verify a user on the Spectrum Virtualize storage system. To generate a token, use the M(ibm.spectrum_virtualize.ibm_svc_auth) module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the type of volume group to be created from the snapshot. Valid during creation of host accessible volume group from an existing snapshot.",
+      "choices": [
+        "clone",
+        "thinclone"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "REST API username for the Spectrum Virtualize storage system. The parameters I(username) and I(password) are required if not using I(token) to authenticate a user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Validates certification.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,876 @@
+{
+  "fqcn": "jterpstra1.azinventory.azure_rm_virtualmachine",
+  "shortDescription": "Manage Azure virtual machines",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/jterpstra1/azinventory/azure_rm_virtualmachine_module.html",
+  "options": [
+    {
+      "name": "accept_terms",
+      "displayName": "Accept Terms",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Accept terms for Marketplace images that require it. Only Azure service admin/account admin users can purchase images from the Marketplace. Only valid when a I(plan) is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ad_user",
+      "displayName": "Ad User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Active Directory username. Use when authenticating with an Active Directory user rather than service principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "additional_capabilities",
+      "displayName": "Additional Capabilities",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables a capability on the virtual machine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "adfs_authority_url",
+      "displayName": "Adfs Authority Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure AD authority url. Use when authenticating with Username/password, and has your own ADFS authority.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "admin_password",
+      "displayName": "Admin Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the admin username. Not required if the I(os_type=Linux) and SSH password authentication is disabled by setting I(ssh_password_enabled=false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "admin_username",
+      "displayName": "Admin Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Admin username used to access the VM after it is created. Required when creating a VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allocated",
+      "displayName": "Allocated",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the VM is allocated or deallocated, only useful with I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_profile",
+      "displayName": "Api Profile",
+      "type": "string",
+      "required": false,
+      "default": "latest",
+      "description": "Selects an API profile to use when communicating with Azure services. Default value of C(latest) is appropriate for public clouds; future values will allow use with Azure Stack.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "append_tags",
+      "displayName": "Append Tags",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Use to control if tags field is canonical or just appends to existing tags. When canonical, any tags not found in the tags parameter will be removed from the object's metadata.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_source",
+      "displayName": "Auth Source",
+      "type": "string",
+      "required": false,
+      "default": "auto",
+      "description": "Controls the source of the credentials to use for authentication. Can also be set via the C(ANSIBLE_AZURE_AUTH_SOURCE) environment variable. When set to C(auto) (the default) the precedence is module parameters -> C(env) -> C(credential_file) -> C(cli). When set to C(env), the credentials will be read from the environment variables. When set to C(credential_file), it will read the profile from C(~/.azure/credentials). When set to C(cli), the credentials will be sources from the Azure CLI profile",
+      "choices": [
+        "auto",
+        "cli",
+        "credential_file",
+        "env",
+        "msi"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_set",
+      "displayName": "Availability Set",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name or ID of an existing availability set to add the VM to. The I(availability_set) should be in the same resource group as VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_diagnostics",
+      "displayName": "Boot Diagnostics",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Manage boot diagnostics settings for a VM. Boot diagnostics includes a serial console and remote console screenshots.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "capacity_reservation_group",
+      "displayName": "Capacity Reservation Group",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The name or ID of the capacity reservation group to be associated with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_validation_mode",
+      "displayName": "Cert Validation Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Controls the certificate validation behavior for Azure endpoints. By default, all modules will validate the server certificate, but when an HTTPS proxy is in use, or against Azure Stack, it may be necessary to disable this behavior by passing C(ignore). Can also be set via credential file profile or the C(AZURE_CERT_VALIDATION) environment variable.",
+      "choices": [
+        "ignore",
+        "validate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure client ID. Use when authenticating with a Service Principal or Managed Identity (msi). Can also be set via the C(AZURE_CLIENT_ID) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud_environment",
+      "displayName": "Cloud Environment",
+      "type": "string",
+      "required": false,
+      "default": "AzureCloud",
+      "description": "For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(AzureChinaCloud), C(AzureUSGovernment)), or a metadata discovery endpoint URL (required for Azure Stack). Can also be set via credential file profile or the C(AZURE_CLOUD_ENVIRONMENT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "created_nsg",
+      "displayName": "Created Nsg",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether network security group created and attached to network interface or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_data",
+      "displayName": "Custom Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Data made available to the VM and used by C(cloud-init). Only used on Linux images with C(cloud-init) enabled. Consult U(https://docs.microsoft.com/en-us/azure/virtual-machines/linux/using-cloud-init#cloud-init-overview) for cloud-init ready images. To enable cloud-init on a Linux image, follow U(https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cloudinit-prepare-custom-image).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_disks",
+      "displayName": "Data Disks",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Describes list of data disks. Use M(azure.azcollection.azure_rm_manageddisk) to manage the specific disk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_instance_discovery",
+      "displayName": "Disable Instance Discovery",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Determines whether or not instance discovery is performed when attempting to authenticate. Setting this to true will completely disable both instance discovery and authority validation. This functionality is intended for use in scenarios where the metadata endpoint cannot be reached such as in private clouds or Azure Stack. The process of instance discovery entails retrieving authority metadata from https://login.microsoft.com/ to validate the authority. By setting this to **True**, the validati",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ephemeral_os_disk",
+      "displayName": "Ephemeral Os Disk",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Parameters of ephemeral disk settings that can be specified for operating system disk. Ephemeral OS disk is only supported for VMS Instances using Managed Disk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "eviction_policy",
+      "displayName": "Eviction Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the eviction policy for the Azure Spot virtual machine. Requires priority to be set to Spot.",
+      "choices": [
+        "Deallocate",
+        "Delete"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use more force during stop of VM Set to C(true) with I(started=false) to stop the VM forcefully (hard poweroff -- skip_shutdown) Set to C(false) to power off gracefully",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "generalized",
+      "displayName": "Generalized",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the VM is generalized or not. Set to C(true) with I(state=present) to generalize the VM. Generalizing a VM is irreversible.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image",
+      "displayName": "Image",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The image used to build the VM. For custom images, the name of the image. To narrow the search to a specific resource group, a dict with the keys I(name) and I(resource_group). For community images, a dict with the keys I(community_gallery_image_id). Specified the community gallery image unique id for vm demployment. The I(community_gallery_image_id) can be fetched from shared gallery image GET call. For Marketplace images, a dict with the keys I(publisher), I(offer), I(sku), and I(version). Set",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "license_type",
+      "displayName": "License Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "On-premise license for the image or disk. Only used for images that contain the Windows Server operating system. To remove all license type settings, set to the string C(None).",
+      "choices": [
+        "Windows_Server",
+        "Windows_Client",
+        "RHEL_BYOS",
+        "SLES_BYOS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "linux_config",
+      "displayName": "Linux Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the Linux operating system settings on the virtual machine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location",
+      "displayName": "Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Valid Azure location for the VM. Defaults to location of the resource group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_mode",
+      "displayName": "Log Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parent argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_path",
+      "displayName": "Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Parent argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "managed_disk_type",
+      "displayName": "Managed Disk Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Managed OS disk type. Create OS disk with managed disk if defined. If not defined, the OS disk will be created with virtual hard disk (VHD).",
+      "choices": [
+        "Standard_LRS",
+        "StandardSSD_LRS",
+        "StandardSSD_ZRS",
+        "Premium_LRS",
+        "Premium_ZRS",
+        "UltraSSD_LRS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_price",
+      "displayName": "Max Price",
+      "type": "number",
+      "required": false,
+      "default": -1,
+      "description": "Specifies the maximum price you are willing to pay for a Azure Spot VM/VMSS. This price is in US Dollars. C(-1) indicates default price to be up-to on-demand. Requires priority to be set to Spot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_interface_names",
+      "displayName": "Network Interface Names",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Network interface names to add to the VM. Can be a string of name or resource ID of the network interface. Can be a dict containing I(resource_group) and I(name) of the network interface. If a network interface name is not provided when the VM is created, a default network interface will be created. To create a new network interface, at least one Virtual Network with one Subnet must exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oidc_token",
+      "displayName": "Oidc Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Direct OpenID Connect (OIDC) token (JWT) used for workload identity authentication. This token is exchanged with Azure AD using OIDC federated identity. Useful in CI systems (for example GitHub Actions, Azure DevOps) where an OIDC token is provided directly by the platform. Can also be set via the C(AZURE_FEDERATED_TOKEN) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oidc_token_file_path",
+      "displayName": "Oidc Token File Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file containing an OpenID Connect (OIDC) token (JWT) used for workload identity authentication. The file must contain only raw token. This method is commonly used in platforms that materialize OIDC tokens as files Can also be set via the C(AZURE_FEDERATED_TOKEN_FILE) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "open_ports",
+      "displayName": "Open Ports",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of ports to open in the security group for the VM, when a security group and network interface are created with a VM. For Linux hosts, defaults to allowing inbound TCP connections to port 22. For Windows hosts, defaults to opening ports 3389 and 5986.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os_disk_caching",
+      "displayName": "Os Disk Caching",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of OS disk caching.",
+      "choices": [
+        "None",
+        "ReadOnly",
+        "ReadWrite"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os_disk_encryption_set",
+      "displayName": "Os Disk Encryption Set",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of disk encryption set for OS disk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os_disk_name",
+      "displayName": "Os Disk Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OS disk name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os_disk_size_gb",
+      "displayName": "Os Disk Size Gb",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Size of OS disk in GB.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os_type",
+      "displayName": "Os Type",
+      "type": "string",
+      "required": false,
+      "default": "Linux",
+      "description": "Base type of operating system.",
+      "choices": [
+        "Windows",
+        "Linux"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Active Directory user password. Use when authenticating with an Active Directory user rather than service principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plan",
+      "displayName": "Plan",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Third-party billing plan for the VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Priority of the VM. C(None) is the equivalent of Regular VM.",
+      "choices": [
+        "None",
+        "Spot"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Security profile found in ~/.azure/credentials file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proximity_placement_group",
+      "displayName": "Proximity Placement Group",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The name or ID of the proximity placement group to be associated with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_ip_allocation_method",
+      "displayName": "Public Ip Allocation Method",
+      "type": "string",
+      "required": false,
+      "default": "Static",
+      "description": "Allocation method for the public IP of the VM. Used only if a network interface is not specified. When set to C(Dynamic), the public IP address may change any time the VM is rebooted or power cycled. The C(Disabled) choice was added in Ansible 2.6.",
+      "choices": [
+        "Dynamic",
+        "Static",
+        "Disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_on_absent",
+      "displayName": "Remove On Absent",
+      "type": "list",
+      "required": false,
+      "default": [
+        "all"
+      ],
+      "description": "Associated resources to remove when removing a VM using I(state=absent). To remove all resources related to the VM being removed, including auto-created resources, set to C(all). To remove only resources that were automatically created while provisioning the VM being removed, set to C(all_autocreated). To remove only specific resources, set to C(network_interfaces), C(virtual_storage) or C(public_ips). Any other input will be ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_group",
+      "displayName": "Resource Group",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the resource group containing the VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restarted",
+      "displayName": "Restarted",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set to C(true) with I(state=present) to restart a running VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret",
+      "displayName": "Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure client secret. Use when authenticating with a Service Principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_profile",
+      "displayName": "Security Profile",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the Security related profile settings for the virtual machine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "short_hostname",
+      "displayName": "Short Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name assigned internally to the host. On a Linux VM this is the name returned by the C(hostname) command. When creating a VM, short_hostname defaults to I(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_password_enabled",
+      "displayName": "Ssh Password Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to enable or disable SSH passwords. When I(os_type=Linux), set to C(false) to disable SSH password authentication and require use of SSH keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_public_keys",
+      "displayName": "Ssh Public Keys",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "For I(os_type=Linux) provide a list of SSH keys. Accepts a list of dicts where each dictionary contains two keys, I(path) and I(key_data). Set I(path) to the default location of the authorized_keys files. For example, I(path=/home/<admin username>/.ssh/authorized_keys). Set I(key_data) to the actual value of the public key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "started",
+      "displayName": "Started",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the VM is started or stopped. Set to C(true) with I(state=present) to start the VM. Set to C(false) to stop the VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the VM. Set to C(present) to create a VM with the configuration specified by other options, or to update the configuration of an existing VM. Set to C(absent) to remove a VM. Does not affect power state. Use I(started)/I(allocated)/I(restarted) parameters to change the power state of a VM.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_account_name",
+      "displayName": "Storage Account Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of a storage account that supports creation of VHD blobs. If not specified for a new VM, a new storage account named <vm name>01 will be created using storage type C(Standard_LRS).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_blob_name",
+      "displayName": "Storage Blob Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the storage blob used to hold the OS disk image of the VM. Must end with '.vhd'. If not specified, defaults to the VM name + '.vhd'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_container_name",
+      "displayName": "Storage Container Name",
+      "type": "string",
+      "required": false,
+      "default": "vhds",
+      "description": "Name of the container to use within the storage account to store VHD blobs. If not specified, a default container will be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subnet_name",
+      "displayName": "Subnet Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Subnet for the VM. Defaults to the first subnet found in the virtual network or the subnet of the I(network_interface_name), if provided. If the subnet is in another resource group, specify the resource group with I(virtual_network_resource_group).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subscription_id",
+      "displayName": "Subscription Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Your Azure subscription Id.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "swap_os_disk",
+      "displayName": "Swap Os Disk",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The swap OS disk parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary of string:string pairs to assign as metadata to the object. Metadata tags on the object will be updated with any provided values. To remove tags set append_tags option to false. Currently, Azure DNS zones and Traffic Manager services also don't allow the use of spaces in the tag. Azure Front Door doesn't support the use of Azure Automation and Azure CDN only support 15 tags on resources.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant",
+      "displayName": "Tenant",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Azure tenant ID. Use when authenticating with a Service Principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "thumbprint",
+      "displayName": "Thumbprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The thumbprint of the private key specified in I(x509_certificate_path). Use when authenticating with a Service Principal. Required if I(x509_certificate_path) is defined.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "virtual_network_name",
+      "displayName": "Virtual Network Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The virtual network to use when creating a VM. If not specified, a new network interface will be created and assigned to the first virtual network found in the resource group. Use with I(virtual_network_resource_group) to place the virtual network in another resource group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "virtual_network_resource_group",
+      "displayName": "Virtual Network Resource Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The resource group to use when creating a VM with another resource group's virtual network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_identity",
+      "displayName": "Vm Identity",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Identity for the VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_size",
+      "displayName": "Vm Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A valid Azure VM size value. For example, C(Standard_D4). Choices vary depending on the subscription and location. Check your subscription for available choices. Required when creating a VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "windows_config",
+      "displayName": "Windows Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies Windows operating system settings on the virtual machine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "winrm",
+      "displayName": "Winrm",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of Windows Remote Management configurations of the VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "x509_certificate_path",
+      "displayName": "X509 Certificate Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the X509 certificate used to create the service principal in PEM format. The certificate must be appended to the private key. Use when authenticating with a Service Principal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zones",
+      "displayName": "Zones",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of Availability Zones for your VM. A maximum of one zone can be configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

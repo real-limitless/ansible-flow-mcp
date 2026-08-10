@@ -1,0 +1,107 @@
+{
+  "fqcn": "arubanetworks.aoscx.aoscx_lag_interface",
+  "shortDescription": "Module for configuring LAG Interfaces in AOS-CX switches.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/arubanetworks/aoscx/aoscx_lag_interface_module.html",
+  "options": [
+    {
+      "name": "interfaces",
+      "displayName": "Interfaces",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of interfaces in the LAG. Each interface added to a LAG interface will inherit the LAG manager state of the LAG, wether it is \"up\" or \"down\".\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lacp_fallback",
+      "displayName": "Lacp Fallback",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable LACP fallback mode, specified only for multi-chassis LAG.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lacp_mode",
+      "displayName": "Lacp Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures Link Aggregation Control Procotol (LACP) mode on this interface, `active` ports are allowed to initiate LACP negotiations. `passive` ports can participate in LACP negotiations initiated by a remote switch, but not initiate such negotiations. If LACP is enabled on a port whose partner switch does not support LACP, the bond will be disabled. Defaults to disabled.\n",
+      "choices": [
+        "active",
+        "passive",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lacp_rate",
+      "displayName": "Lacp Rate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Configures Link Aggregation Control Protocol (LACP) rate on this Interface, by default LACP rate is `slow` and LAPCDUs will be sent every 30 seconds; if LACP rate is `fast` LACPDUs will be sent every second. This value can not be set if lacp mode is disabled.\n",
+      "choices": [
+        "slow",
+        "fast"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "multi_chassis",
+      "displayName": "Multi Chassis",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Option to specify whether the LAG is an MCLAG. This option is mutually exclusive with the `lacp_mode` option. As an MCLAG forces the lacp_mode to `active`.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "LAG Interface Name, the ID portion should be no lower than 1. Check your hardware specifications for its limitations. example: lag1, or lag256.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "create",
+      "description": "Create, Update or Delete the Interface. After that a physical interface is removed from a LAG, interface will be shutdown (admin state in down). LAG interface\n",
+      "choices": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "static_multi_chassis",
+      "displayName": "Static Multi Chassis",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the MCLAG is static. Ignored if `multi_chassis` is not specified.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

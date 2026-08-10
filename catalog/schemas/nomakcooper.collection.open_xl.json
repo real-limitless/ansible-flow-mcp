@@ -1,0 +1,101 @@
+{
+  "fqcn": "nomakcooper.collection.open_xl",
+  "shortDescription": "Read and update Excel (.xlsx) files using openpyxl",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/nomakcooper/collection/open_xl_module.html",
+  "options": [
+    {
+      "name": "cell_style",
+      "displayName": "Cell Style",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "A dictionary specifying optional style attributes for updated cells. Possible keys include: V(fontColor) - Hex RGB code for the font color. V(bgColor) - Hex RGB code for the cell background color. V(bold) - Boolean to set bold font. V(italic) - Boolean to set italic font. V(underline) - Boolean to set underline; if true, uses single underline.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Destination file path for updated Excel content. If omitted, defaults to appending V(_updated.xlsx) to the O(src) filename.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "index_by_name",
+      "displayName": "Index By Name",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "For read operations, if true, uses the first row as dictionary keys. Otherwise, keys are in the format V(col_<n>).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "op",
+      "displayName": "Op",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The operation to perform on the Excel file. Options: V(r) - Read-only. Returns the content from the specified sheet or all sheets. V(w) - Write. Overwrites specified cells with new values. V(a) - Append. Creates one new row at the end of the sheet, writing each item in O(updates_matrix) to that row. V(i) - Insert. Inserts a new row above the row specified in the first item of O(updates_matrix) and writes the updates.\n",
+      "choices": [
+        "r",
+        "w",
+        "a",
+        "i"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_range",
+      "displayName": "Read Range",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Dictionary specifying the cell range to read. Can include V(start_row), V(end_row), V(start_col), and V(end_col). If omitted or partially specified, defaults to the entire used range.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sheet_name",
+      "displayName": "Sheet Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the worksheet to operate on. For O(op=r), if omitted, all sheets are read. For O(op=w), O(op=a), or O(op=i), this parameter is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the source Excel file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "updates_matrix",
+      "displayName": "Updates Matrix",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of dictionaries describing the cells to update. Each dictionary can include: V(cell_row) - The row to update (ignored in append mode). V(cell_col) - The column to update. V(cell_value) - The value to write.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

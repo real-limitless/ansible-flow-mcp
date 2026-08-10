@@ -1,0 +1,204 @@
+{
+  "fqcn": "splunk.es.splunk_finding",
+  "shortDescription": "Manage Splunk Enterprise Security findings",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/splunk/es/splunk_finding_module.html",
+  "options": [
+    {
+      "name": "api_app",
+      "displayName": "Api App",
+      "type": "string",
+      "required": false,
+      "default": "SplunkEnterpriseSecuritySuite",
+      "description": "The app portion of the Splunk API path for the findings endpoint. Override this if your environment uses a different app name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_namespace",
+      "displayName": "Api Namespace",
+      "type": "string",
+      "required": false,
+      "default": "servicesNS",
+      "description": "The namespace portion of the Splunk API path. Override this if your environment uses a different namespace.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": "nobody",
+      "description": "The user portion of the Splunk API path. Override this if your environment requires a different user context.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the finding. Required when creating a new finding.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disposition",
+      "displayName": "Disposition",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Disposition of the finding. Can be updated on existing findings.",
+      "choices": [
+        "unassigned",
+        "true_positive",
+        "benign_positive",
+        "false_positive",
+        "false_positive_inaccurate_data",
+        "other",
+        "undetermined"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "entity",
+      "displayName": "Entity",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The risk object (entity) associated with the finding. Required when creating a new finding.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "entity_type",
+      "displayName": "Entity Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of the risk object (entity). Required when creating a new finding.",
+      "choices": [
+        "user",
+        "system"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fields",
+      "displayName": "Fields",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of custom fields to add to the finding. Only used when creating new findings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "finding_score",
+      "displayName": "Finding Score",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The risk score for the finding. Required when creating a new finding.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Owner of the finding. Use C(admin) for the administrator user. Use C(unassigned) to leave the finding unassigned. Can be updated on existing findings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ref_id",
+      "displayName": "Ref Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Reference ID (finding ID / event_id) of an existing finding. Format is typically C(uuid@@notable@@time{timestamp}) (e.g., C(2008e99d-af14-4fec-89da-b9b17a81820a@@notable@@time1768225865)). If provided, the module will verify the finding exists and update it. If not provided, a new finding is created. When updating, only C(owner), C(status), C(urgency), and C(disposition) can be modified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_domain",
+      "displayName": "Security Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Security domain for the finding. Required when creating a new finding.",
+      "choices": [
+        "access",
+        "endpoint",
+        "network",
+        "threat",
+        "identity",
+        "audit"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Status of the finding. Can be updated on existing findings.",
+      "choices": [
+        "unassigned",
+        "new",
+        "in_progress",
+        "pending",
+        "resolved",
+        "closed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "title",
+      "displayName": "Title",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Title of the finding. Required when creating a new finding (without C(ref_id)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "urgency",
+      "displayName": "Urgency",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Urgency level of the finding. Can be updated on existing findings.",
+      "choices": [
+        "informational",
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

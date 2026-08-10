@@ -1,0 +1,247 @@
+{
+  "fqcn": "dellemc.powerstore.smbshare",
+  "shortDescription": "Manage SMB shares on a PowerStore storage system",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/powerstore/smbshare_module.html",
+  "options": [
+    {
+      "name": "acl",
+      "displayName": "Acl",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "To specify the ACL access options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "array_ip",
+      "displayName": "Array Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the PowerStore management system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description for the SMB share. Optional parameter when creating a share. To modify, pass the new value in description field.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filesystem",
+      "displayName": "Filesystem",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID/Name of the File System. Either filesystem or snapshot is required for creation of the SMB share. If filesystem name is specified, then I(nas_server) is required to uniquely identify the filesystem. If filesystem parameter is provided, then snapshot cannot be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_abe_enabled",
+      "displayName": "Is Abe Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether Access-based Enumeration (ABE) for SMB share is enabled. During creation, if not mentioned, then the default is C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_branch_cache_enabled",
+      "displayName": "Is Branch Cache Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether Branch Cache optimization for SMB share is enabled. During creation, if not mentioned then default is C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_continuous_availability_enabled",
+      "displayName": "Is Continuous Availability Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether continuous availability for SMB 3.0 is enabled. During creation, if not mentioned, then the default is C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_encryption_enabled",
+      "displayName": "Is Encryption Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether encryption for SMB 3.0 is enabled at the shared folder level. During creation, if not mentioned then default is C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nas_server",
+      "displayName": "Nas Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID/Name of the NAS Server. It is not required if I(share_id) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "offline_availability",
+      "displayName": "Offline Availability",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines valid states of Offline Availability. C(MANUAL)- Only specified files will be available offline. C(DOCUMENTS)- All files that users open will be available offline. C(PROGRAMS)- Program will preferably run from the offline cache even when connected to the network. All files that users open will be available offline. C(NONE)- Prevents clients from storing documents and programs in offline cache.",
+      "choices": [
+        "MANUAL",
+        "DOCUMENTS",
+        "PROGRAMS",
+        "NONE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the PowerStore host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Local path to the file system/Snapshot or any existing sub-folder of the file system/Snapshot that is shared over the network. Path is relative to the base of the NAS server and must start with the name of the filesystem. Required for creation of the SMB share.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Port number for the PowerStore array. If not passed, it will take 443 as default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_id",
+      "displayName": "Share Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the SMB share. Should not be specified during creation. ID is auto generated. For all other operations either I(share_name) or I(share_id) is required. If I(share_id) is used then no need to pass I(nas_server)/I(filesystem)/I(snapshot)/ I(path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_name",
+      "displayName": "Share Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the SMB share. Required during creation of the SMB share. For all other operations either I(share_name) or I(share_id) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot",
+      "displayName": "Snapshot",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID/Name of the Snapshot. Either filesystem or snapshot is required for creation of the SMB share. If snapshot name is specified, then I(nas_server) is required to uniquely identify the snapshot. If snapshot parameter is provided, then filesystem cannot be specified. SMB share can be created only if access type of snapshot is \"protocol\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Define whether the SMB share should exist or not. Value C(present) indicates that the share should exist on the system. Value C(absent) indicates that the share should not exist on the system.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Time after which the connection will get terminated. It is to be mentioned in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "umask",
+      "displayName": "Umask",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The default UNIX umask for new files created on the SMB Share. During creation, if not mentioned, then the default is 022. For all other operations, the default is None.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the PowerStore host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean variable to specify whether to validate SSL certificate or not. C(true) - indicates that the SSL certificate should be verified. Set the environment variable REQUESTS_CA_BUNDLE to the path of the SSL certificate. C(false) - indicates that the SSL certificate should not be verified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

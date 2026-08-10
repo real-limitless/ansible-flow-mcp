@@ -1,0 +1,434 @@
+{
+  "fqcn": "pfrest.pfsense.services_freeradius_eap",
+  "shortDescription": "Manage FreeRADIUS EAP.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/pfrest/pfsense/services_freeradius_eap_module.html",
+  "options": [
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the pfSense device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An API key to use for authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": "pfsense",
+      "description": "The password to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_port",
+      "displayName": "Api Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_protocol",
+      "displayName": "Api Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The protocol to use when connecting to the pfSense API.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "The username to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cache_enable",
+      "displayName": "Cache Enable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables the EAP-TLS session resumption / fast reauthentication cache.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cache_lifetime",
+      "displayName": "Cache Lifetime",
+      "type": "number",
+      "required": false,
+      "default": 24,
+      "description": "Lifetime of cached entries (in hours).",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cache_max_entries",
+      "displayName": "Cache Max Entries",
+      "type": "number",
+      "required": false,
+      "default": 255,
+      "description": "The maximum number of entries in the EAP-TLS cache. Set to 0 for infinite.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cisco_accounting_username_bug",
+      "displayName": "Cisco Accounting Username Bug",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables the workaround for the CISCO AP1230B firmware 12.2(13)JA1 accounting username bug.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_eap_type",
+      "displayName": "Default Eap Type",
+      "type": "string",
+      "required": false,
+      "default": "md5",
+      "description": "The default EAP type invoked when an EAP-Identity response is received.",
+      "choices": [
+        "md5",
+        "gtc",
+        "leap",
+        "tls",
+        "ttls",
+        "peap",
+        "mschapv2"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_weak_eap_types",
+      "displayName": "Disable Weak Eap Types",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disables weak EAP types (MD5 and GTC). When enabled, only stronger EAP types like TLS, TTLS, PEAP, and MSCHAPv2 are allowed.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_unknown_eap_types",
+      "displayName": "Ignore Unknown Eap Types",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If enabled, unknown EAP types are ignored instead of rejected. A proxy module must be configured to forward such requests to another RADIUS server.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_sessions",
+      "displayName": "Max Sessions",
+      "type": "number",
+      "required": false,
+      "default": 4096,
+      "description": "Helps prevent DoS attacks by limiting the number of EAP sessions the server tracks.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ocsp_enable",
+      "displayName": "Ocsp Enable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables OCSP support for EAP-TLS client certificate verification.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ocsp_override_cert_url",
+      "displayName": "Ocsp Override Cert Url",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When enabled, the configured OCSP responder URL overrides the URL extracted from the client certificate.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ocsp_url",
+      "displayName": "Ocsp Url",
+      "type": "string",
+      "required": false,
+      "default": "http://127.0.0.1/ocsp/",
+      "description": "The OCSP responder URL used to verify EAP-TLS client certificates when OCSP is enabled.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peap_copy_request_to_tunnel",
+      "displayName": "Peap Copy Request To Tunnel",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When enabled, attributes available outside of the EAP-PEAP tunnel are copied into the tunneled authentication request.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peap_default_eap_type",
+      "displayName": "Peap Default Eap Type",
+      "type": "string",
+      "required": false,
+      "default": "mschapv2",
+      "description": "The default EAP type used inside the EAP-PEAP tunnel.",
+      "choices": [
+        "md5",
+        "gtc",
+        "otp",
+        "tls",
+        "mschapv2"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peap_soh_enable",
+      "displayName": "Peap Soh Enable",
+      "type": "string",
+      "required": false,
+      "default": "Disable",
+      "description": "Enable or disable Microsoft Statement of Health (SoH) support inside EAP-PEAP. The SoH site configuration must be edited at /usr/local/etc/raddb/sites-available/soh outside of this API.",
+      "choices": [
+        "Disable",
+        "Enable"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peap_use_tunneled_reply",
+      "displayName": "Peap Use Tunneled Reply",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When enabled, reply attributes from the tunneled authentication are returned to the NAS.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_ca_cert",
+      "displayName": "Ssl Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Certificate Authority (refid) used by the FreeRADIUS EAP module. Leave unset to have the FreeRADIUS package auto-generate a temporary CA on apply.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_ca_crl",
+      "displayName": "Ssl Ca Crl",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Certificate Revocation List (refid) checked when verifying EAP client certificates. Leave unset to disable CRL checking.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_server_cert",
+      "displayName": "Ssl Server Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The server Certificate (refid) presented by the FreeRADIUS EAP module. Leave unset to have the FreeRADIUS package auto-generate a temporary server certificate on apply.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timer_expire",
+      "displayName": "Timer Expire",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "The expiration time (in seconds) of the EAP-Response / EAP-Request correlation list.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_ca_subject",
+      "displayName": "Tls Ca Subject",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The expected CA subject string for issuer validation. Leave blank to use the subject of the configured SSL CA Certificate.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_check_cert_cn",
+      "displayName": "Tls Check Cert Cn",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When enabled, the Common Name of the client certificate must match the User-Name attribute.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_check_cert_issuer",
+      "displayName": "Tls Check Cert Issuer",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When enabled, the server/client certificate must match the configured CA issuer.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_fragment_size",
+      "displayName": "Tls Fragment Size",
+      "type": "number",
+      "required": false,
+      "default": 1024,
+      "description": "The EAP-TLS fragment size (in bytes). Cannot exceed 4096.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_include_length",
+      "displayName": "Tls Include Length",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When enabled, the total length of the EAP-TLS message is included in every packet, instead of only the first packet of a fragment series.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_min_version",
+      "displayName": "Tls Min Version",
+      "type": "string",
+      "required": false,
+      "default": "1.0",
+      "description": "The minimum TLS version that will be accepted for EAP-TLS-derived methods.",
+      "choices": [
+        "1.0",
+        "1.1",
+        "1.2"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttls_copy_request_to_tunnel",
+      "displayName": "Ttls Copy Request To Tunnel",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When enabled, attributes available outside of the EAP-TTLS tunnel are copied into the tunneled authentication request.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttls_default_eap_type",
+      "displayName": "Ttls Default Eap Type",
+      "type": "string",
+      "required": false,
+      "default": "md5",
+      "description": "The default EAP type used inside the EAP-TTLS tunnel.",
+      "choices": [
+        "md5",
+        "gtc",
+        "otp",
+        "tls",
+        "mschapv2"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttls_include_length",
+      "displayName": "Ttls Include Length",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When enabled, the total length of the EAP-TTLS message is included in every packet, instead of only the first packet of a fragment series.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttls_use_tunneled_reply",
+      "displayName": "Ttls Use Tunneled Reply",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When enabled, reply attributes from the tunneled authentication are returned to the NAS.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate SSL certificates when connecting to the API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

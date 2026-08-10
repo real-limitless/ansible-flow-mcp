@@ -1,0 +1,138 @@
+{
+  "fqcn": "ibm.power_ibmi.ibmi_fix_network_install_server",
+  "shortDescription": "Setup IBM i Network install server which contains image files of PTFs, PTF Group and Technology refresh.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_ibmi/ibmi_fix_network_install_server_module.html",
+  "options": [
+    {
+      "name": "become_user",
+      "displayName": "Become User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the user profile that the IBM i task will run under. Use this option to set a user with desired privileges to run the task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "become_user_password",
+      "displayName": "Become User Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use this option to set the password of the user specified in C(become_user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_name",
+      "displayName": "Device Name",
+      "type": "string",
+      "required": false,
+      "default": "REPOSVROPT",
+      "description": "The virtual optical device name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_catalog_directory_name",
+      "displayName": "Image Catalog Directory Name",
+      "type": "string",
+      "required": false,
+      "default": "/etc/ibmi_ansible/fix_management/network_install",
+      "description": "The image catalog directory on the IBM i Network install server. The path is an IFS directory format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_catalog_name",
+      "displayName": "Image Catalog Name",
+      "type": "string",
+      "required": false,
+      "default": "REPOSVRCLG",
+      "description": "The name of image catalog that is created on the server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "joblog",
+      "displayName": "Joblog",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "The job log of the job executing the task will be returned even rc is zero if it is set to True.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": "setup_only",
+      "description": "The operation on the Network install server, the options are as follows setup_only will only setup the network install server, including configuring a virtual optical device and image catalog. setup_and_addimgclge will setup the network install server and add image catalog entries for PTF image files. addimgclge_only will only add image catalog entries for PTF image files. rmvimgclge_only will only remove all the image catalog entries for PTF image files. rmvimgclge_and_addimgclge will first rem",
+      "choices": [
+        "setup_only",
+        "setup_and_addimgclge",
+        "addimgclge_only",
+        "rmvimgclge_only",
+        "rmvimgclge_and_addimgclge",
+        "uninstall",
+        "retrieve_image_catalog_entries",
+        "restart_NFS_server"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_image_files",
+      "displayName": "Remove Image Files",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the PTF image files under image catalog directory will be removed when removing entries from image catalog. Whether the PTF image files under image catalog directory will be removed when removing the network install server configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rollback",
+      "displayName": "Rollback",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether or not rollback if there's failure during the operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "virtual_image_name_list",
+      "displayName": "Virtual Image Name List",
+      "type": "list",
+      "required": false,
+      "default": "*ALL",
+      "description": "The name list of the PTF image file and its directory, for example, C(/tmp/5733WQXPTFs/SF99433_1.bin). You can specify all the PTF image files under one directory, for example, C(/tmp/PTFs/*ALL). bin and iso image files are supported. default is C(*ALL) for all the PTF image files under image catalog directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "virtual_image_name_remove_list",
+      "displayName": "Virtual Image Name Remove List",
+      "type": "list",
+      "required": false,
+      "default": "*ALL",
+      "description": "The name list of the PTF image file which will be moved from the image catalog, for example, C(SF99433_1.bin). default is C(*ALL) for all the PTF image files under the image caltalog.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

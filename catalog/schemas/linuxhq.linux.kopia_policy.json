@@ -1,0 +1,55 @@
+{
+  "fqcn": "linuxhq.linux.kopia_policy",
+  "shortDescription": "Manage a kopia snapshot policy",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/linuxhq/linux/kopia_policy_module.html",
+  "options": [
+    {
+      "name": "config_file",
+      "displayName": "Config File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the kopia configuration file describing the connection. Defaults to kopia's own configuration path when unset.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policy",
+      "displayName": "Policy",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Complete desired policy for the target, given as snake_case keys mirroring the JSON structure of C(kopia policy export), for example V(retention.keep_latest) or V(compression.compressor_name). Keys are converted to kopia's camelCase, so V(keep_latest) becomes C(keepLatest). Fields left out are removed from the defined policy and fall back to inherited values. Required when O(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "V(present) ensures the defined policy matches O(policy) exactly. V(absent) deletes the defined policy so the target only inherits.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Policy target, a directory path, C(user@host), C(user@host:/path), or V((global)) for the global policy. Use absolute paths, kopia canonicalizes them into the policy target.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

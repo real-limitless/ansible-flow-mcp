@@ -1,0 +1,279 @@
+{
+  "fqcn": "f5networks.f5_bigip.bigip_sslo_service_http",
+  "shortDescription": "Manage an SSL Orchestrator HTTP security device",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_bigip/bigip_sslo_service_http_module.html",
+  "options": [
+    {
+      "name": "auth_offload",
+      "displayName": "Auth Offload",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables authentication offload to the HTTP service. When creating an HTTP service, if the parameter is not provided a default of C(false) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_manage",
+      "displayName": "Auto Manage",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables Internal Service Addressing for HTTP-Proxy service. When creating an HTTP service, if the parameter is not provided a default of C(true) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "control_channels",
+      "displayName": "Control Channels",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "service control channel definition, enabling you to create service control channel pathways. service control channels allow device-initiated traffic to egress to the Internet. Control channels are introduced in SSL Orchestrator 11.1.x. please use this feature for SSL Orchestrator 11.1.x and later. When you deploy a service configuration with a service control channel, the required destination-side listener (a virtual server) is created, and it is auto-bound to the destination-side VLAN of the se",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "devices",
+      "displayName": "Devices",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Defines a list of service IP addresses and ports. Use IP only for transparent proxy, and IP and port for explicit proxy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "devices_from",
+      "displayName": "Devices From",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the set of network settings for traffic going to the BIG-IP from the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "devices_to",
+      "displayName": "Devices To",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies the set of network settings for traffic going to the service from the BIG-IP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dump_json",
+      "displayName": "Dump Json",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Sets the module to output a JSON blob for further consumption. When C(true), does not make any changes on the device and always returns C(changed=False). The output provided is idempotent in nature, meaning if there are no changes to be made during C(MODIFY) on an existing service, no JSON output is generated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_family",
+      "displayName": "Ip Family",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the IP family used for attached HTTP security devices. When creating an ICAP service, if the parameter is not provided a default of C(ipv4) is assumed.",
+      "choices": [
+        "ipv4",
+        "ipv6"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitor",
+      "displayName": "Monitor",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the monitor attached to the HTTP security device pool. The monitor must already exist on the BIG-IP. When creating an HTTP service, if the parameter is not provided a default of C(/Common/gateway_icmp) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the HTTP service object. The configuration auto-prepends C(ssloS_) to the object. Names should be less than 14 characters and not contain dashes C(-).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_remap",
+      "displayName": "Port Remap",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Defines the port to remap decrypted traffic to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_type",
+      "displayName": "Proxy Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the HTTP service as explicit or transparent. When creating an HTTP service, if the parameter is not provided a default of C(transparent) is assumed.",
+      "choices": [
+        "explicit",
+        "transparent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rules",
+      "displayName": "Rules",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Defines a list of iRules to attach to the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_down_action",
+      "displayName": "Service Down Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the action to take on monitor failure. Setting to C(ignore) bypasses the security device in the service chain. Setting to C(reset) or C(drop) resets or drops the connection, respectively if the service monitor fails. When creating an ICAP service, if the parameter is not provided a default value of C(ignore) is assumed.",
+      "choices": [
+        "ignore",
+        "reset",
+        "drop"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_entry_sslprofile",
+      "displayName": "Service Entry Sslprofile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the SSL profile used for the service entry. Introduced in SSL Orchestrator 11.1.x. Please use this feature for SSL Orchestrator 11.1.x and later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_return_sslprofile",
+      "displayName": "Service Return Sslprofile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the SSL profile used for the service return. Introduced in SSL Orchestrator 11.1.x. Please use this feature for SSL Orchestrator 11.1.x and later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snat",
+      "displayName": "Snat",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines if and how a SNAT configuration is deployed. When C(none) no SNAT configuration is performed. This is the default choice when creating HTTP service if the parameter is not provided. When C(automap), SNAT automap is configured. When C(snatpool), the SNAT configuration points to an existing SNAT Pool defined by the C(snatpool) parameter. When C(snatlist), a new SNAT Pool is created from the provided C(snatlist).",
+      "choices": [
+        "none",
+        "automap",
+        "snatpool",
+        "snatlist"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snat_list",
+      "displayName": "Snat List",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Defines a list of IP addresses to use in a SNAT pool configuration. This parameter required when C(snat) set to C(snatlist).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snat_pool",
+      "displayName": "Snat Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines an existing SNAT pool. This parameter is required when C(snat) set to C(snatpool).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(state) is C(present), ensures the object is created or modified. When C(state) is C(absent), ensures the service is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "The amount of time to wait for the C(CREATE) or C(MODIFY) task to complete, in seconds. The accepted value range is between C(10) and C(1800) seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_exist_selfip",
+      "displayName": "Use Exist Selfip",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables using Existing Self-IP addresses to be used for HTTP-Proxy service. When creating an HTTP service, if the parameter is not provided a default of C(false) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vendor_info",
+      "displayName": "Vendor Info",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the vendor-specific HTTP service used. The default is C(Generic HTTP Service).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

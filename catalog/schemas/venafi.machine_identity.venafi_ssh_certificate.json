@@ -1,0 +1,404 @@
+{
+  "fqcn": "venafi.machine_identity.venafi_ssh_certificate",
+  "shortDescription": "Requests and retrieves SSH certificates from Venafi platforms.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/venafi/machine_identity/venafi_ssh_certificate_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The oauth token to authenticate at Venafi TPP. Use it instead of user/password combination. Ignored for VaaS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cert_path",
+      "displayName": "Cert Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Remote absolute path where the generated certificate file should be created or is already located.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destination_addresses",
+      "displayName": "Destination Addresses",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The address (FQDN/hostname/IP/CIDR) of the destination host where the certificate will be used to authenticate to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extensions",
+      "displayName": "Extensions",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The requested certificate extensions. Example: \"Extensions\" : {\"permit-pty\": \"\", \"permit-port-forwarding\": \"\", \"login@github.com\": \"alice@github.com\"}",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder",
+      "displayName": "Folder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Domain Name of the policy folder where the certificate object will be created. If this is not specified, then the policy folder specified on the certificate template will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Execute the task regardless of changes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_command",
+      "displayName": "Force Command",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The requested force command. Example. \"ForceCommand\": \"/usr/scripts/db_backup.sh\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_id",
+      "displayName": "Key Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The identifier of the requested certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_name",
+      "displayName": "Object Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The friendly name for the certificate object. If I(object_name) is not specified, then I(key_id) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to authenticate at Venafi TPP. This option is deprecated. Use I(access_token) instead. Ignored for VaaS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "principals",
+      "displayName": "Principals",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The requested principals. If no value is specified, then the default principals from the certificate template will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_passphrase",
+      "displayName": "Private Key Passphrase",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The passphrase to encrypt the private key. Ignored when I(ssh_key_generation_type) is C(provided).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_path",
+      "displayName": "Private Key Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path where the private key is going to be stored in the remote host. Ignored when I(ssh_key_generation_type) is C(provided)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_key_path",
+      "displayName": "Public Key Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path where the public key is going to be stored in the remote host. If I(ssh_key_generation_type) is C(provided), this option indicates the path to the public key to load.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_addresses",
+      "displayName": "Source Addresses",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The requested source addresses as list of IP/CIDR. Example: [\"192.168.1.1/24\", \"10.0.0.1\"]",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_key_generation_type",
+      "displayName": "Ssh Key Generation Type",
+      "type": "string",
+      "required": false,
+      "default": "local",
+      "description": "The generation type of the SSH Key Pair. C(provided). The user provides a file path I(public_key_path) to load the public key data. C(local). The SSH Key Pair is generated by the vcert library. C(service). The SSH Key Pair is generated by the TPP server and returned in the response. SSH Key Pair are saved if I(public_key_path) and I(private_key_path) are defined.",
+      "choices": [
+        "local",
+        "service",
+        "provided"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_key_size",
+      "displayName": "Ssh Key Size",
+      "type": "number",
+      "required": false,
+      "default": 3072,
+      "description": "Size (in bits) of the SSH key to generate.",
+      "choices": [
+        2048,
+        3072,
+        4096
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Creates or deletes the resource, taking action if the resource's state is different from what is stated.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Domain Name of the issuing certificate template which will be used for signing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_mode",
+      "displayName": "Test Mode",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true) a Fake connection will be created. Use only for testing purposes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The api key to authenticate at VaaS platform. Required for VaaS. Ignored for Venafi TPP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "trust_bundle",
+      "displayName": "Trust Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "the path to a PEM file to be used as trust anchor when communicating with Venafi TPP. Ignored for VaaS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The url of the Venafi platform to connect to. B(Required) for Venafi TPP. Optional for VaaS. Only set the url when trying to reach a custom VaaS platform (dev, QA, staging, etc.).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to authenticate at Venafi TPP. This option is deprecated. Use I(access_token) instead. Ignored for VaaS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validity_period",
+      "displayName": "Validity Period",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "How much time the requester wants to have the certificate valid. The minimum is 1 second and the maximum is (at least) 20 years. The operation will not be rejected if the requested validity is bigger than the validity period set on the certificate template, but the certificate will be valid for the value set on the template. Accepted patterns are:\n    b(Relative time) b(s), b(m), b(h), b(d), and b(w). Example: b(1w 2d 3h 4m 50s).\n    b(Static end day) in format of b(yyyyMMdd) or b(yyyyMMddHHmmss",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "windows_cert",
+      "displayName": "Windows Cert",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "The flag indicates that the certificate is intended to be used in a Windows environment. Break Lines and Carriage Returns will be adjusted accordingly to work on Windows.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

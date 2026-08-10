@@ -1,0 +1,486 @@
+{
+  "fqcn": "pfrest.pfsense.firewall_traffic_shaper_limiter_queue",
+  "shortDescription": "Manage individual Traffic Shaper Limiter Queues.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/pfrest/pfsense/firewall_traffic_shaper_limiter_queue_module.html",
+  "options": [
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the pfSense device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An API key to use for authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": "pfsense",
+      "description": "The password to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_port",
+      "displayName": "Api Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_protocol",
+      "displayName": "Api Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The protocol to use when connecting to the pfSense API.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "The username to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "aqm",
+      "displayName": "Aqm",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Active Queue Management (AQM) algorithm to use for this queue. AQM is the intelligent drop of network packets inside the queue, when it becomes full or gets close to becoming full, with the goal of reducing network congestion.",
+      "choices": [
+        "droptail",
+        "codel",
+        "pie",
+        "red",
+        "gred"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "buckets",
+      "displayName": "Buckets",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The limiter queue's bucket size (slots).",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The verbose description for this limiter queue.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ecn",
+      "displayName": "Ecn",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable ECN. ECN sets a reserved TCP flag when the queue is nearing or exceeding capacity. Not all AQMs or schedulers support this.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables or disables this limiter queue.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lookup_fields",
+      "displayName": "Lookup Fields",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "The list of fields to use when looking up existing resources. This should be a list of field names that uniquely identify a resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mask",
+      "displayName": "Mask",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "If `source` or `destination` slots is chosen a dynamic pipe with the bandwidth, delay, packet loss and queue size given above will be created for each source/destination IP address encountered, respectively. This makes it possible to easily specify bandwidth limits per host or subnet.",
+      "choices": [
+        "none",
+        "srcaddress",
+        "dstaddress"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maskbits",
+      "displayName": "Maskbits",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The IPv4 mask bits to use when determine the scope of the dynamic pipe for IPv4 traffic.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maskbitsv6",
+      "displayName": "Maskbitsv6",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The IPv6 mask bits to use when determine the scope of the dynamic pipe for IPv4 traffic.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The unique name for this limiter queue.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_codel_interval",
+      "displayName": "Param Codel Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the CoDel interval parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_codel_target",
+      "displayName": "Param Codel Target",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the CoDel target parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_gred_max_p",
+      "displayName": "Param Gred Max P",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the GRED max_p parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_gred_max_th",
+      "displayName": "Param Gred Max Th",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the GRED max_th parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_gred_min_th",
+      "displayName": "Param Gred Min Th",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the GRED min_th parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_gred_w_q",
+      "displayName": "Param Gred W Q",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the GRED w_q parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_pie_alpha",
+      "displayName": "Param Pie Alpha",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the PIE alpha parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_pie_beta",
+      "displayName": "Param Pie Beta",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the PIE beta parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_pie_max_burst",
+      "displayName": "Param Pie Max Burst",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the PIE max_burst parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_pie_max_ecnth",
+      "displayName": "Param Pie Max Ecnth",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the PIE ecnth parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_pie_target",
+      "displayName": "Param Pie Target",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the PIE target parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_pie_tupdate",
+      "displayName": "Param Pie Tupdate",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the PIE tupdate parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_red_max_p",
+      "displayName": "Param Red Max P",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the RED max_p parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_red_max_th",
+      "displayName": "Param Red Max Th",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the RED max_th parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_red_min_th",
+      "displayName": "Param Red Min Th",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the RED min_th parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "param_red_w_q",
+      "displayName": "Param Red W Q",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The value for the RED w_q parameter.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent_lookup_query",
+      "displayName": "Parent Lookup Query",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "A dictionary of query parameters used to look up the parent Traffic Shaper Limiter. This should contain field name/value pairs that uniquely identify the parent object this resource is nested under.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pie_capdrop",
+      "displayName": "Pie Capdrop",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable cap drop adjustment.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pie_onoff",
+      "displayName": "Pie Onoff",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable turning PIE on and off depending on queue load.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pie_pderand",
+      "displayName": "Pie Pderand",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable drop probability de-randomisation.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pie_qdelay",
+      "displayName": "Pie Qdelay",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set queue delay type to timestamps (true) or departure rate estimation (false).",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plr",
+      "displayName": "Plr",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The amount of packet loss (in percentage) added to traffic passing through this limiter queue.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "qlimit",
+      "displayName": "Qlimit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The length of the limiter's queue which the scheduler and AQM are responsible for. Set to `null` to assume default.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the resource should be present or absent.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate SSL certificates when connecting to the API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "weight",
+      "displayName": "Weight",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The share of the parent limiter this queue gets.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

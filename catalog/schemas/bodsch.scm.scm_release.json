@@ -1,0 +1,177 @@
+{
+  "fqcn": "bodsch.scm.scm_release",
+  "shortDescription": "Resolve a release to a downloadable, verifiable artefact across SCM providers.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/bodsch/scm/scm_release_module.html",
+  "options": [
+    {
+      "name": "architecture",
+      "displayName": "Architecture",
+      "type": "string",
+      "required": false,
+      "default": "x86_64",
+      "description": "Target CPU architecture used to select the artefact. Synonyms are handled automatically (for example C(x86_64)/C(amd64)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "asset",
+      "displayName": "Asset",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Explicit artefact filename template overriding the heuristic. Placeholders: C({version}), C({tag}), C({system}) (lowercased), C({arch}) (raw architecture). Mutually exclusive with O(asset_regex).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "asset_regex",
+      "displayName": "Asset Regex",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Regular expression matched against asset names, overriding the heuristic. Mutually exclusive with O(asset).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cache",
+      "displayName": "Cache",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Validity of cached release metadata in minutes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_keywords",
+      "displayName": "Exclude Keywords",
+      "type": "list",
+      "required": false,
+      "default": [
+        "beta",
+        "rc",
+        "preview",
+        "alpha",
+        "nightly"
+      ],
+      "description": "Keywords excluded when resolving O(version=latest).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extensions",
+      "displayName": "Extensions",
+      "type": "list",
+      "required": false,
+      "default": [
+        ".tar.gz",
+        ".tgz",
+        ".tar.xz",
+        ".tar.bz2",
+        ".zip"
+      ],
+      "description": "Ordered archive extension preference used to disambiguate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Base URL of a self-hosted instance, for example V(https://git.example.org). Required for O(provider=forgejo). Ignored for O(provider=github).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional access token for the provider.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Project, owner or namespace that contains the repository.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "string",
+      "required": false,
+      "default": "github",
+      "description": "The SCM provider to query.",
+      "choices": [
+        "github",
+        "forgejo"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "repository",
+      "displayName": "Repository",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Repository name within the project.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system",
+      "displayName": "System",
+      "type": "string",
+      "required": false,
+      "default": "Linux",
+      "description": "Target operating system used to select the artefact.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional username (informational; authentication uses O(password)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Requested version. Use V(latest) or a concrete version with or without a leading C(v).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

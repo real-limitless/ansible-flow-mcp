@@ -1,0 +1,365 @@
+{
+  "fqcn": "cohesity.dataprotect.cohesity_restore_vm",
+  "shortDescription": "Restore one or more Virtual Machines from Cohesity Protection Jobs",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cohesity/dataprotect/cohesity_restore_vm_module.html",
+  "options": [
+    {
+      "name": "backup_id",
+      "displayName": "Backup Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Optional Cohesity ID to use as source for the Restore operation.  If not selected, the most recent RunId will be used",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_timestamp",
+      "displayName": "Backup Timestamp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Future option to identify backups based on a timestamp Currently not implemented.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP or FQDN for the Cohesity Cluster",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_compute_resource",
+      "displayName": "Cluster Compute Resource",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If the cluster compute resource is specified, VM will be recovered to resource pool under the specified compute resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cohesity_admin",
+      "displayName": "Cohesity Admin",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username with which Ansible will connect to the Cohesity Cluster. Domain Specific credentails can be configured in following formats AD.domain.com/username AD.domain.com/username@tenant LOCAL/username@tenant",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cohesity_password",
+      "displayName": "Cohesity Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password belonging to the selected Username.  This parameter will not be logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If multiple datastore exists, datacenter and cluster resource details are used to uniquely identify the resourcepool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datastore_folder_id",
+      "displayName": "Datastore Folder Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the folder where the restore datastore should be created. This is applicable only when the VMs are being cloned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datastore_id",
+      "displayName": "Datastore Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the datastore Id where the files should be recovered to. This field is required to recover objects to a different resource pool or to a different parent source. If not specified, objects are recovered to their original datastore locations in the parent source.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datastore_name",
+      "displayName": "Datastore Name",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Specifies the datastore where the files should be recovered to. This field is required to recover objects to a different resource pool or to a different parent source. If not specified, objects are recovered to their original datastore locations in the parent source.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the network endpoint of the Protection Source where it is reachable. It could be an URL or hostname or an IP address of the VMware Protection Source.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "environment",
+      "displayName": "Environment",
+      "type": "string",
+      "required": false,
+      "default": "VMware",
+      "description": "Specifies the environment type (such as VMware) of the Protection Source this Job is protecting. Supported environment types include 'VMware'",
+      "choices": [
+        "VMware"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface_group_name",
+      "displayName": "Interface Group Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the interface name to connect after restoring the VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_name",
+      "displayName": "Job Name",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Name of the Protection Job",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Descriptor to assign to the Recovery Job.  The Recovery Job name will consist of the job_name:name format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_connected",
+      "displayName": "Network Connected",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies whether the network should be left in disabled state. Attached network is enabled by default. Set this flag to true to disable it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_id",
+      "displayName": "Network Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies a network configuration to be attached to the cloned or recovered object. Specify this field to override the preserved network configuration or to attach a new network configuration to the cloned or recovered objects. You can get the networkId of the kNetwork object by setting includeNetworks to 'true' in the GET /public/protectionSources operation. In the response, get the id of the desired kNetwork object, the resource pool, and the registered parent Protection Source.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_name",
+      "displayName": "Network Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a network name to be attached to the cloned or recovered object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_state",
+      "displayName": "Power State",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies the power state of the cloned or recovered objects. By default, the cloned or recovered objects are powered off.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix",
+      "displayName": "Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a prefix to prepended to the source object name to derive a new name for the recovered or cloned object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recovery_process_type",
+      "displayName": "Recovery Process Type",
+      "type": "string",
+      "required": false,
+      "default": "InstantRecovery",
+      "description": "Specifies the recovery type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_pool_id",
+      "displayName": "Resource Pool Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the resource pool Id where the cloned or recovered objects are attached.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_pool_name",
+      "displayName": "Resource Pool Name",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Specifies the resource pool name where the cloned or recovered objects are attached.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restore_to_source",
+      "displayName": "Restore To Source",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Switch determines if VM is restored to original source.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Determines the state of the Recovery Job. (C)present a recovery job will be created and started. (C)absent is currently not implemented",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suffix",
+      "displayName": "Suffix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a suffix to appended to the original source object name to derive a new name for the recovered or cloned object",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Switch determines if SSL Validation should be enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_folder_id",
+      "displayName": "Vm Folder Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies a folder Id where the VMs should be restored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_folder_name",
+      "displayName": "Vm Folder Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a folder name where the VMs should be restored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_names",
+      "displayName": "Vm Names",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of Virtual Machines to restore",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_job",
+      "displayName": "Wait For Job",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Should wait until the Restore Job completes",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_minutes",
+      "displayName": "Wait Minutes",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "Number of minutes to wait until the job completes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

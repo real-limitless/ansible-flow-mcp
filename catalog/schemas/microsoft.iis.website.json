@@ -1,0 +1,90 @@
+{
+  "fqcn": "microsoft.iis.website",
+  "shortDescription": "Configures an IIS website",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/microsoft/iis/website_module.html",
+  "options": [
+    {
+      "name": "application_pool",
+      "displayName": "Application Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the application pool in which the website runs. The application pool must already exist - otherwise the website will not start.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bindings",
+      "displayName": "Bindings",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Specifies the website bindings to add, remove or set. The combination of C(ip:port:hostname) is the binding unique identifier. The binding C(ip:port) must be available and not used by any other website on the server. To clear all website bindings, use O(bindings.set) with an empty list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the website to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "physical_path",
+      "displayName": "Physical Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the physical folder path on the remote host to use for the website. When create a new website physical_path is required. The specified folder must already exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preload_enabled",
+      "displayName": "Preload Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether application preloading is enabled for the website. When V(true), IIS will automatically initialize the application when the application pool starts or when a configuration change is detected. This is useful for reducing the initial response time for the first request to the application. For this to work effectively, the associated application pool (see M(microsoft.iis.web_app_pool)) should have C(startMode=AlwaysRunning).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "site_id",
+      "displayName": "Site Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Explicitly set the IIS website numeric ID. Note that this value cannot be changed after the website has been created. The site ID must be available and not used by any other website on the server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "started",
+      "description": "State of the website. In order to start the website at least one binding should be configured.",
+      "choices": [
+        "absent",
+        "started",
+        "stopped",
+        "restarted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

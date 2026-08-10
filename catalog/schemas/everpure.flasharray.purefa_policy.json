@@ -1,0 +1,576 @@
+{
+  "fqcn": "everpure.flasharray.purefa_policy",
+  "shortDescription": "Manage FlashArray File System Policies",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/everpure/flasharray/purefa_policy_module.html",
+  "options": [
+    {
+      "name": "access_based_enumeration",
+      "displayName": "Access Based Enumeration",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Defines if access based enumeration for SMB is enabled",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "anongid",
+      "displayName": "Anongid",
+      "type": "string",
+      "required": false,
+      "default": "65534",
+      "description": "The ID to which any users whose GID is affected by I(access) of I(root-squash) or I(all-squash) will be mapped to. This is ignored when I(user_mapping) is enabled. Clear using \"\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "anonuid",
+      "displayName": "Anonuid",
+      "type": "string",
+      "required": false,
+      "default": "65534",
+      "description": "The ID to which any users whose UID is affected by I(access) of I(root-squash) or I(all-squash) will be mapped to. Clear using \"\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token",
+      "displayName": "Api Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FlashArray API token for admin privileged user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client",
+      "displayName": "Client",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies which SMB or NFS clients are given access Accepted notation, IP, IP mask, or hostname",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the API Client that issues the identity token. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Name of fleet member on which to perform the operation. This requires the array receiving the request is a member of a fleet and the context name to be a member of the same fleet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "continuous_availability",
+      "displayName": "Continuous Availability",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Defines if continuous availability on the policy. When continuous availability is enabled on a policy, file shares are accessible during otherwise disruptive scenarios such as temporary network outages, controller upgrades or failovers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directory",
+      "displayName": "Directory",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Directories to have the quota rule applied to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_warnings",
+      "displayName": "Disable Warnings",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disable insecure certificate warnings in debug logs",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Define if policy is enabled or not",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enforce_dictionary_check",
+      "displayName": "Enforce Dictionary Check",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If I(true), test password against dictionary of known leaked passwords. Only applies to passwords longer than 6 characters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enforce_username_check",
+      "displayName": "Enforce Username Check",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If I(true), the username cannot be a substring of the password. It only applies to usernames of 3 characters and longer",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fa_url",
+      "displayName": "Fa Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FlashArray management IPv4 address or Hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id_token",
+      "displayName": "Id Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A pre-signed JWT to authenticate with, as an alternative to I(api_token). The token is exchanged by the array for a short-lived access token. Requires a matching API Client to be registered on the array (see M(everpure.flasharray.purefa_apiclient)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_usage",
+      "displayName": "Ignore Usage",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Flag used to override checks for quota management operations. If set to true, directory usage is not checked against the quota_limits that are set. If set to false, the actual logical bytes in use are prevented from exceeding the limits set on the directory. Client operations might be impacted. If the limit exceeds the quota, the client operation is not allowed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "issuer",
+      "displayName": "Issuer",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The API Client's trusted identity issuer registered on the array. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_id",
+      "displayName": "Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Key ID of the API Client that issues the identity token. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lockout_duration",
+      "displayName": "Lockout Duration",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Account lockout duration, in seconds, after I(max_login_attempts) exceeded Range between 1 second and 90 days (7776000 seconds)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_login_attempts",
+      "displayName": "Max Login Attempts",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of failed logins before account is locked",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_password_age",
+      "displayName": "Max Password Age",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Maximum password age before a password must be changed. Value can be specified as a human-readable time period (e.g., C(90d), C(1w), C(24h)) or as an integer representing seconds. Supported time units are C(w) (weeks), C(d) (days), C(h) (hours), C(m) (minutes), C(s) (seconds). Range between 1 day and 99999 days. A value of 0 or C(0s) disables password expiration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_character_groups",
+      "displayName": "Min Character Groups",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The minimum number of character groups required to be present in a password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_characters_per_group",
+      "displayName": "Min Characters Per Group",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The minimum number of characters per group to count the group as present. Maximum is limited by the minimum password length divided by the number of character groups",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_password_age",
+      "displayName": "Min Password Age",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Minimum password age before a password can be changed. Value can be specified as a human-readable time period (e.g., C(1d), C(2h), C(30m), C(60s)) or as an integer representing seconds. Supported time units are C(w) (weeks), C(d) (days), C(h) (hours), C(m) (minutes), C(s) (seconds). Range between 0 seconds (no minimum) and 7 days. A value of 0 or C(0s) means passwords can be changed immediately.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_password_length",
+      "displayName": "Min Password Length",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Minimum user password length",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the policy",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nfs_access",
+      "displayName": "Nfs Access",
+      "type": "string",
+      "required": false,
+      "default": "no-root-squash",
+      "description": "Specifies access control for the export",
+      "choices": [
+        "root-squash",
+        "no-root-squash",
+        "all-squash"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nfs_permission",
+      "displayName": "Nfs Permission",
+      "type": "string",
+      "required": false,
+      "default": "rw",
+      "description": "Specifies which read-write client access permissions are allowed for the export",
+      "choices": [
+        "ro",
+        "rw"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nfs_version",
+      "displayName": "Nfs Version",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "NFS protocol version allowed for the export",
+      "choices": [
+        "nfsv3",
+        "nfsv4"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_history",
+      "displayName": "Password History",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of passwords tracked to prevent reuse of passwords. A value of 0 will not check password history",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policy",
+      "displayName": "Policy",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of policy to use",
+      "choices": [
+        "nfs",
+        "smb",
+        "snapshot",
+        "quota",
+        "autodir",
+        "password"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_file",
+      "displayName": "Private Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the PEM RSA private key used to sign an identity token, as an alternative to I(api_token). Requires I(client_id), I(key_id), I(issuer) and I(username).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_password",
+      "displayName": "Private Key Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password protecting I(private_key_file), if encrypted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quota_enforced",
+      "displayName": "Quota Enforced",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Defines if the directory quota is enforced.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quota_limit",
+      "displayName": "Quota Limit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Logical space limit of the share in M, G, T or P units. See examples. If size is not set at filesystem creation time the filesystem size becomes unlimited. This value cannot be set to 0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quota_notifications",
+      "displayName": "Quota Notifications",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Targets to notify when usage approaches the quota limit. The list of notification targets is a comma-separated string If not specified, notification targets are not assigned.",
+      "choices": [
+        "user",
+        "group",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rename",
+      "displayName": "Rename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "New name of policy",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rule_name",
+      "displayName": "Rule Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of rule to update for a quota policy",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security",
+      "displayName": "Security",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The security flavors to use for accessing files on a mount point. If the server does not support the requested flavor, the mount operation fails. This operation updates all rules of the specified policy.",
+      "choices": [
+        "auth_sys",
+        "krb5",
+        "krb5i",
+        "krb5p"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smb_anon_allowed",
+      "displayName": "Smb Anon Allowed",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies whether access to information is allowed for anonymous users",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smb_encrypt",
+      "displayName": "Smb Encrypt",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies whether the remote client is required to use SMB encryption",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snap_at",
+      "displayName": "Snap At",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the number of hours since midnight at which to take a snapshot or the hour including AM/PM Can only be set on the rule with the smallest I(snap_every) value. Cannot be set if the I(snap_every) value is not measured in days. Can only be set for at most one rule in the same policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snap_client_name",
+      "displayName": "Snap Client Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The customizable portion of the client visible snapshot name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snap_every",
+      "displayName": "Snap Every",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the interval between snapshots, in minutes. The value for all rules must be multiples of one another. Must be unique for each rule in the same policy. Value must be between 5 and 525600.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snap_keep_for",
+      "displayName": "Snap Keep For",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the period that snapshots are retained before they are eradicated, in minutes. Cannot be less than the I(snap_every) value of the rule. Value must be unique for each rule in the same policy. Value must be between 5 and 525600.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snap_suffix",
+      "displayName": "Snap Suffix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The snapshot suffix name The suffix value can only be set for one rule in the same policy The suffix value can only be set on a rule with the same ``keep_for`` value and ``every`` value The suffix value can only be set on the rule with the largest ``keep_for`` value If not specified, defaults to a monotonically increasing number generated by the system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Define whether the policy should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_mapping",
+      "displayName": "User Mapping",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Defines if user mapping is enabled",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username the issued token should be granted to. Must be a valid user on the array. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

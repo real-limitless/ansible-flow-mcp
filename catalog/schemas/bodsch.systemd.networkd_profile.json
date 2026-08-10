@@ -1,0 +1,92 @@
+{
+  "fqcn": "bodsch.systemd.networkd_profile",
+  "shortDescription": "Creates a systemd-networkd profile file (.link / .netdev / .network).",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/bodsch/systemd/networkd_profile_module.html",
+  "options": [
+    {
+      "name": "config",
+      "displayName": "Config",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "The profile configuration. Top-level keys are section names (C(Match), C(Network), C(NetDev) ...) and are written verbatim - casing matters. Values may be scalars (string, int, bool) or lists of scalars. List values are expanded to repeated C(Key=Value) lines as required by systemd-networkd (e.g. multiple C(DNS) entries). Booleans are rendered lower-case (C(true)/C(false)). C(None)/null values are skipped, allowing optional placeholders.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Free-form header placed at the top of the file. Lines without a leading C(#) are auto-prefixed so the result is always a valid comment block.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directory",
+      "displayName": "Directory",
+      "type": "string",
+      "required": false,
+      "default": "/etc/systemd/network",
+      "description": "Target directory where profile files are written.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": "0644",
+      "description": "File mode of the resulting profile (octal string).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Base name of the profile file (without extension). Must not contain path separators.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile_type",
+      "displayName": "Profile Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Type of profile. Selects the file extension appended to C(name).",
+      "choices": [
+        "link",
+        "netdev",
+        "network"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the profile should exist (C(present)) or not (C(absent)).",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

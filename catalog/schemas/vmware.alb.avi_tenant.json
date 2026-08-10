@@ -1,0 +1,305 @@
+{
+  "fqcn": "vmware.alb.avi_tenant",
+  "shortDescription": "Module for setup of Tenant Avi RESTful Object",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/alb/avi_tenant_module.html",
+  "options": [
+    {
+      "name": "api_context",
+      "displayName": "Api Context",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Avi API context that includes current session ID and CSRF Token. This allows user to perform single login and re-use the session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_version",
+      "displayName": "Api Version",
+      "type": "string",
+      "required": false,
+      "default": "20.1.7",
+      "description": "Avi API version of to use for Avi API and objects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attrs",
+      "displayName": "Attrs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Key/value tenant attributes. Field introduced in 30.1.1. Allowed with any value in enterprise, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_api_patch_op",
+      "displayName": "Avi Api Patch Op",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch operation to use when using avi_api_update_method as patch.",
+      "choices": [
+        "add",
+        "replace",
+        "delete",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_api_update_method",
+      "displayName": "Avi Api Update Method",
+      "type": "string",
+      "required": false,
+      "default": "put",
+      "description": "Default method for object update is HTTP PUT. Setting to patch will override that behavior to use HTTP PATCH.",
+      "choices": [
+        "put",
+        "patch"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_credentials",
+      "displayName": "Avi Credentials",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_deactivate_session_cache_as_fact",
+      "displayName": "Avi Deactivate Session Cache As Fact",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "It disables avi session information to be cached as a fact.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_patch_path",
+      "displayName": "Avi Patch Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch path to use when using avi_api_update_method as patch.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_patch_value",
+      "displayName": "Avi Patch Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch value to use when using avi_api_update_method as patch.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_settings",
+      "displayName": "Config Settings",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configpb_attributes",
+      "displayName": "Configpb Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Protobuf versioning for config pbs. Field introduced in 21.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller",
+      "displayName": "Controller",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "IP address or hostname of the controller. The default value is the environment variable C(AVI_CONTROLLER).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "created_by",
+      "displayName": "Created By",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Creator of this tenant. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enforce_label_group",
+      "displayName": "Enforce Label Group",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "The referred label groups are enforced on the tenant if this is set to true.if this is set to false, the label groups are suggested for the tenant. Field introduced in 20.1.5. Allowed with any value in enterprise, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as False.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "label_group_refs",
+      "displayName": "Label Group Refs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The label_groups to be enforced on the tenant. This is strictly enforced only if enforce_label_group is set to true. It is a reference to an object of type labelgroup. Field introduced in 20.1.5. Allowed with any value in enterprise, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local",
+      "displayName": "Local",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as True.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Password of Avi user in Avi controller. The default value is the environment variable C(AVI_PASSWORD).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state that should be applied on the entity.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant",
+      "displayName": "Tenant",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Name of tenant used for all Avi API calls and context of object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_uuid",
+      "displayName": "Tenant Uuid",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "UUID of tenant used for all Avi API calls and context of object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Avi controller URL of the object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Username used for accessing Avi controller. The default value is the environment variable C(AVI_USERNAME).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcf_org_id",
+      "displayName": "Vcf Org Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Vcf organization identifier. This field is automatically populated exclusively for tenants associated with vcf organizations. Field introduced in 32.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,258 @@
+{
+  "fqcn": "cisco.intersight.intersight_switch_control_policy",
+  "shortDescription": "Switch Control Policy configuration for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_switch_control_policy_module.html",
+  "options": [
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description for the Switch Control Policy. Description can contain letters(a-z, A-Z), numbers(0-9), hyphen(-), period(.), colon(:), or an underscore(_).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ethernet_switching_mode",
+      "displayName": "Ethernet Switching Mode",
+      "type": "string",
+      "required": false,
+      "default": "end-host",
+      "description": "Enable or Disable Ethernet End Host Switching Mode. Ethernet End Host Switching Mode is not applicable for Unified Edge; the value defaults to Ethernet Switch Mode. C(end-host) - Ethernet End Host Switching Mode (default). C(switch) - Ethernet Switch Mode.",
+      "choices": [
+        "end-host",
+        "switch"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fabric_pc_vhba_reset",
+      "displayName": "Fabric Pc Vhba Reset",
+      "type": "string",
+      "required": false,
+      "default": "disabled",
+      "description": "When enabled, a Registered State Change Notification (RSCN) is sent to the VIC adapter. This occurs when any member port within the fabric port-channel goes down and vHBA would reset to restore the connection immediately. When disabled (default), vHBA reset is done only when all the members of a fabric port-channel are down. Fabric port-channel vHBA reset is not supported on Unified Edge and cannot be enabled. C(enabled) - Enable fabric port-channel vHBA reset. C(disabled) - Disable fabric port-",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fc_switching_mode",
+      "displayName": "Fc Switching Mode",
+      "type": "string",
+      "required": false,
+      "default": "end-host",
+      "description": "Enable or Disable FC End Host Switching Mode. FC is not supported on Unified Edge, so this setting cannot be configured and is ignored. C(end-host) - FC End Host Switching Mode (default). C(switch) - FC Switch Mode.",
+      "choices": [
+        "end-host",
+        "switch"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mac_aging_option",
+      "displayName": "Mac Aging Option",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "MAC address aging time configuration option. C(default) - Use default MAC aging time with UDLD message interval (default). C(custom) - Use custom MAC aging time in seconds. C(never) - MAC addresses never age out.",
+      "choices": [
+        "default",
+        "custom",
+        "never"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mac_aging_time",
+      "displayName": "Mac Aging Time",
+      "type": "number",
+      "required": false,
+      "default": 14500,
+      "description": "Define the MAC address aging time in seconds. This field is valid when the C(mac_aging_option) is set to C(custom). Valid range is 120-918000 seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "message_interval",
+      "displayName": "Message Interval",
+      "type": "number",
+      "required": false,
+      "default": 15,
+      "description": "Configures the time between UDLD probe messages on the UDLD enabled ports. Valid values are from 7 to 90 seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the Switch Control Policy. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Profiles and Policies that are created within a Custom Organization are applicable only to devices in the same Organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "primary_key",
+      "displayName": "Primary Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Encrypts MACsec keys in type-6 format. If a MACsec key is already provided in a type-6 format, the primary key decrypts it. MACSec is not supported on Unified Edge, so the primary key cannot be configured. Must be 16-64 characters in length when specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recovery_action",
+      "displayName": "Recovery Action",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "UDLD recovery action when enabled, attempts to bring an UDLD error-disabled port out of reset. C(none) - No recovery action (default). C(reset) - Reset the port to recover from UDLD error-disabled state.",
+      "choices": [
+        "none",
+        "reset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reserved_vlan_start_id",
+      "displayName": "Reserved Vlan Start Id",
+      "type": "number",
+      "required": false,
+      "default": 3915,
+      "description": "The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of a contiguous block of 128 VLANs that cannot be configured for user data. This range of VLANs cannot be configured in VLAN policy. If this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default. The reserved VLAN range is fixed for Unified Edge, so this setting cannot be configured and is ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlan_port_optimization_enabled",
+      "displayName": "Vlan Port Optimization Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "To enable or disable the VLAN port count optimization. This feature will always be enabled for Cisco UCS Fabric Interconnect 9108 100G. Also enabled on the IMM 6.x Bundle version and onwards. VLAN Port Count Optimization is not applicable for Unified Edge.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

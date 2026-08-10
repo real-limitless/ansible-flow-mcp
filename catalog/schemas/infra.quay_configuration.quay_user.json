@@ -1,0 +1,143 @@
+{
+  "fqcn": "infra.quay_configuration.quay_user",
+  "shortDescription": "Manage Quay Container Registry users",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/infra/quay_configuration/quay_user_module.html",
+  "options": [
+    {
+      "name": "email",
+      "displayName": "Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User's email address. If your Quay administrator has enabled the mailing capability of your Quay installation (C(FEATURE_MAILING) to C(true) in C(config.yaml)), then this O(email) parameter is mandatory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable (V(true)) or disable (V(false)) the user account. When their account is disabled, the user cannot log in to the web UI and cannot push or pull container images.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User's password as a clear string. The password must be at least eight characters long and must not contain white spaces.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_host",
+      "displayName": "Quay Host",
+      "type": "string",
+      "required": false,
+      "default": "http://127.0.0.1",
+      "description": "URL for accessing the API. U(https://quay.example.com:8443) for example. If you do not set the parameter, then the module uses the E(QUAY_HOST) environment variable. If you do no set the environment variable either, then the module uses the U(http://127.0.0.1) URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_password",
+      "displayName": "Quay Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to use for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_PASSWORD) environment variable. If you set O(quay_password), then you also need to set O(quay_username). Mutually exclusive with O(quay_token).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_token",
+      "displayName": "Quay Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OAuth access token for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_TOKEN) environment variable. Mutually exclusive with O(quay_username) and O(quay_password).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_username",
+      "displayName": "Quay Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_USERNAME) environment variable. If you set O(quay_username), then you also need to set O(quay_password). Mutually exclusive with O(quay_token).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If V(absent), then the module deletes the user. You cannot delete superuser accounts. The module does not fail if the user does not exist, because the state is already as expected. If V(present), then the module creates the user if it does not already exist. If the user account already exists, then the module updates its state. You cannot update superuser accounts.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "superuser",
+      "displayName": "Superuser",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Grant superuser permissions to the user. Granting superuser privileges to a user is not immediate and usually requires a restart of the Quay Container Registry service. You cannot revoke superuser permissions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10.0,
+      "description": "Number of seconds to wait for Quay to send data before giving up. If you do not set the parameter, then the module tries the E(QUAY_TIMEOUT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the user account to create, remove, or modify.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to allow insecure connections to the API. If V(false), then the module does not validate SSL certificates. If you do not set the parameter, then the module tries the E(QUAY_VERIFY_SSL) environment variable (V(yes), V(1), and V(True) mean true, and V(no), V(0), V(False), and no value mean false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

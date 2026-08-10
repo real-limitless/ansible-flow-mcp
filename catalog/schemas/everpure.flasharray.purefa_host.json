@@ -1,0 +1,395 @@
+{
+  "fqcn": "everpure.flasharray.purefa_host",
+  "shortDescription": "Manage hosts on Everpure FlashArrays",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/everpure/flasharray/purefa_host_module.html",
+  "options": [
+    {
+      "name": "api_token",
+      "displayName": "Api Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FlashArray API token for admin privileged user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the API Client that issues the identity token. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Name of fleet member on which to perform the operation. This requires the array receiving the request is a member of a fleet and the context name to be a member of the same fleet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "count",
+      "displayName": "Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of hosts to be created in a multiple host creation Only supported from Purity//FA v6.0.0 and higher",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "digits",
+      "displayName": "Digits",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Number of digits to use for multiple host count. This will pad the index number with zeros where necessary Only supported from Purity//FA v6.0.0 and higher Range is between 1 and 10",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_warnings",
+      "displayName": "Disable Warnings",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disable insecure certificate warnings in debug logs",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fa_url",
+      "displayName": "Fa Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FlashArray management IPv4 address or Hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_password",
+      "displayName": "Host Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets the host password for CHAP authentication Password length between 12 and 255 characters To clear the username/password pair use I(clear) as the password SETTING A PASSWORD IS NON-IDEMPOTENT",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_user",
+      "displayName": "Host User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets the host user name for CHAP authentication Required with I(host_password) To clear the username/password pair use I(clear) as the password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id_token",
+      "displayName": "Id Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A pre-signed JWT to authenticate with, as an alternative to I(api_token). The token is exchanged by the array for a short-lived access token. Requires a matching API Client to be registered on the array (see M(everpure.flasharray.purefa_apiclient)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iqn",
+      "displayName": "Iqn",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of IQNs of the host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "issuer",
+      "displayName": "Issuer",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The API Client's trusted identity issuer registered on the array. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_id",
+      "displayName": "Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Key ID of the API Client that issues the identity token. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lun",
+      "displayName": "Lun",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "LUN ID to assign to volume for host. Must be unique. If not provided the ID will be automatically assigned. Range for LUN ID is 1 to 4095.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "modify_resource_access",
+      "displayName": "Modify Resource Access",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "Describes how to modify a resource accesses of a resource when that resource is moved. The none value indicates that no resource access should be modified. The create value is used when a resource is moving out of a realm into the array and it needs to create a resource access of the moved resource to the realm from which it is moving. The delete value is used when a resource that is moving from an array into a realm already has a resource access into that realm.",
+      "choices": [
+        "none",
+        "create",
+        "delete"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "move",
+      "displayName": "Move",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Move a host in and out of a local member realm(s) or local array Provide the name of realm(s) to move to To move to the local array, specify C(local) Host cannot have connected volume(s) for move operation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the host. Note that hostnames are case-sensitive however FlashArray hostnames are unique and ignore case - you cannot have I(hosta) and I(hostA) Multi-host support available from Purity//FA 6.0.0 B(***NOTE***) Manual deletion of individual hosts created using multi-host will cause idempotency to fail Multi-host support only exists for host creation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nqn",
+      "displayName": "Nqn",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of NQNs of the host. Note that NMVe hosts can only possess NQNs. Multi-protocol is not allowed for these hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "personality",
+      "displayName": "Personality",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Define which operating system the host is. Recommended for ActiveCluster integration. The C(nutanix-mgmt) and C(nutanix-cluster) personalities are only supported from REST API 2.50 and higher.",
+      "choices": [
+        "hpux",
+        "vms",
+        "aix",
+        "esxi",
+        "solaris",
+        "hitachi-vsp",
+        "oracle-vm-server",
+        "nutanix-mgmt",
+        "nutanix-cluster",
+        "delete",
+        ""
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preferred_array",
+      "displayName": "Preferred Array",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of preferred arrays in an ActiveCluster environment. To remove existing preferred arrays from the host, specify I(delete).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_file",
+      "displayName": "Private Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the PEM RSA private key used to sign an identity token, as an alternative to I(api_token). Requires I(client_id), I(key_id), I(issuer) and I(username).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_password",
+      "displayName": "Private Key Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password protecting I(private_key_file), if encrypted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the host connection protocol for volumes. DEPRECATED No longer a necessary parameter",
+      "choices": [
+        "fc",
+        "iscsi",
+        "nvme",
+        "mixed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rename",
+      "displayName": "Rename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name to rename to. Note that hostnames are case-sensitive however FlashArray hostnames are unique and ignore case - you cannot have I(hosta) and I(hostA)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start",
+      "displayName": "Start",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Number at which to start the multiple host creation index Only supported from Purity//FA v6.0.0 and higher",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Define whether the host should exist or not. When removing host all connected volumes will be disconnected.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suffix",
+      "displayName": "Suffix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Suffix string, if required, for multiple host create Host names will be formed as I(<name>#<suffix>), where I(#) is a placeholder for the host index See associated descriptions Suffix string is optional Only supported from Purity//FA v6.0.0 and higher",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_password",
+      "displayName": "Target Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets the target password for CHAP authentication Password length between 12 and 255 characters To clear the username/password pair use I(clear) as the password SETTING A PASSWORD IS NON-IDEMPOTENT",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_user",
+      "displayName": "Target User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets the target user name for CHAP authentication Required with I(target_password) To clear the username/password pair use I(clear) as the password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username the issued token should be granted to. Must be a valid user on the array. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlan",
+      "displayName": "Vlan",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The VLAN ID that the host is associated with. If not set or set to I(any), the host can access any VLAN. If set to I(untagged), the host can only access untagged VLANs. If set to a number between 1 and 4094, the host can only access the specified VLAN with that number.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume",
+      "displayName": "Volume",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Volume name to map to the host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wwns",
+      "displayName": "Wwns",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of wwns of the host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

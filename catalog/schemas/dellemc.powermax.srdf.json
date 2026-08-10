@@ -1,0 +1,213 @@
+{
+  "fqcn": "dellemc.powermax.srdf",
+  "shortDescription": "Manage SRDF pair on PowerMax/VMAX Storage System",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/powermax/srdf_module.html",
+  "options": [
+    {
+      "name": "job_id",
+      "displayName": "Job Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Job ID of an asynchronous task. Can be used to get details of a job.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the Unisphere host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 8443,
+      "description": "The port of the Unisphere host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rdf_target_sg_name",
+      "displayName": "Rdf Target Sg Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the remote (R2) storage group on the target array. Used when the R2 storage group should have a different name from the R1 (source) storage group. If not specified, the R1 storage group name is used as the R2 storage group name. Applicable only when creating an SRDF link.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rdfg_no",
+      "displayName": "Rdfg No",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The RDF group number. Optional parameter for each call. For a create operation, if specified, the array will reuse the RDF group, otherwise an error is returned. For modify and delete operations, if the RFD group number is not specified, and the storage group is protected by multiple RDF groups, then an error is raised.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_serial_no",
+      "displayName": "Remote Serial No",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Integer 12-digit serial number of remote PowerMax or VMAX array. Required while creating an SRDF link.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serial_no",
+      "displayName": "Serial No",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The serial number will refer to the source PowerMax/VMAX array when protecting a storage group. However srdf_state operations may be issued from primary or remote array.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sg_name",
+      "displayName": "Sg Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of storage group. SRDF pairings are managed at a storage group level. Required to identify the SRDF link.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "srdf_mode",
+      "displayName": "Srdf Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The replication mode of the SRDF pair. Required when creating an SRDF pair. Can be modified by providing a required value.",
+      "choices": [
+        "Active",
+        "Adaptive Copy",
+        "Synchronous",
+        "Asynchronous"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "srdf_state",
+      "displayName": "Srdf State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Desired state of the SRDF pairing. While creating a new SRDF pair, allowed values are 'Establish' and 'Suspend'. If the state is not specified, the pair will be created in a 'Suspended' state. When modifying the state, only certain changes are allowed.",
+      "choices": [
+        "Establish",
+        "Resume",
+        "Restore",
+        "Suspend",
+        "Swap",
+        "Split",
+        "Failback",
+        "Failover",
+        "Setbias"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Define whether the SRDF pairing should exist or not. present indicates that the SRDF pairing should exist in system. absent indicates that the SRDF pairing should not exist in system.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Time after which the connection will get terminated. It is to be mentioned in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unispherehost",
+      "displayName": "Unispherehost",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the Unisphere host",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the Unisphere host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verifycert",
+      "displayName": "Verifycert",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies system whether to validate SSL certificate or not, Values can be True or False or a custom file path for SSL certificate with .pem extension or .cer with base 64 encoding.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_completion",
+      "displayName": "Wait For Completion",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Flag to indicate if the operation should be run synchronously or asynchronously. True signifies synchronous execution. By default, all create and update operations will be run asynchronously.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "witness",
+      "displayName": "Witness",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Flag to specify use of Witness for a Metro configuration. Setting to True signifies to use Witness, setting it to False signifies to use Bias. It is recommended to configure a witness for SRDF Metro in a production environment, this is configured via Unisphere for PowerMax UI or REST. The flag can be set only for modifying srdf_state to either Establish, Suspend, or Restore. While creating a Metro configuration, the witness flag must be set to True.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

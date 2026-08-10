@@ -1,0 +1,321 @@
+{
+  "fqcn": "lowlydba.sqlserver.availability_group",
+  "shortDescription": "Configures availability group(s)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/lowlydba/sqlserver/availability_group_module.html",
+  "options": [
+    {
+      "name": "ag_name",
+      "displayName": "Ag Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the Availability Group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "all_ags",
+      "displayName": "All Ags",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Apply changes to all availability groups on the instance. Only used for configuring existing availability groups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_null_backup",
+      "displayName": "Allow Null Backup",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allow taking a full backup to C(NULL) if one does not exist and I(seeding_mode=Automatic).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "automated_backup_preference",
+      "displayName": "Automated Backup Preference",
+      "type": "string",
+      "required": false,
+      "default": "Secondary",
+      "description": "How to handle backup requests by default.",
+      "choices": [
+        "None",
+        "Primary",
+        "Secondary",
+        "SecondaryOnly"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_mode",
+      "displayName": "Availability Mode",
+      "type": "string",
+      "required": false,
+      "default": "SynchronousCommit",
+      "description": "Whether the replica should be Asynchronous or Synchronous. Only used in creating a new availability group.",
+      "choices": [
+        "AsynchronousCommit",
+        "SynchronousCommit"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "basic_availability_group",
+      "displayName": "Basic Availability Group",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether the availability group is Basic Availability Group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_type",
+      "displayName": "Cluster Type",
+      "type": "string",
+      "required": false,
+      "default": "Wsfc",
+      "description": "Cluster type of the Availability Group. Only supported in SQL Server 2017 and above.",
+      "choices": [
+        "Wsfc",
+        "External",
+        "None"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "contained_availability_group",
+      "displayName": "Contained Availability Group",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether the availability group is Contained. Requires DBATools >= 2.1.15",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database",
+      "displayName": "Database",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the database to create the Availability Group for.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_health_trigger",
+      "displayName": "Database Health Trigger",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether the availability group triggers the database health.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dtc_support_enabled",
+      "displayName": "Dtc Support Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables Dtc support.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "failover_mode",
+      "displayName": "Failover Mode",
+      "type": "string",
+      "required": false,
+      "default": "Automatic",
+      "description": "Whether the replica have Automatic or Manual failover.",
+      "choices": [
+        "Automatic",
+        "Manual"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "failure_condition_level",
+      "displayName": "Failure Condition Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the different conditions that can trigger an automatic failover in Availability Group.",
+      "choices": [
+        "OnAnyQualifiedFailureCondition",
+        "OnCriticalServerErrors",
+        "OnModerateServerErrors",
+        "OnServerDown",
+        "OnServerUnresponsive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Drop and recreate the database on remote servers using fresh backup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "healthcheck_timeout",
+      "displayName": "Healthcheck Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "This setting used to specify the length of time, in milliseconds, that the SQL Server resource DLL should wait for information returned by the C(sp_server_diagnostics) stored procedure before reporting the Always On Failover Cluster Instance (FCI) as unresponsive. Changes that are made to the timeout settings are effective immediately and do not require a restart of the SQL Server resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_distributed_ag",
+      "displayName": "Is Distributed Ag",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether the availability group is distributed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seeding_mode",
+      "displayName": "Seeding Mode",
+      "type": "string",
+      "required": false,
+      "default": "Manual",
+      "description": "Default seeding mode for the replica. Should remain as the default otherwise manual setup may be required.",
+      "choices": [
+        "Automatic",
+        "Manual"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shared_path",
+      "displayName": "Shared Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The network share where the backups will be backed up and restored from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_instance",
+      "displayName": "Sql Instance",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The SQL Server instance to modify.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_instance_secondary",
+      "displayName": "Sql Instance Secondary",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The secondary SQL Server instance for the new Availability Group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_password",
+      "displayName": "Sql Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for SQL Authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_password_secondary",
+      "displayName": "Sql Password Secondary",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for SQL Authentication for the secondary replica.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_username",
+      "displayName": "Sql Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for SQL Authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_username_secondary",
+      "displayName": "Sql Username Secondary",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for SQL Authentication for the secondary replica.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether or not the object should be C(present) or C(absent).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_last_backup",
+      "displayName": "Use Last Backup",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use the last full and log backup of database. A log backup must be the last backup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

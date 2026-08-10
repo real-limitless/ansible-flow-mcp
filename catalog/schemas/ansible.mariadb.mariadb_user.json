@@ -1,0 +1,416 @@
+{
+  "fqcn": "ansible.mariadb.mariadb_user",
+  "shortDescription": "Adds or removes a user from a MariaDB database",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/mariadb/mariadb_user_module.html",
+  "options": [
+    {
+      "name": "append_privs",
+      "displayName": "Append Privs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Append the privileges defined by priv to the existing ones for this user instead of overwriting existing ones. Mutually exclusive with I(subtract_privs).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Create, update, or delete user attributes (arbitrary 'key: value' comments) for the user. MySQL server must support the INFORMATION_SCHEMA.USER_ATTRIBUTES table. Provided since MySQL 8.0. To delete an existing attribute, set its value to null.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a Certificate Authority (CA) certificate. This option, if used, must specify the same certificate as used by the server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_hostname",
+      "displayName": "Check Hostname",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to validate the server host name when an SSL connection is required. Corresponds to MySQL CLIs C(--ssl) switch. Setting this to C(false) disables hostname verification. Use with caution. Requires pymysql >= 0.7.11.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_implicit_admin",
+      "displayName": "Check Implicit Admin",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Check if mysql allows login as root/nopassword before trying supplied credentials. If success, passed I(login_user)/I(login_password) will be ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a client public key certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the client private key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "column_case_sensitive",
+      "displayName": "Column Case Sensitive",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "The default is C(true). When C(true), the module will not uppercase the field names in the privileges. When C(false), the field names will be upper-cased. This is the default This feature was introduced because MySQL 8 and above uses case sensitive fields names in privileges. The default changed from C(false) to C(true) in v4.0.0",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file",
+      "displayName": "Config File",
+      "type": "string",
+      "required": false,
+      "default": "~/.my.cnf",
+      "description": "Specify a config file from which user and password are to be read. The default config file, C(~/.my.cnf), if it exists, will be read, even if I(config_file) is not specified. The default config file, C(~/.my.cnf), if it exists, must contain a C([client]) section as a MySQL connector requirement. To prevent the default config file from being read, set I(config_file) to be an empty string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connect_timeout",
+      "displayName": "Connect Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The connection timeout when connecting to the MySQL server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encrypted",
+      "displayName": "Encrypted",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicate that the 'password' field is a C(mysql_native_password) hash. Not supported on MySQL 9.7.0+ because the C(mysql_native_password) plugin has been removed. The module will fail if this option is used on MySQL 9.7.0+.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_context",
+      "displayName": "Force Context",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Sets the \u0421(mysql) system database as context for the executed statements (it will be used as a database to connect to). Useful if you use binlog / replication filters in MySQL as per default the statements can not be caught by a binlog / replication filter, they require a database to be set to work, otherwise the replication can break down. See U(https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-ignore-db) for a description on how binlog filters wor",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "The 'host' part of the MySQL username.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_all",
+      "displayName": "Host All",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Override the host option, making ansible apply changes to all hostnames for a given user. This option cannot be used when creating users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "locked",
+      "displayName": "Locked",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Lock account to prevent connections using it. This is primarily used for creating a user that will act as a DEFINER on stored procedures. If not specified leaves the lock state as is (for a new user creates unlocked).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "Host running the database. In some cases for local connections the I(login_unix_socket=/path/to/mysqld/socket), that is usually C(/var/run/mysqld/mysqld.sock), needs to be used instead of I(login_host=localhost).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password used to authenticate with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": 3306,
+      "description": "Port of the MySQL server. Requires I(login_host) be defined as other than localhost if login_port is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_unix_socket",
+      "displayName": "Login Unix Socket",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to a Unix domain socket for local connections. Use this parameter to avoid the C(Please explicitly state intended protocol) error.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username used to authenticate with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the user (role) to add or remove.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set the user's password. Only for C(mysql_native_password) authentication. For other authentication plugins see the combination of I(plugin), I(plugin_hash_string), I(plugin_auth_string). On MySQL 9.7.0+, C(mysql_native_password) was removed. The password is still accepted and applied via C(IDENTIFIED BY), letting the server use C(caching_sha2_password) instead. Because C(caching_sha2_password) uses a random salt, the password hash cannot be compared. As a result, I(update_password=always) will ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_expire",
+      "displayName": "Password Expire",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(never) - I(password) will never expire. C(default) - I(password) is defined using global system variable I(default_password_lifetime) setting. C(interval) - I(password) will expire in days which is defined in I(password_expire_interval). C(now) - I(password) will expire immediately.",
+      "choices": [
+        "now",
+        "never",
+        "default",
+        "interval"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_expire_interval",
+      "displayName": "Password Expire Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of days I(password) will expire. Requires I(password_expire=interval).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plugin",
+      "displayName": "Plugin",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User's plugin to authenticate (``CREATE USER user IDENTIFIED WITH plugin``).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plugin_auth_string",
+      "displayName": "Plugin Auth String",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User's plugin auth_string (``CREATE USER user IDENTIFIED WITH plugin BY plugin_auth_string``). If I(plugin) is ``pam`` (MariaDB) or ``auth_pam`` (MySQL) an optional I(plugin_auth_string) can be used to choose a specific PAM service. You need to define a I(salt) to have idempotence on password change with ``caching_sha2_password`` and ``sha256_password`` plugins.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plugin_hash_string",
+      "displayName": "Plugin Hash String",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User's plugin hash string (``CREATE USER user IDENTIFIED WITH plugin AS plugin_hash_string``).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priv",
+      "displayName": "Priv",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "MySQL privileges string in the format: C(db.table:priv1,priv2). Additionally, there must be no spaces between the table and the privilege as this will yield a non-idempotent check mode. Multiple privileges can be specified by separating each one using a forward slash: C(db.table1:priv/db.table2:priv). The format is based on MySQL C(GRANT) statement. Database and table names can be quoted, MySQL-style. If column privileges are used, the C(priv1,priv2) part must be exactly as returned by a C(SHOW ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_limits",
+      "displayName": "Resource Limits",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Limit the user for certain server resources. Provided since MySQL 5.6 / MariaDB 10.2. Available options are C(MAX_QUERIES_PER_HOUR: num), C(MAX_UPDATES_PER_HOUR: num), C(MAX_CONNECTIONS_PER_HOUR: num), C(MAX_USER_CONNECTIONS: num), C(MAX_STATEMENT_TIME: num) (supported only for MariaDB since collection version 3.7.0). Used when I(state=present), ignored otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "salt",
+      "displayName": "Salt",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Salt used to generate password hash from I(plugin_auth_string). Salt length must be 20 characters. Salt only support ``caching_sha2_password`` or ``sha256_password`` authentication I(plugin).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_vars",
+      "displayName": "Session Vars",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary of session variables in form of C(variable: value) to set at the beginning of module execution. Cannot be used to set global variables, use the M(ansible.mariadb.mariadb_variables) module instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_log_bin",
+      "displayName": "Sql Log Bin",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether binary logging should be enabled or disabled for the connection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the user should exist. When C(absent), removes the user.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subtract_privs",
+      "displayName": "Subtract Privs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Revoke the privileges defined by the I(priv) option and keep other existing privileges. If set, invalid privileges in I(priv) are ignored. Mutually exclusive with I(append_privs).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_requires",
+      "displayName": "Tls Requires",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Set requirement for secure transport as a dictionary of requirements (see the examples). Valid requirements are SSL, X509, SUBJECT, ISSUER, CIPHER. SUBJECT, ISSUER and CIPHER are complementary, and mutually exclusive with SSL and X509. U(https://mariadb.com/kb/en/securing-connections-for-client-and-server/#requiring-tls).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "string",
+      "required": false,
+      "default": "always",
+      "description": "C(always) will update passwords if they differ. This affects I(password) and the combination of I(plugin), I(plugin_hash_string), I(plugin_auth_string). C(on_create) will only set the password or the combination of I(plugin), I(plugin_hash_string), I(plugin_auth_string) for newly created users. C(on_new_username) works like C(on_create), but it tries to reuse an existing password: If one different user with the same username exists, or multiple different users with the same username and equal C(",
+      "choices": [
+        "always",
+        "on_create",
+        "on_new_username"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

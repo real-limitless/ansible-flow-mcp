@@ -1,0 +1,322 @@
+{
+  "fqcn": "logicmonitor.integration.lm_collector",
+  "shortDescription": "LogicMonitor Collector Ansible module for managing collectors",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/logicmonitor/integration/lm_collector_module.html",
+  "options": [
+    {
+      "name": "access_id",
+      "displayName": "Access Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Access ID API token associated with the user's account that's used to query the LogicMonitor API. Please contact your LogicMonitor admin if you need new API tokens created for your account.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Access Key API token associated with the user's account that's used to query the LogicMonitor API. Please contact your LogicMonitor admin if you need new API tokens created for your account. Must start with the \"!unsafe\" keyword if the the key starts with a special character (e.g. '[', ']', etc.) to prevent playbook issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The action you wish to perform on the collector. Add = Install existing collector on a Linux machine or add a new collector to your LogicMonitor account & install it. Update = Update properties, description, etc for a collector in your LogicMonitor account. Remove = Remove a collector from your LogicMonitor account & uninstall it from Linux machine. SDT = Schedule downtime for a collector in your LogicMonitor account.",
+      "choices": [
+        "add",
+        "update",
+        "remove",
+        "sdt"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_collector_description",
+      "displayName": "Backup Collector Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The long text description of the failover collector to configure for the collector being updated. Optional for action=update.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_collector_id",
+      "displayName": "Backup Collector Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The ID of the failover collector to configure for the collector being updated. 0 denotes to not assign any failover collector. Optional for action=update.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "collector_group_id",
+      "displayName": "Collector Group Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the collector group associated with the collector being added. Optional for action=add and action=update",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "collector_group_name",
+      "displayName": "Collector Group Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the collector group associated with the collector being added. Default/ungrouped collector group should be denoted by empty string \"\" or \"@default\". Optional for action=add and action=update",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The note/comment to add to an SDT action. Optional for action=sdt.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "company",
+      "displayName": "Company",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The LogicMonitor account company name. A user logging into their account at \"batman.logicmonitor.com\" would use \"batman\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The long text description of the collector in your LogicMonitor account. Optional for action=add. Required for update, remove, sdt if id isn't provided. Optional for action=add (only used when installing an existing collector).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_group_full_path",
+      "displayName": "Device Group Full Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Full path of the device group associated with the collector being added. Default/root device group should be denoted by empty string \"\" or \"/\". Optional for action=add",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_group_id",
+      "displayName": "Device Group Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the device group associated with the collector being added. Optional for action=add",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "duration",
+      "displayName": "Duration",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The duration (minutes) of the Scheduled Down Time (SDT). Optional for action=sdt.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "end_time",
+      "displayName": "End Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The time that the Scheduled Down Time (SDT) should end. Format must be 'yyyy-MM-dd HH:mm' or \"yyyy-MM-dd HH:mm z\" where z is \"am\" or \"pm\". The former is used for a 24-hr clock while the latter is for a 12-hr clock. If end time is provided it will be used otherwise duration would be used (duration defaults to 30 min). Optional for action=sdt.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "escalating_chain_id",
+      "displayName": "Escalating Chain Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The ID of the escalation chain to configure for the collector being updated. 0 denotes to not assign any escalation chain (i.e. disable alert routing/notifications) Optional for action=update.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "escalating_chain_name",
+      "displayName": "Escalating Chain Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the escalation chain to configure for the collector being updated. Optional for action=update.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_manage",
+      "displayName": "Force Manage",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "A boolean flag to enable/disable the feature to add a collector when the initial action=update because the collector doesn't exist. Optional for action=update.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the collector. Required for update, remove, sdt if description isn't provided. Optional for action=add (only used when installing an existing collector).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "install_path",
+      "displayName": "Install Path",
+      "type": "string",
+      "required": false,
+      "default": "/usr/local/logicmonitor",
+      "description": "The full path of the directory where the collector agent should be installed or is installed. Optional for action=add & action=remove",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "install_user",
+      "displayName": "Install User",
+      "type": "string",
+      "required": false,
+      "default": "logicmonitor",
+      "description": "The username to associate with the installed collector. Optional for action=add",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "optype",
+      "displayName": "Optype",
+      "type": "string",
+      "required": false,
+      "default": "replace",
+      "description": "A string describing the operation on properties when updating collector... (1) replace - a property would be updated if it exists already else a new property will be created (2) refresh - a property would be updated if it exists already else a new property will be created, any existing property not provided during update will be removed (3) add - a property would be ignored if it exists already else a new property will be created Optional for action=update.",
+      "choices": [
+        "add",
+        "replace",
+        "refresh"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "platform",
+      "displayName": "Platform",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The operating system of the platform where playbook will be executed. This field is only relevant for testing purposes. This field should not be provided when using product since collector installation is only supported on Linux machines.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "properties",
+      "displayName": "Properties",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A JSON object of properties to configure for the LogicMonitor collector. This parameter will add or update existing properties in your LogicMonitor account. Must be enclosed within {} braces. Optional for action=update.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resend_collector_down_alert_interval",
+      "displayName": "Resend Collector Down Alert Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The interval, in minutes, after which collector down alert notifications will be resent. 0 denotes to send the collector down alert once. Optional for action=update.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": false,
+      "default": "small",
+      "description": "The size of the collector to download. nano = <2GB small = 2GB medium = 4GB large = 8GB Optional for action=add",
+      "choices": [
+        "nano",
+        "small",
+        "medium",
+        "large"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_time",
+      "displayName": "Start Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The time that the Scheduled Down Time (SDT) should begin. Format must be \"yyyy-MM-dd HH:mm\" or \"yyyy-MM-dd HH:mm z\" where z is \"am\" or \"pm\". The former is used for a 24-hr clock while the latter is for a 12-hr clock. Optional for action=sdt. Defaults to the time action is executed. Required in case start time differ from the execution time of action.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The version of the collector to download & install. 28.005 = required release 29.003 = general release 29.107 = early release General release is typically recommended. Defaults to the latest GD Collector. Optional for action=add",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

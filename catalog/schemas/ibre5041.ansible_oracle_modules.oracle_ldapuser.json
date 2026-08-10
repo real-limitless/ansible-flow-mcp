@@ -1,0 +1,281 @@
+{
+  "fqcn": "ibre5041.ansible_oracle_modules.oracle_ldapuser",
+  "shortDescription": "Syncronises user accounts from LDAP/Active directory to Oracle database and maps group membership to Oracle roles",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibre5041/ansible_oracle_modules/oracle_ldapuser_module.html",
+  "options": [
+    {
+      "name": "deleted_user_mode",
+      "displayName": "Deleted User Mode",
+      "type": "string",
+      "required": false,
+      "default": "lock",
+      "description": "What action to take then user is not found in LDAP search anymore",
+      "choices": [
+        "lock",
+        "drop"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dsn",
+      "displayName": "Dsn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Oracle Data Source Name (connect string or TNS alias), overrides hostname/port/service_name",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_role_map",
+      "displayName": "Group Role Map",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Each user can be granted additional roles based on LDAP group membership, this parameter describes the relationship between group LDAP DN and Oracle group name Each list item must be DICT with elements dn and groups {'Example list item': {'dn': 'CN=prod_db_reader,OU=Security Groups,DC=domain,DC=int', 'group': 'prod_db_reader'}}",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "The Oracle database host",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_binddn",
+      "displayName": "Ldap Binddn",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "LDAP login username eg reader@domain.int",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_bindpassword",
+      "displayName": "Ldap Bindpassword",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "LDAP login password",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_connect",
+      "displayName": "Ldap Connect",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "LDAP connect string eg ldap://domain.int:389",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_user_basedn",
+      "displayName": "Ldap User Basedn",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "LDAP BASE DN for syncronised users",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_user_filter",
+      "displayName": "Ldap User Filter",
+      "type": "string",
+      "required": false,
+      "default": "(objectClass=user)",
+      "description": "LDAP filter to search for syncronised users",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_user_subtree",
+      "displayName": "Ldap User Subtree",
+      "type": "string",
+      "required": false,
+      "default": true,
+      "description": "Is the entire subtree searched for users (true) or just one level (false)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_username_attribute",
+      "displayName": "Ldap Username Attribute",
+      "type": "string",
+      "required": false,
+      "default": "sAMAccountName",
+      "description": "LDAP attribute that is used for user name in Oracle If value does not \"Oracle identifier\" compatible, then this user is silently skipped",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": true,
+      "default": "normal",
+      "description": "The mode with which to connect to the database",
+      "choices": [
+        "normal",
+        "sysdba",
+        "sysdg",
+        "sysoper",
+        "sysasm"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oracle_home",
+      "displayName": "Oracle Home",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ORACLE_HOME path",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle user password for 'user'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "string",
+      "required": false,
+      "default": 1521,
+      "description": "The listener port number on the host",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_name",
+      "displayName": "Service Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The database service name to connect to Optional. Omit (with no user/password and mode=sysdba) to use local BEQ / OS auth via ORACLE_SID",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_container",
+      "displayName": "Session Container",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Switch session into this PDB via ALTER SESSION SET CONTAINER after connecting (use when connecting to a CDB)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Oracle user name to connect to the database, must have DBA privilege",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_default_password",
+      "displayName": "User Default Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default password for newly created user Password is expired immediately Do not specify for EXTERNAL authentication_type",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_default_tablespace",
+      "displayName": "User Default Tablespace",
+      "type": "string",
+      "required": false,
+      "default": "USERS",
+      "description": "Default tablespace for syncronised users",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_grants",
+      "displayName": "User Grants",
+      "type": "list",
+      "required": false,
+      "default": "create session",
+      "description": "List of all grants all syncronised users will get",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_profile",
+      "displayName": "User Profile",
+      "type": "string",
+      "required": false,
+      "default": "LDAP_USER",
+      "description": "Profile for syncronised user Must be dedicated profile for this syncronization process, since this is the only way to detect which users should be locked/dropped",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_quota_on_default_tbs_mb",
+      "displayName": "User Quota On Default Tbs Mb",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Quota in MB for the default tablespace Do not specify for unlimited quota",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_temp_tablespace",
+      "displayName": "User Temp Tablespace",
+      "type": "string",
+      "required": false,
+      "default": "TEMP",
+      "description": "Temporary tablespace for syncronised user",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

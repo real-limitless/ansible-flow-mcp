@@ -1,0 +1,328 @@
+{
+  "fqcn": "everpure.flasharray.purefa_offload",
+  "shortDescription": "Create, modify and delete NFS, S3 or Azure offload targets",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/everpure/flasharray/purefa_offload_module.html",
+  "options": [
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Access Key ID of the offload target",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "account",
+      "displayName": "Account",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Azure blob storage account",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "address",
+      "displayName": "Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IP or FQDN address of the NFS server",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token",
+      "displayName": "Api Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FlashArray API token for admin privileged user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_region",
+      "displayName": "Auth Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The region that will be used for initial authentication request. This parameter is optional and should be used only when region autodetection fails.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bucket",
+      "displayName": "Bucket",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the bucket for the S3 or GCP target",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the API Client that issues the identity token. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "container",
+      "displayName": "Container",
+      "type": "string",
+      "required": false,
+      "default": "offload",
+      "description": "Name of the blob container of the Azure target",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Name of fleet member on which to perform the operation. This requires the array receiving the request is a member of a fleet and the context name to be a member of the same fleet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_warnings",
+      "displayName": "Disable Warnings",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disable insecure certificate warnings in debug logs",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fa_url",
+      "displayName": "Fa Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FlashArray management IPv4 address or Hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id_token",
+      "displayName": "Id Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A pre-signed JWT to authenticate with, as an alternative to I(api_token). The token is exchanged by the array for a short-lived access token. Requires a matching API Client to be registered on the array (see M(everpure.flasharray.purefa_apiclient)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initialize",
+      "displayName": "Initialize",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Define whether to initialize the offload bucket",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "issuer",
+      "displayName": "Issuer",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The API Client's trusted identity issuer registered on the array. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_id",
+      "displayName": "Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Key ID of the API Client that issues the identity token. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the offload target",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "options",
+      "displayName": "Options",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Additional mount options for the NFS share Supported mount options include I(port), I(rsize), I(wsize), I(nfsvers), and I(tcp) or I(udp)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "placement",
+      "displayName": "Placement",
+      "type": "string",
+      "required": false,
+      "default": "retention-based",
+      "description": "AWS S3 placement strategy",
+      "choices": [
+        "retention-based",
+        "aws-standard-class",
+        "aws-intelligent-tiering"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_file",
+      "displayName": "Private Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the PEM RSA private key used to sign an identity token, as an alternative to I(api_token). Requires I(client_id), I(key_id), I(issuer) and I(username).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_password",
+      "displayName": "Private Key Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password protecting I(private_key_file), if encrypted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Offload target profile that will be selected for this target. This option allows more granular configuration for the target on top of the protocol parameter",
+      "choices": [
+        "azure",
+        "gcp",
+        "nfs",
+        "nfs-flashblade",
+        "s3-aws",
+        "s3-flashblade",
+        "s3-scality-ring",
+        "s3-wasabi-pay-as-you-go",
+        "s3-wasabi-rcs",
+        "s3-other"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": "nfs",
+      "description": "Define which protocol the offload engine uses NFS is not a supported protocol from Purity//FA 6.6.0 and higher",
+      "choices": [
+        "nfs",
+        "s3",
+        "azure",
+        "gcp"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret",
+      "displayName": "Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Secret Access Key for the offload target",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share",
+      "displayName": "Share",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "NFS export on the NFS server",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Define state of offload",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uri",
+      "displayName": "Uri",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URI used to create a connection between the array and a non-AWS S3 offload target. Storage placement strategies are not supported for non-AWS S3 offload targets. Both the HTTP and HTTPS protocols are allowed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username the issued token should be granted to. Must be a valid user on the array. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

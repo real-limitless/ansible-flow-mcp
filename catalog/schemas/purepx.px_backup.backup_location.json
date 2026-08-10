@@ -1,0 +1,297 @@
+{
+  "fqcn": "purepx.px_backup.backup_location",
+  "shortDescription": "Manage backup locations in PX-Backup",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/purepx/px_backup/backup_location_module.html",
+  "options": [
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "PX-Backup API URL",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud_credential_name",
+      "displayName": "Cloud Credential Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of cloud credential to use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud_credential_uid",
+      "displayName": "Cloud Credential Uid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "UID of cloud credential to use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_refs",
+      "displayName": "Cluster Refs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of clusters associated with this BackupLocation Each item should have 'name' and optionally 'uid' Required for CREATE and UPDATE when federated is true CREATE and UPDATE automatically trigger validation on all clusters in cluster_refs On UPDATE, the entire cluster_status map is replaced and ALL associated clusters are re-validated, not just newly added ones For VALIDATE, when set, only the listed clusters are re-validated (must be a subset of the BackupLocation's existing cluster_refs); whe",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_key",
+      "displayName": "Encryption Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Encryption key for backup data",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "federated",
+      "displayName": "Federated",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable Federated Identity (Workload Identity/OIDC) authentication When true, authentication uses workload identity instead of cloud credentials When true, cloud_credential_ref should be empty Supported for S3 (AWS IRSA / EKS Pod Identity), Azure (Workload Identity) and Google (Workload Identity) Cloud-specific config should be in s3_config (azure_account_name, azure_subscription_id for Azure; google_project_id for Google)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_secrets",
+      "displayName": "Include Secrets",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Include sensitive information in response",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Labels to attach to the backup location",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location_type",
+      "displayName": "Location Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of backup location Required for CREATE and UPDATE operations",
+      "choices": [
+        "S3",
+        "Azure",
+        "Google",
+        "NFS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the backup location Required for all operations except INSPECT_ALL",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nfs_config",
+      "displayName": "Nfs Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration for NFS backup locations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_lock_enabled",
+      "displayName": "Object Lock Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable object lock for S3 backup locations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Operation to perform on the backup location  - CREATE: creates a new backup location  - UPDATE: modifies an existing backup location  - DELETE: removes a backup location  - VALIDATE: validates a backup location configuration (supports per-cluster validation in federated mode)  - INSPECT_ONE: retrieves details of a specific backup location  - INSPECT_ALL: lists all backup locations  - UPDATE_OWNERSHIP: updates ownership settings of a backup location  - SYNC: triggers backup sync from object store",
+      "choices": [
+        "CREATE",
+        "UPDATE",
+        "DELETE",
+        "VALIDATE",
+        "INSPECT_ONE",
+        "INSPECT_ALL",
+        "UPDATE_OWNERSHIP",
+        "SYNC"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "org_id",
+      "displayName": "Org Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Organization ID",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ownership",
+      "displayName": "Ownership",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Ownership configuration for the backup location Required for UPDATE_OWNERSHIP operation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path/bucket name for the backup location Required for CREATE and UPDATE operations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "s3_config",
+      "displayName": "S3 Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration for S3 backup locations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_config",
+      "displayName": "Ssl Config",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "SSL configuration dictionary containing certificate settings Contains validate_certs, ca_cert, client_cert, and client_key options If not provided, defaults to standard SSL verification",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sync",
+      "displayName": "Sync",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Trigger backup sync from the object store Only valid in federated deployment mode Can be used with CREATE or UPDATE operations, or via the SYNC operation The sync is on-demand (not automatic or periodic) Parallel sync triggers while another sync is in progress are not allowed",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sync_poll_interval",
+      "displayName": "Sync Poll Interval",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Interval in seconds between sync status polls Only used with SYNC operation when wait_for_completion is true",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sync_timeout",
+      "displayName": "Sync Timeout",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Maximum time in seconds to wait for backup sync to complete Only used with SYNC operation when wait_for_completion is true",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Authentication token",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uid",
+      "displayName": "Uid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Unique identifier of the backup location",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_cloud_credential",
+      "displayName": "Validate Cloud Credential",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate cloud credentials",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for_completion",
+      "displayName": "Wait For Completion",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to wait for the sync operation to complete Only used with SYNC operation When true, the module will poll sync_info status until completion or timeout",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

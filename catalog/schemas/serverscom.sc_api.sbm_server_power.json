@@ -1,0 +1,78 @@
+{
+  "fqcn": "serverscom.sc_api.sbm_server_power",
+  "shortDescription": "Power on/off SBM (Scalable Baremetal) server",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/serverscom/sc_api/sbm_server_power_module.html",
+  "options": [
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.servers.com/v1",
+      "description": "Endpoint to use to connect to API. Do not change until specifically asked to do otherwise. If not set, the value of the C(SERVERSCOM_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hostname of the SBM server (exact match on server title). Mutually exclusive with I(server_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_id",
+      "displayName": "Server Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the SBM server. Mutually exclusive with I(hostname). Use I(serverscom.sc_api.sc_baremetal_servers_info) with type=sbm_server to retrieve servers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Desired power state. I(on): power on outlet. I(off): power off outlet. I(cycle): power cycle outlet. Within this action the power will be turned off and then on again.",
+      "choices": [
+        "on",
+        "off",
+        "cycle"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Token to use. You can create token for your account in https://portal.servers.com in Profile -> Public API section. If not set, the value of the C(SERVERSCOM_API_TOKEN) or C(SC_TOKEN) environment variable is used (C(SERVERSCOM_API_TOKEN) takes precedence). Value is not logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "Maximum time in seconds to wait for the server to reach the desired state.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

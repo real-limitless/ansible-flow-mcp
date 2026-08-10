@@ -1,0 +1,340 @@
+{
+  "fqcn": "illumio.core.pairing_profile",
+  "shortDescription": "Create/update/delete Illumio PCE pairing profiles",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/illumio/core/pairing_profile_module.html",
+  "options": [
+    {
+      "name": "allowed_uses_per_key",
+      "displayName": "Allowed Uses Per Key",
+      "type": "string",
+      "required": false,
+      "default": "unlimited",
+      "description": "The number of times pairing profile keys can be used. By default, each key has unlimited uses.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_secret",
+      "displayName": "Api Key Secret",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Illumio PCE API key secret. Can be set with the environment variable C(ILLUMIO_API_KEY_SECRET).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_username",
+      "displayName": "Api Key Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Illumio PCE API key username. Can be set with the environment variable C(ILLUMIO_API_KEY_USERNAME).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "app_label_lock",
+      "displayName": "App Label Lock",
+      "type": "boolean",
+      "required": false,
+      "default": "yes",
+      "description": "If set to C(false), allows the app label to be overridden when pairing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Pairing profile description.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": "yes",
+      "description": "Determines whether or not the profile is enabled for pairing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enforcement_mode",
+      "displayName": "Enforcement Mode",
+      "type": "string",
+      "required": false,
+      "default": "idle",
+      "description": "Pairing profile default enforcement mode. VENs paired using this profile will be put into the provided enforcement mode by default. C(idle): the VEN will not take control of the host firewall. C(visibility_only): no traffic will be blocked by PCE policy. C(selective): segmentation rules are enforced only for selected inbound services when the host is within the scope of an enforcement boundary. C(full): segmentation rules are enforced for all inbound and outbound services. Traffic that is not al",
+      "choices": [
+        "idle",
+        "visibility_only",
+        "selective",
+        "full"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enforcement_mode_lock",
+      "displayName": "Enforcement Mode Lock",
+      "type": "boolean",
+      "required": false,
+      "default": "yes",
+      "description": "If set to C(false), allows the enforcement mode to be overridden when pairing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "env_label_lock",
+      "displayName": "Env Label Lock",
+      "type": "boolean",
+      "required": false,
+      "default": "yes",
+      "description": "If set to C(false), allows the environment label to be overridden when pairing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "external_data_reference",
+      "displayName": "External Data Reference",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "External data reference identifier. Must be set if using C(external_data_set).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "external_data_set",
+      "displayName": "External Data Set",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "External data set identifier. Must be set if using C(external_data_reference).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "href",
+      "displayName": "Href",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "HREF of an existing pairing profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_lifespan",
+      "displayName": "Key Lifespan",
+      "type": "string",
+      "required": false,
+      "default": "unlimited",
+      "description": "The number of seconds pairing profile keys will be valid for. By default, each key lasts an unlimited amount of time.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of default labels to apply to workloads paired using this profile. Labels can only be referenced by HREF, and only one Label of each type can be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "loc_label_lock",
+      "displayName": "Loc Label Lock",
+      "type": "boolean",
+      "required": false,
+      "default": "yes",
+      "description": "If set to C(false), allows the location label to be overridden when pairing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Pairing profile display name. Required for creating a pairing profile or when HREF is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pce_hostname",
+      "displayName": "Pce Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL or FQDN of Illumio Policy Compute Engine. C(pce_url) is an alias for C(pce_hostname). Can be set with the environment variable C(ILLUMIO_PCE_HOST).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pce_http_proxy",
+      "displayName": "Pce Http Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "HTTP proxy server to use when connecting to the PCE. If not set, it will use the default C(http_proxy) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pce_https_proxy",
+      "displayName": "Pce Https Proxy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "HTTPS proxy server to use when connecting to the PCE. If not set, it will use the default C(https_proxy) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pce_org_id",
+      "displayName": "Pce Org Id",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "PCE Organization ID. Can be set with the environment variable C(ILLUMIO_PCE_ORG_ID).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pce_port",
+      "displayName": "Pce Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "HTTP(S) port used by the PCE. Can be set with the environment variable C(ILLUMIO_PCE_PORT).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pce_tls_ca",
+      "displayName": "Pce Tls Ca",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a custom root CA certificate bundle to use for the PCE connection. If set, overrides C(pce_tls_verify).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pce_tls_client_certs",
+      "displayName": "Pce Tls Client Certs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Optional paths to client-side certificate files. May point to separate cert and private key files or a PEM bundle containing both.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pce_tls_verify",
+      "displayName": "Pce Tls Verify",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Flag denoting whether TLS verification should be enabled on the PCE connection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role_label_lock",
+      "displayName": "Role Label Lock",
+      "type": "boolean",
+      "required": false,
+      "default": "yes",
+      "description": "If set to C(false), allows the role label to be overridden when pairing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired pairing profile state. If C(present), the profile will be created if it does not exist, or updated to match the provided parameters if it does. If C(absent), the profile will be removed if it exists.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ven_version",
+      "displayName": "Ven Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional parameter to set the VEN version used by this pairing profile. If not set, the profile will use the default VEN version configured in the PCE's VEN library.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "visibility_level",
+      "displayName": "Visibility Level",
+      "type": "string",
+      "required": false,
+      "default": "flow_summary",
+      "description": "Determines what traffic will be logged by VENs paired with this profile. C(flow_summary): log connection information for allowed, blocked, and potentially blocked traffic. C(flow_drops): log connection information for blocked and potentially blocked traffic. C(flow_off): do not log any traffic information. C(enhanced_data_collection): log byte counts in addition to connection details for all traffic.",
+      "choices": [
+        "flow_summary",
+        "flow_drops",
+        "flow_off",
+        "enhanced_data_collection"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "visibility_level_lock",
+      "displayName": "Visibility Level Lock",
+      "type": "boolean",
+      "required": false,
+      "default": "yes",
+      "description": "If set to C(false), allows the visibility level to be overridden when pairing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

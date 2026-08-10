@@ -1,0 +1,343 @@
+{
+  "fqcn": "ibre5041.ansible_oracle_modules.oracle_dataguard",
+  "shortDescription": "Manage Oracle Data Guard configurations",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibre5041/ansible_oracle_modules/oracle_dataguard_module.html",
+  "options": [
+    {
+      "name": "apply_state",
+      "displayName": "Apply State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Managed recovery state (SQL mode)",
+      "choices": [
+        "started",
+        "stopped"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configuration_name",
+      "displayName": "Configuration Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Data Guard broker configuration",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connect_identifier",
+      "displayName": "Connect Identifier",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Oracle Net connect identifier for the database being managed",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_name",
+      "displayName": "Database Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "DB_UNIQUE_NAME of the database to manage",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database_state",
+      "displayName": "Database State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Desired state of redo transport/apply for a database",
+      "choices": [
+        "transport-on",
+        "transport-off",
+        "apply-on",
+        "apply-off"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dgmgrl_as",
+      "displayName": "Dgmgrl As",
+      "type": "string",
+      "required": false,
+      "default": "sysdg",
+      "description": "DGMGRL connection privilege Used for both password and OS authentication",
+      "choices": [
+        "sysdba",
+        "sysdg"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dgmgrl_connect_identifier",
+      "displayName": "Dgmgrl Connect Identifier",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Connect identifier for DGMGRL (e.g. host:port/service)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dgmgrl_password",
+      "displayName": "Dgmgrl Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for DGMGRL connection If omitted (along with dgmgrl_user), OS authentication is used Credentials are passed via stdin (CONNECT command), never on the command line",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dgmgrl_user",
+      "displayName": "Dgmgrl User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for DGMGRL connection If omitted (along with dgmgrl_password), OS authentication is used (/ AS SYSDG or / AS SYSDBA)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the configuration or database should be enabled or disabled. Only meaningful when C(state=present) and C(mode_dg=broker). C(true) ensures the resource is enabled after creating/configuring. C(false) ensures the resource is disabled after creating/configuring. When omitted the enabled state is not changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "far_sync_connect_identifier",
+      "displayName": "Far Sync Connect Identifier",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Connect identifier for Far Sync instance",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "far_sync_name",
+      "displayName": "Far Sync Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the Far Sync instance",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_logging",
+      "displayName": "Force Logging",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable FORCE LOGGING (SQL mode)",
+      "choices": [
+        "enable",
+        "disable"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fsfo",
+      "displayName": "Fsfo",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fast-Start Failover state",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fsfo_target",
+      "displayName": "Fsfo Target",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Target database for Fast-Start Failover When enabling FSFO, issues ENABLE FAST_START FAILOVER TARGET TO <target>",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode_dg",
+      "displayName": "Mode Dg",
+      "type": "string",
+      "required": false,
+      "default": "broker",
+      "description": "Data Guard management mode broker uses DGMGRL commands (recommended by Oracle) sql uses direct SQL and V$ views (for environments without broker)",
+      "choices": [
+        "broker",
+        "sql"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "observer_state",
+      "displayName": "Observer State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Observer state",
+      "choices": [
+        "started",
+        "stopped"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oracle_home",
+      "displayName": "Oracle Home",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ORACLE_HOME path (required for DGMGRL in broker mode)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output_format",
+      "displayName": "Output Format",
+      "type": "string",
+      "required": false,
+      "default": "text",
+      "description": "Output format for DGMGRL (26ai supports JSON) json provides structured output (Oracle 26ai+)",
+      "choices": [
+        "text",
+        "json"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "primary_database",
+      "displayName": "Primary Database",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "DB_UNIQUE_NAME of the primary database",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "primary_database_candidates",
+      "displayName": "Primary Database Candidates",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of database unique names eligible to become primary Sets the PrimaryDatabaseCandidates configuration property Oracle 26ai+ feature, will warn and skip on older versions",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "properties",
+      "displayName": "Properties",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary of broker properties to set on a database Example: {'LogXptMode': 'SYNC', 'NetTimeout': '60'}",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protection_mode",
+      "displayName": "Protection Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Data Guard protection mode",
+      "choices": [
+        "maximum_protection",
+        "maximum_availability",
+        "maximum_performance"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset_tags",
+      "displayName": "Reset Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tag names to remove from the target object Uses EDIT <object> RESET TAG syntax (Oracle 26ai+)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "status",
+      "description": "The intended state",
+      "choices": [
+        "present",
+        "absent",
+        "status",
+        "switchover",
+        "failover",
+        "snapshot_standby",
+        "physical_standby"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary of tags to set on the target object Target is determined by database_name (DATABASE), far_sync_name (FAR_SYNC), or CONFIGURATION if neither is set Uses EDIT <object> SET TAG syntax (Oracle 26ai+)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_connect_identifier",
+      "displayName": "Validate Connect Identifier",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Connect identifier to validate via DGMGRL VALIDATE DGConnectIdentifier Tests network resolution, connectivity, and service name validation Oracle 26ai+ feature",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

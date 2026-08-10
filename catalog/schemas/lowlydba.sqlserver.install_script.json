@@ -1,0 +1,167 @@
+{
+  "fqcn": "lowlydba.sqlserver.install_script",
+  "shortDescription": "Runs migration scripts against a database",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/lowlydba/sqlserver/install_script_module.html",
+  "options": [
+    {
+      "name": "connection_timeout",
+      "displayName": "Connection Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Database server connection timeout in seconds. Only affects connection attempts. Does not affect execution timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_database",
+      "displayName": "Create Database",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Will create an empty database if missing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database",
+      "displayName": "Database",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the target database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deployment_method",
+      "displayName": "Deployment Method",
+      "type": "string",
+      "required": false,
+      "default": "NoTransaction",
+      "description": "C(SingleTransaction) - wrap all the deployment scripts into a single transaction and rollback whole deployment on error. C(TransactionPerScript) - wrap each script into a separate transaction; rollback single script deployment in case of error. C(NoTransaction) - deploy as is. C(AlwaysRollback) - roll back the transaction.",
+      "choices": [
+        "NoTransaction",
+        "SingleTransaction",
+        "TransactionPerScript",
+        "AlwaysRollback"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "execution_timeout",
+      "displayName": "Execution Timeout",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Script execution timeout. The script will be aborted if the execution takes more than specified number of seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "match",
+      "displayName": "Match",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Runs a regex verification against provided file names using the provided string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_log_version",
+      "displayName": "No Log Version",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set, the deployment will not be tracked in the database. That will also mean that all the scripts and all the builds from the package are going to be deployed regardless of any previous deployment history.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_recurse",
+      "displayName": "No Recurse",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Only process the first level of the target path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output_file",
+      "displayName": "Output File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Log output into specified file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Directory where targeted sql scripts are stored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schema_version_table",
+      "displayName": "Schema Version Table",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A table that will hold the history of script execution. This table is used to choose what scripts are going to be run during the deployment, preventing the scripts from being execured twice.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_instance",
+      "displayName": "Sql Instance",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The SQL Server instance to modify.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_password",
+      "displayName": "Sql Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for SQL Authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_username",
+      "displayName": "Sql Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for SQL Authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

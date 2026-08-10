@@ -1,0 +1,344 @@
+{
+  "fqcn": "ibm.storage_virtualize.ibm_svc_host",
+  "shortDescription": "This module manages hosts on IBM Storage Virtualize family systems",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/storage_virtualize/ibm_svc_host_module.html",
+  "options": [
+    {
+      "name": "autostoragediscovery",
+      "displayName": "Autostoragediscovery",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether to enable auto storage discovery for the host. Valid when I(state=present), to create or modify a host.",
+      "choices": [
+        "yes",
+        "no"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clustername",
+      "displayName": "Clustername",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or management IP or Partition IP of the Storage Virtualize system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Domain for the Storage Virtualize system. Valid when hostname is used for the parameter I(clustername).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "draftpartition",
+      "displayName": "Draftpartition",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name or UUID of the draft partition to be assigned to the host. Valid when I(state=present), to modify a host. Supported from Storage Virtualize family systems 8.6.3.0 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fcwwpn",
+      "displayName": "Fcwwpn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "List of Initiator WWPNs to be added to the host. The complete list of WWPNs must be provided. The parameters I(fcwwpn) and I(iscsiname) are mutually exclusive. Required when I(state=present), to create or modify a Fibre Channel (FC) host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fdminame",
+      "displayName": "Fdminame",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Host object to be created from the fdminame. The valid fdminame should be provided for host creation. The parameters I(fcwwpn) and I(fdminame) are mutually exclusive. Parameter is mutually exlusive with other parameters saswwpn,fcwwpn,iscsiname and nqn. Valid when I(state=present), to create host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostcluster",
+      "displayName": "Hostcluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name or UUID of the host cluster to which the host object is to be added. A host cluster must exist before a host object can be added to it. Parameters I(hostcluster) and I(nohostcluster) are mutually exclusive. Valid when I(state=present), to create or modify a host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iogrp",
+      "displayName": "Iogrp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a set of one or more input/output (I/O) groups from which the host can access the volumes. Once specified, this parameter cannot be modified. Valid when I(state=present), to create a host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iscsiname",
+      "displayName": "Iscsiname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "List of Initiator IQNs to be added to the host. IQNs are separated by comma. The complete list of IQNs must be provided. The parameters I(fcwwpn) and I(iscsiname) are mutually exclusive. Valid when I(state=present), to create host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location",
+      "displayName": "Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the system ID or system name that is co-located with this host. If set to blank (\"\"), the host will normally submit I/O operations to the storage partition's preferred system. Valid when I(state=present), to modify an existing host. Supported from Storage Virtualize family systems 8.7.0.0 or later. Creating a host with a location, or changing the location of a host, is only permitted if the host is associated with a storage partition configured for high availability.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_path",
+      "displayName": "Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path of debug log file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies a name or label or UUID for the new host object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nodraftpartition",
+      "displayName": "Nodraftpartition",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If specified as C(True), the host object is removed from the draft partition. Parameters I(draftpartition) and I(nodraftpartition) are mutually exclusive. Valid when I(state=present), to modify an existing host. Supported from Storage Virtualize family systems 8.6.3.0 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nohostcluster",
+      "displayName": "Nohostcluster",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If specified as C(True), host object is removed from the host cluster. Parameters I(hostcluster) and I(nohostcluster) are mutually exclusive. Valid when I(state=present), to modify an existing host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nopartition",
+      "displayName": "Nopartition",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If specified as C(True), the host object is removed from the storage partition. Parameters I(partition) and I(nopartition) are mutually exclusive. Valid when I(state=present), to modify an existing host. Supported from Storage Virtualize family systems 8.6.1.0 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nqn",
+      "displayName": "Nqn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "List of initiator NQNs to be added to the host. Each NQN is separated by a comma. The complete list of NQNs must be provided. Required when I(protocol=rdmanvme or tcpnvme), to create. Valid when I(state=present), to create or modify a host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "old_name",
+      "displayName": "Old Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the old name or UUID of the host while renaming. Valid when I(state=present), to rename an existing host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "partition",
+      "displayName": "Partition",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the storage partition name or UUID to be associated with the host. Valid when I(state=present), to create or modify a host. Supported from Storage Virtualize family systems 8.6.1.0 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "REST API password for the Storage Virtualize system. The parameters I(username) and I(password) are required if not using I(token) to authenticate a user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "portset",
+      "displayName": "Portset",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the portset to be associated with the host. Valid when I(state=present), to create or modify a host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the protocol used by the host to communicate with the storage system. Valid when I(state=present), to create a host. Use I(sas) when creating a host with I(saswwpn).",
+      "choices": [
+        "scsi",
+        "sas",
+        "rdmanvme",
+        "tcpnvme",
+        "fcnvme",
+        "iscsi",
+        "fcscsi"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "saswwpn",
+      "displayName": "Saswwpn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "List of SAS (Serial Attached SCSI) Initiator WWPNs to be added to the host. The complete list of WWPNs must be provided. The parameters I(saswwpn), I(fcwwpn), I(iscsiname), I(nqn), and I(fdminame) are mutually exclusive. Required when I(state=present), to create or modify a SAS host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "site",
+      "displayName": "Site",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the site name of the host. Valid when I(state=present), to create or modify a host. If I(site) is specified as an empty string (\"\"), it is treated as nosite, indicating the removal of the existing site.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Creates or updates (C(present)) or removes (C(absent)) a host.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suppressofflinealert",
+      "displayName": "Suppressofflinealert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If specified as C(yes), an event will not be generated if host is offline. Valid when I(state=present), to modify an existing host. Supported from Storage Virtualize family systems 8.7.2.0 or later.",
+      "choices": [
+        "yes",
+        "no"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The authentication token to verify a user on the Storage Virtualize system. To generate a token, use the M(ibm.storage_virtualize.ibm_svc_auth) module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the type of host. Valid when I(state=present), to create or modify a host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "REST API username for the Storage Virtualize system. The parameters I(username) and I(password) are required if not using I(token) to authenticate a user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Validates certification.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

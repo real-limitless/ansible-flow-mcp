@@ -1,0 +1,180 @@
+{
+  "fqcn": "ceph.automation.ceph_fs_volume",
+  "shortDescription": "Manage volumes, subvolume groups and subvolumes in Ceph filesystem.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ceph/automation/ceph_fs_volume_module.html",
+  "options": [
+    {
+      "name": "ceph_client",
+      "displayName": "Ceph Client",
+      "type": "string",
+      "required": false,
+      "default": "client.admin",
+      "description": "Ceph client name (``-n``) for the native ``ceph`` CLI when ``use_cephadm`` is false.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": "ceph",
+      "description": "Ceph cluster name used with the native ``ceph`` CLI when ``use_cephadm`` is false.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_remove",
+      "displayName": "Force Remove",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allow the module to forcibly delete the CephFS volume (default Ceph config forbids removal of volumes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_shrink",
+      "displayName": "Force Shrink",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Tell the module to reduce the quota size of the subvolume group or subvolume to a size smaller than the occupied space in the subvolume(group).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fsid",
+      "displayName": "Fsid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Identifier (FSID) of the Ceph cluster to interact with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image",
+      "displayName": "Image",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Ceph container image to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initial_placement",
+      "displayName": "Initial Placement",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional string that specifies the Daemon Placement for the MDS. Used only for new volumes, may be used for sub-types (parent_volume will be affected). See the Ceph documentation about L(deploying MDS daemons, https://docs.ceph.com/en/latest/cephadm/services/mds/) and for L(placement specification, https://docs.ceph.com/en/latest/cephadm/services/#orchestrator-cli-placement-spec).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keyring",
+      "displayName": "Keyring",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the keyring file for the native ``ceph`` CLI when ``use_cephadm`` is false. Defaults to ``/etc/ceph/<cluster>.<ceph_client>.keyring``.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the entity (volume, subvolume, subvolume group).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent_group",
+      "displayName": "Parent Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the parent subvolume group where the subvolume resides. O(parent_group) may be skipped when a subvolume is placed without group in the volume itself.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent_volume",
+      "displayName": "Parent Volume",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the parent volume where the subvolume or subvolume group resides. Required for both V(subvolume) and V(subvolume_group) types.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Quota size for a subvolume group or subvolume in bytes. Default is no quota. To unset quota use O(size=0). The module will not change quota if O(size) is not defined. The module will not reduce the quota to a size smaller than the occupied space in the subvolume(group). You can force shrinking to a smaller size with O(force_shrink).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If V(present) is used, the module creates a volume if it doesn't exist or update it if it already exists. If V(absent) is used, the module will simply delete the volume.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "volume",
+      "description": "Type of entity has to be one of V(volume), V(subvolume_group) or V(subvolume). Parent entities (volume and/or subvolume group) will be created if O(state=present) and parent entities are not present.",
+      "choices": [
+        "volume",
+        "subvolume_group",
+        "subvolume"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_cephadm",
+      "displayName": "Use Cephadm",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When true (default), run the Ceph CLI through Cephadm shell (``cephadm shell ceph ...``). When false, run the ``ceph`` binary on the target host with keyring authentication (for example Proxmox or other non-Cephadm clusters). May be set for all modules in ``group/ceph.automation.ceph_cli`` via ``module_defaults``.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

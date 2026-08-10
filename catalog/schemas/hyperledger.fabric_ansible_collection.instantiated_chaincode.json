@@ -1,0 +1,220 @@
+{
+  "fqcn": "hyperledger.fabric_ansible_collection.instantiated_chaincode",
+  "shortDescription": "Manage a instantiated chaincode on a Hyperledger Fabric channel",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/hyperledger/fabric_ansible_collection/instantiated_chaincode_module.html",
+  "options": [
+    {
+      "name": "api_authtype",
+      "displayName": "Api Authtype",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "C(basic) - Authenticate to the Fabric operations console using basic authentication. You must provide both a valid API key using I(api_key) and API secret using I(api_secret).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_endpoint",
+      "displayName": "Api Endpoint",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The URL for the Fabric operations console.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The API key for the Fabric operations console.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_secret",
+      "displayName": "Api Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The API secret for the Fabric operations console. Only required when I(api_authtype) is C(basic).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "The timeout, in seconds, to use when interacting with the Fabric operations console.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "channel",
+      "displayName": "Channel",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the channel.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "collections_config",
+      "displayName": "Collections Config",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the collections configuration file for the chaincode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "constructor",
+      "displayName": "Constructor",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The constructor for the chaincode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endorsement_policy",
+      "displayName": "Endorsement Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The endorsement policy for the chaincode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "escc",
+      "displayName": "Escc",
+      "type": "string",
+      "required": false,
+      "default": "escc",
+      "description": "The name of the endorsement system chaincode (ESCC) to use for the chaincode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hsm",
+      "displayName": "Hsm",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The PKCS #11 compliant HSM configuration to use for digital signatures. Only required if the identity specified in I(identity) was enrolled using an HSM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identity",
+      "displayName": "Identity",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The identity to use when interacting with the peer. You can pass a string, which is the path to the JSON file where the enrolled identity is stored. You can also pass a dict, which must match the result format of one of the M(enrolled_identity_info) or M(enrolled_identity) modules.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "msp_id",
+      "displayName": "Msp Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The MSP ID to use for interacting with the peer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the chaincode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "orderer_name",
+      "displayName": "Orderer Name",
+      "type": "string",
+      "required": false,
+      "default": "the tls_cert for the orderering service will be found from the channel configuration",
+      "description": "The name of the ordering service node to get the tls-certificate from",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peer",
+      "displayName": "Peer",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The peer to use to manage the instantiated chaincode. You can pass a string, which is the display name of a peer registered with the Fabric operations console. You can also pass a dict, which must match the result format of one of the M(peer_info) or M(peer) modules.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "C(absent) - If a chaincode matching the specified name and version is instantiated, then an error will be thrown, as it is not possible to uninstantiate chaincode. C(present) - Asserts that a chaincode matching the specified name and version is instantiated on the specified channel. If it is not instantiated, then the chaincode with the specified name and version is instantiated on the specified channel. If it is instantiated with a different version, then the chaincode is upgraded on the specif",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The version of the chaincode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vscc",
+      "displayName": "Vscc",
+      "type": "string",
+      "required": false,
+      "default": "vscc",
+      "description": "The name of the validation system chaincode (VSCC) to use for the chaincode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

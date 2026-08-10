@@ -1,0 +1,232 @@
+{
+  "fqcn": "lowlydba.sqlserver.agent_job_schedule",
+  "shortDescription": "Configures a SQL Agent job schedule",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/lowlydba/sqlserver/agent_job_schedule_module.html",
+  "options": [
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the schedule is enabled or disabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "end_date",
+      "displayName": "End Date",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The date on which execution of a job can stop. If I(force=true) the end date will be C(99991231), via dbatools. Format is C(yyyyMMdd).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "end_time",
+      "displayName": "End Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The time on any day to end execution of a job. Format C(HHMMSS) (24 hour clock). If (force=true) the start time will be C(23:59:59).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "The force option will ignore some errors in the options and assume defaults. It will also remove the any present schedules with the same name for the specific job.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "frequency_interval",
+      "displayName": "Frequency Interval",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The days that a job is executed. Allowed values for I(frequency_type=Daily) - C(EveryDay) or a number between C(1) and C(365) inclusive. Allowed values for I(frequency_type=Weekly) - C(Sunday), C(Monday), C(Tuesday), C(Wednesday), C(Thursday), C(Friday), C(Saturday), C(Weekdays), C(Weekend) or C(EveryDay). Allowed values for I(frequency_type=Monthly) - Numbers C(1) through C(31) for each day of the month. If C(Weekdays), C(Weekend) or C(EveryDay) is used it overwrites any other value that has be",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "frequency_recurrence_factor",
+      "displayName": "Frequency Recurrence Factor",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of weeks or months between the scheduled execution of a job. Required if I(frequency_type=Weekly), I(frequency_type=Monthly) or I(frequency_type=MonthlyRelative).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "frequency_relative_interval",
+      "displayName": "Frequency Relative Interval",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A job's occurrence of I(frequency_interval) in each month. If I(frequency_interval=32) (C(MonthlyRelative)).",
+      "choices": [
+        "Unused",
+        "First",
+        "Second",
+        "Third",
+        "Fourth",
+        "Last"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "frequency_subday_interval",
+      "displayName": "Frequency Subday Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of subday type periods to occur between each execution of a job.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "frequency_subday_type",
+      "displayName": "Frequency Subday Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the units for the subday I(frequency_interval).",
+      "choices": [
+        "Time",
+        "Seconds",
+        "Minutes",
+        "Hours"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "frequency_type",
+      "displayName": "Frequency Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A value indicating when a job is to be executed. If I(force=true) the default will be C(Once).",
+      "choices": [
+        "Once",
+        "OneTime",
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "MonthlyRelative",
+        "AgentStart",
+        "AutoStart",
+        "IdleComputer",
+        "OnIdle"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job",
+      "displayName": "Job",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the job that has the schedule. Schedules and jobs can also be associated via M(lowlydba.sqlserver.agent_job). See U(https://docs.dbatools.io/New-DbaAgentSchedule) for more detailed usage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schedule",
+      "displayName": "Schedule",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the schedule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_instance",
+      "displayName": "Sql Instance",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The SQL Server instance to modify.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_password",
+      "displayName": "Sql Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for SQL Authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_username",
+      "displayName": "Sql Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for SQL Authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_date",
+      "displayName": "Start Date",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The date on which execution of a job can begin. If I(force=true) the start date will be the current day. Format is C(yyyyMMdd).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_time",
+      "displayName": "Start Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The time on any day to begin execution of a job. Format C(HHMMSS) (24 hour clock). If I(force=true) the start time will be C(00:00:00).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether or not the object should be C(present) or C(absent).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

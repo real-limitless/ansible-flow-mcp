@@ -1,0 +1,110 @@
+{
+  "fqcn": "serverscom.sc_api.dedicated_server_rescue",
+  "shortDescription": "Manage rescue mode on a Bare Metal server",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/serverscom/sc_api/dedicated_server_rescue_module.html",
+  "options": [
+    {
+      "name": "auth_methods",
+      "displayName": "Auth Methods",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Authentication methods for rescue mode login. Required when I(state)=C(rescue). C(password): enable password authentication. C(ssh_key): enable SSH key authentication (requires I(ssh_key_fingerprints) or I(ssh_key_name)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.servers.com/v1",
+      "description": "Endpoint to use to connect to API. Do not change until specifically asked to do otherwise. If not set, the value of the C(SERVERSCOM_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_id",
+      "displayName": "Server Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "ID of the Bare Metal server. Use I(serverscom.sc_api.baremetal_servers_info) to retrieve servers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_key_fingerprints",
+      "displayName": "Ssh Key Fingerprints",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Fingerprints of SSH keys for rescue mode access. Required when C(ssh_key) is in I(auth_methods). Keys must be registered via M(serverscom.sc_api.ssh_key). Mutually exclusive with I(ssh_key_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_key_name",
+      "displayName": "Ssh Key Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of a single SSH key to use for rescue mode access. The module resolves the name to a fingerprint via the SSH keys API. Mutually exclusive with I(ssh_key_fingerprints).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Desired rescue mode state. I(rescue): activate rescue mode. I(normal): deactivate rescue mode and boot normally.",
+      "choices": [
+        "rescue",
+        "normal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Token to use. You can create token for your account in https://portal.servers.com in Profile -> Public API section. If not set, the value of the C(SERVERSCOM_API_TOKEN) or C(SC_TOKEN) environment variable is used (C(SERVERSCOM_API_TOKEN) takes precedence). Value is not logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_interval",
+      "displayName": "Update Interval",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Polling interval in seconds when waiting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Maximum time in seconds to wait for the server to reach the desired operational status. Set to C(0) to disable waiting.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

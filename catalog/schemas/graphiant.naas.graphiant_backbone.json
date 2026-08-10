@@ -1,0 +1,112 @@
+{
+  "fqcn": "graphiant.naas.graphiant_backbone",
+  "shortDescription": "Manage Graphiant Core (backbone) device configuration",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_backbone_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_yaml_file",
+      "displayName": "Config Yaml File",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the backbone (Core) interface configuration YAML file. Required for all operations. Can be an absolute path or relative path. Relative paths are resolved using the configured config_path. Configuration files support Jinja2 templating syntax for dynamic generation. File must contain a top-level `backbone_devices:` list, one entry per Core device with a `core:` block (name, regionName, site, interfaces, vrfs).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging output for troubleshooting and monitoring. Logs are captured and included in the result message for display using M(ansible.builtin.debug).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The specific backbone operation to perform. V(configure): Push full Core configuration (name + regionName + site + interfaces + vrfs). V(deconfigure): Orchestrated full backbone teardown (WAN circuits, direct-peer, core-to-core tunnels, core-to-core interfaces, syslog targets) -- idempotent. V(configure_core_to_core_interfaces): Configure core-to-core interfaces (loopback / core_to_core_link / disabled). V(deconfigure_core_to_core_interfaces): Reset core-to-core interfaces to the enterprise defa",
+      "choices": [
+        "configure",
+        "deconfigure",
+        "configure_core_to_core_interfaces",
+        "deconfigure_core_to_core_interfaces",
+        "configure_core_to_core_tunnel_interfaces",
+        "deconfigure_core_to_core_tunnel_interfaces",
+        "configure_wan_circuits",
+        "deconfigure_wan_circuits",
+        "configure_direct_peer_interfaces",
+        "deconfigure_direct_peer_interfaces",
+        "configure_syslog_targets",
+        "deconfigure_syslog_targets"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state for the Core device configuration. V(present): Maps to V(configure) when O(operation) is not specified. V(absent): Maps to V(deconfigure) when O(operation) is not specified.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

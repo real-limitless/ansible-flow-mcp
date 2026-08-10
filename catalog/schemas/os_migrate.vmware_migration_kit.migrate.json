@@ -1,0 +1,283 @@
+{
+  "fqcn": "os_migrate.vmware_migration_kit.migrate",
+  "shortDescription": "Migrates a VMware virtual machine to OpenStack.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/os_migrate/vmware_migration_kit/migrate_module.html",
+  "options": [
+    {
+      "name": "assumezero",
+      "displayName": "Assumezero",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Assume that the destination cinder volume will be zeroed. This allows for optmization of the data copy but may cause failures with encrypted volume types.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bootscript",
+      "displayName": "Bootscript",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a script file that will be configured to run on the first boot of the migrated virtual machine in OpenStack. This is typically used for guest OS customization (e.g., network configuration via cloud-init).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cbtsync",
+      "displayName": "Cbtsync",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true), attempts to use VMware's Changed Block Tracking (CBT) for the synchronization/migration process.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compression",
+      "displayName": "Compression",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the compression method to be used during data transfer (e.g., C(skipz), C(fastlz), C(zlib)), if supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "convhostname",
+      "displayName": "Convhostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional. Hostname or IP address of a specific conversion host. This might be used if the migration process involves a helper VM or a specific host for conversion tasks orchestrated by the module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cutover",
+      "displayName": "Cutover",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Optional. If C(true), the module will perform a cutover operation, which typically means it will finalize the migration and switch the VM to the new OpenStack instance. This might involve stopping the source VM or ensuring that no further changes are made to it during the migration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug_mode",
+      "displayName": "Debug Mode",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true), enables verbose debug logging for the module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dst_cloud",
+      "displayName": "Dst Cloud",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "A dictionary containing authentication and connection parameters for the destination OpenStack cloud. This should include details like C(auth_url), C(username), C(password), C(project_name), C(user_domain_name), C(project_domain_name), C(region_name), etc., or a C(cloud) key to use a clouds.yaml profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extraopts",
+      "displayName": "Extraopts",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Additional options to be passed to the conversion process. This can include flags or parameters that modify the behavior of the conversion tool. Example --key LUKS -x --color.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instanceuuid",
+      "displayName": "Instanceuuid",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "UUID of an OpenStack instance. This can be the UUID of an existing placeholder instance to which the migrated disks/VM should be associated, or it might be used as a reference for the newly created OpenStack VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "osmdatadir",
+      "displayName": "Osmdatadir",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the os-migrate data directory, used for storing migration-related data, logs, or state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Password for authenticating with the vSphere server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "runscript",
+      "displayName": "Runscript",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a script file that will be executed during the conversion. This is typically used for guest OS customization (e.g., network interface configuration).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server",
+      "displayName": "Server",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Hostname or IP address of the vSphere server (vCenter or ESXi).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skipconversion",
+      "displayName": "Skipconversion",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Optional. If C(true), skips the conversion step, if the disk does not require conversion or is not a filesystem. Use this option with caution, as skipping conversion may lead to incompatibilities in the target environment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 3600,
+      "description": "Overall timeout in seconds for the migration operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Username for authenticating with the vSphere server (vCenter or ESXi).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "usesocks",
+      "displayName": "Usesocks",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true), a SOCKS proxy (typically configured via environment variables) will be used for relevant network connections.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vddkpath",
+      "displayName": "Vddkpath",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the VMware VDDK (Virtual Disk Development Kit) installation directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vmname",
+      "displayName": "Vmname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the source VMware virtual machine to be migrated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vmware_insecure",
+      "displayName": "Vmware Insecure",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true), SSL certificate verification for the VMware C(server) will be skipped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume_type_mapping",
+      "displayName": "Volume Type Mapping",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Optional. A mapping between VMware datastore name and OpenStack volume type. It defaults to volumetype if a mapping cannot be found.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volumeaz",
+      "displayName": "Volumeaz",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The availability zone to use for creating cinder volumes",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volumetype",
+      "displayName": "Volumetype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The volume type to use for creating cinder volumes",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(true), the module will wait for the migration operation to complete before returning.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

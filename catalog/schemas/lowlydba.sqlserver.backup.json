@@ -1,0 +1,336 @@
+{
+  "fqcn": "lowlydba.sqlserver.backup",
+  "shortDescription": "Performs a backup operation",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/lowlydba/sqlserver/backup_module.html",
+  "options": [
+    {
+      "name": "azure_base_url",
+      "displayName": "Azure Base Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The URL to the base container of an Azure Storage account to write backups to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "azure_credential",
+      "displayName": "Azure Credential",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the credential on the SQL instance that can write to the I(azure_base_url), only needed if using Storage access keys If using SAS credentials, the command will look for a credential with a name matching the I(azure_base_url).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "block_size",
+      "displayName": "Block Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies block size to use.",
+      "choices": [
+        "0.5kb",
+        "1kb",
+        "2kb",
+        "4kb",
+        "8kb",
+        "16kb",
+        "32kb",
+        "64kb"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "buffer_count",
+      "displayName": "Buffer Count",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Number of I/O buffers to use.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "build_path",
+      "displayName": "Build Path",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "By default this command will not attempt to create missing paths, this switch will change the behaviour so that it will.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checksum",
+      "displayName": "Checksum",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set, the backup checksum will be calculated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compress",
+      "displayName": "Compress",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set, use compression when creating the backup if it is supported by the version and edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "copy_only",
+      "displayName": "Copy Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "The backup will be CopyOnly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_folder",
+      "displayName": "Create Folder",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set, database is backed up to its own subfolder within the path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database",
+      "displayName": "Database",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The database to process.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_algorithm",
+      "displayName": "Encryption Algorithm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the Encryption Algorithm to used.",
+      "choices": [
+        "AES128",
+        "AES192",
+        "AES256",
+        "TRIPLEDES"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_certificate",
+      "displayName": "Encryption Certificate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the certificate to be used to encrypt the backups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_count",
+      "displayName": "File Count",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The number of striped files to create the backup with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_path",
+      "displayName": "File Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the file to backup to. If no name is specified then the backup files will be named C(DatabaseName_yyyyMMddHHmm) (i.e. C(Database1_201714022131))",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_file_checks",
+      "displayName": "Ignore File Checks",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set, stops the function from checking path validity.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "increment_prefix",
+      "displayName": "Increment Prefix",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set, this will prefix backup files with an incrementing integer (ie; C(1-), C(2-)). Using this has been alleged to improved restore times on some Azure based SQL Database platforms.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initialize",
+      "displayName": "Initialize",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Initializes the media as part of the backup operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_transfer_size",
+      "displayName": "Max Transfer Size",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Sets the size of the unit of transfer. Values must be a multiple of 64kb.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_recovery",
+      "displayName": "No Recovery",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set, performs a tail log backup.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path in which to place the backup files. If not specified, the backups will be placed in the default backup location for SqlInstance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace_in_name",
+      "displayName": "Replace In Name",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set, the following list of strings will be replaced in the FilePath and Path strings. C(instancename) - will be replaced with the instance Name C(servername) - will be replaced with the server name C(dbname) - will be replaced with the database name C(timestamp) - will be replaced with the timestamp (either the default, or the format provided) C(backuptype) - will be replaced with C(Full), C(Log), or C(Differential) as appropriate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_instance",
+      "displayName": "Sql Instance",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The SQL Server instance to modify.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_password",
+      "displayName": "Sql Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for SQL Authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_username",
+      "displayName": "Sql Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for SQL Authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timestamp_format",
+      "displayName": "Timestamp Format",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "By default the command timestamps backups using the format C(yyyyMMddHHmm). Using this option this can be overridden.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "database",
+      "description": "The type of backup to perform.",
+      "choices": [
+        "full",
+        "log",
+        "differential",
+        "diff",
+        "database"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify",
+      "displayName": "Verify",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set, the backup will be verified via C(RESTORE VERIFYONLY)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "with_format",
+      "displayName": "With Format",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Formats the media as the first step of the backup operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

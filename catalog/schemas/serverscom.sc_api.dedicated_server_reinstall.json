@@ -1,0 +1,155 @@
+{
+  "fqcn": "serverscom.sc_api.dedicated_server_reinstall",
+  "shortDescription": "Reinstall baremetal server.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/serverscom/sc_api/dedicated_server_reinstall_module.html",
+  "options": [
+    {
+      "name": "drives_layout",
+      "displayName": "Drives Layout",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Partitioning schema for drives during reinstallation. Mutually exclusive with I(drives_layout_template). Translates to drives[\"layout\"] in API. List of configuration for each raid or a stand-alone drive. At least one layout should be provided. Slot 0 must be used. Partitioning should provide at least '/' (root) and /boot (for Linux) or 'C:' for Windows. Only paritioning for dirve 'C:' is supported for Windows.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "drives_layout_template",
+      "displayName": "Drives Layout Template",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Mutually exclusive with I(drives_layout). Provides a template to use instead of I(drives_layout). C(raid1-simple) uses two first drives to create RAID1, partition /boot (1Gb), swap (4Gb) and / (all other space). C(raid0-simple) uses first two drives to create RAID0, partition /boot (1Gb), swap (4Gb) and / (all other space). C(no-raid) uses first drive, does not create any RAID, partition /boot (1Gb), swap (4Gb) and / (all other space). This option is implemented by this module (it generates layo",
+      "choices": [
+        "raid1-simple",
+        "raid0-simple",
+        "no-raid"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.servers.com/v1",
+      "description": "Endpoint to use to connect to API. Do not change until specifically asked to do otherwise. If not set, the value of the C(SERVERSCOM_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hostname for the server. Module will retrieve old server title if not specified. Translates to hostname in API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operating_system_id",
+      "displayName": "Operating System Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "id of the operating system to install on the server. Module will retrieve and reuse old operating system if not specified. Mutually exclusive with I(operating_system_regex).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operating_system_regex",
+      "displayName": "Operating System Regex",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Regular expression to filter operating systems by name. If specified, the module will install operating system that match the provided regex (case insensitive). Mutually exclusive with I(operating_system_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_id",
+      "displayName": "Server Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "ID of the server to reinstall.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_key_name",
+      "displayName": "Ssh Key Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of a single ssh key to add to root user. Mutually exclusive with I(ssh_keys). Server is reinstalled with root password only if no I(ssh_keys) or I(ssh_key_name) specified. Name is used to search fingerprint through ssh keys API requests. Key should be registered. This option is implemented by the module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_keys",
+      "displayName": "Ssh Keys",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of fingerprints of public ssh keys to add for root user. Keys must be registered before use by module M(serverscom.sc_api.ssh_key). Mutually exclusive with I(ssh_key_name). Server is reinstalled with root password only if no I(ssh_keys) or I(ssh_key_name) specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Token to use. You can create token for your account in https://portal.servers.com in Profile -> Public API section. If not set, the value of the C(SERVERSCOM_API_TOKEN) or C(SC_TOKEN) environment variable is used (C(SERVERSCOM_API_TOKEN) takes precedence). Value is not logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_interval",
+      "displayName": "Update Interval",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Interval in seconds for requests for server status. Each update request reduces number of available API requests in accordance with ratelimit. Minimal value is 10. Ignored if I(wait)=C(0).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_data",
+      "displayName": "User Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User data content that will be processed by the cloud-init while server's initialization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "number",
+      "required": false,
+      "default": 86400,
+      "description": "Time to wait for server to change status to 'ready' If wait is 0 or absent, task is succeeded sending reuest to API without waiting. When server become 'ready' after reinstallation, it can still be in booting state for some time and do not answer ssh/ping request. Use M(serverscom.sc_api.wait_for_connection) module to wait the server to become available though ssh. Installation may start few minutes later than request, during this time server is responding with 'old' ssh.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

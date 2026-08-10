@@ -1,0 +1,206 @@
+{
+  "fqcn": "infinidat.infinibox.infini_vol",
+  "shortDescription": "Create, Delete or Modify volumes on Infinibox",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/infinidat/infinibox/infini_vol_module.html",
+  "options": [
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Volume name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parent_volume_name",
+      "displayName": "Parent Volume Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify a volume name. This is the volume parent for creating a snapshot. Required if volume_type is snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Infinibox User password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool",
+      "displayName": "Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Pool that master volume will reside within.  Required for creating a master volume, but not a snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restore_volume_from_snapshot",
+      "displayName": "Restore Volume From Snapshot",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specify true to restore a volume (parent_volume_name) from an existing snapshot specified by the name field. State must be set to present and volume_type must be 'snapshot'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serial",
+      "displayName": "Serial",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Volume serial number.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Volume size in MB, GB or TB units.  Required for creating a master volume, but not a snapshot",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_lock_expires_at",
+      "displayName": "Snapshot Lock Expires At",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This will cause a snapshot to be locked at the specified date-time. Uses python's datetime format YYYY-mm-dd HH:MM:SS.ffffff, e.g. 2020-02-13 16:21:59.699700",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_lock_only",
+      "displayName": "Snapshot Lock Only",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This will lock an existing snapshot but will suppress refreshing the snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Creates/Modifies master volume or snapshot when present or removes when absent.",
+      "choices": [
+        "stat",
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stay_logged_in",
+      "displayName": "Stay Logged In",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If True, persist API session to disk. Load the session on subsequent module calls. Persisted sessions are only usable for stay_logged_in_minutes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stay_logged_in_minutes",
+      "displayName": "Stay Logged In Minutes",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Number of minutes for which a persisted session may be reused. After this time, the session data will be deleted. The time should be shorter than the IBOX session timeout time.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system",
+      "displayName": "System",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Infinibox Hostname or IPv4 Address.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "thin_provision",
+      "displayName": "Thin Provision",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the master volume should be thin or thick provisioned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Infinibox User username with sufficient priveledges ( see notes ).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volume_type",
+      "displayName": "Volume Type",
+      "type": "string",
+      "required": false,
+      "default": "master",
+      "description": "Specifies the volume type, regular volume or snapshot.",
+      "choices": [
+        "master",
+        "snapshot"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_protected",
+      "displayName": "Write Protected",
+      "type": "string",
+      "required": false,
+      "default": "Default",
+      "description": "Specifies if the volume should be write protected. Default will be True for snapshots, False for regular volumes.",
+      "choices": [
+        "Default",
+        "True",
+        "False"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

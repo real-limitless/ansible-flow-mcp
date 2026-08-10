@@ -1,0 +1,72 @@
+{
+  "fqcn": "netways.icinga.ifw_restapicommand",
+  "shortDescription": "Adds / Removes Icinga REST-Api Commands.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netways/icinga/ifw_restapicommand_module.html",
+  "options": [
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "The name of a valid command available in the used PowerShell. This could be something like C(Invoke-IcingaCheckCPU). The use of C(*) as a wildcard is allowed. O(command) is added to or removed from the chosen O(list) within the chosen O(endpoint).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "apichecks",
+      "description": "The endpoint the command should be added to / removed from.",
+      "choices": [
+        "apichecks",
+        "checker"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "list",
+      "displayName": "List",
+      "type": "string",
+      "required": false,
+      "default": "whitelist",
+      "description": "The list the command should be added to / removed from.",
+      "choices": [
+        "whitelist",
+        "blacklist"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "purge",
+      "displayName": "Purge",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If O(purge=true), removes any command not specified in O(command) from O(list) within O(endpoint). If also setting O(state=absent), nothing will remain. If O(purge=false), commands in O(command) are added or removed if necessary. Existing commands stay untouched.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the REST-Api Command.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

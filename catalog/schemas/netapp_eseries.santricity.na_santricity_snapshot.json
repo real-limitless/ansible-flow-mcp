@@ -1,0 +1,278 @@
+{
+  "fqcn": "netapp_eseries.santricity.na_santricity_snapshot",
+  "shortDescription": "NetApp E-Series storage system's snapshots.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp_eseries/santricity/na_santricity_snapshot_module.html",
+  "options": [
+    {
+      "name": "alert_threshold_pct",
+      "displayName": "Alert Threshold Pct",
+      "type": "number",
+      "required": false,
+      "default": 75,
+      "description": "Percent of filled reserve capacity to issue alert.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The url to the SANtricity Web Services Proxy or Embedded Web Services API. Example https://prod-1.wahoo.acme.com:8443/devmgr/v2",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_name",
+      "displayName": "Group Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the snapshot consistency group or snapshot volume. Be sure to use different names for snapshot consistency groups and snapshot volumes to avoid name conflicts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maximum_snapshots",
+      "displayName": "Maximum Snapshots",
+      "type": "number",
+      "required": false,
+      "default": 32,
+      "description": "Total number of snapshot images to maintain.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pit_description",
+      "displayName": "Pit Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Arbitrary description for a consistency group's snapshot images",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pit_name",
+      "displayName": "Pit Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of a consistency group's snapshot images.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pit_timestamp",
+      "displayName": "Pit Timestamp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Snapshot image timestamp in the YYYY-MM-DD HH:MM:SS (AM|PM) (hours, minutes, seconds, and day-period are optional) Define only as much time as necessary to distinguish the desired snapshot image from the others. 24 hour time will be assumed if day-period indicator (AM, PM) is not specified. The terms latest and oldest may be used to select newest and oldest consistency group images. Mutually exclusive with I(pit_name or pit_description)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preferred_reserve_storage_pool",
+      "displayName": "Preferred Reserve Storage Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default preferred storage pool or volume group for the reserve capacity volume. The base volume's storage pool or volume group will be selected by default if not defined. Used to specify storage pool or volume group for both snapshot consistency group volume members and snapshot volumes",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reserve_capacity_full_policy",
+      "displayName": "Reserve Capacity Full Policy",
+      "type": "string",
+      "required": false,
+      "default": "purge",
+      "description": "Policy for full reserve capacity. Purge deletes the oldest snapshot image for the base volume in the consistency group. Reject writes to base volume (keep snapshot images valid).",
+      "choices": [
+        "purge",
+        "reject"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reserve_capacity_pct",
+      "displayName": "Reserve Capacity Pct",
+      "type": "number",
+      "required": false,
+      "default": 40,
+      "description": "Default percentage of base volume capacity to reserve for snapshot copy-on-writes (COW). Used to define reserve capacity for both snapshot consistency group volume members and snapshot volumes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rollback_backup",
+      "displayName": "Rollback Backup",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a point-in-time snapshot should be taken prior to performing a rollback.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rollback_priority",
+      "displayName": "Rollback Priority",
+      "type": "string",
+      "required": false,
+      "default": "medium",
+      "description": "Storage system priority given to restoring snapshot point in time.",
+      "choices": [
+        "highest",
+        "high",
+        "medium",
+        "low",
+        "lowest"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssid",
+      "displayName": "Ssid",
+      "type": "string",
+      "required": false,
+      "default": "1",
+      "description": "The ID of the array to manage. This value must be unique for each array.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When I(state==absent) ensures the I(type) has been removed. When I(state==present) ensures the I(type) is available. When I(state==rollback) the consistency group will be rolled back to the point-in-time snapshot images selected by I(pit_name or pit_timestamp). I(state==rollback) will always return changed since it is not possible to evaluate the current state of the base volume in relation to a snapshot image.",
+      "choices": [
+        "absent",
+        "present",
+        "rollback"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "group",
+      "description": "Type of snapshot object to effect. Group indicates a snapshot consistency group; consistency groups may have one or more base volume members which are defined in I(volumes). Pit indicates a snapshot consistency group point-in-time image(s); a snapshot image will be taken of each base volume when I(state==present). Warning! When I(state==absent and type==pit), I(pit_name) or I(pit_timestamp) must be defined and all point-in-time images created prior to the selection will also be deleted. View ind",
+      "choices": [
+        "group",
+        "pit",
+        "view"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Should https certificates be validated?",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "view_host",
+      "displayName": "View Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default host or host group to map snapshot volumes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "view_name",
+      "displayName": "View Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Consistency group snapshot volume group. Required when I(state==volume) or when ensuring the views absence when I(state==absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "view_validate",
+      "displayName": "View Validate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Default whether snapshop volumes should be validated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "view_writable",
+      "displayName": "View Writable",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Default whether snapshot volumes should be writable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volumes",
+      "displayName": "Volumes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Details for each consistency group base volume for defining reserve capacity, preferred reserve capacity storage pool, and snapshot volume options. When I(state==present and type==group) the volume entries will be used to add or remove base volume from a snapshot consistency group. When I(state==present and type==view) the volume entries will be used to select images from a point-in-time for their respective snapshot volumes. If I(state==present and type==view) and I(volume) is not specified the",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

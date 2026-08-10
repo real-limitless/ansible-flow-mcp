@@ -1,0 +1,191 @@
+{
+  "fqcn": "dellemc.unity.tree_quota",
+  "shortDescription": "Manage quota tree on the Unity storage system",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/unity/tree_quota_module.html",
+  "options": [
+    {
+      "name": "cap_unit",
+      "displayName": "Cap Unit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Unit of I(soft_limit) and I(hard_limit) size. It defaults to C(GB) if not specified.",
+      "choices": [
+        "MB",
+        "GB",
+        "TB"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of a quota tree.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filesystem_id",
+      "displayName": "Filesystem Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the filesystem for which the quota tree is created. For creation of a quota tree either I(filesystem_id) or I(filesystem_name) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filesystem_name",
+      "displayName": "Filesystem Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the filesystem for which quota tree is created. For creation or modification of a quota tree either I(filesystem_name) or I(filesystem_id) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hard_limit",
+      "displayName": "Hard Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Hard limitation for a quota tree on the total space available. If exceeded, users in quota tree cannot write data. Value C(0) implies no limit. One of the values of I(soft_limit) and I(hard_limit) can be C(0), however, both cannot be both C(0) during creation of a quota tree.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nas_server_id",
+      "displayName": "Nas Server Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the NAS server in which the filesystem is created. For creation of a quota tree either I(filesystem_id) or I(filesystem_name) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nas_server_name",
+      "displayName": "Nas Server Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the NAS server in which the filesystem is created. For creation of a quota tree either I(nas_server_name) or I(nas_server_id) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the quota tree. Either I(tree_quota_id) or I(path) to quota tree is required to create/view/modify/delete a quota tree. Path must start with a forward slash '/'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port number through which communication happens with Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "soft_limit",
+      "displayName": "Soft Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Soft limitation for a quota tree on the total space available. If exceeded, notification will be sent to users in the quota tree for the grace period mentioned, beyond which users cannot use space. Value C(0) implies no limit. Both I(soft_limit) and I(hard_limit) cannot be C(0) during creation of quota tree.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The state option is used to mention the existence of the filesystem quota tree.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tree_quota_id",
+      "displayName": "Tree Quota Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the quota tree. Either I(tree_quota_id) or I(path) to quota tree is required to view/modify/delete quota tree.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unispherehost",
+      "displayName": "Unispherehost",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean variable to specify whether or not to validate SSL certificate. C(true) - Indicates that the SSL certificate should be verified. C(false) - Indicates that the SSL certificate should not be verified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,113 @@
+{
+  "fqcn": "graphiant.naas.graphiant_ospfv2",
+  "shortDescription": "Manage Graphiant OSPFv2 configuration (edge.segments.*.ospfv2)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_ospfv2_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specific operation to perform. C(configure) builds full OSPF process objects. C(deconfigure) deletes OSPF processes for listed segments.",
+      "choices": [
+        "configure",
+        "deconfigure"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ospfv2_config_file",
+      "displayName": "Ospfv2 Config File",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the ospf YAML file. Can be an absolute path or relative to the configured config_path. Expected top-level key is C(networkLists) and C(portLists) (list of devices).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state for OSPF processes. C(present) maps to C(configure); C(absent) maps to C(deconfigure) if operation not set",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_ospf_md5_passwords",
+      "displayName": "Vault Ospf Md5 Passwords",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Dict of device name to interface name to OSPF MD5 authentication key (configure only). Pass from playbook vars loaded from encrypted I(vault_secrets.yml); secrets in memory only. Keys must match the device name and C(interfaceName) under that device's areas/interfaces in the OSPF config. Optional; used only when an interface's C(authentication.key) is null in YAML.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,545 @@
+{
+  "fqcn": "vastdata.vms.tenants",
+  "shortDescription": "Create, update, or delete VAST Tenant resources",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vastdata/vms/tenants_module.html",
+  "options": [
+    {
+      "name": "access_ip_ranges",
+      "displayName": "Access Ip Ranges",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Restricts tenant login access to specified source IP ranges. Enter as single IPs (1.1.1.1), ranges (1.2.3.4 -\n1.2.3.6), or CIDR (1.1.1.0/24).\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ad_provider_id",
+      "displayName": "Ad Provider Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Active Directory provider ID",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_disabled_users",
+      "displayName": "Allow Disabled Users",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allow IO from users whose Active Directory accounts are explicitly disabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_locked_users",
+      "displayName": "Allow Locked Users",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allow IO from users whose Active Directory accounts are locked out by lockout policies due to unsuccessful login\nattempts.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allowed_delegations",
+      "displayName": "Allowed Delegations",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the possible types of NFSv4 delegations",
+      "choices": [
+        "NONE",
+        "READ",
+        "WRITE",
+        "READ_WRITE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "application_users_group_name",
+      "displayName": "Application Users Group Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the group that will be used for application users",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "capacity_rules",
+      "displayName": "Capacity Rules",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Capacity Rules",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_ip_ranges",
+      "displayName": "Client Ip Ranges",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of ranges of client IPs to be served by the tenant. For client requests made to a VIP that belongs to a VIP\nPool that is not associated to a specific tenant, the client's source IP is checked against the Client IPs that\nare defined within each tenant. That check determines access. The client IPs that you associate with each tenant\nmust be unique per tenant.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_engine_role_enabled",
+      "displayName": "Data Engine Role Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to create dedicated Role for application users group",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_engine_s3_policy_enabled",
+      "displayName": "Data Engine S3 Policy Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to create dedicated Identity Policy for application users group",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_others_share_level_perm",
+      "displayName": "Default Others Share Level Perm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default Share-level permissions for Others",
+      "choices": [
+        "READ",
+        "CHANGE",
+        "FULL"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain_name",
+      "displayName": "Domain Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Domain name to incorporate into the VMS tenant login page URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_crn",
+      "displayName": "Encryption Crn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Tenant's encryption group unique identifier (deprecated)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encryption_group",
+      "displayName": "Encryption Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Tenant's encryption group unique identifier",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_remove",
+      "displayName": "Force Remove",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Forces deletion of the tenant, even if files exist in the tenant directory. (only used when state=absent)\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "grant_unrequested_delegations_by_default",
+      "displayName": "Grant Unrequested Delegations By Default",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When enabled, the server may grant delegations based on share access even if not explicitly requested by the\nclient\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Resource ID for direct lookup. Mutually exclusive with name-based identification.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identity_provider_name",
+      "displayName": "Identity Provider Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets a configured SAML login provider to enable for the tenant. When set, users defined on the specified SAML\nprovider can login to the tenant VMS as tenant admin users.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_nfsv42_supported",
+      "displayName": "Is Nfsv42 Supported",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable NFSv4.2",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "krb_provider_id",
+      "displayName": "Krb Provider Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Kerberos provider ID",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_provider_id",
+      "displayName": "Ldap Provider Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Open-LDAP provider ID specified separately by the user",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_provider_id",
+      "displayName": "Local Provider Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Local provider ID",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_name_primary_provider",
+      "displayName": "Login Name Primary Provider",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Login name primary provider type",
+      "choices": [
+        "NONE",
+        "LDAP",
+        "NIS",
+        "AD",
+        "LOCAL"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_views",
+      "displayName": "Max Views",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Max views we can create on this tenant (0:unlimted as default)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mtls_identifier",
+      "displayName": "Mtls Identifier",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The mTLS identifier of the tenant Requires VMS 5.5 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A name for the tenant",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nis_provider_id",
+      "displayName": "Nis Provider Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "NIS provider ID",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oidc_provider_id",
+      "displayName": "Oidc Provider Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "OIDC provider ID",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "posix_primary_provider",
+      "displayName": "Posix Primary Provider",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "POSIX primary provider type",
+      "choices": [
+        "NONE",
+        "LDAP",
+        "NIS",
+        "AD"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preferred_owning_group",
+      "displayName": "Preferred Owning Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Set to prefer GID of the user as the owning group of the file",
+      "choices": [
+        "PROTOCOL_BASED",
+        "POSIX_GID"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "qos",
+      "displayName": "Qos",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Qos",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "require_smb_signing",
+      "displayName": "Require Smb Signing",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Require SMB signing",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smb_administrators_group_name",
+      "displayName": "Smb Administrators Group Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional custom name to specify a non default privileged group. If not set, privileged group is the Backup\nOperators domain group.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smb_encryption_state",
+      "displayName": "Smb Encryption State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the encryption level for SMB",
+      "choices": [
+        "OFF",
+        "AVAILABLE",
+        "DESIRED",
+        "REQUIRED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smb_privileged_group_full_access",
+      "displayName": "Smb Privileged Group Full Access",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True=The SMB privileged user group has read and write control access. Members of the group can perform backup and\nrestore operations on all files and directories, without requiring read or write access to the specific files and\ndirectories. False=the privileged group has read only access.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smb_privileged_group_sid",
+      "displayName": "Smb Privileged Group Sid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional custom SID to specify a non default SMB privileged group. If not set, SMB privileged group is the Backup\nOperators domain group.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smb_privileged_user_name",
+      "displayName": "Smb Privileged User Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional custom username for the SMB privileged user. If not set, the SMB privileged user name is 'vastadmin'\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the resource.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_admins_group_name",
+      "displayName": "Tenant Admins Group Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a group on an AD or LDAP provider. Enables users in the group to log into the tenant VMS as Tenant\nAdmin users. In order to be granted permissions to do any configuration, the same users need to belong to groups\non the provider that are associated with VMS manager user roles for tenant admin type users on the tenant.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "trash_gid",
+      "displayName": "Trash Gid",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "GID with permissions to the trash folder",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_smb_native",
+      "displayName": "Use Smb Native",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use native SMB authentication",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_smb_privileged_group",
+      "displayName": "Use Smb Privileged Group",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables SMB privileged user group",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_smb_privileged_user",
+      "displayName": "Use Smb Privileged User",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables SMB privileged user",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vms",
+      "displayName": "Vms",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "VAST VMS connection parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Wait for async operations to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "Timeout in seconds for async operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

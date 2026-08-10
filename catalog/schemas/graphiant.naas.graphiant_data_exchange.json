@@ -1,0 +1,141 @@
+{
+  "fqcn": "graphiant.naas.graphiant_data_exchange",
+  "shortDescription": "Manage Graphiant Data Exchange services, customers, matches, and invitations",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_data_exchange_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file",
+      "displayName": "Config File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the YAML configuration file for the operation. Required for V(create_services), V(delete_services), V(create_customers), V(update_customers), V(delete_customers), V(match_service_to_customers), and V(accept_invitation) operations. Can be an absolute path or relative path. Relative paths are resolved using the configured config_path. Configuration files support Jinja2 templating syntax for dynamic generation. For V(create_services), file must contain I(data_exchange_services) list. Option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging output for troubleshooting and monitoring. When enabled, provides comprehensive logs of all Data Exchange operations. Logs are captured and included in the RV(msg) return value for display using M(ansible.builtin.debug) module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "matches_file",
+      "displayName": "Matches File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the matches responses JSON file for match ID lookup. Optional for V(accept_invitation) operation. If not provided, attempts API lookup using the service name (works when the service is already visible in the consumer tenant). When the service is not yet visible via API (e.g. during a dry-run before acceptance, or when the producer has not shared the service yet), provide this file using C(-e matches_file=...). Can be an absolute path or relative path. Relative paths are resolved using th",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The specific Data Exchange operation to perform. V(create_services): Create Data Exchange services from YAML configuration (Workflow 1). Configuration file must contain I(data_exchange_services) list with service definitions. Services define I(type: peering_service) (full network-level routing/segmentation with a partner) or I(type: client_to_server) (partner access to your organization's services) with LAN segments, sites, and service prefixes. Optional I(policy.globalObjectOps): keys are devic",
+      "choices": [
+        "create_services",
+        "update_services",
+        "delete_services",
+        "create_customers",
+        "update_customers",
+        "delete_customers",
+        "match_service_to_customers",
+        "accept_invitation"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the Data Exchange resources. V(present): Maps to V(create_services) when O(operation) not specified. V(absent): Maps to V(delete_services) when O(operation) not specified.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_data_exchange_bgp_md5_passwords",
+      "displayName": "Vault Data Exchange Bgp Md5 Passwords",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Dict of customer name to BGP MD5 password for V(accept_invitation). Key must match the C(customerName) field in the acceptance config. Precedence{{ \":\" }} YAML C(md5Password) non-null wins; secrets store fills C(null)/absent; absent from both means no MD5 auth (optional field). Fetch from your organization's secrets store and pass as a module param. Secrets are never written to disk \u2014 passed in memory only (C(no_log: true)). Ansible Vault{{ \":\" }} load with M(ansible.builtin.include_vars) (C(no_",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_data_exchange_psk",
+      "displayName": "Vault Data Exchange Psk",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Nested dict of IPSec tunnel preshared keys for V(accept_invitation) C(ipsecGatewayPeers) configs. Structure{{ \":\" }} C(customerName \u2192 peer name \u2192 tunnel1/tunnel2 \u2192 psk string). Precedence{{ \":\" }} YAML C(psk) non-null wins; secrets store fills C(null)/absent; if both are null the API auto-fills the PSK (recommended fallback when vault is omitted). Fetch from your organization's secrets store and pass as a module param. Secrets are never written to disk \u2014 passed in memory only (C(no_log: true)). ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

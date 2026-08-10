@@ -1,0 +1,225 @@
+{
+  "fqcn": "ibm.ibm_zhmc.zhmc_lpar",
+  "shortDescription": "Manage an LPAR (classic mode)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zhmc/zhmc_lpar_module.html",
+  "options": [
+    {
+      "name": "_faked_session",
+      "displayName": " Faked Session",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An internal parameter used for testing the module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "activation_profile_name",
+      "displayName": "Activation Profile Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the image or load activation profile to be used when the LPAR needs to be activated, for O(state=active) and O(state=loaded). This parameter is not allowed for the other O(state) values. Default: The image or load activation profile specified in the 'next-activation-profile-name' property of the LPAR is used when the LPAR needs to be activated. For LPARs with activation modes other than SSC or zAware, the following applies: If an image activation profile is specified, the 'load-at-ac",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_status_exceptions",
+      "displayName": "Allow Status Exceptions",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Controls whether LPAR status 'exceptions' is considered an additional acceptable end status: If True (default), it is considered acceptable, and the module returns once that status (or one of the other desired end states) is reached. If False, it is not considered acceptable, and the module keeps waiting for one of the other desired end states to be reached.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clear_indicator",
+      "displayName": "Clear Indicator",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Controls whether memory is cleared before performing the load, for O(state=loaded). This parameter is not allowed for the other O(state) values. This parameter is used only when the LPAR is explicitly loaded using the 'Load Logical Partition' operation. It is not used when the LPAR is automatically loaded during the 'Activate Logical Partition' operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpc_name",
+      "displayName": "Cpc Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the CPC with the target LPAR.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Controls whether operations that change the LPAR status are performed when the LPAR is currently loaded (i.e. status 'operating' or 'exceptions'): If True, such operations are performed regardless of the current LPAR status. If False (default), such operations are performed only if the LPAR is not currently loaded, and are rejected otherwise.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_auth",
+      "displayName": "Hmc Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The authentication credentials for the HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_host",
+      "displayName": "Hmc Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostnames or IP addresses of a single HMC or of a list of redundant HMCs. A single HMC can be specified as a string type or as an HMC list with one item. An HMC list can be specified as a list type or as a string type containing a Python list representation. The first available HMC of a list of redundant HMCs is used for the entire execution of the module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "load_address",
+      "displayName": "Load Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hexadecimal address of an I/O device that provides access to the control program to be loaded, for O(state=loaded). This parameter is not allowed for the other O(state) values. This parameter is used only when the LPAR is explicitly loaded using the 'Load Logical Partition' operation. It is not used when the LPAR is automatically loaded during the 'Activate Logical Partition' operation. For z13 and older generations, this parameter is required. Starting with z14, this parameter is optional a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "load_parameter",
+      "displayName": "Load Parameter",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A parameter string that is passed to the control program when loading it, for O(state=loaded). This parameter is not allowed for the other O(state) values. This parameter is used only when the LPAR is explicitly loaded using the 'Load Logical Partition' operation. It is not used when the LPAR is automatically loaded during the 'Activate Logical Partition' operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_file",
+      "displayName": "Log File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "File path of a log file to which the logic flow of this module as well as interactions with the HMC are logged. If null, logging will be propagated to the Python root logger.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the target LPAR.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os_ipl_token",
+      "displayName": "Os Ipl Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Setting this parameter for O(state=reset_clear) or O(state=reset_normal) requests that the corresponding HMC operations only be performed if the provided value matches the current value of the 'os-ipl-token' property of the LPAR, and be rejected otherwise. Note that the 'os-ipl-token' property of the LPAR is set by the operating system and is set only by some operating systems, such as z/OS. This parameter is ignored for other O(state) values.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "properties",
+      "displayName": "Properties",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary with new values for the LPAR properties, for O(state=active), O(state=loaded) and O(state=set). Key is the property name with underscores instead of hyphens, and value is the property value in YAML syntax. Integer properties may also be provided as decimal strings. The possible input properties in this dictionary are the properties defined as writeable in the data model for LPAR resources (where the property names contain underscores instead of hyphens). Properties omitted in this dic",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "select_properties",
+      "displayName": "Select Properties",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Limits the returned properties of the LPAR to those specified in this parameter plus those specified in the O(properties) parameter. The properties can be specified with underscores or hyphens in their names. Null indicates not to limit the returned properties in this way. This parameter is ignored for O(state) values that cause no properties to be returned. The specified properties are passed to the 'Get Logical Partition Properties' HMC operation using the 'properties' query parameter and save",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The desired state for the LPAR: * V(inactive): Ensures that the LPAR is inactive (i.e. status 'not-activated'), unless the LPAR is currently operating and the O(force) parameter was not set to True. Properties cannot be updated. The LPAR is deactivated if needed. * V(active): Ensures that the LPAR is at least active (i.e. status is 'not-operating', 'operating' or 'exceptions'), and then ensures that the LPAR properties have the specified values. The LPAR is activated if needed using the 'Activat",
+      "choices": [
+        "inactive",
+        "active",
+        "loaded",
+        "reset_clear",
+        "reset_normal",
+        "set",
+        "facts"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status_timeout",
+      "displayName": "Status Timeout",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Timeout in seconds, for reaching the desired status after the HMC operation completed, for O(state=inactive), O(state=active) and O(state=loaded).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "store_status_indicator",
+      "displayName": "Store Status Indicator",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Controls whether the current values of CPU timer, clock comparator, program status word, and the contents of the processor registers are stored to their assigned absolute storage locations, for O(state=loaded). This parameter is not allowed for the other O(state) values. This parameter is used only when the LPAR is explicitly loaded using the 'Load Logical Partition' operation. It is not used when the LPAR is automatically loaded during the 'Activate Logical Partition' operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Timeout in seconds, for the HMC operation to complete, for O(state=inactive), O(state=active) and O(state=loaded).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

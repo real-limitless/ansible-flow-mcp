@@ -1,0 +1,187 @@
+{
+  "fqcn": "netapp_eseries.santricity.netapp_e_ldap",
+  "shortDescription": "NetApp E-Series manage LDAP integration to use for authentication",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp_eseries/santricity/netapp_e_ldap_module.html",
+  "options": [
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The url to the SANtricity Web Services Proxy or Embedded Web Services API. Example https://prod-1.wahoo.acme.com/devmgr/v2",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "list",
+      "required": false,
+      "default": "memberOf",
+      "description": "The user attributes that should be considered for the group to role mapping. Typically this is used with something like 'memberOf', and a user's access is tested against group membership or lack thereof.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identifier",
+      "displayName": "Identifier",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This is a unique identifier for the configuration (for cases where there are multiple domains configured). If this is not specified, but I(state=present), we will utilize a default value of 'default'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_path",
+      "displayName": "Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A local path to a file to be used for debug logging",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The domain name[s] that will be utilized when authenticating to identify which domain to utilize. Default to use the DNS name of the I(server). The only requirement is that the name[s] be resolvable. Example: user@example.com",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "This is the password for the bind user account.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role_mappings",
+      "displayName": "Role Mappings",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "This is where you specify which groups should have access to what permissions for the storage-system. For example, all users in group A will be assigned all 4 available roles, which will allow access to all the management functionality of the system (super-user). Those in group B only have the storage.monitor role, which will allow only read-only access. This is specified as a mapping of regular expressions to a list of roles. See the examples. The roles that will be assigned to to the group/gro",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search_base",
+      "displayName": "Search Base",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The search base is used to find group memberships of the user. Example: ou=users,dc=example,dc=com",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server",
+      "displayName": "Server",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "This is the LDAP server url. The connection string should be specified as using the ldap or ldaps protocol along with the port information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssid",
+      "displayName": "Ssid",
+      "type": "string",
+      "required": false,
+      "default": "1",
+      "description": "The ID of the array to manage. This value must be unique for each array.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Enable/disable LDAP support on the system. Disabling will clear out any existing defined domains.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_attribute",
+      "displayName": "User Attribute",
+      "type": "string",
+      "required": false,
+      "default": "sAMAccountName",
+      "description": "This is the attribute we will use to match the provided username when a user attempts to authenticate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "This is the user account that will be used for querying the LDAP server. Example: CN=MyBindAcct,OU=ServiceAccounts,DC=example,DC=com",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Should https certificates be validated?",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

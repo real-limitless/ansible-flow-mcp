@@ -1,0 +1,261 @@
+{
+  "fqcn": "kembitnl.topdesk.changeactivity",
+  "shortDescription": "Manipulate change activities",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/kembitnl/topdesk/changeactivity_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional action (entry in the progressTrail). Ignored when O(state<>new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "activityTemplate",
+      "displayName": "Activitytemplate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional change activity template ID. Ignored when O(state<>new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "activityType",
+      "displayName": "Activitytype",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "The activity type. Default is V(normal). Ignored when O(state<>new).",
+      "choices": [
+        "normal",
+        "authorization"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "add",
+      "displayName": "Add",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The properties to add to an existing change. At least one of O(add), O(replace), or O(remove) is required when O(state=update). Ignored for other states.\nThe elements in the list of items to add should have a path (leading slash not needed) and a value property.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "assigneeId",
+      "displayName": "Assigneeid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the assignee. If no assigneeId is given, the group ID is used. Ignored when O(state<>new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "assigneegroupId",
+      "displayName": "Assigneegroupid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The group ID of the assignee. If no assigneeId is given, this is also used for the assignee. Required when O(state=new), ignored for other states.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "briefDescription",
+      "displayName": "Briefdescription",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The brief description of the change activity. Only the first 80 characters will be used if a longer description is given. Required when O(state=new), ignored for other states.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "category",
+      "displayName": "Category",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID or name of the category. If not provided, the category from the change is used. Ignored when O(state<>new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "changeActivityId",
+      "displayName": "Changeactivityid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the change activity to manipulate. Ignored when O(state=new), required for other states.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "changeId",
+      "displayName": "Changeid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the change to which the change activity belongs. Required when O(state=new), ignored for other states.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "changePhase",
+      "displayName": "Changephase",
+      "type": "string",
+      "required": false,
+      "default": "progress",
+      "description": "The phase for the change activity. Default is V(progress). Ignored when O(state<>new).",
+      "choices": [
+        "rfc",
+        "progress",
+        "evaluation"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to include some debugging in the output or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file",
+      "displayName": "File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the file to upload to the change. Required when O(state=upload).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plannedDays",
+      "displayName": "Planneddays",
+      "type": "string",
+      "required": false,
+      "default": 1,
+      "description": "The number of days until the planned end date. Overruled when plannedEndDate is also provided. Note that weekends and holidays are not looked at.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plannedEndDate",
+      "displayName": "Plannedenddate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The end date of the change activity, in the format '%Y-%m-%dT%H:%M:00%z'. By default, the activity ends 1 day after the time of creation.\nIf both plannedDays and plannedEndDate are given, plannedDays is ignored. Note that weekends and holidays are not looked at.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plannedStartDate",
+      "displayName": "Plannedstartdate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The start date of the change activity, in the format '%Y-%m-%dT%H:%M:00%z'. By default, the activity starts at the time of creation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove",
+      "displayName": "Remove",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The properties to remove to an existing change. At least one of O(add), O(replace), or O(remove) is required when O(state=update). Ignored for other states.\nThe elements in the list of items to remove should only have a path (leading slash not needed) property.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replace",
+      "displayName": "Replace",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The properties to replace on an existing change. At least one of O(add), O(replace), or O(remove) is required when O(state=update). Ignored for other states.\nThe elements in the list of items to replace should have a path (leading slash not needed) and a value property.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "request",
+      "displayName": "Request",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The request text. Required when O(state=new), ignored for other states.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The state of the change activity.",
+      "choices": [
+        "new",
+        "update",
+        "upload"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID or name of the status. Required when O(state=new). Ignored for other states.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subcategory",
+      "displayName": "Subcategory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID or name of the subcategory. If not provided, the subcategory from the change is used. Ignored when O(state<>new).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

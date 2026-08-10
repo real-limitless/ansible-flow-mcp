@@ -1,0 +1,106 @@
+{
+  "fqcn": "infra.quay_configuration.quay_api_token",
+  "shortDescription": "Create OAuth access tokens for accessing the Quay Container Registry API",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/infra/quay_configuration/quay_api_token_module.html",
+  "options": [
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The client ID associated with the OAuth application to use for generating the OAuth access token. See the M(infra.quay_configuration.quay_application) module to create an application object and to retrieve the associated client ID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "for_user",
+      "displayName": "For User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to generate an OAuth access token for. The user receives a notification in the web interface, which enables the user to retrieve the token. When you use this option, the module does not return the token. Requires Quay version 3.12 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_host",
+      "displayName": "Quay Host",
+      "type": "string",
+      "required": false,
+      "default": "http://127.0.0.1",
+      "description": "URL for accessing the API. U(https://quay.example.com:8443) for example. If you do not set the parameter, then the module uses the E(QUAY_HOST) environment variable. If you do no set the environment variable either, then the module uses the U(http://127.0.0.1) URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_password",
+      "displayName": "Quay Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password to use for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_PASSWORD) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_username",
+      "displayName": "Quay Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username to use for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_USERNAME) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rights",
+      "displayName": "Rights",
+      "type": "list",
+      "required": false,
+      "default": "repo:read",
+      "description": "List of permissions to grant to the user account. V(all) means all the permissions.",
+      "choices": [
+        "org:admin",
+        "repo:admin",
+        "repo:create",
+        "repo:read",
+        "repo:write",
+        "super:user",
+        "user:admin",
+        "user:read",
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10.0,
+      "description": "Number of seconds to wait for Quay to send data before giving up. If you do not set the parameter, then the module tries the E(QUAY_TIMEOUT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to allow insecure connections to the API. If V(false), then the module does not validate SSL certificates. If you do not set the parameter, then the module tries the E(QUAY_VERIFY_SSL) environment variable (V(yes), V(1), and V(True) mean true, and V(no), V(0), V(False), and no value mean false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

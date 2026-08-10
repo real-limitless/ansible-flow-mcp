@@ -1,0 +1,113 @@
+{
+  "fqcn": "ultradns.ultradns.record",
+  "shortDescription": "Manage zone resource records in UltraDNS",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ultradns/ultradns/record_module.html",
+  "options": [
+    {
+      "name": "data",
+      "displayName": "Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The complete rdata of the record as a string Required for O(state=present) when creating a new record If not specified for O(state=present) with an existing record, only the TTL will be updated If not specified for O(state=absent), all records in the rrset will be removed",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The record owner name May be relative to the zone (e.g. 'www') or fully qualified (e.g. 'www.example.com.') V(\"@\") may be used to for records at the zone apex",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Connection information for the UltraDNS API",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "solo",
+      "displayName": "Solo",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Determines the behavior when adding a record to an existing rrset. O(solo=true) will replace the existing rrset with the new record, removing any existing records. O(solo=false) will add the new record to the existing rrset. Ignored if O(type=CNAME) or O(type=SOA) Ignored when O(state=absent) Defaults to O(solo=false)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The desired state of the record",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttl",
+      "displayName": "Ttl",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The record time-to-live (TTL) in seconds Defaults to UltraDNS account default if not specified Can be updated without specifying data for existing records",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The record type by common name",
+      "choices": [
+        "A",
+        "AAAA",
+        "CNAME",
+        "TXT",
+        "MX",
+        "NS",
+        "CAA",
+        "HTTPS",
+        "SVCB",
+        "PTR",
+        "SOA",
+        "SRV",
+        "SSHFP"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zone",
+      "displayName": "Zone",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The zone containing the record Must be a fully qualified domain name (FQDN)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

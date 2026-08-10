@@ -1,0 +1,268 @@
+{
+  "fqcn": "logicmonitor.integration.lm_device",
+  "shortDescription": "LogicMonitor Device Ansible module for managing devices.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/logicmonitor/integration/lm_device_module.html",
+  "options": [
+    {
+      "name": "access_id",
+      "displayName": "Access Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Access ID API token associated with the user's account that's used to query the LogicMonitor API. Please contact your LogicMonitor admin if you need new API tokens created for your account.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Access Key API token associated with the user's account that's used to query the LogicMonitor API. Please contact your LogicMonitor admin if you need new API tokens created for your account. Must start with the \"!unsafe\" keyword if the the key starts with a special character (e.g. '[', ']', etc.) to prevent playbook issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The action you wish to perform on the device. Add = Add a device to your LogicMonitor account. Update = Update properties, description, etc for a device in your LogicMonitor account. Remove = Remove a device from your LogicMonitor account. SDT = Schedule downtime for a device in your LogicMonitor account.",
+      "choices": [
+        "add",
+        "update",
+        "remove",
+        "sdt"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_balance",
+      "displayName": "Auto Balance",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A boolean flag to denote whether or not the collector group configured for the device should use auto balancing. This value should only be True when the configured collector group is an Auto-Balanced Collector Group (ABCG). Optional for managing devices (action=add or action=update).",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "collector_description",
+      "displayName": "Collector Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of a collector to monitor newly added device. Required for action=add if a non-ABCG is being configured (auto_balance=False) and collector_id isn't provided. NOTE - A collector can't be manually configured for an existing device (action=update) when an ABCG is in use and auto balance isn't being disabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "collector_group_id",
+      "displayName": "Collector Group Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the collector group to configure for the device. Required for action=add if an ABCG is being configured (auto_balance=True) and collector_group_name isn't provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "collector_group_name",
+      "displayName": "Collector Group Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the collector group to configure for the device. Default/Ungrouped group name should be denoted by empty string \"\" or \"@default\". Required for action=add if an ABCG is being configured (auto_balance=True) and collector_group_name isn't provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "collector_id",
+      "displayName": "Collector Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of a collector to monitor newly added device. Required for action=add if a non-ABCG is being configured (auto_balance=False) and collector_description isn't provided. NOTE - A collector can't be manually configured for an existing device (action=update) when an ABCG is in use and auto balance isn't being disabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The note/comment to add to an SDT action. Optional for action=sdt.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "company",
+      "displayName": "Company",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The LogicMonitor account company name. A user logging into their account at \"batman.logicmonitor.com\" would use \"batman\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The long text description of the device to add. Optional for managing devices (action=add or action=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_alerting",
+      "displayName": "Disable Alerting",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A boolean flag to enable/disable alerting for a device. Defaults to False when creating a device. Optional for managing devices (action=add or action=update).",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The display name of a device (host) in your LogicMonitor account. Required for action=add. Required for update, remove, sdt if both id and hostname aren't provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "duration",
+      "displayName": "Duration",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The duration (minutes) of the Scheduled Down Time (SDT). Optional for action=sdt.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "end_time",
+      "displayName": "End Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The time that the Scheduled Down Time (SDT) should end. Format must be 'yyyy-MM-dd HH:mm' or \"yyyy-MM-dd HH:mm z\" where z is \"am\" or \"pm\". The former is used for a 24-hr clock while the latter is for a 12-hr clock. If end time is provided it will be used otherwise duration would be used (duration defaults to 30 min). Optional for action=sdt.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_manage",
+      "displayName": "Force Manage",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "A boolean flag to enable/disable the feature to ... (1) update a device when the initial action=add because the device exists or (2) add a device when the initial action=update because the device doesn't exist. Optional for managing devices (action=add or action=update).",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "groups",
+      "displayName": "Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A comma-separated list of device groups that the device should be a member of. The list can contain device group IDs and/or full paths. Must be enclosed within [] brackets. Optional for managing devices (action=add or action=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname (name) of a device (host) in your LogicMonitor account. Required for action=add. Required for update, remove, sdt if both id and display_name aren't provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the device to target. Required for update, remove, sdt if both display_name and hostname aren't provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "optype",
+      "displayName": "Optype",
+      "type": "string",
+      "required": false,
+      "default": "replace",
+      "description": "A string describing the operation on properties when updating device... (1) replace - a property would be updated if it exists already else a new property will be created (2) refresh - a property would be updated if it exists already else a new property will be created, any existing property not provided during update will be removed (3) add - a property would be ignored if it exists already else a new property will be created Optional for action=update.",
+      "choices": [
+        "add",
+        "replace",
+        "refresh"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "properties",
+      "displayName": "Properties",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A JSON object of properties to configure for the LogicMonitor device. This parameter will add or update existing properties in your LogicMonitor account. Must be enclosed within {} braces. Optional for managing devices (action=add or action=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_time",
+      "displayName": "Start Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The time that the Scheduled Down Time (SDT) should begin. Format must be \"yyyy-MM-dd HH:mm\" or \"yyyy-MM-dd HH:mm z\" where z is \"am\" or \"pm\". The former is used for a 24-hr clock while the latter is for a 12-hr clock. Optional for action=sdt. Defaults to the time action is executed. Required in case start time differ from the execution time of action.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

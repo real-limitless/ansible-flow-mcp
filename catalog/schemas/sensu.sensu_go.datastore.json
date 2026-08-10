@@ -1,0 +1,143 @@
+{
+  "fqcn": "sensu.sensu_go.datastore",
+  "shortDescription": "Manage Sensu external datastore providers",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/sensu/sensu_go/datastore_module.html",
+  "options": [
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Authentication parameters. Can define each of them with ENV as well.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "batch_buffer",
+      "displayName": "Batch Buffer",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Maximum number of requests to buffer in memory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "batch_size",
+      "displayName": "Batch Size",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Number of requests in each PostgreSQL write transaction, as specified in the PostgreSQL configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "batch_workers",
+      "displayName": "Batch Workers",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of Goroutines sending data to PostgreSQL, as specified in the PostgreSQL configuration. Set to current PostgreSQL pool size as default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dsn",
+      "displayName": "Dsn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Attribute that specifies the data source names as a URL or PostgreSQL connection string. See the PostgreSQL docs for more information about connection strings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_round_robin",
+      "displayName": "Enable Round Robin",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables round robin scheduling on PostgreSQL. Any existing round robin scheduling will stop and migrate to PostgreSQL as entities check in with keepalives. Sensu will gradually delete the existing etcd scheduler state as keepalives on the etcd scheduler keys expire over time.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_conn_lifetime",
+      "displayName": "Max Conn Lifetime",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Maximum time a connection can persist before being destroyed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_idle_conns",
+      "displayName": "Max Idle Conns",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Maximum number of number of idle connections to retain.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Sensu resource's name. This name (in combination with the namespace where applicable) uniquely identifies the resource that Ansible operates on. If the resource with selected name already exists, Ansible module will update it to match the specification in the task. Consult the I(name) metadata attribute specification in the upstream docs on U(https://docs.sensu.io/sensu-go/latest/reference/) for more details about valid names and other restrictions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool_size",
+      "displayName": "Pool Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The maximum number of connections to hold in the PostgreSQL connection pool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Target state of the Sensu object.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "strict",
+      "displayName": "Strict",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When the PostgresConfig resource is created, configuration validation will include connecting to the PostgreSQL database and executing a query to confirm whether the connected user has permission to create database tables. Sensu-backend will try to connect to PostgreSQL indefinitely at 5-second intervals instead of reverting to etcd after 3 attempts. We recommend setting strict to true in most cases. If the connection fails or the user does not have permission to create database tables, resource",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

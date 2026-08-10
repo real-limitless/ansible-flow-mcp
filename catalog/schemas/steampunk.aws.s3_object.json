@@ -1,0 +1,140 @@
+{
+  "fqcn": "steampunk.aws.s3_object",
+  "shortDescription": "Manage S3 objects",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/steampunk/aws/s3_object_module.html",
+  "options": [
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Parameters for authenticating with the AWS service. Each of them may be defined via environment variables.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bucket",
+      "displayName": "Bucket",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the S3 bucket containing the S3 object we're managing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clear_metadata",
+      "displayName": "Clear Metadata",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to clear any existing metadata on the resource that are not explicitly stated in I(metadata). By default, existing metadata are kept on the resource. When this parameter is set to C(true), any pre-existing metadata on the resource are removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clear_tags",
+      "displayName": "Clear Tags",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to clear any existing tags on the resource that are not explicitly stated in I(tags). By default, existing tags are kept on the resource. When this parameter is set to C(true), any pre-existing tags on the resource are removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "content",
+      "displayName": "Content",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The contents of the S3 object. Only use this parameter if you are providing the content encoded as UTF-8 text. For binary contents, store the content to a file and use I(content_source) instead. This parameter is required when creating an object. Mutually exclusive with I(content_source).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "content_source",
+      "displayName": "Content Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the file on your local filesystem whose contents will be uploaded to S3. This parameter is required when creating an object. Mutually exclusive with I(content).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key",
+      "displayName": "Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The key name of the S3 object. It must contain the full path to the object within the I(bucket), for example C(img/20-7-2020/image.jpeg).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "metadata",
+      "displayName": "Metadata",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "User-defined metadata that will be stored with the S3 object as key/value pairs. Note that the specified metadata keys will be automatically prefixed with C(x-amz-meta-) and AWS will convert metadata keys to lowercase. Metadata values are case-sensitive strings. For more information about S3 object metadata, please refer to U(https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-metadata).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the S3 object. When I(state) is C(absent) and multiple versions of the object exist, the module deletes all the versions of the S3 object.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_class",
+      "displayName": "Storage Class",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Storage class for the S3 object. If you omit this parameter when creating a new object, the default value C(standard) will be used. Please refer to U(https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) for more info on S3 storage types.",
+      "choices": [
+        "standard",
+        "standard_ia",
+        "one_zone_ia",
+        "glacier",
+        "deep_archive",
+        "reduced_redundancy",
+        "intelligent_tiering"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Metadata for the AWS resource as key/value pairs. Keys and values are case-sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

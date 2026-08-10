@@ -1,0 +1,407 @@
+{
+  "fqcn": "gillbus.project.uri",
+  "shortDescription": "Interacts with webservices",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/gillbus/project/uri_module.html",
+  "options": [
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The attributes the resulting filesystem object should have. To get supported flags look at the man page for C(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by C(lsattr). The C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "body",
+      "displayName": "Body",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The body of the http request/response to the web service. If C(body_format) is set to 'json' it will take an already formatted JSON string or convert a data structure into JSON. If C(body_format) is set to 'form-urlencoded' it will convert a dictionary or list of tuples into an 'application/x-www-form-urlencoded' string. (Added in v2.7) If C(body_format) is set to 'form-multipart' it will convert a dictionary into 'multipart/form-multipart' body. (Added in v2.10)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "body_format",
+      "displayName": "Body Format",
+      "type": "string",
+      "required": false,
+      "default": "raw",
+      "description": "The serialization format of the body. When set to C(json), C(form-multipart), or C(form-urlencoded), encodes the body argument, if needed, and automatically sets the Content-Type header accordingly. As of C(2.3) it is possible to override the `Content-Type` header, when set to C(json) or C(form-urlencoded) via the I(headers) option. The 'Content-Type' header cannot be overridden when using C(form-multipart) C(form-urlencoded) was added in v2.7. C(form-multipart) was added in v2.10.",
+      "choices": [
+        "form-urlencoded",
+        "json",
+        "raw",
+        "form-multipart"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted CA certificate file to be used for validation of server SSL certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted certificate chain file to be used for SSL client authentication. This file can also include the key as well, and if the key is included, I(client_key) is not required",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted file that contains your private key to be used for SSL client authentication. If I(client_cert) contains both the certificate and key, this option is not required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "creates",
+      "displayName": "Creates",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A filename, when it already exists, this step will not be run.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path of where to download the file to (if desired). If I(dest) is a directory, the basename of the file on the remote server will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "follow_redirects",
+      "displayName": "Follow Redirects",
+      "type": "string",
+      "required": false,
+      "default": "safe",
+      "description": "Whether or not the URI module should follow redirects. C(all) will follow all redirects. C(safe) will follow only \"safe\" redirects, where \"safe\" means that the client is only doing a GET or HEAD on the URI to which it is being redirected. C(none) will not follow any redirects. Note that C(yes) and C(no) choices are accepted for backwards compatibility, where C(yes) is the equivalent of C(all) and C(no) is the equivalent of C(safe). C(yes) and C(no) are deprecated and will be removed in some futu",
+      "choices": [
+        "all",
+        "no",
+        "none",
+        "safe",
+        "urllib2",
+        "yes"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(yes) do not get a cached copy. Alias C(thirsty) has been deprecated and will be removed in 2.13.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_basic_auth",
+      "displayName": "Force Basic Auth",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Force the sending of the Basic authentication header upon initial request. The library used by the uri module only sends authentication information when a webservice responds to an initial request with a 401 status. Since some basic auth services do not properly send a 401, logins will fail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current group of the current user unless you are root, in which case it can preserve the previous ownership.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "headers",
+      "displayName": "Headers",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Add custom HTTP headers to a request in the format of a YAML hash. As of C(2.3) supplying C(Content-Type) here will override the header generated by supplying C(json) or C(form-urlencoded) for I(body_format).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_agent",
+      "displayName": "Http Agent",
+      "type": "string",
+      "required": false,
+      "default": "ansible-httpget",
+      "description": "Header to identify as, generally appears in web server logs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "method",
+      "displayName": "Method",
+      "type": "string",
+      "required": false,
+      "default": "GET",
+      "description": "The HTTP method of the request or response. In more recent versions we do not restrict the method at the module level anymore but it still must be a valid method accepted by the service handling the request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The permissions the resulting filesystem object should have. For those used to C(/usr/bin/chmod) remember that modes are actually octal numbers. You must give Ansible enough information to parse them correctly. For consistent results, quote octal numbers (for example, V('644') or V('1777')) so Ansible receives a string and can do its own conversion from string into number. Adding a leading zero (for example, V(0755)) works sometimes, but can fail in loops and some other circumstances. Giving Ans",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the user that should own the filesystem object, as would be fed to C(chown). When left unspecified, it uses the current user unless you are root, in which case it can preserve the previous ownership. Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_src",
+      "displayName": "Remote Src",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(no), the module will search for the C(src) on the controller node. If C(yes), the module will search for the C(src) on the managed (remote) node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "removes",
+      "displayName": "Removes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A filename, when it does not exist, this step will not be run.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "return_content",
+      "displayName": "Return Content",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether or not to return the body of the response as a \"content\" key in the dictionary result no matter it succeeded or failed. Independently of this option, if the reported Content-type is \"application/json\", then the JSON is always loaded into a key called C(json) in the dictionary results.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selevel",
+      "displayName": "Selevel",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The level part of the SELinux filesystem object context. This is the MLS/MCS attribute, sometimes known as the C(range). When set to V(_default), it will use the C(level) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serole",
+      "displayName": "Serole",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The role part of the SELinux filesystem object context. When set to V(_default), it will use the C(role) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "setype",
+      "displayName": "Setype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type part of the SELinux filesystem object context. When set to V(_default), it will use the C(type) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seuser",
+      "displayName": "Seuser",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user part of the SELinux filesystem object context. By default it uses the V(system) policy, where applicable. When set to V(_default), it will use the C(user) portion of the policy if available.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to file to be submitted to the remote server. Cannot be used with I(body).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status_code",
+      "displayName": "Status Code",
+      "type": "list",
+      "required": false,
+      "default": [
+        200
+      ],
+      "description": "A list of valid, numeric, HTTP status codes that signifies success of the request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unix_socket",
+      "displayName": "Unix Socket",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to Unix domain socket to use for connection",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unsafe_writes",
+      "displayName": "Unsafe Writes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target filesystem object. By default this module uses atomic operations to prevent data corruption or inconsistent reads from the target filesystem objects, but sometimes systems are configured or just broken in ways that prevent this. One example is docker mounted filesystem objects, which cannot be updated atomically from inside the container and can only be written in an unsafe manner. This option",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "HTTP or HTTPS URL in the form (http|https)://host.domain[:port]/path",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url_password",
+      "displayName": "Url Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A password for the module to use for Digest, Basic or WSSE authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url_username",
+      "displayName": "Url Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A username for the module to use for Digest, Basic or WSSE authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_gssapi",
+      "displayName": "Use Gssapi",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use GSSAPI to perform the authentication, typically this is for Kerberos or Kerberos through Negotiate authentication. Requires the Python library L(gssapi,https://github.com/pythongssapi/python-gssapi) to be installed. Credentials for GSSAPI can be specified with I(url_username)/I(url_password) or with the GSSAPI env var C(KRB5CCNAME) that specified a custom Kerberos credential cache. NTLM authentication is C(not) supported even if the GSSAPI mech for NTLM has been installed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), SSL certificates will not be validated. This should only set to C(no) used on personally controlled sites using self-signed certificates. Prior to 1.9.2 the code defaulted to C(no).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

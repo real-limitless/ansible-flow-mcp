@@ -1,0 +1,58 @@
+{
+  "fqcn": "jm1.libvirt.net_xml",
+  "shortDescription": "Create/Modify/Delete a libvirt virtual network.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/jm1/libvirt/net_xml_module.html",
+  "options": [
+    {
+      "name": "ignore",
+      "displayName": "Ignore",
+      "type": "list",
+      "required": false,
+      "default": [
+        "/network/mac",
+        "/network/uuid"
+      ],
+      "description": "XPath expressions to XML nodes that are ignored when comparing I(xml) to existing network configuration. XPath expressions must return XML nodes only, e.g. '/network/uuid'. Other XPath expressions, such as '/network/uuid/text()' are not supported. When modifying a network, ignored XML nodes will be taken from existing network, i.e. they will not be overwritten.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Should the network be present or absent. If network does not exist and I(state) is C(present), then the network will be defined, but not started. Use M(community.libvirt.virt_net) to start the network. If network does exist and I(state) is C(absent), then the network will not be stopped prior to undefine. Use M(community.libvirt.virt_net) to stop the network.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uri",
+      "displayName": "Uri",
+      "type": "string",
+      "required": false,
+      "default": "qemu:///system",
+      "description": "libvirt connection uri.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "xml",
+      "displayName": "Xml",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "XML document used to define or modify the network. Must be raw XML content using C(lookup). XML cannot be reference to a file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

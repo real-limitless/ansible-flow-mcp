@@ -1,0 +1,78 @@
+{
+  "fqcn": "ibm.ibm_zos_cics.stop_region",
+  "shortDescription": "Stop a CICS region",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_cics/stop_region_module.html",
+  "options": [
+    {
+      "name": "job_id",
+      "displayName": "Job Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Identifies the job ID belonging to the running CICS region. The stop_region module uses this job ID to identify the state of the CICS region and shut it down.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_name",
+      "displayName": "Job Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Identifies the job name belonging to the running CICS region. The stop_region module uses this job name to identify the state of the CICS region and shut it down. The O(job_name) must be unique; if multiple jobs with the same name are running, use O(job_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "Specify the type of shutdown to be executed on the CICS region. Specify C(normal) to perform a normal shutdown. This instructs the stop_region module to issue a CEMT PERFORM SHUTDOWN command. Specify C(immediate) to perform an immediate shutdown. This instructs the stop_region module to issue a CEMT PERFORM SHUTDOWN IMMEDIATE command. Specify C(cancel) to cancel the CICS region. This instructs the stop_region module to use ZOAU's C(jobs.cancel) utility to process the request.",
+      "choices": [
+        "normal",
+        "immediate",
+        "cancel"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_sdtran",
+      "displayName": "No Sdtran",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "No shutdown assist transaction is to be run at CICS shutdown.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdtran",
+      "displayName": "Sdtran",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The 4-character identifier of the shutdown assist transaction. If neither SDTRAN nor NOSDTRAN is specified, the value specified in the SDTRAN SIT parameter is used; or if this has not been set, the CICS-supplied shutdown assist transaction, CESD, is used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": -1,
+      "description": "The maximum time, in seconds, to wait for CICS shutdown processing to complete. Specify -1 to exclude a timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

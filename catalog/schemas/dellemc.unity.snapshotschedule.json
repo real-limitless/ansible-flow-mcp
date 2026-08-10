@@ -1,0 +1,237 @@
+{
+  "fqcn": "dellemc.unity.snapshotschedule",
+  "shortDescription": "Manage snapshot schedules on Unity storage system",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/unity/snapshotschedule_module.html",
+  "options": [
+    {
+      "name": "auto_delete",
+      "displayName": "Auto Delete",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether the system can automatically delete the snapshot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "day_interval",
+      "displayName": "Day Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of days between snapshots. Applicable only when rule type is C(every_n_days).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "day_of_month",
+      "displayName": "Day Of Month",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Day of the month for which the snapshot schedule rule applies. Applicable only when rule type is C(every_month). Value should be [1, 31].",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "days_of_week",
+      "displayName": "Days Of Week",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Days of the week for which the snapshot schedule rule applies. Applicable only when rule type is C(every_week).",
+      "choices": [
+        "SUNDAY",
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "desired_retention",
+      "displayName": "Desired Retention",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of days/hours for which snapshot will be retained. When I(auto_delete) is C(true), I(desired_retention) cannot be specified. Maximum desired retention supported is 31 days or 744 hours.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hour",
+      "displayName": "Hour",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The hour when the snapshot will be taken. Applicable for C(every_n_days), C(every_week), C(every_month) rule types. For create operation, if I(hour) parameter is not specified, value will be taken as C(0). Value should be [0, 23].",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hours_of_day",
+      "displayName": "Hours Of Day",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Hours of the day when the snapshot will be taken. Applicable only when rule type is C(every_day).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the snapshot schedule.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interval",
+      "displayName": "Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of hours between snapshots. Applicable only when rule type is C(every_n_hours).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minute",
+      "displayName": "Minute",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Minute offset from the hour when the snapshot will be taken. Applicable for all rule types. For a create operation, if I(minute) parameter is not specified, value will be taken as C(0). Value should be [0, 59].",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the snapshot schedule. Name is mandatory for a create operation. Specify either I(name) or I(id) (but not both) for any operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port number through which communication happens with Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retention_unit",
+      "displayName": "Retention Unit",
+      "type": "string",
+      "required": false,
+      "default": "hours",
+      "description": "The retention unit for the snapshot.",
+      "choices": [
+        "hours",
+        "days"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Define whether the snapshot schedule should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of the rule to be included in snapshot schedule. Type is mandatory for any create or modify operation. Once the snapshot schedule is created with one type it can be modified.",
+      "choices": [
+        "every_n_hours",
+        "every_day",
+        "every_n_days",
+        "every_week",
+        "every_month"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unispherehost",
+      "displayName": "Unispherehost",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the Unity management server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean variable to specify whether or not to validate SSL certificate. C(true) - Indicates that the SSL certificate should be verified. C(false) - Indicates that the SSL certificate should not be verified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

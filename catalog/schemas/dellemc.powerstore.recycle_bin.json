@@ -1,0 +1,146 @@
+{
+  "fqcn": "dellemc.powerstore.recycle_bin",
+  "shortDescription": "Manage Recycle Bin on PowerStore storage systems",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/powerstore/recycle_bin_module.html",
+  "options": [
+    {
+      "name": "array_ip",
+      "displayName": "Array Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the PowerStore management system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "empty_recycle_bin",
+      "displayName": "Empty Recycle Bin",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When set to C(true) and I(state=absent), empties the entire recycle bin by permanently deleting all items. Cannot be used together with I(recycle_bin_id) or I(resource_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "expiration_duration",
+      "displayName": "Expiration Duration",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Duration in days for items to remain in the recycle bin before automatic permanent deletion. Valid range is 0 to 30 days. A value of 0 means items expire immediately. Used only with I(state=present) to configure the recycle bin retention policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the PowerStore host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Port number for the PowerStore array. If not passed, it will take 443 as default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recycle_bin_id",
+      "displayName": "Recycle Bin Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The unique identifier of the recycle bin item. Required for recover and delete operations. Mutually exclusive with I(resource_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_name",
+      "displayName": "Resource Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the deleted resource in the recycle bin. Used as an alternative to I(recycle_bin_id) for identifying items. Mutually exclusive with I(recycle_bin_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_type",
+      "displayName": "Resource Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of resource to filter when using I(resource_name). Used to disambiguate when multiple items share the same name.",
+      "choices": [
+        "volume",
+        "volume_group"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Define the operation to perform on the recycle bin. C(present) with I(expiration_duration) configures the retention policy. C(present) with I(recycle_bin_id) or I(resource_name) recovers items from the recycle bin. C(absent) with I(recycle_bin_id) or I(resource_name) permanently deletes items from the recycle bin. C(absent) with I(empty_recycle_bin=true) empties the entire recycle bin.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Time after which the connection will get terminated. It is to be mentioned in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the PowerStore host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean variable to specify whether to validate SSL certificate or not. C(true) - indicates that the SSL certificate should be verified. Set the environment variable REQUESTS_CA_BUNDLE to the path of the SSL certificate. C(false) - indicates that the SSL certificate should not be verified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

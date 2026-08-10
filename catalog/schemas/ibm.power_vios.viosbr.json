@@ -1,0 +1,177 @@
+{
+  "fqcn": "ibm.power_vios.viosbr",
+  "shortDescription": "Backup/Restore the configuration of the VIOS",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_vios/viosbr_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the operation to perform on the VIOS. C(backup) to perform a backup. C(restore) to restore a backup file. C(recoverdb) to recover from a corrupted shared storage pool (SSP) database. C(migrate) to migrate a backup file from an older release level to a current release level. A new file is created with C(_MIGRATED) string appended to the given file name. C(dr) to recover the cluster on another geographic location. C(list) to view the listing of backup files. C(view) to view a backup file",
+      "choices": [
+        "backup",
+        "restore",
+        "recoverdb",
+        "migrate",
+        "dr",
+        "list",
+        "view"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clustername",
+      "displayName": "Clustername",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the cluster name to back up or restore, including all of its associated nodes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "currentdb",
+      "displayName": "Currentdb",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Restores the cluster without restoring the database from the backup. When restoring mapping, some of the mapping can fail if the mappings are not in the current database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "devtype",
+      "displayName": "Devtype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Only restore devices of the specified type.",
+      "choices": [
+        "net",
+        "vscsi",
+        "npiv",
+        "cluster",
+        "vlogrepo",
+        "ams"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dir",
+      "displayName": "Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User-specified location from where to list backup files when I(action=list).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file",
+      "displayName": "File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the file name of the file that has backup information. For backup, compressed file is created with C(.tar.gz) extension. For cluster backups, compressed file is created with C(<clustername>.tar.gz) extension. If file name is a relative path, file is created under C(/home/padmin/cfgbackups).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Attempts to restore a device even if it has not been successfully validated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mapping",
+      "displayName": "Mapping",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Displays mapping information for SEA, virtual SCSI adapters, VFC adapters, and PowerVM Active Memory Sharing paging devices.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "repopvs",
+      "displayName": "Repopvs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of hdisks to be used as repository disks for restoring the cluster. The given disks must not contain a repository signature.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skipcluster",
+      "displayName": "Skipcluster",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Restores all local devices, except I(cluster0).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skipdevattr",
+      "displayName": "Skipdevattr",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Skips the restore of the physical device attributes. Does not modify the current system's physical device attributes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subfile",
+      "displayName": "Subfile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the node configuration file to be restored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate",
+      "displayName": "Validate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Validates the devices on the server against the devices on the backed-up file. Fails the restore operation if items do not validate successfully.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "view_backup_file",
+      "displayName": "View Backup File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the file name of the file which user wants to view information about.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

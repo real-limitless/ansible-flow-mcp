@@ -1,0 +1,209 @@
+{
+  "fqcn": "cybus.connectware.user_batch",
+  "shortDescription": "Manages Connectware Users in batches",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cybus/connectware/user_batch_module.html",
+  "options": [
+    {
+      "name": "admin_password",
+      "displayName": "Admin Password",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Admin password (used with basic auth).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "admin_user",
+      "displayName": "Admin User",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Admin username (used with basic auth).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Timeout for API calls.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bearer_token",
+      "displayName": "Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for authentication (preferred method).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_password",
+      "displayName": "Check Password",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Default flag to disable user password checking. Can be overridden per item. Password checking performs a real login per user; consider C(false) for large batches.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enforce_mfa_enrollment",
+      "displayName": "Enforce Mfa Enrollment",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Default flag whether users are forced to enroll MFA at their next login. Can be overridden per item. If unset, the flag is left untouched, e.g. when it is managed via the Admin UI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "grant_types",
+      "displayName": "Grant Types",
+      "type": "list",
+      "required": false,
+      "default": [
+        "password",
+        "token"
+      ],
+      "description": "Default list of supported grant types for all items. Can be overridden per item.",
+      "choices": [
+        "password",
+        "token",
+        "certificate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identity_provider",
+      "displayName": "Identity Provider",
+      "type": "string",
+      "required": false,
+      "default": "local",
+      "description": "Default identity source for all items. Can be overridden per item.",
+      "choices": [
+        "local",
+        "ldap",
+        "msentraid"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "items",
+      "displayName": "Items",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Users to manage. Each item uses the same user-specific fields as C(cybus.connectware.user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "manage_permissions",
+      "displayName": "Manage Permissions",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Default flag whether to reconcile the users' direct permissions. Can be overridden per item. Set this to C(false) for LDAP or Microsoft Entra ID users when direct permissions should not be managed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_concurrent",
+      "displayName": "Max Concurrent",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Maximum number of user operations to run concurrently. This limits worker threads in this module. The Connectware auth service is typically the bottleneck under parallel load; increase this value only after validating auth service load.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default user password for all items. Can be overridden per item.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "permissions",
+      "displayName": "Permissions",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Default list of permissions for all items. Can be overridden per item (not merged; the item list replaces the default).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roles",
+      "displayName": "Roles",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Default list of existing roles for all items. Can be overridden per item (not merged; the item list replaces the default).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Default target state for Connectware Users. Can be overridden per item.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_hostname",
+      "displayName": "Target Hostname",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "Used to connect to the Connectware API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Flag to enable Connectware certificate checking.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

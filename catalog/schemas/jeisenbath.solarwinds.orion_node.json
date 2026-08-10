@@ -1,0 +1,329 @@
+{
+  "fqcn": "jeisenbath.solarwinds.orion_node",
+  "shortDescription": "Created/Removes/Edits Nodes in Solarwinds Orion NPM",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/jeisenbath/solarwinds/orion_node_module.html",
+  "options": [
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of Orion host running SWIS service. If not defined in the task, the value of E(SOLARWINDS_SERVER) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_address",
+      "displayName": "Ip Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP Address of the node. One of I(ip_address), I(node_id), or I(name) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the node. When I(state=present), this field is required. When state is other than present, one of I(ip_address), I(node_id), or I(name) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "node_id",
+      "displayName": "Node Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Node ID of the node. One of I(ip_address), I(node_id), or I(name) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for Orion user. If not defined in the task, the value of E(SOLARWINDS_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "polling_engine",
+      "displayName": "Polling Engine",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of polling engine that NPM will use to poll this device. If not passed, will query for the Polling Engine with least nodes assigned. Not recommended to use I(polling_engine=1), which should be the main app server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "polling_method",
+      "displayName": "Polling Method",
+      "type": "string",
+      "required": false,
+      "default": "ICMP",
+      "description": "Polling method to use.",
+      "choices": [
+        "External",
+        "ICMP",
+        "SNMP",
+        "WMI",
+        "Agent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "string",
+      "required": false,
+      "default": "17774",
+      "description": "Port to connect to the Solarwinds Information Service API. Solarwinds ver. 2024.1.0 and on has a new API on port 17774, with legacy supported on 17778. This argument was introduced in orionsdk 0.4.0 to support connecting to either API. If using an older version of Solarwinds with orionsdk 0.4.0, define this as port 17778.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ro_community_string",
+      "displayName": "Ro Community String",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SNMP Read-Only Community string. Required if I(polling_method=snmp).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rw_community_string",
+      "displayName": "Rw Community String",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SNMP Read-Write Community string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmp_allow_64",
+      "displayName": "Snmp Allow 64",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Set true if device supports 64-bit counters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmp_port",
+      "displayName": "Snmp Port",
+      "type": "string",
+      "required": false,
+      "default": "161",
+      "description": "Port that SNMP server listens on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmp_version",
+      "displayName": "Snmp Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SNMPv2c or SNMPv3 for snmp polling.",
+      "choices": [
+        "2",
+        "3"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmpv3_auth_key",
+      "displayName": "Snmpv3 Auth Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication passphrase for SNMPv3. Required when SNMP version is 3.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmpv3_auth_key_is_pwd",
+      "displayName": "Snmpv3 Auth Key Is Pwd",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "SNMPv3 Authentication Password is a key. Confusingly, value of True corresponds to web GUI checkbox being unchecked.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmpv3_auth_method",
+      "displayName": "Snmpv3 Auth Method",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication method for SNMPv3. Required when SNMP version is 3.",
+      "choices": [
+        "SHA1",
+        "MD5"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmpv3_credential_set",
+      "displayName": "Snmpv3 Credential Set",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Credential set name for SNMPv3 credentials. Optional when SNMP version is 3.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmpv3_priv_key",
+      "displayName": "Snmpv3 Priv Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Privacy passphrase for SNMPv3.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmpv3_priv_key_is_pwd",
+      "displayName": "Snmpv3 Priv Key Is Pwd",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "SNMPv3 Privacy Password is a key. Confusingly, value of True corresponds to web GUI checkbox being unchecked.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmpv3_priv_method",
+      "displayName": "Snmpv3 Priv Method",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Privacy method for SNMPv3.",
+      "choices": [
+        "DES56",
+        "AES128",
+        "AES192",
+        "AES256"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snmpv3_username",
+      "displayName": "Snmpv3 Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Read-Only SNMPv3 username. Required when SNMP version is 3.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The desired state of the node.",
+      "choices": [
+        "present",
+        "absent",
+        "managed",
+        "unmanaged",
+        "muted",
+        "unmuted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unmanage_from",
+      "displayName": "Unmanage From",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The date and time (in ISO 8601 UTC format) to begin the unmanage period. If this is in the past, the node will be unmanaged effective immediately. If not provided, module defaults to now. ex: 2017-02-21T12:00:00Z",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unmanage_until",
+      "displayName": "Unmanage Until",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The date and time (in ISO 8601 UTC format) to end the unmanage period. You can set this as far in the future as you like. If not provided, module defaults to 24 hours from now. ex: 2017-02-21T12:00:00Z",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Orion Username. Active Directory users must use DOMAIN\\\\username format. If not defined in the task, the value of E(SOLARWINDS_USERNAME) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify",
+      "displayName": "Verify",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Verify SSL Certificate for Solarwinds Information Service API. Requires orionsdk >= 0.4.0",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wmi_credential_set",
+      "displayName": "Wmi Credential Set",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Credential Name already configured in NPM  Found under \"Manage Windows Credentials\" section of the Orion website (Settings). Note: creation of credentials are not supported at this time. Required if I(polling_method=wmi).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

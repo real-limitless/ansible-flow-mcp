@@ -1,0 +1,369 @@
+{
+  "fqcn": "dettonville.git_inventory.update_inventory",
+  "shortDescription": "Add/update group and/or host nodes and respective variable settings to a specified YAML-file based inventory.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dettonville/git_inventory/update_inventory_module.html",
+  "options": [
+    {
+      "name": "always_add_child_group_to_root",
+      "displayName": "Always Add Child Group To Root",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Always add child groups to root all.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "always_add_host_to_root_hosts",
+      "displayName": "Always Add Host To Root Hosts",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Always add host to root hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Create a backup inventory file including the timestamp information so you can get the original inventory file back if you somehow clobbered it incorrectly. This option is should not be necessary since the file can be rolled back to a prior commit using git.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_empty_groupvars_files",
+      "displayName": "Create Empty Groupvars Files",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Creates empty 'group_vars/' vars files for group vars even when no vars specified. Only used if the `use_vars_files` is enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_empty_hostvars_files",
+      "displayName": "Create Empty Hostvars Files",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Creates empty 'host_vars/' vars files for host vars even when no vars specified. Only used if the `use_vars_files` is enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_parent_groupvar_files",
+      "displayName": "Create Parent Groupvar Files",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Creates empty groupvar files ('group_vars/') for parent groups even when no vars specified. Only used if the `use_vars_files` or `create_empty_groupvars_files` is enabled (default).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_groupvar_symlinks_for_child_inventories",
+      "displayName": "Enable Groupvar Symlinks For Child Inventories",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enables `group_vars` symlinks for child inventories. Only used if the `use_vars_files` is enabled. Used to link group_vars/*.yml files upon creation of corresponding root inventory `group_vars`.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enforce_global_groups_must_already_exist",
+      "displayName": "Enforce Global Groups Must Already Exist",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Validate host groups exist already in the specified global_groups_file before allowing hosts to be added. This will automatically be set to 'false' (ignored) when `global_groups_file` is equal to the `inventory_file` parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "git_comment_body",
+      "displayName": "Git Comment Body",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Git comment body string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "git_comment_prefix",
+      "displayName": "Git Comment Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Git comment prefix string.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "git_user_email",
+      "displayName": "Git User Email",
+      "type": "string",
+      "required": false,
+      "default": "ansible@example.org",
+      "description": "Explicit git local email address. Nice to have for remote operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "git_user_name",
+      "displayName": "Git User Name",
+      "type": "string",
+      "required": false,
+      "default": "ansible",
+      "description": "Explicit git local user name. Nice to have for remote operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "global_groups_file",
+      "displayName": "Global Groups File",
+      "type": "string",
+      "required": false,
+      "default": "xenv_groups.yml",
+      "description": "File path to global groups YAML file relative to repo directory root or parameter `inventory_dir` if defined/set. The inventory file must be YAML formatted. E.g., `global_groups.yml`, `test_inventory/xenv_groups.yml`, `inventory/xenv_groups.yml`, etc. Used to validate addition of groups to inventory file when the parameter `enforce_global_groups_must_already_exist` is set to true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_list",
+      "displayName": "Group List",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specifies a list of group dicts. The required key within the group item is 'group_name'. The supported keys within the group item dict are 'group_vars', 'parent_groups' and 'groups'. The 'parent_groups'/'groups' value is used to specify parent groups and may either be a list of group name strings or nested dicts where each key represents a group name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_list",
+      "displayName": "Host List",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Specifies a list of host dicts. The required key within the group item is 'host_name'. The supported keys within the host item dict are 'host_name', 'host_vars', 'parent_groups' and 'groups'. The 'parent_groups'/'groups' value is used to specify parent groups and may either be a list of group name strings or nested dicts where each key represents a group name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inventory_base_dir",
+      "displayName": "Inventory Base Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to base directory where the inventory git repository will be cloned. If not specified, a temporary directory is created in order to clone the inventory git repo. The temporary directory is automatically removed after performing the inventory update and git pacp action. If desired, the temporary directory may be saved by setting the 'remove_repo_dir' option to true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inventory_dir",
+      "displayName": "Inventory Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Relative path to inventory directory where inventory YAML files are located relative to repo directory root. If not specified, the `inventory_dir` is derived from the implied relative path of `inventory_file`. E.g., `test_inventory/child_inventory`, `inventory/SANDBOX`, `inventory/DEV`, or `inventory` for parent inventory use cases.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inventory_file",
+      "displayName": "Inventory File",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "File path to inventory hosts YAML file relative to repo directory root or parameter `inventory_dir` if defined/set. The inventory file must be YAML formatted. E.g., `test_inventory/child_inventory/hosts.yml`, `inventory/SANDBOX/hosts.yml`, etc.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inventory_repo_branch",
+      "displayName": "Inventory Repo Branch",
+      "type": "string",
+      "required": false,
+      "default": "main",
+      "description": "Git branch where perform git push.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inventory_repo_url",
+      "displayName": "Inventory Repo Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Git inventory repository URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inventory_root_yaml_key",
+      "displayName": "Inventory Root Yaml Key",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "description": "Inventory root node key in yaml. E.g., 'all'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logging_level",
+      "displayName": "Logging Level",
+      "type": "string",
+      "required": false,
+      "default": "INFO",
+      "description": "Parameter used to define the level of troubleshooting output.",
+      "choices": [
+        "NOTSET",
+        "DEBUG",
+        "INFO",
+        "ERROR"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_repo_dir",
+      "displayName": "Remove Repo Dir",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Remove temporary repo inventory directory after completing.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_params",
+      "displayName": "Ssh Params",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary containing SSH parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "merge",
+      "description": "State for the update - 'merge', 'overwrite', or 'absent'.",
+      "choices": [
+        "merge",
+        "overwrite",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "symlink_subdirs",
+      "displayName": "Symlink Subdirs",
+      "type": "list",
+      "required": false,
+      "default": [
+        "DEV",
+        "QA",
+        "PROD",
+        "SANDBOX"
+      ],
+      "description": "Specifies a list of inventory sub-directories. Used when 'enable_groupvar_symlinks_for_child_inventories' is set to create group_vars symlinks. The sub-directories must reside directly in 'inventory_dir'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_mode",
+      "displayName": "Test Mode",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable test mode",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_vars_files",
+      "displayName": "Use Vars Files",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Use vars files ('group_vars/' or 'host_vars/') for group/host vars instead of inline host_vars/group_vars.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vars_overwrite_depth",
+      "displayName": "Vars Overwrite Depth",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "if vars_state='overwrite' is used, the depth at which variable overwrites will begin.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vars_state",
+      "displayName": "Vars State",
+      "type": "string",
+      "required": false,
+      "default": "merge",
+      "description": "State for the vars update - 'merge' or 'overwrite'.",
+      "choices": [
+        "merge",
+        "overwrite"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "yaml_lib_mode",
+      "displayName": "Yaml Lib Mode",
+      "type": "string",
+      "required": false,
+      "default": "ruamel",
+      "description": "specifies the YAML library - 'ruamel' or 'pyyaml'.",
+      "choices": [
+        "ruamel",
+        "pyyaml"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

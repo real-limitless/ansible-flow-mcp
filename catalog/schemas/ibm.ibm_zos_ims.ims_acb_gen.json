@@ -1,0 +1,130 @@
+{
+  "fqcn": "ibm.ibm_zos_ims.ims_acb_gen",
+  "shortDescription": "Generate IMS ACB",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_ims/ims_acb_gen_module.html",
+  "options": [
+    {
+      "name": "acb_lib",
+      "displayName": "Acb Lib",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The ACB Maintenance utility maintains the prebuilt blocks (ACB) library (IMS.ACBLIB). The ACB library is a consolidated library of program (PSB) and database (DBD) descriptions. The IMS acb_lib must be used exclusively. The module can only be executed using an ACB library which is not concurrently allocated to an active IMS system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "build_psb",
+      "displayName": "Build Psb",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Specifies whether ims_acb_gen rebuilds all PSBs that reference a changed DBD in the I(dbdname) parameter. TRUE indicates that ims_acb_gen rebuilds all PSBs that reference the changed DBD on the I(dbdname) parameter. FALSE indicates that ims_acb_gen does not rebuild PSBs that reference the changed DBD if the changed DBD does not change the physical structure of the database.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command_input",
+      "displayName": "Command Input",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "This field specifies two command options(BUILD/DELETE). BUILD - Specifies that blocks are built for the named PSBs, which refer to the named DBDs. DELETE - Specifies that blocks are deleted from the ACBLIB data set. The named PSBs and all PSBs that refer to the named DBDs are deleted.",
+      "choices": [
+        "build",
+        "delete",
+        "BUILD",
+        "DELETE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compression",
+      "displayName": "Compression",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PRECOMP,POSTCOMP, in any combination, cause the required in-place compression. The default is none.",
+      "choices": [
+        "precomp",
+        "postcomp",
+        "precomp,postcomp",
+        "PRECOMP",
+        "POSTCOMP",
+        "PRECOMP,POSTCOMP"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dbd_lib",
+      "displayName": "Dbd Lib",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "The ACB Maintenance utility receives input from the IMS DBDLIB data set. The ACB Maintenance utility does not change the DBD(s) in DBDLIB. If changes are made in PSBs or DBDs that require changes in the associated DBD, make these changes before running the module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dbd_name",
+      "displayName": "Dbd Name",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The name of the DBD(s). Specifies that blocks are built or deleted for this DBD, and for all PSBs that reference this DBD either directly or indirectly through logical relationships.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "psb_lib",
+      "displayName": "Psb Lib",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "The ACB Maintenance utility receives input from the IMS PSBLIB data set. The ACB Maintenance utility does not change the PSB(s) in PSBLIB. If changes are made in PSBs or DBDs that require changes in the associated PSB, make these changes before running the module. Changes in PSBs might also require modifications to the affected application programs. For example, if a DBD has a segment name changed, all PSBs which are sensitive to that segment must have their SENSEG statements changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "psb_name",
+      "displayName": "Psb Name",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The name of the PSB(s). Specifies that blocks are built or deleted for all PSBs that are named on this control statement. This field requires \"ALL\" or a list of psb names to be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reslib",
+      "displayName": "Reslib",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Points to an authorized library that contains the IMS SVC modules. For IMS batch, SDFSRESL and any data set that is concatenated to it in the reslib field must be authorized through the Authorized Program Facility (APF).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "steplib",
+      "displayName": "Steplib",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Points to the IMS SDFSRESL data set, which contains the IMS nucleus and required IMS modules. If STEPLIB is unauthorized by having unauthorized libraries that are concatenated to SDFSRESL, you must specify the I(reslib) parameter. The steplib parameter can also be specified in the target inventory's environment_vars. The steplib input parameter to the module will take precedence over the value specified in the environment_vars.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,182 @@
+{
+  "fqcn": "cdillc.splunk.ksconf_package",
+  "shortDescription": "Create a Splunk app from a local directory",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cdillc/splunk/ksconf_package_module.html",
+  "options": [
+    {
+      "name": "app_name",
+      "displayName": "App Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the top-level folder (app) name. If this is not given, the app folder name is automatically extracted from the basename of C(source). Placeholder variables, such as C({{app_id}}) can be used here.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "block",
+      "displayName": "Block",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Pattern for files/directories to exclude.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cache",
+      "displayName": "Cache",
+      "type": "string",
+      "required": false,
+      "default": "on",
+      "description": "Control caching behavior. To fully enable or disable cache use C(on) or C(off). Use C(rebuild) to ignore an existing cache entries and force but allow cache to be stored. C(read-only) allows existing cache to be used but writes or updates to cache is prohibited. Generally C(rebuild) and C(read-only) shouldn't be necessary unless debugging the caching mechanism or a bug is found or suspected. Note that using C(rebuild) may not result in an actual C(updated) I(action). The package will fully repac",
+      "choices": [
+        "on",
+        "off",
+        "rebuild",
+        "read-only"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cache_storage",
+      "displayName": "Cache Storage",
+      "type": "string",
+      "required": false,
+      "default": "~/.cache/cdillc-splunk-ksconf-package",
+      "description": "Path to local cache storage. Avoid sharing this too broadly, for example in a multitenant scenario.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Free-form metadata that is passed through to the output. Use this to pass around important app context variables that can be conveniently retained when looping and using C(register).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_handler",
+      "displayName": "Enable Handler",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Enable one or more file handlers for template expansion and encrypted file support. Use C(jinja) for basic Jinja2 syntax support. All necessary variables must be passed in via the I(template_vars) argument. Use C(ansible-jinja) to use the Ansible engine to handle all jinja rendering. By default, all Ansible variables, filters, tests, and lookups are available. This is effectively like using the M(ansible.builtin.template) module to render all C(*.j2) files before packaging an app. Use C(ansible-",
+      "choices": [
+        "ansible-jinja",
+        "ansible-vault",
+        "jinja"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encrypt",
+      "displayName": "Encrypt",
+      "type": "string",
+      "required": false,
+      "default": false,
+      "description": "Encrypt the resulting archive I(file). Set to C(vault) to encrypt with ansible-vault.",
+      "choices": [
+        false,
+        "vault"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file",
+      "displayName": "File",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Tarball file created of the app.  This can be I(.spl) or I(.tar.gz) This parameter supports dynamic placeholders. Variables are listed L(here,https://ksconf.readthedocs.io/en/stable/cmd_package.html#variables). This value may require extra planning in scenarios where ksconf layers are in use and/or when templates are being used in combinations with variables. Any time a single I(source) input directory is used to build multiple variations or versions of an app a unique output I(file) is needed. ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "follow_symlink",
+      "displayName": "Follow Symlink",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Follow symbolic links pointing to directories. Symlinks to files are always followed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "layer_method",
+      "displayName": "Layer Method",
+      "type": "string",
+      "required": false,
+      "default": "dir.d",
+      "description": "Type of layers used within the I(source) directory.",
+      "choices": [
+        "auto",
+        "dir.d",
+        "disable"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "layers",
+      "displayName": "Layers",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Include and exclude rules regarding which layers to include in the generated app. Layer filters rules are evaluated sequentially, and the last match wins. List of dictionaries with a single key, either I(include) or I(exclude)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local",
+      "displayName": "Local",
+      "type": "string",
+      "required": false,
+      "default": "preserve",
+      "description": "Define handling of of C(local) directory and C(local.meta) file. Use I(preserve) to keep the local artifacts as-is. I(block) will exclude local artifacts from the generated app archive. I(promote) will merge any local artifacts into the default layer.",
+      "choices": [
+        "preserve",
+        "block",
+        "promote"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path of app directory",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_vars",
+      "displayName": "Template Vars",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Add-hoc variables useable during template expansion. This dictionary can be structured any way that's helpful. There are no restrictions imposed, but be aware that sending more variables than needed could result in extra processing. When using the C(ansible-jinja) handler, these values will be added to existing Ansible variables. Variables set here will have the highest precedence.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

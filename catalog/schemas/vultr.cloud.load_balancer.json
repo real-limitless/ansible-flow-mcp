@@ -1,0 +1,289 @@
+{
+  "fqcn": "vultr.cloud.load_balancer",
+  "shortDescription": "Manages load balancers on Vultr",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vultr/cloud/load_balancer_module.html",
+  "options": [
+    {
+      "name": "api_endpoint",
+      "displayName": "Api Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.vultr.com/v2",
+      "description": "URL to API endpint (without trailing slash). Fallback environment variable C(VULTR_API_ENDPOINT).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of the Vultr API. Fallback environment variable C(VULTR_API_KEY).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_results_per_page",
+      "displayName": "Api Results Per Page",
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "When receiving large numbers of resources, specify how many results should be returned per call to API. This does not determine how many results are returned; all resources are returned according to other filters. Vultr API maximum is 500. Fallback environment variable C(VULTR_API_RESULTS_PER_PAGE).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_retries",
+      "displayName": "Api Retries",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Amount of retries in case of the Vultr API retuns an HTTP error code, such as - 429 Too Many Requests - 500 Internal Server Error - 504 Gateway Time-out Fallback environment variable C(VULTR_API_RETRIES).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_retry_max_delay",
+      "displayName": "Api Retry Max Delay",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "Retry backoff delay in seconds is exponential up to this max. value, in seconds. Fallback environment variable C(VULTR_API_RETRY_MAX_DELAY).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "HTTP timeout to Vultr API. Fallback environment variable C(VULTR_API_TIMEOUT).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_ssl",
+      "displayName": "Auto Ssl",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The Auto SSL configuration. Must be using Vultr DNS for Auto SSL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "balancing_algorithm",
+      "displayName": "Balancing Algorithm",
+      "type": "string",
+      "required": false,
+      "default": "roundrobin",
+      "description": "The balancing algorithm.",
+      "choices": [
+        "roundrobin",
+        "leastconn"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "firewall_rules",
+      "displayName": "Firewall Rules",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "An array of firewall rule objects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "forwarding_rules",
+      "displayName": "Forwarding Rules",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "An array of forwarding rule objects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "global_regions",
+      "displayName": "Global Regions",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of Region ids to deploy child Load Balancers to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_check",
+      "displayName": "Health Check",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The health check configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http2",
+      "displayName": "Http2",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If true, this will enable HTTP2 traffic. You must have an HTTPS forwarding rule combo (HTTPS -> HTTPS) to enable this option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http3",
+      "displayName": "Http3",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If true, this will enable HTTP3/QUIC traffic. You must have HTTP2 enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instances",
+      "displayName": "Instances",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Array of Instance IDs to attach to this Load Balancer. Instances will be attached or detached to match your array.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "label",
+      "displayName": "Label",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The label for your Load Balancer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nodes",
+      "displayName": "Nodes",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The number of nodes to add to the load balancer (1-99), must be an odd number. Defaults to 1.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_protocol",
+      "displayName": "Proxy Protocol",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If true, you must configure backend nodes to accept Proxy protocol.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Region where the load balancer will be created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_redirect",
+      "displayName": "Ssl Redirect",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If true, this will redirect all HTTP traffic to HTTPS. You must have an HTTPS rule and SSL certificate installed on the load balancer to enable this option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the load balancer.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sticky_session",
+      "displayName": "Sticky Session",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Enables sticky sessions for your load balancer when a cookie_name is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "The maximum time allowed for the connection to remain inactive before timing out in seconds. Defaults to 600.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Validate SSL certs of the Vultr API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vpc",
+      "displayName": "Vpc",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the VPC you wish to use. If omitted, defaults to the public network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

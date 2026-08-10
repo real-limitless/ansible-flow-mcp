@@ -1,0 +1,187 @@
+{
+  "fqcn": "cdillc.splunk.splunk_rest_conf",
+  "shortDescription": "Manage adhoc configurations via the Splunk REST API",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cdillc/splunk/splunk_rest_conf_module.html",
+  "options": [
+    {
+      "name": "app",
+      "displayName": "App",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Splunk \"app\" (namespace) where the stanza lives or will be created. The special value of C(system) can be used to indicate no app association.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "conf",
+      "displayName": "Conf",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The configuration type to manage or view. The list of choices provided here are for reference only and are not enforced by the module. Any value supported by the underling Splunk SDK / REST API should work.",
+      "choices": [
+        "server",
+        "props",
+        "transforms",
+        "macros"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "defaults",
+      "displayName": "Defaults",
+      "type": "string",
+      "required": false,
+      "default": {},
+      "description": "The dictionary of key/values to push into a newly created stanza. Use this to set stanza defaults that you do not want to override on subsequent runs. The I(defaults) option is only used when C(state=present) and a new stanza is created. If a new stanza is created, the I(result) output will contain the value C(created).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "del_unknown",
+      "displayName": "Del Unknown",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Not implemented yet! Remove any keys in the servers configuration that are not present within the I(settings) dictionary. This feature does not yet exist in the code. Currently only adding or updated keys or removing the entire stanza is supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Splunk owner (namespace) of the stanza. Use the special value of C(nobody) if no owner is desired. The value of C(sharing) may also impact the owner.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for username/password authentication. Must be provided if I(username) is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restart_on_change",
+      "displayName": "Restart On Change",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable an immediate splunkd restart on configuration change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restart_timeout",
+      "displayName": "Restart Timeout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Amount of time to wait for the restart to complete. If I(restart_timeout) is 0 then the restart wait is disabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "settings",
+      "displayName": "Settings",
+      "type": "string",
+      "required": false,
+      "default": {},
+      "description": "The dictionary of key/values to push into the given stanza. The I(settings) option must be provided when C(state=present). The final value of the stanza is returned via the I(content) output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sharing",
+      "displayName": "Sharing",
+      "type": "string",
+      "required": false,
+      "default": "global",
+      "description": "The Splunk sharing mode to use for stanza creation or modification. See the note on \"Splunk namespaces\" below. The default C(global) will create entries that are placed in C(etc/system/local/)",
+      "choices": [
+        "user",
+        "app",
+        "global",
+        "system"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "splunkd_uri",
+      "displayName": "Splunkd Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://localhost:8089",
+      "description": "The Splunkd endpoint of the Splunk server to configure. Defaults to the local server and default splunkd port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stanza",
+      "displayName": "Stanza",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The stanza to edit within the given I(conf) configuration file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Ensure the configuration settings are either present or absent, or to list existing settings. The C(content) output contains the final setting. If the state is absent, the C(content) output will be missing if the stanza was previously removed.",
+      "choices": [
+        "present",
+        "absent",
+        "list"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Token to use when authentication has already taken place. The C(token) can be specified instead of I(username) and I(password). This module returns an output named I(token) that can be used for subsequent splunkd calls to the same splunkd endpoint.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Splunk username for username/password authentication. When provided, I(password) must also be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

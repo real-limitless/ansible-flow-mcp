@@ -1,0 +1,169 @@
+{
+  "fqcn": "steampunk.aws.ec2_network_interface",
+  "shortDescription": "Manage EC2 Elastic Network Interfaces",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/steampunk/aws/ec2_network_interface_module.html",
+  "options": [
+    {
+      "name": "attachment",
+      "displayName": "Attachment",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The configuration for an attachment of the network interface to an instance. Required if I(state) is C(attached) and we're creating the network interface or attaching a previously detached one.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Parameters for authenticating with the AWS service. Each of them may be defined via environment variables.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clear_security_groups",
+      "displayName": "Clear Security Groups",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether security groups not listed in I(security_groups) should be removed from the network interface. This parameter requires I(security_groups).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clear_tags",
+      "displayName": "Clear Tags",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to clear any existing tags on the resource that are not explicitly stated in I(tags). By default, existing tags are kept on the resource. When this parameter is set to C(true), any pre-existing tags on the resource (including the name tag) are removed. To clear all tags except the name tag, make sure to provide the I(name) parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An optional description of the network interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the resource to perform the task on. If specified, this parameter is used to identify the resource. If omitted, a combination of I(subnet), I(ip), I(name), I(attachment.instance), I(attachment.device_index) is used to identify an existing instance, if possible.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip",
+      "displayName": "Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The primary private IPv4 addresses for the network interface. If provided, must be within the IP range of I(subnet). When I(id) is not present, it is used in combination with I(subnet) to attempt to identify the network interface. If this parameter is omitted, the private IPv4 address will be selected by AWS from the pool of available private IPv4 addresses from the subnet specified by the I(subnet) parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name tag of the network interface. Required for the creation of the network interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_groups",
+      "displayName": "Security Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of security group IDs to attach the network interface to. Security groups must reside in the same VPC as I(subnet). If the parameter is provided, at least one security group must be specified. Required if I(clear_security_groups) is C(true). If this parameter is omitted, the module will assume the default security group of the VPC in which the network interface exists.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_dest_check",
+      "displayName": "Source Dest Check",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to enable or disable source/destination checking for the network interface. This must be set to C(false) for interfaces used for NAT.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "attached",
+      "description": "The desired state of the network interface.",
+      "choices": [
+        "attached",
+        "detached",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subnet",
+      "displayName": "Subnet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the subnet in which to create the network interface. Required when creating the network interface. When I(id) is not present, it is used in combination with I(ip) to attempt to identify the network interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Metadata for the AWS resource as key/value pairs. Keys and values are case-sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "Type of the network interface. Set this parameter to C(efa) to create an Elastic Fabric Adapter instead of a regular network interface.",
+      "choices": [
+        "normal",
+        "efa"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

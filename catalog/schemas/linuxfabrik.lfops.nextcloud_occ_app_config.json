@@ -1,0 +1,105 @@
+{
+  "fqcn": "linuxfabrik.lfops.nextcloud_occ_app_config",
+  "shortDescription": "Manage a Nextcloud app configuration value via occ",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/linuxfabrik/lfops/nextcloud_occ_app_config_module.html",
+  "options": [
+    {
+      "name": "app",
+      "displayName": "App",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "App ID whose configuration is being managed (e.g. C(core), C(files_sharing), C(notify_push)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "installed_config_json",
+      "displayName": "Installed Config Json",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Pre-fetched output of C(occ config:list --output=json --private), as either a JSON string or an already-parsed dict. When set, the module skips the C(config:app:get) call and reads the current value from this value, which avoids running C(occ) once per key when looping over many keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Configuration key. Multiple whitespace-separated tokens are forwarded as separate arguments to C(occ), which is how Nextcloud addresses nested keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "occ_path",
+      "displayName": "Occ Path",
+      "type": "string",
+      "required": false,
+      "default": "/var/www/html/nextcloud/occ",
+      "description": "Absolute path to the Nextcloud C(occ) command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "php_path",
+      "displayName": "Php Path",
+      "type": "string",
+      "required": false,
+      "default": "php",
+      "description": "PHP binary to invoke C(occ) with. A bare C(php) relies on C($PATH); pass an absolute path to pin a specific PHP version.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "C(present) creates or updates the key, C(absent) deletes it.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "string",
+      "description": "Data type C(occ config:app:set) records for the value.",
+      "choices": [
+        "string",
+        "integer",
+        "float",
+        "boolean",
+        "array"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "value",
+      "displayName": "Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Target value for the configuration key. Required when I(state=C(present)). When I(type=C(array)), pass a valid JSON array literal; this module forwards the string verbatim and lets C(occ) parse it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

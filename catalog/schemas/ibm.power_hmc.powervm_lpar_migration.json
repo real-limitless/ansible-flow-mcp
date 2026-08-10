@@ -1,0 +1,156 @@
+{
+  "fqcn": "ibm.power_hmc.powervm_lpar_migration",
+  "shortDescription": "validate, migrate and recover of the LPAR",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_hmc/powervm_lpar_migration_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "C(validate) validate a specified partition/s. C(migrate) migrate a specified partition/s from I(src_system) to I(dest_system). C(recover) recover a specified partition. C(authenticate) adds SSH authentication key of remote management console.",
+      "choices": [
+        "validate",
+        "migrate",
+        "recover",
+        "authenticate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "all_vms",
+      "displayName": "All Vms",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "All the partitions of the I(src_system) to be migrated. valid only for C(migrate) I(action)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest_system",
+      "displayName": "Dest System",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the destination managed system. valid only for C(validate) and C(migrate) I(action) operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_auth",
+      "displayName": "Hmc Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Username and Password credential of the HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_host",
+      "displayName": "Hmc Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The IP Address or hostname of the HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_ip",
+      "displayName": "Remote Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If the destination managed system is not managed by the same management console that is managing the source managed system, then use this option to specify the IP address or host name of the management console that is managing the destination managed system. This option is mandatory for C(authenticate) I(action) and optional for other I(action)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_passwd",
+      "displayName": "Remote Passwd",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of the remote HMC This option can be used only with C(authenticate) I(action)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_username",
+      "displayName": "Remote Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username of the remote HMC This option can be used only with C(authenticate) I(action)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shared_proc_pool",
+      "displayName": "Shared Proc Pool",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "list of the details of the shared processor pools to use on the destination managed system. this parameter support single and multiple pools. This option can be used only with C(migrate)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src_system",
+      "displayName": "Src System",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the source managed system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_ids",
+      "displayName": "Vm Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "ID/s of the partition to be migrated/validated. To perform action on multiple partitions, provide comma separated partition ids or in list form. For C(recover) I(action) only one partition id is allowed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_names",
+      "displayName": "Vm Names",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Name of the partition/s to be migrated/validated. To perform action on multiple partitions, provide comma separated partition names or in list form. For C(recover) I(action) only one partition name is allowed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The maximum time, in minutes, to wait for operation to complete This option can be used only with C(migrate) and C(validate) I(action)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

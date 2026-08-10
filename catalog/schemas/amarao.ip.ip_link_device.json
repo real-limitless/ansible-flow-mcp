@@ -1,0 +1,285 @@
+{
+  "fqcn": "amarao.ip.ip_link_device",
+  "shortDescription": "Create or delete network interfaces in Linux",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/amarao/ip/ip_link_device_module.html",
+  "options": [
+    {
+      "name": "address",
+      "displayName": "Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "MAC address (L2 address) for a new interface Some interface types can not have L2 address. Module will fail if address is specified for interface without L2 address support (f.e. 'type vcan') The kenel generates address automatically if needed",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bond_options",
+      "displayName": "Bond Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options, specific for I(type)=C(bond) Should not be used for any other type. Most options are for rarely used bond types. Physical devices can added to a bond by setting them as master for the bond using M(ip_link_device_atrribute). (see examples). Extensive documentation for linux boding is provided in the Kernel docs at https://www.kernel.org/doc/Documentation/networking/bonding.txt",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bridge_options",
+      "displayName": "Bridge Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options, specific for I(type)=C(bridge). Should not be used for any other type. Option 'mcast_hash_elasticity' from man pages for ip link is deprecated in modern kernels and is not supported in this module (use I(mcast_hash_max) insdead).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "broadcast",
+      "displayName": "Broadcast",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "broadcast (L2) address for a new interface The default value is 'ff:ff:ff:ff:ff:ff' Some addresses have no broadcast support. Module will fail if broadcast is specified for interface without broadcast support (f.e. 'type vcan')",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gre_options",
+      "displayName": "Gre Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options, specific for I(type)=C(gre). Should not be used for any other type. Secondary encapsulation options (fou/gue) are not supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gretap_options",
+      "displayName": "Gretap Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options, specific for I(type)=C(gretap). Should not be used for any other type. Secondary encapsulation options (fou/gue) are not supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_id",
+      "displayName": "Group Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Id of the group of interfaces to delete. Can be used only for I(state)=absent. The group 'default' contains all interfaces which aren't part of some other group (use with caution).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gso_max_segs",
+      "displayName": "Gso Max Segs",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of segments for GSO (Generic Segment Offload) Poorly tested Requires new version of the kernel and iproute2 package. Default value is used by the kernel if omitted",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gso_max_size",
+      "displayName": "Gso Max Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of bytes for GSO (Generic Segment Offload) Poorly tested Requires new version of the kernel and iproute2 package. Default value is used by the kernel if omitted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "index",
+      "displayName": "Index",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of a new interface in the kernel's interface table Assigned automatically if omitted",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "link",
+      "displayName": "Link",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of parent interface for vlan type device Required for I(type)=vlan Parent device should exist Is ignored if had no sense",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mtu",
+      "displayName": "Mtu",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Set MTU value for a new interface. The kernel uses appropriate default value if omitted This is L3 mtu (limit on size of IP packets)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of a new network device. Required for I(state)=present Either I(name), I(group_id) or I(type) is required for I(state)=absent",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace",
+      "displayName": "Namespace",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of namespace where interface should be created/deleted. Namespace should exist. If interface with I(type)=veth is created in a namespace, peer interface is created in the same namespace",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "numrxqueues",
+      "displayName": "Numrxqueues",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of recieve queues for a new interface. Default value is used by the kernel if omitted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "numtxqueues",
+      "displayName": "Numtxqueues",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of transmit queues for a new interface. Default value is used by the kernel if omitted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search_namespaces",
+      "displayName": "Search Namespaces",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of network namespaces to check if interface is already exist. Used only for I(state)=C(present). If interface exists in any of namespace from I(search_namespaces) it is not created. If interface is not found in any of I(search_namespaces) namespace it's created in I(namespace) namespace (or in root namespace if no I(namespace) specified. If namespace from the list does not exists, it's ignored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Declare the state of interface. If state is present and interface is exists the interface is not checked for type (for both present and absent modes)",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "txqueuelen",
+      "displayName": "Txqueuelen",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Transmit queue length of a new interface The kernel uses default value for the interface type if omitted",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of a new interface to add or delete. Can be specified instead of I(name) or I(group_id) for I(state)=absent, in this case all interfaces of that type are removed. Module may fail if corresponding kernel module is not available Each type (except C(dummy)) has own set of additional options (f.e. I(vlan_options), I(veth_options), I(bridge_options)).",
+      "choices": [
+        "bridge",
+        "dummy",
+        "gre",
+        "gretap",
+        "veth",
+        "vlan",
+        "vxlan",
+        "bond",
+        "vrf"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "veth_options",
+      "displayName": "Veth Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options, specific for I(type)=C(veth). Should not be used for any other type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlan_options",
+      "displayName": "Vlan Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options, specific for I(type)=C(vlan) Should not be used for any other type",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vrf_options",
+      "displayName": "Vrf Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options, specific for I(type)=C(vrf) Should not be used for any other type. VRF documentation is available at https://docs.kernel.org/networking/vrf.html",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vxlan_options",
+      "displayName": "Vxlan Options",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Options, specific for I(type)=C(vxlan) Should not be used for any other type",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

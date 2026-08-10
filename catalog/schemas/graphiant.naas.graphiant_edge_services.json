@@ -1,0 +1,188 @@
+{
+  "fqcn": "graphiant.naas.graphiant_edge_services",
+  "shortDescription": "Configure edge services (DHCP, DNS, LLDP, DPI, LWS password)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_edge_services_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging in the task result message.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device",
+      "displayName": "Device",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Portal device hostname for C(get_device_id). With C(edge_services_config_file), optional overrides. Required when C(edge_services_config_file) is omitted (single-device mode).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dhcpSubnets",
+      "displayName": "Dhcpsubnets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of DHCP subnet entries (segment, interface, ipPrefix, subnet dict, optional C(state)). Each C(segment) must match an existing LAN segment on the device. C(interface) and C(ipPrefix) must match a configured LAN interface or subinterface. The task fails with a clear error otherwise. API subnet key is interface name and C(ipPrefix) joined with a hyphen. Use C(state: absent) to remove a subnet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns",
+      "displayName": "Dns",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Edge DNS settings. C(mode) is C(DNSModeStatic), C(DNSModeCloudflare), or C(DNSModeDynamic). For static mode, set C(static) with C(primaryIpv4), C(primaryIpv6), C(secondaryIpv4), C(secondaryIpv6).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dpiApplications",
+      "displayName": "Dpiapplications",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Map of DPI application name to C(application) settings (API C(edge.trafficPolicy.dpiApplications)). The map key is the application name in the API; C(application.name) in YAML is optional and defaults to the key. If set, it must match the key. C(ipProtocol) (C(any), C(icmp), C(tcp), or C(udp)) and optional network/port fields or list name references are required per app. Use C(state: absent) on an entry to remove an application. Legacy list-of-C(application) YAML is also accepted and normalized ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "edge_services_config_file",
+      "displayName": "Edge Services Config File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to YAML (optional if C(device) is set with at least one service field). Relative paths resolve using the collection config path (see C(GRAPHIANT_CONFIGS_PATH)). Top-level key C(edge_services) is a list of dicts; each dict has one key, the portal device name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lldp",
+      "displayName": "Lldp",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Map of LAN interface names to C(lldpEnabled) boolean. The task fails if a key names a WAN/circuit interface or an interface that does not exist on the device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "localWebServerPassword",
+      "displayName": "Localwebserverpassword",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Plaintext local web server password (API C(localWebServerPassword)). At least 8 characters with upper, lower, and digit. Use C(no_log) in playbooks. May be set in C(edge_services_config_file) YAML per device (without vault) or as a module parameter. Takes precedence over C(vault_devices_lws_password) for the same device. Without C(localWebServerPasswordForce), applied only when the device has no password yet; skipped silently if one is already configured (portal hash).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "localWebServerPasswordForce",
+      "displayName": "Localwebserverpasswordforce",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When C(true), push C(localWebServerPassword) even if the device already has a configured password. When C(false) or omitted (default), password is pushed only on first set. Requires C(localWebServerPassword) in YAML, C(vault_devices_lws_password), or module parameters; the task fails if force is true and no password is available for that device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": "configure",
+      "description": "Only C(configure) is supported.",
+      "choices": [
+        "configure"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Only C(present) is supported.",
+      "choices": [
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_devices_lws_password",
+      "displayName": "Vault Devices Lws Password",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Map of portal device hostname to local web server password (from Ansible Vault via C(include_vars)). Keys must match device names in C(edge_services_config_file) or C(device). Injected as C(localWebServerPassword) before apply when YAML does not already set C(localWebServerPassword) for that device. YAML may set C(localWebServerPasswordForce). Do not reference Ansible/playbook variables inside the config file; pass this dict as this module parameter after C(include_vars). Self-contained Jinja2 i",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

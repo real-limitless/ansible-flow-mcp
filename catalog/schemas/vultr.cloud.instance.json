@@ -1,0 +1,337 @@
+{
+  "fqcn": "vultr.cloud.instance",
+  "shortDescription": "Manages server instances on Vultr.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vultr/cloud/instance_module.html",
+  "options": [
+    {
+      "name": "activation_email",
+      "displayName": "Activation Email",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to send an activation email when the instance is ready or not. Only considered on creation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_endpoint",
+      "displayName": "Api Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.vultr.com/v2",
+      "description": "URL to API endpint (without trailing slash). Fallback environment variable C(VULTR_API_ENDPOINT).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of the Vultr API. Fallback environment variable C(VULTR_API_KEY).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_results_per_page",
+      "displayName": "Api Results Per Page",
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "When receiving large numbers of resources, specify how many results should be returned per call to API. This does not determine how many results are returned; all resources are returned according to other filters. Vultr API maximum is 500. Fallback environment variable C(VULTR_API_RESULTS_PER_PAGE).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_retries",
+      "displayName": "Api Retries",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Amount of retries in case of the Vultr API retuns an HTTP error code, such as - 429 Too Many Requests - 500 Internal Server Error - 504 Gateway Time-out Fallback environment variable C(VULTR_API_RETRIES).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_retry_max_delay",
+      "displayName": "Api Retry Max Delay",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "Retry backoff delay in seconds is exponential up to this max. value, in seconds. Fallback environment variable C(VULTR_API_RETRY_MAX_DELAY).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "HTTP timeout to Vultr API. Fallback environment variable C(VULTR_API_TIMEOUT).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "app",
+      "displayName": "App",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The app deploy name of Vultr OneClick apps. Mutually exclusive with I(image) and I(os).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backups",
+      "displayName": "Backups",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to enable automatic backups or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ddos_protection",
+      "displayName": "Ddos Protection",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to enable ddos_protection or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_ipv6",
+      "displayName": "Enable Ipv6",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to enable IPv6 or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "firewall_group",
+      "displayName": "Firewall Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The firewall group description to assign this instance to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The hostname to assign to this instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image",
+      "displayName": "Image",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The image deploy name of Vultr Marketplace apps. Mutually exclusive with I(os) and I(app).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "label",
+      "displayName": "Label",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os",
+      "displayName": "Os",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The operating system name. Mutually exclusive with I(image) and I(app).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plan",
+      "displayName": "Plan",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The plan name to use for the instance. Required if the instance does not yet exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Region the instance is deployed into.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reserved_ipv4",
+      "displayName": "Reserved Ipv4",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP address of the floating IP to use as the main IP of this instance. Only considered on creation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "skip_wait",
+      "displayName": "Skip Wait",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to skip the wait for the instance to be completely ready for access.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot",
+      "displayName": "Snapshot",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description or ID of the snapshot. Only considered while creating the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_keys",
+      "displayName": "Ssh Keys",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of SSH key names passed to the instance on creation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "startup_script",
+      "displayName": "Startup Script",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name or ID of the startup script to execute on boot. Only considered while creating the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the instance. The state I(reinstalled) was added in version 1.8.0.",
+      "choices": [
+        "present",
+        "absent",
+        "started",
+        "stopped",
+        "restarted",
+        "reinstalled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Tags for the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_data",
+      "displayName": "User Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User data to be passed to the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_scheme",
+      "displayName": "User Scheme",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user scheme used as login user (Linux-only). By default, the I(root) user is configured. Only considered while creating the instance.",
+      "choices": [
+        "root",
+        "limited"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Validate SSL certs of the Vultr API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vpcs",
+      "displayName": "Vpcs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of VPCs identified by their description to be assigned to the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

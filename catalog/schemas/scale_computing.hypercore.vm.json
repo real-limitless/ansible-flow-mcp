@@ -1,0 +1,234 @@
+{
+  "fqcn": "scale_computing.hypercore.vm",
+  "shortDescription": "Create, update or delete a VM.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/scale_computing/hypercore/vm_module.html",
+  "options": [
+    {
+      "name": "attach_guest_tools_iso",
+      "displayName": "Attach Guest Tools Iso",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If supported by operating system, create an extra device to attach the Scale Guest OS tools ISO. Supported by I(operating_system=os_windows_server_2012).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "boot_devices",
+      "displayName": "Boot Devices",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Ordered list of boot devices (disks and nics) you want to set",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud_init",
+      "displayName": "Cloud Init",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Configuration to be used by cloud-init (Linux) or cloudbase-init (Windows). When non-empty will create an extra ISO device attached to VM as a NoCloud datasource. There has to be cloud-config comment present at the beginning of cloud_init file or raw yaml. The cloud-init configuration is applied only during the initial creation of a VM (whether through provisioning, cloning, or importing). It is not applied to an existing VM. This is consistent with the behavior of the HyperCore appliance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_instance",
+      "displayName": "Cluster Instance",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Scale Computing HyperCore instance information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "VM's description. Only relevant if I(state=present). value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disks",
+      "displayName": "Disks",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of disks we want to create. Required if I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_reboot",
+      "displayName": "Force Reboot",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Can VM be forced to power off and on. Only used when modifications to the VM require it to be powered off and VM does not respond to a shutdown request within I(shutdown_timeout) limit. Before this is utilized, a shutdown request is sent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "machine_type",
+      "displayName": "Machine Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Scale I(Hardware) version. Required if creating a new VM. Only relevant when creating the VM. This property cannot be modified. HyperCore needs to support requested machine_type. BIOS and UEFI - available since 9.1. vTPM+UEFI - available since 9.2. vTPM+UEFI-compatible - available since 9.3.",
+      "choices": [
+        "BIOS",
+        "UEFI",
+        "vTPM+UEFI",
+        "vTPM+UEFI-compatible"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "memory",
+      "displayName": "Memory",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "VM's physical memory in bytes. Required if I(state=present). Irrelevant if I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nics",
+      "displayName": "Nics",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of network interfaces we want to create. Required if I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operating_system",
+      "displayName": "Operating System",
+      "type": "string",
+      "required": false,
+      "default": "os_windows_server_2012",
+      "description": "Operating system name. Used to select drivers package",
+      "choices": [
+        "os_windows_server_2012",
+        "os_other"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_state",
+      "displayName": "Power State",
+      "type": "string",
+      "required": false,
+      "default": "start",
+      "description": "Desired VM state. States C(PAUSE) and C(LIVEMIGRATE) are not exposed in this module (this can be done with raw api module). Note that - I(shutdown) will trigger a graceful ACPI shutdown. - I(reboot) will trigger a graceful ACPI reboot. - I(stop) will trigger an abrupt shutdown (force power off). VM might loose data, and filesystem might be corrupted afterwards. - I(reset) will trigger an abrupt reset (force power reset). VM might loose data, and filesystem might be corrupted afterwards.",
+      "choices": [
+        "start",
+        "shutdown",
+        "stop",
+        "reboot",
+        "reset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shutdown_timeout",
+      "displayName": "Shutdown Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "How long does ansible controller wait for VMs response to a shutdown request. In seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_schedule",
+      "displayName": "Snapshot Schedule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of an existing snapshot_schedule to assign to VM. VM can have 0 or 1 snapshot schedules assigned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Desired state of the VM.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Tags of the VM. The first tag determines the group that the VM is going to belong.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vcpu",
+      "displayName": "Vcpu",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Number of Central processing units on the VM. Required if I(state=present). If I(state=absent), vcpu is not relevant.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name",
+      "displayName": "Vm Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Virtual machine name. Used to identify selected virtual machine by name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name_new",
+      "displayName": "Vm Name New",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use it to rename a VM. If the VM already exists, VM's new name. Only relevant if I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

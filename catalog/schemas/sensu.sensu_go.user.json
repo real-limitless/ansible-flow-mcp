@@ -1,0 +1,77 @@
+{
+  "fqcn": "sensu.sensu_go.user",
+  "shortDescription": "Manage Sensu users",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/sensu/sensu_go/user_module.html",
+  "options": [
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Authentication parameters. Can define each of them with ENV as well.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "groups",
+      "displayName": "Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of groups user belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Sensu resource's name. This name (in combination with the namespace where applicable) uniquely identifies the resource that Ansible operates on. If the resource with selected name already exists, Ansible module will update it to match the specification in the task. Consult the I(name) metadata attribute specification in the upstream docs on U(https://docs.sensu.io/sensu-go/latest/reference/) for more details about valid names and other restrictions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the user. Required if user with a desired name does not exist yet on the backend and I(password_hash) is not set. If both I(password) and I(password_hash) are set, I(password_hash) is ignored and calculated from the I(password) if required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password_hash",
+      "displayName": "Password Hash",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bcrypt password hash for the user. Use C(sensuctl user hash-password PASSWORD) to generate a hash. Required if user with a desired name does not exist yet on the backend and I(password) is not set. If both I(password) and I(password_hash) are set, I(password_hash) is ignored and calculated from the I(password) if required. Sensu Go < 5.21.0 does not support creating/updating users using hashed passwords. Use I(password) parameter if you need to manage such Sensu Go installations. At the moment, ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "enabled",
+      "description": "Desired state of the user. Users cannot actually be deleted, only deactivated.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

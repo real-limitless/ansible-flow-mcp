@@ -1,0 +1,158 @@
+{
+  "fqcn": "cybus.connectware.role",
+  "shortDescription": "Manages Connectware Roles",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cybus/connectware/role_module.html",
+  "options": [
+    {
+      "name": "admin_password",
+      "displayName": "Admin Password",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Admin password (used with basic auth)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "admin_user",
+      "displayName": "Admin User",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Admin username (used with basic auth)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Timeout for API calls",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bearer_token",
+      "displayName": "Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for authentication (preferred method)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inherits_from",
+      "displayName": "Inherits From",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Existing base role names to inherit permissions from. The module fetches these roles on every run and reconciles the target role against the composed permission set. Each listed role must exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_group_dn",
+      "displayName": "Ldap Group Dn",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP group distinguished name to associate with the role. When omitted, the module leaves the current LDAP group binding unchanged. Set to an empty string to clear an existing LDAP group binding.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ms_entra_id_group_ids",
+      "displayName": "Ms Entra Id Group Ids",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Microsoft Entra ID group identifiers associated with the role. When omitted, the module leaves the current Entra ID group bindings unchanged. Set to an empty list to clear existing Entra ID group bindings.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the role",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "permission_mode",
+      "displayName": "Permission Mode",
+      "type": "string",
+      "required": false,
+      "default": "exact",
+      "description": "How I(permissions) is interpreted when I(inherits_from) is set. C(exact) applies exactly the inherited permissions and does not accept additional explicit permissions. C(additive) adds I(permissions) to the inherited permissions. C(subtractive) removes I(permissions) from the inherited permissions. Without I(inherits_from), only C(exact) is supported and existing behavior is preserved.",
+      "choices": [
+        "exact",
+        "additive",
+        "subtractive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "permissions",
+      "displayName": "Permissions",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of permissions. When omitted, the module leaves the current role permissions unchanged. Set to an empty list to remove all permissions from the role. When I(inherits_from) is set and I(permission_mode=additive), these permissions are added to the inherited permissions. When I(inherits_from) is set and I(permission_mode=subtractive), these permissions are removed from the inherited permissions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Target state for Connectware Role",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_hostname",
+      "displayName": "Target Hostname",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "Used to connect to the Connectware API",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Flag to enable Connectware certificate checking",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

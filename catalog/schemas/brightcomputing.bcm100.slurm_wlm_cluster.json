@@ -1,0 +1,556 @@
+{
+  "fqcn": "brightcomputing.bcm100.slurm_wlm_cluster",
+  "shortDescription": "Manages slurm_wlm_clusters",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/brightcomputing/bcm100/slurm_wlm_cluster_module.html",
+  "options": [
+    {
+      "name": "accounting",
+      "displayName": "Accounting",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Advanced accounting settings",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "accountingStorageTRES",
+      "displayName": "Accountingstoragetres",
+      "type": "list",
+      "required": false,
+      "default": [
+        "gres/gpu"
+      ],
+      "description": "List of resources you wish to track on the cluster (slurm: AccountingStorageTRES)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autoDetect",
+      "displayName": "Autodetect",
+      "type": "string",
+      "required": false,
+      "default": "NONE",
+      "description": "Detect NVIDIA (nvml) or AMD (rsmi) or Intel (oneapi) GPUs or AWS Trainium/Inferentia devices (nrt) automatically (global option), or use the cluster manager information (bcm). GPU configuration is part of Slurm GRES.",
+      "choices": [
+        "NONE",
+        "OFF",
+        "NVML",
+        "RSMI",
+        "ONEAPI",
+        "BCM",
+        "NRT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "batchStartTimeout",
+      "displayName": "Batchstarttimeout",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The maximum time (in seconds) that a batch job is permitted for launching before being considered missing and releasing the allocation (value 0 removes the parameter from slurm.conf)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cgroups",
+      "displayName": "Cgroups",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Submode containing Slurm related cgroups settings",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloneFrom",
+      "displayName": "Clonefrom",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The id or name of the entity that the new entity will be cloned from.  (take effect only at entity creation)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configureMigs",
+      "displayName": "Configuremigs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Detect and configure MIG profiles as GPU types in Slurm",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enablePrejob",
+      "displayName": "Enableprejob",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable Bright Cluster Manager powered prejob healthchecking in the workload manager",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "epilog",
+      "displayName": "Epilog",
+      "type": "string",
+      "required": false,
+      "default": "/cm/local/apps/cmd/scripts/epilog",
+      "description": "Fully qualified pathname of a script to execute as user root on every node when a user's job completes",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "epilogSlurmctld",
+      "displayName": "Epilogslurmctld",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fully qualified pathname of a program for the slurmctld to execute upon termination of a job allocation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "etc",
+      "displayName": "Etc",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Slurm configuration files directory",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fastSchedule",
+      "displayName": "Fastschedule",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Controls how a node's configuration specifications in slurm.conf are used",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gresConfFileTemplate",
+      "displayName": "Gresconffiletemplate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Template for gres.conf file",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gresTypes",
+      "displayName": "Grestypes",
+      "type": "list",
+      "required": false,
+      "default": [
+        "gpu"
+      ],
+      "description": "A list of generic resources to be managed",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "moduleFileTemplate",
+      "displayName": "Modulefiletemplate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Template content for system module file",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network that will be used to form FQDN node names",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ociSettings",
+      "displayName": "Ocisettings",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "OCI container settings for Slurm",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "placeholders",
+      "displayName": "Placeholders",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Job queue node placeholders mode",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "powerSavingEnabled",
+      "displayName": "Powersavingenabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable power saving options into slurm.conf",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix",
+      "displayName": "Prefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Slurm root installation directory",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "primaryServer",
+      "displayName": "Primaryserver",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The WLM primary server (where the active WLM daemon will be running).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prolog",
+      "displayName": "Prolog",
+      "type": "string",
+      "required": false,
+      "default": "/cm/local/apps/cmd/scripts/prolog",
+      "description": "Fully qualified pathname of a program for the slurmd to execute whenever it is asked to run a job step from a new job allocation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prologEpilogTimeout",
+      "displayName": "Prologepilogtimeout",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The interval in seconds Slurm waits for Prolog and Epilog before terminating them (value 0 removes the parameter from slurm.conf)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prologFlags",
+      "displayName": "Prologflags",
+      "type": "list",
+      "required": false,
+      "default": [
+        "Alloc"
+      ],
+      "description": "Flags to control the prolog behavior",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prologSlurmctld",
+      "displayName": "Prologslurmctld",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fully qualified pathname of a program for the slurmctld daemon to execute before granting a new job allocation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resumeProgram",
+      "displayName": "Resumeprogram",
+      "type": "string",
+      "required": false,
+      "default": "/cm/shared/apps/slurm/var/cm/power/poweron",
+      "description": "Program that will be executed when a suspended node is needed by a submitted jobs",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resumeTimeout",
+      "displayName": "Resumetimeout",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Maximum time permitted (in second) between when a node is resume request is issued and when the node is actually available for use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheduler",
+      "displayName": "Scheduler",
+      "type": "string",
+      "required": false,
+      "default": "backfill",
+      "description": "Scheduler to use in combination with slurm",
+      "choices": [
+        "backfill",
+        "builtin"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schedulerParameters",
+      "displayName": "Schedulerparameters",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Parameters specific to the scheduler. The interpretation of them varies by SchedulerType",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selectType",
+      "displayName": "Selecttype",
+      "type": "string",
+      "required": false,
+      "default": "select/cons_tres",
+      "description": "The type of resource selection algorithm to be used (slurm: SelectType)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "selectTypeParameters",
+      "displayName": "Selecttypeparameters",
+      "type": "list",
+      "required": false,
+      "default": [
+        "CR_Core"
+      ],
+      "description": "Parameters specific to Select Type (slurm: SelectTypeParameters)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "slurmConfFileTemplate",
+      "displayName": "Slurmconffiletemplate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Template for slurm.conf file",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "slurmctldParameters",
+      "displayName": "Slurmctldparameters",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Parameters specific to the Slurmctld",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "slurmdParameters",
+      "displayName": "Slurmdparameters",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Parameters specific to the Slurmd",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "srunEpilog",
+      "displayName": "Srunepilog",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fully qualified pathname of a script to execute after completion of job step (invoked by srun).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "srunProlog",
+      "displayName": "Srunprolog",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fully qualified pathname of a script to execute prior to launching job step (invoked by srun).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state the resource should have",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stateSave",
+      "displayName": "Statesave",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Directory into which the Slurm controller saves its state",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suspendProgram",
+      "displayName": "Suspendprogram",
+      "type": "string",
+      "required": false,
+      "default": "/cm/shared/apps/slurm/var/cm/power/poweroff",
+      "description": "Program that will be executed when a node remains idle for an extended period of time",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suspendTime",
+      "displayName": "Suspendtime",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "Nodes which remain idle for this number of seconds will be placed into power save mode by SuspendProgram",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suspendTimeout",
+      "displayName": "Suspendtimeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Maximum time permitted (in second) between when a node suspend request is issued and when the node shutdown",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "taskEpilog",
+      "displayName": "Taskepilog",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fully qualified pathname of a script to execute after completion of job step (invoked by slurmstepd).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "taskProlog",
+      "displayName": "Taskprolog",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fully qualified pathname of a script to execute prior to launching job step (invoked by slurmstepd).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "topologySwitches",
+      "displayName": "Topologyswitches",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of switches that should be used to write the topology file",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tracingJobs",
+      "displayName": "Tracingjobs",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of job ids to trace in CMDaemon",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Major Slurm version",
+      "choices": [
+        "22.05",
+        "23.02",
+        "23.11",
+        "24.05",
+        "24.05-sharp",
+        "24.11",
+        "24.11-sharp",
+        "25.05"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,143 @@
+{
+  "fqcn": "trippsc2.hashi_vault.vault_init",
+  "shortDescription": "Initializes a HashiCorp Vault instance.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/trippsc2/hashi_vault/vault_init_module.html",
+  "options": [
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to certificate to use for authentication. If not specified by any other means, the C(VAULT_CACERT) environment variable will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace",
+      "displayName": "Namespace",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Vault namespace where secrets reside. This option requires HVAC 0.7.0+ and Vault 0.11+. Optionally, this may be achieved by prefixing the authentication mount point and/or secret path with the namespace (e.g C(mynamespace/secret/mysecret)). If environment variable C(VAULT_NAMESPACE) is set, its value will be used last among all ways to specify I(namespace).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pgp_keys",
+      "displayName": "Pgp Keys",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of PGP public keys used to encrypt the output unseal keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxies",
+      "displayName": "Proxies",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL(s) to the proxies used to access the Vault service. It can be a string or a dict. If it's a dict, provide the scheme (eg. C(http) or C(https)) as the key, and the URL as the value. If it's a string, provide a single URL that will be used as the proxy for both C(http) and C(https) schemes. A string that can be interpreted as a dictionary will be converted to one (see examples). You can specify a different proxy for HTTP and HTTPS resources. If not specified, L(environment variables from the R",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retries",
+      "displayName": "Retries",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Allows for retrying on errors, based on the L(Retry class in the urllib3 library,https://urllib3.readthedocs.io/en/latest/reference/urllib3.util.html#urllib3.util.Retry). This collection defines recommended defaults for retrying connections to Vault. This option can be specified as a positive number (integer) or dictionary. If this option is not specified or the number is C(0), then retries are disabled. A number sets the total number of retries, and uses collection defaults for the other settin",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retry_action",
+      "displayName": "Retry Action",
+      "type": "string",
+      "required": false,
+      "default": "warn",
+      "description": "Controls whether and how to show messages on I(retries). This has no effect if a request is not retried.",
+      "choices": [
+        "ignore",
+        "warn"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "root_token_pgp_key",
+      "displayName": "Root Token Pgp Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The PGP public key used to encrypt the root token.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_shares",
+      "displayName": "Secret Shares",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "The number of shares to split the master key into.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret_threshold",
+      "displayName": "Secret Threshold",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "The number of shares required to reconstruct the master key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Sets the connection timeout in seconds. If not set, then the C(hvac) library's default is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "URL to the Vault service. If not specified by any other means, the value of the C(VAULT_ADDR) environment variable will be used. If C(VAULT_ADDR) is also not defined then an error will be raised.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Controls verification and validation of SSL certificates, mostly you only want to turn off with self signed ones. Will be populated with the inverse of C(VAULT_SKIP_VERIFY) if that is set and I(validate_certs) is not explicitly provided. Will default to C(true) if neither I(validate_certs) or C(VAULT_SKIP_VERIFY) are set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

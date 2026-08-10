@@ -1,0 +1,144 @@
+{
+  "fqcn": "ivansible.base.github_release",
+  "shortDescription": "Returns links to github release artifacts",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ivansible/base/github_release_module.html",
+  "options": [
+    {
+      "name": "creates",
+      "displayName": "Creates",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If C(creates) is defined and the given file exists, the module will skip actions and mark release as not changed If C(creates) is not defined or the given file does not exist, the module will perform its actions and mark the release as changed",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "only_latest",
+      "displayName": "Only Latest",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true and C(release) is C(latest), the module will access github to request the latest release tag If true and C(release) is not C(latest), the module will build release URL without accessing github If false, the module will always access github to check whether given release exists",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "regex",
+      "displayName": "Regex",
+      "type": "string",
+      "required": false,
+      "default": "v[0-9][0-9a-z.-]+",
+      "description": "A regular expression for extracting release tag from the C(script) output",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reinstall",
+      "displayName": "Reinstall",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(creates) is defined and the given filename exists but C(reinstall) is true, the module will still mark the release as changed",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "release",
+      "displayName": "Release",
+      "type": "string",
+      "required": false,
+      "default": "latest",
+      "description": "A release to seek, either C(latest) or a git tag",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "repo",
+      "displayName": "Repo",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Describes github repository to query Either a combined string C(USERNAME/REPOSITORY:RELEASE) Or just C(USERNAME/REPOSITORY) (then C(release) argument must be provided) Or just C(REPOSITORY) (then C(release) and C(user) arguments must be provided)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retries",
+      "displayName": "Retries",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "How many times should the module retry HTTP request if it fails",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "script",
+      "displayName": "Script",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If C(script) is not provided, the release will be marked as (un-)changed depending on the C(creates) option If C(script) is provided, the script is run, and the installed release (if any) is extracted from its output If the script fails to run or release cannot be extracted, the release is marked is changed If the script runs successfully and a release is extracted, it is compared with release tag queried from github If two release tags match, the release is marked as not changed, else as change",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shout",
+      "displayName": "Shout",
+      "type": "string",
+      "required": false,
+      "default": "latest",
+      "description": "Defines when should the module print a warning message about detected release",
+      "choices": [
+        "latest",
+        "always",
+        "never"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stripv",
+      "displayName": "Stripv",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Defines whether first \"v\" should be stripped from the C({ver}) place holder in C(template) Does not affect release URL or download URL",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If C(template) is not provided, the module returns the resolved repository url like C(https://github.com/USERNAME/REPOSITORY) If C(template) is provided, it must contain the following placeholders: C({ver}) - detected release (with or without first \"v\", depending on the C(stripv) option) C({repo_url}) - link to the repository like C(https://github.com/USERNAME/REPOSITORY) C({release_url}) - link to the resolved release like C(https://github.com/USERNAME/REPOSITORY/releases/tag/RELEASE) C({downlo",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Owner of the github repository",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

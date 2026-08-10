@@ -1,0 +1,112 @@
+{
+  "fqcn": "graphiant.naas.graphiant_device_config",
+  "shortDescription": "Push raw device configurations to Graphiant devices",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_device_config_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file",
+      "displayName": "Config File",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the device configuration YAML file. Required for all operations. Can be an absolute path or relative path. Relative paths are resolved using the configured config_path. Configuration files support Jinja2 templating syntax for dynamic generation. File must contain I(device_config) list with entries in the format:   device_config:     - device-name:         payload: |           { JSON payload conforming to API spec }",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging output for troubleshooting and monitoring. When enabled, provides comprehensive logs of all device configuration operations. Logs are captured and included in the result_msg for display using M(ansible.builtin.debug) module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": "configure",
+      "description": "The specific device configuration operation to perform. V(configure): Push device configuration to devices (PUT /v1/devices/{device_id}/config). V(show_validated_payload): Dry-run mode that shows the validated payload after SDK model processing. Validates configuration syntax, resolves device names, and displays what would be pushed to the API. Unrecognized fields are excluded by SDK models. No changes are made to devices.",
+      "choices": [
+        "configure",
+        "show_validated_payload"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the device configuration. V(present): Maps to V(configure) operation when O(operation) not specified. V(absent) state is not supported as device configuration is a PUT operation.",
+      "choices": [
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_file",
+      "displayName": "Template File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional path to a user-defined Jinja2 template file. When provided, the template is rendered with config file data as context. The rendered template should produce the final I(device_config) structure. Can be an absolute path or relative path. Relative paths are resolved using the configured config_path. Use this to create reusable templates for common configuration patterns.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

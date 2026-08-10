@@ -1,0 +1,255 @@
+{
+  "fqcn": "serverscom.sc_api.cloud_computing_instance",
+  "shortDescription": "Create or delete a cloud computing instance",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/serverscom/sc_api/cloud_computing_instance_module.html",
+  "options": [
+    {
+      "name": "backup_copies",
+      "displayName": "Backup Copies",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Number of daily backups to keep. Default value (if not specified) is 5. Value C(0) disables daily backups. Is used only for for I(state)=C(present). Ignored for I(state)=C(absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "confirm_upgrade",
+      "displayName": "Confirm Upgrade",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Confirm upgrades. Upgrades are autoconfirmed in 72 hours. Used only for I(state)=C(upgraded), ignored of other I(state). If instance is in the state AWAITING_UPGRADE_CONFIRM, calling M(serverscom.sc_api.cloud_computing_instance) with I(state)=C(upgraded) confirm upgrade. If I(wait)=C(0) instance upgrage is not confirmed even if I(confirm_upgrade)=C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.servers.com/v1",
+      "description": "Endpoint to use to connect to API. Do not change until specifically asked to do otherwise. If not set, the value of the C(SERVERSCOM_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flavor_id",
+      "displayName": "Flavor Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Id of the flavor to use. Some flavors may be needed for certain images. Different flavors have different mothly price. Mutually exclusive with I(flavor_name). I(flavor_id) or I(flavor_name) is required for for I(state)=C(present) and C(upgraded). Ignored for I(state)=C(absent) and C(reinstalled).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flavor_name",
+      "displayName": "Flavor Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the flavor to use. Flavor name is checked for exact match. Some flavors may be needed for certain images. Different flavors have different mothly price. Mutually exclusive with I(flavor_id). I(flavor_id) or I(flavor_name) is required for for I(state)=C(present) and C(upgraded). Ignored for I(state)=C(absent) and C(reinstalled).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gpn",
+      "displayName": "Gpn",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable Global Private network for the instance. Local Private network is always allocated for the instance regardless of Global Private network status. Is used only for for I(state)=C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_id",
+      "displayName": "Image Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Id of the image or snapshot to build instance from. Mutually exclusive with I(image_regexp). Required for I(state)=C(present). Used for I(state)=C(reinstalled) if present. Ignored for I(state)=C(absent) and C(upgraded).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_regexp",
+      "displayName": "Image Regexp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Regular expression to use to find an image or a snapshot to build instance from. Regular expressions are based on python 're' module. First found image is used if few images matches. Use I(image_id) for exact image selection. Mutually exclusive with I(image_id). Required for I(state)=C(present). Used for I(state)=C(reinstalled) if present. Ignored for I(state)=C(absent) and C(upgraded).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_id",
+      "displayName": "Instance Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the instance for I(state)=C(absent). Mutually exclusive with I(name)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipv4",
+      "displayName": "Ipv4",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enable external IPv4 network Local Private IPv4 network is always allocated for the instance Is used only for for I(state)=C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipv6",
+      "displayName": "Ipv6",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable IPv6. Currently enable IPv6 only on public (internet) interface. Is used only for for I(state)=C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Labels to attach to the instance. If labels do not exist they will be created. Key-value pairs. More info at https://developers.servers.com/api-documentation/v1/#section/Labels.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the instance. Will be used as hostname for the new instance. Required for I(state)=C(present). May be used for I(state)=C(absent) instead of I(instance_id).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region_id",
+      "displayName": "Region Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Id of the cloud region for the instance Use M(serverscom.sc_api.cloud_computing_regions_info) to get list of available regions. Required for I(state)=C(present). May be used for other I(state) to narrow search to one region with I(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retry_on_conflicts",
+      "displayName": "Retry On Conflicts",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Retry delete requiest for I(state)=C(absent) if instance is in conflicting state (code 409). Retries are controlled by wait/update_interval values.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_key_fingerprint",
+      "displayName": "Ssh Key Fingerprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fingerprint of the public ssh key to use for user cloud-user. Fingerprint must be registered. Use M(serverscom.sc_api.ssh_key) to register public key. Mutually exclusive with I(ssh_key_name) Instance is created with password if no I(ssh_key_fingerprint) or I(ssh_key_name) is used. Is used only for for I(state)=C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_key_name",
+      "displayName": "Ssh Key Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the registered ssh public key to use for user cloud-user. Key must be registered before use. Mutually exclusive with I(ssh_key_fingerprint) Instance is created with password if no I(ssh_key_fingerprint) or I(ssh_key_name) is used. Is used only for for I(state)=C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "State of instance. C(present) creates instance if it not present, but does not change parameters for existing instances. C(absent) delete instance if it present. C(reinstalled) performs reinstallation. I(image_id) or I(Image_regexp) are used, if not specified, old image is used. It's impossible to change ssh key by reinstalling. C(reinstalled) is not idempotent, use 'when' for idempotency. C(upgraded) performs upgrade (change of the flavor), if flavor of the current instance is different from ex",
+      "choices": [
+        "absent",
+        "present",
+        "reinstalled",
+        "upgraded"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Token to use. You can create token for your account in https://portal.servers.com in Profile -> Public API section. If not set, the value of the C(SERVERSCOM_API_TOKEN) or C(SC_TOKEN) environment variable is used (C(SERVERSCOM_API_TOKEN) takes precedence). Value is not logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_interval",
+      "displayName": "Update Interval",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Polling interval for waiting. Every polling request is reducing API ratelimits.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_data",
+      "displayName": "User Data",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "User data to pass to the newly created instance See https://cloudinit.readthedocs.io/en/latest/topics/format.html for possible formats Is used only for for I(state)=C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Time to wait until instance get to the desired state. I(state)=C(present) waits for ACTIVE. I(state)=C(absent) waits for instance to disappear. Value C(0) is used to disable wait. If C(0) is set, module works in 'fire-and-forget' mode. ACTIVE state doesn't mean that instance is ready to accept ssh connections. Use M(ansible.builtin.wait_for_connection) module to wait until instance finishes booting. wait time is independent for I(retry_on_conflicts) and status wait. If instance is in conflicting",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

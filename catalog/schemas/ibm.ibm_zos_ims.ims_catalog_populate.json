@@ -1,0 +1,265 @@
+{
+  "fqcn": "ibm.ibm_zos_ims.ims_catalog_populate",
+  "shortDescription": "Add records to the  IMS Catalog",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_ims/ims_catalog_populate_module.html",
+  "options": [
+    {
+      "name": "acb_lib",
+      "displayName": "Acb Lib",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Defines an ACB library data set that contains the ACB members that are used to populate the IMS catalog.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bootstrap_dataset",
+      "displayName": "Bootstrap Dataset",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Optionally defines the IMS directory bootstrap data set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "buffer_pool_param_dataset",
+      "displayName": "Buffer Pool Param Dataset",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the buffer pool parameters data set. This option is required if you are running the utility as a DLI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_timestamp",
+      "displayName": "Check Timestamp",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Determines if the utility should check timestamps of ACB members with duplicate names. If true, the utility will check if the ACB generation timestamp is different from the previously processed ACB member with the same name. If the timestamp is different, it will use the ACB with the duplicate name. If not, it will ignore the ACB with the duplicate name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "control_statements",
+      "displayName": "Control Statements",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The control statement parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dbd_lib",
+      "displayName": "Dbd Lib",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Defines the IMS.DBDLIB data sets.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dbrc",
+      "displayName": "Dbrc",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates if the IMS Database Recovery Control facility is enabled.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dfsdf_member",
+      "displayName": "Dfsdf Member",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The DFSDFxxx member in the IMS.PROCLIB data set where the CATALOG section is defined. For example, dfsdf_member is \"CAT\" specifies the DFSDFCAT member of the PROCLIB data set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directory_datasets",
+      "displayName": "Directory Datasets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Optionally defines the IMS directory data sets that are used to store the ACBs. If this is omitted, the utility dynamically deletes any preexisting directory data sets and dynamically creates two new data sets to store the ACBs. The data set name must conform to the same naming convention as for a system-created directory data set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directory_staging_dataset",
+      "displayName": "Directory Staging Dataset",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Optionally defines the size and placement IMS of the directory staging data set. The data set must follow the naming convention for the IMS Catalog Directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ims_id",
+      "displayName": "Ims Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The identifier of the IMS system on which the job is to be run. Required if online_batch is true",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "irlm_id",
+      "displayName": "Irlm Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IRLM ID if IRLM is enabled. Cannot be specified when online_batch is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Indicates the mode in which the Catalog Populate utility must be run. {'For module option I(mode=LOAD), the setup option is used': ['catalog only is supported in both online and offline modes.', 'managed_acbs is supported only in offline mode (requires offline IMS).']} {'For module option I(mode=UPDATE)': ['catalog only is supported in both online and offline modes.', 'managed_acbs (stage option) is supported in both online and offline modes.', 'managed_acbs (update option) is supported only in ",
+      "choices": [
+        "LOAD",
+        "UPDATE",
+        "READ"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "modstat",
+      "displayName": "Modstat",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Describes the IMS MODSTAT data set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "online_batch",
+      "displayName": "Online Batch",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates if this utility is to be run in a BMP region.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "primary_log_dataset",
+      "displayName": "Primary Log Dataset",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Defines the primary IMS log data set. This is required if dbrc is set to true or if mode 'UPDATE' is selected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proclib",
+      "displayName": "Proclib",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Defines the IMS.PROCLIB data set that contains the DFSDFxxx member. The  DFSDFxxx member defines various attributes of the IMS catalog that are required by the utility.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "psb_lib",
+      "displayName": "Psb Lib",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Defines the IMS.PSBLIB data set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reslib",
+      "displayName": "Reslib",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Points to an authorized library that contains the IMS SVC modules.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secondary_log_dataset",
+      "displayName": "Secondary Log Dataset",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Defines the secondary IMS log data set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "steplib",
+      "displayName": "Steplib",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Points to IMS.SDFSRESL, which contains the IMS nucleus and required IMS modules. The steplib parameter can also be specified in the target inventory's environment_vars. The steplib input parameter to the module will take precedence over the value specified in the environment_vars.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sysabend",
+      "displayName": "Sysabend",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the dump data set. This defaults to = \\*",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "temp_acb_dataset",
+      "displayName": "Temp Acb Dataset",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "An optional control statement to define an empty work data set to be used as an IMS.ACBLIB data set for the IMS Catalog Populate utility. If IMS Management of ACBs is not enabled, this statement is ommitted. This data set does not need to conform to any IMS Catalog or system-defined naming convention.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

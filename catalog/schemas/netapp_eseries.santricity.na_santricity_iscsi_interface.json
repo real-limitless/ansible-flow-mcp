@@ -1,0 +1,171 @@
+{
+  "fqcn": "netapp_eseries.santricity.na_santricity_iscsi_interface",
+  "shortDescription": "NetApp E-Series manage iSCSI interface configuration",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp_eseries/santricity/na_santricity_iscsi_interface_module.html",
+  "options": [
+    {
+      "name": "address",
+      "displayName": "Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IPv4 address to assign to the interface. Should be specified in xx.xx.xx.xx form. Mutually exclusive with I(config_method=dhcp)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The url to the SANtricity Web Services Proxy or Embedded Web Services API. Example https://prod-1.wahoo.acme.com:8443/devmgr/v2",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_method",
+      "displayName": "Config Method",
+      "type": "string",
+      "required": false,
+      "default": "dhcp",
+      "description": "The configuration method type to use for this interface. dhcp is mutually exclusive with I(address), I(subnet_mask), and I(gateway).",
+      "choices": [
+        "dhcp",
+        "static"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller",
+      "displayName": "Controller",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The controller that owns the port you want to configure. Controller names are presented alphabetically, with the first controller as A, the second as B, and so on. Current hardware models have either 1 or 2 available controllers, but that is not a guaranteed hard limitation and could change in the future.",
+      "choices": [
+        "A",
+        "B"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gateway",
+      "displayName": "Gateway",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IPv4 gateway address to utilize for the interface. Should be specified in xx.xx.xx.xx form. Mutually exclusive with I(config_method=dhcp)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mtu",
+      "displayName": "Mtu",
+      "type": "number",
+      "required": false,
+      "default": 1500,
+      "description": "The maximum transmission units (MTU), in bytes. This allows you to configure a larger value for the MTU, in order to enable jumbo frames (any value > 1500). Generally, it is necessary to have your host, switches, and other components not only support jumbo frames, but also have it configured properly. Therefore, unless you know what you're doing, it's best to leave this at the default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "The controller iSCSI baseboard or HIC port to modify. Determine the port by counting, starting from one, the controller's iSCSI ports left to right. Count the baseboard and then the HIC ports.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "speed",
+      "displayName": "Speed",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The option will change the interface port speed. Only supported speeds will be accepted and must be in the form [0-9]+[gm] (i.e. 25g) Down interfaces will report as Unknown speed until they are set to an accepted network speed. Do not use this option when the port's speed is automatically configured as it will fail. See System Manager for the port's capability.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssid",
+      "displayName": "Ssid",
+      "type": "string",
+      "required": false,
+      "default": "1",
+      "description": "The ID of the array to manage. This value must be unique for each array.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "enabled",
+      "description": "When enabled, the provided configuration will be utilized. When disabled, the IPv4 configuration will be cleared and IPv4 connectivity disabled.",
+      "choices": [
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subnet_mask",
+      "displayName": "Subnet Mask",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The subnet mask to utilize for the interface. Should be specified in xx.xx.xx.xx form. Mutually exclusive with I(config_method=dhcp)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Should https certificates be validated?",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

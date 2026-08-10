@@ -1,0 +1,201 @@
+{
+  "fqcn": "cdillc.splunk.splunk_user",
+  "shortDescription": "Manage Splunk user accounts",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cdillc/splunk/splunk_user_module.html",
+  "options": [
+    {
+      "name": "append_roles",
+      "displayName": "Append Roles",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When true, the specified I(roles) will be appended to the user's existing roles.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "defaultapp",
+      "displayName": "Defaultapp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The default Splunk application the user sees when they login to Splunk Web.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "email",
+      "displayName": "Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Email address associated with the Splunk user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_change_pass",
+      "displayName": "Force Change Pass",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Force user to change password. This field is set when the user is first created or when I(update_password=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password for username/password authentication to Splunkd. Must be provided if I(username) is provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realname",
+      "displayName": "Realname",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full name (comment) of the user account.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roles",
+      "displayName": "Roles",
+      "type": "list",
+      "required": true,
+      "default": [
+        "user"
+      ],
+      "description": "List of roles associated with the Splunk user. By default this will override any users existing role membership. Use I(append_roles=true) to change this behavior to be additive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "splunk_home",
+      "displayName": "Splunk Home",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to Splunk installation. This is used if the splunk-sdk is not installed for all users.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "splunk_pass",
+      "displayName": "Splunk Pass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the Splunk user account being created or modified. See the notes regarding changing passwords under the I(update_password) option. This option is required when C(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "splunk_user",
+      "displayName": "Splunk User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the user to create, modify or delete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "splunkd_uri",
+      "displayName": "Splunkd Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://localhost:8089",
+      "description": "The Splunkd endpoint of the Splunk server to configure. Defaults to the local server and default splunkd port.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Ensure the user is either present or absent; or list the contents of the user's configuration. With C(present), existing users are updated in place. See notes regarding specific handling of the I(roles), I(splunk_pass), and I(force_change_pass).",
+      "choices": [
+        "present",
+        "absent",
+        "list"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Token to use when authentication has already taken place. The C(token) can be specified instead of I(username) and I(password). This module returns an output named I(token) that can be used for subsequent splunkd calls to the same splunkd endpoint.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tz",
+      "displayName": "Tz",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Timezone associated with the Splunk user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_force_change_pass",
+      "displayName": "Update Force Change Pass",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use in combination with I(force_change_pass) to force an update to an existing user. Whenever this is set to I(true) the module will always report as changed. The Splunk REST api does not allow the C(force-change-pass) to be read.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Replace the existing password with the one specified in I(password). When I(true) this module will always report changed since there is no way to determine if the new password is different than the currently assigned password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Splunk username for username/password authentication to Splunkd. When provided, I(password) must also be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

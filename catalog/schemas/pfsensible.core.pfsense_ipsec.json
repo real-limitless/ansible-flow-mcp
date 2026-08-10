@@ -1,0 +1,444 @@
+{
+  "fqcn": "pfsensible.core.pfsense_ipsec",
+  "shortDescription": "Manage pfSense IPsec tunnels and phase 1 options",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/pfsensible/core/pfsense_ipsec_module.html",
+  "options": [
+    {
+      "name": "apply",
+      "displayName": "Apply",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Apply VPN configuration on target pfSense",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "authentication_method",
+      "displayName": "Authentication Method",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authenticatin method. Must match the setting chosen on the remote side.",
+      "choices": [
+        "pre_shared_key",
+        "rsasig"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate",
+      "displayName": "Certificate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "a certificate previously configured",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_authority",
+      "displayName": "Certificate Authority",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "a certificate authority previously configured",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "closeaction",
+      "displayName": "Closeaction",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Set this option to control the behavior when the remote peer unexpectedly closes a child SA (P2).  New in pfSense 2.5.2.",
+      "choices": [
+        "",
+        "none",
+        "start",
+        "trap"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "descr",
+      "displayName": "Descr",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The description of the IPsec tunnel",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_reauth",
+      "displayName": "Disable Reauth",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "(IKEv2 only) Whether rekeying of an IKE_SA should also reauthenticate the peer. In IKEv1, reauthentication is always done.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_rekey",
+      "displayName": "Disable Rekey",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Disables renegotiation when a connection is about to expire (deprecated with pfSense 2.5.0)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disabled",
+      "displayName": "Disabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set this option to disable this phase1 without removing it from the list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dpd_delay",
+      "displayName": "Dpd Delay",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Delay between requesting peer acknowledgement.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dpd_maxfail",
+      "displayName": "Dpd Maxfail",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Number of consecutive failures allowed before disconnect.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_dpd",
+      "displayName": "Enable Dpd",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enable dead peer detection",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gw_duplicates",
+      "displayName": "Gw Duplicates",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allow multiple phase 1 configurations with the same endpoint",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iketype",
+      "displayName": "Iketype",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Internet Key Exchange protocol version to be used. Auto uses IKEv2 when initiator, and accepts either IKEv1 or IKEv2 as responder.",
+      "choices": [
+        "ikev1",
+        "ikev2",
+        "auto"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Interface for the local endpoint of this phase1 entry.  Can be a virtual IP name or address prefixed with \"vip:\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lifetime",
+      "displayName": "Lifetime",
+      "type": "number",
+      "required": false,
+      "default": 28800,
+      "description": "The lifetime defines how often the connection will be rekeyed, in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "margintime",
+      "displayName": "Margintime",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "How long before connection expiry or keying-channel expiry should attempt to negotiate a replacement begin (deprecated with pfSense 2.5.0)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mobike",
+      "displayName": "Mobike",
+      "type": "string",
+      "required": false,
+      "default": "off",
+      "description": "(IKEv2 only) Set this option to control the use of MOBIKE",
+      "choices": [
+        "on",
+        "off"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Negotiation mode. Aggressive is more flexible, but less secure. Only for IkeV1 or Auto.",
+      "choices": [
+        "main",
+        "aggressive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "myid_data",
+      "displayName": "Myid Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Local identifier value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "myid_type",
+      "displayName": "Myid Type",
+      "type": "string",
+      "required": false,
+      "default": "myaddress",
+      "description": "Local identifier type.",
+      "choices": [
+        "myaddress",
+        "address",
+        "fqdn",
+        "user_fqdn",
+        "asn1dn",
+        "keyid tag",
+        "dyn_dns",
+        "auto"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nat_traversal",
+      "displayName": "Nat Traversal",
+      "type": "string",
+      "required": false,
+      "default": "on",
+      "description": "Set this option to enable the use of NAT-T (i.e. the encapsulation of ESP in UDP packets) if needed, which can help with clients that are behind restrictive firewalls.",
+      "choices": [
+        "on",
+        "force"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nattport",
+      "displayName": "Nattport",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "UDP port for NAT-T on the remote gateway.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peerid_data",
+      "displayName": "Peerid Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Remote identifier value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "peerid_type",
+      "displayName": "Peerid Type",
+      "type": "string",
+      "required": false,
+      "default": "peeraddress",
+      "description": "Remote identifier type.",
+      "choices": [
+        "any",
+        "peeraddress",
+        "address",
+        "fqdn",
+        "user_fqdn",
+        "asn1dn",
+        "keyid tag",
+        "auto"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preshared_key",
+      "displayName": "Preshared Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This key must match on both peers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": "inet",
+      "description": "IP family",
+      "choices": [
+        "inet",
+        "inet6",
+        "both"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rand_time",
+      "displayName": "Rand Time",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "A random value up to this amount will be subtracted from Rekey Time/Reauth Time to avoid simultaneous renegotiation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reauth_time",
+      "displayName": "Reauth Time",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Time, in seconds, before an IKE SA is torn down and recreated from scratch, including authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rekey_time",
+      "displayName": "Rekey Time",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Time, in seconds, before an IKE SA establishes new keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_gateway",
+      "displayName": "Remote Gateway",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public IP address or host name of the remote gateway.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "responderonly",
+      "displayName": "Responderonly",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable this option to never initiate this connection from this side, only respond to incoming requests.  Removed in pfSense 2.5.2.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "splitconn",
+      "displayName": "Splitconn",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "(IKEv2 only) Enable this to split connection entries with multiple phase 2 configurations",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "startaction",
+      "displayName": "Startaction",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Set this option to force specific initiation/responder behavior for child SA (P2) entries.  New in pfSense 2.5.2.",
+      "choices": [
+        "",
+        "none",
+        "start",
+        "trap"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State in which to leave the IPsec tunnel",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,371 @@
+{
+  "fqcn": "ionoscloudsdk.ionoscloud.volume",
+  "shortDescription": "Create, update or destroy a volume.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ionoscloudsdk/ionoscloud/volume_module.html",
+  "options": [
+    {
+      "name": "allow_replace",
+      "displayName": "Allow Replace",
+      "type": "string",
+      "required": false,
+      "default": false,
+      "description": "Boolean indicating if the resource should be recreated when the state cannot be reached in another way. This may be used to prevent resources from being deleted from specifying a different value to an immutable property. An error will be thrown instead",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Ionos API base URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_zone",
+      "displayName": "Availability Zone",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The availability zone in which the volume should be provisioned. The storage volume will be provisioned on as few physical storage devices as possible, but this cannot be guaranteed upfront. This is uavailable for DAS (Direct Attached Storage), and subject to availability for SSD.",
+      "choices": [
+        "AUTO",
+        "ZONE_1",
+        "ZONE_2",
+        "ZONE_3"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backupunit",
+      "displayName": "Backupunit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the backup unit that the user has access to. The property is immutable and is only allowed to be set on creation of a new a volume. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bus",
+      "displayName": "Bus",
+      "type": "string",
+      "required": false,
+      "default": "VIRTIO",
+      "description": "The bus type for this volume; default is VIRTIO.",
+      "choices": [
+        "VIRTIO",
+        "IDE",
+        "UNKNOWN"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_fingerprint",
+      "displayName": "Certificate Fingerprint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Ionos API certificate fingerprint.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "count",
+      "displayName": "Count",
+      "type": "string",
+      "required": false,
+      "default": 1,
+      "description": "The number of volumes you wish to create.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpu_hot_plug",
+      "displayName": "Cpu Hot Plug",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hot-plug capable CPU (no reboot required).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datacenter",
+      "displayName": "Datacenter",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The datacenter in which to create the volumes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disc_virtio_hot_plug",
+      "displayName": "Disc Virtio Hot Plug",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hot-plug capable Virt-IO drive (no reboot required).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disc_virtio_hot_unplug",
+      "displayName": "Disc Virtio Hot Unplug",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hot-unplug capable Virt-IO drive (no reboot required). Not supported with Windows VMs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_type",
+      "displayName": "Disk Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The disk type of the volume.",
+      "choices": [
+        "HDD",
+        "SSD",
+        "SSD Premium",
+        "SSD Standard",
+        "DAS",
+        "ISO"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image",
+      "displayName": "Image",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Image or snapshot ID to be used as template for this volume. MSSQL Enterprise Images can be used only if the feature toggle for MSSQL Enterprise is enabled on the contract.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_password",
+      "displayName": "Image Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Initial password to be set for installed OS. Works with public images only. Not modifiable, forbidden in update requests. Password rules allows all characters from a-z, A-Z, 0-9.",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "instance_ids",
+      "displayName": "Instance Ids",
+      "type": "string",
+      "required": false,
+      "default": [],
+      "description": "list of instance ids or names. Should only contain one ID if renaming in update state",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "licence_type",
+      "displayName": "Licence Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OS type for this volume.",
+      "choices": [
+        "UNKNOWN",
+        "WINDOWS",
+        "WINDOWS2016",
+        "WINDOWS2019",
+        "WINDOWS2022",
+        "WINDOWS2025",
+        "RHEL",
+        "LINUX",
+        "OTHER"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the  resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nic_hot_plug",
+      "displayName": "Nic Hot Plug",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hot-plug capable NIC (no reboot required).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nic_hot_unplug",
+      "displayName": "Nic Hot Unplug",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hot-unplug capable NIC (no reboot required).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Ionos password. Overrides the IONOS_PASSWORD environment variable.",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "ram_hot_plug",
+      "displayName": "Ram Hot Plug",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hot-plug capable RAM (no reboot required).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server",
+      "displayName": "Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The server to which to attach the volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The size of the volume in GB.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_keys",
+      "displayName": "Ssh Keys",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Indicate desired state of the resource.",
+      "choices": [
+        "present",
+        "absent",
+        "update"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Ionos token. Overrides the IONOS_TOKEN environment variable.",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "user_data",
+      "displayName": "User Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on creation of a new a volume. It is mandatory to provide either 'public image' or 'imageAlias' that has cloud-init compatibility in conjunction with this property.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Ionos username. Overrides the IONOS_USERNAME environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "string",
+      "required": false,
+      "default": true,
+      "description": "Wait for the resource to be created before returning.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "string",
+      "required": false,
+      "default": 600,
+      "description": "How long before wait gives up, in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

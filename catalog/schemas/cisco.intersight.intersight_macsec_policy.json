@@ -1,0 +1,298 @@
+{
+  "fqcn": "cisco.intersight.intersight_macsec_policy",
+  "shortDescription": "MACsec Policy configuration for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_macsec_policy_module.html",
+  "options": [
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cipher_suite",
+      "displayName": "Cipher Suite",
+      "type": "string",
+      "required": false,
+      "default": "gcm-aes-xpn-256",
+      "description": "Cipher suite to be used for MACsec encryption.",
+      "choices": [
+        "gcm-aes-xpn-256",
+        "gcm-aes-128",
+        "gcm-aes-256",
+        "gcm-aes-xpn-128"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "confidentiality_offset",
+      "displayName": "Confidentiality Offset",
+      "type": "string",
+      "required": false,
+      "default": "conf-offset-0",
+      "description": "The MACsec confidentiality offset specifies the number of bytes starting from the frame header. MACsec encrypts only the bytes after the offset in a frame.",
+      "choices": [
+        "conf-offset-0",
+        "conf-offset-30",
+        "conf-offset-50"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configure_fallback_keychain",
+      "displayName": "Configure Fallback Keychain",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable configuration of fallback keychain.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description for the MACsec Policy. Description can contain letters(a-z, A-Z), numbers(0-9), hyphen(-), period(.), colon(:), or an underscore(_).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "eapol_ethertype",
+      "displayName": "Eapol Ethertype",
+      "type": "string",
+      "required": false,
+      "default": "0x888e",
+      "description": "Ethertype to use in EAPoL frames for MKA PDUs. The range is between 0x600 - 0xffff.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "eapol_mac_address",
+      "displayName": "Eapol Mac Address",
+      "type": "string",
+      "required": false,
+      "default": "0180.C200.0003",
+      "description": "MAC address to use in extensible authentication protocol over LAN (EAPoL) for MKA PDUs. EAPol MAC address should not be equal to all-zero (0000.0000.0000).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fallback_keychain_name",
+      "displayName": "Fallback Keychain Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Fallback keychain name. Required when C(configure_fallback_keychain) is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fallback_keys",
+      "displayName": "Fallback Keys",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of security keys for the fallback keychain.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_icv_indicator",
+      "displayName": "Include Icv Indicator",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Configures inclusion of the optional integrity check value (ICV) indicator. Part of the transmitted MACsec key agreement protocol data unit (PDU).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_server_priority",
+      "displayName": "Key Server Priority",
+      "type": "number",
+      "required": false,
+      "default": 16,
+      "description": "Key server is selected by comparing priority values during MKA message exchange. Valid values range from 0 to 255. Lower value means higher chance of being selected as key server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the MACsec Policy. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Profiles, Policies, and Pools that are created within a Custom Organization are applicable only to devices in the same Organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "primary_keychain_name",
+      "displayName": "Primary Keychain Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Primary keychain name for managing the default set of security keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "primary_keys",
+      "displayName": "Primary Keys",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of security keys for the primary keychain.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "replay_window_size",
+      "displayName": "Replay Window Size",
+      "type": "number",
+      "required": false,
+      "default": 148809600,
+      "description": "Defines the size of the replay protection window. Determines the number of packets that can be received out of order without being considered replay attacks. Valid range is from 0 to 596000000.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sak_expiry_time",
+      "displayName": "Sak Expiry Time",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Time in seconds to force secure association key (SAK) rekey. Valid range is from 60 to 2592000 seconds. When set to 0 or not configured, SAK rekey interval is determined based on interface speed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_policy",
+      "displayName": "Security Policy",
+      "type": "string",
+      "required": false,
+      "default": "should-secure",
+      "description": "The security policy specifies the level of MACsec enforcement on network traffic. C(should-secure) allows unencrypted traffic until MKA session is secured. C(must-secure) only allows MACsec encrypted traffic.",
+      "choices": [
+        "should-secure",
+        "must-secure"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,129 @@
+{
+  "fqcn": "linuxfabrik.lfops.uptimerobot_mwindow",
+  "shortDescription": "Create, update or delete an UptimeRobot maintenance window",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/linuxfabrik/lfops/uptimerobot_mwindow_module.html",
+  "options": [
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "UptimeRobot API key. See C(uptimerobot_monitor) for the resolution order.",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_file",
+      "displayName": "Api Key File",
+      "type": "string",
+      "required": false,
+      "default": "~/.uptimerobot",
+      "description": "Path to a file whose first line is the UptimeRobot API key. Tilde-expanded.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "duration",
+      "displayName": "Duration",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Duration of the window in minutes. Mutually exclusive with I(end_time).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "end_time",
+      "displayName": "End Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(HH:MM) wall-clock time. Combined with I(start_time) to compute I(duration) automatically; wraps over midnight when end < start. Mutually exclusive with I(duration).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "friendly_name",
+      "displayName": "Friendly Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Display name of the window. When omitted on I(state=present), the module synthesises one from I(type), I(value), I(start_time) and I(end_time); in that case all four must be given. Required on I(state=absent).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "start_time",
+      "displayName": "Start Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "For I(type=C(once)), an RFC3339 timestamp. For I(type=C(daily))/C(weekly)/C(monthly), an C(HH:MM) wall-clock time.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "C(present) creates or updates, C(absent) deletes. When the window does not exist on I(state=absent), the module exits with C(changed=false).",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "status",
+      "displayName": "Status",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(active) un-pauses the window, C(paused) pauses it. Only honoured on edit; UptimeRobot rejects this field on create.",
+      "choices": [
+        "active",
+        "paused"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Recurrence type. Required when creating a new window.",
+      "choices": [
+        "daily",
+        "monthly",
+        "once",
+        "weekly"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "value",
+      "displayName": "Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "For I(type=C(weekly)), the weekday as a label (C(mon), C(tue), ..., C(sun)). Multiple weekdays can be passed as a dash-joined list (e.g. C(mon-wed-fri)). For I(type=C(monthly)), the day of the month as a number C(1)..C(31) (passed through unchanged). For I(type=C(once)) and I(type=C(daily)), unused.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

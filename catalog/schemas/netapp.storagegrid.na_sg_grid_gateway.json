@@ -1,0 +1,253 @@
+{
+  "fqcn": "netapp.storagegrid.na_sg_grid_gateway",
+  "shortDescription": "Manage Load balancer (gateway) endpoints on StorageGRID.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netapp/storagegrid/na_sg_grid_gateway_module.html",
+  "options": [
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The url to the StorageGRID Admin Node REST API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_token",
+      "displayName": "Auth Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The authorization token for the API request",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "binding_mode",
+      "displayName": "Binding Mode",
+      "type": "string",
+      "required": false,
+      "default": "global",
+      "description": "Binding mode to restrict accessibility of the load balancer endpoint. A binding mode other than I(global) requires StorageGRID 11.5 or greater.",
+      "choices": [
+        "global",
+        "ha-groups",
+        "node-interfaces"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_bundle",
+      "displayName": "Ca Bundle",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Intermediate CA certificate bundle in concatenated PEM-encoding. Omit when there is no intermediate CA.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "closed_on_untrusted_client_network",
+      "displayName": "Closed On Untrusted Client Network",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to close the port on an untrusted Client Network.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_service_type",
+      "displayName": "Default Service Type",
+      "type": "string",
+      "required": false,
+      "default": "s3",
+      "description": "The type of service to proxy through the load balancer.",
+      "choices": [
+        "s3",
+        "swift",
+        "management"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A display name for the configuration. This parameter can be modified if I(gateway_id) is also specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_grid_manager",
+      "displayName": "Enable Grid Manager",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to use the port bind for grid manager traffic.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_ipv4",
+      "displayName": "Enable Ipv4",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Indicates whether to listen for connections on IPv4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_ipv6",
+      "displayName": "Enable Ipv6",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Indicates whether to listen for connections on IPv6.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_tenant_manager",
+      "displayName": "Enable Tenant Manager",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to use the port bind for tenant manager traffic.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gateway_id",
+      "displayName": "Gateway Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the load balancer endpoint.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ha_groups",
+      "displayName": "Ha Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A set of StorageGRID HA Groups by name or UUID to bind the load balancer endpoint to. Option is ignored unless I(binding_mode=ha-groups).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "node_interfaces",
+      "displayName": "Node Interfaces",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A set of StorageGRID node interfaces to bind the load balancer endpoint to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "node_type",
+      "displayName": "Node Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A list of node types to bind to. This Load Balancer Endpoint will listen on all nodes of this type. The adminNode type includes both primary and non-primary admin nodes.",
+      "choices": [
+        "adminNode",
+        "apiGatewayNode"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "The TCP port to serve traffic on. This parameter cannot be modified after the load balancer endpoint has been created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key",
+      "displayName": "Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Certficate private key in PEM-encoding. Required if I(server_certificate) is not empty.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secure",
+      "displayName": "Secure",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the load balancer endpoint serves HTTP or HTTPS traffic. This parameter cannot be modified after the load balancer endpoint has been created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_certificate",
+      "displayName": "Server Certificate",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "X.509 server certificate in PEM-encoding. Omit if using default certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the specified load balancer endpoint should be configured.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Should https certificates be validated?",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

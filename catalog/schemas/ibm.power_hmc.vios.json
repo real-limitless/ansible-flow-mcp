@@ -1,0 +1,397 @@
+{
+  "fqcn": "ibm.power_hmc.vios",
+  "shortDescription": "Creation and management of Virtual I/O Server partition",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_hmc/vios_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(install) install VIOS through NIM Server or disk. C(accept_license) Accept license after fresh installation of VIOS. C(copy) copies VIOS images from NFS/SFTP server to the HMC. C(delete) deletes VIOS images present in the HMC.",
+      "choices": [
+        "install",
+        "accept_license",
+        "copy",
+        "delete"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directory_list",
+      "displayName": "Directory List",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The name of one or more VIOS installation images to remove",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directory_name",
+      "displayName": "Directory Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name to give the VIOS installation image on the HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "files",
+      "displayName": "Files",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specify one or two comma-separated VIOS ISO files. Required for remote imports ['sftp', 'nfs']; not valid for USB.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "free_pvs",
+      "displayName": "Free Pvs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Provides the Unassigned Physical Volume details. Default value is False. Valid only for C(state) = I(facts)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_auth",
+      "displayName": "Hmc Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Username and Password credential of the HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_host",
+      "displayName": "Hmc Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The IP Address or hostname of the HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_dir",
+      "displayName": "Image Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This parameter determines whether to use the HMC based image for VIOS installation, rather than relying on the Network Installation Manager (NIM). Name of the directory on which VIOS image is available on HMC. This represent the same parameter C(directory_name) that is used during the copy action. valid only for C(action) = I(install)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "label",
+      "displayName": "Label",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a label name for installed vios to use instead of creating a default label name. supports only installation through image available on the HMC local disk. valid only for C(action) = I(install)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location_code",
+      "displayName": "Location Code",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Network adapter location code to be used while installing VIOS through nim server. If user doesn't provide, it automatically picks the first pingable adapter attached to the partition. valid only for C(action) = I(install)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "media",
+      "displayName": "Media",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Media type for the VIOS installation (e.g., nfs, sftp).",
+      "choices": [
+        "nfs",
+        "sftp"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mount_location",
+      "displayName": "Mount Location",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Required for VIOS image imports from NFS; specify the NFS server mount location.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the VirtualIOServer for installation through nim server or image available on HMC local disk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_macaddr",
+      "displayName": "Network Macaddr",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the client MAC address through which the network installation of the Virtual I/O Server will take place. If user doesn't provide, it automatically picks the first pingable adapter attached to the partition. valid only for C(action) = I(install)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nim_IP",
+      "displayName": "Nim Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This parameter determines whether to use Network Installation Manager (NIM) rather than relying on the HMC based image for VIOS installation. IP Address of the NIM Server. valid only for C(action) = I(install)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nim_gateway",
+      "displayName": "Nim Gateway",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "VIOS gateway IP Address. valid only for C(action) = I(install) supports installation through nim server. This parameter is deprecated now and will be removed from future versions and as a replacement C(vios_gateway) can be used now onwards.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nim_subnetmask",
+      "displayName": "Nim Subnetmask",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Subnetmask IP Address to be configured to VIOS. valid only for C(action) = I(install) supports installation through nim server. This parameter is deprecated now and will be removed from future versions and as a replacement C(vios_subnetmask) can be used now onwards.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nim_vlan_id",
+      "displayName": "Nim Vlan Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the VLANID(0 to 4094) to use for tagging Ethernet frames during network install for virtual network communication. Default value is 0 valid only for C(action) = I(install)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nim_vlan_priority",
+      "displayName": "Nim Vlan Priority",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the VLAN priority (0 to 7) to use for tagging Ethernet frames during network install for virtual network communication. Default value is 0 valid only for C(action) = I(install)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "options",
+      "displayName": "Options",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify options for the NFS mount command in double quotes. Default is version 3; use vers=4 for version 4. Valid only for VIOS image imports from NFS.",
+      "choices": [
+        "3",
+        "4"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prof_name",
+      "displayName": "Prof Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Profile Name to be used for VIOS install. Default profile name 'default_profile'. valid only for C(action) = I(install)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_directory",
+      "displayName": "Remote Directory",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the directory on the remote server for the VIOS installation image. If not provided for SFTP, the user's home directory is used; for NFS, the mount location is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_server",
+      "displayName": "Remote Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The host name or IP address of the remote server ['sftp', 'nfs'].",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "settings",
+      "displayName": "Settings",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "To configure various supported attributes of VIOS partition. Supports all the attributes available for creation of VIOS on the mksyscfg command except 'lpar_env'. valid only for C(state) = I(present)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sftp_auth",
+      "displayName": "Sftp Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Username and Password credential of the SFTP Server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_key_file",
+      "displayName": "Ssh Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the SSH private key file name. If not fully qualified, it must be in the user's home directory on the HMC. This option is only valid for sftp and is mutually exclusive with password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(facts) fetch details of specified I(VIOS). C(present) creates VIOS with specified I(settings). C(listimages) list the VIOS images present in HMC",
+      "choices": [
+        "facts",
+        "present",
+        "listimages"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system_name",
+      "displayName": "System Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name or mtms (machine type model serial) of the managed system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Max waiting time in mins for VIOS to bootup fully. Min timeout should be more than 10 mins. Default value is 60 min. valid only for C(action) = I(install)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vios_IP",
+      "displayName": "Vios Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP Address to be configured to VIOS. valid only for C(action) = I(install)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vios_gateway",
+      "displayName": "Vios Gateway",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "VIOS gateway IP Address. valid only for C(action) = I(install) supports installation through nim server and image available on the HMC local disk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vios_iso",
+      "displayName": "Vios Iso",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The vios iso file to be installed. supports only installation through image available on the HMC local disk. valid only for C(action) = I(install)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vios_subnetmask",
+      "displayName": "Vios Subnetmask",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Subnetmask IP Address to be configured to VIOS. valid only for C(action) = I(install) supports installation through nim server and image available on the HMC local disk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "virtual_optical_media",
+      "displayName": "Virtual Optical Media",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Provides the virtual optical media details. Default value is False. Valid only for C(state) = I(facts)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

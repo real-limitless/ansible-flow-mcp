@@ -1,0 +1,157 @@
+{
+  "fqcn": "serverscom.sc_api.l2_segment",
+  "shortDescription": "Managing L2 segement",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/serverscom/sc_api/l2_segment_module.html",
+  "options": [
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "https://api.servers.com/v1",
+      "description": "Endpoint to use to connect to API. Do not change until specifically asked to do otherwise. If not set, the value of the C(SERVERSCOM_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Labels to attach to the instance. If labels do not exist they will be created. Key-value pairs. More info at https://developers.servers.com/api-documentation/v1/#section/Labels.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "location_group_id",
+      "displayName": "Location Group Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of location group to create L2 segment Used only for I(state)=C(absent) or I(State)=C(present) If members are in different location group than specified, module fails.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "members",
+      "displayName": "Members",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of servers and mode of connection (native or trunk) (Either I(members) or I(members_present) or I(members_absent) required if I(state)=C(present) L2 segment should contains at least one member Server can be member of only one L2 segment in I(mode)=C(native) Server can participate in multiple L2 segments in I(mode)=C(trunk) Server can be present in a given segment only once (e.g. it's impossible to have the same segment with two different vlan IDs on the same server) L2 segment is reconfigur",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "members_absent",
+      "displayName": "Members Absent",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of servers to be absent in L2 segment Other servers in L2 segement are not affected (this option only assure that listed servers are removed) (Either I(members) or I(members_present) or I(members_absent) required if I(state)=C(present) L2 segment should contains at least two members Either I(members) or I(members_present) can be used. Either I(members) or I(members_absent) can be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "members_present",
+      "displayName": "Members Present",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of servers and mode of connection (native or trunk) Existing servers in L2 segement are not affected, except for possible mode change (this option only assure that servers are added) (Either I(members) or I(members_present) or I(members_absent) required if I(state)=C(present) L2 segment should contains at least one member Server can be member of only one L2 segment in I(mode)=C(native) Server can participate in multiple L2 segments in I(mode)=C(trunk) Server can be present in a given segmen",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the segment This module required to all segments to have unique names If two segments have the same name (even in different location groups or having different type), this module fails. Either I(name) or I(segment_id) is required for delete/update of existing segment. I(name) is required if new segment need to be created",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "segment_id",
+      "displayName": "Segment Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the segment Can be used for delete or update operations istead if I(name)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the segment C(absent) make sure that segment was deleted If C(absent), and I(type) is specified, delete segment of only given type. If C(absent) and I(type) is not specified delete segment of any type.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Token to use. You can create token for your account in https://portal.servers.com in Profile -> Public API section. If not set, the value of the C(SERVERSCOM_API_TOKEN) or C(SC_TOKEN) environment variable is used (C(SERVERSCOM_API_TOKEN) takes precedence). Value is not logged.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of segment Required if I(state)=C(present) Global Private Network is C(private) Internet is C(public)s If I(type) for existing segment is different, module fails.",
+      "choices": [
+        "public",
+        "private"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_interval",
+      "displayName": "Update Interval",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Interval for polling for of L2 segment Each update consumes API quota. Ignored if I(wait)=C(0)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "number",
+      "required": false,
+      "default": 1800,
+      "description": "Max wait time for operation to be finished. By default waiting for L2 segment to become active. C(0) disable waiting (fire-and-forget mode)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

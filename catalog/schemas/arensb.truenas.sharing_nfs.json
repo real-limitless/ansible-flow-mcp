@@ -1,0 +1,165 @@
+{
+  "fqcn": "arensb.truenas.sharing_nfs",
+  "shortDescription": "Manage NFS sharing",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/arensb/truenas/sharing_nfs_module.html",
+  "options": [
+    {
+      "name": "alldirs",
+      "displayName": "Alldirs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allows clients to mount any subdirectory of the exported directory. Can only be used on exports that contain only one directory. False by default when a share is created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enabled",
+      "displayName": "Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not this export should be enabled. Exports that are not enabled exist in the middleware database, but are not listed in C(/etc/exports). True by default when a share is created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hosts",
+      "displayName": "Hosts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of allowed hosts, either hostnames or addresses. An empty list means to allow all.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mapall_group",
+      "displayName": "Mapall Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "All requests (including by root) are limited to the permissions of this group. Set to the empty string (C(\"\")) to remove this setting. Mutually-exclusive with C(maproot_group). Requires C(mapall_user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mapall_user",
+      "displayName": "Mapall User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "All requests (including by root) are limited to the permissions of this user. Set to the empty string (C(\"\")) to remove this setting. Mutually-exclusive with C(maproot_user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maproot_group",
+      "displayName": "Maproot Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Requests by user root are also limited to the permissions of this group. Set to the empty string (C(\"\")) to remove this setting. Mutually-exclusive with C(mapall_group). Requires C(maproot_user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maproot_user",
+      "displayName": "Maproot User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Requests by user root are limited to the permissions of this user. Set to the empty string (C(\"\")) to remove this setting. Mutually-exclusive with C(mapall_user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": "",
+      "description": "Name for this export group. This will show up as the comment.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "networks",
+      "displayName": "Networks",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of allowed networks, in CIDR notation. An empty list means to allow all. Note that using incorrect CIDR may lead to this module seeing a change when nothing has changed. For example, if you specify \"10.1.2.3/16\", TrueNAS will normalize this to \"10.1.0.0/16\", but afterward, this module will think that you want to make a change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "A directory to export.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "paths",
+      "displayName": "Paths",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Deprecated; use C(path) instead. List of directories to export. All paths must be in the same filesystem. And if multiple directories from the same filesystem are being imported, they must be in the same NFS export.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quiet",
+      "displayName": "Quiet",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Suppress certain error messages. This can be used to avoid spamming log files with messages about known errors. See exports(5) for examples. False by default when a share is created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "readonly",
+      "displayName": "Readonly",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the directories are exported read-only, to prohibit clients from writing to them.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether this export should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

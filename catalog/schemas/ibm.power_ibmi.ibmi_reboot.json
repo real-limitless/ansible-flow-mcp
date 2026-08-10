@@ -1,0 +1,195 @@
+{
+  "fqcn": "ibm.power_ibmi.ibmi_reboot",
+  "shortDescription": "Reboot an IBM i machine",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_ibmi/ibmi_reboot_module.html",
+  "options": [
+    {
+      "name": "become_user",
+      "displayName": "Become User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the user profile that the IBM i task will run under. Use this option to set a user with desired privileges to run the task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "become_user_password",
+      "displayName": "Become User Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use this option to set the password of the user specified in C(become_user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connect_timeout",
+      "displayName": "Connect Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "Maximum seconds to wait for a successful connection to the managed hosts before trying again. If unspecified, the default setting for the underlying connection plugin is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controlled_end_delay_time",
+      "displayName": "Controlled End Delay Time",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Specifies the amount of time(1-99999), in seconds, that the system allows a controlled end to be performed by the active subsystems. If the value is greater than 99999, C(*NOLIMIT) will be used in PWRDWNSYS command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "end_subsystem_option",
+      "displayName": "End Subsystem Option",
+      "type": "string",
+      "required": false,
+      "default": "*DFT",
+      "description": "Specifies the options to take when ending the active.",
+      "choices": [
+        "*DFT",
+        "*NOJOBLOG",
+        "*CHGPTY",
+        "*CHGTSL"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "how_to_end",
+      "displayName": "How To End",
+      "type": "string",
+      "required": false,
+      "default": "*IMMED",
+      "description": "Specifies whether the system allows the active subsystem to end processing of active jobs in a controlled manner. or whether the system ends the jobs immediately. In either case, the system does perform certain job-cleanup functions.",
+      "choices": [
+        "*IMMED",
+        "*CNTRLD"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipl_source",
+      "displayName": "Ipl Source",
+      "type": "string",
+      "required": false,
+      "default": "*PANEL",
+      "description": "Specifies whether an initial-program-load (IPL) is started from the A-source, B-source or D-source of the system.",
+      "choices": [
+        "*PANEL",
+        "A",
+        "B",
+        "D",
+        "*IMGCLG"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "msg",
+      "displayName": "Msg",
+      "type": "string",
+      "required": false,
+      "default": "Reboot initiated by Ansible",
+      "description": "Message to display to users before reboot.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parameters",
+      "displayName": "Parameters",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The parameters that PWRDWNSYS command will take. Other than options above, all other parameters need to be specified here. The default values of parameters for PWRDWNSYS will be taken if not specified. Only Install PTF device(INSPTFDEV) is supported now for IBMi 7.3 and above.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "post_reboot_delay",
+      "displayName": "Post Reboot Delay",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Seconds to wait after the reboot command was successful before attempting to validate the system rebooted successfully. This is useful if you want wait for something to settle despite your connection already working.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pre_reboot_delay",
+      "displayName": "Pre Reboot Delay",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Seconds to wait before issue the reboot command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot_timeout",
+      "displayName": "Reboot Timeout",
+      "type": "number",
+      "required": false,
+      "default": 1800,
+      "description": "Maximum seconds to wait for machine to reboot and respond to a test command. This timeout is evaluated separately for both reboot verification and test command success so the maximum execution time for the module is twice this amount.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reboot_type",
+      "displayName": "Reboot Type",
+      "type": "string",
+      "required": false,
+      "default": "*IPLA",
+      "description": "Specifies the point from which the initial program load (IPL) restarts.",
+      "choices": [
+        "*IPLA",
+        "*SYS",
+        "*FULL"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_command",
+      "displayName": "Test Command",
+      "type": "string",
+      "required": false,
+      "default": "uname",
+      "description": "Command to run on the rebooted host and expect success from to determine the machine is ready for further tasks.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout_option",
+      "displayName": "Timeout Option",
+      "type": "string",
+      "required": false,
+      "default": "*CONTINUE",
+      "description": "Specifies the option to take when the system does not end within the time limit specified by the QPWRDWNLMT system value. If this time limit is exceeded, the subsequent IPL will be abnormal regardless of the value specified for this parameter.",
+      "choices": [
+        "*CONTINUE",
+        "*MSD",
+        "*SYSREFCDE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

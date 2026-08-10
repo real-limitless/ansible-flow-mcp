@@ -1,0 +1,157 @@
+{
+  "fqcn": "ibm.power_hmc.hmc_user",
+  "shortDescription": "Manage the hmc users",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_hmc/hmc_user_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "C(configure_ldap) Configure Hardware Management Console (HMC) Light weight Directory Access Protocol (LDAP) client configuration. C(remove_ldap_config) Remove the Hardware Management Console (HMC) Light weight Directory Access Protocol (LDAP) client configuration.",
+      "choices": [
+        "configure_ldap",
+        "remove_ldap_config"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "attributes",
+      "displayName": "Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration attributes used during the create and modify of HMC user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_user",
+      "displayName": "Enable User",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "To enable an HMC user that was disabled due to inactivity. This option is only valid if I(state=updated).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_auth",
+      "displayName": "Hmc Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Username and Password credential of the HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_host",
+      "displayName": "Hmc Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The IP address or hostname of the HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_resource",
+      "displayName": "Ldap Resource",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "LDAP configuration to be removed. This is valid only for I(action=remove_ldap_config).",
+      "choices": [
+        "backup",
+        "ldap",
+        "binddn",
+        "bindpw",
+        "searchfilter",
+        "hmcgroups",
+        "groupmemberattributes"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ldap_settings",
+      "displayName": "Ldap Settings",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configuration attributes used during Configuration of LDAP on HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user name of the HMC user. This option is valid for I(state=present), I(state=absent), I(state=updated), I(state=facts) and I(state=ldap_facts).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource",
+      "displayName": "Resource",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The LDAP resources to be listed. This option is valid only for I(state=ldap_facts). To filter out the LDAP configuration of particular user we can use C(name) parameter with I(resource=user).",
+      "choices": [
+        "config",
+        "user"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The desired state of the HMC user and ldap. C(facts) does not change anything on the HMC and returns the HMC user information or the default settings of HMC user attributes. C(ldap_facts) does not change anything on the HMC and returns LDAP configuration or LDAP user details. C(updated) ensures the HMC user is updated with provided configuration. C(present) ensures the HMC user is created with provided configuration. C(absent) ensures the HMC user is removed.",
+      "choices": [
+        "facts",
+        "present",
+        "absent",
+        "updated",
+        "ldap_facts"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of user. During I(state=updated) to change the default settings of HMC user, specify C(default) with this option. The values of this option changes during I(state=absent). Supported values are C(all|local|kerberos|ldap|automanage). During I(state=facts), valid values are C(default|user).",
+      "choices": [
+        "default",
+        "user",
+        "all",
+        "local",
+        "kerberos",
+        "ldap",
+        "automanage"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,126 @@
+{
+  "fqcn": "steampunk.aws.ec2_volume",
+  "shortDescription": "Manage EC2 EBS volumes",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/steampunk/aws/ec2_volume_module.html",
+  "options": [
+    {
+      "name": "attachment",
+      "displayName": "Attachment",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The configuration for an attachment of the volume to an EC2 instance. Required when creating a new volume if I(state) is C(attached).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Parameters for authenticating with the AWS service. Each of them may be defined via environment variables.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_zone",
+      "displayName": "Availability Zone",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the availability zone in which to create the volume. Required when creating a volume if I(state) is C(detached). Mutually exclusive with I(attachment), as the module will automatically set the value of this parameter to the availability zone of I(attachment.instance).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clear_tags",
+      "displayName": "Clear Tags",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to clear any existing tags on the resource that are not explicitly stated in I(tags). By default, existing tags are kept on the resource. When this parameter is set to C(true), any pre-existing tags on the resource (including the name tag) are removed. To clear all tags except the name tag, make sure to provide the I(name) parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the EBS volume to perform the task on. If specified, this parameter is used to identify the volume. If omitted, a combination of I(name) and I(availability_zone) or I(attachment.instance) and I(attachment.device) is used to identify an existing volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name tag of the EBS volume. Required for the creation of the EBS volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size_gib",
+      "displayName": "Size Gib",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The size of the volume to create, in GiBs. The minimum and maximum allowed size depends on the I(type). If C(type=gp2), the allowed range is 1 to 16384 GiB. If C(type=st1), the allowed range is 500 to 16384 GiB. If C(type=standard), the allowed range is 1 to 1024 GiB.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "attached",
+      "description": "The desired state of the volume.",
+      "choices": [
+        "attached",
+        "detached",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Metadata for the AWS resource as key/value pairs. Keys and values are case-sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of the EBS volume to create. C(gp2) stands for General Purpose SSD, C(st1) for Throughput Optimized HDD, C(standard) for standard Magnetic volumes. Note that the value of this parameter affects the allowed range for the I(size_gib) parameter. Refer to U(https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html) for more information on EBS volume types. If you omit this parameter when creating an EC2 volume, the default type C(gp2) will be used.",
+      "choices": [
+        "gp2",
+        "st1",
+        "standard"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

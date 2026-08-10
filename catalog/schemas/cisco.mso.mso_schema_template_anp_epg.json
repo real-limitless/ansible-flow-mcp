@@ -1,0 +1,368 @@
+{
+  "fqcn": "cisco.mso.mso_schema_template_anp_epg",
+  "shortDescription": "Manage Endpoint Groups (EPGs) in schema templates",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/mso/mso_schema_template_anp_epg_module.html",
+  "options": [
+    {
+      "name": "access_type",
+      "displayName": "Access Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This parameter indicates how the service will be accessed. It is only available when epg_type is service.",
+      "choices": [
+        "private",
+        "public",
+        "public_and_private"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "anp",
+      "displayName": "Anp",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the ANP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bd",
+      "displayName": "Bd",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The BD associated to this ANP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deployment_type",
+      "displayName": "Deployment Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The deployment_type parameter indicates how and where the service is deployed. This parameter is available only when epg_type is service.",
+      "choices": [
+        "cloud_native",
+        "cloud_native_managed",
+        "third_party"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description as displayed on the MSO web interface. The description is supported on versions of MSO that are 3.3 or greater.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name as displayed on the MSO web interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "epg",
+      "displayName": "Epg",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the EPG to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "epg_type",
+      "displayName": "Epg Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The EPG type parameter is supported on versions of MSO that are 3.3 or greater.",
+      "choices": [
+        "application",
+        "service"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP Address or hostname of the ACI Multi Site Orchestrator host. If the value is not specified in the task, the value of environment variable C(MSO_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "intersite_multicast_source",
+      "displayName": "Intersite Multicast Source",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether intersite multicast source is enabled. When not specified, this parameter defaults to C(no).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "intra_epg_isolation",
+      "displayName": "Intra Epg Isolation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Whether intra EPG isolation is enforced. When not specified, this parameter defaults to C(unenforced).",
+      "choices": [
+        "enforced",
+        "unenforced"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_domain",
+      "displayName": "Login Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The login domain name to use for authentication. The default value is Local. If the value is not specified in the task, the value of environment variable C(MSO_LOGIN_DOMAIN) will be used instead. When using a HTTPAPI connection plugin the inventory variable C(ansible_httpapi_login_domain) will be used if this attribute is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output_level",
+      "displayName": "Output Level",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "Influence the output of this MSO module. C(normal) means the standard output, incl. C(current) dict C(info) adds informational output, incl. C(previous), C(proposed) and C(sent) dicts C(debug) adds debugging output, incl. C(filter_string), C(method), C(response), C(status) and C(url) information If the value is not specified in the task, the value of environment variable C(MSO_OUTPUT_LEVEL) will be used instead.",
+      "choices": [
+        "debug",
+        "info",
+        "normal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to use for authentication. If the value is not specified in the task, the value of environment variables C(MSO_PASSWORD) or C(ANSIBLE_NET_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Port number to be used for the REST connection. The default value depends on parameter `use_ssl`. If the value is not specified in the task, the value of environment variable C(MSO_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preferred_group",
+      "displayName": "Preferred Group",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether this EPG is added to preferred group or not. When not specified, this parameter defaults to C(no).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_arp",
+      "displayName": "Proxy Arp",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether proxy arp is enabled. When not specified, this parameter defaults to C(no).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "qos_level",
+      "displayName": "Qos Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Quality of Service (QoS) allows you to classify the network traffic in the fabric. It helps prioritize and police the traffic flow to help avoid congestion in the network. The Contract QoS Level parameter is supported on versions of MSO that are 3.1 or greater.",
+      "choices": [
+        "unspecified",
+        "level1",
+        "level2",
+        "level3",
+        "level4",
+        "level5",
+        "level6"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "schema",
+      "displayName": "Schema",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the schema.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_type",
+      "displayName": "Service Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The service_type parameter refers to the type of cloud services. Only certain deployment types, and certain access types within each deployment type, are supported for each service type. This parameter is available only when epg_type is service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Use C(present) or C(absent) for adding or removing. Use C(query) for listing an object or multiple objects.",
+      "choices": [
+        "absent",
+        "present",
+        "query"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subnets",
+      "displayName": "Subnets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The subnets associated to this ANP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the template.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The socket level timeout in seconds. The default value is 30 seconds. If the value is not specified in the task, the value of environment variable C(MSO_TIMEOUT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If C(false), it will not use a proxy, even if one is defined in an environment variable on the target hosts. If the value is not specified in the task, the value of environment variable C(MSO_USE_PROXY) will be used instead. The default is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_ssl",
+      "displayName": "Use Ssl",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If C(false), an HTTP connection will be used instead of the default HTTPS connection. If the value is not specified in the task, the value of environment variable C(MSO_USE_SSL) will be used instead. When using a HTTPAPI connection plugin the inventory variable C(ansible_httpapi_use_ssl) will be used if this attribute is not specified. The default is C(false) when using a HTTPAPI connection plugin (mso or nd) and C(true) when using the legacy connection method (only for mso).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "useg_epg",
+      "displayName": "Useg Epg",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether this is a USEG EPG.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use for authentication. If the value is not specified in the task, the value of environment variables C(MSO_USERNAME) or C(ANSIBLE_NET_USERNAME) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If C(false), SSL certificates will not be validated. This should only set to C(false) when used on personally controlled sites using self-signed certificates. If the value is not specified in the task, the value of environment variable C(MSO_VALIDATE_CERTS) will be used instead. The default is C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vrf",
+      "displayName": "Vrf",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The VRF associated to this ANP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

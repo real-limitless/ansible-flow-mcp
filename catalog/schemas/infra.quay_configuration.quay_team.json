@@ -1,0 +1,158 @@
+{
+  "fqcn": "infra.quay_configuration.quay_team",
+  "shortDescription": "Manage Quay Container Registry teams",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/infra/quay_configuration/quay_team_module.html",
+  "options": [
+    {
+      "name": "append",
+      "displayName": "Append",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(true), then add the users specified in O(members) to the team. If V(false), then the module sets the team members to users specified in O(members), removing all others users from the team.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Text in Markdown format that describes the team.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "members",
+      "displayName": "Members",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of the user or robot accounts in the team. Use the syntax C(organization)+C(robotshortname) for robot accounts. If the team is synchronized with an LDAP group (see the M(infra.quay_configuration.quay_team_ldap) module), then you can only add or remove robot accounts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the team to create, remove, or modify. The name must be in lowercase, must not contain white spaces, must not start by a digit, and must be at least two characters long.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the organization for the team. This organization must exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_host",
+      "displayName": "Quay Host",
+      "type": "string",
+      "required": false,
+      "default": "http://127.0.0.1",
+      "description": "URL for accessing the API. U(https://quay.example.com:8443) for example. If you do not set the parameter, then the module uses the E(QUAY_HOST) environment variable. If you do no set the environment variable either, then the module uses the U(http://127.0.0.1) URL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_password",
+      "displayName": "Quay Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to use for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_PASSWORD) environment variable. If you set O(quay_password), then you also need to set O(quay_username). Mutually exclusive with O(quay_token).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_token",
+      "displayName": "Quay Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "OAuth access token for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_TOKEN) environment variable. Mutually exclusive with O(quay_username) and O(quay_password).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quay_username",
+      "displayName": "Quay Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use for authenticating against the API. If you do not set the parameter, then the module tries the E(QUAY_USERNAME) environment variable. If you set O(quay_username), then you also need to set O(quay_password). Mutually exclusive with O(quay_token).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "role",
+      "displayName": "Role",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Role of the team within the organization. If not set, then the new team has the V(member) role.",
+      "choices": [
+        "member",
+        "creator",
+        "admin"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If V(absent), then the module deletes the team. The module does not fail if the team does not exist, because the state is already as expected. If V(present), then the module creates the team if it does not already exist. If the team already exists, then the module updates its state.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10.0,
+      "description": "Number of seconds to wait for Quay to send data before giving up. If you do not set the parameter, then the module tries the E(QUAY_TIMEOUT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to allow insecure connections to the API. If V(false), then the module does not validate SSL certificates. If you do not set the parameter, then the module tries the E(QUAY_VERIFY_SSL) environment variable (V(yes), V(1), and V(True) mean true, and V(no), V(0), V(False), and no value mean false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

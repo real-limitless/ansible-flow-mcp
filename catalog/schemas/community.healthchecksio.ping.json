@@ -1,0 +1,184 @@
+{
+  "fqcn": "community.healthchecksio.ping",
+  "shortDescription": "Send Healthchecks.io ping events",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/healthchecksio/ping_module.html",
+  "options": [
+    {
+      "name": "body",
+      "displayName": "Body",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional diagnostic text to store with the ping. Supplying a body changes the default C(method) from C(HEAD) to C(POST).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create",
+      "displayName": "Create",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Automatically create a missing check when pinging by C(slug). Maps to the Pinging API C(create=1) query parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exit_status",
+      "displayName": "Exit Status",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Process exit status from 0 through 255. Healthchecks.io interprets 0 as success and all other values as failure.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "management_api_base_url",
+      "displayName": "Management Api Base Url",
+      "type": "string",
+      "required": false,
+      "default": "https://healthchecks.io/api/v3",
+      "description": "Base URL of the Healthchecks.io management API. There are several environment variables which can be used to provide this value: C(HEALTHCHECKSIO_API_MANAGEMENT_BASE_URL), C(HC_API_MANAGEMENT_BASE_URL) Defaults to C(https://healthchecks.io/api/v3).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "management_api_token",
+      "displayName": "Management Api Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Healthchecks.io management API token. There are several environment variables which can be used to provide this value: C(HEALTHCHECKSIO_API_TOKEN), C(HEALTHCHECKSIO_API_KEY), C(HC_API_TOKEN), C(HC_API_KEY) C(HEALTHCHECKSIO_MANAGEMENT_API_KEY), C(HC_MANAGEMENT_API_KEY), C(HC_MANAGEMENT_KEY)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "method",
+      "displayName": "Method",
+      "type": "string",
+      "required": false,
+      "default": "HEAD",
+      "description": "HTTP method used for the ping request. C(GET) cannot be used together with C(body); use C(POST) instead.",
+      "choices": [
+        "HEAD",
+        "GET",
+        "POST"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ping_api_base_url",
+      "displayName": "Ping Api Base Url",
+      "type": "string",
+      "required": false,
+      "default": "https://hc-ping.com",
+      "description": "Base URL of the Healthchecks.io ping API. There are several environment variables which can be used to provide this value: C(HEALTHCHECKSIO_API_PING_BASE_URL), C(HC_API_PING_BASE_URL) Defaults to C(https://hc-ping.com).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ping_api_token",
+      "displayName": "Ping Api Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Healthchecks.io project ping key. Required when pinging a check by slug. There are several environment variables which can be used to provide this value: C(HEALTHCHECKSIO_API_PING_KEY), C(HC_API_PING_KEY)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "request_timeout",
+      "displayName": "Request Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "HTTP request timeout in seconds for API calls.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "runid",
+      "displayName": "Runid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional run ID sent in the Healthchecks.io C(rid) query parameter. Use the same canonical UUID for matching start and completion pings from one execution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "signal",
+      "displayName": "Signal",
+      "type": "string",
+      "required": false,
+      "default": "success",
+      "description": "Event type to send. C(log) stores diagnostic data without changing check status. Ignored when C(exit_status) is specified.",
+      "choices": [
+        "success",
+        "fail",
+        "start",
+        "log"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "slug",
+      "displayName": "Slug",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Check slug. Requires the project ping key in C(ping_api_token). Mutually exclusive with C(uuid).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "C(present) sends the event.",
+      "choices": [
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Immutable check UUID. Mutually exclusive with C(slug).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate TLS certificates for HTTPS requests. Set to V(false) when connecting to self-hosted Healthchecks.io instances that use a private or unknown CA. Disabling certificate validation reduces security and should only be used against trusted self-hosted endpoints.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

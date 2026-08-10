@@ -1,0 +1,378 @@
+{
+  "fqcn": "ibm.storage_virtualize.ibm_svc_manage_volume",
+  "shortDescription": "This module manages standard volumes on IBM Storage Virtualize family systems",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/storage_virtualize/ibm_svc_manage_volume_module.html",
+  "options": [
+    {
+      "name": "allow_hs",
+      "displayName": "Allow Hs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If specified `True`, manages the hyperswap volume by ignoring the volume type validation. Valid when I(state=present), to modify an existing volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autoexpand",
+      "displayName": "Autoexpand",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies whether thin-provisioned volume copies automatically expand their real capacities. If specified as off, works as `noautoexpand`.",
+      "choices": [
+        "on",
+        "off"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "buffersize",
+      "displayName": "Buffersize",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the pool capacity that the volume will reserve as a buffer for thin-provisioned and compressed volumes. Parameter 'thin' or 'compressed' must be specified to use this parameter. The default buffer size is 2%. I(thin) or I(compressed) is required when using I(buffersize). Valid when I(state=present), to create a volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cache",
+      "displayName": "Cache",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the caching options for the volume. When not specified, the default value is 'readwrite'.",
+      "choices": [
+        "readwrite",
+        "readonly",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud_account_name",
+      "displayName": "Cloud Account Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name of the cloud account name. Valid when I(enable_cloud_snapshot=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clustername",
+      "displayName": "Clustername",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or management IP or Partition IP of the Storage Virtualize system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compressed",
+      "displayName": "Compressed",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies that a compressed volume is to be created. Parameters 'compressed' and 'thin' are mutually exclusive. Valid when I(state=present), to create a compressed volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deduplicated",
+      "displayName": "Deduplicated",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies that a deduplicated volume is to be created. Required when I(state=present), to create a deduplicated volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Domain for the Storage Virtualize system. Valid when hostname is used for the parameter I(clustername).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_cloud_snapshot",
+      "displayName": "Enable Cloud Snapshot",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specify to enable or disable cloud snapshot. Valid when I(state=present), to modify an existing volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fromsourcevolume",
+      "displayName": "Fromsourcevolume",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the volume name or UID in the snapshot used to pre-populate clone or thinclone volume. Valid when I(state=present), to create a thinclone or clone volume. Supported from Storage Virtualize family systems from 8.6.2.0 or later. Addressing volume via UUID is supported from 9.1.0.0 or later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "grainsize",
+      "displayName": "Grainsize",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Sets the grain size for a thin-provisioned volume.",
+      "choices": [
+        32,
+        64,
+        128,
+        256
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iogrp",
+      "displayName": "Iogrp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the list of I/O group names. Group names in the list must be separated by using a comma. While creating a new volume, the first I/O group in the list is added as both cached & access I/O group, while remaining I/O groups are added as access I/O groups. This parameter supports update functionality. Valid when I(state=present), to create or modify a volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_path",
+      "displayName": "Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path of debug log file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name to assign to the new volume or name/UID to manage an existing volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "novolumegroup",
+      "displayName": "Novolumegroup",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If specified `True`, the volume is removed from its associated volumegroup. Parameters 'novolumegroup' and 'volumegroup' are mutually exclusive. Valid when I(state=present), to modify a volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "old_name",
+      "displayName": "Old Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the old name/UID of the volume during renaming. Valid when I(state=present), to rename an existing volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "REST API password for the Storage Virtualize system. The parameters I(username) and I(password) are required if not using I(token) to authenticate a user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool",
+      "displayName": "Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name or UUID of the storage pool to use while creating the volume. This parameter is required when I(state=present), to create a volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preferrednode",
+      "displayName": "Preferrednode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the preferred node name that is used to access the volume. When not specified, the system selects the preferred node automatically.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the size of the volume. This parameter can also be used to resize an existing volume. Required when I(state=present), to create or modify a volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Creates or updates (C(present)) or removes (C(absent)) a volume.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "thin",
+      "displayName": "Thin",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies that a thin-provisioned volume is to be created. Parameters 'thin' and 'compressed' are mutually exclusive. Valid when I(state=present), to create a thin-provisioned volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The authentication token to verify a user on the Storage Virtualize system. To generate a token, use the ibm_svc_auth module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the type of volume to create. Volume can be thinclone or clone type. Valid when I(state=present), to create a thinclone or clone volume. Supported from Storage Virtualize family systems from 8.6.2.0 or later. Also used to convert a thinclone volume to clone. type = clone should be specified.",
+      "choices": [
+        "thinclone",
+        "clone"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unit",
+      "displayName": "Unit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the data units to use with the capacity that is specified by the 'size' parameter. I(size) is required when using I(unit).",
+      "choices": [
+        "b",
+        "kb",
+        "mb",
+        "gb",
+        "tb",
+        "pb"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unmap",
+      "displayName": "Unmap",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Removes specified objects associated with the volume which is to be deleted. Valid when I(state=absent), to delete a volume.",
+      "choices": [
+        "host_mappings",
+        "remotecopy_relationships",
+        "flashcopy_mappings"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "REST API username for the Storage Virtualize system. The parameters I(username) and I(password) are required if not using I(token) to authenticate a user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Validates certification.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volumegroup",
+      "displayName": "Volumegroup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the name or UUID of the volumegroup to which the volume is to be added. Parameters 'volumegroup' and 'novolumegroup' are mutually exclusive. Valid when I(state=present), to create or modify a volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "warning",
+      "displayName": "Warning",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Raises a warning when the used disk capacity on the thin-provisioned copy first exceeds the specified threshold. The value is specified as a percentage of the total capacity of the thin-provisioned volume, hence it must be between 0 and 100. When not specified, the default value is 80%. Valid when I(state=present), to create or modify a thin-provisioned or compressed volume.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

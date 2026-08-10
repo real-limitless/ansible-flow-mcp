@@ -1,0 +1,121 @@
+{
+  "fqcn": "puzzle.opnsense.system_high_availability_settings",
+  "shortDescription": "Configure high availability settings",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/puzzle/opnsense/system_high_availability_settings_module.html",
+  "options": [
+    {
+      "name": "disable_preempt",
+      "displayName": "Disable Preempt",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When this device is configured as CARP master it will try to switch to master when powering up, this option will keep this one slave if there already is a master on the network. A reboot is required to take effect.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disconnect_dialup_interfaces",
+      "displayName": "Disconnect Dialup Interfaces",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When this device is configured as CARP backup it will disconnect all PPP type interfaces and try to reconnect them when becoming master again.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_system_password",
+      "displayName": "Remote System Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enter the web GUI password of the system entered above for synchronizing your configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remote_system_username",
+      "displayName": "Remote System Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enter the web GUI username of the system entered above for synchronizing your configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "services_to_synchronize",
+      "displayName": "Services To Synchronize",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of config items to synchronize to the other firewall.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sync_compatibility",
+      "displayName": "Sync Compatibility",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Newer versions of OPNsense offer additional attributes in the state synchronization, for compatibility reasons you can optionally choose an older version here. Always make sure both nodes use the same version to avoid inconsistent state tables.",
+      "choices": [
+        ">24.7",
+        "<24.7"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "synchronize_config_to_ip",
+      "displayName": "Synchronize Config To Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP address of the firewall to which the selected configuration sections should be synchronized.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "synchronize_interface",
+      "displayName": "Synchronize Interface",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "If Synchronize States is enabled, it will utilize this interface for communication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "synchronize_peer_ip",
+      "displayName": "Synchronize Peer Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Setting this option will force pfsync to synchronize its state table to this IP address. The default is directed multicast.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "synchronize_states",
+      "displayName": "Synchronize States",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "pfsync transfers state insertion, update, and deletion messages between firewalls. Each firewall sends these messages out via multicast on a specified interface, using the PFSYNC protocol ([IP Protocol 240](https://www.openbsd.org/faq/pf/carp.html)). It also listens on that interface for similar messages from other firewalls, and imports them into the local state table. This setting should be enabled on all members of a failover group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,79 @@
+{
+  "fqcn": "linuxfabrik.lfops.nextcloud_occ_app",
+  "shortDescription": "Install, enable, disable or remove a Nextcloud app via occ",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/linuxfabrik/lfops/nextcloud_occ_app_module.html",
+  "options": [
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Pass C(--force) to C(app:install) and C(app:enable) so that Nextcloud installs apps that are not officially compatible with the running version.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "installed_apps_json",
+      "displayName": "Installed Apps Json",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Pre-fetched output of C(occ app:list --output=json), as either a JSON string or an already-parsed dict. When set, the module skips the C(app:list) call and reads the current state from this value, which avoids running C(occ) once per app when looping over a list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the Nextcloud app (the app ID, e.g. C(notify_push), C(comments)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "occ_path",
+      "displayName": "Occ Path",
+      "type": "string",
+      "required": false,
+      "default": "/var/www/html/nextcloud/occ",
+      "description": "Absolute path to the Nextcloud C(occ) command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "php_path",
+      "displayName": "Php Path",
+      "type": "string",
+      "required": false,
+      "default": "php",
+      "description": "PHP binary to invoke C(occ) with. A bare C(php) relies on C($PATH); pass an absolute path to pin a specific PHP version.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "enabled",
+      "description": "Desired state of the app. C(enabled) - install the app if missing and enable it. C(disabled) - disable the app if it is currently enabled. Does nothing if the app is already disabled or absent. C(present) - install the app if missing but leave it disabled. Does nothing if the app already exists in any state. C(absent) - remove the app entirely.",
+      "choices": [
+        "absent",
+        "disabled",
+        "enabled",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

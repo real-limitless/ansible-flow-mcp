@@ -1,0 +1,149 @@
+{
+  "fqcn": "netautomate.netorca.netorca_ai_processor_info",
+  "shortDescription": "Query NetOrca Pack AI processors",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netautomate/netorca/netorca_ai_processor_info_module.html",
+  "options": [
+    {
+      "name": "action_type",
+      "displayName": "Action Type",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by processor type.",
+      "choices": [
+        "config",
+        "verify",
+        "execution",
+        "optimiser",
+        "change_instance_validator"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "active",
+      "displayName": "Active",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Filter by whether the processor is enabled. Inactive processors are skipped by pipeline runs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of your NetOrca team. The NetOrca API supports API-key authentication only - there is no username/password mode. Treat the key like a password - supply it via the E(NETORCA_API_KEY) environment variable (for example from a CI/CD secret) or from Ansible Vault, never as a literal in a playbook. If not set, the value of the E(NETORCA_API_KEY) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Base URL of the NetOrca API, for example C(https://api.example.netorca.io). The URL is normalised to end in a single C(/v1), so passing it with or without the suffix both work. If not set, the value of the E(NETORCA_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": "serviceowner",
+      "description": "Point of view for the request. The same query returns different data depending on which side of the service relationship your team is on. V(serviceowner) operates on the services your team I(offers) - the requests made against them, their service items and deployed items. This is the side that validates, approves, deploys and completes changes. V(consumer) operates on what your team I(consumes) - the service items your applications declared and the change instances tracking your own requests. If",
+      "choices": [
+        "serviceowner",
+        "consumer"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Return only the AI processor with this ID. When set, all other filters are ignored. If the ID does not exist, an empty list is returned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_history",
+      "displayName": "Include History",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Also return the configuration history of the processor selected by O(id) - the versioned audit trail of every edit, with actor and timestamp. Useful to answer \"who changed this prompt, and when\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit",
+      "displayName": "Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of results to return. Results are auto-paginated, so by default all matching records are returned regardless of the API's page size.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "llm_model_id",
+      "displayName": "Llm Model Id",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by ID of the LLM model the processor uses (see M(netautomate.netorca.netorca_llm_model_info)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ordering",
+      "displayName": "Ordering",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Server-side field to order results by, for example V(created) or V(modified). Prefix with C(-) for descending order - V(-modified) returns the most recently changed records first.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_id",
+      "displayName": "Service Id",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by ID of the service the processor belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate TLS certificates when talking to the API. Only disable this for lab instances with self-signed certificates. If not set, the value of the E(NETORCA_VALIDATE_CERTS) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

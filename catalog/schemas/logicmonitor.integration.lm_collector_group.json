@@ -1,0 +1,154 @@
+{
+  "fqcn": "logicmonitor.integration.lm_collector_group",
+  "shortDescription": "LogicMonitor Collector Group Ansible module for managing collector groups.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/logicmonitor/integration/lm_collector_group_module.html",
+  "options": [
+    {
+      "name": "access_id",
+      "displayName": "Access Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Access ID API token associated with the user's account that's used to query the LogicMonitor API. Please contact your LogicMonitor admin if you need new API tokens created for your account.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Access Key API token associated with the user's account that's used to query the LogicMonitor API. Please contact your LogicMonitor admin if you need new API tokens created for your account. Must start with the \"!unsafe\" keyword if the the key starts with a special character (e.g. '[', ']', etc.) to prevent playbook issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The action you wish to perform on the collector group. Add = Add a collector group to your LogicMonitor account. Update = Update properties, description, etc for a collector group in your LogicMonitor account. Remove = Remove a collector group from your LogicMonitor account.",
+      "choices": [
+        "add",
+        "update",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_balance",
+      "displayName": "Auto Balance",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A boolean flag to denote whether or not the collector group should be an Auto-Balanced Collector Group (ABCG). Optional for managing collector groups (action=add or action=update).",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "company",
+      "displayName": "Company",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The LogicMonitor account company name. A user logging into their account at \"batman.logicmonitor.com\" would use \"batman\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The long text description of the collector group to add. Optional for managing collector groups (action=add or action=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_manage",
+      "displayName": "Force Manage",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "A boolean flag to enable/disable the feature to ... (1) update a collector group when the initial action=add because the group exists or (2) add a collector group when the initial action=update because the group doesn't exist. Optional for managing collector groups (action=add or action=update).",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the collector group to target. Required for update, remove if name isn't provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_threshold",
+      "displayName": "Instance Threshold",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The instance count threshold for a Collector in an Auto-Balanced Collector Group (ABCG) is auto-calculated using the ABCG's assigned threshold value and the RAM on the Collector machine. By default, this threshold is set to 10,000 instances, which represents the instance count threshold for a medium-sized Collector that uses 2 GB of RAM. Only values greater than or equal to 0 will be used. The number of instances that a Collector can handle is calculated with the following formula ... * Number o",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the collector group to target. Default/Ungrouped group name should be denoted by empty string \"\" or \"@default\". Required for action=add. Required for update, remove if id isn't provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "optype",
+      "displayName": "Optype",
+      "type": "string",
+      "required": false,
+      "default": "replace",
+      "description": "A string describing the operation on properties when updating collector group... (1) replace - a property would be updated if it exists already else a new property will be created (2) refresh - a property would be updated if it exists already else a new property will be created, any existing property not provided during update will be removed (3) add - a property would be ignored if it exists already else a new property will be created Optional for action=update.",
+      "choices": [
+        "add",
+        "replace",
+        "refresh"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "properties",
+      "displayName": "Properties",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A JSON object of properties to configure for the LogicMonitor collector group. This parameter will add or update existing properties in your LogicMonitor account. Optional for managing collector groups (action=add or action=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

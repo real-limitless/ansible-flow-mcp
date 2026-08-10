@@ -1,0 +1,150 @@
+{
+  "fqcn": "jorgemarti.ipa.ipa_hostgroup",
+  "shortDescription": "Manage FreeIPA host-group",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/jorgemarti/ipa/ipa_hostgroup_module.html",
+  "options": [
+    {
+      "name": "cn",
+      "displayName": "Cn",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of host-group. Can not be changed as it is the unique identifier.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If the state is set to 'present', any provided hosts will be added to the group. If an empty list is passed all hosts will be removed from the group. If option is omitted hosts will not be checked or changed. Any assigned hostgroups which are not passed will be unassigned from the group. If the state is set to 'add_members', any provided hosts not currently in the group will be added. If the state is set to 'remove_members', any provided hosts currently in the group will be removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostgroup",
+      "displayName": "Hostgroup",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If the state is set to 'present', any provided host-groups will be added to the group. If an empty list is passed all host-groups will be removed from the group. If option is omitted host-groups will not be checked or changed. Any assigned hostgroups which are not passed will be unassigned from the group. If the state is set to 'add_members', any provided host-groups not currently in the group will be added. If the state is set to 'remove_members', any provided host-groups currently in the group",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_host",
+      "displayName": "Ipa Host",
+      "type": "string",
+      "required": false,
+      "default": "ipa.example.com",
+      "description": "IP or hostname of IPA server. If the value is not specified in the task, the value of environment variable C(IPA_HOST) will be used instead. If both the environment variable C(IPA_HOST) and the value are not specified in the task, then DNS will be used to try to discover the FreeIPA server. The relevant entry needed in FreeIPA is the 'ipa-ca' entry. If neither the DNS entry, nor the environment C(IPA_HOST), nor the value are available in the task, then the default value will be used. Environment",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_pass",
+      "displayName": "Ipa Pass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password of administrative user. If the value is not specified in the task, the value of environment variable C(IPA_PASS) will be used instead. Note that if the 'urllib_gssapi' library is available, it is possible to use GSSAPI to authenticate to FreeIPA. If the environment variable C(KRB5CCNAME) is available, the module will use this kerberos credentials cache to authenticate to the FreeIPA server. If the environment variable C(KRB5_CLIENT_KTNAME) is available, and C(KRB5CCNAME) is not; the mod",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_port",
+      "displayName": "Ipa Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "Port of FreeIPA / IPA server. If the value is not specified in the task, the value of environment variable C(IPA_PORT) will be used instead. If both the environment variable C(IPA_PORT) and the value are not specified in the task, then default value is set. Environment variable fallback mechanism is added in Ansible 2.5.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_prot",
+      "displayName": "Ipa Prot",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "Protocol used by IPA server. If the value is not specified in the task, the value of environment variable C(IPA_PROT) will be used instead. If both the environment variable C(IPA_PROT) and the value are not specified in the task, then default value is set. Environment variable fallback mechanism is added in Ansible 2.5.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_timeout",
+      "displayName": "Ipa Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Specifies idle timeout (in seconds) for the connection. For bulk operations, you may want to increase this in order to avoid timeout from IPA server. If the value is not specified in the task, the value of environment variable C(IPA_TIMEOUT) will be used instead. If both the environment variable C(IPA_TIMEOUT) and the value are not specified in the task, then default value is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipa_user",
+      "displayName": "Ipa User",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Administrative account used on IPA server. If the value is not specified in the task, the value of environment variable C(IPA_USER) will be used instead. If both the environment variable C(IPA_USER) and the value are not specified in the task, then default value is set. Environment variable fallback mechanism is added in Ansible 2.5.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State to ensure.",
+      "choices": [
+        "present",
+        "absent",
+        "add_members",
+        "remove_members",
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "This only applies if C(ipa_prot) is I(https). If set to C(false), the SSL certificates will not be validated. This should only set to C(false) used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

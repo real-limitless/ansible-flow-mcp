@@ -1,0 +1,136 @@
+{
+  "fqcn": "f5networks.f5_bigip.bigip_sslo_service_layer2",
+  "shortDescription": "Manage an SSL Orchestrator Layer 2 security device",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_bigip/bigip_sslo_service_layer2_module.html",
+  "options": [
+    {
+      "name": "devices",
+      "displayName": "Devices",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the set of network settings for traffic going to the service from the BIG-IP. Multiple devices are defined as separate list items.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dump_json",
+      "displayName": "Dump Json",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Sets the module to output a JSON blob for further consumption. When C(true), does not make any changes on the device and always returns C(changed=False). The output provided is idempotent in nature, meaning if there are no changes to be made during C(MODIFY) on an existing service no JSON output is generated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_offset",
+      "displayName": "Ip Offset",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Defines an IP offset integer to be used in the internal IP addressing. This parameter is required when creating a new L2 service. Accepted values are in the range of C(0) to C(30). This is typically used in a tiered architecture, where a Layer 2 service is shared between multiple standalone SSL Orchestrator instances.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitor",
+      "displayName": "Monitor",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the monitor attached to the L2 security device pool. The monitor must already exist on the BIG-IP. When creating a L2 service, if the parameter is not provided a default of C(/Common/gateway_icmp) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the Layer 2 security service. The configuration auto-prepends \"ssloS_\" to the service. The service name should be less than 14 characters and not contain dashes \"-\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_remap",
+      "displayName": "Port Remap",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Defines the port to remap decrypted traffic to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rules",
+      "displayName": "Rules",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Defines a list of iRules to attach to the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_down_action",
+      "displayName": "Service Down Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the action to take on monitor failure. Setting to C(ignore) bypasses the security device in the service chain. Setting to C(reset) or C(drop) resets or drops the connection, respectively if the service monitor fails. When creating an ICAP service, if the parameter is not provided a default value of C(ignore) is assumed.",
+      "choices": [
+        "ignore",
+        "reset",
+        "drop"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(state) is C(present), ensures the object is created or modified. When C(state) is C(absent), ensures the service is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "The amount of time to wait for the C(CREATE) or C(MODIFY) task to complete, in seconds. The accepted value range is between C(10) and C(1800) seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vendor_info",
+      "displayName": "Vendor Info",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the vendor-specific L2 service used. The default is C(Generic Inline Layer 2).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

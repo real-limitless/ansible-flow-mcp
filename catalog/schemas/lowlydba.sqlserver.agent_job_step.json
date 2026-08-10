@@ -1,0 +1,218 @@
+{
+  "fqcn": "lowlydba.sqlserver.agent_job_step",
+  "shortDescription": "Configures a SQL Agent job step",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/lowlydba/sqlserver/agent_job_step_module.html",
+  "options": [
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The commands to be executed by SQLServerAgent service through subsystem.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "database",
+      "displayName": "Database",
+      "type": "string",
+      "required": false,
+      "default": "master",
+      "description": "The name of the database in which to execute a Transact-SQL step.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job",
+      "displayName": "Job",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the job to which to add the step.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "on_fail_action",
+      "displayName": "On Fail Action",
+      "type": "string",
+      "required": false,
+      "default": "QuitWithFailure",
+      "description": "The action to perform if the step fails.",
+      "choices": [
+        "QuitWithSuccess",
+        "QuitWithFailure",
+        "GoToNextStep",
+        "GoToStep"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "on_fail_step_id",
+      "displayName": "On Fail Step Id",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The ID of the step in this job to execute if the step fails and I(on_fail_action=GoToStep).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "on_success_action",
+      "displayName": "On Success Action",
+      "type": "string",
+      "required": false,
+      "default": "QuitWithSuccess",
+      "description": "The action to perform if the step succeeds.",
+      "choices": [
+        "QuitWithSuccess",
+        "QuitWithFailure",
+        "GoToNextStep",
+        "GoToStep"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "on_success_step_id",
+      "displayName": "On Success Step Id",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The ID of the step in this job to execute if the step succeeds and I(on_success_action=GoToStep).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output_file",
+      "displayName": "Output File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The full path to the output file for the job step. This specifies where the output of the job step will be written.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retry_attempts",
+      "displayName": "Retry Attempts",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The number of retry attempts to use if this step fails. The default is C(0).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retry_interval",
+      "displayName": "Retry Interval",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The amount of time in minutes between retry attempts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_instance",
+      "displayName": "Sql Instance",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The SQL Server instance to modify.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_password",
+      "displayName": "Sql Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for SQL Authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_username",
+      "displayName": "Sql Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for SQL Authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether or not the object should be C(present) or C(absent).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "step_id",
+      "displayName": "Step Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The sequence identification number for the job step. Step identification numbers start at C(1) and increment without gaps. Required if I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "step_name",
+      "displayName": "Step Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the step. Required if I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subsystem",
+      "displayName": "Subsystem",
+      "type": "string",
+      "required": false,
+      "default": "TransactSql",
+      "description": "The subsystem used by the SQL Server Agent service to execute command.",
+      "choices": [
+        "CmdExec",
+        "Distribution",
+        "LogReader",
+        "Merge",
+        "PowerShell",
+        "QueueReader",
+        "Snapshot",
+        "Ssis",
+        "TransactSql"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

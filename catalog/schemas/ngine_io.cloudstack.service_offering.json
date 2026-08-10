@@ -1,0 +1,410 @@
+{
+  "fqcn": "ngine_io.cloudstack.service_offering",
+  "shortDescription": "Manages service offerings on Apache CloudStack based clouds.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ngine_io/cloudstack/service_offering_module.html",
+  "options": [
+    {
+      "name": "api_http_method",
+      "displayName": "Api Http Method",
+      "type": "string",
+      "required": false,
+      "default": "get",
+      "description": "HTTP method used to query the API endpoint. If not given, the C(CLOUDSTACK_METHOD) env variable is considered.",
+      "choices": [
+        "get",
+        "post"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of the CloudStack API. If not given, the C(CLOUDSTACK_KEY) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_secret",
+      "displayName": "Api Secret",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Secret key of the CloudStack API. If not set, the C(CLOUDSTACK_SECRET) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "HTTP timeout in seconds. If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL of the CloudStack API e.g. https://cloud.example.com/client/api. If not given, the C(CLOUDSTACK_ENDPOINT) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_verify_ssl_cert",
+      "displayName": "Api Verify Ssl Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Verify CA authority cert file. If not given, the C(CLOUDSTACK_VERIFY) env variable is considered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpu_number",
+      "displayName": "Cpu Number",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The number of CPUs of the service offering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpu_speed",
+      "displayName": "Cpu Speed",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The CPU speed of the service offering in MHz.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "deployment_planner",
+      "displayName": "Deployment Planner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The deployment planner heuristics used to deploy a VM of this offering. If not set, the value of global config I(vm.deployment.planner) is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_bytes_read_rate",
+      "displayName": "Disk Bytes Read Rate",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Bytes read rate of the disk offering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_bytes_write_rate",
+      "displayName": "Disk Bytes Write Rate",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Bytes write rate of the disk offering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_iops_max",
+      "displayName": "Disk Iops Max",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Max. iops of the compute offering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_iops_min",
+      "displayName": "Disk Iops Min",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Min. iops of the compute offering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_iops_read_rate",
+      "displayName": "Disk Iops Read Rate",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "IO requests read rate of the disk offering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk_iops_write_rate",
+      "displayName": "Disk Iops Write Rate",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "IO requests write rate of the disk offering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "display_text",
+      "displayName": "Display Text",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Display text of the service offering. If not set, I(name) will be used as I(display_text) while creating.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Domain the service offering is related to. Public for all domains and subdomains if not set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_tags",
+      "displayName": "Host Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The host tags for this service offering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hypervisor_snapshot_reserve",
+      "displayName": "Hypervisor Snapshot Reserve",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Hypervisor snapshot reserve space as a percent of a volume. Only for managed storage using Xen or VMware.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_customized",
+      "displayName": "Is Customized",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the offering is customizable or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_iops_customized",
+      "displayName": "Is Iops Customized",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether compute offering iops is custom or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_system",
+      "displayName": "Is System",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether it is a system VM offering or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_volatile",
+      "displayName": "Is Volatile",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether the virtual machine needs to be volatile or not. Every reboot of VM the root disk is detached then destroyed and a fresh root disk is created and attached to VM.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit_cpu_usage",
+      "displayName": "Limit Cpu Usage",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Restrict the CPU usage to committed service offering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "memory",
+      "displayName": "Memory",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The total memory of the service offering in MB.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the service offering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_rate",
+      "displayName": "Network Rate",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Data transfer rate in Mb/s allowed. Supported only for non-system offering and system offerings having I(system_vm_type=domainrouter).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "offer_ha",
+      "displayName": "Offer Ha",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether HA is set for the service offering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provisioning_type",
+      "displayName": "Provisioning Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Provisioning type used to create volumes.",
+      "choices": [
+        "thin",
+        "sparse",
+        "fat"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_offering_details",
+      "displayName": "Service Offering Details",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Details for planner, used to store specific parameters. A list of dictionaries having keys C(key) and C(value).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the service offering.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_tags",
+      "displayName": "Storage Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The storage tags for this service offering.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_type",
+      "displayName": "Storage Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The storage type of the service offering.",
+      "choices": [
+        "local",
+        "shared"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system_vm_type",
+      "displayName": "System Vm Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The system VM type. Required if I(is_system=true).",
+      "choices": [
+        "domainrouter",
+        "consoleproxy",
+        "secondarystoragevm"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If V(false), SSL certificates will not be validated. If not given, the C(CLOUDSTACK_DANGEROUS_NO_TLS_VERIFY) env variable is considered. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

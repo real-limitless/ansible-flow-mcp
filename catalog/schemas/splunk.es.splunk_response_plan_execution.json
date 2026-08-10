@@ -1,0 +1,88 @@
+{
+  "fqcn": "splunk.es.splunk_response_plan_execution",
+  "shortDescription": "Apply response plans to investigations and manage tasks",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/splunk/es/splunk_response_plan_execution_module.html",
+  "options": [
+    {
+      "name": "api_app",
+      "displayName": "Api App",
+      "type": "string",
+      "required": false,
+      "default": "missioncontrol",
+      "description": "The app portion of the Splunk API path. Override this if your environment uses a different app name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_namespace",
+      "displayName": "Api Namespace",
+      "type": "string",
+      "required": false,
+      "default": "servicesNS",
+      "description": "The namespace portion of the Splunk API path. Override this if your environment uses a different namespace.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": false,
+      "default": "nobody",
+      "description": "The user portion of the Splunk API path. Override this if your environment requires a different user context.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "investigation_ref_id",
+      "displayName": "Investigation Ref Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The investigation UUID to apply or manage response plans. This is the unique identifier of the investigation in Splunk ES.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "response_plan",
+      "displayName": "Response Plan",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The response plan template to apply or remove. Accepts either a UUID (e.g., \"2dc5530d-8bb0-4a4f-9b53-74745bf4ea6a\") or a name (e.g., \"Incident Response Plan\"). If UUID format is detected, it is used directly as the template ID. If not a UUID, the module performs an API lookup to resolve the name to an ID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the response plan on the investigation. Use C(present) to apply the response plan to the investigation or update the tasks. Use C(absent) to remove the response plan from the investigation.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tasks",
+      "displayName": "Tasks",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tasks to manage within the applied response plan. Each task is identified by phase name and task name. You can set the task status (started/ended) and/or change the owner. Tasks are only managed when C(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

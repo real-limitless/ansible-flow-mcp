@@ -1,0 +1,106 @@
+{
+  "fqcn": "ibre5041.ansible_oracle_modules.oracle_grant",
+  "shortDescription": "Manage grants and privileges in an Oracle database",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibre5041/ansible_oracle_modules/oracle_grant_module.html",
+  "options": [
+    {
+      "name": "container",
+      "displayName": "Container",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Controls the CONTAINER= clause appended to GRANT/REVOKE statements. 'current': appends CONTAINER=CURRENT in a CDB environment (scopes the grant to the current container). On a non-CDB database the clause is silently omitted, so the same playbook works against both. 'all': appends CONTAINER=ALL, making privileges apply to all PDBs. Requires the session to be connected to CDB root (cdb='YES' and con_id=1); the module fails otherwise. Mutually exclusive with session_container. Leave unset (default)",
+      "choices": [
+        "current",
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directory_privs",
+      "displayName": "Directory Privs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Directory object privileges to grant or revoke. format: 'priv1,priv2:directory_name' e.g. 'read,write:data_pump_dir'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "grant_mode",
+      "displayName": "Grant Mode",
+      "type": "string",
+      "required": false,
+      "default": "append",
+      "description": "Controls whether the requested privilege list is enforced exactly or appended. exact: privileges not listed in C(grants), C(object_privs), or C(directory_privs) are removed. append: requested privileges are added and existing privileges are left untouched.",
+      "choices": [
+        "exact",
+        "append"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "grantee",
+      "displayName": "Grantee",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Schema, user, or role that should receive or lose privileges. This is the canonical parameter name. C(name), C(schema_name), C(role), and C(role_name) are accepted as aliases.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "grants",
+      "displayName": "Grants",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "System privileges or roles to grant or revoke. C(privileges) and C(grant) are accepted as aliases.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "object_privs",
+      "displayName": "Object Privs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The privileges granted to specific objects format: 'priv1,priv2,priv3:owner.object_name' e.g. select,update,insert,delete:sys.dba_tablespaces select:sys.v_$session",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_container",
+      "displayName": "Session Container",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of a PDB to switch to via ALTER SESSION SET CONTAINER before issuing grants. Mutually exclusive with container=all.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The intended state of the priv (present=added to the user, absent=removed from the user). REMOVEALL will remove ALL role/sys privileges",
+      "choices": [
+        "present",
+        "absent",
+        "REMOVEALL"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

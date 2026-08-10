@@ -1,0 +1,144 @@
+{
+  "fqcn": "community.sap_launchpad.software_center_download",
+  "shortDescription": "Downloads software from the SAP Software Center.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/sap_launchpad/software_center_download_module.html",
+  "options": [
+    {
+      "name": "deduplicate",
+      "displayName": "Deduplicate",
+      "type": "string",
+      "required": false,
+      "default": "last",
+      "description": "Specifies how to handle multiple search results. Only applies when C(search_alternatives) is enabled and multiple versions are found. Choices: C(first) returns the oldest version, C(last) returns the newest version. If left empty and multiple results are found, an error with all available versions will be displayed.",
+      "choices": [
+        "first",
+        "last",
+        ""
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Destination folder path.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_filename",
+      "displayName": "Download Filename",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Download filename of the SAP software.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_link",
+      "displayName": "Download Link",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Direct download link to the SAP software.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dry_run",
+      "displayName": "Dry Run",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Check availability of SAP Software without downloading.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search_alternatives",
+      "displayName": "Search Alternatives",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable search for alternative packages when the exact filename is not available. Required when using wildcard queries in C(search_query). Only works for files following the format C(PREFIX-ID.EXT) with a dash and extension. Special media files without this pattern (e.g., C(S4CORE107_INST_EXPORT_1.zip)) must use exact filenames.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search_query",
+      "displayName": "Search Query",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Filename of the SAP software to download. Supports wildcard format for version matching with C(search_alternatives) enabled. Wildcard format: C(PREFIX*-ID.EXT) where the asterisk replaces the version number. Example: C(SWPM20SP2*-80003424.SAR) matches all versions like SWPM20SP23, SWPM20SP24, etc. Only one wildcard is allowed per query.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "search_upgrades",
+      "displayName": "Search Upgrades",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable broader search to find any available version in the product family. Only applies when C(search_alternatives) is enabled. Useful when specific versions are removed from SAP Software Center (e.g., old HANA revisions). Example: searching for C(IMDB_SERVER20_067_4) may find C(IMDB_SERVER20_080_0) if 067 is no longer available. Typically combined with C(deduplicate='last') to get the newest available version.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "softwarecenter_search_query",
+      "displayName": "Softwarecenter Search Query",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Deprecated. Use 'search_query' instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suser_id",
+      "displayName": "Suser Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "SAP S-User ID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suser_password",
+      "displayName": "Suser Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "SAP S-User Password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_checksum",
+      "displayName": "Validate Checksum",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If a file with the same name already exists at the destination, validate its checksum against the remote file. If the checksum is invalid, the local file will be removed and re-downloaded.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

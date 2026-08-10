@@ -1,0 +1,473 @@
+{
+  "fqcn": "vmware.alb.avi_gslb",
+  "shortDescription": "Module for setup of Gslb Avi RESTful Object",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vmware/alb/avi_gslb_module.html",
+  "options": [
+    {
+      "name": "api_context",
+      "displayName": "Api Context",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Avi API context that includes current session ID and CSRF Token. This allows user to perform single login and re-use the session.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_version",
+      "displayName": "Api Version",
+      "type": "string",
+      "required": false,
+      "default": "20.1.7",
+      "description": "Avi API version of to use for Avi API and objects.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "async_interval",
+      "displayName": "Async Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Frequency with which messages are propagated to vs mgr. Value of 0 disables async behavior and rpc are sent inline. Allowed values are 0-5. Field introduced in 18.2.3. Unit is sec. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_tune_send_interval",
+      "displayName": "Auto Tune Send Interval",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Automatically set the send interval value based on the load. Field introduced in 30.2.5, 31.2.1. Allowed with any value in enterprise, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_api_patch_op",
+      "displayName": "Avi Api Patch Op",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch operation to use when using avi_api_update_method as patch.",
+      "choices": [
+        "add",
+        "replace",
+        "delete",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_api_update_method",
+      "displayName": "Avi Api Update Method",
+      "type": "string",
+      "required": false,
+      "default": "put",
+      "description": "Default method for object update is HTTP PUT. Setting to patch will override that behavior to use HTTP PATCH.",
+      "choices": [
+        "put",
+        "patch"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_credentials",
+      "displayName": "Avi Credentials",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_deactivate_session_cache_as_fact",
+      "displayName": "Avi Deactivate Session Cache As Fact",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "It disables avi session information to be cached as a fact.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_patch_path",
+      "displayName": "Avi Patch Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch path to use when using avi_api_update_method as patch.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "avi_patch_value",
+      "displayName": "Avi Patch Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Patch value to use when using avi_api_update_method as patch.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clear_on_max_retries",
+      "displayName": "Clear On Max Retries",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Max retries after which the remote site is treated as a fresh start. In fresh start all the configs are downloaded. Allowed values are 1-1024. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 20.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_ip_addr_group",
+      "displayName": "Client Ip Addr Group",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Group to specify if the client ip addresses are public or private. Field introduced in 17.1.2. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configpb_attributes",
+      "displayName": "Configpb Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Protobuf versioning for config pbs. Field introduced in 21.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller",
+      "displayName": "Controller",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "IP address or hostname of the controller. The default value is the environment variable C(AVI_CONTROLLER).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_configs",
+      "displayName": "Dns Configs",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Sub domain configuration for the gslb. Gslb services fqdn must be a match one of these subdomains. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_config_by_members",
+      "displayName": "Enable Config By Members",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allows enable/disable of gslbservice pool groups and pool members from the gslb follower members. Field introduced in 20.1.5. Allowed with any value in enterprise, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as False.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "error_resync_interval",
+      "displayName": "Error Resync Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Frequency with which errored messages are resynced to follower sites. Value of 0 disables resync behavior. Allowed values are 60-3600. Special values are 0 - disable. Field introduced in 18.2.3. Unit is sec. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 300.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fileobject_max_file_versions",
+      "displayName": "Fileobject Max File Versions",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "This is the max number of file versions that will be retained for a file referenced by the federated fileobject. Subsequent uploads of file will result in the file rotation of the older version and the latest version retained. Example  when a file upload is done for the first time, there will be a v1 version. Subsequent uploads will get mapped to v1, v2 and v3 versions. On the fourth upload of the file, the v1 will be file rotated and v2, v3 and v4 will be retained. Allowed values are 1-5. Field",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gs_member_fqdn_resolution_on_se",
+      "displayName": "Gs Member Fqdn Resolution On Se",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If this knob is enabled, gslb service member fqdn will be resolved by the service engines hosting the gslb service. Each service engine will resolve and consume the resolved ip addresses locally. Field introduced in 31.1.1. Allowed with any value in enterprise, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as False.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_federated",
+      "displayName": "Is Federated",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "This field indicates that this object is replicated across gslb federation. Field introduced in 17.1.3. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as True.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "leader_change_info",
+      "displayName": "Leader Change Info",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "This field has leader change configuration info including mode, leader designate sites and other configurations for auto leader change like max short probe failures. Field introduced in 31.2.1. Allowed with any value in enterprise, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "leader_cluster_uuid",
+      "displayName": "Leader Cluster Uuid",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Mark this site as leader of gslb configuration. This site is the one among the avi sites. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maintenance_mode",
+      "displayName": "Maintenance Mode",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "This field disables the configuration operations on the leader for all federated objects. Cud operations on gslb, gslbservice, gslbgeodbprofile and other federated objects will be rejected. The rest-api disabling helps in upgrade scenarios where we dont want configuration sync operations to the gslb member when the member is being upgraded. This configuration programmatically blocks the leader from accepting new gslb configuration when member sites are undergoing upgrade. Field introduced in 17.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name for the gslb object. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Password of Avi user in Avi controller. The default value is the environment variable C(AVI_PASSWORD).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "patch_level",
+      "displayName": "Patch Level",
+      "type": "string",
+      "required": false,
+      "default": "/site/dns_vses",
+      "description": "Patch level to use when using patch.",
+      "choices": [
+        "/site/dns_vses",
+        "/site"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "send_interval",
+      "displayName": "Send Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Frequency with which group members communicate. Allowed values are 1-3600. Unit is sec. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 15.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "send_interval_prior_to_maintenance_mode",
+      "displayName": "Send Interval Prior To Maintenance Mode",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The user can specify a send-interval while entering maintenance mode. The validity of this maintenance send-interval is only during maintenance mode. When the user leaves maintenance mode, the original send-interval is reinstated. This internal variable is used to store the original send-interval. Field introduced in 18.2.3. Unit is sec. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interprete",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "short_probe_interval",
+      "displayName": "Short Probe Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Wait time between two consecutive short probe health checks. Allowed values are 1-3600. Field introduced in 31.1.1. Unit is sec. Allowed with any value in enterprise, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 30.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sites",
+      "displayName": "Sites",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "Select avi site member belonging to this gslb. Minimum of 1 items required. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state that should be applied on the entity.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant",
+      "displayName": "Tenant",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Name of tenant used for all Avi API calls and context of object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_ref",
+      "displayName": "Tenant Ref",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "It is a reference to an object of type tenant. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_scoped",
+      "displayName": "Tenant Scoped",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "This field indicates tenant visibility for gs pool member selection across the gslb federated objects.tenant scope can be set only during the gslb create and cannot be changed once it is set. Field introduced in 18.2.12,20.1.4. Allowed with any value in enterprise, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as True.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_uuid",
+      "displayName": "Tenant Uuid",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "UUID of tenant used for all Avi API calls and context of object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "third_party_sites",
+      "displayName": "Third Party Sites",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Third party site member belonging to this gslb. Field introduced in 17.1.1. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Avi controller URL of the object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Username used for accessing Avi controller. The default value is the environment variable C(AVI_USERNAME).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uuid",
+      "displayName": "Uuid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Uuid of the gslb object. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "view_id",
+      "displayName": "View Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The view-id is used in change-leader mode to differentiate partitioned groups while they have the same gslb namespace. Each partitioned group will be able to operate independently by using the view-id. Allowed with any value in enterprise, essentials, basic, enterprise with cloud services edition. Default value when not specified in API or module is interpreted by Avi Controller as 0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

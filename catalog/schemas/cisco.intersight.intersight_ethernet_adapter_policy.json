@@ -1,0 +1,566 @@
+{
+  "fqcn": "cisco.intersight.intersight_ethernet_adapter_policy",
+  "shortDescription": "Ethernet Adapter Policy configuration for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_ethernet_adapter_policy_module.html",
+  "options": [
+    {
+      "name": "advanced_filter",
+      "displayName": "Advanced Filter",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables advanced filtering on the interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "arfs_enabled",
+      "displayName": "Arfs Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Status of Accelerated Receive Flow Steering on the virtual ethernet interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "completion_queue_count",
+      "displayName": "Completion Queue Count",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "The number of completion queue resources to allocate. In general, the number of completion queue resources to allocate is equal to the number of transmit queue resources plus the number of receive queue resources.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "completion_ring_size",
+      "displayName": "Completion Ring Size",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The number of descriptors in each completion queue.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description for the Ethernet Adapter Policy. Description can contain letters(a-z, A-Z), numbers(0-9), hyphen(-), period(.), colon(:), or an underscore(_).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "etherchannel_pinning_enabled",
+      "displayName": "Etherchannel Pinning Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables EtherChannel Pinning to combine multiple physical links between two network switches into a single logical link. Transmit Queue Count should be at least 2 to enable ether channel pinning.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "geneve_enabled",
+      "displayName": "Geneve Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "GENEVE offload protocol allows you to create logical networks that span physical network boundaries. Cannot be enabled simultaneously with ARFS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interrupt_coalescing_time",
+      "displayName": "Interrupt Coalescing Time",
+      "type": "number",
+      "required": false,
+      "default": 125,
+      "description": "The time to wait between interrupts or the idle period that must be encountered before an interrupt is sent. To turn off interrupt coalescing, enter 0 (zero) in this field.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interrupt_coalescing_type",
+      "displayName": "Interrupt Coalescing Type",
+      "type": "string",
+      "required": false,
+      "default": "MIN",
+      "description": "Interrupt Coalescing Type. MIN - The system waits for the time specified in the Coalescing Time field before sending another interrupt event. IDLE - The system does not send an interrupt until there is a period of no activity lasting at least as long as the time specified in the Coalescing Time field.",
+      "choices": [
+        "MIN",
+        "IDLE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interrupt_count",
+      "displayName": "Interrupt Count",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "The number of interrupt resources to allocate. Typical value is be equal to the number of completion queue resources.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interrupt_mode",
+      "displayName": "Interrupt Mode",
+      "type": "string",
+      "required": false,
+      "default": "MSIx",
+      "description": "Preferred driver interrupt mode. MSIx - Message Signaled Interrupts (MSI) with the optional extension (recommended). MSI - MSI only. INTx - PCI INTx interrupts.",
+      "choices": [
+        "MSIx",
+        "MSI",
+        "INTx"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interrupt_scaling",
+      "displayName": "Interrupt Scaling",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables Interrupt Scaling on the interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the Ethernet Adapter Policy. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nvgre_enabled",
+      "displayName": "Nvgre Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Status of the Network Virtualization using Generic Routing Encapsulation on the virtual ethernet interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Profiles, Policies, and Pools that are created within a Custom Organization are applicable only to devices in the same Organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ptp_enabled",
+      "displayName": "Ptp Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Status of Precision Time Protocol (PTP) on the virtual ethernet interface. PTP can be enabled only on one vNIC on an adapter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roce_class_of_service",
+      "displayName": "Roce Class Of Service",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "The Class of Service for RoCE on this virtual interface. Only applicable when roce_enabled is true.",
+      "choices": [
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roce_enabled",
+      "displayName": "Roce Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If enabled sets RDMA over Converged Ethernet (RoCE) on this virtual interface. Cannot be enabled simultaneously with NVGRE.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roce_memory_regions",
+      "displayName": "Roce Memory Regions",
+      "type": "number",
+      "required": false,
+      "default": 131072,
+      "description": "The number of memory regions per adapter. Recommended value = integer power of 2. Only applicable when roce_enabled is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roce_queue_pairs",
+      "displayName": "Roce Queue Pairs",
+      "type": "number",
+      "required": false,
+      "default": 256,
+      "description": "The number of queue pairs per adapter. Recommended value = integer power of 2. Only applicable when roce_enabled is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roce_resource_groups",
+      "displayName": "Roce Resource Groups",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "The number of resource groups per adapter. Recommended value = be an integer power of 2 greater than or equal to the number of CPU cores. Only applicable when roce_enabled is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roce_version",
+      "displayName": "Roce Version",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Configure RDMA over Converged Ethernet (RoCE) version on the virtual interface. Only RoCEv1 is supported on Cisco VIC 13xx series adapters and only RoCEv2 is supported on Cisco VIC 14xx series adapters. Only applicable when roce_enabled is true.",
+      "choices": [
+        1,
+        2
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rss_enabled",
+      "displayName": "Rss Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Receive Side Scaling allows the incoming traffic to be spread across multiple CPU cores.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rss_ipv4_hash",
+      "displayName": "Rss Ipv4 Hash",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When enabled, the IPv4 address is used for traffic distribution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rss_ipv6_ext_hash",
+      "displayName": "Rss Ipv6 Ext Hash",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When enabled, the IPv6 extensions are used for traffic distribution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rss_ipv6_hash",
+      "displayName": "Rss Ipv6 Hash",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When enabled, the IPv6 address is used for traffic distribution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rss_tcp_ipv4_hash",
+      "displayName": "Rss Tcp Ipv4 Hash",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When enabled, both the IPv4 address and TCP port number are used for traffic distribution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rss_tcp_ipv6_ext_hash",
+      "displayName": "Rss Tcp Ipv6 Ext Hash",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When enabled, both the IPv6 extensions and TCP port number are used for traffic distribution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rss_tcp_ipv6_hash",
+      "displayName": "Rss Tcp Ipv6 Hash",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When enabled, both the IPv6 address and TCP port number are used for traffic distribution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rss_udp_ipv4_hash",
+      "displayName": "Rss Udp Ipv4 Hash",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When enabled, both the IPv4 address and UDP port number are used for traffic distribution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rss_udp_ipv6_hash",
+      "displayName": "Rss Udp Ipv6 Hash",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When enabled, both the IPv6 address and UDP port number are used for traffic distribution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rx_queue_count",
+      "displayName": "Rx Queue Count",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "The number of receive queue resources to allocate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rx_ring_size",
+      "displayName": "Rx Ring Size",
+      "type": "number",
+      "required": false,
+      "default": 512,
+      "description": "The number of descriptors in each receive queue.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tcp_large_receive",
+      "displayName": "Tcp Large Receive",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enables the reassembly of segmented packets in hardware before sending them to the CPU.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tcp_large_send",
+      "displayName": "Tcp Large Send",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Enables the CPU to send large packets to the hardware for segmentation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tcp_rx_checksum",
+      "displayName": "Tcp Rx Checksum",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When enabled, the CPU sends all packet checksums to the hardware for validation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tcp_tx_checksum",
+      "displayName": "Tcp Tx Checksum",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When enabled, the CPU sends all packets to the hardware so that the checksum can be calculated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tx_queue_count",
+      "displayName": "Tx Queue Count",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The number of transmit queue resources to allocate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tx_ring_size",
+      "displayName": "Tx Ring Size",
+      "type": "number",
+      "required": false,
+      "default": 256,
+      "description": "The number of descriptors in each transmit queue.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uplink_failback_timeout",
+      "displayName": "Uplink Failback Timeout",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Uplink Failback Timeout in seconds when uplink failover is enabled for a vNIC. After a vNIC has started using its secondary interface, this setting controls how long the primary interface must be available before the system resumes using the primary interface for the vNIC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vxlan_enabled",
+      "displayName": "Vxlan Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Status of the Virtual Extensible LAN Protocol on the virtual ethernet interface.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

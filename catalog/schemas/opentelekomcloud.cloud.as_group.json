@@ -1,0 +1,441 @@
+{
+  "fqcn": "opentelekomcloud.cloud.as_group",
+  "shortDescription": "Create/Update/Remove AutoScaling group from the OTC",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/opentelekomcloud/cloud/as_group_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a flag for enabling or disabling an AS group.",
+      "choices": [
+        "resume",
+        "pause"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "How long should the socket layer wait before timing out for API calls. If this is omitted, nothing will be passed to the requests library.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary containing auth information as needed by the cloud's auth plugin strategy. For the default I(password) plugin, this would contain I(auth_url), I(username), I(password), I(project_name) and any information about domains (for example, I(os_user_domain_name) or I(os_project_domain_name)) if the cloud supports them. For other plugins, this param will need to contain whatever parameters that auth plugin requires. This parameter is not needed if a named cloud is provided or OpenStack OS_* e",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the auth plugin to use. If the cloud uses something other than password authentication, the name of the plugin should be indicated here and the contents of the I(auth) parameter should be updated accordingly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_zones",
+      "displayName": "Availability Zones",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the AZ information. The ECS associated with a scaling       action will be created in a specified AZ.If you do not specify an AZ,       the system automatically specifies one.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a CA Cert bundle that can be used as part of verifying SSL API requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a client certificate to use as part of the SSL transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a client key to use as part of the SSL transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud",
+      "displayName": "Cloud",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Named cloud or cloud config to operate against. If I(cloud) is a string, it references a named cloud config as defined in an OpenStack clouds.yaml file. Provides default values for I(auth) and I(auth_type). This parameter is not needed if I(auth) is provided or if OpenStack OS_* environment variables are present. If I(cloud) is a dict, it contains a complete cloud configuration like would be in a section of clouds.yaml.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cool_down_time",
+      "displayName": "Cool Down Time",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "Specifies the cooldown period (in seconds). The value ranges from 0 to 86400 and is 300 by default. After a scaling action is triggered, the system starts the cooldown       period. During the cooldown period, scaling actions triggered by alarms       will be denied. Scheduled, periodic, and manual scaling actions are not       affected.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_publicip",
+      "displayName": "Delete Publicip",
+      "type": "boolean",
+      "required": false,
+      "default": "no",
+      "description": "Specifies whether to delete the EIP bound to the ECS when       deleting the ECS. The default value is false.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_volume",
+      "displayName": "Delete Volume",
+      "type": "boolean",
+      "required": false,
+      "default": "no",
+      "description": "Specifies whether to delete the data disks attached to the       ECS when deleting the ECS. The default value is false.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "desire_instance_number",
+      "displayName": "Desire Instance Number",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Specifies the expected number of instances. The default value is the minimum number of instances.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_delete",
+      "displayName": "Force Delete",
+      "type": "boolean",
+      "required": false,
+      "default": "no",
+      "description": "Specifies whether to forcibly delete an AS group, remove the ECS       instances and release them when the AS group is running instances or       performing scaling actions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_periodic_audit_grace_period",
+      "displayName": "Health Periodic Audit Grace Period",
+      "type": "number",
+      "required": false,
+      "default": 600,
+      "description": "Specifies the grace period for instance health check. The unit is second and value range is 0-86400. The default value is 600. The health check grace period starts after an instance is added to an       AS group and is enabled.The AS group will start checking the instance       status only after the grace period ends. This parameter is valid only when the instance health check method       of the AS group is ELB_AUDIT.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_periodic_audit_method",
+      "displayName": "Health Periodic Audit Method",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the health check method for instances in the AS group.      When load balancing is configured for an AS group, the default value       is ELB_AUDIT. Otherwise, the default value is NOVA_AUDIT. ELB_AUDIT indicates the ELB health check, which takes effect in an       AS group with a listener. NOVA_AUDIT indicates the ECS health check, which is the health check       method delivered with AS.",
+      "choices": [
+        "elb_audit",
+        "nova_audit"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "health_periodic_audit_time",
+      "displayName": "Health Periodic Audit Time",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Specifies the instance health check period. The value can be 1, 5, 15, 60, or 180 in the unit of minutes. If this parameter is not specified, the default value is 5. If the value is set to 0, health check is performed every 10 seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance_terminate_policy",
+      "displayName": "Instance Terminate Policy",
+      "type": "string",
+      "required": false,
+      "default": "old_config_old_instance",
+      "description": "Specifies the instance removal policy. OLD_CONFIG_OLD_INSTANCE (default). The earlier-created instances       based on the earlier-created AS configurations are removed first. OLD_CONFIG_NEW_INSTANCE. The later-created instances based on the       earlier-created AS configurations are removed first. OLD_INSTANCE. The earlier-created instances are removed first. NEW_INSTANCE. The later-created instances are removed first.",
+      "choices": [
+        "old_config_old_instance",
+        "old_config_new_instance",
+        "old_instance",
+        "new_instance"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": false,
+      "default": "public",
+      "description": "Endpoint URL type to fetch from the service catalog.",
+      "choices": [
+        "admin",
+        "internal",
+        "public"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lb_listener",
+      "displayName": "Lb Listener",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies ID or name of a classic load balancer listener. The system       supports the binding of up to six load balancer listeners, the IDs of       which are separated using a comma (,). Mandatory when 'lbaas_listeners' is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lbaas_listeners",
+      "displayName": "Lbaas Listeners",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies information about an enhanced load balancer. Mandatory when 'lb_listener' is not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_instance_number",
+      "displayName": "Max Instance Number",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Specifies the maximum number of instances. The default value is 0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_instance_number",
+      "displayName": "Min Instance Number",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Specifies the minimum number of instances. The default value is 0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "multi_az_priority_policy",
+      "displayName": "Multi Az Priority Policy",
+      "type": "string",
+      "required": false,
+      "default": "equilibrium_distribute",
+      "description": "Specifies the priority policy used to select target AZs when       adjusting the number of instances in an AS group. EQUILIBRIUM_DISTRIBUTE (default). When adjusting the number of       instances, ensure that instances in each AZ in the available_zones list       is evenly distributed. If instances cannot be added in the target AZ,       select another AZ based on the PICK_FIRST policy. PICK_FIRST. When adjusting the number of instances, target AZs are       determined in the order in the availa",
+      "choices": [
+        "equilibrium_distribute",
+        "pick_first"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "networks",
+      "displayName": "Networks",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies network information. The system supports up to five subnets.       The first subnet transferred serves as the primary NIC of the ECS by        default. Mandatory for creation of AS group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notifications",
+      "displayName": "Notifications",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies the notification mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region_name",
+      "displayName": "Region Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the region.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "router",
+      "displayName": "Router",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The router ID or name. Mandatory for creating AS group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scaling_configuration",
+      "displayName": "Scaling Configuration",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AS configuration ID or name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scaling_group",
+      "displayName": "Scaling Group",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Name or ID of the AS Group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdk_log_level",
+      "displayName": "Sdk Log Level",
+      "type": "string",
+      "required": false,
+      "default": "WARN",
+      "description": "Log level of the OpenStackSDK",
+      "choices": [
+        "ERROR",
+        "WARN",
+        "INFO",
+        "DEBUG"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdk_log_path",
+      "displayName": "Sdk Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the logfile of the OpenStackSDK. If empty no log is written",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_groups",
+      "displayName": "Security Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A maximum of one security group can be selected. Specifies the security group. If the security group is specified both       in the AS configuration and AS group, the security group specified in       the AS configuration prevails. If the security group is not specified in either of them, the default       security group is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether resource should be present or absent.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 200,
+      "description": "The duration in seconds that module should wait.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not SSL API requests should be verified. Before Ansible 2.3 this defaulted to C(yes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": "yes",
+      "description": "If the module should wait for the AS Group to be created or deleted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

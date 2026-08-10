@@ -1,0 +1,253 @@
+{
+  "fqcn": "seiko.smartcs.smartcs_tty_command",
+  "shortDescription": "Send character string to device via ConsoleServer SmartCS",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/seiko/smartcs/smartcs_tty_command_module.html",
+  "options": [
+    {
+      "name": "cmd_timeout",
+      "displayName": "Cmd Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "After sending the character string,set the timeout time to receive the response character string as a numerical value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_response",
+      "displayName": "Custom Response",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Returns values as the customized format to be able to recognize sent characters(execute_command) and received characters(response) easily.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_response_delete_lastline",
+      "displayName": "Custom Response Delete Lastline",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Deletes the last line of the custom_response output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_response_delete_nl",
+      "displayName": "Custom Response Delete Nl",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Deletes the line with only a line break in the custom_response output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "error_detect_on_module",
+      "displayName": "Error Detect On Module",
+      "type": "string",
+      "required": false,
+      "default": "ok",
+      "description": "When an error occurs after sending the character string set in sendchar, set whether the result of ansible-playbook command is \"ok\" or \"failed\". When ok is set, an error information isn't displayed and the result of ansible-playbook command is \"ok\" even if an error occurs after sending the character string set in sendchar. When failed is set, an error information is displayed and the result of ansible-playbook command is \"failed\" if an error occurs after sending the character string set in sendc",
+      "choices": [
+        "failed",
+        "ok"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "error_detect_on_sendchar",
+      "displayName": "Error Detect On Sendchar",
+      "type": "string",
+      "required": false,
+      "default": "cancel",
+      "description": "If an error occurs after sending the string set in sendchar, specify whether to send sendchar or not. When cancel is set, next sendchar won't be sent if an error occurs after sending the character string set in sendchar. If exec is set, sendchar will send the next sendchar even if sendchar's sending fails.",
+      "choices": [
+        "cancel",
+        "exec"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "error_recvchar_regex",
+      "displayName": "Error Recvchar Regex",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "After sending the character string set in sendchar, set the list of strings to be detected as an error if the received string contains a specific string as a regular expression. It can be set up to 8 values in list format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "escape_cmd",
+      "displayName": "Escape Cmd",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a string to be sent when the expected value is not received after the command specified in initial_prompt_check_cmd option is executed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "escape_cmd_retry",
+      "displayName": "Escape Cmd Retry",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Specifies the number of retries for the escape_cmd.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "escape_cmd_timeout",
+      "displayName": "Escape Cmd Timeout",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Specifies a timeout value for the escape_cmd.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initial_prompt",
+      "displayName": "Initial Prompt",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies a string expected to be received after the command specified in initial_prompt_check_cmd option is executed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initial_prompt_check_cmd",
+      "displayName": "Initial Prompt Check Cmd",
+      "type": "string",
+      "required": false,
+      "default": "__NL__",
+      "description": "Specifies a string to be sent in the pre-check operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initial_prompt_check_cmd_timeout",
+      "displayName": "Initial Prompt Check Cmd Timeout",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Specifies a timeout value for the initial_prompt_check_cmd.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nl",
+      "displayName": "Nl",
+      "type": "string",
+      "required": false,
+      "default": "cr",
+      "description": "Specify the line feed code to be sent.",
+      "choices": [
+        "crlf",
+        "cr",
+        "lf"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "B(Deprecated) Starting with Ansible 2.5 we recommend using C(connection: network_cli). HORIZONTALLINE A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recvchar",
+      "displayName": "Recvchar",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Set a list of received strings expected to be output after sending the string set in sendchar. It can be set up to 16 values in list format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recvchar_regex",
+      "displayName": "Recvchar Regex",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Set a regular expression which has the same role as recvchar. It can be set up to 8 values in list format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sendchar",
+      "displayName": "Sendchar",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Set a list of strings to send to the target tty. This string will be sent in order from the top of the list.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the file path that contains the strings to be sent to the target tty. The file path can be the absolute pathname or relative pathname from the playbook or role root directory. This option is exclusive with the sendchar option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tty",
+      "displayName": "Tty",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Set the tty to send a string. It can be set in ttylist format (1-16, 1, 2-8, 16). An example 1-5,21 --> 1,2,3,4,5,21",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttycmd_debug",
+      "displayName": "Ttycmd Debug",
+      "type": "string",
+      "required": false,
+      "default": "off",
+      "description": "A debug information is displayed after all strings set in sendchar have been sent.",
+      "choices": [
+        "off",
+        "on",
+        "detail"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

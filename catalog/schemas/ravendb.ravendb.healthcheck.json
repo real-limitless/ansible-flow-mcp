@@ -1,0 +1,118 @@
+{
+  "fqcn": "ravendb.ravendb.healthcheck",
+  "shortDescription": "Perform RavenDB node and cluster health checks",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ravendb/ravendb/healthcheck_module.html",
+  "options": [
+    {
+      "name": "ca_cert_path",
+      "displayName": "Ca Cert Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a CA bundle used to validate the server certificate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "certificate_path",
+      "displayName": "Certificate Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a client certificate for secured clusters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "checks",
+      "displayName": "Checks",
+      "type": "list",
+      "required": false,
+      "default": [
+        "node_alive",
+        "cluster_connectivity"
+      ],
+      "description": "List of health checks to run.",
+      "choices": [
+        "node_alive",
+        "cluster_connectivity",
+        "db_groups_available",
+        "db_groups_available_excluding_target"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_retry_interval_seconds",
+      "displayName": "Db Retry Interval Seconds",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Interval in seconds between attempts for C(db_groups_available) and C(db_groups_available_excluding_target).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_time_to_wait",
+      "displayName": "Max Time To Wait",
+      "type": "number",
+      "required": false,
+      "default": 1200,
+      "description": "Max time window in seconds for each selected check before timing out.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "on_db_timeout",
+      "displayName": "On Db Timeout",
+      "type": "string",
+      "required": false,
+      "default": "fail",
+      "description": "Behavior when C(db_groups_available) times out. C(fail) fails the task; C(continue) returns success with timeout noted in results.",
+      "choices": [
+        "fail",
+        "continue"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retry_interval_seconds",
+      "displayName": "Retry Interval Seconds",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Interval in seconds between attempts for C(node_alive) and C(cluster_connectivity).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "url",
+      "displayName": "Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Base URL of the RavenDB node to check, e.g. C(http://node-a:8080) or C(https://node-a:443).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certificate",
+      "displayName": "Validate Certificate",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Verify the server TLS certificate when using HTTPS. Automatically disabled for IP hosts when running C(node_alive) or C(cluster_connectivity).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

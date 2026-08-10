@@ -1,0 +1,379 @@
+{
+  "fqcn": "dellemc.powerstore.filesystem",
+  "shortDescription": "Filesystem operations for PowerStore Storage system",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/powerstore/filesystem_module.html",
+  "options": [
+    {
+      "name": "access_policy",
+      "displayName": "Access Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "File system security access policies.",
+      "choices": [
+        "NATIVE",
+        "UNIX",
+        "WINDOWS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "array_ip",
+      "displayName": "Array Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the PowerStore management system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_snap_name",
+      "displayName": "Backup Snap Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the backup snap to be created before the restore operation occurs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cap_unit",
+      "displayName": "Cap Unit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Capacity unit for the size. It defaults to C(GB), if not specified.",
+      "choices": [
+        "GB",
+        "TB"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clone_filesystem",
+      "displayName": "Clone Filesystem",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The attributes for filesystem clone.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_type",
+      "displayName": "Config Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Indicates the file system type. Cannot be modified.",
+      "choices": [
+        "GENERAL",
+        "VMWARE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of the file system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "file_events_publishing_mode",
+      "displayName": "File Events Publishing Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "State of the event notification services for all file systems of the NAS server. It can only be set to C(NFS_ONLY) when I(config_typ) is set to C(VMWARE).",
+      "choices": [
+        "DISABLE",
+        "SMB_ONLY",
+        "NFS_ONLY",
+        "ALL"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filesystem_id",
+      "displayName": "Filesystem Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Unique id of the file system. Mutually exclusive with I(filesystem_name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filesystem_name",
+      "displayName": "Filesystem Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the file system. Mutually exclusive with I(filesystem_id). Mandatory only for create operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flr_attributes",
+      "displayName": "Flr Attributes",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The attributes for file retention. Can only be provided when the I(config_type) is C(GENERAL).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "folder_rename_policy",
+      "displayName": "Folder Rename Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "File system folder rename policies for the file system with multi-protocol access enabled. C(ALL_ALLOWED) - All protocols are allowed to rename directories without any restrictions. C(SMB_FORBIDDEN) - A directory rename from the SMB protocol will be denied if at least one file is opened in the directory or in one of its child directories. C(All_FORBIDDEN) - Any directory rename request will be denied regardless of the protocol used, if at least one file is opened in the directory or in one of it",
+      "choices": [
+        "ALL_ALLOWED",
+        "SMB_FORBIDDEN",
+        "ALL_FORBIDDEN"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_io_size",
+      "displayName": "Host Io Size",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Typical size of writes from the server or other computer using the VMware file system to the storage system. Can only be set when the I(config_type) is C(VMWARE). Cannot be modified.",
+      "choices": [
+        "VMWARE_8K",
+        "VMWARE_16K",
+        "VMWARE_32K",
+        "VMWARE_64K"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_async_mtime_enabled",
+      "displayName": "Is Async Mtime Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether asynchronous MTIME is enabled on the file system or protocol snaps that are mounted writeable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "locking_policy",
+      "displayName": "Locking Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "File system locking policies. C(ADVISORY)- No lock checking for NFS and honor SMB lock range only for SMB. C(MANDATORY)- Honor SMB and NFS lock range.",
+      "choices": [
+        "ADVISORY",
+        "MANDATORY"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nas_server",
+      "displayName": "Nas Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name or ID of the NAS Server on which the file system is created. Mandatory parameter whenever I(filesystem_name) is provided, since filesystem names are unique only within a NAS server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the PowerStore host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "performance_policy",
+      "displayName": "Performance Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The File Performance policy name or ID for the file system. Associates a file IO limit rule policy with the file system for bandwidth control. Requires PowerStoreOS 4.1 or later. To represent policy, both name or ID can be used interchangeably. The module will detect both. A file system can be assigned a performance policy at the time of creation or later. The policy can also be changed for a given file system by simply passing the new value. To remove the performance policy from a file system, ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Port number for the PowerStore array. If not passed, it will take 443 as default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protection_policy",
+      "displayName": "Protection Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name or ID of the protection policy applied to the file system. Specifying \"\" (empty string) removes the existing protection policy from file system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quota_defaults",
+      "displayName": "Quota Defaults",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Contains the default attributes for a filesystem quota.It contains below optional candidate variables.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "refresh_filesystem",
+      "displayName": "Refresh Filesystem",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies to refresh filesystem. Mandatory only for refresh filesystem.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "restore_filesystem",
+      "displayName": "Restore Filesystem",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Specifies to restore filesystem. Mandatory only for restore filesystem.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "size",
+      "displayName": "Size",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Size that the file system presents to the host or end user. Mandatory only for create operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smb_properties",
+      "displayName": "Smb Properties",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Advance settings for SMB. It contains optional candidate variables listed below.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_id",
+      "displayName": "Snapshot Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the Snapshot. Specify either snapshot name or ID (but not both) for restore and refresh operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_name",
+      "displayName": "Snapshot Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the filesystem snapshot. Specify either snapshot name or ID (but not both) for restore and refresh operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Define whether the filesystem should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Time after which the connection will get terminated. It is to be mentioned in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the PowerStore host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean variable to specify whether to validate SSL certificate or not. C(true) - indicates that the SSL certificate should be verified. Set the environment variable REQUESTS_CA_BUNDLE to the path of the SSL certificate. C(false) - indicates that the SSL certificate should not be verified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

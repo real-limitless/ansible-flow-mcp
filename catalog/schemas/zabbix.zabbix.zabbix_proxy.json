@@ -1,0 +1,199 @@
+{
+  "fqcn": "zabbix.zabbix.zabbix_proxy",
+  "shortDescription": "Module for creating and deleting proxies, and updating existing ones.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/zabbix/zabbix/zabbix_proxy_module.html",
+  "options": [
+    {
+      "name": "allowed_addresses",
+      "displayName": "Allowed Addresses",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Comma-delimited IP addresses or DNS names of an active Zabbix proxy. Supported if I(proxy_mode) is active. Set empty to clean.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_timeouts",
+      "displayName": "Custom Timeouts",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Whether to override global item timeouts on the proxy level. Set '{}' to clear the value and use global timeouts. Used only for Zabbix versions above 7.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Proxy description.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The proxy interface object defines the interface used to connect to a passive proxy. Supported if I(proxy_mode) is passive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_address",
+      "displayName": "Local Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Address for active agents. IP address or DNS name to connect to. Used only for Zabbix versions above 7.0. Required if I(proxy_group) is not empty. Set empty to clean.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "local_port",
+      "displayName": "Local Port",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Local proxy port number to connect to. Used only for Zabbix versions above 7.0. Supported if I(proxy_group) is not empty. Set empty or '10051' to clean or reset to the default value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of proxy. Active or passive.",
+      "choices": [
+        "active",
+        "passive"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the proxy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_group",
+      "displayName": "Proxy Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the proxy group that is used to monitor the host. Used only for Zabbix versions above 7.0. Set empty to exclude the proxy from the proxy group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Create or delete proxy.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_accept",
+      "displayName": "Tls Accept",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Connections from proxy. Supported only in active proxy mode. Set empty list ([]) to clean.",
+      "choices": [
+        "unencrypted",
+        "psk",
+        "cert"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_connect",
+      "displayName": "Tls Connect",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Connections to proxy. Supported only in passive proxy mode. Set empty to clean.",
+      "choices": [
+        "",
+        "unencrypted",
+        "psk",
+        "cert"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_issuer",
+      "displayName": "Tls Issuer",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Certificate issuer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_psk",
+      "displayName": "Tls Psk",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The pre-shared key, at least 32 hex digits. Required if I(tls_connect=psk), or I(tls_accept) contains the 'psk'. If you are creating a new proxy and have the PSK mode (tls_accept or tls_connect), then this parameter is required. In case of updating an existing proxy, if the proxy already has PSK enabled, the parameter is not required. If the parameter is defined, then every launch of the task will update the proxy because Zabbix API does not have access to an existing PSK key and it is not possi",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_psk_identity",
+      "displayName": "Tls Psk Identity",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PSK identity. Required if I(tls_connect=psk), or I(tls_accept) contains the 'psk'. If you are creating a new proxy and have the PSK mode (tls_accept or tls_connect), then this parameter is required. In case of updating an existing proxy, if the proxy already has PSK enabled, the parameter is not required. If the parameter is defined, then every launch of the task will update the proxy because Zabbix API does not have access to an existing PSK key and it is not possible to compare the specified k",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_subject",
+      "displayName": "Tls Subject",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Certificate subject.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

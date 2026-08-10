@@ -1,0 +1,345 @@
+{
+  "fqcn": "cisco.intersight.intersight_fibre_channel_adapter_policy",
+  "shortDescription": "Manage Fibre Channel Adapter Policies for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_fibre_channel_adapter_policy_module.html",
+  "options": [
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description for the Fibre Channel Adapter Policy. Description can contain letters(a-z, A-Z), numbers(0-9), hyphen(-), period(.), colon(:), or an underscore(_).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "error_detection_timeout",
+      "displayName": "Error Detection Timeout",
+      "type": "number",
+      "required": false,
+      "default": 2000,
+      "description": "Error Detection Timeout, also referred to as EDTOV, is the number of milliseconds to wait. This is the time before the system assumes that an error has occurred.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "error_recovery_enabled",
+      "displayName": "Error Recovery Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables Fibre Channel Error recovery.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flogi_retries",
+      "displayName": "Flogi Retries",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "The number of times that the system tries to log in to the fabric after the first failure.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flogi_timeout",
+      "displayName": "Flogi Timeout",
+      "type": "number",
+      "required": false,
+      "default": 4000,
+      "description": "The number of milliseconds that the system waits before it tries to log in again.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interrupt_mode",
+      "displayName": "Interrupt Mode",
+      "type": "string",
+      "required": false,
+      "default": "MSIx",
+      "description": "The preferred driver interrupt mode. MSIx is the recommended option.",
+      "choices": [
+        "MSIx",
+        "MSI",
+        "INTx"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "io_retry_timeout",
+      "displayName": "Io Retry Timeout",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "The number of seconds the adapter waits before aborting the pending command. After timeout, it resends the same IO request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "io_throttle_count",
+      "displayName": "Io Throttle Count",
+      "type": "number",
+      "required": false,
+      "default": 512,
+      "description": "The maximum number of data or control I/O operations that can be pending for the virtual interface at one time. If this value is exceeded, the additional I/O operations wait in the queue. They wait until the number of pending I/O operations decreases and the additional operations can be processed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "link_down_timeout",
+      "displayName": "Link Down Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30000,
+      "description": "The number of milliseconds the port should actually be down before it is marked down. After this timeout, fabric connectivity is considered lost.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lun_count",
+      "displayName": "Lun Count",
+      "type": "number",
+      "required": false,
+      "default": 1024,
+      "description": "The maximum number of LUNs that the Fibre Channel driver will export or show. The maximum number of LUNs is usually controlled by the operating system running on the server. Lun Count value can exceed 1024 only for vHBA of type 'FC Initiator' and on servers having supported firmware version.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lun_queue_depth",
+      "displayName": "Lun Queue Depth",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "The number of commands that the HBA can send and receive in a single transmission per LUN.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the Fibre Channel Adapter Policy. Must be unique within the organization. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Policies created within a Custom Organization are applicable only to devices in the same Organization. Use 'default' for the default organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plogi_retries",
+      "displayName": "Plogi Retries",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "The number of times that the system tries to log in to a port after the first failure.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plogi_timeout",
+      "displayName": "Plogi Timeout",
+      "type": "number",
+      "required": false,
+      "default": 20000,
+      "description": "The number of milliseconds that the system waits before it tries to log in again.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_down_io_retry_count",
+      "displayName": "Port Down Io Retry Count",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "The number of times an I/O request to a port is retried because the port is busy. After this count, the system decides the port is unavailable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_down_timeout",
+      "displayName": "Port Down Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10000,
+      "description": "The number of milliseconds a remote Fibre Channel port should be offline before informing the SCSI upper layer. This determines when the port is considered unavailable. For a server with a VIC adapter running ESXi, the recommended value is 10000. For a server with a port used to boot a Windows OS from the SAN, the recommended value is 5000 milliseconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_allocation_timeout",
+      "displayName": "Resource Allocation Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10000,
+      "description": "Resource Allocation Timeout, also referred to as RATOV, is the number of milliseconds to wait. This is the time before the system assumes that a resource cannot be properly allocated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rx_ring_size",
+      "displayName": "Rx Ring Size",
+      "type": "number",
+      "required": false,
+      "default": 64,
+      "description": "The number of descriptors in each receive queue. The maximum value for Receive queue is 2048.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scsi_io_queue_count",
+      "displayName": "Scsi Io Queue Count",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The number of SCSI I/O queue resources the system should allocate.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scsi_io_ring_size",
+      "displayName": "Scsi Io Ring Size",
+      "type": "number",
+      "required": false,
+      "default": 512,
+      "description": "The number of descriptors in each SCSI I/O queue.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tx_ring_size",
+      "displayName": "Tx Ring Size",
+      "type": "number",
+      "required": false,
+      "default": 64,
+      "description": "The number of descriptors in each transmit queue. The maximum value for Transmit queue is 128.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

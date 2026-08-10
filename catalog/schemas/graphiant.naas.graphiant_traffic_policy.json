@@ -1,0 +1,104 @@
+{
+  "fqcn": "graphiant.naas.graphiant_traffic_policy",
+  "shortDescription": "Manage device traffic policy rulesets and LAN segment attachments",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_traffic_policy_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specific operation to perform. C(configure) creates/updates rulesets listed under C(trafficRulesets). Pair with C(attach_to_lan_segments) (or the playbook C(configure) tag) to attach rulesets to LAN segments. C(deconfigure) deletes listed rulesets by setting C(ruleset=null). Pair with C(detach_from_lan_segments) (or the playbook C(deconfigure) tag) to clear segment references first. C(attach_to_lan_segments) sets C(edge.segments.<segment>.trafficRuleset.ruleset) from the YAML C(segments) map. C(",
+      "choices": [
+        "configure",
+        "deconfigure",
+        "attach_to_lan_segments",
+        "detach_from_lan_segments"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state for traffic policy rulesets. C(present) maps to C(configure) when C(operation) is omitted. For a full apply, also run C(attach_to_lan_segments) or use the sample playbook C(configure) tag. C(absent) maps to C(deconfigure) when C(operation) is omitted. For a full teardown, also run C(detach_from_lan_segments) or use the sample playbook C(deconfigure) tag.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "traffic_policy_config_file",
+      "displayName": "Traffic Policy Config File",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the traffic policy YAML file. Can be an absolute path or relative to the configured config_path. Expected top-level key is C(trafficPolicyObject) (list of devices). Each device may define C(trafficRulesets) and/or C(segments) in the same file. C(configure)/C(deconfigure) use C(trafficRulesets); attach/detach operations use C(segments).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

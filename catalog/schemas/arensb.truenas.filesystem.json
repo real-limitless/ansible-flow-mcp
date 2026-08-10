@@ -1,0 +1,128 @@
+{
+  "fqcn": "arensb.truenas.filesystem",
+  "shortDescription": "Manage ZFS datasets (filesystems/volumes) via TrueNAS middleware",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/arensb/truenas/filesystem_module.html",
+  "options": [
+    {
+      "name": "comments",
+      "displayName": "Comments",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Arbitrary comment or notes for the dataset.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_ancestors",
+      "displayName": "Create Ancestors",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If True, create any missing parent datasets automatically when creating. Under TrueNAS CORE, this option is ignored. However, missing ancestors are not created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_size",
+      "displayName": "Force Size",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to ignore checks if the volume size is below thresholds. Only valid for type=VOLUME.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Full name (ZFS path) of the dataset, e.g. \"pool/dataset\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sparse",
+      "displayName": "Sparse",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to create a sparse volume (if type=VOLUME). Cannot be changed after creation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If \"present\", ensure the dataset is created/updated. If \"absent\", ensure the dataset is deleted.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "FILESYSTEM",
+      "description": "Dataset type: FILESYSTEM or VOLUME.",
+      "choices": [
+        "FILESYSTEM",
+        "VOLUME",
+        "filesystem",
+        "volume"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volblocksize",
+      "displayName": "Volblocksize",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Volume block size if type=VOLUME, e.g. \"64K\" or \"65536\". Only valid at dataset creation time; cannot be changed on an existing volume.",
+      "choices": [
+        "512",
+        "512B",
+        "1K",
+        "2K",
+        "4K",
+        "8K",
+        "16K",
+        "32K",
+        "64K",
+        "128K",
+        "256K",
+        "65536"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volsize",
+      "displayName": "Volsize",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Size of the volume if type=VOLUME. This can be either an integer, or a string like '640K', '32MB', '10GiB', or '1TB'. Allowable  suffixes are:\n\"K\", \"M\", \"G\", \"T\" (powers of 2),\n\"KB\", \"MB\", \"GB\", \"TB\" (powers of 10),\n\"KiB\", \"MiB\", \"GiB\", \"TiB\" (powers of 2) This is required when creating a volume, but not when updating an existing one.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,140 @@
+{
+  "fqcn": "vbotka.freebsd.iocage",
+  "shortDescription": "FreeBSD iocage jail handling",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vbotka/freebsd/iocage_module.html",
+  "options": [
+    {
+      "name": "args",
+      "displayName": "Args",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Additional arguments of M(vbotka.freebsd.iocage) applied to the O(state). They will be applied to the sub-command B(create) if the O(state) is V(basejail, thickjail, template, present). If the same Ansible task also fetches a release as apart of the creation the arguments will not be applied to the sub-command B(fetch). Use separate task B(state=fetched) and set O(args) there if needed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bupdate",
+      "displayName": "Bupdate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Update the fetch to the latest patch level when B(state=fetched). Fetch and install binary updates when O(name) is defined. This will start the jail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clone_from",
+      "displayName": "Clone From",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use B(state=cloned). If O(clone_from) is a template C(create) the new jail C(uuid) or O(name) if defined. If O(clone_from) is a jail C(clone) the new jail C(uuid) or O(name) if defined. Use O(properties) to configure the new jail. Use O(args) to configure the C(iocage) command. Use O(pkglist) if O(clone_from) is a template.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cmd",
+      "displayName": "Cmd",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Execute the command O(cmd) inside the specified jail O(name).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "components",
+      "displayName": "Components",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Uses a local file directory for the root directory instead of HTTP to downloads and/or updates releases.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "O(name) of the jail. States V(started, stopped, restarted) accept V(ALL) to start, stop, or restart all jails. States V(present, cloned, template, basejail, thickjail) will return RV(uuid) and RV(uuid_short) if O(name) is V(None) or empty.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pkglist",
+      "displayName": "Pkglist",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a JSON file containing packages to install. Only applicable when creating a jail.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "plugin",
+      "displayName": "Plugin",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify which plugin to fetch or update.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "properties",
+      "displayName": "Properties",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "O(properties) of the jail. The jail will restart if any of the properties B(ip4_addr, ip6_addr, template, interfaces, vnet, host_hostname) changes. The strings C('yes') and C('on'), and boolean C(True) or C(true) will be converted to C(1). The strings C('no') and C('off'), and boolean C(False) or C(false) will be converted to C(0).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "release",
+      "displayName": "Release",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify which RELEASE to fetch, update, or create a jail from. O(release) defaults to the release of the remote host if O(state) is one of V(basejail, thickjail, template, fetched, present). O(release) also defaults to the release of the remote host if V(bupdate=True).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "facts",
+      "description": "O(state) of the desired result. State V(cloned) uses C(iocage create ...) if O(clone_from) is a template. State V(cloned) uses C(iocage clone ...) if O(clone_from) is a jail. State V(absent) by default force the destruction C(iocage destroy --force name). V(started, stopped, restarted, get, set, exec, pkg, absent) require O(name). V(started, stopped, restarted, get, set, exec, pkg) require existing jail. V(exec, pkg) require running jail. For V(basejail, thickjail, template, fetched, present) th",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": false,
+      "default": "root",
+      "description": "O(user) who runs the command O(cmd).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

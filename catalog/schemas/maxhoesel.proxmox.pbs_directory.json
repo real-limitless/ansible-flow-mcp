@@ -1,0 +1,124 @@
+{
+  "fqcn": "maxhoesel.proxmox.pbs_directory",
+  "shortDescription": "Manage the mountpoint for a physical disk on a PBS node",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/maxhoesel/proxmox/pbs_directory_module.html",
+  "options": [
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the target host of the Proxmox VE cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify the password to authenticate with. You can also use the C(PROXMOX_PASSWORD) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the user to authenticate with.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disk",
+      "displayName": "Disk",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Disk identifier, such as sda or nvme0n1. Ignored if C(state) is absent\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filesystem",
+      "displayName": "Filesystem",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of filesystem to use.",
+      "choices": [
+        "ext4",
+        "xfs"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "init_gpt",
+      "displayName": "Init Gpt",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to first initialize the disk with GPT before adding it as a directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mount_name",
+      "displayName": "Mount Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the path under which the disk should be mounted. For example, if mount_name=disk1, then the mount will be under /mnt/datastore/disk1. Note that once a disk is mounted that mount path cannot be moved. If C(state) is absent, then this mount will be deleted\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "node",
+      "displayName": "Node",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Node on which the disk resides. Default: hostname section of I(api_host).\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state that the disk should be in. C(present) will ensure that the disk has a filesystem mounted at the location defined in (mount_name), while absent will remove that directory without touching the disk itself. Note that once a disk is mounted that mount path cannot be moved.\n",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Validate SSL certificate of the PVE host upon connecting",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

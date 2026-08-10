@@ -1,0 +1,169 @@
+{
+  "fqcn": "ibm.ibm_zhmc.zhmc_partition",
+  "shortDescription": "Manage a partition (DPM mode)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zhmc/zhmc_partition_module.html",
+  "options": [
+    {
+      "name": "_faked_session",
+      "displayName": " Faked Session",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An internal parameter used for testing the module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpc_name",
+      "displayName": "Cpc Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the CPC with the target partition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "expand_crypto_adapters",
+      "displayName": "Expand Crypto Adapters",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Boolean that controls whether the returned partition contains an additional artificial property C(crypto-adapters) in its C(crypto-configuration) property that is the list of crypto adapters attached to the partition, with properties as described for the zhmc_adapter module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "expand_storage_groups",
+      "displayName": "Expand Storage Groups",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Boolean that controls whether the returned partition contains an additional artificial property RV(partition.storage-groups) that is the list of storage groups attached to the partition, with properties as described for the zhmc_storage_group module with C(expand=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_auth",
+      "displayName": "Hmc Auth",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The authentication credentials for the HMC.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hmc_host",
+      "displayName": "Hmc Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostnames or IP addresses of a single HMC or of a list of redundant HMCs. A single HMC can be specified as a string type or as an HMC list with one item. An HMC list can be specified as a list type or as a string type containing a Python list representation. The first available HMC of a list of redundant HMCs is used for the entire execution of the module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_file",
+      "displayName": "Image File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path name of the local ISO image file for O(state=iso_mount) (required). Not permitted for any other O(state) values. When mounting an ISO image, this file is opened for reading and its content is sent to the HMC using the 'Mount ISO Image' operation. This file is not used when an image with the name specified in O(image_name) was already mounted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_name",
+      "displayName": "Image Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the ISO image for O(state=iso_mount) (required). Not permitted for any other O(state) values. This value is shown in the 'boot-iso-image-name' property of the partition. If an ISO image with this name is already mounted to the partition, the new image will not be mounted. The image conntent is not verified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ins_file",
+      "displayName": "Ins File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path name of the INS file within the ISO image that will be used when booting from the ISO image for O(state=iso_mount) (required). Not permitted for any other O(state) values. This value is shown in the 'boot-iso-ins-file' property of the partition. The 'boot-iso-ins-file' property of the partition is always updated, even when the ISO image was already mounted and thus is not re-mounted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "log_file",
+      "displayName": "Log File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "File path of a log file to which the logic flow of this module as well as interactions with the HMC are logged. If null, logging will be propagated to the Python root logger.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the target partition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "properties",
+      "displayName": "Properties",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary with input properties for the partition, for O(state=stopped) and O(state=active). Key is the property name with underscores instead of hyphens, and value is the property value in YAML syntax. Integer properties may also be provided as decimal strings. Will be ignored for O(state=absent). The possible input properties in this dictionary are the properties defined as writeable in the data model for Partition resources (where the property names contain underscores instead of hyphens), w",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "select_properties",
+      "displayName": "Select Properties",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Limits the returned properties of the partition to those specified in this parameter plus those specified in the O(properties) parameter. The properties can be specified with underscores or hyphens in their names. Null indicates not to limit the returned properties in this way. This parameter is ignored for O(state) values that cause no properties to be returned. The specified properties are passed to the 'Get Partition Properties' HMC operation using the 'properties' query parameter and save ti",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The desired state for the partition. All states are fully idempotent within the limits of the properties that can be changed: * V(absent): Ensures that the partition does not exist in the specified CPC. * V(stopped): Ensures that the partition exists in the specified CPC, has the specified properties, and is in one of the inactive statuses ('stopped', 'terminated', 'paused', 'reservation-error'). * V(active): Ensures that the partition exists in the specified CPC, has the specified properties, a",
+      "choices": [
+        "absent",
+        "stopped",
+        "active",
+        "iso_mount",
+        "iso_unmount",
+        "facts"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

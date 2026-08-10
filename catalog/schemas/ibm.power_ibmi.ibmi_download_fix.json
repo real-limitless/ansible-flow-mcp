@@ -1,0 +1,185 @@
+{
+  "fqcn": "ibm.power_ibmi.ibmi_download_fix",
+  "shortDescription": "Download fix through SNDPTFORD",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_ibmi/ibmi_download_fix_module.html",
+  "options": [
+    {
+      "name": "become_user",
+      "displayName": "Become User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the user profile that the IBM i task will run under. Use this option to set a user with desired privileges to run the task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "become_user_password",
+      "displayName": "Become User Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use this option to set the password of the user specified in C(become_user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_PTF",
+      "displayName": "Check Ptf",
+      "type": "string",
+      "required": false,
+      "default": "*NO",
+      "description": "Specifies whether checking is performed on the service requester system to determine if PTFs are ordered based on whether or not the PTF product is installed or supported.",
+      "choices": [
+        "*NO",
+        "*YES"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delivery_format",
+      "displayName": "Delivery Format",
+      "type": "string",
+      "required": false,
+      "default": "*SAVF",
+      "description": "Specifies the format of the delivered PTFs.",
+      "choices": [
+        "*SAVF",
+        "*IMAGE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_catalog",
+      "displayName": "Image Catalog",
+      "type": "string",
+      "required": false,
+      "default": "*NONE",
+      "description": "Specifies the image catalog to create based on the PTFs ordered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "image_directory",
+      "displayName": "Image Directory",
+      "type": "string",
+      "required": false,
+      "default": "*DFT",
+      "description": "Specifies the directory where the optical image files are stored. If IMGCLG parameter is specified, the directory specified will be associated with the image catalog.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "joblog",
+      "displayName": "Joblog",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to C(true), output the available joblog even the rc is 0(success).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "order",
+      "displayName": "Order",
+      "type": "string",
+      "required": false,
+      "default": "*REQUIRED",
+      "description": "Specifies if requisite PTFs should be included with the ordered PTFs.",
+      "choices": [
+        "*REQUIRED",
+        "*PTFID"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parameters",
+      "displayName": "Parameters",
+      "type": "string",
+      "required": false,
+      "default": " ",
+      "description": "The parameters that SNDPTFORD command will take. Other than options above, all other parameters need to be specified here. The default values of parameters for SNDPTFORD will be taken if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "product",
+      "displayName": "Product",
+      "type": "string",
+      "required": false,
+      "default": "*ONLYPRD",
+      "description": "Specifies the product ID associated with the PTF.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ptf_id",
+      "displayName": "Ptf Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the identifier of the PTF information being ordered. For Cumulative PTF package and PTF group ID, please see C(*CUMPKG) Order the latest level of the Cumulative PTF package group (SF99vrm) for the operating system release that is installed on the system. The HIPER and DB2 for IBM i PTF groups are automatically included when the Cumulative PTF package PTF group is specified. This value cannot be specified with any other PTF identifier or special value. C(*ALLGRP) Order the latest level of",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "release",
+      "displayName": "Release",
+      "type": "string",
+      "required": false,
+      "default": "*ONLYRLS",
+      "description": "Specifies the release level of the PTF in one of the following formats, VxRyMz, where Vx is the version number, Ry is the release number, and Mz is the modification level. The variables x and y can be a number from 0 through 9, and the variable z can be a number from 0 through 9 or a letter from A through Z. vvrrmm, where version vv and release rr must be a number from 00 through 35, and modification mm must be a number from 00 through 09 or a letter from 0A through 0Z.  The leading zeros are re",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reorder",
+      "displayName": "Reorder",
+      "type": "string",
+      "required": false,
+      "default": "*YES",
+      "description": "Specifies whether a PTF that is currently loaded, applied, or on order should be ordered again.",
+      "choices": [
+        "*NO",
+        "*YES"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_out",
+      "displayName": "Time Out",
+      "type": "string",
+      "required": false,
+      "default": "15m",
+      "description": "The max time that the module waits for the SNDPTFORD command complete. The unit can be 's', 'm', 'h', 'd' and 'w'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Only works when delivery_format is C(*SAVF). If delivery_format is C(*SAVF), and C(wait) set to C(true), module will wait until all PTF save files are delivered or time is up.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

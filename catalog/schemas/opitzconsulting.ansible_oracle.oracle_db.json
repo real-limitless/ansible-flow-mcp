@@ -1,0 +1,438 @@
+{
+  "fqcn": "opitzconsulting.ansible_oracle.oracle_db",
+  "shortDescription": "Manage an Oracle database",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/opitzconsulting/ansible_oracle/oracle_db_module.html",
+  "options": [
+    {
+      "name": "amm",
+      "displayName": "Amm",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Should Automatic Memory Management be used (memory_target, memory_max_target)\n",
+      "choices": [
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "archivelog",
+      "displayName": "Archivelog",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Puts the database is archivelog mode\n",
+      "choices": [
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cdb",
+      "displayName": "Cdb",
+      "type": "string",
+      "required": false,
+      "default": false,
+      "description": "Should the database be a container database\n",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "characterset",
+      "displayName": "Characterset",
+      "type": "string",
+      "required": false,
+      "default": "AL32UTF8",
+      "description": "The database characterset\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "customscripts",
+      "displayName": "Customscripts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of scripts to run after database is created\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datafile_dest",
+      "displayName": "Datafile Dest",
+      "type": "string",
+      "required": false,
+      "default": false,
+      "description": "Where the database files should be placed             (ASM diskgroup or filesystem path)\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_name",
+      "displayName": "Db Name",
+      "type": "string",
+      "required": true,
+      "default": "None",
+      "description": "The name of the database",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_type",
+      "displayName": "Db Type",
+      "type": "string",
+      "required": false,
+      "default": "MULTIPURPOSE",
+      "description": "Default Type of database (MULTIPURPOSE, OLTP, DATA_WAREHOUSING)\n",
+      "choices": [
+        "MULTIPURPOSE",
+        "OLTP",
+        "DATA_WAREHOUSING"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_unique_name",
+      "displayName": "Db Unique Name",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The database db_unique_name",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dbconfig_type",
+      "displayName": "Dbconfig Type",
+      "type": "string",
+      "required": false,
+      "default": "SI",
+      "description": "Type of database (SI,RAC,RON)\n",
+      "choices": [
+        "SI",
+        "RAC",
+        "RACONENODE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dbsnmp_password",
+      "displayName": "Dbsnmp Password",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "Password for the dbsnmp user. If not set, defaults to sys_password\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_tablespace",
+      "displayName": "Default Tablespace",
+      "type": "string",
+      "required": false,
+      "default": "smallfile",
+      "description": "Database default tablespace\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_tablespace_type",
+      "displayName": "Default Tablespace Type",
+      "type": "string",
+      "required": false,
+      "default": "smallfile",
+      "description": "Database default tablespace type (DEFAULT_TBS_TYPE)\n",
+      "choices": [
+        "smallfile",
+        "bigfile"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_temp_tablespace",
+      "displayName": "Default Temp Tablespace",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Database default temporary tablespace\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flashback",
+      "displayName": "Flashback",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables flashback for the database\n",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_logging",
+      "displayName": "Force Logging",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables force logging for the Database\n",
+      "choices": [
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_restart",
+      "displayName": "Force Restart",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Effective only when using state == 'restarted' If true (default), database will be restarted without checking             for spfile vs runtime parameters If false, database will ONLY be restarted if spfile is in use             and spfile parameters do not match runtime parameters\n",
+      "choices": [
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "The host of the database if using dbms_service\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initparams",
+      "displayName": "Initparams",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of dict for init.ora parameter.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "memory_percentage",
+      "displayName": "Memory Percentage",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The database total memory in % of available memory\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "memory_totalmb",
+      "displayName": "Memory Totalmb",
+      "type": "string",
+      "required": false,
+      "default": [
+        "1024"
+      ],
+      "description": "The database total memory in MB. Defaults to 1G\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nodelist",
+      "displayName": "Nodelist",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The list of nodes a RAC DB should be created on\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "omf",
+      "displayName": "Omf",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Should Oracle Managed Files be used\n",
+      "choices": [
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oracle_home",
+      "displayName": "Oracle Home",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The home where the database will be created\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "string",
+      "required": false,
+      "default": 1521,
+      "description": "The listener port to connect to the database if using dbms_service\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "racone_service",
+      "displayName": "Racone Service",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "If dbconfig_type = RACONENODE, a service has to be created along with the DB. This is the name of that service If no name is defined, the service will be called \"{{ db_name }}_ronserv\"\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recoveryfile_dest",
+      "displayName": "Recoveryfile Dest",
+      "type": "string",
+      "required": false,
+      "default": false,
+      "description": "Where the database files should be placed (ASM diskgroup or filesystem path)\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "responsefile",
+      "displayName": "Responsefile",
+      "type": "string",
+      "required": true,
+      "default": "None",
+      "description": "The name of responsefile",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sid",
+      "displayName": "Sid",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "The instance name",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The intended state of the database. For 'restarted' the database has to be running.\n",
+      "choices": [
+        "present",
+        "absent",
+        "started",
+        "restarted"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_type",
+      "displayName": "Storage Type",
+      "type": "string",
+      "required": false,
+      "default": "FS",
+      "description": "Type of underlying storage (Filesystem or ASM)\n",
+      "choices": [
+        "FS",
+        "ASM"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "supplemental_logging",
+      "displayName": "Supplemental Logging",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables supplemental (minimal) logging for the Database (basically 'add supplemental log data')\n",
+      "choices": [
+        "true",
+        "false"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sys_password",
+      "displayName": "Sys Password",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "Password for the sys user",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system_password",
+      "displayName": "System Password",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "Password for the system user. If not set, defaults to sys_password\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template",
+      "displayName": "Template",
+      "type": "string",
+      "required": false,
+      "default": "General_Purpose.dbc",
+      "description": "The template the database will be based off\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,252 @@
+{
+  "fqcn": "pfrest.pfsense.services_freeradius_client",
+  "shortDescription": "Manage individual FreeRADIUS Clients.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/pfrest/pfsense/services_freeradius_client_module.html",
+  "options": [
+    {
+      "name": "addr",
+      "displayName": "Addr",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The IP address or network of the RADIUS client(s) in CIDR notation. This is the IP of the NAS (switch, access point, firewall, router, etc.)",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the pfSense device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An API key to use for authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": "pfsense",
+      "description": "The password to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_port",
+      "displayName": "Api Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_protocol",
+      "displayName": "Api Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The protocol to use when connecting to the pfSense API.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "The username to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The description for this interface.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_version",
+      "displayName": "Ip Version",
+      "type": "string",
+      "required": false,
+      "default": "ipaddr",
+      "description": "The IP version of the this Client.",
+      "choices": [
+        "ipaddr",
+        "ipv6addr"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lookup_fields",
+      "displayName": "Lookup Fields",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "The list of fields to use when looking up existing resources. This should be a list of field names that uniquely identify a resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxconn",
+      "displayName": "Maxconn",
+      "type": "number",
+      "required": false,
+      "default": 16,
+      "description": "Takes only effect if you use TCP as protocol. Limits the number of simultaneous TCP connections from a client.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "msgauth",
+      "displayName": "Msgauth",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "RFC5080 requires Message-Authenticator in Access-Request. But older NAS (switches or accesspoints) do not include that.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "naslogin",
+      "displayName": "Naslogin",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "If supported by your NAS, you can use SNMP or finger for simultaneous-use checks instead of (s)radutmp file and accounting. Leave empty to choose (s)radutmp.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "naspassword",
+      "displayName": "Naspassword",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "If supported by your NAS, you can use SNMP or finger for simultaneous-use checks instead of (s)radutmp file and accounting. Leave empty to choose (s)radutmp.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nastype",
+      "displayName": "Nastype",
+      "type": "string",
+      "required": false,
+      "default": "other",
+      "description": "The NAS type of the client. This is used by checkrad.pl for simultaneous use checks.",
+      "choices": [
+        "cisco",
+        "cvx",
+        "computone",
+        "digitro",
+        "livingston",
+        "juniper",
+        "max40xx",
+        "mikrotik",
+        "mikrotik_snmp",
+        "dot1x",
+        "other"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proto",
+      "displayName": "Proto",
+      "type": "string",
+      "required": false,
+      "default": "udp",
+      "description": "The protocol the client uses.",
+      "choices": [
+        "udp",
+        "tcp"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secret",
+      "displayName": "Secret",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "This is the shared secret (password) which the NAS (switch, accesspoint, etc.) needs to communicate with the RADIUS server.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shortname",
+      "displayName": "Shortname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "A short name for the client. This is generally the hostname of the NAS.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the resource should be present or absent.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate SSL certificates when connecting to the API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

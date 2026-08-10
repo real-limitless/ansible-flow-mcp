@@ -1,0 +1,334 @@
+{
+  "fqcn": "flowerysong.hvault.ssh_role",
+  "shortDescription": "Manage SSH roles in HashiCorp Vault",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/flowerysong/hvault/ssh_role_module.html",
+  "options": [
+    {
+      "name": "algorithm_signer",
+      "displayName": "Algorithm Signer",
+      "type": "string",
+      "required": false,
+      "default": "rsa-sha2-512",
+      "description": "Algorithm to use when signing certificates. Note that the default of C(rsa-sha2-512) is different from the upstream default, which is C(ssh-rsa) for historical reasons.",
+      "choices": [
+        "ssh-rsa",
+        "rsa-sha2-256",
+        "rsa-sha2-512"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_bare_domains",
+      "displayName": "Allow Bare Domains",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allows this role to sign host certificates for the domains specified in I(allowed_domains).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_host_certificates",
+      "displayName": "Allow Host Certificates",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allows this role to sign host certificates. Either this or I(allow_user_certificates) must be C(true) when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_subdomains",
+      "displayName": "Allow Subdomains",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allows this role to sign host certificates for subdomains of the domains specified in I(allowed_domains).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_user_certificates",
+      "displayName": "Allow User Certificates",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allows this role to sign user certificates. Either this or I(allow_host_certificates) must be C(true) when I(state=present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_user_key_ids",
+      "displayName": "Allow User Key Ids",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allow signing requests to override the automatically generated key ID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allowed_critical_options",
+      "displayName": "Allowed Critical Options",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Critical options a certificate can have when signed. An empty list allows all options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allowed_domains",
+      "displayName": "Allowed Domains",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Domains for which this role can sign keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allowed_extensions",
+      "displayName": "Allowed Extensions",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Extensions a certificate can have when signed. An empty list allows all extensions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allowed_user_key_lengths",
+      "displayName": "Allowed User Key Lengths",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Mapping of SSH key types and their allowed sizes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allowed_users",
+      "displayName": "Allowed Users",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Users for which this role can sign keys. Defaults to I(default_user) if this is not set and I(default_user) is.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted certificate chain file to be used for TLS client authentication. This file can also include the key as well, and if the key is included, C(client_key) is not required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted file that contains your private key to be used for TLS client authentication. If C(client_cert) contains both the certificate and key, this option is not required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_critical_options",
+      "displayName": "Default Critical Options",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Options applied if none are provided in the signing request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_extensions",
+      "displayName": "Default Extensions",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Extensions applied if none are provided in the signing request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_user",
+      "displayName": "Default User",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Default user to sign keys for.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http_agent",
+      "displayName": "Http Agent",
+      "type": "string",
+      "required": false,
+      "default": "ansible-httpget",
+      "description": "Header to identify as, generally appears in web server logs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_id_format",
+      "displayName": "Key Id Format",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Custom format for automatically generated key IDs. Vault allows the variables C({{token_display_name}}), C({{role_name}}), and C({{public_key_hash}}) to be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_ttl",
+      "displayName": "Max Ttl",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Maximum length of time a certificate can be valid, in seconds. C(0) will use the system default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mount_point",
+      "displayName": "Mount Point",
+      "type": "string",
+      "required": false,
+      "default": "ssh",
+      "description": "Path where the backend is mounted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the role to manage.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "not_before_duration",
+      "displayName": "Not Before Duration",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Amount to backdate the ValidAfter property, in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the role.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Request timeout, in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication token to use. If this is not set then the contents of C(~/.vault-token) will be checked.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttl",
+      "displayName": "Ttl",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Default length of time the certificate will be valid, in seconds. C(0) will use the system default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), TLS certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_addr",
+      "displayName": "Vault Addr",
+      "type": "string",
+      "required": false,
+      "default": "https://localhost:8200",
+      "description": "Location of the Vault service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

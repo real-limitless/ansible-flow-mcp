@@ -1,0 +1,57 @@
+{
+  "fqcn": "jm1.libvirt.pool_xml",
+  "shortDescription": "Create/Modify/Delete a libvirt storage pool.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/jm1/libvirt/pool_xml_module.html",
+  "options": [
+    {
+      "name": "ignore",
+      "displayName": "Ignore",
+      "type": "list",
+      "required": false,
+      "default": [
+        "/pool/uuid"
+      ],
+      "description": "XPath expressions to XML nodes that are ignored when comparing I(xml) to existing pool configuration. XPath expressions must return XML nodes only, e.g. '/pool/uuid'. Other XPath expressions, such as '/pool/uuid/text()' are not supported. When modifying a pool, ignored XML nodes will be taken from existing pool, i.e. they will not be overwritten.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Should the pool be present or absent. If pool does not exist and I(state) is C(present), then the pool will be defined, but not started. Use M(community.libvirt.virt_pool) to start the pool. If pool does exist and I(state) is C(absent), then the pool will not be stopped prior to undefine. Use M(community.libvirt.virt_pool) to stop the pool.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "uri",
+      "displayName": "Uri",
+      "type": "string",
+      "required": false,
+      "default": "qemu:///system",
+      "description": "libvirt connection uri.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "xml",
+      "displayName": "Xml",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "XML document used to define or modify the pool. Must be raw XML content using C(lookup). XML cannot be reference to a file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

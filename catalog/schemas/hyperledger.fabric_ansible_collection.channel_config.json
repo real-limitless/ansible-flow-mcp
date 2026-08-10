@@ -1,0 +1,239 @@
+{
+  "fqcn": "hyperledger.fabric_ansible_collection.channel_config",
+  "shortDescription": "Manage the configuration for a Hyperledger Fabric channel",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/hyperledger/fabric_ansible_collection/channel_config_module.html",
+  "options": [
+    {
+      "name": "acls",
+      "displayName": "Acls",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The set of ACLs to add to the new channel. The keys are the ACL names, and the values are the name of the policy used by the ACL.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_authtype",
+      "displayName": "Api Authtype",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "C(basic) - Authenticate to the Fabric operations console using basic authentication. You must provide both a valid API key using I(api_key) and API secret using I(api_secret).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_endpoint",
+      "displayName": "Api Endpoint",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The URL for the Fabric operations console.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The API key for the Fabric operations console.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_secret",
+      "displayName": "Api Secret",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The API secret for the Fabric operations console. Only required when I(api_authtype) is C(basic).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "The timeout, in seconds, to use when interacting with the Fabric operations console.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "capabilities",
+      "displayName": "Capabilities",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The capability levels for the new channel.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hsm",
+      "displayName": "Hsm",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The PKCS #11 compliant HSM configuration to use for digital signatures. Only required if the identity specified in I(identity) was enrolled using an HSM, and when I(operation) is C(fetch), C(sign), or C(apply_update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "identity",
+      "displayName": "Identity",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The identity to use when interacting with the ordering service or for signing channel configuration update transactions. You can pass a string, which is the path to the JSON file where the enrolled identity is stored. You can also pass a dict, which must match the result format of one of the M(enrolled_identity_info) or M(enrolled_identity) modules. Only required when I(operation) is C(fetch), C(sign_update), or C(apply_update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "msp_id",
+      "displayName": "Msp Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The MSP ID to use for interacting with the ordering service or for signing channel configuration update transactions. Only required when I(operation) is C(fetch), C(sign), or C(apply_update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the channel.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "C(create) - Create a channel configuration update transaction for a new channel. C(fetch) - Fetch the current channel configuration to the specified I(path). C(compute_update) - Compute a channel configuration update transaction using the original configuration at I(origin) and the updated configuration at I(updated). C(sign_update) - Sign a channel configuration update transaction. C(apply_update) - Apply a channel configuration update transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ordering_service",
+      "displayName": "Ordering Service",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ordering service to use to manage the channel. You can pass a string, which is the cluster name of a ordering service registered with the Fabric operations console. You can also pass a list, which must match the result format of one of the M(ordering_service_info) or M(ordering_service) modules. Only required when I(operation) is C(fetch) or C(apply_update). Cannot be specified with I(ordering_service_nodes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ordering_service_nodes",
+      "displayName": "Ordering Service Nodes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ordering service nodes to use to manage the channel. You can pass strings, which are the names of ordering service nodes that are registered with the Fabric operations console. You can also pass a dict, which must match the result format of one of the M(ordering_service_node_info) or M(ordering_service_node) modules. Only required when I(operation) is C(fetch) or C(apply_update). Cannot be specified with I(ordering_service). If specified when I(operation) is C(create), then the specified ord",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organizations",
+      "displayName": "Organizations",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of organizations to add as members in the new channel. The organizations must all be members of the consortium. You can pass strings, which are the names of organizations that are registered with the Fabric operations console. You can also pass a dict, which must match the result format of one of the M(organization_info) or M(organization) modules. Only required when I(operation) is C(create).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "original",
+      "displayName": "Original",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the file where the original channel configuration is stored. Only required when I(operation) is C(compute_update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "parameters",
+      "displayName": "Parameters",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The parameters for the new channel.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The path to the file where the channel configuration or the channel configuration update transaction will be stored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policies",
+      "displayName": "Policies",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The set of policies to add to the new channel. The keys are the policy names, and the values are the policies. You can pass strings, which are paths to JSON files containing policies in the Hyperledger Fabric format (common.Policy). You can also pass a dict, which must correspond to a parsed policy in the Hyperledger Fabric format (common.Policy). You must provide at least an Admins, Writers, and Readers policy. Only required when I(operation) is C(create).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls_handshake_time_shift",
+      "displayName": "Tls Handshake Time Shift",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The amount of time to shift backwards for certificate expiration checks during TLS handshakes with the ordering service endpoint. Only use this option if the ordering service TLS certificates have expired. The value must be a duration, for example I(30m), I(24h), or I(6h30m).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "updated",
+      "displayName": "Updated",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The path to the file where the updated channel configuration is stored. Only required when I(operation) is C(compute_update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

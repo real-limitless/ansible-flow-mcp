@@ -1,0 +1,177 @@
+{
+  "fqcn": "arubanetworks.aruba_central.central_devices",
+  "shortDescription": "This module provides a mechanism to interact with devices to perform device-pertinent operations",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/arubanetworks/aruba_central/central_devices_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Action to be performed on the device(s) I(get_device_group) gets the name of the group that a device belongs to I(get_running_config) gets last known running-config of a device as multipart/form-data I(get_config_details) gets configuration details for a device belonging to a template group. It applicable only to devices in template groups. It gets the following details- Central-side configuration; Device running configuration; Configuration error details; Template error details and status of de",
+      "choices": [
+        "get_device_group",
+        "get_running_config",
+        "get_config_details",
+        "get_template_info",
+        "get_templates_for_groups",
+        "get_templates_using_hash",
+        "get_variablised_switch_template",
+        "set_switch_ssh_connection",
+        "move_devices"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_serial",
+      "displayName": "Device Serial",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Serial number of the device Used with actions I(get_device_group), I(get_running_config), I(get_config_details), I(get_variablised_switch_template), and I(set_switch_ssh_connection)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_serial_list",
+      "displayName": "Device Serial List",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of device serial numbers Used with actions I(move_devices) and I(get_template_info) When moving an IAP, all APs in a cluster will be moved to the specified group if the serial number of conductor AP is provided in this list; serial number(s) of member IAP(s) will be ignored",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_type",
+      "displayName": "Device Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of device for which the template is applicable Used with actions I(get_templates_for_groups) and \"get_templates_using_hash\"",
+      "choices": [
+        "IAP",
+        "ArubaSwitch",
+        "CX",
+        "MobilityController"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_groups",
+      "displayName": "Exclude Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of group names for which I(get_templates_for_groups) will exclude Used with action I(get_templates_for_groups) Mutually exclusive with I(include_groups)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_hash",
+      "displayName": "Exclude Hash",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Determines behavior of I(get_templates_using_hash) Used with action I(get_templates_using_hash)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "full_details",
+      "displayName": "Full Details",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Used with action I(get_config_details) action to determine whether the action retrieves a summary of device configuration info or the comprehensive details of device configuration info Specify as true only if the detailed response of a device's configuration info is required, as passing true might result in slower API response and performance",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group_name",
+      "displayName": "Group Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the group Used with action I(move_devices)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_groups",
+      "displayName": "Include Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of groups for which I(get_templates_for_groups) will include Used with action I(get_templates_for_groups) Mutually exclusive with I(exclude_groups)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit",
+      "displayName": "Limit",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "Maximum number of records to be returned. It is used optionally as a filter parameter for I(get_templates_for_groups) and I(get_templates_using_hash)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "offset",
+      "displayName": "Offset",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Number of items to be skipped before returning the data, which is useful for pagination Used optionally as a filter parameter for I(get_templates_for_groups) and I(get_templates_using_hash)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sw_password",
+      "displayName": "Sw Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Switch password to establish SSH connection to AOS-S switch Used with action I(set_switch_ssh_connection)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sw_username",
+      "displayName": "Sw Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Switch username to establish SSH connection to AOS-S switch Used with action I(set_switch_ssh_connection)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "template_hash",
+      "displayName": "Template Hash",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hash string of template for which I(get_templates_using_hash) either includes or excludes Used with action \"get_templates_using_hash\" Behavior (inclusion or exclusion) determined by I(exclude_hash) parameter",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

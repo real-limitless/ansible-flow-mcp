@@ -1,0 +1,262 @@
+{
+  "fqcn": "lowlydba.sqlserver.ag_replica",
+  "shortDescription": "Configures an availability group replica",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/lowlydba/sqlserver/ag_replica_module.html",
+  "options": [
+    {
+      "name": "ag_name",
+      "displayName": "Ag Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the Availability Group that will have the new replica joined to it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_mode",
+      "displayName": "Availability Mode",
+      "type": "string",
+      "required": false,
+      "default": "AsynchronousCommit",
+      "description": "Whether the replica should be Asynchronous or Synchronous.",
+      "choices": [
+        "AsynchronousCommit",
+        "SynchronousCommit"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "backup_priority",
+      "displayName": "Backup Priority",
+      "type": "number",
+      "required": false,
+      "default": 50,
+      "description": "Sets the backup priority availability group replica.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster_type",
+      "displayName": "Cluster Type",
+      "type": "string",
+      "required": false,
+      "default": "Wsfc",
+      "description": "Cluster type of the Availability Group. Only supported in SQL Server 2017 and above.",
+      "choices": [
+        "Wsfc",
+        "External",
+        "None"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "configure_xe_session",
+      "displayName": "Configure Xe Session",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Configure the AlwaysOn_health extended events session to start automatically as the SSMS wizard would do.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_mode_in_primary_role",
+      "displayName": "Connection Mode In Primary Role",
+      "type": "string",
+      "required": false,
+      "default": "AllowAllConnections",
+      "description": "Which connections can be made to the database when it is in the primary role.",
+      "choices": [
+        "AllowReadIntentConnectionsOnly",
+        "AllowAllConnections"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_mode_in_secondary_role",
+      "displayName": "Connection Mode In Secondary Role",
+      "type": "string",
+      "required": false,
+      "default": "AllowNoConnections",
+      "description": "Which connections can be made to the database when it is in the secondary role.",
+      "choices": [
+        "AllowNoConnections",
+        "AllowReadIntentConnectionsOnly",
+        "AllowAllConnections"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint",
+      "displayName": "Endpoint",
+      "type": "string",
+      "required": false,
+      "default": "hadr_endpoint",
+      "description": "By default, this command will attempt to find a DatabaseMirror endpoint. If one does not exist, it will create it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "endpoint_url",
+      "displayName": "Endpoint Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "By default, the property C(Fqdn) of C(Get-DbaEndpoint) is used as I(endpoint_url). Use I(endpoint_url) if a different URL is required due to special network configurations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "failover_mode",
+      "displayName": "Failover Mode",
+      "type": "string",
+      "required": false,
+      "default": "Manual",
+      "description": "Whether the replica have Automatic or Manual failover.",
+      "choices": [
+        "Automatic",
+        "Manual"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_only_routing_connection_url",
+      "displayName": "Read Only Routing Connection Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets the read only routing connection url for the availability replica.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_only_routing_list",
+      "displayName": "Read Only Routing List",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Sets the read only routing ordered list of replica server names to use when redirecting read-only connections through this availability replica.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "seeding_mode",
+      "displayName": "Seeding Mode",
+      "type": "string",
+      "required": false,
+      "default": "Automatic",
+      "description": "Default seeding mode for the replica. Should remain as the default otherwise manual setup may be required.",
+      "choices": [
+        "Automatic",
+        "Manual"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "session_timeout",
+      "displayName": "Session Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "How many seconds an availability replica waits for a ping response from a connected replica before considering the connection to have failed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_instance",
+      "displayName": "Sql Instance",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The SQL Server instance to modify.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_instance_replica",
+      "displayName": "Sql Instance Replica",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The SQL Server instance where of the replica to be configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_password",
+      "displayName": "Sql Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for SQL Authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_password_replica",
+      "displayName": "Sql Password Replica",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for SQL Authentication for the secondary replica.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_username",
+      "displayName": "Sql Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for SQL Authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql_username_replica",
+      "displayName": "Sql Username Replica",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username for SQL Authentication for the secondary replica.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether or not the object should be C(present) or C(absent).",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

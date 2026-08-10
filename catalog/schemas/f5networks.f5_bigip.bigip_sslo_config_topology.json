@@ -1,0 +1,471 @@
+{
+  "fqcn": "f5networks.f5_bigip.bigip_sslo_config_topology",
+  "shortDescription": "Manage an SSL Orchestrator Topology",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_bigip/bigip_sslo_config_topology_module.html",
+  "options": [
+    {
+      "name": "access_profile",
+      "displayName": "Access Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines a custom access profile to use. When not specified, a topology-defined access profile is created. This parameter is mandatory when C(topology_type) is C(outbound_explicit) or when C(security_policy) is set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "additional_protocols",
+      "displayName": "Additional Protocols",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Defines a list of additional protocols to create listeners for. This parameter is only valid when C(protocol) is set to C(tcp). Accepted values of this list are: C(ftp), C(imap), C(pop3), C(smtps).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_profile",
+      "displayName": "Auth Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines an access profile to use for explicit proxy authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpm_policies",
+      "displayName": "Cpm Policies",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specify the LTM policy you want to be associated with the interception rule. This parameter makes sense when C(topology_type) is C(inbound_l3) with C(Application) mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dest",
+      "displayName": "Dest",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the destination address filter and optional route domain for the topology listener. The address must be specified in CIDR notation, with subnet mask not exceeding 32 bits. When creating a new topology object, if dest is not specified, a value of C(0.0.0.0%0/0) is assumed. Wildcard C(0.0.0.0%0/0) is supported in case of C(Gateway) mode, in C(Application) mode unique IP/mask should be given.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns_resolver",
+      "displayName": "Dns Resolver",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines a per-topology DNS resolver configuration object. This parameter is available in SSLO version 9.0 and above.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dump_json",
+      "displayName": "Dump Json",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Sets the module to output a JSON blob for further consumption. When C(true) does not make any changes on the device and always returns C(changed=False). The output provided is idempotent in nature, meaning if there are no changes to be made during C(MODIFY) on an existing service, no JSON output is generated.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gateway",
+      "displayName": "Gateway",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the type of egress gateway to use for egress traffic. When C(system) is set, a system-defined gateway route is used. This is the default choice when a creating topology object if the parameter is not provided. When C(topology_type) is either set to C(l2_outbound) or C(l2_inbound), a C(gateway) is automatically set to C(system). When C(pool), the gateway configuration points to an existing gateway pool defined by the C(gateway_pool) parameter. When C(iplist), a new gateway pool is created",
+      "choices": [
+        "system",
+        "pool",
+        "iplist"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gateway_list",
+      "displayName": "Gateway List",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Defines a list of IP addresses to use in a gateway pool configuration. This parameter is required when C(gateway) is set to C(iplist).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gateway_pool",
+      "displayName": "Gateway Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines an existing gateway pool to use for egress traffic. This parameter is required when C(gateway) is set to C(pool).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_family",
+      "displayName": "Ip Family",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the IP family for the topology. When creating a new topology object, if ip_family is not specified, a value of C(ipv4) is assumed.",
+      "choices": [
+        "ipv4",
+        "ipv6"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "irules_list",
+      "displayName": "Irules List",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Defines a list of irules to attach with the topology. iRules help automate the intercepting, processing, and routing of application traffic. This parameter makes sense when C(topology_type) is C(inbound_l3).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "l7_profile",
+      "displayName": "L7 Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the specific HTTP profile if the C(l7_profile_type) is set to C(http). When creating a new topology object, if l7_profile is not specified, a value of C(/Common/http) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "l7_profile_type",
+      "displayName": "L7 Profile Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the L7 protocol type, and can either be C(none) for all protocols, or C(http). When creating a new topology object, if l7_profile_type is not specified, a value of C(http) is assumed.",
+      "choices": [
+        "none",
+        "http"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "logging",
+      "displayName": "Logging",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Defines the setting of logging characteristics for an SSL Orchestrator topology.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mode",
+      "displayName": "Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the Topology Mode. This parameter is required when C(topology_type) is C(inbound_l3). Default mode will be asssumed as C(application) in case C(topology_type) is C(inbound_l3).",
+      "choices": [
+        "application",
+        "gateway"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies the name of the topology. Configuration auto-prepends \"sslo_\" to the topology. Topology name should be less than 14 characters and not contain dashes \"-\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ocsp_auth",
+      "displayName": "Ocsp Auth",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This setting defines an OCSP Authentication profile. This parameter is available in SSLO version 9.0 and later.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool",
+      "displayName": "Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines a server pool to use in an application mode inbound topology. This parameter makes sense when C(topology_type) is C(inbound_l3) with C(Application) mode.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Defines the port filter for the topology listener. When creating a new topology object, if port is not specified, a value of C(0) is assumed. Valid value range is from C(0) to C(65535). Port 0 is assumed in C(Gateway) mode, in C(Application) mode unique Port should be given.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "primary_auth_uri",
+      "displayName": "Primary Auth Uri",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the authentication service (ie. captive portal) to redirect new users to. This setting should contain a fully-qualified domain name (ex. https://auth.f5labs.com). This parameter applies to SSLO version 8.2 and later. Required when the C(profile_scope) option is C(named).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile_scope",
+      "displayName": "Profile Scope",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the access profile scope. This parameter applies to SSLO version 8.2 and later.",
+      "choices": [
+        "public",
+        "named"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profile_scope_value",
+      "displayName": "Profile Scope Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines a string name shared between the transparent proxy SSL Orchestrator profile and the captive portal authentication access profile. This parameter applies to SSLO version 8.2 and later. Required when the C(profile_scope) option is C(named).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the topology protocol, either TCP, UDP, or other (non-tcp/non-udp). When creating a new topology object, if protocol is not specified, a value of C(tcp) is assumed.",
+      "choices": [
+        "tcp",
+        "udp",
+        "other"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_ip",
+      "displayName": "Proxy Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the explicit proxy listener IP address. This parameter is required when C(topology_type) is is C(outbound_explicit). This parameter is mutually exclusive with C(dest) and C(port). This parameter must be specified together with C(proxy_port).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_port",
+      "displayName": "Proxy Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Defines the explicit proxy listener port. This parameter is required when C(topology_type) is is C(outbound_explicit). This parameter is mutually exclusive with C(dest) and C(port). This parameter must be specified together with C(proxy_ip).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_policy",
+      "displayName": "Security Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the name of the security policy object already created. Configuration auto-prepends \"ssloP_\" to provided name if not present. This parameter is mandatory when C(proxy_type) is C(outbound_explicit).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snat",
+      "displayName": "Snat",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the type egress source NAT used. When C(none), no outbound SNAT configuration is configured. This is the default choice when creating a topology object if the parameter is not provided. When C(topology_type) is either set to C(l2_outbound) or C(l2_inbound), a C(snat) is automatically set to C(none). When C(automap), SNAT auto map is configured. When C(snatpool), the SNAT configuration points to an existing SNAT pool defined by the C(snatpool) parameter. When C(snatlist), a new SNAT pool ",
+      "choices": [
+        "none",
+        "automap",
+        "snatpool",
+        "snatlist"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snat_list",
+      "displayName": "Snat List",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Defines a list of IP addresses to use in a SNAT pool configuration. This parameter is required when C(snat) is set to C(snatlist).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snat_pool",
+      "displayName": "Snat Pool",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines an existing SNAT pool. This parameter required when C(snat) is set to C(snatpool).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source",
+      "displayName": "Source",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the source address filter and optional route domain for the topology listener. The address must be specified in CIDR notation, with subnet mask not exceeding 32 bits. When creating a new topology object, if source is not specified, a value of C(0.0.0.0%0/0) is assumed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssl_settings",
+      "displayName": "Ssl Settings",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Defines the names of the SSL settings object already created. Configuration auto-prepends \"ssloT_\" to provided name if not present. The Server Names associated with SSL config must be unique. If multiple are present one (and only one) must be set as sniDefault (true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When C(state) is C(present), ensures the object is created or modified. When C(state) is C(absent), ensures the object is removed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tcp_settings_client",
+      "displayName": "Tcp Settings Client",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines a custom client side TCP profile to use. This parameter is ignored when C(topology_type) is set to C(outbound_explicit). When not specified, the default creation value is set depending on the C(topology_type). If C(topology_type) is either set to C(l2_inbound) or C(l3_inbound), the value is set to C(/Common/f5-tcp-wan). If C(topology_type) is either set to C(l2_outbound or C(l3_outbound), the value is set to C(/Common/f5-tcp-lan).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tcp_settings_server",
+      "displayName": "Tcp Settings Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines a custom server side TCP profile to use. This parameter is ignored when C(topology_type) is set to C(outbound_explicit). When not specified, the default creation value is set depending on the C(topology_type). If C(topology_type) is either set to C(l2_inbound) or C(l3_inbound) the value is set to C(/Common/f5-tcp-lan). If C(topology_type) is either set to C(l2_outbound or C(l3_outbound) the value is set to C(/Common/f5-tcp-wan).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "The amount of time to wait for the C(CREATE), C(MODIFY) or C(DELETE) task to complete, in seconds. The accepted value range is between C(10) and C(1800) seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "topology_type",
+      "displayName": "Topology Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Defines the type of topology to create.",
+      "choices": [
+        "outbound_l3",
+        "inbound_l3",
+        "outbound_explicit",
+        "outbound_l2",
+        "inbound_l2"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_accept",
+      "displayName": "Verify Accept",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables TCP Verify Accept proxy through an outbound topology. This parameter is available in SSLO version 9.0 and later. This parameter is there for Topology Mode C(Gateway).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vlans",
+      "displayName": "Vlans",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Defines the list of listening VLANs for the topology listener. This parameter is required when creating new topology object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

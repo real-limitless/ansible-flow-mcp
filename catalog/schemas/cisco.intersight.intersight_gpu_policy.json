@@ -1,0 +1,201 @@
+{
+  "fqcn": "cisco.intersight.intersight_gpu_policy",
+  "shortDescription": "GPU policy configuration for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_gpu_policy_module.html",
+  "options": [
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description of the GPU policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gpu_mode",
+      "displayName": "Gpu Mode",
+      "type": "string",
+      "required": false,
+      "default": "compute",
+      "description": "The operating mode for GPUs in the server. C(graphics) configures GPUs for standard graphics/display use. C(compute) configures GPUs for compute workloads (CUDA, inference, training).",
+      "choices": [
+        "graphics",
+        "compute"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gpu_thermal_threshold",
+      "displayName": "Gpu Thermal Threshold",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "GPU thermal throttle threshold temperature in Celsius. When GPU temperature exceeds this threshold, performance will be throttled to prevent damage. Valid range depends on GPU model. Typical values are 80-95 for data center GPUs. Set to 0 to use the platform default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mig_enabled",
+      "displayName": "Mig Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable or disable Multi-Instance GPU (MIG) partitioning. When enabled, each physical GPU can be partitioned into multiple isolated GPU instances. MIG is supported on NVIDIA A100, H100, B200 and newer architectures.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mig_profiles",
+      "displayName": "Mig Profiles",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of MIG partition profiles to apply when mig_enabled is true. Each entry defines the partition configuration for a GPU slot. If fewer profiles are specified than available GPUs, remaining GPUs use the default profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the GPU policy. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Profiles and Policies that are created within a Custom Organization are applicable only to devices in the same Organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_cap_watts",
+      "displayName": "Power Cap Watts",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum power consumption per GPU in watts when power_capping_enabled is true. Valid range depends on GPU model (e.g., H100 SXM supports 300-700W). Set to 0 to use the platform default TDP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_capping_enabled",
+      "displayName": "Power Capping Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable or disable GPU power capping. When enabled, GPU power consumption is limited to the power_cap_watts value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

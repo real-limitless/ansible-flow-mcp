@@ -1,0 +1,739 @@
+{
+  "fqcn": "vastdata.vms.views",
+  "shortDescription": "Create, update, or delete VAST View resources",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/vastdata/vms/views_module.html",
+  "options": [
+    {
+      "name": "abac_tags",
+      "displayName": "Abac Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "list of ABAC tags",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "abe_max_depth",
+      "displayName": "Abe Max Depth",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Restricts ABE to a specified path depth. For example, if max depth is 3, ABE does not affect paths deeper than\nthree levels. If not specified, ABE affects all path depths.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "abe_protocols",
+      "displayName": "Abe Protocols",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The protocols for which Access-Based Enumeration (ABE) is enabled",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "alias",
+      "displayName": "Alias",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "For NFS-enabled views, a view alias for NFSv3 clients.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_anonymous_access",
+      "displayName": "Allow Anonymous Access",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Not in use",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allow_s3_anonymous_access",
+      "displayName": "Allow S3 Anonymous Access",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Allow S3 anonymous access to S3 bucket. If true, anonymous requests are granted provided that the object ACL\ngrants access to the All Users group (in S3 Native security flavor) or the permission mode bits on the requested\nfile and directory path grant access permission to 'others' (in NFS security flavor).\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "allowed_delegations",
+      "displayName": "Allowed Delegations",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines which types of NFSv4 file delegations are enabled for this view. - `NONE` means NFSv4 file delegations\nare disabled. - `READ` means read type NFSv4 file delegations can be granted to a client opening a file. -\n`WRITE` means write type NFSv4 file delegations can be granted to a client opening a file. - `READ_WRITE` means\nboth read and write type NFSv4 file delegations can be granted to a client opening a file. -\n`USE_TENANT_ALLOWED_DELEG` (default) means the view inherits the tenant's `al",
+      "choices": [
+        "NONE",
+        "READ",
+        "WRITE",
+        "READ_WRITE",
+        "USE_TENANT_ALLOWED_DELEG"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_commit",
+      "displayName": "Auto Commit",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Applicable if locking is enabled. Sets the auto-commit time for files that are locked automatically. These files\nare locked automatically after the auto-commit period elapses from the time the file is saved. Files locked\nautomatically are locked for the default-retention-period, after which they are unlocked. Specify as an integer\nvalue followed by a letter for the unit (h - hours, d - days, y - years). Example: 2h (2 hours).\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bucket",
+      "displayName": "Bucket",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Not yet implemented",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bucket_creators",
+      "displayName": "Bucket Creators",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "For S3 endpoint views, specify a list of users, by user name, whose bucket create requests use this view. Any\nrequest to create an S3 bucket that is sent by S3 API by a specified user will use this S3 Endpoint view. Users\nshould not be specified as bucket creators in more than one S3 Endpoint view. Naming a user as a bucket creator\nin two S3 Endpoint views will fail the creation of the view with an error.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bucket_creators_groups",
+      "displayName": "Bucket Creators Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "For S3 endpoint views, specify a list of groups, by group name, whose bucket create requests use this view. Any\nrequest to create an S3 bucket that is sent by S3 API by a user who belongs to a group listed here will use this\nS3 Endpoint view. Take extra care not to duplicate bucket creators through groups: If you specify a group as a\nbucket creator group in one view and you also specify a user who belongs to that group as a bucket creator user\nin another view, view creation will not fail. Yet, t",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bucket_logging",
+      "displayName": "Bucket Logging",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Bucket Logging",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bucket_owner",
+      "displayName": "Bucket Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "S3 Bucket owner",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "bucket_owner_type",
+      "displayName": "Bucket Owner Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bucket Owner Type",
+      "choices": [
+        "USER",
+        "ROLE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_dir",
+      "displayName": "Create Dir",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Create a directory at the specified path (Note: This field is not returned by the API and only used during\noperations)\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_dir_acl",
+      "displayName": "Create Dir Acl",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Define ACL for the newly created dir",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "create_dir_mode",
+      "displayName": "Create Dir Mode",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Unix permissions mode for the new dir",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_retention_period",
+      "displayName": "Default Retention Period",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Relevant if locking is enabled. Required if s3_locks_retention_mode is set to governance or compliance. Specifies\na default retention period for objects in the bucket. If set, object versions that are placed in the bucket are\nautomatically protected with the specified retention lock. Otherwise, by default, each object version has no\nautomatic protection but can be configured with a retention period or legal hold. Specify as an integer followed\nby h for hours, d for days, m for months, or y for y",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "event_notifications",
+      "displayName": "Event Notifications",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Event Notifications",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "files_retention_mode",
+      "displayName": "Files Retention Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Applicable if locking is enabled. The retention mode for new files. For views enabled for NFSv3 or SMB, if\nlocking is enabled, files_retention_mode must be set to GOVERNANCE or COMPLIANCE. If the view is enabled for S3\nand not for NFSv3 or SMB, files_retention_mode can be set to NONE. If GOVERNANCE, locked files cannot be deleted\nor changed. The Retention settings can be shortened or extended by users with sufficient permissions. If\nCOMPLIANCE, locked files cannot be deleted or changed. Retentio",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Force View removal (only used when state=absent)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Resource ID for direct lookup. Mutually exclusive with name-based identification.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "indestructible_object_duration",
+      "displayName": "Indestructible Object Duration",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Retention period for objects, in days. Each object in the bucket is protected from deletion, overwriting,\nrenaming and metadata changes for the specified number of days after its creation date.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inherit_acl",
+      "displayName": "Inherit Acl",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether the directory should inherit ACLs from its parent directory",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_default_subsystem",
+      "displayName": "Is Default Subsystem",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set to true to set view to be the default subsystem for block storage. There can be up to one default subsystem\nper tenant. The default subsystem is the default view selected when creating a block volume if no view is\nspecified.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_indestructible_object_enabled",
+      "displayName": "Is Indestructible Object Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set to true to enable indestructible object mode on the view. This is supported only if S3 is the only specified\nprotocol. Other limitations also apply.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_kafka_encrypted_conn_allowed",
+      "displayName": "Is Kafka Encrypted Conn Allowed",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True if encrypted connection is allowed for Kafka",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_kafka_unencrypted_conn_allowed",
+      "displayName": "Is Kafka Unencrypted Conn Allowed",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True if unencrypted connection is allowed for Kafka",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_seamless",
+      "displayName": "Is Seamless",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Supports seamless failover between replication peers by syncing file handles between the view and remote views on\nthe replicated path on replication peers. This enables NFSv3 client users to retain the same mount point to the\nview in the event of a failover of the view path to a replication peer. This feature enables NFSv3 client users\nto retain the same mount point to the view in the event of a failover of the view path to a replication peer.\nEnabling this option may cause overhead and should o",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kafka_encrypted_auth_mechanism",
+      "displayName": "Kafka Encrypted Auth Mechanism",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication mechanism for encrypted connection",
+      "choices": [
+        "NONE",
+        "SASL_PLAIN"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kafka_first_join_group_timeout_sec",
+      "displayName": "Kafka First Join Group Timeout Sec",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Kafka first join group timeout, in seconds",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kafka_is_authorization_required",
+      "displayName": "Kafka Is Authorization Required",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "True if authorization is required for Kafka",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kafka_rejoin_group_timeout_sec",
+      "displayName": "Kafka Rejoin Group Timeout Sec",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Kafka rejoin group timeout, in seconds",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kafka_unencrypted_auth_mechanism",
+      "displayName": "Kafka Unencrypted Auth Mechanism",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Authentication mechanism for unencrypted connection",
+      "choices": [
+        "NONE",
+        "SASL_PLAIN"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kafka_vip_pools",
+      "displayName": "Kafka Vip Pools",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "For Kafka-enabled views, an array of IDs of Virtual IP pools used to access event topics exposed by the view. The\nspecified virtual IP pool must belong to the same tenant as the Kafka-enabled view. Must also not be a virtual IP\npool that is excluded by the view policy's virtual IP pool association.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "locking",
+      "displayName": "Locking",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set to true to enable object locking on an S3 bucket. Object locking cannot be disabled after the view is\nmodified. Must be true if s3_versioning is true.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_retention_period",
+      "displayName": "Max Retention Period",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Applicable if locking is enabled. Sets a maximum retention period for files that are locked in the view. Files\ncannot be locked for longer than this period, whether they are locked manually (by setting the atime) or\nautomatically, using auto-commit. Specify as an integer value followed by a letter for the unit (m - minutes, h -\nhours, d - days, y - years). Example: 2y (2 years).\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_retention_period",
+      "displayName": "Min Retention Period",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Applicable if locking is enabled. Sets a minimum retention period for files that are locked in the view. Files\ncannot be locked for less than this period, whether locked manually (by setting the atime) or automatically,\nusing auto-commit. Specify as an integer value followed by a letter for the unit (h - hours, d - days, m -\nmonths, y - years). Example: 1d (1 day).\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "View name",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nfs_interop_flags",
+      "displayName": "Nfs Interop Flags",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Indicates whether the view should support simultaneous access to NFS3/NFS4/SMB protocols.",
+      "choices": [
+        "BOTH_NFS3_AND_NFS4_INTEROP_DISABLED",
+        "ONLY_NFS3_INTEROP_ENABLED",
+        "ONLY_NFS4_INTEROP_ENABLED",
+        "BOTH_NFS3_AND_NFS4_INTEROP_ENABLED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The owner of the folder. Specify the owner using the attribute type set by owner_type. You can specify a group as\nthe owner, as supported by SMB. To enable setting a group as the owner, set owner_is_group=true. In all cases,\nset owning_group also.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner_is_group",
+      "displayName": "Owner Is Group",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Set to true if passing a group as the owner of the folder. This feature is used to enable setting a group as the\nowner, as supported by SMB.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner_type",
+      "displayName": "Owner Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of attribute used to specify owner.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owning_group",
+      "displayName": "Owning Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The owning group of the folder.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owning_group_type",
+      "displayName": "Owning Group Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The type of attribute to use to specify the owning group of the folder.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "View path",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "policy_id",
+      "displayName": "Policy Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "View policy ID. Specify to change which view policy the view uses. Every view must be attached to one view\npolicy, which specifies further configurations.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocols",
+      "displayName": "Protocols",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Client protocols enabled for access to the view. 'NFS' enables access from NFS version 3, 'NFS4' enables access\nfrom NFS version 4.1 and 4.2, S3' creates an S3 bucket on the view, 'ENDPOINT' creates an S3 endpoint, used as\ntemplate for views created via S3 RPCs, DATABASE exposes the view as a VAST database. KAFKA enables events\nrelated to elements on the view path to be published to the VAST Event Broker. BLOCK exposes the view as a block\nstorage subsystem.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "qos_policy",
+      "displayName": "Qos Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "QoS Policy",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "qos_policy_id",
+      "displayName": "Qos Policy Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Associates a QoS policy with the view.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "s3_locks_retention_mode",
+      "displayName": "S3 Locks Retention Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The retention mode for new object versions stored in this bucket. You can override this if you upload a new\nobject version with an explicit retention mode and period.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "s3_object_ownership_rule",
+      "displayName": "S3 Object Ownership Rule",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "S3 Object Ownership Rule",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "s3_unverified_lookup",
+      "displayName": "S3 Unverified Lookup",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "S3 Unverified Lookup",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "s3_versioning",
+      "displayName": "S3 Versioning",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enable S3 Versioning if S3 bucket. Versioning cannot be disabled after the view is modified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "select_for_live_monitoring",
+      "displayName": "Select For Live Monitoring",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables live monitoring on the view. Live monitoring can be enabled for up to ten views at one time. Analytics\ndata for views is polled every 5 minutes by default and every 10 seconds with live monitoring.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share",
+      "displayName": "Share",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SMB share name",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "share_acl",
+      "displayName": "Share Acl",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Share-level ACL details",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "smb_encryption_state",
+      "displayName": "Smb Encryption State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Defines the encryption level for SMB",
+      "choices": [
+        "AVAILABLE",
+        "DESIRED",
+        "REQUIRED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the resource.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenant_id",
+      "displayName": "Tenant Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Associates the specified tenant with the view.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_impersonation",
+      "displayName": "User Impersonation",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "User Impersonation",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vms",
+      "displayName": "Vms",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "VAST VMS connection parameters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Wait for async operations to complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_timeout",
+      "displayName": "Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "Timeout in seconds for async operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

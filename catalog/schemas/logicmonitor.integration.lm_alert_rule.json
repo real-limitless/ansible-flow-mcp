@@ -1,0 +1,235 @@
+{
+  "fqcn": "logicmonitor.integration.lm_alert_rule",
+  "shortDescription": "LogicMonitor Alert Rule Ansible module for managing alert rules.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/logicmonitor/integration/lm_alert_rule_module.html",
+  "options": [
+    {
+      "name": "access_id",
+      "displayName": "Access Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Access ID API token associated with the user's account that's used to query the LogicMonitor API. Please contact your LogicMonitor admin if you need new API tokens created for your account.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Access Key API token associated with the user's account that's used to query the LogicMonitor API. Please contact your LogicMonitor admin if you need new API tokens created for your account. Must start with the \"!unsafe\" keyword if the the key starts with a special character (e.g. '[', ']', etc.) to prevent playbook issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The action you wish to perform on the alert rule. Add = Add a alert rule to your LogicMonitor account. Update = priority, level, escalation chain etc for a alert rule in your LogicMonitor account. Remove = Remove a alert rule from your LogicMonitor account.",
+      "choices": [
+        "add",
+        "update",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "company",
+      "displayName": "Company",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The LogicMonitor account company name. A user logging into their account at \"batman.logicmonitor.com\" would use \"batman\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datapoint",
+      "displayName": "Datapoint",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The datapoint for which the alert rule would be applicable. Defaults to all datapoint when creating rule. Optional for managing alert rule (action=add or action=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "datasource",
+      "displayName": "Datasource",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The datasource for which the alert rule would be applicable. Defaults to all datasource when creating rule. Optional for managing alert rule (action=add or action=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "devices",
+      "displayName": "Devices",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A comma-separated list of devices for which the rule would be applicable. Defaults to all devices when creating rule. Must be enclosed within [] brackets. Optional for managing alert rules (action=add or action=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "escalation_chain_id",
+      "displayName": "Escalation Chain Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of escalation chain to which the alert would be sent. Required for action=add. Optional for managing rules action=update.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "escalation_interval",
+      "displayName": "Escalation Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "the amount of time(min) that should elapse before an alert will be escalated to the next stage. Required for action=add. Optional for managing rules action=update.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_manage",
+      "displayName": "Force Manage",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "A boolean flag to enable/disable the feature to ... (1) update a alert rule when the initial action=add because the rule exists or (2) add a alert rule when the initial action=update because the rule doesn't exist. Optional for managing alert rule (action=add or action=update).",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "groups",
+      "displayName": "Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A comma-separated list of device groups for which the rule would be applicable. Defaults to all groups when creating rule. Must be enclosed within [] brackets. Optional for managing alert rule (action=add or action=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the alert rule to target. Required for update, remove if name isn't provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance",
+      "displayName": "Instance",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The instance for which the alert rule would be applicable. Defaults to all instance when creating rule. Optional for managing alert rule (action=add or action=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "level",
+      "displayName": "Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "alert severity level to which the alert rule would apply. Defaults to All when creating rule. Optional for managing alert rule (action=add or action=update)",
+      "choices": [
+        "All",
+        "Warn",
+        "Error",
+        "Critical"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the alert rule to target. Required for action=add. Required for update, remove if id isn't provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "A numeric value determining the priority of alert rule. Number '1' represents the highest priority. Required for action=add.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_properties_filter",
+      "displayName": "Resource Properties Filter",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A JSON object of properties that a resource or website must possess in order for this alert rule to match. A maximum of five property filters can be specified. Multiple property filters are joined by an AND logical operator. Must be enclosed within {} braces. Optional for managing rules (action=add or action=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suppress_ACK_STD",
+      "displayName": "Suppress Ack Std",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A boolean flag to enable/disable notification of alert SDT and Acknowledge. Defaults to False when creating a rule. Optional for managing rule (action=add or action=update).",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "suppress_clear",
+      "displayName": "Suppress Clear",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A boolean flag to enable/disable notification of alert clear. Defaults to False when creating a rule. Optional for managing rules (action=add or action=update).",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

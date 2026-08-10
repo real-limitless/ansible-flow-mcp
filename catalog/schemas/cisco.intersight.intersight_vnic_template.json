@@ -1,0 +1,319 @@
+{
+  "fqcn": "cisco.intersight.intersight_vnic_template",
+  "shortDescription": "Manage vNIC Templates for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_vnic_template_module.html",
+  "options": [
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cdn_source",
+      "displayName": "Cdn Source",
+      "type": "string",
+      "required": false,
+      "default": "vnic",
+      "description": "Source of the CDN. It can either be user specified or be the same as the vNIC name.",
+      "choices": [
+        "vnic",
+        "user"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cdn_value",
+      "displayName": "Cdn Value",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "CDN value when cdn_source is 'user'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "connection_type",
+      "displayName": "Connection Type",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "Type of connection for the vNIC.",
+      "choices": [
+        "none",
+        "usnic",
+        "vmq",
+        "sriov"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description for the vNIC Template. Description can contain letters(a-z, A-Z), numbers(0-9), hyphen(-), period(.), colon(:), or an underscore(_).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_override",
+      "displayName": "Enable Override",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When enabled, the configuration of the derived instances may override the template configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "eth_adapter_policy_name",
+      "displayName": "Eth Adapter Policy Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Relationship to the Ethernet Adapter Policy. Required when state is 'present'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "eth_qos_policy_name",
+      "displayName": "Eth Qos Policy Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Relationship to the Ethernet QoS Policy. Required when state is 'present'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fabric_eth_network_control_policy_name",
+      "displayName": "Fabric Eth Network Control Policy Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Relationship to the Fabric Ethernet Network Control Policy. Required when state is 'present'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fabric_eth_network_group_policy_name",
+      "displayName": "Fabric Eth Network Group Policy Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Relationship to the Fabric Ethernet Group Policy. Required when state is 'present'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "failover_enabled",
+      "displayName": "Failover Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables automatic vNIC failover to the secondary Fabric Interconnect if the primary path fails. Failover applies only to Cisco VICs that are connected to a Fabric Interconnect cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iscsi_boot_policy_name",
+      "displayName": "Iscsi Boot Policy Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Relationship to the boot iSCSI Policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mac_pool_name",
+      "displayName": "Mac Pool Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The MAC pool that is assigned to the vNIC Template. Required when state is 'present'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the vNIC Template. Must be unique within the organization. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Policies created within a Custom Organization are applicable only to devices in the same Organization. Use 'default' for the default organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pin_group_name",
+      "displayName": "Pin Group Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the corresponding uplink port/port channel to pin the vNIC traffic.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sriov_settings",
+      "displayName": "Sriov Settings",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "SR-IOV settings when connection_type is 'sriov'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "switch_id",
+      "displayName": "Switch Id",
+      "type": "string",
+      "required": false,
+      "default": "A",
+      "description": "The fabric port to which the vNIC will be associated.",
+      "choices": [
+        "A",
+        "B"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "usnic_settings",
+      "displayName": "Usnic Settings",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "USNIC settings when connection_type is 'usnic'. Required when connection_type is 'usnic'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vmq_settings",
+      "displayName": "Vmq Settings",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "VMQ settings when connection_type is 'vmq'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

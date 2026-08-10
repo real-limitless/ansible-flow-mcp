@@ -1,0 +1,330 @@
+{
+  "fqcn": "everpure.flasharray.purefa_pod",
+  "shortDescription": "Manage AC pods in Everpure FlashArrays",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/everpure/flasharray/purefa_pod_module.html",
+  "options": [
+    {
+      "name": "api_token",
+      "displayName": "Api Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FlashArray API token for admin privileged user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_id",
+      "displayName": "Client Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the API Client that issues the identity token. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Name of fleet member on which to perform the operation. This requires the array receiving the request is a member of a fleet and the context name to be a member of the same fleet.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_protection_pg",
+      "displayName": "Default Protection Pg",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the default protection default for the pod Only applicable for existing pods Name must include the pod name Will create the PG in the pod if it doesn't already exist To remove an existing default protection group provide I([])",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "delete_contents",
+      "displayName": "Delete Contents",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This enables you to eradicate pods with contents.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disable_warnings",
+      "displayName": "Disable Warnings",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Disable insecure certificate warnings in debug logs",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "eradicate",
+      "displayName": "Eradicate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Define whether to eradicate the pod on delete or leave in trash.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fa_url",
+      "displayName": "Fa Url",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "FlashArray management IPv4 address or Hostname.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "failover",
+      "displayName": "Failover",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The name of the array given priority to stay online if arrays loose contact with each other. Options are either array in the cluster, or I(auto)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id_token",
+      "displayName": "Id Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A pre-signed JWT to authenticate with, as an alternative to I(api_token). The token is exchanged by the array for a short-lived access token. Requires a matching API Client to be registered on the array (see M(everpure.flasharray.purefa_apiclient)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_usage",
+      "displayName": "Ignore Usage",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Flag used to override checks for quota management operations. If set to true, pod usage is not checked against the quota_limits that are set. If set to false, the actual logical bytes in use are prevented from exceeding the limits set on the pod. Client operations might be impacted. If the limit exceeds the quota, the operation is not allowed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "issuer",
+      "displayName": "Issuer",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The API Client's trusted identity issuer registered on the array. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_id",
+      "displayName": "Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Key ID of the API Client that issues the identity token. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mediator",
+      "displayName": "Mediator",
+      "type": "string",
+      "required": false,
+      "default": "purestorage",
+      "description": "Name of the mediator to use for a pod",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the pod. To place a pod inside a realm either set the I(realm) parameter, or provide the fully-qualified C(realm::pod) name here (for example C(myrealm::mypod)). If I(realm) is set, do not also use the C(::) form in this parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_file",
+      "displayName": "Private Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the PEM RSA private key used to sign an identity token, as an alternative to I(api_token). Requires I(client_id), I(key_id), I(issuer) and I(username).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "private_key_password",
+      "displayName": "Private Key Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password protecting I(private_key_file), if encrypted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "promote",
+      "displayName": "Promote",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Promote/demote any pod not in a stretched relationship. . Demoting a pod will render it read-only.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quiesce",
+      "displayName": "Quiesce",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Quiesce/Skip quiesce when I(promote) is false and demoting an ActiveDR pod. Quiesce will ensure all local data has been replicated before demotion. Skipping quiesce looses all pending data to be replicated to the remote pod. Can only demote the pod if it is in a Acrive DR replica link relationship. This will default to True",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quota",
+      "displayName": "Quota",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Logical quota limit of the pod in K, M, G, T or P units, or bytes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "realm",
+      "displayName": "Realm",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the realm the pod belongs to. When set, the pod is created (or managed) as C(realm::pod). This is a convenience for the C(realm::pod) naming convention and is mutually exclusive with providing C(::) directly in I(name). Requires Purity//FA 6.6.11, or higher (REST 2.36).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retention_lock",
+      "displayName": "Retention Lock",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Define if I(default_protection_pg) has retention lock enabled",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Define whether the pod should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stretch",
+      "displayName": "Stretch",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the array to stretch to/unstretch from. Must be synchromously replicated. To unstretch an array use state I(absent) You can only specify a remote array, ie you cannot unstretch a pod from the current array and then restretch back to the current array. To restretch a pod you must perform this from the remaining array the pod resides on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target",
+      "displayName": "Target",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of clone target pod.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "throttle",
+      "displayName": "Throttle",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Allows pod creation to fail if array health is not optimal",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "undo",
+      "displayName": "Undo",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Use the I(undo-remote) pod when I(promote) is true and promoting an ActiveDR pod. This will default to True",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username the issued token should be granted to. Must be a valid user on the array. Used with I(private_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "with_default_protection",
+      "displayName": "With Default Protection",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to keep the default container protection for the pod Only applicable for first creation of a pod",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

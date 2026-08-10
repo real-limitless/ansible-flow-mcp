@@ -1,0 +1,116 @@
+{
+  "fqcn": "ondrejhome.ha_cluster.pcs_resource",
+  "shortDescription": "wrapper module for 'pcs resource' ",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ondrejhome/ha_cluster/pcs_resource_module.html",
+  "options": [
+    {
+      "name": "child_name",
+      "displayName": "Child Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "define custom name of child resource when creating multistate resource ('master' or 'promotable' resource_class). If not specified then the child resource name will have for of name+'-child'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cib_file",
+      "displayName": "Cib File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Apply changes to specified file containing cluster CIB instead of running cluster. This module requires the file to already contain cluster configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_resource_update",
+      "displayName": "Force Resource Update",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "When set to 'yes' the pcs will use 'scope=resource' instead of 'scope=all' when creating resources For primitive resources the default is 'no' while for multistate resources ('master'/'promotable') the default value is 'yes'. This option is useful in busy clusters where a lot of changes may happen while module is running resulting in error like 'Unable to push to the CIB because pushed configuration is older than existing one.' in which case this is worth a try to see if that resolves the error.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignored_meta_attributes",
+      "displayName": "Ignored Meta Attributes",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "list of meta attributes that will be ignored when comparing existing resources",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "name of cluster resource - cluster resource identifier",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "options",
+      "displayName": "Options",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "additional options passed to 'pcs' command",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_class",
+      "displayName": "Resource Class",
+      "type": "string",
+      "required": false,
+      "default": "ocf",
+      "description": "class of cluster resource",
+      "choices": [
+        "ocf",
+        "systemd",
+        "stonith",
+        "master",
+        "promotable"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resource_type",
+      "displayName": "Resource Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "cluster resource type",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "'present' - ensure that cluster resource exists 'absent' - ensure cluster resource doesn't exist",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

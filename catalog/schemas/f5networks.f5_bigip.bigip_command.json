@@ -1,0 +1,99 @@
+{
+  "fqcn": "f5networks.f5_bigip.bigip_command",
+  "shortDescription": "Run TMSH and BASH commands on F5 devices",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/f5networks/f5_bigip/bigip_command_module.html",
+  "options": [
+    {
+      "name": "chdir",
+      "displayName": "Chdir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Change into this directory before running the command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "commands",
+      "displayName": "Commands",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The commands to send to the remote BIG-IP device over the configured provider. The resulting output from the command is returned. If the I(wait_for) argument is provided, the module is not returned until the condition is satisfied or the number of retries as expired. Only C(tmsh) commands are supported. If you are piping or adding additional logic that is outside of C(tmsh) (such as using grep, awk or other shell related things that are not C(tmsh), this behavior is not supported.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interval",
+      "displayName": "Interval",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Configures the interval to wait between retries of the command in seconds. If the command does not pass the specified conditional, the interval indicates how to long to wait before trying the command again.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "match",
+      "displayName": "Match",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "description": "The I(match) argument is used in conjunction with the I(wait_for) argument to specify the match policy. Valid values are C(all) or C(any). If the value is set to C(all) then all conditionals in the I(wait_for) must be satisfied. If the value is set to C(any) then only one of the values must be satisfied.",
+      "choices": [
+        "any",
+        "all"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retries",
+      "displayName": "Retries",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Specifies the number of retries a command should by tried before it is considered failed. The command is run on the target device every retry and evaluated against the I(wait_for) conditionals.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_ssh",
+      "displayName": "Use Ssh",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Determines if C(network_cli) is to be used as a method of connection. Default connection is always C(httpapi).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_for",
+      "displayName": "Wait For",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Specifies what to evaluate from the output of the command and what conditionals to apply.  This argument causes the task to wait for a particular conditional to be true before moving forward. If the conditional is not true by the configured number of retries, the task fails. See the examples.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "warn",
+      "displayName": "Warn",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether or not the module should raise warnings related to command idempotency. Note the F5 Ansible developers specifically leave this on to make you aware your usage of this module may be better served by official F5 Ansible modules. This module should always be used as a last resort.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,482 @@
+{
+  "fqcn": "opentelekomcloud.cloud.cce_node_pool",
+  "shortDescription": "Add/Delete CCE Node Pool",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/opentelekomcloud/cloud/cce_node_pool_module.html",
+  "options": [
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "How long should the socket layer wait before timing out for API calls. If this is omitted, nothing will be passed to the requests library.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary containing auth information as needed by the cloud's auth plugin strategy. For the default I(password) plugin, this would contain I(auth_url), I(username), I(password), I(project_name) and any information about domains (for example, I(os_user_domain_name) or I(os_project_domain_name)) if the cloud supports them. For other plugins, this param will need to contain whatever parameters that auth plugin requires. This parameter is not needed if a named cloud is provided or OpenStack OS_* e",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth_type",
+      "displayName": "Auth Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the auth plugin to use. If the cloud uses something other than password authentication, the name of the plugin should be indicated here and the contents of the I(auth) parameter should be updated accordingly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autoscaling_enabled",
+      "displayName": "Autoscaling Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable or disable Autoscaling",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_zone",
+      "displayName": "Availability Zone",
+      "type": "string",
+      "required": false,
+      "default": "random",
+      "description": "Availability zone or 'random' for all zones",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_cert",
+      "displayName": "Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a CA Cert bundle that can be used as part of verifying SSL API requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_cert",
+      "displayName": "Client Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a client certificate to use as part of the SSL transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_key",
+      "displayName": "Client Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A path to a client key to use as part of the SSL transaction.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cloud",
+      "displayName": "Cloud",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Named cloud or cloud config to operate against. If I(cloud) is a string, it references a named cloud config as defined in an OpenStack clouds.yaml file. Provides default values for I(auth) and I(auth_type). This parameter is not needed if I(auth) is provided or if OpenStack OS_* environment variables are present. If I(cloud) is a dict, it contains a complete cloud configuration like would be in a section of clouds.yaml.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "CCE cluster name or id which hosts the CCE Node Pool",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_volumes",
+      "displayName": "Data Volumes",
+      "type": "list",
+      "required": false,
+      "default": [
+        {
+          "cmk_id": "",
+          "encrypted": false,
+          "size": 100,
+          "volumetype": "SATA"
+        }
+      ],
+      "description": "List of data volumes attached to the cluster node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ecs_group",
+      "displayName": "Ecs Group",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the ECS group where the CCE node can belong to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "flavor",
+      "displayName": "Flavor",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Flavor ID of the cluster node",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initial_node_count",
+      "displayName": "Initial Node Count",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Expected number of nodes in this node pool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": false,
+      "default": "public",
+      "description": "Endpoint URL type to fetch from the service catalog.",
+      "choices": [
+        "admin",
+        "internal",
+        "public"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "k8s_tags",
+      "displayName": "K8S Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Dictionary of Kubernetes tags.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lvm_config",
+      "displayName": "Lvm Config",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ConfigMap of the Docker data disk.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_node_count",
+      "displayName": "Max Node Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of nodes after scale-up.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "max_pods",
+      "displayName": "Max Pods",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of pods on the node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_node_count",
+      "displayName": "Min Node Count",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Minimum number of nodes after a scale-down.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the CCE Node Pool",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the network to which the CCE node pool belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "node_image_id",
+      "displayName": "Node Image Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Mandatory if custom image is used on a bare metall node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os",
+      "displayName": "Os",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Operating System of the cluster node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "postinstall_script",
+      "displayName": "Postinstall Script",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Base64 encoded post installation script.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "preinstall_script",
+      "displayName": "Preinstall Script",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Base64 encoded pre installation script.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "priority",
+      "displayName": "Priority",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Node pool weight for scale-up operations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "public_key",
+      "displayName": "Public Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Additional public key to be added for login.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region_name",
+      "displayName": "Region Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the region.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "root_volume_size",
+      "displayName": "Root Volume Size",
+      "type": "number",
+      "required": false,
+      "default": 40,
+      "description": "Size of the root volume",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "root_volume_type",
+      "displayName": "Root Volume Type",
+      "type": "string",
+      "required": false,
+      "default": "SATA",
+      "description": "Type of the root volume.",
+      "choices": [
+        "SATA",
+        "SAS",
+        "SSD"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scale_down_cooldown_time",
+      "displayName": "Scale Down Cooldown Time",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Interval in minutes during which nodes added after a scale-up will not be deleted.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdk_log_level",
+      "displayName": "Sdk Log Level",
+      "type": "string",
+      "required": false,
+      "default": "WARN",
+      "description": "Log level of the OpenStackSDK",
+      "choices": [
+        "ERROR",
+        "WARN",
+        "INFO",
+        "DEBUG"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sdk_log_path",
+      "displayName": "Sdk Log Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the logfile of the OpenStackSDK. If empty no log is written",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ssh_key",
+      "displayName": "Ssh Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the public key to login into the nodes",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Should the resource be present or absent.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags used to build UI labels.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "taints",
+      "displayName": "Taints",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of taints.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "How long should ansible wait for the requested resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether or not SSL API requests should be verified. Before Ansible 2.3 this defaulted to C(yes).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait",
+      "displayName": "Wait",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Should ansible wait until the requested resource is complete.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

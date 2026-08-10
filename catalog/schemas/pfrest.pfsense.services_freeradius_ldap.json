@@ -1,0 +1,864 @@
+{
+  "fqcn": "pfrest.pfsense.services_freeradius_ldap",
+  "shortDescription": "Manage FreeRADIUS LDAP.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/pfrest/pfsense/services_freeradius_ldap_module.html",
+  "options": [
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the pfSense device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An API key to use for authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": "pfsense",
+      "description": "The password to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_port",
+      "displayName": "Api Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_protocol",
+      "displayName": "Api Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The protocol to use when connecting to the pfSense API.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "The username to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "failover_mode",
+      "displayName": "Failover Mode",
+      "type": "string",
+      "required": false,
+      "default": "redundant",
+      "description": "The failover/load-balancing mode used between the two LDAP servers.",
+      "choices": [
+        "redundant",
+        "load-balance"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_access_attr_used_for_allow",
+      "displayName": "Server1 Access Attr Used For Allow",
+      "type": "string",
+      "required": false,
+      "default": "Yes",
+      "description": "Whether the access attribute is used to allow (Server 1).",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_access_attribute",
+      "displayName": "Server1 Access Attribute",
+      "type": "string",
+      "required": false,
+      "default": "dialupAccess",
+      "description": "The LDAP access attribute used by Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_base_dn",
+      "displayName": "Server1 Base Dn",
+      "type": "string",
+      "required": false,
+      "default": "o=My Company Ltd,c=US",
+      "description": "The base DN used when searching Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_base_filter",
+      "displayName": "Server1 Base Filter",
+      "type": "string",
+      "required": false,
+      "default": "(objectclass=radiusprofile)",
+      "description": "The base LDAP filter used by Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_compare_check_items",
+      "displayName": "Server1 Compare Check Items",
+      "type": "string",
+      "required": false,
+      "default": "Yes",
+      "description": "Whether Server 1 should compare check items.",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_default_profile",
+      "displayName": "Server1 Default Profile",
+      "type": "string",
+      "required": false,
+      "default": "cn=radprofile,ou=dialup,o=My Company Ltd,c=US",
+      "description": "The default profile DN used by Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_do_xlat",
+      "displayName": "Server1 Do Xlat",
+      "type": "string",
+      "required": false,
+      "default": "Yes",
+      "description": "Whether Server 1 should perform attribute translation (xlat).",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_enable_authenticate",
+      "displayName": "Server1 Enable Authenticate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables LDAP authentication support for Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_enable_authorize",
+      "displayName": "Server1 Enable Authorize",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables LDAP authorization support for Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_enable_starttls",
+      "displayName": "Server1 Enable Starttls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use STARTTLS when establishing a TLS-protected connection to Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_enable_tls_support",
+      "displayName": "Server1 Enable Tls Support",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables TLS support when connecting to Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_filter",
+      "displayName": "Server1 Filter",
+      "type": "string",
+      "required": false,
+      "default": "(uid=%{%{Stripped-User-Name}:-%{User-Name}})",
+      "description": "The LDAP search filter used by Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_group_enable",
+      "displayName": "Server1 Group Enable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables LDAP group membership lookups for Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_group_membership_attribute",
+      "displayName": "Server1 Group Membership Attribute",
+      "type": "string",
+      "required": false,
+      "default": "radiusGroupName",
+      "description": "The LDAP group membership attribute used by Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_group_membership_filter",
+      "displayName": "Server1 Group Membership Filter",
+      "type": "string",
+      "required": false,
+      "default": "(|(&(objectClass=GroupOfNames)(member=%{control:Ldap-UserDn}))(&(objectClass=GroupOfUniqueNames)(uniquemember=%{control:Ldap-UserDn})))",
+      "description": "The LDAP group membership filter used by Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_groupname_attribute",
+      "displayName": "Server1 Groupname Attribute",
+      "type": "string",
+      "required": false,
+      "default": "cn",
+      "description": "The LDAP group name attribute used by Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_identity",
+      "displayName": "Server1 Identity",
+      "type": "string",
+      "required": false,
+      "default": "cn=admin,o=My Company Ltd,c=US",
+      "description": "The bind DN used to connect to Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_keepalive_idle",
+      "displayName": "Server1 Keepalive Idle",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "The TCP KeepAlive idle interval (in seconds) used with Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_keepalive_interval",
+      "displayName": "Server1 Keepalive Interval",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "The TCP KeepAlive interval (in seconds) used with Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_keepalive_probes",
+      "displayName": "Server1 Keepalive Probes",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "The number of TCP KeepAlive probes used with Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_ldap_connections_number",
+      "displayName": "Server1 Ldap Connections Number",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "The maximum number of LDAP connections opened to Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_misc_enable",
+      "displayName": "Server1 Misc Enable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables the miscellaneous (Default Profile / Profile Attribute / Access Attribute) block for Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_msad_compatibility_enable",
+      "displayName": "Server1 Msad Compatibility Enable",
+      "type": "string",
+      "required": false,
+      "default": "Disable",
+      "description": "Enables Microsoft Active Directory compatibility mode for Server 1.",
+      "choices": [
+        "Disable",
+        "Enable"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_net_timeout",
+      "displayName": "Server1 Net Timeout",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The TCP network timeout (in seconds) used with Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_password",
+      "displayName": "Server1 Password",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The password used to bind to Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_profile_attribute",
+      "displayName": "Server1 Profile Attribute",
+      "type": "string",
+      "required": false,
+      "default": "radiusProfileDn",
+      "description": "The LDAP profile attribute used by Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_require_cert",
+      "displayName": "Server1 Require Cert",
+      "type": "string",
+      "required": false,
+      "default": "never",
+      "description": "The certificate verification mode used when connecting to Server 1 with TLS support.",
+      "choices": [
+        "never",
+        "allow",
+        "try",
+        "demand",
+        "hard"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_server",
+      "displayName": "Server1 Server",
+      "type": "string",
+      "required": false,
+      "default": "ldap.example.com",
+      "description": "The FQDN or IP address of Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_server_port",
+      "displayName": "Server1 Server Port",
+      "type": "string",
+      "required": false,
+      "default": "389",
+      "description": "The TCP port used to connect to Server 1. Valid options are: a TCP/UDP port number",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_ssl_ca_cert",
+      "displayName": "Server1 Ssl Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Certificate Authority (refid) used to verify the Server 1 server certificate when TLS support is enabled.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_ssl_server_cert",
+      "displayName": "Server1 Ssl Server Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The client Certificate (refid) presented when establishing a TLS connection to Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_time_limit",
+      "displayName": "Server1 Time Limit",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "The LDAP search time limit (in seconds) used with Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server1_timeout",
+      "displayName": "Server1 Timeout",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "The bind/operation timeout (in seconds) used with Server 1.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_access_attr_used_for_allow",
+      "displayName": "Server2 Access Attr Used For Allow",
+      "type": "string",
+      "required": false,
+      "default": "Yes",
+      "description": "Whether the access attribute is used to allow (Server 2).",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_access_attribute",
+      "displayName": "Server2 Access Attribute",
+      "type": "string",
+      "required": false,
+      "default": "dialupAccess",
+      "description": "The LDAP access attribute used by Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_base_dn",
+      "displayName": "Server2 Base Dn",
+      "type": "string",
+      "required": false,
+      "default": "o=My Company Ltd,c=US",
+      "description": "The base DN used when searching Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_base_filter",
+      "displayName": "Server2 Base Filter",
+      "type": "string",
+      "required": false,
+      "default": "(objectclass=radiusprofile)",
+      "description": "The base LDAP filter used by Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_compare_check_items",
+      "displayName": "Server2 Compare Check Items",
+      "type": "string",
+      "required": false,
+      "default": "Yes",
+      "description": "Whether Server 2 should compare check items.",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_default_profile",
+      "displayName": "Server2 Default Profile",
+      "type": "string",
+      "required": false,
+      "default": "cn=radprofile,ou=dialup,o=My Company Ltd,c=US",
+      "description": "The default profile DN used by Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_do_xlat",
+      "displayName": "Server2 Do Xlat",
+      "type": "string",
+      "required": false,
+      "default": "Yes",
+      "description": "Whether Server 2 should perform attribute translation (xlat).",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_enable_authenticate",
+      "displayName": "Server2 Enable Authenticate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables LDAP authentication support for Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_enable_authorize",
+      "displayName": "Server2 Enable Authorize",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables LDAP authorization support for Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_enable_starttls",
+      "displayName": "Server2 Enable Starttls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Use STARTTLS when establishing a TLS-protected connection to Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_enable_tls_support",
+      "displayName": "Server2 Enable Tls Support",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables TLS support when connecting to Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_filter",
+      "displayName": "Server2 Filter",
+      "type": "string",
+      "required": false,
+      "default": "(uid=%{%{Stripped-User-Name}:-%{User-Name}})",
+      "description": "The LDAP search filter used by Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_group_enable",
+      "displayName": "Server2 Group Enable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables LDAP group membership lookups for Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_group_membership_attribute",
+      "displayName": "Server2 Group Membership Attribute",
+      "type": "string",
+      "required": false,
+      "default": "radiusGroupName",
+      "description": "The LDAP group membership attribute used by Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_group_membership_filter",
+      "displayName": "Server2 Group Membership Filter",
+      "type": "string",
+      "required": false,
+      "default": "(|(&(objectClass=GroupOfNames)(member=%{control:Ldap-UserDn}))(&(objectClass=GroupOfUniqueNames)(uniquemember=%{control:Ldap-UserDn})))",
+      "description": "The LDAP group membership filter used by Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_groupname_attribute",
+      "displayName": "Server2 Groupname Attribute",
+      "type": "string",
+      "required": false,
+      "default": "cn",
+      "description": "The LDAP group name attribute used by Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_identity",
+      "displayName": "Server2 Identity",
+      "type": "string",
+      "required": false,
+      "default": "cn=admin,o=My Company Ltd,c=US",
+      "description": "The bind DN used to connect to Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_keepalive_idle",
+      "displayName": "Server2 Keepalive Idle",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "The TCP KeepAlive idle interval (in seconds) used with Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_keepalive_interval",
+      "displayName": "Server2 Keepalive Interval",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "The TCP KeepAlive interval (in seconds) used with Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_keepalive_probes",
+      "displayName": "Server2 Keepalive Probes",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "The number of TCP KeepAlive probes used with Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_ldap_connections_number",
+      "displayName": "Server2 Ldap Connections Number",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "The maximum number of LDAP connections opened to Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_misc_enable",
+      "displayName": "Server2 Misc Enable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enables the miscellaneous (Default Profile / Profile Attribute / Access Attribute) block for Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_msad_compatibility_enable",
+      "displayName": "Server2 Msad Compatibility Enable",
+      "type": "string",
+      "required": false,
+      "default": "Disable",
+      "description": "Enables Microsoft Active Directory compatibility mode for Server 2.",
+      "choices": [
+        "Disable",
+        "Enable"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_net_timeout",
+      "displayName": "Server2 Net Timeout",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The TCP network timeout (in seconds) used with Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_password",
+      "displayName": "Server2 Password",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The password used to bind to Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_profile_attribute",
+      "displayName": "Server2 Profile Attribute",
+      "type": "string",
+      "required": false,
+      "default": "radiusProfileDn",
+      "description": "The LDAP profile attribute used by Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_require_cert",
+      "displayName": "Server2 Require Cert",
+      "type": "string",
+      "required": false,
+      "default": "never",
+      "description": "The certificate verification mode used when connecting to Server 2 with TLS support.",
+      "choices": [
+        "never",
+        "allow",
+        "try",
+        "demand",
+        "hard"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_server",
+      "displayName": "Server2 Server",
+      "type": "string",
+      "required": false,
+      "default": "ldap.example.com",
+      "description": "The FQDN or IP address of Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_server_port",
+      "displayName": "Server2 Server Port",
+      "type": "string",
+      "required": false,
+      "default": "389",
+      "description": "The TCP port used to connect to Server 2. Valid options are: a TCP/UDP port number",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_ssl_ca_cert",
+      "displayName": "Server2 Ssl Ca Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The Certificate Authority (refid) used to verify the Server 2 server certificate when TLS support is enabled.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_ssl_server_cert",
+      "displayName": "Server2 Ssl Server Cert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The client Certificate (refid) presented when establishing a TLS connection to Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_time_limit",
+      "displayName": "Server2 Time Limit",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "The LDAP search time limit (in seconds) used with Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server2_timeout",
+      "displayName": "Server2 Timeout",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "The bind/operation timeout (in seconds) used with Server 2.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate SSL certificates when connecting to the API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

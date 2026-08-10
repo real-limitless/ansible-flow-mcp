@@ -1,0 +1,161 @@
+{
+  "fqcn": "logicmonitor.integration.lm_escalation_chain",
+  "shortDescription": "LogicMonitor Escalation Chain Ansible module for managing escalation chain.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/logicmonitor/integration/lm_escalation_chain_module.html",
+  "options": [
+    {
+      "name": "access_id",
+      "displayName": "Access Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Access ID API token associated with the user's account that's used to query the LogicMonitor API. Please contact your LogicMonitor admin if you need new API tokens created for your account.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_key",
+      "displayName": "Access Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Access Key API token associated with the user's account that's used to query the LogicMonitor API. Please contact your LogicMonitor admin if you need new API tokens created for your account. Must start with the \"!unsafe\" keyword if the the key starts with a special character (e.g. '[', ']', etc.) to prevent playbook issues.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The action you wish to perform on the escalation chain. Add = Add a escalation chain to your LogicMonitor account. Update = rate limit, destination / recipient etc for a escalation chain in your LogicMonitor account. Remove = Remove a escalation chain from your LogicMonitor account.",
+      "choices": [
+        "add",
+        "update",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cc_destinations",
+      "displayName": "Cc Destinations",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "cc destination is a list of recipients Recipients in cc will receive all notifications sent to every stage in the escalation chain. Optional for managing escalation chain (action=add or action=update). Recipient is a JSON object pointing to any one of the following... (1) integration - send alerts to integrations (sms, email, pagerduty, autotask, etc...) required properties name - name of the integration user - logicmonitor username Note in case of email, sms and voice name would be type (ie for",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "company",
+      "displayName": "Company",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The LogicMonitor account company name. A user logging into their account at \"batman.logicmonitor.com\" would use \"batman\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Description of escalation chain. Optional for managing escalation chain (action=add or action=update).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destinations",
+      "displayName": "Destinations",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Destinations consists of ordered list of stages. Stages consist of one or more recipients that alert notifications will be routed to. Required for managing escalation chain (action=add). Optional for managing escalation chain (action=update). Recipient is a JSON object pointing to any one of the following... (1) integration - send alerts to integrations (sms, email, pagerduty, autotask, etc...) required properties name - name of the integration user - logicmonitor username Note in case of email,",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_throttling",
+      "displayName": "Enable Throttling",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "A boolean flag to enable/disable alert throttling. Required for managing escalation chain (action=add). Optional for managing escalation chain (action=update).",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_manage",
+      "displayName": "Force Manage",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "A boolean flag to enable/disable the feature to ... (1) update a escalation chain when the initial action=add because the chain exists or (2) add a escalation chain when the initial action=update because the chain doesn't exist. Optional for managing escalation chain (action=add or action=update).",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "ID of the escalation chain to target. Required for managing escalation chain (action=update and action=remove) if name isn't provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the escalation chain to target. Required for managing escalation chain (action=add). Required for managing escalation chain (action=update and action=remove) if name isn't provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rate_limit_alerts",
+      "displayName": "Rate Limit Alerts",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The maximum number of alert notifications that can be delivered during the Rate Limit Period. Note that re-sent alert notifications count towards this number. Required for managing escalation chain (action=add and action=update) if enable_throttling is set to true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rate_limit_period",
+      "displayName": "Rate Limit Period",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The period (minutes) over which max number of alerts (specified in rate_limit_alerts) can be sent out. Required for managing escalation chain (action=add and action=update) if enable_throttling is set to true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

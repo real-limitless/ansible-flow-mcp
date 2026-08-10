@@ -1,0 +1,106 @@
+{
+  "fqcn": "graphiant.naas.graphiant_prefix_port_list",
+  "shortDescription": "Manage Graphiant prefix and port lists (edge.trafficPolicy.networkLists, edge.trafficPolicy.portLists)",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_prefix_port_list_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specific operation to perform. C(create_prefix_port_lists) builds full prefix and port list objects. C(delete_prefix_port_lists) deletes listed prefix and port lists by setting networkLists=null and portLists=null. C(create_prefix_lists) builds full prefix list objects. C(delete_prefix_lists) deletes listed prefix lists by setting networkLists=null. C(create_port_lists) builds full port list objects. C(delete_port_lists) deletes listed port lists by setting portLists=null.",
+      "choices": [
+        "create_prefix_port_lists",
+        "delete_prefix_port_lists",
+        "create_prefix_lists",
+        "delete_prefix_lists",
+        "create_port_lists",
+        "delete_port_lists"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix_port_list_config_file",
+      "displayName": "Prefix Port List Config File",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the prefix and port list YAML file. Can be an absolute path or relative to the configured config_path. Expected top-level key is C(networkLists) and C(portLists) (list of devices).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state for prefix and port lists. C(present) maps to C(create_prefix_port_lists); C(absent) maps to C(delete_prefix_port_lists), C(create_prefix_lists), C(delete_prefix_lists), C(create_port_lists), C(delete_port_lists) if operation not set.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

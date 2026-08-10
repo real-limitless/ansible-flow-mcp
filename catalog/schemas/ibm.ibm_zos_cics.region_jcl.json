@@ -1,0 +1,182 @@
+{
+  "fqcn": "ibm.ibm_zos_cics.region_jcl",
+  "shortDescription": "Create CICS startup JCL data set",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_cics/region_jcl_module.html",
+  "options": [
+    {
+      "name": "applid",
+      "displayName": "Applid",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of your z/OS Communications Server application identifier for this CICS region.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cics_data_sets",
+      "displayName": "Cics Data Sets",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The data set names of the C(SDFHAUTH), C(SDFHLOAD) and C(SDFHLIC) libraries, for example, C(CICSTS61.CICS.SDFHAUTH) and C(CICSTS61.CICS.SDFHLOAD).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cpsm_data_sets",
+      "displayName": "Cpsm Data Sets",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The data set names of the C(SEYUAUTH) and C(SEYULOAD) libraries, for example, C(CTS610.CPSM610.SEYUAUTH).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dfhrpl",
+      "displayName": "Dfhrpl",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Any locations of additional data sets other than C(SDFHLOAD), C(SCEECICS), C(SCEERUN), or C(SCEERUN2), to be added to the DFHRPL concatenation. The DFHRPL concatenation is where you specify the libraries that contain modules loaded by CICS, for example, the libraries containing your CICS application programs, your CICS control tables, and so on. You can either add data sets at the very top of the list or append them to the bottom of the list. There are other data sets in between, as determined b",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_parameters",
+      "displayName": "Job Parameters",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies various parameters to be applied to the CICS startup job.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "le_data_sets",
+      "displayName": "Le Data Sets",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The data set names of the C(SCEECICS), C(SCEERUN) and C(SCEERUN2) libraries.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output_data_sets",
+      "displayName": "Output Data Sets",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The system output data sets such as C(CEEMSG) and C(SYSPRINT), as well as the destination class of the output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region_data_sets",
+      "displayName": "Region Data Sets",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The location of the region data sets, for example, C(REGIONS.ABCD01.DFHAUXT), C(REGIONS.ABCD01.DFHCSD) and C(REGIONS.ABCD01.DFHGCD).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sit_parameters",
+      "displayName": "Sit Parameters",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Define the system initalization parameters for the CICS region.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_primary",
+      "displayName": "Space Primary",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The size of the primary space allocated to the CICS startup JCL data set. Note that this is just the value; the unit is specified with O(space_type). This option takes effect only when the CICS startup JCL data set is being created. If the CICS startup JCL data set already exists, the option has no effect. If this option is not set, the primary space is dynamically calculated based on the size of the generated CICS startup JCL. If the target data set is a member in a PDS or PDSE, then this value",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_secondary",
+      "displayName": "Space Secondary",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The size of the secondary space allocated to the CICS startup JCL data set. Note that this is just the value; the unit is specified with O(space_type). This option takes effect only when the CICS startup JCL data set is being created. If the CICS startup JCL data set already exists, the option has no effect. If this option is not set, the secondary space is dynamically calculated as 10% of the total size of the generated CICS startup JCL. If the target data set is a member in a PDS or PDSE, then",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_type",
+      "displayName": "Space Type",
+      "type": "string",
+      "required": false,
+      "default": "m",
+      "description": "The unit portion of the CICS startup JCL data set size. Note that this is just the unit; the value for the primary space is specified with O(space_primary) and the value for the secondary space is specified with O(space_secondary). This option takes effect only when the CICS startup JCL data set is being created. If the CICS startup JCL data set already exists, the option has no effect. The size can be specified in megabytes (V(m)), kilobytes (V(k)), cylinders (V(cyl)), or tracks (V(trk)). If ne",
+      "choices": [
+        "m",
+        "k",
+        "cyl",
+        "trk"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The intended state for the CICS startup JCL data set, which the module aims to achieve. Specify V(absent) to remove the CICS startup JCL data set entirely, if it already exists. Specify V(initial) to create the CICS startup JCL data set if it does not already exist. Specify V(warm) to retain an existing CICS startup JCL data set in its current state. The module verifies whether the specified data set exists and whether it matches the generated startup JCL. If both conditions are met, the module ",
+      "choices": [
+        "initial",
+        "absent",
+        "warm"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "steplib",
+      "displayName": "Steplib",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Any locations of additional data sets other than C(SDFHAUTH), C(SDFHLIC), C(SCEERUN), or C(SCEERUN2), to be added to the STEPLIB concatenation. The STEPLIB concatenation is where you specify the libraries that contain the modules loaded by the z/OS operating system. You can either add data sets at the very top of the list or append them to the bottom of the list. There are other data sets in between, as determined by the defaults or other input parameters; for example, C(SEYUAUTH) and C(SEYULOAD",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volumes",
+      "displayName": "Volumes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The volume(s) where the data set is created. Use a string to define a singular volume or a list of strings for multiple volumes. If the target data set is a member in a PDS or PDSE, then this value does not have any effect.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

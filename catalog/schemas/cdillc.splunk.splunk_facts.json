@@ -1,0 +1,53 @@
+{
+  "fqcn": "cdillc.splunk.splunk_facts",
+  "shortDescription": "Gathers facts about a Splunk installation",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cdillc/splunk/splunk_facts_module.html",
+  "options": [
+    {
+      "name": "app_dirs",
+      "displayName": "App Dirs",
+      "type": "list",
+      "required": false,
+      "default": [
+        "apps",
+        "deployment-apps",
+        "shcluster/apps",
+        "manager-apps",
+        "peer-apps",
+        "master-apps",
+        "slave-apps"
+      ],
+      "description": "List of paths (relative to I($SPLUNK_HOME/etc)). An absolute path can be provided to check a specific path. An empty list C([]) can be provided to disable app inventory collection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ksconf",
+      "displayName": "Ksconf",
+      "type": "string",
+      "required": false,
+      "default": "short",
+      "description": "Set the level of ksconf detail to collect. Use I(skip) to disable all ksconf related facts, I(short) to collect basic information, and I(detail) to show information about the available subcommands.",
+      "choices": [
+        "skip",
+        "short",
+        "detail"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "splunk_home",
+      "displayName": "Splunk Home",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to Splunk installation path. If not provided, this module will check the $SPLUNK_HOME environment variable and then several commonly used install paths. Can also be set to I(skip) to disable normal Splunk information collection.  Useful in Splunk-detached cases, like app dir scans.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

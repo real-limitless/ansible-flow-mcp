@@ -1,0 +1,238 @@
+{
+  "fqcn": "ceph.automation.ceph_volume",
+  "shortDescription": "Create ceph OSDs with ceph-volume",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ceph/automation/ceph_volume_module.html",
+  "options": [
+    {
+      "name": "action",
+      "displayName": "Action",
+      "type": "string",
+      "required": false,
+      "default": "create",
+      "description": "The action to take. Creating OSDs and zapping or querying devices.",
+      "choices": [
+        "create",
+        "zap",
+        "batch",
+        "prepare",
+        "activate",
+        "list",
+        "inventory"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "batch_devices",
+      "displayName": "Batch Devices",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of devices to pass to the 'ceph-volume lvm batch' subcommand. Only applicable if action is 'batch'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "block_db_devices",
+      "displayName": "Block Db Devices",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of devices for bluestore block db to pass to the 'ceph-volume lvm batch' subcommand. Only applicable if action is 'batch'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "block_db_size",
+      "displayName": "Block Db Size",
+      "type": "string",
+      "required": false,
+      "default": "-1",
+      "description": "The size in bytes of bluestore block db lvs. The default of -1 means to create them as big as possible. Only applicable if action is 'batch'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": "ceph",
+      "description": "The ceph cluster name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "crush_device_class",
+      "displayName": "Crush Device Class",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Will set the crush device class for the OSD.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data",
+      "displayName": "Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The logical volume name or device to use for the OSD data.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "data_vg",
+      "displayName": "Data Vg",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If data is a lv, this must be the name of the volume group it belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db",
+      "displayName": "Db",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A partition or logical volume name to use for block.db.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "db_vg",
+      "displayName": "Db Vg",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If db is a lv, this must be the name of the volume group it belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "destroy",
+      "displayName": "Destroy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "TBD",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dmcrypt",
+      "displayName": "Dmcrypt",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to True the OSD will be encrypted with dmcrypt.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "objectstore",
+      "displayName": "Objectstore",
+      "type": "string",
+      "required": false,
+      "default": "bluestore",
+      "description": "The objectstore of the OSD.",
+      "choices": [
+        "bluestore"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "osd_fsid",
+      "displayName": "Osd Fsid",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OSD FSID",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "osd_id",
+      "displayName": "Osd Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The OSD ID",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "osds_per_device",
+      "displayName": "Osds Per Device",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The number of OSDs to create per device. Only applicable if action is 'batch'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "report",
+      "displayName": "Report",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If provided the --report flag will be passed to 'ceph-volume lvm batch'. No OSDs will be created. Results will be returned in json format. Only applicable if action is 'batch'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wal",
+      "displayName": "Wal",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A partition or logical volume name to use for block.wal.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wal_devices",
+      "displayName": "Wal Devices",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "A list of devices for bluestore block wal to pass to the 'ceph-volume lvm batch' subcommand. Only applicable if action is 'batch'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wal_vg",
+      "displayName": "Wal Vg",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If wal is a lv, this must be the name of the volume group it belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

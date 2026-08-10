@@ -1,0 +1,138 @@
+{
+  "fqcn": "ibm.power_ibmi.ibmi_mirror_setup_source",
+  "shortDescription": "Configures the Db2 Mirror on the source node",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_ibmi/ibmi_mirror_setup_source_module.html",
+  "options": [
+    {
+      "name": "become_user",
+      "displayName": "Become User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the user profile that the IBM i task will run under. Use this option to set a user with desired privileges to run the task.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "become_user_password",
+      "displayName": "Become User Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Use this option to set the password of the user specified in C(become_user).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clone_type",
+      "displayName": "Clone Type",
+      "type": "string",
+      "required": false,
+      "default": "COLD",
+      "description": "Indicates the clone is warm clone or cold clone A cold clone requires the setup source node to be shut down during the cloning portion of the setup process. A warm clone allows the setup source node to remain active during the entire Db2 Mirror setup and configuration process.",
+      "choices": [
+        "COLD",
+        "WARM"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_inclusion_state",
+      "displayName": "Default Inclusion State",
+      "type": "string",
+      "required": false,
+      "default": "EXCLUDE",
+      "description": "The default inclusion state setting will be used when no applicable rules for an object are found in the Replication Criteria List (RCL).",
+      "choices": [
+        "EXCLUDE",
+        "INCLUDE"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "primary_hostname",
+      "displayName": "Primary Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "String that contains the host and domain name or IP address of the partition designated as the primary node. IP address is preferred.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "primary_node",
+      "displayName": "Primary Node",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the partition designated as the secondary node. It must be same as the current system name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secondary_hostname",
+      "displayName": "Secondary Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "String that contains the host and domain name or IP address of the partition designated as the secondary node. IP address is preferred.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secondary_node",
+      "displayName": "Secondary Node",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the partition designated as the secondary node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "terminate_confirmed",
+      "displayName": "Terminate Confirmed",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "A bool value to indicate the terminate mirror action is confirmed. When set to False, only the replication state as NOT_MIRRORED is allowed to run this module. When set to True, this module will execute the terminate mirror without checking the replication state.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "termination_level",
+      "displayName": "Termination Level",
+      "type": "string",
+      "required": false,
+      "default": "RECLONE",
+      "description": "The TERMINATE_MIRROR procedure ends all replication between the primary and secondary nodes and resets the replication state of both nodes to NOT MIRRORED. A clone operation is required to restart replication. When termination_level is RECLONE, all Db2 Mirror configuration information is retained. When termination_level is DESTROY, all Db2 Mirror configuration information is deleted.",
+      "choices": [
+        "RECLONE",
+        "DESTROY"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_server",
+      "displayName": "Time Server",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "String that identifies the DNS name of the NTP server to be added to the configuration. A time server must be used to keep the clocks of the nodes synchronized.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

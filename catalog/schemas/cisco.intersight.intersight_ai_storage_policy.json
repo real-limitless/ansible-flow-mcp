@@ -1,0 +1,232 @@
+{
+  "fqcn": "cisco.intersight.intersight_ai_storage_policy",
+  "shortDescription": "AI-optimized storage policy for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_ai_storage_policy_module.html",
+  "options": [
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description of the storage policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "m2_boot_enabled",
+      "displayName": "M2 Boot Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Override whether to enable M.2 RAID boot drive. When true, configures M.2 MSTOR-RAID-1 as the boot virtual drive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the storage policy. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nvme_mode",
+      "displayName": "Nvme Mode",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the NVMe attachment mode. C(direct) attaches NVMe drives directly to the CPU for lowest latency. C(controller) routes NVMe through the RAID controller for management features.",
+      "choices": [
+        "direct",
+        "controller"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nvme_slots",
+      "displayName": "Nvme Slots",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "NVMe drive slots to configure in the selected mode. Overrides the default slot configuration from the storage profile. Allowed slots are 1-9, 21-24, 101-104. Slot format examples: \"1,4,5\", \"2\", \"1-5\", \"1,2,6-8\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "raid_level",
+      "displayName": "Raid Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the RAID level for data drive groups. Only applicable for training_data profile.",
+      "choices": [
+        "Raid0",
+        "Raid1",
+        "Raid5",
+        "Raid6",
+        "Raid10"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_policy",
+      "displayName": "Read Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the read cache policy for virtual drives.",
+      "choices": [
+        "Default",
+        "ReadAhead",
+        "NoReadAhead"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "storage_profile",
+      "displayName": "Storage Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The AI storage preset profile to apply. C(inference_optimized) configures NVMe drives in direct-attach mode for lowest latency access to model weights. Sets all available NVMe slots to direct-attach, disables JBOD for VD creation, and uses RAID0 with read-ahead caching for maximum throughput. C(training_data) configures storage for large dataset access during training. Uses RAID5/RAID6 for data protection with write-back caching and larger strip sizes for sequential read throughput. C(model_cach",
+      "choices": [
+        "inference_optimized",
+        "training_data",
+        "model_cache",
+        "edge_compact"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "write_policy",
+      "displayName": "Write Policy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override the write cache policy for virtual drives.",
+      "choices": [
+        "Default",
+        "WriteThrough",
+        "WriteBackGoodBbu",
+        "AlwaysWriteBack"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

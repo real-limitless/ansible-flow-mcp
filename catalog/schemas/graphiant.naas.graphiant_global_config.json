@@ -1,0 +1,122 @@
+{
+  "fqcn": "graphiant.naas.graphiant_global_config",
+  "shortDescription": "Manage Graphiant global configuration objects",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_global_config_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "config_file",
+      "displayName": "Config File",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to the global configuration YAML file. Required for all operations. Can be an absolute path or relative path. Relative paths are resolved using the configured config_path. Configuration files support Jinja2 templating syntax for dynamic generation. File must contain the appropriate global object definitions based on the operation type.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging output for troubleshooting and monitoring. When enabled, provides comprehensive logs of all global configuration operations. Logs are captured and included in the result_msg for display using M(ansible.builtin.debug) module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The specific global configuration operation to perform. V(configure): Configure all global objects (automatically detects all types in the file). V(deconfigure): Deconfigure all global objects (automatically detects all types in the file). V(configure_prefix_sets): Configure global prefix sets only. V(deconfigure_prefix_sets): Deconfigure global prefix sets only. V(configure_bgp_filters): Configure global BGP filters (routing policies) only. V(deconfigure_bgp_filters): Deconfigure global BGP fil",
+      "choices": [
+        "configure",
+        "deconfigure",
+        "configure_prefix_sets",
+        "deconfigure_prefix_sets",
+        "configure_bgp_filters",
+        "deconfigure_bgp_filters",
+        "configure_graphiant_filters",
+        "deconfigure_graphiant_filters",
+        "configure_snmp_services",
+        "deconfigure_snmp_services",
+        "configure_syslog_services",
+        "deconfigure_syslog_services",
+        "configure_ntps",
+        "deconfigure_ntps",
+        "configure_ipfix_services",
+        "deconfigure_ipfix_services",
+        "configure_vpn_profiles",
+        "deconfigure_vpn_profiles",
+        "configure_lan_segments",
+        "deconfigure_lan_segments",
+        "configure_site_lists",
+        "deconfigure_site_lists"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the global configuration objects. V(present): Maps to V(configure) when O(operation) not specified. V(absent): Maps to V(deconfigure) when O(operation) not specified.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

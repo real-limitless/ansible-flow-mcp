@@ -1,0 +1,152 @@
+{
+  "fqcn": "bodsch.scm.github_release",
+  "shortDescription": "Resolve a GitHub release to a downloadable, verifiable artefact.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/bodsch/scm/github_release_module.html",
+  "options": [
+    {
+      "name": "architecture",
+      "displayName": "Architecture",
+      "type": "string",
+      "required": false,
+      "default": "x86_64",
+      "description": "Target CPU architecture used to select the artefact, typically taken from C(ansible_facts.architecture). Synonyms are handled automatically (for example C(x86_64)/C(amd64), C(aarch64)/C(arm64)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "asset",
+      "displayName": "Asset",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Explicit artefact filename template overriding the heuristic. Supported placeholders: C({version}) (without leading C(v)), C({tag}) (raw tag), C({system}) (lowercased) and C({arch}) (raw architecture). Mutually exclusive with O(asset_regex).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "asset_regex",
+      "displayName": "Asset Regex",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Regular expression matched against asset names, overriding the heuristic. Mutually exclusive with O(asset).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cache",
+      "displayName": "Cache",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Validity of cached release metadata in minutes. Prevents unnecessary repeated GitHub API calls.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "exclude_keywords",
+      "displayName": "Exclude Keywords",
+      "type": "list",
+      "required": false,
+      "default": [
+        "beta",
+        "rc",
+        "preview",
+        "alpha",
+        "nightly"
+      ],
+      "description": "Keywords excluded when resolving O(version=latest). A release whose name or tag contains any keyword (case-insensitive) is skipped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extensions",
+      "displayName": "Extensions",
+      "type": "list",
+      "required": false,
+      "default": [
+        ".tar.gz",
+        ".tgz",
+        ".tar.xz",
+        ".tar.bz2",
+        ".zip"
+      ],
+      "description": "Ordered archive extension preference used to disambiguate multiple matching artefacts. The first extension with a match wins.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional GitHub personal access token. Raises the API rate limit and enables access to private repositories.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "project",
+      "displayName": "Project",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Defines the project (owner or organisation) in which the repository was created. For example: B(prometheus)/alertmanager",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "repository",
+      "displayName": "Repository",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Defines the repository maintained underneath the given project. For example: prometheus/B(alertmanager)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "system",
+      "displayName": "System",
+      "type": "string",
+      "required": false,
+      "default": "Linux",
+      "description": "Target operating system used to select the artefact, typically taken from C(ansible_facts.system).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Optional GitHub username (currently informational; authentication uses the token supplied via O(password)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "version",
+      "displayName": "Version",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Requested version. Use V(latest) to resolve the highest non-excluded SemVer release, or a concrete version with or without a leading C(v) (for example V(2.53.0) or V(v2.53.0)).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

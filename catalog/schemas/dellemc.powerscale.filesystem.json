@@ -1,0 +1,204 @@
+{
+  "fqcn": "dellemc.powerscale.filesystem",
+  "shortDescription": "Manage Filesystems on PowerScale",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/powerscale/filesystem_module.html",
+  "options": [
+    {
+      "name": "access_control",
+      "displayName": "Access Control",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ACL value for the directory. At the time of creation, users can either provide input such as C(private_read) , C(private) , C(public_read), C(public_read_write), C(public) or in C(POSIX) format (eg 0700). Modification of ACL is only supported from C(POSIX) to C(POSIX) mode. This field is mutually exclusive with I(access_control_rights).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_control_rights",
+      "displayName": "Access Control Rights",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Manage user rights and set ACL permissions for files and directories.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_control_rights_state",
+      "displayName": "Access Control Rights State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies if the access rights are to be added or deleted for the trustee. It is required together with I(access_control_rights).",
+      "choices": [
+        "add",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "access_zone",
+      "displayName": "Access Zone",
+      "type": "string",
+      "required": false,
+      "default": "System",
+      "description": "The access zone. If no Access Zone is specified, the 'System' access zone would be taken by default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "the password of the PowerScale cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_user",
+      "displayName": "Api User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "username of the PowerScale cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "group",
+      "displayName": "Group",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The group of the Filesystem. The following sub-options are supported for Group. - I(name(str)), - I(provider_type(str)). If you specify  a group, then the corresponding name is mandatory. The I(provider_type) is optional, it defaults to C(local). The supported values for I(provider_type) are C(local), C(file), C(ldap) and C(ads).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "list_snapshots",
+      "displayName": "List Snapshots",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If set to C(true), the filesystem's snapshots are returned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "onefs_host",
+      "displayName": "Onefs Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP address or FQDN of the PowerScale cluster.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "owner",
+      "displayName": "Owner",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The owner of the Filesystem. This parameter is required when creating a Filesystem. The following sub-options are supported for Owner. - I(name(str)), - I(provider_type(str)). If you specify owner, then the corresponding name is mandatory. The I(provider_type) is optional and it defaults to C(local). The supported values for I(provider_type) are C(local), C(file), C(ldap) and C(ads).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "This is the directory path. It is the absolute path for System access zone and is relative if using a non-System access zone. For example, if your access zone is 'Ansible' and it has a base path '/ifs/ansible' and the path specified is '/user1', then the effective path would be '/ifs/ansible/user1'. If your access zone is System, and you have 'directory1' in the access zone, the path provided should be '/ifs/directory1'.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port_no",
+      "displayName": "Port No",
+      "type": "string",
+      "required": false,
+      "default": "8080",
+      "description": "Port number of the PowerScale cluster.It defaults to 8080 if not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "quota",
+      "displayName": "Quota",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The Smart Quota for the filesystem. Only directory Quotas are supported. The following sub-options are supported for Quota.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recursive",
+      "displayName": "Recursive",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Creates intermediate folders recursively when set to C(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recursive_force_delete",
+      "displayName": "Recursive Force Delete",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Deletes sub files and folders recursively when set to C(true) even if the filesystem is not empty.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Defines whether the Filesystem should exist or not. A filesystem with NFS exports or SMB shares cannot be deleted. Any Quotas on the Filesystem need to be removed before deleting the filesystem.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify_ssl",
+      "displayName": "Verify Ssl",
+      "type": "boolean",
+      "required": true,
+      "default": null,
+      "description": "boolean variable to specify whether to validate SSL certificate or not. C(true) - indicates that the SSL certificate should be verified. C(false) - indicates that the SSL certificate should not be verified.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

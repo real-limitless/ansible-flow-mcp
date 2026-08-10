@@ -1,0 +1,236 @@
+{
+  "fqcn": "eigenstate.ipa.vault_write",
+  "shortDescription": "Create, archive, modify, and delete FreeIPA/IdM vaults",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/eigenstate/ipa/vault_write_module.html",
+  "options": [
+    {
+      "name": "data",
+      "displayName": "Data",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Secret payload to archive. Required when C(state=archived) and C(data_file) is not set. Mutually exclusive with C(data_file).",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "data_file",
+      "displayName": "Data File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file whose contents will be archived as the secret payload. Mutually exclusive with C(data).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Human-readable description for the vault.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ipaadmin_password",
+      "displayName": "Ipaadmin Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for the principal. Used to obtain a Kerberos ticket via C(kinit). Not required if C(kerberos_keytab) is set or a valid ticket already exists.",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "ipaadmin_principal",
+      "displayName": "Ipaadmin Principal",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "Kerberos principal to authenticate as.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "kerberos_keytab",
+      "displayName": "Kerberos Keytab",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a Kerberos keytab file. Takes precedence over C(ipaadmin_password). Required for non-interactive use in AAP Execution Environments.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "members",
+      "displayName": "Members",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of users, groups, or service principals to ensure are vault members. Delta-only \u2014 only adds members not already present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "members_absent",
+      "displayName": "Members Absent",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of users, groups, or service principals to ensure are not vault members. Delta-only \u2014 only removes members currently present.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the vault.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server",
+      "displayName": "Server",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "FQDN of the IPA server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service",
+      "displayName": "Service",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Service vault scope \u2014 the vault is owned by this service principal. Mutually exclusive with C(username) and C(shared).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shared",
+      "displayName": "Shared",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Shared vault scope. Mutually exclusive with C(username) and C(service).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "C(present) ensures the vault exists. Creates it if absent; updates C(description) or C(vault_type) if changed. C(absent) removes the vault. A no-op if the vault does not exist. C(archived) ensures the vault exists and then stores the payload in it. For standard vaults, the current payload is retrieved and compared; the archive step is skipped when the payload is identical. For symmetric and asymmetric vaults, the payload is always archived because comparison would require re-encryption.",
+      "choices": [
+        "present",
+        "absent",
+        "archived"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "User vault scope \u2014 the vault is owned by this user. Mutually exclusive with C(service) and C(shared).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_password",
+      "displayName": "Vault Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password for a symmetric vault. Required when creating or archiving a C(vault_type=symmetric) vault. Mutually exclusive with C(vault_password_file).",
+      "choices": null,
+      "noLog": true,
+      "suboptions": null
+    },
+    {
+      "name": "vault_password_file",
+      "displayName": "Vault Password File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file containing the symmetric vault password. Mutually exclusive with C(vault_password).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_public_key",
+      "displayName": "Vault Public Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "RSA public key (PEM format) for an asymmetric vault. Required when C(vault_type=asymmetric) and the vault is being created. Mutually exclusive with C(vault_public_key_file).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_public_key_file",
+      "displayName": "Vault Public Key File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to a file containing the RSA public key (PEM format) for an asymmetric vault. Mutually exclusive with C(vault_public_key).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_type",
+      "displayName": "Vault Type",
+      "type": "string",
+      "required": false,
+      "default": "standard",
+      "description": "Vault encryption type. Used when creating the vault and validated when the vault already exists. The module fails if the existing vault type does not match this value because changing vault type in place is not supported.",
+      "choices": [
+        "standard",
+        "symmetric",
+        "asymmetric"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verify",
+      "displayName": "Verify",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the IPA CA certificate for TLS verification. Auto-detected from C(/etc/ipa/ca.crt) when not set. If neither is available, the module fails unless C(verify) is set to C(false) explicitly.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

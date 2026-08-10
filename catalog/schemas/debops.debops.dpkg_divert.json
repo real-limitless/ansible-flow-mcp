@@ -1,0 +1,88 @@
+{
+  "fqcn": "debops.debops.dpkg_divert",
+  "shortDescription": "Override a package's version of a file",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/debops/debops/dpkg_divert_module.html",
+  "options": [
+    {
+      "name": "delete",
+      "displayName": "Delete",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When I(yes), delete the file in place of the original before reverting. This only applies with I(state=absent) to avoid C(dpkg-divert) command complaining about existing file in place of the diverted one.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "divert",
+      "displayName": "Divert",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The location where the versions of file will be diverted. The default suffix is C(.distrib) for diversions defined by a package and C(.dpkg-divert) for 'LOCAL' diversions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Force to divert file when diversion already exists and is hold by another I(package) or points to another I(divert). There is no need to use it for I(remove) action if I(divert) or I(package) are not used. This doesn't override the rename's lock feature, i.e. it doesn't help to force I(rename), but only to force the diversion for dpkg.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "package",
+      "displayName": "Package",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the package whose copy of file is not diverted, also known as the diversion holder or the package the diversion belongs to. The actual package does not have to be installed or even to exist for its name to be valid. If not specified, the diversion is held by 'LOCAL', which is reserved for local diversions. Removing or updating a diversion fails if the diversion exists and belongs to another package, unless I(force) is C(True).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The original and absolute path of the file to be diverted or undiverted. This path is unique, i.e. it is not possible to get two diversions for the same I(path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rename",
+      "displayName": "Rename",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Actually move the file aside (or back). Renaming is skipped (but module doesn't fail) in case the destination file already exists. This is a C(dpkg-divert) feature, and its purpose is to never overwrite a file. It also makes the command itself idempotent, and the module's I(force) parameter has no effect on this behaviour. Also, I(rename) is ignored if the diversion entry is unchanged in the diversion database (adding an already existing diversion or removing a non-existing one).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "When I(state=absent), remove the diversion of the specified I(path); when I(state=present), create the diversion if it does not exist, or update its I(package) holder or I(divert) path, if any, and if I(force) is C(True). Unless I(force) is C(True), the removal of I(path)'s diversion only happens if the diversion matches the I(divert) and I(package) values, if any.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

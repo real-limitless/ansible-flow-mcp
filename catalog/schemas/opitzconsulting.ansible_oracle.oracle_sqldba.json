@@ -1,0 +1,151 @@
+{
+  "fqcn": "opitzconsulting.ansible_oracle.oracle_sqldba",
+  "shortDescription": "Execute sql (scripts) using sqlplus (BEQ) or catcon.pl",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/opitzconsulting/ansible_oracle/oracle_sqldba_module.html",
+  "options": [
+    {
+      "name": "catcon_pl",
+      "displayName": "Catcon Pl",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "Script name, optionally followed by parameters. Will be executed by $OH//perl catcon.pl\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chdir",
+      "displayName": "Chdir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Working directory for SQL/script execution",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "creates_sql",
+      "displayName": "Creates Sql",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "This is the check query to ensure idempotence.. Must be a single SQL select that results to no rows or a plain 0 if the catcon_pl/sqlscript/sql has to be executed. Any other result prevent the execution of catcon_pl/sqlscript/sql.. The catcon_pl/sqlscript/sql will be executed unconditionally if creates_sql is omitted.. Creates_sql must be omitted when sqlselect is used.. Creates_sql is executed with sqlplus / as sysdba in the root container. Write the sql query according to this fact.. If pdb_li",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nls_lang",
+      "displayName": "Nls Lang",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "set NLS_LANG to the given value",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oracle_db_name",
+      "displayName": "Oracle Db Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "SID or DB_NAME, needed for BEQ connect",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "oracle_home",
+      "displayName": "Oracle Home",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "content of $ORACLE_HOME",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "Password of database user",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pdb_list",
+      "displayName": "Pdb List",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "Optional list of PDB names. Space separated, as catcon.pl wants. Gets used only if scope is \"pdbs\". Will be automatically filled and used when scope = all_pdbs and action like sql%.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scope",
+      "displayName": "Scope",
+      "type": "string",
+      "required": false,
+      "default": "cdb",
+      "description": "Shall the SQL be applied to CDB, PDBs, or both?",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sql",
+      "displayName": "Sql",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "Single SQL statement. Will be executed by sqlplus. Used for DDL and DML.\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sqlscript",
+      "displayName": "Sqlscript",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "Script name, optionally followed by parameters. Will be executed by sqlplus\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sqlselect",
+      "displayName": "Sqlselect",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "Single SQL statement. Will be executed by sqlplus using dbms_xmlgen.getxml. Used for select only, returns dict in .state. To access the column \"value\" of the first row write: \"<<registered result>>.state.ROW[0].VALUE\" (use uppercase).\n",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": "None",
+      "description": "Database username, defaults to \"/ as sysdba\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

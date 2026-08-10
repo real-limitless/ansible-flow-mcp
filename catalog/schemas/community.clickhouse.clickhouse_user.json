@@ -1,0 +1,255 @@
+{
+  "fqcn": "community.clickhouse.clickhouse_user",
+  "shortDescription": "Creates or removes a ClickHouse user using the clickhouse-driver Client interface",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/clickhouse/clickhouse_user_module.html",
+  "options": [
+    {
+      "name": "authentication",
+      "displayName": "Authentication",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Set the user authentication. Allows using LDAP, different hashing password. Cannot be used together with legacy O(password) and O(type_password).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "client_kwargs",
+      "displayName": "Client Kwargs",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Any additional keyword arguments you want to pass to the Client interface when instantiating its object.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cluster",
+      "displayName": "Cluster",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the cluster where the row policy is defined. If not provided, the row policy will be managed on the local server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_roles",
+      "displayName": "Default Roles",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Sets specified roles as default for the user. The roles must be explicitly granted to the user whether manually before using this argument or by using the O(roles) argument in the same task. To append or remove roles, use the O(default_roles_mode) argument. To unset all roles as default, pass an empty list (C([])) and O(default_roles_mode=listed_only).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_roles_mode",
+      "displayName": "Default Roles Mode",
+      "type": "string",
+      "required": false,
+      "default": "listed_only",
+      "description": "When C(listed_only) (default), sets only roles specified in O(default_roles) as user default roles. It will unset all other roles as default roles. When C(append), appends roles specified in O(default_roles) to existing user default roles. default roles instead of unsetting not specified ones. When C(remove), removes roles specified in O(default_roles) from user default roles. Ignored without O(default_roles) set.",
+      "choices": [
+        "append",
+        "listed_only",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_db",
+      "displayName": "Login Db",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The same as the V(Client(database='...'\\)) argument. If not passed, relies on the driver's default argument value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_host",
+      "displayName": "Login Host",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "The same as the V(Client(host='...'\\)) argument.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_password",
+      "displayName": "Login Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The same as the V(Client(password='...'\\)) argument. If not passed, relies on the driver's default argument value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_port",
+      "displayName": "Login Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The same as the V(Client(port='...'\\)) argument. If not passed, relies on the driver's default argument value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_user",
+      "displayName": "Login User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The same as the V(Client(user='...'\\)) argument. If not passed, relies on the driver's default argument value. Be sure your the user has permissions to read the system tables listed in the RETURN section.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "User name to add or remove.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This option is deprecated and will be removed in 3.0.0. Use O(authentication) instead. Set the user's password. Password can be passed unhashed or hashed. Cannot be used together with O(authentication).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "profiles",
+      "displayName": "Profiles",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Settings profiles that will be applied to role. Can be only used with O(settings) as C(dict).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roles",
+      "displayName": "Roles",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Grants specified roles to the user. To append or remove roles, use the O(roles_mode) argument. To revoke all roles, pass an empty list (C([])) and O(default_roles_mode=listed_only).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roles_mode",
+      "displayName": "Roles Mode",
+      "type": "string",
+      "required": false,
+      "default": "listed_only",
+      "description": "When C(listed_only) (default), makes the user a member of only roles specified in O(roles). It will remove the user from all other roles. When C(append), appends roles specified in O(roles) to existing user roles. When C(remove), removes roles specified in O(roles) from user roles. The argument is ignored without O(roles) set.",
+      "choices": [
+        "append",
+        "listed_only",
+        "remove"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "settings",
+      "displayName": "Settings",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Settings with their constraints applied by default at user login. Can pass either C(list)(obsolete) or dictionary. You can also specify the profile from which the settings will be inherited C(list). When specified for an existing user, settings will only be updated if they differ from current settings. The module fetches current settings from C(system.settings_profile_elements) for comparison. If no O(profiles) or O(settings) defined setting will not remove anything. Set to {} to purge it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "User state. If C(present), will create the user if not exists. If C(absent), will drop the user if exists.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "success_on",
+      "displayName": "Success On",
+      "type": "list",
+      "required": false,
+      "default": [
+        497
+      ],
+      "description": "List of L(server error codes,https://github.com/ClickHouse/ClickHouse/blob/master/src/Common/ErrorCodes.cpp) that will be treated as success, otherwise throw errors.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type_password",
+      "displayName": "Type Password",
+      "type": "string",
+      "required": false,
+      "default": "sha256_password",
+      "description": "This option is deprecated and will be removed in 3.0.0. Use O(authentication) instead. The type of password being transmitted(plaintext_password, sha256_password, sha256_hash...). For more details, see U(https://clickhouse.com/docs/en/sql-reference/statements/create/user). Cannot be used together with O(authentication).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_password",
+      "displayName": "Update Password",
+      "type": "string",
+      "required": false,
+      "default": "on_create",
+      "description": "If C(on_create), will set the password only for newly created users. If the user already exists, a C(password) value will be ignored. If C(always), will always update the password. This option is not idempotent and will update the password even if it is the same in the database. If in future ClickHouse will allow to retrieve password hashes and other necessary details, this behavior will be changed.",
+      "choices": [
+        "always",
+        "on_create"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user_hosts",
+      "displayName": "User Hosts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Host restrictions to apply to the user. It's a list of dictionaries, where each dictionary specifies the type of restriction to apply to which hosts or pattern.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

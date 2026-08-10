@@ -1,0 +1,217 @@
+{
+  "fqcn": "community.routeros.api_find_and_modify",
+  "shortDescription": "Find and modify information using the API",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/community/routeros/api_find_and_modify_module.html",
+  "options": [
+    {
+      "name": "allow_no_matches",
+      "displayName": "Allow No Matches",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to allow that no match is found. If not specified, this value is induced from whether O(require_matches_min) is 0 or larger.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ca_path",
+      "displayName": "Ca Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "PEM formatted file that contains a CA certificate to be used for certificate validation. See also O(validate_cert_hostname). Only used when O(tls=true) and O(validate_certs=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "encoding",
+      "displayName": "Encoding",
+      "type": "string",
+      "required": false,
+      "default": "ASCII",
+      "description": "Use the specified encoding when communicating with the RouterOS device. Default is V(ASCII). Note that V(UTF-8) requires librouteros 3.2.1 or newer.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "find",
+      "displayName": "Find",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Fields to search for. The module will only consider entries in the given O(path) that match all fields provided here. Use YAML V(~), or prepend keys with V(!), to specify an unset value. Note that if the dictionary specified here is empty, every entry in the path will be matched.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_no_cert",
+      "displayName": "Force No Cert",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set to V(true) to connect without a certificate when O(tls=true). See also O(validate_certs). B(Note:) this forces the use of anonymous Diffie-Hellman (ADH) ciphers. The protocol is susceptible to Man-in-the-Middle attacks, because the keys used in the exchange are not authenticated. Instead of simply connecting without a certificate to \"make things work\" have a look at O(validate_certs) and O(ca_path).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname",
+      "displayName": "Hostname",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "RouterOS hostname API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_builtin",
+      "displayName": "Ignore Builtin",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to ignore builtin entries. By default, they are considered (V(false)). If set to V(true), they are not considered. It is generally recommended to set this to V(true) unless when you really need to modify builtin entries. Note that the current default (V(false)) is B(deprecated) and will change to V(true) in community.routeros 4.0.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_dynamic",
+      "displayName": "Ignore Dynamic",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Whether to ignore dynamic entries. By default, they are considered (V(false)). If set to V(true), they are not considered. It is generally recommended to set this to V(true) unless when you really need to modify dynamic entries. Note that the current default (V(false)) is B(deprecated) and will change to V(true) in community.routeros 4.0.0.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "RouterOS user password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path to query. An example value is V(ip address). This is equivalent to running C(/ip address) in the RouterOS CLI.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "RouterOS API port. If O(tls) is set, port will apply to TLS/SSL connection. Defaults are V(8728) for the HTTP API, and V(8729) for the HTTPS API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "require_matches_max",
+      "displayName": "Require Matches Max",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Make sure that there are no more matches than this number. If there are more matches, fail instead of modifying anything. If not specified, there is no upper limit.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "require_matches_min",
+      "displayName": "Require Matches Min",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Make sure that there are no less matches than this number. If there are less matches, fail instead of modifying anything.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Timeout for the request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tls",
+      "displayName": "Tls",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If is set TLS will be used for RouterOS API connection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "RouterOS login user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_cert_hostname",
+      "displayName": "Validate Cert Hostname",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Set to V(true) to validate hostnames in certificates. See also O(validate_certs). Only used when O(tls=true) and O(validate_certs=true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Set to V(false) to skip validation of TLS certificates. See also O(validate_cert_hostname). Only used when O(tls=true). B(Note:) instead of simply deactivating certificate validations to \"make things work\", please consider creating your own CA certificate and using it to sign certificates used for your router. You can tell the module about your CA certificate with the O(ca_path) option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "values",
+      "displayName": "Values",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "On all entries matching the conditions in O(find), set the keys of this option to the values specified here. Use YAML V(~), or prepend keys with V(!), to specify to unset a value.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

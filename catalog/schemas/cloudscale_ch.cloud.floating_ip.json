@@ -1,0 +1,162 @@
+{
+  "fqcn": "cloudscale_ch.cloud.floating_ip",
+  "shortDescription": "Manages floating IPs on the cloudscale.ch IaaS service",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cloudscale_ch/cloud/floating_ip_module.html",
+  "options": [
+    {
+      "name": "api_timeout",
+      "displayName": "Api Timeout",
+      "type": "number",
+      "required": false,
+      "default": 45,
+      "description": "Timeout in seconds for calls to the cloudscale.ch API. This can also be passed in the C(CLOUDSCALE_API_TIMEOUT) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_token",
+      "displayName": "Api Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "cloudscale.ch API token. This can also be passed in the C(CLOUDSCALE_API_TOKEN) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": false,
+      "default": "https://api.cloudscale.ch/v1",
+      "description": "cloudscale.ch API URL. This can also be passed in the C(CLOUDSCALE_API_URL) environment variable.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip_version",
+      "displayName": "Ip Version",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "IP protocol version of the floating IP. Required when assigning a new floating IP.",
+      "choices": [
+        4,
+        6
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name to identifiy the floating IP address for idempotency. One of I(network) or I(name) is required to identify the floating IP. Required for assigning a new floating IP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network",
+      "displayName": "Network",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Floating IP address to change. One of I(network) or I(name) is required to identify the floating IP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "prefix_length",
+      "displayName": "Prefix Length",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Only valid if I(ip_version) is 6. Prefix length for the IPv6 network. Currently only a prefix of /56 can be requested. If no I(prefix_length) is present, a single address is created.",
+      "choices": [
+        56
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region",
+      "displayName": "Region",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Region in which the floating IP resides (e.g. C(lpg) or C(rma)). If omitted, the region of the project default zone is used. This parameter must be omitted if I(type) is set to C(global).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reverse_ptr",
+      "displayName": "Reverse Ptr",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Reverse PTR entry for this address. You cannot set a reverse PTR entry for IPv6 floating networks. Reverse PTR entries are only allowed for single addresses.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server",
+      "displayName": "Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "UUID of the server assigned to this floating IP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "State of the floating IP.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Tags associated with the floating IP. Set this to C({}) to clear any tags.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": "regional",
+      "description": "The type of the floating IP.",
+      "choices": [
+        "regional",
+        "global"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

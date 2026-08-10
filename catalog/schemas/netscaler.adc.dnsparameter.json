@@ -1,0 +1,517 @@
+{
+  "fqcn": "netscaler.adc.dnsparameter",
+  "shortDescription": "Configuration for DNS parameter resource.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netscaler/adc/dnsparameter_module.html",
+  "options": [
+    {
+      "name": "api_path",
+      "displayName": "Api Path",
+      "type": "string",
+      "required": false,
+      "default": "nitro/v1/config",
+      "description": "Base NITRO API path. Define only in case of an ADM service proxy call",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "autosavekeyops",
+      "displayName": "Autosavekeyops",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Flag to enable/disable saving of rollover operations executed automatically to avoid config loss. Applicable only when autorollover option is enabled on a key. Note: when you enable this, full configuration will be saved",
+      "choices": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cacheecszeroprefix",
+      "displayName": "Cacheecszeroprefix",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Cache ECS responses with a Scope Prefix length of zero. Such a cached response will be used for all queries with this domain name and any subnet. When disabled, ECS responses with Scope Prefix length of zero will be cached, but not tied to any subnet. This option has no effect if caching of ECS responses is disabled in the corresponding DNS profile.",
+      "choices": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cachehitbypass",
+      "displayName": "Cachehitbypass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "This parameter is applicable only in proxy mode and if this parameter is enabled  we will forward all the client requests to the backend DNS server and the response served will be cached on Citrix ADC",
+      "choices": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cachenoexpire",
+      "displayName": "Cachenoexpire",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If this flag is set to YES, the existing entries in cache do not age out. On reaching the max limit the cache records are frozen",
+      "choices": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cacherecords",
+      "displayName": "Cacherecords",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Cache resource records in the DNS cache. Applies to resource records obtained through proxy configurations only. End resolver and forwarder configurations always cache records in the DNS cache, and you cannot disable this behavior. When you disable record caching, the appliance stops caching server responses. However, cached records are not flushed. The appliance does not serve requests from the cache until record caching is enabled again.",
+      "choices": [
+        "YES",
+        "NO"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dns64timeout",
+      "displayName": "Dns64Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "While doing DNS64 resolution, this parameter specifies the time to wait before sending an A query if no response is received from backend DNS server for AAAA query.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dnsrootreferral",
+      "displayName": "Dnsrootreferral",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Send a root referral if a client queries a domain name that is unrelated to the domains configured/cached on the Citrix ADC. If the setting is disabled, the appliance sends a blank response instead of a root referral. Applicable to domains for which the appliance is authoritative. Disable the parameter when the appliance is under attack from a client that is sending a flood of queries for unrelated domains.",
+      "choices": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dnssec",
+      "displayName": "Dnssec",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enable or disable the Domain Name System Security Extensions (DNSSEC) feature on the appliance. Note: Even when the DNSSEC feature is enabled, forwarder configurations (used by internal Citrix ADC features such as SSL VPN and Cache Redirection for name resolution) do not support the DNSSEC OK (DO) bit in the EDNS0 OPT header.",
+      "choices": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ecsmaxsubnets",
+      "displayName": "Ecsmaxsubnets",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of subnets that can be cached corresponding to a single domain. Subnet caching will occur for responses with EDNS Client Subnet (ECS) option. Caching of such responses can be disabled using DNS profile settings. A value of zero indicates that the number of subnets cached is limited only by existing memory constraints. The default value is zero.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "managed_netscaler_instance_id",
+      "displayName": "Managed Netscaler Instance Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the managed NetScaler instance to which NetScaler Console has to configure as a proxy server. Define only in case of an ADM service proxy call",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "managed_netscaler_instance_ip",
+      "displayName": "Managed Netscaler Instance Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The IP of the managed NetScaler instance to which NetScaler Console has to configure as a proxy server. Define only in case of an ADM service proxy call",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "managed_netscaler_instance_name",
+      "displayName": "Managed Netscaler Instance Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the managed NetScaler instance to which NetScaler Console has to configure as a proxy server. Define only in case of an ADM service proxy call",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "managed_netscaler_instance_password",
+      "displayName": "Managed Netscaler Instance Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password of the managed NetScaler instance. Define only in case of an ADM service proxy call In Settings > Administration > System Configurations > Basic Settings, if you select Prompt Credentials for Instance Login, ensure to configure username and password of a managed instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "managed_netscaler_instance_username",
+      "displayName": "Managed Netscaler Instance Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username of the managed NetScaler instance. Define only in case of an ADM service proxy call In Settings > Administration > System Configurations > Basic Settings, if you select Prompt Credentials for Instance Login, ensure to configure username and password of a managed instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxcachesize",
+      "displayName": "Maxcachesize",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum memory, in megabytes, that can be used for dns caching per Packet Engine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxnegativecachesize",
+      "displayName": "Maxnegativecachesize",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum memory, in megabytes, that can be used for caching of negative DNS responses per packet engine.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxnegcachettl",
+      "displayName": "Maxnegcachettl",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum time to live (TTL) for all negative records ( NXDONAIN and NODATA ) cached in the DNS cache by DNS proxy, end resolver, and forwarder configurations. If the TTL of a record that is to be cached is higher than the value configured for maxnegcacheTTL, the TTL of the record is set to the value of maxnegcacheTTL before caching. When you modify this setting, the new value is applied only to those records that are cached after the modification. The TTL values of existing records are not change",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxpipeline",
+      "displayName": "Maxpipeline",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of concurrent DNS requests to allow on a single client connection, which is identified by the <clientip:port>-<vserver ip:port> tuple. A value of 0 (zero) applies no limit to the number of concurrent DNS requests allowed on a single client connection.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxttl",
+      "displayName": "Maxttl",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum time to live (TTL) for all records cached in the DNS cache by DNS proxy, end resolver, and forwarder configurations. If the TTL of a record that is to be cached is higher than the value configured for maxTTL, the TTL of the record is set to the value of maxTTL before caching. When you modify this setting, the new value is applied only to those records that are cached after the modification. The TTL values of existing records are not changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxudppacketsize",
+      "displayName": "Maxudppacketsize",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum UDP packet size that can be handled by Citrix ADC. This is the value advertised by Citrix ADC when responding as an authoritative server and it is also used when Citrix ADC queries other name servers as a forwarder. When acting as a proxy, requests from clients are limited by this parameter - if a request contains a size greater than this value in the OPT record, it will be replaced.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "minttl",
+      "displayName": "Minttl",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Minimum permissible time to live (TTL) for all records cached in the DNS cache by DNS proxy, end resolver, and forwarder configurations. If the TTL of a record that is to be cached is lower than the value configured for minTTL, the TTL of the record is set to the value of minTTL before caching. When you modify this setting, the new value is applied only to those records that are cached after the modification. The TTL values of existing records are not changed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namelookuppriority",
+      "displayName": "Namelookuppriority",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of lookup (C(DNS) or C(WINS)) to attempt first. If the first-priority lookup fails, the second-priority lookup is attempted. Used only by the SSL VPN feature.",
+      "choices": [
+        "WINS",
+        "DNS"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "netscaler_console_as_proxy_server",
+      "displayName": "Netscaler Console As Proxy Server",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "The IP address of the NetScaler ADC appliance acting as a proxy server. Define only in case of an ADM service proxy call",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_auth_token",
+      "displayName": "Nitro Auth Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The authentication token provided by a login operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_pass",
+      "displayName": "Nitro Pass",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password with which to authenticate to the NetScaler ADC node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_protocol",
+      "displayName": "Nitro Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "Which protocol to use when accessing the nitro API objects.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nitro_user",
+      "displayName": "Nitro User",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username with which to authenticate to the NetScaler ADC node.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nsip",
+      "displayName": "Nsip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The ip address of the NetScaler ADC appliance where the nitro API calls will be made. The port can be specified with the colon (:). E.g. 192.168.1.1:555.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nxdomainratelimitthreshold",
+      "displayName": "Nxdomainratelimitthreshold",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Rate limit threshold for Non-Existant domain (NXDOMAIN) responses generated from Citrix ADC. Once the threshold is breached , DNS queries leading to NXDOMAIN response will be dropped. This threshold will not be applied for NXDOMAIN responses got from the backend. The threshold will be applied per packet engine and per second.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "recursion",
+      "displayName": "Recursion",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Function as an end resolver and recursively resolve queries for domains that are not hosted on the Citrix ADC. Also resolve queries recursively when the external name servers configured on the appliance (for a forwarder configuration) are unavailable. When external name servers are unavailable, the appliance queries a root server and resolves the request recursively, as it does for an end resolver configuration.",
+      "choices": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "remove_non_updatable_params",
+      "displayName": "Remove Non Updatable Params",
+      "type": "string",
+      "required": false,
+      "default": "no",
+      "description": "When given yes, the module will remove any parameters that are not updatable in the resource. If no, the module will return error if any non-updatable parameters are provided.",
+      "choices": [
+        "yes",
+        "no"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resolutionorder",
+      "displayName": "Resolutionorder",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of DNS queries (A, AAAA, or both) to generate during the routine functioning of certain Citrix ADC features, such as SSL VPN, cache redirection, and the integrated cache. The queries are sent to the external name servers that are configured for the forwarder function. If you specify both query types, you can also specify the order. Available settings function as follows: * C(OnlyAQuery). Send queries for IPv4 address records (A records) only. * C(OnlyAAAAQuery). Send queries for IPv6 addres",
+      "choices": [
+        "OnlyAQuery",
+        "OnlyAAAAQuery",
+        "AThenAAAAQuery",
+        "AAAAThenAQuery"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resolvermaxactiveresolutions",
+      "displayName": "Resolvermaxactiveresolutions",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of active concurrent DNS resolutions per Packet Engine",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resolvermaxtcpconnections",
+      "displayName": "Resolvermaxtcpconnections",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum DNS-TCP connections opened for recursive resolution per Packet Engine",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "resolvermaxtcptimeout",
+      "displayName": "Resolvermaxtcptimeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum wait time in seconds for the response on DNS-TCP connection for recursive resolution per Packet Engine",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "retries",
+      "displayName": "Retries",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of retry attempts when no response is received for a query sent to a name server. Applies to end resolver and forwarder configurations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save_config",
+      "displayName": "Save Config",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If C(true) the module will save the configuration on the NetScaler ADC node if it makes any changes. The module will not save the configuration on the NetScaler ADC node if it made no changes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "splitpktqueryprocessing",
+      "displayName": "Splitpktqueryprocessing",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Processing requests split across multiple packets",
+      "choices": [
+        "ALLOW",
+        "DROP"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The state of the resource being configured by the module on the NetScaler ADC node. When C(present), the resource will be added/updated configured according to the module's parameters. When C(unset), the resource will be unset on the NetScaler ADC node.",
+      "choices": [
+        "present",
+        "unset"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(false), SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "zonetransfer",
+      "displayName": "Zonetransfer",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Flag to enable/disable DNS zones configuration transfer to remote GSLB site nodes",
+      "choices": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

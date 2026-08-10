@@ -1,0 +1,96 @@
+{
+  "fqcn": "ibm.ibm_zos_cics.global_catalog",
+  "shortDescription": "Create, remove, and manage the CICS global catalog",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/ibm_zos_cics/global_catalog_module.html",
+  "options": [
+    {
+      "name": "cics_data_sets",
+      "displayName": "Cics Data Sets",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The name of the C(SDFHLOAD) library of the CICS installation, for example, C(CICSTS61.CICS.SDFHLOAD). This module uses the C(DFHRMUTL) utility internally, which is found in the C(SDFHLOAD) library.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "region_data_sets",
+      "displayName": "Region Data Sets",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "The location of the region data sets to be created by using a template, for example, C(REGIONS.ABCD0001.<< data_set_name >>). If you want to use a data set that already exists, ensure that the data set is a global catalog data set.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_primary",
+      "displayName": "Space Primary",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "The size of the primary space allocated to the global catalog data set. Note that this is just the value; the unit is specified with O(space_type). This option takes effect only when the global catalog data set is being created. If the global catalog data set already exists, the option has no effect.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_secondary",
+      "displayName": "Space Secondary",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The size of the secondary space allocated to the global catalog data set. Note that this is just the value; the unit is specified with O(space_type). This option takes effect only when the global catalog data set is being created. If the global catalog data set already exists, the option has no effect.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "space_type",
+      "displayName": "Space Type",
+      "type": "string",
+      "required": false,
+      "default": "m",
+      "description": "The unit portion of the global catalog data set size. Note that this is just the unit; the value for the primary space is specified with O(space_primary) and the value for the secondary space is specified with O(space_secondary). This option takes effect only when the global catalog data set is being created. If the global catalog data set already exists, the option has no effect. The size can be specified in megabytes (V(m)), kilobytes (V(k)), records (V(rec)), cylinders (V(cyl)), or tracks (V(",
+      "choices": [
+        "m",
+        "k",
+        "rec",
+        "cyl",
+        "trk"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The intended state for the global catalog data set, which the module aims to achieve. Specify V(absent) to remove the global catalog data set entirely, if it exists. Specify V(initial) to set the autostart override record to C(AUTOINIT). If the specified global catalog data set does not already exist, the module creates the data set. Specify V(cold) to set the autostart override record of an existing global catalog to C(AUTOCOLD). If the specified global catalog data set does not already exist, ",
+      "choices": [
+        "absent",
+        "initial",
+        "cold",
+        "warm"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volumes",
+      "displayName": "Volumes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The volume(s) where the data set is created. Use a string to define a singular volume or a list of strings for multiple volumes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

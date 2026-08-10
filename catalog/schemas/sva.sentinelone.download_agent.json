@@ -1,0 +1,123 @@
+{
+  "fqcn": "sva.sentinelone.download_agent",
+  "shortDescription": "Download SentinelOne agent from Management Console",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/sva/sentinelone/download_agent_module.html",
+  "options": [
+    {
+      "name": "agent_version",
+      "displayName": "Agent Version",
+      "type": "string",
+      "required": false,
+      "default": "latest",
+      "description": "Version of the agent to be downloaded. B(latest) (default) - download latest GA (stable) release for the specified parameters B(latest_ea) - same as latest, but also includes EA packages B(custom) - custom_version is required when agent_versioin is custom",
+      "choices": [
+        "latest",
+        "latest_ea",
+        "custom"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "architecture",
+      "displayName": "Architecture",
+      "type": "string",
+      "required": false,
+      "default": "64_bit",
+      "description": "Architecture of the packet which should be downloaded If not set 64 bit agent will be downloaded. If set to B(aarch64) the ARM64 agent will be downloaded",
+      "choices": [
+        "32_bit",
+        "64_bit",
+        "aarch64"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "console_url",
+      "displayName": "Console Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Insert your management console URL",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "custom_version",
+      "displayName": "Custom Version",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Explicit version of the file to be downloaded Has to be set when agent_version=custom Will be ignored if B(agent_version) is not B(custom)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "download_dir",
+      "displayName": "Download Dir",
+      "type": "string",
+      "required": false,
+      "default": "./",
+      "description": "Set the path where the agent should be downloaded. If not set the agent will be downloaded to the working directory. If the directory does not exists it will be created",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os_type",
+      "displayName": "Os Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The type of the OS for which the agent should be downloaded",
+      "choices": [
+        "Linux",
+        "Windows"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "packet_format",
+      "displayName": "Packet Format",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The format of the packet which should be downloaded",
+      "choices": [
+        "rpm",
+        "deb",
+        "msi",
+        "exe"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "site",
+      "displayName": "Site",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the site from which to download the agent If omitted the scope will be on account level",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "SentinelOne API auth token to authenticate at the management API",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,122 @@
+{
+  "fqcn": "nextcloud.admin.user",
+  "shortDescription": "Manage a Nextcloud user.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/nextcloud/admin/user_module.html",
+  "options": [
+    {
+      "name": "display_name",
+      "displayName": "Display Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The display name for the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "email",
+      "displayName": "Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user's email.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "groups",
+      "displayName": "Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "A list of groups the user must be a member of. If any list is provided (even an empty one), __the module will enforce this list__. Adding the user to all groups in the list and removing it from any group not specified in it. To manage groups more dynamically, use the 'nextcloud.admin.group' module instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The unique identifier or name of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignore_missing_groups",
+      "displayName": "Ignore Missing Groups",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to ignore errors when specified groups are not found. If `True`, the module will raise an Ansible warning for each element in `groups` that doesn't exist in the Nextcloud server. If `False`, the module will fail at the first absent group encountered instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nextcloud_path",
+      "displayName": "Nextcloud Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the nextcloud instance's location in the host. If not specified, the module will attempt to use the `nextcloud_path` var if it exists. In last resort, read the `NEXTCLOUD_PATH` environment variable on the ansible host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specify a password. Used only during user creation or password reset.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "php_runtime",
+      "displayName": "Php Runtime",
+      "type": "string",
+      "required": false,
+      "default": "php",
+      "description": "Specify the php runtime used to run the occ tool. Can be an absolute or relative path if the runtime is available in the remote host PATH. If not specified, the module will attempt to use the `nextcloud_php_runtime` var if it exists, then the `NEXTCLOUD_PHP_RUNTIME` environment variable on the ansible host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "reset_password",
+      "displayName": "Reset Password",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Trigger a password reset for the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the group. Use 'present' to ensure the user exists and is enabled, 'absent' to delete it if necessary. Use 'disabled' to ensure the user exists and is disabled.",
+      "choices": [
+        "present",
+        "absent",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

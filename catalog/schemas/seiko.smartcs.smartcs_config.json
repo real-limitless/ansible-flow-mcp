@@ -1,0 +1,82 @@
+{
+  "fqcn": "seiko.smartcs.smartcs_config",
+  "shortDescription": "Manage configuratin sections of SmartCS",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/seiko/smartcs/smartcs_config_module.html",
+  "options": [
+    {
+      "name": "backup",
+      "displayName": "Backup",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "This argument will cause the module to create a full backup of the current C(running-config) from the remote device before any changes are made. If the C(backup_options) value is not given, the backup file is written to the C(backup) folder in the playbook root directory or role root directory, if playbook is part of an ansible role. If the directory does not exist, it is created.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lines",
+      "displayName": "Lines",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The ordered set of commands that should be configured in the section. The commands must be the exact same commands as found in the device running-config.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "match",
+      "displayName": "Match",
+      "type": "string",
+      "required": false,
+      "default": "line",
+      "description": "Instructs the module on the way to perform the matching of the set of commands against the current device config.  If match is set to I(line), commands are matched line by line. if match is set to I(none), the module will not attempt to compare the source configuration with the running configuration on the remote device.",
+      "choices": [
+        "line",
+        "none"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "provider",
+      "displayName": "Provider",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "B(Deprecated) Starting with Ansible 2.5 we recommend using C(connection: network_cli). HORIZONTALLINE A dict object containing connection details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "save_when",
+      "displayName": "Save When",
+      "type": "string",
+      "required": false,
+      "default": "never",
+      "description": "When changes are made to the device running-configuration, the changes are not copied to non-volatile storage by default.  Using this argument will change that before.  If the argument is set to I(always), then the running-configratoin will always be copied to the startup-configration and the I(modified) flag will always be set to True.  If the argument is set to I(modified), then the running-configration will only be copied to the startup-configration if it has changed since the last save to st",
+      "choices": [
+        "always",
+        "never",
+        "modified",
+        "changed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "src",
+      "displayName": "Src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies the source path to the file that contains the configuration to load.  The path to the source file can either be the full path on the Ansible control host or a relative path from the playbook or role root directory.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

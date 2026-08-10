@@ -1,0 +1,207 @@
+{
+  "fqcn": "steampunk.aws.ec2_instance",
+  "shortDescription": "Manage EC2 instances",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/steampunk/aws/ec2_instance_module.html",
+  "options": [
+    {
+      "name": "ami",
+      "displayName": "Ami",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the Amazon Machine Image used to launch the instance. This parameter is required when creating a new instance. In the absence of I(id) and I(network_interface), the value of this parameter will be used in conjunction with I(name) and I(subnet) to identify the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Parameters for authenticating with the AWS service. Each of them may be defined via environment variables.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "availability_zone",
+      "displayName": "Availability Zone",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the availability zone in which to create the instance. This parameter is required when creating an instance if neither I(subnet) nor I(network_interface) are specified. If C(subnet) is provided, this parameter is ignored. If C(id) is not provided, at least one of I(subnet), I(availability_zone) is required.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clear_tags",
+      "displayName": "Clear Tags",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to clear any existing tags on the resource that are not explicitly stated in I(tags). By default, existing tags are kept on the resource. When this parameter is set to C(true), any pre-existing tags on the resource (including the name tag) are removed. To clear all tags except the name tag, make sure to provide the I(name) parameter.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the resource to perform the task on. If specified, this parameter is used to identify the resource. Omit this parameter when you are first creating the resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "key_pair",
+      "displayName": "Key Pair",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the key pair to be used when connecting to the instance. This parameter is required when creating an instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "monitoring",
+      "displayName": "Monitoring",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "CloudWatch monitoring mode for the instance. If you omit this parameter when creating a new instance, the default value C(basic) will be used.",
+      "choices": [
+        "basic",
+        "detailed"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name tag for the EC2 instance. This parameter is required when creating a new instance. In the absence of I(id) and I(network_interface), the value of this parameter will be used in conjunction with I(ami) and I(subnet) to identify the instance.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_interface",
+      "displayName": "Network Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of an existing ENI to attach to the instance as the primary network interface (at device index 0). This parameter is required when creating an instance if you don't provide I(subnet) or I(availability_zone). If I(network_interface) points to an ENI that is already attached as a primary network interface for an instance, the module uses it to uniquely identify the instance. If this parameter is provided, the instance will be created in the subnet of the network interface. If this parameter is ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "on_instance_initiated_shutdown",
+      "displayName": "On Instance Initiated Shutdown",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default behavior for instance-initiated shutdown. If you omit this parameter when creating a new instance, the default value C(stop) will be used.",
+      "choices": [
+        "stop",
+        "terminate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_groups",
+      "displayName": "Security Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "IDs of security groups that will be associated with the default primary network interface. If omitted, the VPC's default security group will be used. Use this parameter if you wish to configure the default primary network interface that will be created automatically when a new instance is launched. To modify security groups of the default network interface created for you on instance launch, use M(steampunk.aws.ec2_network_interface). This parameter is mutually exclusive with I(network_interface",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "The desired state of the EC2 instance. When creating a new instance, the default behavior of the module is to wait until the instance is in running state on AWS. Set I(wait_state) to C(false) to modify this behavior. Note that terminated instances are treated as absent.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subnet",
+      "displayName": "Subnet",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the subnet where the instance will be launched from. This parameter is required when creating an instance if neither I(availability_zone) nor I(network_interface) are specified. If omitted, the instance will be created in the default subnet for the availability zone specified in C(availability_zone) of the default VPC for I(auth.region).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Metadata for the AWS resource as key/value pairs. Keys and values are case-sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tenancy",
+      "displayName": "Tenancy",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The instance tenancy setting. If omitted, the VPC's default instance tenancy setting will be used. You cannot modify this setting after an instance is launched.",
+      "choices": [
+        "default",
+        "dedicated"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "type",
+      "displayName": "Type",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Type of the EC2 instance. This parameter is required when creating a new instance. Currently it is not possible to modify the instance type after an instance is launched.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "wait_state",
+      "displayName": "Wait State",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the module should wait (block) until I(state) is reached. For newly created instances - if I(state) is C(present) and this parameter is set, the module ensures a running instance. Otherwise it ensures an instance that exists on AWS, but is not necessarily in running state. Note that this parameter has no effect when you're updating an existing instance. If I(state) is C(absent) and this parameter is set, the module initiates instance termination and continues. Otherwise it waits until th",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

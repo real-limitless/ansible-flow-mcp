@@ -1,0 +1,292 @@
+{
+  "fqcn": "cisco.intersight.intersight_port_policy",
+  "shortDescription": "Manage Port Policies for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_port_policy_module.html",
+  "options": [
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "appliance_port_channels",
+      "displayName": "Appliance Port Channels",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of appliance port channel configurations. Port channels for direct-attached storage connectivity.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "appliance_ports",
+      "displayName": "Appliance Ports",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of Appliance port configurations. Appliance ports are used for direct-attached storage connectivity.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "breakout_ports",
+      "displayName": "Breakout Ports",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of breakout port configurations. Breakout ports allow splitting a high-speed port into multiple lower-speed ports. Device-specific breakout support applies (see device_model documentation). UCS-FI-6664 does not support breakout ports at all.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description for the Port Policy. Description can contain letters(a-z, A-Z), numbers(0-9), hyphen(-), period(.), colon(:), or an underscore(_).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device_model",
+      "displayName": "Device Model",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The device model for which the Port Policy is intended. Different models support different port configurations and capabilities. Required when C(state=present). UCS-FI-6454: 54 ports (1-54), FC ports 1-16, breakout ports 49-54 UCS-FI-64108: 108 ports (1-108), FC ports 1-16, breakout ports 97-108, 1Gbps only on ports 89-96, 40/100Gbps only on ports 97-108 UCS-FI-6536: 36 ports (1-36), FC only via breakout ports 33-36, all ports support breakout, 1Gbps only on ports 9-10 UCS-FI-6664: 64 ports (1-6",
+      "choices": [
+        "UCS-FI-6454",
+        "UCS-FI-64108",
+        "UCS-FI-6536",
+        "UCS-FI-6664",
+        "UCSX-S9108-100G"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ethernet_uplink_port_channels",
+      "displayName": "Ethernet Uplink Port Channels",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of Ethernet uplink port channel configurations. Port channels aggregate multiple Ethernet ports into a single logical link.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ethernet_uplink_ports",
+      "displayName": "Ethernet Uplink Ports",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of Ethernet Uplink port configurations. Ethernet Uplink ports connect to upstream network switches.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fc_port_mode",
+      "displayName": "Fc Port Mode",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Configure Fibre Channel port mode for a range of ports. This converts Ethernet ports to Fibre Channel ports. Only one FC port mode configuration is allowed per policy. Device-specific FC port ranges apply (see device_model documentation). For UCS-FI-6536 and UCSX-S9108-100G, fc_port_mode is not supported. FC functionality is available through breakout ports only. If specified, this parameter will be ignored with a warning.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fc_storage_ports",
+      "displayName": "Fc Storage Ports",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of FC Storage port configurations. FC Storage ports are used for direct storage connectivity. For UCS-FI-6454, UCS-FI-64108, UCS-FI-6664 requires fc_port_mode configuration. For UCS-FI-6536, UCSX-S9108-100G uses FC breakout ports (no fc_port_mode needed).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fc_uplink_port_channels",
+      "displayName": "Fc Uplink Port Channels",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of FC uplink port channel configurations. Port channels aggregate multiple FC ports into a single logical link. Only applicable when fc_port_mode is configured.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fc_uplink_ports",
+      "displayName": "Fc Uplink Ports",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of FC Uplink port configurations. FC Uplink ports are used for Fibre Channel connectivity to storage networks. For UCS-FI-6454, UCS-FI-64108, UCS-FI-6664 requires fc_port_mode configuration. For UCS-FI-6536, UCSX-S9108-100G uses FC breakout ports (no fc_port_mode needed).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fcoe_uplink_port_channels",
+      "displayName": "Fcoe Uplink Port Channels",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of FCoE uplink port channel configurations. Port channels provide Fibre Channel over Ethernet connectivity.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fcoe_uplink_ports",
+      "displayName": "Fcoe Uplink Ports",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of FCoE Uplink port configurations. FCoE Uplink ports provide Fibre Channel over Ethernet connectivity.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the Port Policy. Must be unique within the organization. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Policies created within a Custom Organization are applicable only to devices in the same Organization. Use 'default' for the default organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pin_groups",
+      "displayName": "Pin Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of pin group configurations (both LAN and SAN). Pin groups control traffic distribution across uplinks. LAN pin groups are used for Ethernet uplink ports and port channels. SAN pin groups are used for FCoE uplink ports and port channels.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "server_ports",
+      "displayName": "Server Ports",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of server port configurations. Server ports connect to server adapters.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,240 @@
+{
+  "fqcn": "rapyutarobotics.rr_io.builds",
+  "shortDescription": "Module to interact with rapyuta_io builds.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/rapyutarobotics/rr_io/builds_module.html",
+  "options": [
+    {
+      "name": "architecture",
+      "displayName": "Architecture",
+      "type": "string",
+      "required": false,
+      "default": "amd64",
+      "description": "Strategy type to make the build. Choices are case insensitive.",
+      "choices": [
+        "amd64",
+        "arm32v7",
+        "arm64v8"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "branch",
+      "displayName": "Branch",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Branch in the repository from which to create the build.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "catkin_options",
+      "displayName": "Catkin Options",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Catkin options for the build if is_ros is set to True. Each Catkin option is a dictionary.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context_directory",
+      "displayName": "Context Directory",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Context dir to be used in the build.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_file_path",
+      "displayName": "Docker File Path",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Path of Dockerfile. This path is appended to the context_directory before searching for the Dockerfile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_image_repository",
+      "displayName": "Docker Image Repository",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "An external docker repository where Build will push the image. For example \u2018docker.io/user/example\u2019.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_pull_secret",
+      "displayName": "Docker Pull Secret",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Secret name created in rapyuta io to pull the docker image. This is valid if the strategy_type is set to docker",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "docker_push_secret",
+      "displayName": "Docker Push Secret",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Secret name created in rapyuta io to push the docker image. This is valid if the strategy_type is set to docker.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_simulation",
+      "displayName": "Enable Simulation",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to enable simulation in the build. Can be set to true only when is_ros is true.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_ros",
+      "displayName": "Is Ros",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the build has a ros component. If this parameter is set to true then a ros_distro is required.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the build.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "present",
+      "displayName": "Present",
+      "type": "boolean",
+      "required": true,
+      "default": null,
+      "description": "Whether build should be present or not.",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "repository",
+      "displayName": "Repository",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Repository to make the build from.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ros_distro",
+      "displayName": "Ros Distro",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Ros distribution to use for the build. This parameter is required only if the build has a ros component. Choices are case insensitive.",
+      "choices": [
+        "kinetic",
+        "melodic",
+        "noetic"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "source_secret",
+      "displayName": "Source Secret",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Represents secret for a private git repository.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "strategy_type",
+      "displayName": "Strategy Type",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Strategy type to make the build. Choices are case insensitive.",
+      "choices": [
+        "docker",
+        "source"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tag_name",
+      "displayName": "Tag Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If the build is already present and the trigger option is enabled then this option sets the tag name of the docker image.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "trigger",
+      "displayName": "Trigger",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "If the build is already present then this options lets you trigger the build. It is automatically set to true if there is a build with same name which failed and I(present=true).",
+      "choices": [
+        true,
+        false
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "trigger_name",
+      "displayName": "Trigger Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "If the build is already present and the trigger option is enabled then this option sets the trigger name of the docker image.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

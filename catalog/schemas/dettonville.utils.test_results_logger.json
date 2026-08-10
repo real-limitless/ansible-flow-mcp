@@ -1,0 +1,123 @@
+{
+  "fqcn": "dettonville.utils.test_results_logger",
+  "shortDescription": "Update test results.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dettonville/utils/test_results_logger_module.html",
+  "options": [
+    {
+      "name": "logging_level",
+      "displayName": "Logging Level",
+      "type": "string",
+      "required": false,
+      "default": "INFO",
+      "description": "Parameter used to define the level of troubleshooting output.",
+      "choices": [
+        "NOTSET",
+        "DEBUG",
+        "INFO",
+        "ERROR"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_case_base_dir",
+      "displayName": "Test Case Base Dir",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Base directory that test case files are located as specified in the O(test_case_file_prefix).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_case_file_prefix",
+      "displayName": "Test Case File Prefix",
+      "type": "string",
+      "required": false,
+      "default": "testcase_",
+      "description": "finds list of test case files where file names match specified prefix. must define a prefix to set/derived the test_case_id (e.g., '(prefix)(test_case_id)\\.yml'). If child directories exist in O(test_case_base_dir), the `test_suite_id` is set to respective parent directory. the 'test_suite_id' is set using the parent directory for each test case file in the O(test_case_base_dir). See examples for more details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_case_file_regex",
+      "displayName": "Test Case File Regex",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "defines the pattern regex to find the list of test case var files. See examples for more details. if not set the derived value is set to '(test_case_file_prefix)*.yml'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_case_id_capture_regex",
+      "displayName": "Test Case Id Capture Regex",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "defines the regex group capture pattern used to find the test case identifiers. See examples for more details. if not set the derived value is set to '(test_case_file_prefix)(.*?).yml'",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_junit_report_file",
+      "displayName": "Test Junit Report File",
+      "type": "string",
+      "required": false,
+      "default": "junit-report.xml",
+      "description": "path where the test junit report file will be written/saved.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_results",
+      "displayName": "Test Results",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Specifies a dictionary of test result dicts. See examples where test_suites and test_cases contain dynamic keys",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_results_dir",
+      "displayName": "Test Results Dir",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Directory where the O(test_results_file) and O(test_junit_report_file) test results are stored.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_results_file",
+      "displayName": "Test Results File",
+      "type": "string",
+      "required": false,
+      "default": "test-logger-results.yml",
+      "description": "Path to store test suite test results using internal YAML format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "test_suite_list",
+      "displayName": "Test Suite List",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "List of test suite directories located in the O(test_case_base_dir). Each test suite directory is set as the test_suite_id in the results dictionary",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

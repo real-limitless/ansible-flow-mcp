@@ -1,0 +1,87 @@
+{
+  "fqcn": "os_migrate.vmware_migration_kit.create_network_port",
+  "shortDescription": "Create network ports for a VM",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/os_migrate/vmware_migration_kit/create_network_port_module.html",
+  "options": [
+    {
+      "name": "cloud",
+      "displayName": "Cloud",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "A dictionary containing authentication and connection parameters for the destination OpenStack cloud. This should include details like C(auth_url), C(username), C(password), C(project_name), C(user_domain_name), C(project_domain_name), C(region_name), etc., or a C(cloud) key to use a clouds.yaml profile.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_name",
+      "displayName": "Network Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the network to which the ports should be attached.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "os_migrate_nics_file_path",
+      "displayName": "Os Migrate Nics File Path",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Path of the nics file dumped by the VMware migration kit. It could be the json macs_{{vm_name}}.json file or the nics_{{vm_name}}.json file.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_groups",
+      "displayName": "Security Groups",
+      "type": "list",
+      "required": false,
+      "default": [
+        "default"
+      ],
+      "description": "List of security groups to be attached to the ports.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_fixed_ips",
+      "displayName": "Use Fixed Ips",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to assign fixed IPs to the created ports based on the IP addresses found in the nics file. Only IPv4 addresses are used and other IPv6 addresses from VMware metadata are ignored so Neutron fixed IPs can target a single IPv4 subnet without requiring matching IPv6 subnets.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "used_mapped_networks",
+      "displayName": "Used Mapped Networks",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the nics file contains mapped networks or not.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name",
+      "displayName": "Vm Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the VM for which the nics file was dumped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

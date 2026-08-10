@@ -1,0 +1,263 @@
+{
+  "fqcn": "netautomate.netorca.netorca_service_item_info",
+  "shortDescription": "Query service items in NetOrca",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/netautomate/netorca/netorca_service_item_info_module.html",
+  "options": [
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "API key of your NetOrca team. The NetOrca API supports API-key authentication only - there is no username/password mode. Treat the key like a password - supply it via the E(NETORCA_API_KEY) environment variable (for example from a CI/CD secret) or from Ansible Vault, never as a literal in a playbook. If not set, the value of the E(NETORCA_API_KEY) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_url",
+      "displayName": "Api Url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Base URL of the NetOrca API, for example C(https://api.example.netorca.io). The URL is normalised to end in a single C(/v1), so passing it with or without the suffix both work. If not set, the value of the E(NETORCA_API_URL) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "application_id",
+      "displayName": "Application Id",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by ID of the consumer application the item belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "application_name",
+      "displayName": "Application Name",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by exact name of the consumer application the item belongs to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "application_name_contains",
+      "displayName": "Application Name Contains",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filter by application name (substring match).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "change_state",
+      "displayName": "Change State",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by the aggregated state of the item's change instances - for example V(CHANGES_APPROVED) finds items with approved work waiting to be deployed and V(ALL_CHANGES_COMPLETED) finds items with nothing outstanding.",
+      "choices": [
+        "ALL_CHANGES_COMPLETED",
+        "CHANGES_PENDING",
+        "CHANGES_ERRORED",
+        "CHANGES_REJECTED",
+        "CHANGES_APPROVED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "consumer_team_id",
+      "displayName": "Consumer Team Id",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by ID of the consuming team - the team whose application declared the item.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "context",
+      "displayName": "Context",
+      "type": "string",
+      "required": false,
+      "default": "serviceowner",
+      "description": "Point of view for the request. The same query returns different data depending on which side of the service relationship your team is on. V(serviceowner) operates on the services your team I(offers) - the requests made against them, their service items and deployed items. This is the side that validates, approves, deploys and completes changes. V(consumer) operates on what your team I(consumes) - the service items your applications declared and the change instances tracking your own requests. If",
+      "choices": [
+        "serviceowner",
+        "consumer"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "declaration",
+      "displayName": "Declaration",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Filter by exact match on declaration fields - every key/value pair must equal the corresponding field of the item's declaration, for example C({\"partition\": \"prod\"}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "declaration_contains",
+      "displayName": "Declaration Contains",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Filter by containment match on declaration fields - values match if they are contained in the corresponding field, for example C({\"comments\": \"web\"}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "declaration_regex",
+      "displayName": "Declaration Regex",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Filter by regular expression match on declaration fields - values are regexes matched against the corresponding field, for example C({\"name\": \"^prod-.*\"}).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dependant",
+      "displayName": "Dependant",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Query the dependant view (C(service_items/dependant)) instead of the plain listing. Lists the service items your team contributes to because the owning service declares your team in its C(dependant_teams) (see the NetOrca documentation on dependant teams).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Return only the service item with this ID. When set, all other filters are ignored. If the ID does not exist, an empty list is returned.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "limit",
+      "displayName": "Limit",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Maximum number of results to return. Results are auto-paginated, so by default all matching records are returned regardless of the API's page size.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filter by service item name (case-insensitive substring match).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ordering",
+      "displayName": "Ordering",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Server-side field to order results by, for example V(created) or V(modified). Prefix with C(-) for descending order - V(-modified) returns the most recently changed records first.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "runtime_state",
+      "displayName": "Runtime State",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by lifecycle state - V(REQUESTED) (declared, CREATE change not yet completed), V(IN_SERVICE) (deployed) or V(DECOMMISSIONED) (DELETE change completed). The platform excludes C(DECOMMISSIONED) items from listings unless this filter is set.",
+      "choices": [
+        "REQUESTED",
+        "IN_SERVICE",
+        "DECOMMISSIONED"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_id",
+      "displayName": "Service Id",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by service ID.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_name",
+      "displayName": "Service Name",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by exact service name, for example V(LOAD_BALANCER). This is usually the first filter a service owner sets - it scopes the query to one of the services the team offers.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_owner_id",
+      "displayName": "Service Owner Id",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by ID of the service owner.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_owner_team_id",
+      "displayName": "Service Owner Team Id",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Filter by ID of the team that owns the service.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate TLS certificates when talking to the API. Only disable this for lab instances with self-signed certificates. If not set, the value of the E(NETORCA_VALIDATE_CERTS) environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

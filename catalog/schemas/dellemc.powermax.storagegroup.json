@@ -1,0 +1,284 @@
+{
+  "fqcn": "dellemc.powermax.storagegroup",
+  "shortDescription": "Manage storage groups on PowerMax or VMAX Storage System",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/powermax/storagegroup_module.html",
+  "options": [
+    {
+      "name": "child_sg_state",
+      "displayName": "Child Sg State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Describes the state of CSG inside parent SG.",
+      "choices": [
+        "present-in-group",
+        "absent-in-group"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "child_storage_groups",
+      "displayName": "Child Storage Groups",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "This is a list of child storage groups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compression",
+      "displayName": "Compression",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Compression on storage group. Compression parameter is ignored if service_level is not specified. Default is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "This flag is to be set to True while moving volumes to target SG if volume is in a masking view.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_io_limit",
+      "displayName": "Host Io Limit",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Host I/O limit of the storage group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_sg_name",
+      "displayName": "New Sg Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The new name of the storage group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the Unisphere host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 8443,
+      "description": "The port of the Unisphere host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rdf_auto_resolve_target",
+      "displayName": "Rdf Auto Resolve Target",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When true, automatically queries the array to discover the actual remote storage group name. Ignored if I(rdf_target_sg_name) is specified. Applicable only for SRDF-protected storage groups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "rdf_target_sg_name",
+      "displayName": "Rdf Target Sg Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the remote (R2) storage group on the target array. Used when the R2 storage group has a different name from the R1 (source) storage group. If not specified and I(rdf_auto_resolve_target) is false, the R1 storage group name is used. Applicable only for SRDF-protected storage groups.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "serial_no",
+      "displayName": "Serial No",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The serial number of the PowerMax/VMAX array. It is a required parameter for all array-specific operations except for getting a list of arrays in the Gatherfacts module.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_level",
+      "displayName": "Service Level",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of SLO.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sg_name",
+      "displayName": "Sg Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the storage group.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_policies",
+      "displayName": "Snapshot Policies",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of snapshot policies.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot_policy_state",
+      "displayName": "Snapshot Policy State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Describes the state of snapshot policy for an SG.",
+      "choices": [
+        "present-in-group",
+        "absent-in-group"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "srp",
+      "displayName": "Srp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the storage resource pool. This parameter is ignored if service_level is not specified. Default is to use whichever is the default SRP on the array.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Define whether the storage group should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_sg_name",
+      "displayName": "Target Sg Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The destination SG name to move the volumes to.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Time after which the connection will get terminated. It is to be mentioned in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "unispherehost",
+      "displayName": "Unispherehost",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the Unisphere host",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the Unisphere host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "verifycert",
+      "displayName": "Verifycert",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specifies system whether to validate SSL certificate or not, Values can be True or False or a custom file path for SSL certificate with .pem extension or .cer with base 64 encoding.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vol_state",
+      "displayName": "Vol State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Describes the state of volumes inside the SG.",
+      "choices": [
+        "present-in-group",
+        "absent-in-group"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "volumes",
+      "displayName": "Volumes",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "This is a list of volumes. Each volume has four attributes; vol_name, size, cap_unit, vol_id. Volume ID must be provided for existing volumes. The size must be provided to add new volumes to SG. The cap_unit is optional. Default value of cap_unit is GB, choices are MB, GB, TB.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

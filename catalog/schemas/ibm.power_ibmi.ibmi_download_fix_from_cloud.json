@@ -1,0 +1,89 @@
+{
+  "fqcn": "ibm.power_ibmi.ibmi_download_fix_from_cloud",
+  "shortDescription": "Download fix using the cloud API to Electronic Fix Delivery (EFD).",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ibm/power_ibmi/ibmi_download_fix_from_cloud_module.html",
+  "options": [
+    {
+      "name": "clean_directory",
+      "displayName": "Clean Directory",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Clean out contents of specified directory prior to download.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "credentials",
+      "displayName": "Credentials",
+      "type": "dict",
+      "required": true,
+      "default": null,
+      "description": "Machine credentials used to validate entitlement for the requested fix. Includes fields for 'machine_model', 'machine_type', 'serial_number', and 'country'. This information can be determined from the ibmi_facts module output.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "directory",
+      "displayName": "Directory",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Directory to download the fix files to. The directory is created if it does not already exist. The full or absolute directory path must be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "include_requisites",
+      "displayName": "Include Requisites",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Specifies if requisite PTFs should be included with the ordered PTFs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": "download",
+      "description": "The various operations include Download the fix (includes validating fix entitlement based on the provided credentials). Validate machine entitlement for the fix based on credentials provided. No download occurs. Preview the fix. Useful for viewing the pre/co-requisite fixes. No download occurs.",
+      "choices": [
+        "download",
+        "validate",
+        "preview"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ptf_id",
+      "displayName": "Ptf Id",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Specify the identifier of the PTF information being ordered.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "time_out",
+      "displayName": "Time Out",
+      "type": "string",
+      "required": false,
+      "default": "15m",
+      "description": "The max time that the module waits for the download to complete. The unit can be 's', 'm', 'h', 'd' and 'w'. Future parameter to enforce. Currently we only enforce the recommended 2 minute timeout for cloud API handshake and do not time out for the PTF image download, but we plan to incorporate an enforced time out that factors in the image download time in a future release.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,302 @@
+{
+  "fqcn": "sensu.sensu_go.check",
+  "shortDescription": "Manage Sensu checks",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/sensu/sensu_go/check_module.html",
+  "options": [
+    {
+      "name": "annotations",
+      "displayName": "Annotations",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Custom metadata fields with fewer restrictions, as key/value pairs. These are preserved by Sensu but not accessible as tokens or identifiers, and are mainly intended for use with external tools.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Authentication parameters. Can define each of them with ENV as well.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_hooks",
+      "displayName": "Check Hooks",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A mapping of response codes to hooks which will be run by the agent when that code is returned. Note that the structure of this parameter is a bit different from the one described at U(https://docs.sensu.io/sensu-go/latest/reference/checks/#check-hooks-attribute). See check hooks example below for more information on exact mapping structure.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "command",
+      "displayName": "Command",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Check command to run. Required if I(state) is C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "cron",
+      "displayName": "Cron",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Schedule check requests using crontab syntax. Cannot be used when I(interval) option is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "env_vars",
+      "displayName": "Env Vars",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "A mapping of environment variable names and values to use with command execution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "handlers",
+      "displayName": "Handlers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of handlers which receive check results.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "high_flap_threshold",
+      "displayName": "High Flap Threshold",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "High flap threshold.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interval",
+      "displayName": "Interval",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Check request interval. Cannot be used when I(cron) option is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "labels",
+      "displayName": "Labels",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Custom metadata fields that can be accessed within Sensu, as key/value pairs.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "low_flap_threshold",
+      "displayName": "Low Flap Threshold",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Low flap threshold.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The Sensu resource's name. This name (in combination with the namespace where applicable) uniquely identifies the resource that Ansible operates on. If the resource with selected name already exists, Ansible module will update it to match the specification in the task. Consult the I(name) metadata attribute specification in the upstream docs on U(https://docs.sensu.io/sensu-go/latest/reference/) for more details about valid names and other restrictions.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "namespace",
+      "displayName": "Namespace",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "RBAC namespace to operate in. If this is not set the value of the SENSU_NAMESPACE environment variable will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output_metric_format",
+      "displayName": "Output Metric Format",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Enable parsing of metrics in the specified format from this check's output.",
+      "choices": [
+        "graphite_plaintext",
+        "influxdb_line",
+        "nagios_perfdata",
+        "opentsdb_line"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output_metric_handlers",
+      "displayName": "Output Metric Handlers",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of handlers which receive check results. I'm not sure why this exists.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_entity_name",
+      "displayName": "Proxy Entity Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Entity name to associate this check with instead of the agent it ran on.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "proxy_requests",
+      "displayName": "Proxy Requests",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Allows you to assign the check to run for multiple entities according to their entity_attributes.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "publish",
+      "displayName": "Publish",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables or disables scheduled publication of check requests.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "round_robin",
+      "displayName": "Round Robin",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "An array of environment variables to use with command execution.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "runtime_assets",
+      "displayName": "Runtime Assets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of runtime assets required to run the check.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secrets",
+      "displayName": "Secrets",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of secrets that are available to the command.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Target state of the Sensu object.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "stdin",
+      "displayName": "Stdin",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "Enables writing of serialized JSON data to the check command's stdin. Only usable with checks written specifically for Sensu Go.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "subscriptions",
+      "displayName": "Subscriptions",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of subscriptions which receive check requests. Required if I(state) is C(present).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Check execution timeout.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttl",
+      "displayName": "Ttl",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Amount of time after which a check result is considered stale.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

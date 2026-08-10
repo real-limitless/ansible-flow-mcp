@@ -1,0 +1,352 @@
+{
+  "fqcn": "infoblox.universal_ddi.ipam_ip_space",
+  "shortDescription": "Manages an IP Space.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/infoblox/universal_ddi/ipam_ip_space_module.html",
+  "options": [
+    {
+      "name": "asm_config",
+      "displayName": "Asm Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The Automated Scope Management configuration for the IP space.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "comment",
+      "displayName": "Comment",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description for the IP space. May contain 0 to 1024 characters. Can include UTF-8.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "compartment_id",
+      "displayName": "Compartment Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The compartment associated with the object. If no compartment is associated with the object, the value defaults to empty.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ddns_client_update",
+      "displayName": "Ddns Client Update",
+      "type": "string",
+      "required": false,
+      "default": "client",
+      "description": "Controls who does the DDNS updates. Valid values are: * I(client): DHCP server updates DNS if requested by client. * I(server): DHCP server always updates DNS, overriding an update request from the client, unless the client requests no updates. * I(ignore): DHCP server always updates DNS, even if the client says not to. * I(over_client_update): Same as I(server). DHCP server always updates DNS, overriding an update request from the client, unless the client requests no updates. * I(over_no_updat",
+      "choices": [
+        "client",
+        "server",
+        "ignore",
+        "over_client_update",
+        "over_no_update"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ddns_conflict_resolution_mode",
+      "displayName": "Ddns Conflict Resolution Mode",
+      "type": "string",
+      "required": false,
+      "default": "check_with_dhcid",
+      "description": "The mode used for resolving conflicts while performing DDNS updates. Valid values are: * I(check_with_dhcid): It includes adding a DHCID record and checking that record via conflict detection as per RFC 4703. * I(no_check_with_dhcid): This will ignore conflict detection but add a DHCID record when creating/updating an entry. * I(check_exists_with_dhcid): This will check if there is an existing DHCID record but does not verify the value of the record matches the update. This will also update the ",
+      "choices": [
+        "check_with_dhcid",
+        "no_check_with_dhcid",
+        "check_exists_with_dhcid",
+        "no_check_without_dhcid"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ddns_domain",
+      "displayName": "Ddns Domain",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The domain suffix for DDNS updates. FQDN, may be empty. Defaults to empty.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ddns_generate_name",
+      "displayName": "Ddns Generate Name",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates if DDNS needs to generate a hostname when not supplied by the client. Defaults to I(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ddns_generated_prefix",
+      "displayName": "Ddns Generated Prefix",
+      "type": "string",
+      "required": false,
+      "default": "myhost",
+      "description": "The prefix used in the generation of an FQDN. When generating a name, DHCP server will construct the name in the format: [ddns-generated-prefix]-[address-text].[ddns-qualifying-suffix]. where address-text is simply the lease IP address converted to a hyphenated string. Defaults to &quot;myhost&quot;.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ddns_send_updates",
+      "displayName": "Ddns Send Updates",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Determines if DDNS updates are enabled at the IP space level. Defaults to I(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ddns_ttl_percent",
+      "displayName": "Ddns Ttl Percent",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "DDNS TTL value - to be calculated as a simple percentage of the lease&#x27;s lifetime, using the parameter&#x27;s value as the percentage. It is specified as a percentage (e.g. 25, 75). Defaults to unspecified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ddns_update_on_renew",
+      "displayName": "Ddns Update On Renew",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Instructs the DHCP server to always update the DNS information when a lease is renewed even if its DNS information has not changed. Defaults to I(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ddns_use_conflict_resolution",
+      "displayName": "Ddns Use Conflict Resolution",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When true, DHCP server will apply conflict resolution, as described in RFC 4703, when attempting to fulfill the update request. When false, DHCP server will simply attempt to update the DNS entries per the request, regardless of whether or not they conflict with existing entries owned by other DHCP4 clients. Defaults to I(true).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_realms",
+      "displayName": "Default Realms",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The IDs of the default realms in which the IP Space participates.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dhcp_config",
+      "displayName": "Dhcp Config",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The shared DHCP configuration for the IP space that controls how leases are issued.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dhcp_options",
+      "displayName": "Dhcp Options",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of IPv4 DHCP options for IP space. May be either a specific option or a group of options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dhcp_options_v6",
+      "displayName": "Dhcp Options V6",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "The list of IPv6 DHCP options for IP space. May be either a specific option or a group of options.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "header_option_filename",
+      "displayName": "Header Option Filename",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The configuration for header option filename field.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "header_option_server_address",
+      "displayName": "Header Option Server Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The configuration for header option server address field.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "header_option_server_name",
+      "displayName": "Header Option Server Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The configuration for header option server name field.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname_rewrite_char",
+      "displayName": "Hostname Rewrite Char",
+      "type": "string",
+      "required": false,
+      "default": "-",
+      "description": "The character to replace non-matching characters with, when hostname rewrite is enabled. Any single ASCII character or no character if the invalid characters should be removed without replacement. Defaults to &quot;-&quot;.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname_rewrite_enabled",
+      "displayName": "Hostname Rewrite Enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Indicates if client supplied hostnames will be rewritten prior to DDNS update by replacing every character that does not match I(hostname_rewrite_regex) by I(hostname_rewrite_char). Defaults to I(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "hostname_rewrite_regex",
+      "displayName": "Hostname Rewrite Regex",
+      "type": "string",
+      "required": false,
+      "default": "[^a-zA-Z0-9_.]",
+      "description": "The regex bracket expression to match valid characters. Must begin with &quot;[&quot; and end with &quot;]&quot; and be a compilable POSIX regex. Defaults to &quot;[^a-zA-Z0-9_.]&quot;.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "id",
+      "displayName": "Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the object",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "inheritance_sources",
+      "displayName": "Inheritance Sources",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The inheritance configuration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the IP space. Must contain 1 to 256 characters. Can include UTF-8.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "portal_key",
+      "displayName": "Portal Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The API token for authentication against Infoblox BloxOne API. If not set, the environment variable E(INFOBLOX_PORTAL_KEY) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "portal_url",
+      "displayName": "Portal Url",
+      "type": "string",
+      "required": false,
+      "default": "https://csp.infoblox.com",
+      "description": "The Infoblox Cloud Services Portal (CSP) URL. If not set, the environment variable E(INFOBLOX_PORTAL_URL) will be used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Indicate desired state of the object",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "The tags for the IP space in JSON format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vendor_specific_option_option_space",
+      "displayName": "Vendor Specific Option Option Space",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The DHCP Option Space resource identifier.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

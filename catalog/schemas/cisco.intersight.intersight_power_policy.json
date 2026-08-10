@@ -1,0 +1,276 @@
+{
+  "fqcn": "cisco.intersight.intersight_power_policy",
+  "shortDescription": "Power Policy configuration for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_power_policy_module.html",
+  "options": [
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description for the Power Policy. Description can contain letters(a-z, A-Z), numbers(0-9), hyphen(-), period(.), colon(:), or an underscore(_).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dynamic_power_rebalancing",
+      "displayName": "Dynamic Power Rebalancing",
+      "type": "string",
+      "required": false,
+      "default": "Enabled",
+      "description": "Sets the dynamic power rebalancing mode of the chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage. Applicable for 'Chassis' and 'All' platforms.",
+      "choices": [
+        "Enabled",
+        "Disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "extended_power_capacity",
+      "displayName": "Extended Power Capacity",
+      "type": "string",
+      "required": false,
+      "default": "Enabled",
+      "description": "Sets the Extended Power Capacity of the Chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies. This option is only supported for Cisco UCS X series Chassis. Applicable for 'Chassis' and 'All' platforms.",
+      "choices": [
+        "Enabled",
+        "Disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the Power Policy. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Profiles, Policies, and Pools that are created within a Custom Organization are applicable only to devices in the same Organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_allocation",
+      "displayName": "Power Allocation",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Sets the limit for the maximum input power consumption by the chassis (in Watts). Set to 0 for no limit. Applicable for 'Chassis' and 'All' platforms.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_priority",
+      "displayName": "Power Priority",
+      "type": "string",
+      "required": false,
+      "default": "Low",
+      "description": "Sets the Power Priority of the Server. This priority is used to determine the initial power allocation for servers. This field is only supported for Cisco UCS B series and X series servers. Applicable for 'FIAttached' and 'All' platforms.",
+      "choices": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_profiling",
+      "displayName": "Power Profiling",
+      "type": "string",
+      "required": false,
+      "default": "Enabled",
+      "description": "Sets the Power Profiling of the Server. If Enabled, this field allows the power manager to run power profiling utility to determine the power needs of the server. This field is only supported for Cisco UCS X series servers. Applicable for 'FIAttached' and 'All' platforms.",
+      "choices": [
+        "Enabled",
+        "Disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_redundancy",
+      "displayName": "Power Redundancy",
+      "type": "string",
+      "required": false,
+      "default": "Grid",
+      "description": "Sets the Power Redundancy Mode of the Chassis. Redundancy Mode determines the number of PSUs the chassis keeps as redundant. N+2 mode is only supported for Cisco UCS X series Chassis. Applicable for 'Chassis' and 'All' platforms.",
+      "choices": [
+        "Grid",
+        "NotRedundant",
+        "N+1",
+        "N+2"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_restore",
+      "displayName": "Power Restore",
+      "type": "string",
+      "required": false,
+      "default": "AlwaysOff",
+      "description": "Sets the Power Restore State of the Server. In the absence of Intersight connectivity, the chassis/server will use this policy to recover the host power after a power loss event. Applicable for 'Standalone', 'FIAttached', and 'All' platforms.",
+      "choices": [
+        "AlwaysOff",
+        "AlwaysOn",
+        "LastState"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "power_save_mode",
+      "displayName": "Power Save Mode",
+      "type": "string",
+      "required": false,
+      "default": "Enabled",
+      "description": "Sets the power save mode of the chassis. If the requested power budget is less than available power capacity, the additional PSUs not required to comply with redundancy policy are placed in power save mode. Applicable for 'Chassis' and 'All' platforms.",
+      "choices": [
+        "Enabled",
+        "Disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "processor_package_power_limit",
+      "displayName": "Processor Package Power Limit",
+      "type": "string",
+      "required": false,
+      "default": "Default",
+      "description": "Sets the Processor Package Power Limit (PPL) of a server. PPL refers to the amount of power that a CPU can draw from the power supply. The Processor Package Power Limit (PPL) feature is currently available exclusively on Cisco UCS C225/C245 M8 servers. Applicable for 'Standalone', 'FIAttached', and 'All' platforms.",
+      "choices": [
+        "Default",
+        "Maximum",
+        "Minimum"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_platform",
+      "displayName": "Target Platform",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The platform type for which the power policy is intended. This determines which settings are applicable. This parameter is required when C(state) is C(present).",
+      "choices": [
+        "All",
+        "Standalone",
+        "FIAttached",
+        "Chassis"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

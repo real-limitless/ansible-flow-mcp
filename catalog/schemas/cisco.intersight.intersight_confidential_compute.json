@@ -1,0 +1,215 @@
+{
+  "fqcn": "cisco.intersight.intersight_confidential_compute",
+  "shortDescription": "Confidential computing BIOS policy for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_confidential_compute_module.html",
+  "options": [
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description of the BIOS policy.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable_tme",
+      "displayName": "Enable Tme",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override for Intel Total Memory Encryption (TME). TME is a prerequisite for SGX and encrypts all system memory with a platform key. Automatically enabled by intel_sgx profiles; set explicitly only to override.",
+      "choices": [
+        "platform-default",
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the BIOS policy. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "numa_optimized",
+      "displayName": "Numa Optimized",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Override for NUMA optimization. All confidential compute profiles enable NUMA optimization by default.",
+      "choices": [
+        "platform-default",
+        "enabled",
+        "disabled"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Profiles and Policies that are created within a Custom Organization are applicable only to devices in the same Organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "security_profile",
+      "displayName": "Security Profile",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The confidential computing security profile to apply. C(amd_sev) enables AMD Secure Encrypted Virtualization with memory encryption for VMs. Encrypts VM memory with per-VM keys so the hypervisor cannot read guest data. Requires AMD EPYC processors (Milan/Genoa or later). C(amd_sev_snp) enables AMD SEV with Secure Nested Paging for stronger isolation. Adds integrity protection on top of SEV memory encryption, preventing hypervisor tampering with guest memory mappings. Requires AMD EPYC Genoa or l",
+      "choices": [
+        "amd_sev",
+        "amd_sev_snp",
+        "intel_sgx",
+        "intel_sgx_with_auto_reg"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sev_asid_count",
+      "displayName": "Sev Asid Count",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Number of AMD SEV Address Space Identifiers (ASIDs) to allocate. Higher ASID counts allow more concurrent encrypted VMs but may reduce available ASIDs for SEV-SNP. Only applicable for amd_sev and amd_sev_snp security profiles.",
+      "choices": [
+        "platform-default",
+        "253 ASIDs",
+        "509 ASIDs"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sgx_epoch0",
+      "displayName": "Sgx Epoch0",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Intel SGX Epoch 0 value. Changing this invalidates all existing SGX sealed data. Only applicable for intel_sgx and intel_sgx_with_auto_reg profiles. Use with caution in production environments.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "sgx_epoch1",
+      "displayName": "Sgx Epoch1",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Intel SGX Epoch 1 value. Changing this invalidates all existing SGX sealed data. Only applicable for intel_sgx and intel_sgx_with_auto_reg profiles. Use with caution in production environments.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

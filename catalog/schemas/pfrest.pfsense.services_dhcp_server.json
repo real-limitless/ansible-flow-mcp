@@ -1,0 +1,402 @@
+{
+  "fqcn": "pfrest.pfsense.services_dhcp_server",
+  "shortDescription": "Manage individual DHCP Servers.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/pfrest/pfsense/services_dhcp_server_module.html",
+  "options": [
+    {
+      "name": "api_host",
+      "displayName": "Api Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The hostname or IP address of the pfSense device.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key",
+      "displayName": "Api Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "An API key to use for authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_password",
+      "displayName": "Api Password",
+      "type": "string",
+      "required": false,
+      "default": "pfsense",
+      "description": "The password to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_port",
+      "displayName": "Api Port",
+      "type": "number",
+      "required": false,
+      "default": 443,
+      "description": "The port number of the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_protocol",
+      "displayName": "Api Protocol",
+      "type": "string",
+      "required": false,
+      "default": "https",
+      "description": "The protocol to use when connecting to the pfSense API.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_username",
+      "displayName": "Api Username",
+      "type": "string",
+      "required": false,
+      "default": "admin",
+      "description": "The username to authenticate with the pfSense API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "defaultleasetime",
+      "displayName": "Defaultleasetime",
+      "type": "number",
+      "required": false,
+      "default": 7200,
+      "description": "The default DHCP lease validity period (in seconds). This is used for clients that do not ask for a specific expiration time.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "denyunknown",
+      "displayName": "Denyunknown",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Define how to handle unknown clients requesting DHCP leases. When set to `null`, any DHCP client will get an IP address within this scope/range on this interface. If set to `enabled`, any DHCP client with a MAC address listed in a static mapping on any scope(s)/interface(s) will get an IP address. If set to `class`, only MAC addresses listed in static mappings on this interface will get an IP address within this scope/range.",
+      "choices": [
+        "enabled",
+        "class"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dhcpleaseinlocaltime",
+      "displayName": "Dhcpleaseinlocaltime",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Display the DHCP lease times in local time instead of UTC.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "disablepingcheck",
+      "displayName": "Disablepingcheck",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Prevent the DHCP server from sending a ping to the address being assigned, where if no response has been heard, it assigns the address.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dnsserver",
+      "displayName": "Dnsserver",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The DNS servers to provide via DHCP. Leave empty to default to system nameservers.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domain",
+      "displayName": "Domain",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The domain to be assigned via DHCP.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "domainsearchlist",
+      "displayName": "Domainsearchlist",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The domain search list to provide via DHCP.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "enable",
+      "displayName": "Enable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable the DHCP server for this interface.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "failover_peerip",
+      "displayName": "Failover Peerip",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The interface IP address of the other firewall (failover peer) in this subnet. Leave empty to disable failover peering.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "gateway",
+      "displayName": "Gateway",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The gateway IPv4 address to provide via DHCP. This is only necessary if you are not using the interface's IP as the gateway. Specify `none` for no gateway assignment.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignorebootp",
+      "displayName": "Ignorebootp",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Force this DHCP server to ignore BOOTP queries.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ignoreclientuids",
+      "displayName": "Ignoreclientuids",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Prevent recording a unique identifier (UID) in client lease data if present in the client DHCP request. This option may be useful when a client can dual boot using different client identifiers but the same hardware (MAC) address. Note that the resulting server behavior violates the official DHCP specification.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interface",
+      "displayName": "Interface",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The interface to configure the DHCP server for. This field is only necessary when you wantto change the interface (ID) of an existing DHCP server, or you are replacing all DHCP server objects with a new configuration. Note that specifying an interface in this field will update the ID of the DHCP server to match the interface specified here. Leaving this field empty will retain the existing interface.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "lookup_fields",
+      "displayName": "Lookup Fields",
+      "type": "list",
+      "required": true,
+      "default": null,
+      "description": "The list of fields to use when looking up existing resources. This should be a list of field names that uniquely identify a resource.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mac_allow",
+      "displayName": "Mac Allow",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "MAC addresses this DHCP server is allowed to provide leases for.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mac_deny",
+      "displayName": "Mac Deny",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "MAC addresses this DHCP server is not allowed to provide leases for.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "maxleasetime",
+      "displayName": "Maxleasetime",
+      "type": "number",
+      "required": false,
+      "default": 86400,
+      "description": "The maximum DHCP lease validity period (in seconds) a client can request.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nonak",
+      "displayName": "Nonak",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Ignore denied clients rather than reject. This option is not compatible with failover and cannot be enabled when a Failover Peer IP address is configured.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ntpserver",
+      "displayName": "Ntpserver",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The NTP servers to provide via DHCP.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "numberoptions",
+      "displayName": "Numberoptions",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The custom DHCP options to apply to this DHCP server.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "pool",
+      "displayName": "Pool",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Additional address pools applied to this DHCP server.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "range_from",
+      "displayName": "Range From",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The starting IP address for the primary DHCP pool. This address must be less than or equal to the `range_to` field.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "range_to",
+      "displayName": "Range To",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The ending IP address for the primary DHCP pool. This address must be greater than or equal to the `range_to` field.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Whether the resource should be present or absent.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "staticarp",
+      "displayName": "Staticarp",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Assign static ARP entries for DHCP leases provided by this server.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "staticmap",
+      "displayName": "Staticmap",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "Static mappings applied to this DHCP server.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "statsgraph",
+      "displayName": "Statsgraph",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable adding DHCP lease statistics to the pfSense Monitoring graphs.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate SSL certificates when connecting to the API.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "winsserver",
+      "displayName": "Winsserver",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The WINS servers to provide via DHCP.",
+      "choices": [],
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,194 @@
+{
+  "fqcn": "ansible.eda.user",
+  "shortDescription": "Manage users in EDA controller",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/ansible/eda/user_module.html",
+  "options": [
+    {
+      "name": "controller_host",
+      "displayName": "Controller Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The URL of the EDA controller. If not set, the value of C(CONTROLLER_HOST), or E(AAP_HOSTNAME) environment variables will be used. Support for E(AAP_HOSTNAME) has been added in version 2.7.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller_password",
+      "displayName": "Controller Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Password used for authentication. If not set, the value of C(CONTROLLER_PASSWORD), or E(AAP_PASSWORD) environment variables will be used. Support for E(AAP_PASSWORD) has been added in version 2.7.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller_token",
+      "displayName": "Controller Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Token used for authentication. If not set, the value of C(CONTROLLER_TOKEN), E(AAP_TOKEN), or E(AAP_OAUTH_TOKEN) environment variables will be used. Support for E(CONTROLLER_TOKEN), E(AAP_TOKEN), and E(AAP_OAUTH_TOKEN) has been added in version 2.10.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "controller_username",
+      "displayName": "Controller Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Username used for authentication. If not set, the value of C(CONTROLLER_USERNAME), or E(AAP_USERNAME) environment variables will be used. Support for E(AAP_USERNAME) has been added in version 2.7.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "email",
+      "displayName": "Email",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Email address of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "first_name",
+      "displayName": "First Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "First name of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_superuser",
+      "displayName": "Is Superuser",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Make user as superuser. This parameter is valid for AAP 2.5 and onwards.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "last_name",
+      "displayName": "Last Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Last name of the user.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "new_username",
+      "displayName": "New Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Setting this option will change the existing username.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Write-only field used to change the password.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "request_timeout",
+      "displayName": "Request Timeout",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Timeout in seconds for the connection with the EDA controller. If not set, the value of C(CONTROLLER_TIMEOUT), E(AAP_REQUEST_TIMEOUT) environment variables will be used. Support for E(AAP_REQUEST_TIMEOUT) has been added in version 2.7.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "roles",
+      "displayName": "Roles",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Set of roles to be associated with the user. This parameter is only valid and required if targeted controller is AAP 2.4 and O(state=present). For AAP 2.5 and onwards this parameter is ignored.",
+      "choices": [
+        "Admin",
+        "Editor",
+        "Contributor",
+        "Operator",
+        "Auditor",
+        "Viewer"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Desired state of the resource.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update_secrets",
+      "displayName": "Update Secrets",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "V(true) will always change password if user specifies password, even if API gives $encrypted$ for password. V(false) will only set the password if other values change too.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name of the user. 150 characters or fewer. Name can contain letters, digits and ('@', '.', '+', '-', '_') only.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to allow insecure connections to Ansible Automation Platform EDA Controller instance. If C(no), SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates. If value not set, will try environment variable C(CONTROLLER_VERIFY_SSL), or E(AAP_VALIDATE_CERTS). Support for E(AAP_VALIDATE_CERTS) has been added in version 2.7.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

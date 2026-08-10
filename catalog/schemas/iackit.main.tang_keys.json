@@ -1,0 +1,90 @@
+{
+  "fqcn": "iackit.main.tang_keys",
+  "shortDescription": "Manage key material on a tang server",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/iackit/main/tang_keys_module.html",
+  "options": [
+    {
+      "name": "cachedir",
+      "displayName": "Cachedir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Absolute path to the on-disk cache directory used by older tang releases. Ignored when I(update) does not exist.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Always create new keys, even if the key directory already contains keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keydir",
+      "displayName": "Keydir",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Absolute path to the directory holding the tang keys.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keygen",
+      "displayName": "Keygen",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Absolute path to the C(tangd-keygen) helper used to create new keys. Required for C(keys-created), C(keys-rotated) and C(keys-deployed).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "keys_to_deploy_dir",
+      "displayName": "Keys To Deploy Dir",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Directory on the managed node holding the C(*.jwk) files to deploy. Required for C(state=keys-deployed).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Operation to perform. C(keys-created) generates new keys when the key directory has no visible keys yet. Existing keys are kept untouched. C(keys-rotated) renames every visible C(*.jwk) file in the key directory to a hidden C(.*.jwk) file and then creates a fresh set of keys. Hidden keys continue to be honoured by tang for existing clients but are no longer advertised. C(keys-deployed) copies all C(*.jwk) files from I(keys_to_deploy_dir) into the key directory and rotates any conflicting keys. C",
+      "choices": [
+        "keys-rotated",
+        "keys-created",
+        "keys-deployed",
+        "cache-updated"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "update",
+      "displayName": "Update",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Absolute path to the C(tangd-update) helper used to update the on-disk cache. When the path does not exist the cache update step is silently skipped.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,300 @@
+{
+  "fqcn": "dellemc.powerstore.nfs",
+  "shortDescription": "Manage NFS exports for PowerStore",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/dellemc/powerstore/nfs_module.html",
+  "options": [
+    {
+      "name": "anonymous_gid",
+      "displayName": "Anonymous Gid",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the group ID of the anonymous account. If not specified at the time of creation, it will be set to -2.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "anonymous_uid",
+      "displayName": "Anonymous Uid",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Specifies the user ID of the anonymous account. If not specified at the time of creation, it will be set to -2.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "array_ip",
+      "displayName": "Array Ip",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "IP or FQDN of the PowerStore management system.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "default_access",
+      "displayName": "Default Access",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Default access level for all hosts that can access the Export. For hosts that need different access than the default, they can be configured by adding to the list. If I(default_access) is not mentioned during creation, then NFS export will be created with C(No_Access).",
+      "choices": [
+        "NO_ACCESS",
+        "READ_ONLY",
+        "READ_WRITE",
+        "ROOT",
+        "READ_ONLY_ROOT"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The description for the NFS export.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "filesystem",
+      "displayName": "Filesystem",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID/Name of the filesystem for which the NFS export will be created. Either filesystem or snapshot is required for creation of the NFS Export. If filesystem name is specified, then I(nas_server) is required to uniquely identify the filesystem. If I(filesystem) parameter is provided, then I(snapshot) cannot be specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host_state",
+      "displayName": "Host State",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Define whether the hosts can access the NFS export. Required when adding or removing host access from the export.",
+      "choices": [
+        "present-in-export",
+        "absent-in-export"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "is_no_suid",
+      "displayName": "Is No Suid",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If set, do not allow access to set SUID. Otherwise, allow access. If not specified at the time of creation, it will be set to C(false).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "min_security",
+      "displayName": "Min Security",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "NFS enforced security type for users accessing an NFS export. If not specified at the time of creation, it will be set to C(SYS).",
+      "choices": [
+        "SYS",
+        "KERBEROS",
+        "KERBEROS_WITH_INTEGRITY",
+        "KERBEROS_WITH_ENCRYPTION"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nas_server",
+      "displayName": "Nas Server",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The NAS server. This could be the name or ID of the NAS server.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nfs_export_id",
+      "displayName": "Nfs Export Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID of the NFS export.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "nfs_export_name",
+      "displayName": "Nfs Export Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the NFS export. Mandatory for create operation. Specify either I(nfs_export_name) or I(nfs_export_id) but not both for any operation.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "no_access_hosts",
+      "displayName": "No Access Hosts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Hosts with no access to the NFS export.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The password of the PowerStore host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "path",
+      "displayName": "Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Local path to export relative to the NAS server root. With NFS, each export of a file_system or file_snap must have a unique local path. Mandatory while creating NFS export.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Port number for the PowerStore array. If not passed, it will take 443 as default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_only_hosts",
+      "displayName": "Read Only Hosts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Hosts with read-only access to the NFS export.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_only_root_hosts",
+      "displayName": "Read Only Root Hosts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Hosts with read-only access for root user to the NFS export.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_write_hosts",
+      "displayName": "Read Write Hosts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Hosts with read and write access to the NFS export.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "read_write_root_hosts",
+      "displayName": "Read Write Root Hosts",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "Hosts with read and write access for root user to the NFS export.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "snapshot",
+      "displayName": "Snapshot",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The ID/Name of the Snapshot for which NFS export will be created. Either I(filesystem) or I(snapshot) is required for creation of the NFS Export. If snapshot name is specified, then I(nas_server) is required to uniquely identify the snapshot. If I(snapshot) parameter is provided, then I(filesystem) cannot be specified. NFS export can be created only if access type of snapshot is \"protocol\".",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Define whether the NFS export should exist or not.",
+      "choices": [
+        "absent",
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Time after which the connection will get terminated. It is to be mentioned in seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "user",
+      "displayName": "User",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The username of the PowerStore host.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean variable to specify whether to validate SSL certificate or not. C(true) - indicates that the SSL certificate should be verified. Set the environment variable REQUESTS_CA_BUNDLE to the path of the SSL certificate. C(false) - indicates that the SSL certificate should not be verified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

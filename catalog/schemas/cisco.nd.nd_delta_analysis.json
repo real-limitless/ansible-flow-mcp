@@ -1,0 +1,237 @@
+{
+  "fqcn": "cisco.nd.nd_delta_analysis",
+  "shortDescription": "Manage delta analysis jobs",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/nd/nd_delta_analysis_module.html",
+  "options": [
+    {
+      "name": "earlier_snapshot",
+      "displayName": "Earlier Snapshot",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Snapshot/Epoch UUID for the earlier snapshot/epoch Ignored if state is C(query) or C(absent)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "earlier_snapshot_time",
+      "displayName": "Earlier Snapshot Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Snapshot/Epoch collection time, in ISO format, for the earlier snapshot/epoch Ignored if state is C(query) or C(absent)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fabric",
+      "displayName": "Fabric",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Name of the fabric.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP Address or hostname of the Nexus Dashboard (ND) host. If the value is not specified in the task, the value of environment variable C(ND_HOST) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "insights_group",
+      "displayName": "Insights Group",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the insights group. This attribute should only be set for NDI versions prior to 6.3. Later versions require this attribute to be set to default.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_delay",
+      "displayName": "Job Wait Delay",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "The time to wait in seconds between queries to check for delta analysis job completion. This option is only used when O(state=validate).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "job_wait_timeout",
+      "displayName": "Job Wait Timeout",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The total time in seconds to wait for the delta analysis job to complete before validating. This option is only used when O(state=validate). When the timeout is C(0), not provided or a negative value the module will wait indefinitely.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "later_snapshot",
+      "displayName": "Later Snapshot",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Snapshot/Epoch UUID for the later snapshot/epoch Ignored if state is C(query) or C(absent)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "later_snapshot_time",
+      "displayName": "Later Snapshot Time",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Snapshot/Epoch collection time, in ISO format, for the later snapshot/epoch Ignored if state is C(query) or C(absent)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "login_domain",
+      "displayName": "Login Domain",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The login domain name to use for authentication. The default value is DefaultAuth. If the value is not specified in the task, the value of environment variable C(ND_LOGIN_DOMAIN) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The name of the delta analysis job",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "output_level",
+      "displayName": "Output Level",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "Influence the output of this ND module. C(normal) means the standard output, incl. C(current) dict C(info) adds informational output, incl. C(previous), C(proposed) and C(sent) dicts C(debug) adds debugging output, incl. C(filter_string), C(method), C(response), C(status) and C(url) information If the value is not specified in the task, the value of environment variable C(ND_OUTPUT_LEVEL) will be used instead.",
+      "choices": [
+        "debug",
+        "info",
+        "normal"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The password to use for authentication. If the value is not specified in the task, the value of environment variables C(ND_PASSWORD) or C(ANSIBLE_NET_PASSWORD) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Port number to be used for the REST connection. The default value depends on parameter `use_ssl`. If the value is not specified in the task, the value of environment variable C(ND_PORT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "query",
+      "description": "Use C(present) or C(absent) for creating or deleting a delta analysis job. Use C(query) for querying existing delta analysis jobs. Use C(validate) to wait for completion, validate and return an error if any unacknowledged anomalies (non-info) exist",
+      "choices": [
+        "absent",
+        "present",
+        "query",
+        "validate"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "The socket level timeout in seconds. If the value is not specified in the task, the value of environment variable C(ND_TIMEOUT) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts. If the value is not specified in the task, the value of environment variable C(ND_USE_PROXY) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_ssl",
+      "displayName": "Use Ssl",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If C(no), an HTTP connection will be used instead of the default HTTPS connection. If the value is not specified in the task, the value of environment variable C(ND_USE_SSL) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The username to use for authentication. If the value is not specified in the task, the value of environment variables C(ND_USERNAME) or C(ANSIBLE_NET_USERNAME) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "description": "If C(no), SSL certificates will not be validated. This should only set to C(no) when used on personally controlled sites using self-signed certificates. If the value is not specified in the task, the value of environment variable C(ND_VALIDATE_CERTS) will be used instead.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

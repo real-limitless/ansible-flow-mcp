@@ -1,0 +1,242 @@
+{
+  "fqcn": "gillbus.project.consul",
+  "shortDescription": "Add, modify & delete services within a consul cluster.",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/gillbus/project/consul_module.html",
+  "options": [
+    {
+      "name": "check_id",
+      "displayName": "Check Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "an ID for the service check. If I(state=absent), defaults to I(check_name). Ignored if part of a service definition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "check_name",
+      "displayName": "Check Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "a name for the service check. Required if standalone, ignored if part of service definition.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "dc",
+      "displayName": "Dc",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The datacenter that this agent will communicate with. By default the datacenter of the host is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": "localhost",
+      "description": "host of the consul agent defaults to localhost",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "http",
+      "displayName": "Http",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "checks can be registered with an HTTP endpoint. This means that consul will check that the http endpoint returns a successful HTTP status. I(interval) must also be provided with this option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interval",
+      "displayName": "Interval",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "the interval at which the service check will be run. This is a number with a s or m suffix to signify the units of seconds or minutes e.g C(15s) or C(1m). If no suffix is supplied, m will be used by default e.g. C(1) will be C(1m). Required if the I(script) parameter is specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "notes",
+      "displayName": "Notes",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Notes to attach to check when registering it.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": 8500,
+      "description": "the port on which the consul agent is running",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "scheme",
+      "displayName": "Scheme",
+      "type": "string",
+      "required": false,
+      "default": "http",
+      "description": "the protocol scheme on which the consul agent is running",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "script",
+      "displayName": "Script",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "the script/command that will be run periodically to check the health of the service. Scripts require I(interval) and vice versa.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_address",
+      "displayName": "Service Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "the address to advertise that the service will be listening on. This value will be passed as the I(address) parameter to Consul's U(/v1/agent/service/register) API method, so refer to the Consul API documentation for further details.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_id",
+      "displayName": "Service Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "the ID for the service, must be unique per node. If I(state=absent), defaults to the service name if supplied.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_name",
+      "displayName": "Service Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Unique name for the service on a node, must be unique per node, required if registering a service. May be omitted if registering a node level check",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "service_port",
+      "displayName": "Service Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "the port on which the service is listening. Can optionally be supplied for registration of a service, i.e. if I(service_name) or I(service_id) is set",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "register or deregister the consul service, defaults to present",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "tags that will be attached to the service registration.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tcp",
+      "displayName": "Tcp",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Checks can be registered with a TCP port. This means that consul will check if the connection attempt to that port is successful (that is, the port is currently accepting connections). The format is C(host:port), for example C(localhost:80). I(interval) must also be provided with this option.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A custom HTTP check timeout. The consul default is 10 seconds. Similar to the interval this is a number with a C(s) or C(m) suffix to signify the units of seconds or minutes, e.g. C(15s) or C(1m).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "the token key identifying an ACL rule set. May be required to register services.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ttl",
+      "displayName": "Ttl",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "checks can be registered with a ttl instead of a I(script) and I(interval) this means that the service will check in with the agent before the ttl expires. If it doesn't the check will be considered failed. Required if registering a check and the script an interval are missing Similar to the interval this is a number with a s or m suffix to signify the units of seconds or minutes e.g C(15s) or C(1m). If no suffix is supplied, C(m) will be used by default e.g. C(1) will be C(1m)",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": "yes",
+      "description": "whether to verify the TLS certificate of the consul agent",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

@@ -1,0 +1,340 @@
+{
+  "fqcn": "cisco.intersight.intersight_iscsi_boot_policy",
+  "shortDescription": "Manage iSCSI Boot Policies for Cisco Intersight",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/cisco/intersight/intersight_iscsi_boot_policy_module.html",
+  "options": [
+    {
+      "name": "api_bearer_token",
+      "displayName": "Api Bearer Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for OAuth2 authentication with the Intersight API. When provided, I(api_key_id) and I(api_private_key) are not required and the C(cryptography) Python library is not needed. If not set, the value of the INTERSIGHT_API_BEARER_TOKEN environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_key_id",
+      "displayName": "Api Key Id",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Public API Key ID associated with the private key. If not set, the value of the INTERSIGHT_API_KEY_ID environment variable is used. Required if I(api_bearer_token) is not provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_private_key",
+      "displayName": "Api Private Key",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Filename (absolute path) or string of PEM formatted private key data to be used for Intersight API authentication. If a string is used, Ansible vault should be used to encrypt string data. Ex. ansible-vault encrypt_string --vault-id tme@/Users/dsoper/Documents/vault_password_file '-----BEGIN EC PRIVATE KEY-----     <your private key data>     -----END EC PRIVATE KEY-----' If not set, the value of the INTERSIGHT_API_PRIVATE_KEY environment variable is used. Required if I(api_bearer_token) is not ",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "api_uri",
+      "displayName": "Api Uri",
+      "type": "string",
+      "required": false,
+      "default": "https://intersight.com/api/v1",
+      "description": "URI used to access the Intersight API. If not set, the value of the INTERSIGHT_API_URI environment variable is used.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "auto_targetvendor_name",
+      "displayName": "Auto Targetvendor Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 64 characters. Required when target_source_type is auto and iscsi_ip_type is ipv4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "chap",
+      "displayName": "Chap",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "CHAP authentication parameters for iSCSI Target. Provide user_id and password to enable CHAP authentication. Leave empty or omit to disable CHAP authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "description",
+      "displayName": "Description",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The user-defined description for the iSCSI Boot Policy. Description can contain letters(a-z, A-Z), numbers(0-9), hyphen(-), period(.), colon(:), or an underscore(_).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initiator_ip_pool_name",
+      "displayName": "Initiator Ip Pool Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Name of the IP pool to use for initiator IP address assignment. Required when initiator_ip_source is pool.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initiator_ip_source",
+      "displayName": "Initiator Ip Source",
+      "type": "string",
+      "required": false,
+      "default": "dhcp",
+      "description": "Method for assigning initiator IP address. dhcp - Obtain IP address automatically via DHCP. pool - Use an IP pool for address assignment. static - Manually configure static IP address.",
+      "choices": [
+        "dhcp",
+        "pool",
+        "static"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initiator_static_ipv4_address",
+      "displayName": "Initiator Static Ipv4 Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Static IPv4 address provided for iSCSI Initiator. Required when initiator_ip_source is static and iscsi_ip_type is ipv4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initiator_static_ipv4_gateway",
+      "displayName": "Initiator Static Ipv4 Gateway",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP address of the default IPv4 gateway. Required when initiator_ip_source is static and iscsi_ip_type is ipv4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initiator_static_ipv4_netmask",
+      "displayName": "Initiator Static Ipv4 Netmask",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address. Required when initiator_ip_source is static and iscsi_ip_type is ipv4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initiator_static_ipv4_primary_dns",
+      "displayName": "Initiator Static Ipv4 Primary Dns",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP Address of the primary Domain Name System (DNS) server. Optional when initiator_ip_source is static and iscsi_ip_type is ipv4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initiator_static_ipv4_secondary_dns",
+      "displayName": "Initiator Static Ipv4 Secondary Dns",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP Address of the secondary Domain Name System (DNS) server. Optional when initiator_ip_source is static and iscsi_ip_type is ipv4.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initiator_static_ipv6_address",
+      "displayName": "Initiator Static Ipv6 Address",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Static IPv6 address provided for iSCSI Initiator. Required when initiator_ip_source is static and iscsi_ip_type is ipv6.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initiator_static_ipv6_gateway",
+      "displayName": "Initiator Static Ipv6 Gateway",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "IP address of the default IPv6 gateway. Required when initiator_ip_source is static and iscsi_ip_type is ipv6.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "initiator_static_ipv6_prefix",
+      "displayName": "Initiator Static Ipv6 Prefix",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The integer length of the prefix that masks the IP address and divides it into network and host addresses. Required when initiator_ip_source is static and iscsi_ip_type is ipv6.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iscsi_adapter_policy_name",
+      "displayName": "Iscsi Adapter Policy Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Relationship to the iSCSI Adapter Policy. Name of the iSCSI adapter policy to associate with this boot policy. Optional for all configurations.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "iscsi_ip_type",
+      "displayName": "Iscsi Ip Type",
+      "type": "string",
+      "required": false,
+      "default": "ipv4",
+      "description": "Type of the IP address requested for iSCSI vNIC - IPv4/IPv6. ipv4 supports both auto and static target source types. ipv6 only supports static target source type (not auto). Both ipv4 and ipv6 support dhcp, pool, and static initiator IP sources.",
+      "choices": [
+        "ipv4",
+        "ipv6"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mutual_chap",
+      "displayName": "Mutual Chap",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Mutual CHAP authentication parameters for iSCSI Initiator. Two-way CHAP mechanism. Provide user_id and password to enable Mutual CHAP authentication. Leave empty or omit to disable Mutual CHAP authentication.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "name",
+      "displayName": "Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name assigned to the iSCSI Boot Policy. Must be unique within the organization. The name must be between 1 and 64 alphanumeric characters, allowing special characters :-_.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "organization",
+      "displayName": "Organization",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "The name of the Organization this resource is assigned to. Policies created within a Custom Organization are applicable only to devices in the same Organization. Use 'default' for the default organization.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "primary_target_policy_name",
+      "displayName": "Primary Target Policy Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies Target Profile information for iSCSI Boot. Name of the primary iSCSI static target policy. Required when target_source_type is static.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "secondary_target_policy_name",
+      "displayName": "Secondary Target Policy Name",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Specifies Target Profile information for iSCSI Boot. Optional when target_source_type is static.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "If C(present), will verify the resource is present and will create if needed. If C(absent), will verify the resource is absent and will delete if needed.",
+      "choices": [
+        "present",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "list",
+      "required": false,
+      "default": null,
+      "description": "List of tags in Key:<user-defined key> Value:<user-defined value> format.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "target_source_type",
+      "displayName": "Target Source Type",
+      "type": "string",
+      "required": false,
+      "default": "static",
+      "description": "Target discovery method. auto - Automatic target discovery using DHCP vendor ID/IQN. static - Manual target configuration using target policies.",
+      "choices": [
+        "auto",
+        "static"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "use_proxy",
+      "displayName": "Use Proxy",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Boolean control for verifying the api_uri TLS certificate",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

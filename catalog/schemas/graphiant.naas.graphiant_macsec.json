@@ -1,0 +1,133 @@
+{
+  "fqcn": "graphiant.naas.graphiant_macsec",
+  "shortDescription": "Configure interface MACsec (802.1AE) on Edge/Gateway devices",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/graphiant/naas/graphiant_macsec_module.html",
+  "options": [
+    {
+      "name": "access_token",
+      "displayName": "Access Token",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Bearer token for API authentication (for example, from C(graphiant login), which opens a browser for sign-in (SSO or non-SSO) and retrieves the token). If not passed as a module argument, the collection reads C(GRAPHIANT_ACCESS_TOKEN) (set after C(graphiant login) when you C(source ~/.graphiant/env.sh)). When a bearer token is present (module argument or environment), it takes precedence over O(username) and O(password). If no valid token is available, the module authenticates with O(username) a",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "detailed_logs",
+      "displayName": "Detailed Logs",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Enable detailed logging in the task result message.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "device",
+      "displayName": "Device",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Portal device hostname for C(get_device_id). With C(macsec_config_file), optional overrides. Required when C(macsec_config_file) is omitted (single-device mode).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Graphiant portal host URL for API connectivity. Example: \"https://api.graphiant.com\"",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "interfaces",
+      "displayName": "Interfaces",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Map of main interface name to MACsec settings (ethernet or LAG only; not subinterfaces). Each value may include C(enabled), C(encryptionEnforcementMode), C(keyServerPriority), C(presharedKeys), and C(sakConfiguration).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "macsec_config_file",
+      "displayName": "Macsec Config File",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to YAML (optional if C(device) is set with C(interfaces)). Relative paths resolve using the collection config path (see C(GRAPHIANT_CONFIGS_PATH)). Top-level key C(macsec) is a list of dicts; each dict has one key, the portal device name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "operation",
+      "displayName": "Operation",
+      "type": "string",
+      "required": false,
+      "default": "configure",
+      "description": "Only C(configure) is supported.",
+      "choices": [
+        "configure"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "password",
+      "displayName": "Password",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal password for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "present",
+      "description": "Only C(present) is supported.",
+      "choices": [
+        "present"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "username",
+      "displayName": "Username",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Graphiant portal username for authentication. Required for password-based login when no valid bearer token is available from O(access_token) or C(GRAPHIANT_ACCESS_TOKEN).",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vault_devices_macsec_psk",
+      "displayName": "Vault Devices Macsec Psk",
+      "type": "dict",
+      "required": false,
+      "default": {},
+      "description": "Nested map C(device \u2192 interface \u2192 ckn \u2192 cak) from Ansible Vault via C(include_vars) (key C(vault_devices_macsec_psk) in C(configs/vault_secrets.yml)). When YAML or C(interfaces) omit C(cak) but include C(ckn), the module looks up CAK by C(ckn). Explicit C(cak) in YAML or module params is not overwritten.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

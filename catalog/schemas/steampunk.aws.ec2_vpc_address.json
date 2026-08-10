@@ -1,0 +1,89 @@
+{
+  "fqcn": "steampunk.aws.ec2_vpc_address",
+  "shortDescription": "Manage EC2 VPC addresses",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/steampunk/aws/ec2_vpc_address_module.html",
+  "options": [
+    {
+      "name": "auth",
+      "displayName": "Auth",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Parameters for authenticating with the AWS service. Each of them may be defined via environment variables.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "clear_tags",
+      "displayName": "Clear Tags",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to clear any existing tags on the resource that are not explicitly stated in I(tags). By default, existing tags are kept on the resource. When this parameter is set to C(true), any pre-existing tags on the resource are removed.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "instance",
+      "displayName": "Instance",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the instance whose primary network interface the VPC address will be associated with. The value of this parameter is only relevant when I(state) is C(associated). Exactly one of I(instance), I(network_interface) is required. When updating an existing VPC address that is already associated, the module will perform re-association.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "ip",
+      "displayName": "Ip",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "The public (Elastic) IP address. You can use this parameter to uniquely identify the VPC address. If I(state) is C(present) and the VPC address with the specified public IP does not exist, the module will attempt to reclaim the specified public IP.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "network_interface",
+      "displayName": "Network Interface",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "ID of the network interface to associate the VPC address with. VPC address will be associated with the primary private IP of the specified network interface. The value of this parameter is only relevant when I(state) is C(associated). Exactly one of I(network_interface), I(instance) is required. When updating an existing VPC address that is already associated, the module will perform re-association.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": false,
+      "default": "associated",
+      "description": "The desired state of the VPC address. I(state) C(associated) if not already, it will allocate address, and associated it with instance or network interface. If I(state) is C(allocated), the VPC address will be allocated or if already associated with an instance it will be disassociated, but not released. If I(state) is C(absent), the VPC address will be automatically disassociated from the network interface or instance, if necessary.",
+      "choices": [
+        "associated",
+        "allocated",
+        "absent"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "tags",
+      "displayName": "Tags",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Metadata for the AWS resource as key/value pairs. Keys and values are case-sensitive.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

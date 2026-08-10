@@ -1,0 +1,110 @@
+{
+  "fqcn": "iackit.main.patroni_info",
+  "shortDescription": "Query Patroni REST endpoints for cluster information",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/iackit/main/patroni_info_module.html",
+  "options": [
+    {
+      "name": "config_path",
+      "displayName": "Config Path",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Path to the Patroni configuration file (patroni.yml). If specified, the module will parse this file to extract REST API settings. Required if protocol, host, or port are not specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fail_on_error",
+      "displayName": "Fail On Error",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, the module will fail on connection errors. If false, it will return the error status in the results instead. Useful for health checking and monitoring.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "fetch_config",
+      "displayName": "Fetch Config",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, the Patroni dynamic configuration is fetched from the server via the C(/config) REST endpoint. The result is returned in the C(config) key.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "host",
+      "displayName": "Host",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Hostname or IP address of the Patroni REST API. If not specified, will be extracted from config_path. Overrides the value from config_path if both are specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "mask_credentials",
+      "displayName": "Mask Credentials",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "If true, credentials in the fetched configuration are masked with the value C(REDACTED). Affects C(restapi.authentication.password) and C(postgresql.authentication.*.password). Only applies when O(fetch_config) is true.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "port",
+      "displayName": "Port",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Port number for the Patroni REST API. If not specified, will be extracted from config_path. Overrides the value from config_path if both are specified.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "protocol",
+      "displayName": "Protocol",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "description": "Protocol to use for the REST API request (http or https). If not specified, will be extracted from config_path. Overrides the value from config_path if both are specified.",
+      "choices": [
+        "http",
+        "https"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Timeout in seconds for the HTTP request.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "validate_certs",
+      "displayName": "Validate Certs",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to validate SSL certificates when using HTTPS.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}

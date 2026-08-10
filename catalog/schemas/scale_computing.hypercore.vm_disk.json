@@ -1,0 +1,89 @@
+{
+  "fqcn": "scale_computing.hypercore.vm_disk",
+  "shortDescription": "Manage VM's disks",
+  "docUrl": "https://docs.ansible.com/ansible/latest/collections/scale_computing/hypercore/vm_disk_module.html",
+  "options": [
+    {
+      "name": "cluster_instance",
+      "displayName": "Cluster Instance",
+      "type": "dict",
+      "required": false,
+      "default": null,
+      "description": "Scale Computing HyperCore instance information.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force",
+      "displayName": "Force",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "A safeguard to prevent unintentional removal of all disks. To remove all disks, items should be set to I(items=[]) and state should be I(state=set) (see example below). In addition, the I(force=true) must be provided.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "force_reboot",
+      "displayName": "Force Reboot",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Can VM be forced to power off and on. Only used when modifications to the VM require it to be powered off and VM does not respond to a shutdown request within I(shutdown_timeout) limit. Before this is utilized, a shutdown request is sent.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "items",
+      "displayName": "Items",
+      "type": "list",
+      "required": false,
+      "default": [],
+      "description": "The disk items we want to change.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "shutdown_timeout",
+      "displayName": "Shutdown Timeout",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "How long does ansible controller wait for VMs response to a shutdown request. In seconds.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "state",
+      "displayName": "State",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The desired state of the disks specified by I(items). With I(state=present) (or I(state=absent)), the disks in I(items) are added to VM, or removed from VM. Individual disk is resized if needed. With I(state=set), the VM is reconfigured to have exactly such disks as specified by I(items).",
+      "choices": [
+        "present",
+        "absent",
+        "set"
+      ],
+      "noLog": false,
+      "suboptions": null
+    },
+    {
+      "name": "vm_name",
+      "displayName": "Vm Name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Virtual machine name. Used to identify selected virtual machine by name.",
+      "choices": null,
+      "noLog": false,
+      "suboptions": null
+    }
+  ],
+  "source": "ansible-doc"
+}
