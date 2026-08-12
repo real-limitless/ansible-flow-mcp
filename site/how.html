@@ -94,26 +94,91 @@
           <p class="eyebrow">Schema Lab</p>
           <h2 class="section-title" style="margin-bottom: 8px">Pull the contract. Then dry-run.</h2>
           <p class="lede" style="margin-bottom: 16px">
-            Search the full gallery. Select a module. Load its committed slim schema — the same shape
-            agents receive from <span class="mono">get_module_schema</span>. Try typing
-            <span class="mono">shell</span> to see the deny path.
+            Search the full gallery (lazy shards + worker). Select a module. Load its committed slim
+            schema — the same shape agents receive from <span class="mono">get_module_schema</span>.
+            Try typing <span class="mono">shell</span> to see the deny path.
           </p>
           <div id="lab-status" class="lab-status">Initializing…</div>
+          <div id="lab-load" class="lab-load" hidden></div>
 
           <div class="lab" id="schema-lab">
             <div class="lab-search">
-              <label for="lab-q">search_modules</label>
-              <input
-                id="lab-q"
-                class="lab-input"
-                type="search"
-                placeholder="file, cloudflare, package, posix…"
-                autocomplete="off"
-                spellcheck="false"
-              />
-              <div id="lab-meta" class="lab-meta">—</div>
-              <ul id="lab-results" class="lab-results" aria-label="Module results"></ul>
+              <div class="lab-toolbar panel">
+                <div class="panel-head">
+                  <span class="title">search_modules</span>
+                  <span class="title" id="lab-meta">—</span>
+                </div>
+                <div class="lab-toolbar-body">
+                  <label class="field-label" for="lab-q">Query</label>
+                  <input
+                    id="lab-q"
+                    class="lab-input"
+                    type="search"
+                    placeholder="file, cloudflare, package, posix…"
+                    autocomplete="off"
+                    spellcheck="false"
+                  />
+                  <div class="lab-filters">
+                    <label class="filter-field">
+                      <span>Collection</span>
+                      <select id="lab-collection">
+                        <option value="">Any collection</option>
+                      </select>
+                    </label>
+                    <label class="filter-field">
+                      <span>Per page</span>
+                      <select id="lab-page-size">
+                        <option value="24">24</option>
+                        <option value="48" selected>48</option>
+                        <option value="96">96</option>
+                      </select>
+                    </label>
+                    <div class="seg" role="group" aria-label="View">
+                      <button type="button" class="seg-btn on" id="lab-view-list">List</button>
+                      <button type="button" class="seg-btn" id="lab-view-cards">Cards</button>
+                    </div>
+                    <button type="button" class="pill-btn" id="lab-reset">Reset</button>
+                  </div>
+                </div>
+              </div>
+
+              <nav class="lab-pager" id="lab-pager-top" aria-label="Results pagination top" hidden>
+                <button type="button" class="pill-btn page-prev">Prev</button>
+                <span class="pager-info mono">Page 1</span>
+                <button type="button" class="pill-btn page-next">Next</button>
+                <span class="pager-jump">
+                  <input class="page-jump-input" type="number" min="1" value="1" aria-label="Page" />
+                  <button type="button" class="pill-btn page-go">Go</button>
+                </span>
+              </nav>
+
+              <div id="lab-results-body" data-view="list">
+                <div id="lab-skeleton" class="lab-skeleton" aria-hidden="true">
+                  <div class="skel"></div>
+                  <div class="skel"></div>
+                  <div class="skel"></div>
+                  <div class="skel"></div>
+                </div>
+                <div id="lab-list-wrap">
+                  <ul id="lab-results" class="lab-results" aria-label="Module results"></ul>
+                </div>
+                <div id="lab-cards-wrap" hidden>
+                  <div id="lab-cards" class="lab-cards" aria-label="Module cards"></div>
+                </div>
+                <div id="lab-empty" class="schema-empty" hidden>No modules match.</div>
+              </div>
+
+              <nav class="lab-pager" id="lab-pager" aria-label="Results pagination bottom" hidden>
+                <button type="button" class="pill-btn page-prev">Prev</button>
+                <span class="pager-info mono">Page 1</span>
+                <button type="button" class="pill-btn page-next">Next</button>
+                <span class="pager-jump">
+                  <input class="page-jump-input" type="number" min="1" value="1" aria-label="Page" />
+                  <button type="button" class="pill-btn page-go">Go</button>
+                </span>
+              </nav>
             </div>
+
             <div class="lab-schema">
               <div id="lab-schema-head" class="lab-schema-head">
                 <h3>get_module_schema</h3>

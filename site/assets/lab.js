@@ -1,24 +1,48 @@
 (function () {
   const DENY = new Set(["command", "shell", "raw", "script"]);
   const statusEl = document.getElementById("lab-status");
+  const loadBar = document.getElementById("lab-load");
   const inputEl = document.getElementById("lab-q");
   const resultsEl = document.getElementById("lab-results");
+  const cardGrid = document.getElementById("lab-cards");
   const metaEl = document.getElementById("lab-meta");
   const schemaHead = document.getElementById("lab-schema-head");
   const schemaBody = document.getElementById("lab-schema-body");
   const previewEl = document.getElementById("lab-preview");
   const checkEl = document.getElementById("lab-check");
+  const collectionEl = document.getElementById("lab-collection");
+  const pageSizeEl = document.getElementById("lab-page-size");
+  const resultsBody = document.getElementById("lab-results-body");
 
-  if (!inputEl || !resultsEl) return;
+  if (!inputEl || (!resultsEl && !cardGrid)) return;
 
-  let gallery = [];
   let selected = null;
   let schemaRoot = null;
+  let collections = [];
+  const state = {
+    page: 1,
+    queryId: 0,
+    loaded: false,
+    corpus: 0,
+    debounce: null,
+    view: "list",
+  };
+
+  const PAGE_SIZES = [24, 48, 96];
+  const DEFAULT_PAGE_SIZE = 48;
 
   function setStatus(msg, cls) {
     if (!statusEl) return;
     statusEl.textContent = msg || "";
     statusEl.className = "lab-status" + (cls ? " " + cls : "");
+  }
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
   }
 
   function catalogCandidates() {
@@ -32,140 +56,422 @@
     return [...new Set(roots.map((r) => r.replace(/\/+$/, "")))];
   }
 
-  async function loadGallery() {
-    const cached = sessionStorage.getItem("af-gallery-v1");
-    if (cached) {
-      try {
-        gallery = JSON.parse(cached);
-        if (Array.isArray(gallery) && gallery.length) {
-          schemaRoot = sessionStorage.getItem("af-schema-root") || "catalog";
-          setStatus("Gallery ready · " + gallery.length.toLocaleString() + " modules (cached)", "ok");
-          renderResults(searchModules("", 40));
-          return;
-        }
-      } catch (_) {
-        /* fall through */
+  function workerUrl() {
+    const scripts = document.getElementsByTagName("script");
+    let base = "assets/";
+    for (let i = 0; i < scripts.length; i++) {
+      const src = scripts[i].src || "";
+      if (src.indexOf("lab.js") !== -1) {
+        base = src.replace(/lab\.js(\?.*)?$/, "");
+        break;
       }
     }
+    return base + "lab-search-worker.js";
+  }
 
-    setStatus("Loading gallery…");
-    let lastErr = null;
-    for (const root of catalogCandidates()) {
-      try {
-        const res = await fetch(root + "/gallery.json", { cache: "force-cache" });
-        if (!res.ok) throw new Error(String(res.status));
-        const data = await res.json();
-        if (!Array.isArray(data)) throw new Error("bad gallery shape");
-        gallery = data.filter((x) => x && x.fqcn);
-        schemaRoot = root;
-        try {
-          sessionStorage.setItem("af-gallery-v1", JSON.stringify(gallery));
-          sessionStorage.setItem("af-schema-root", root);
-        } catch (_) {
-          /* quota */
-        }
-        setStatus("Gallery ready · " + gallery.length.toLocaleString() + " modules", "ok");
-        renderResults(searchModules("", 40));
-        return;
-      } catch (e) {
-        lastErr = e;
+  const worker = new Worker(workerUrl());
+
+  worker.onmessage = function (ev) {
+    const msg = ev.data || {};
+    if (msg.type === "progress") {
+      state.corpus = msg.total;
+      state.loaded = Boolean(msg.loaded);
+      if (loadBar) {
+        loadBar.hidden = state.loaded;
+        loadBar.textContent = state.loaded
+          ? ""
+          : "Loading gallery index… " + msg.total.toLocaleString() + " modules";
       }
-    }
-    setStatus(
-      "Could not load gallery.json. Serve site with catalog/ (see site/README.md). " +
-        (lastErr ? String(lastErr.message || lastErr) : ""),
-      "err"
-    );
-    resultsEl.innerHTML =
-      '<li class="schema-empty">No gallery loaded. Run <span class="mono">./scripts/site_preview.sh</span> or open the GitHub Pages deploy.</li>';
-  }
-
-  function searchModules(query, limit) {
-    const q = (query || "").trim().toLowerCase();
-    const lim = Math.max(1, Math.min(limit || 40, 100));
-    if (!q) return gallery.slice(0, lim);
-
-    const shortMod = q.includes(".") ? q.split(".").pop() : q;
-    if (DENY.has(shortMod) || DENY.has(q)) {
-      return [{ _deny: true, fqcn: q, shortName: shortMod, description: "Free-form module — denied by default" }];
-    }
-
-    const scored = [];
-    for (const item of gallery) {
-      const fqcn = String(item.fqcn || "").toLowerCase();
-      const short = String(item.shortName || "").toLowerCase();
-      const col = String(item.collection || "").toLowerCase();
-      const desc = String(item.description || "").toLowerCase();
-      const hay = fqcn + " " + short + " " + col + " " + desc;
-      if (!hay.includes(q)) continue;
-      let score = 10;
-      if (fqcn === q || short === q) score += 100;
-      else if (fqcn.endsWith("." + q) || short.startsWith(q)) score += 50;
-      else if (fqcn.includes(q)) score += 25;
-      scored.push([score, item]);
-    }
-    scored.sort((a, b) => b[0] - a[0] || String(a[1].fqcn).localeCompare(String(b[1].fqcn)));
-    return scored.slice(0, lim).map((x) => x[1]);
-  }
-
-  function renderResults(items) {
-    resultsEl.innerHTML = "";
-    if (metaEl) {
-      metaEl.textContent = items.length
-        ? items[0]._deny
-          ? "Policy hit"
-          : items.length + " shown"
-        : "No matches";
-    }
-    if (!items.length) {
-      resultsEl.innerHTML = '<li class="schema-empty">No modules match.</li>';
+      scheduleQuery(false);
       return;
     }
-    const frag = document.createDocumentFragment();
-    for (const item of items) {
-      const li = document.createElement("li");
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.setAttribute("aria-selected", selected && selected.fqcn === item.fqcn ? "true" : "false");
-      if (item._deny) {
-        btn.innerHTML =
-          '<span class="r-fqcn" style="color:var(--deny)">' +
-          esc(item.fqcn) +
-          '</span><span class="r-desc">' +
-          esc(item.description) +
-          "</span>";
-        btn.addEventListener("click", () => showDeny(item));
-      } else {
-        btn.innerHTML =
-          '<span class="r-fqcn">' +
-          esc(item.fqcn) +
-          '</span><span class="r-desc">' +
-          esc(item.description || "") +
-          '</span><div class="r-col">' +
-          esc(item.collection || "") +
-          "</div>";
-        btn.addEventListener("click", () => selectModule(item, btn));
-      }
-      li.appendChild(btn);
-      frag.appendChild(li);
+    if (msg.type === "result") {
+      if (msg.id !== state.queryId) return;
+      applyResult(msg);
     }
-    resultsEl.appendChild(frag);
+  };
+
+  worker.onerror = function () {
+    setStatus("Search worker failed", "err");
+  };
+
+  function readFilters() {
+    const ps = Number(pageSizeEl && pageSizeEl.value) || DEFAULT_PAGE_SIZE;
+    return {
+      q: (inputEl.value || "").trim(),
+      collection: (collectionEl && collectionEl.value) || "",
+      pageSize: PAGE_SIZES.indexOf(ps) >= 0 ? ps : DEFAULT_PAGE_SIZE,
+      view: state.view,
+    };
   }
 
-  function esc(s) {
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+  function applyUrl() {
+    const sp = new URLSearchParams(location.search);
+    if (sp.has("q")) inputEl.value = sp.get("q") || "";
+    if (collectionEl && sp.get("collection"))
+      collectionEl.value = sp.get("collection");
+    const ps = Number(sp.get("pageSize") || DEFAULT_PAGE_SIZE);
+    if (pageSizeEl && PAGE_SIZES.indexOf(ps) >= 0)
+      pageSizeEl.value = String(ps);
+    state.page = Math.max(1, Number(sp.get("page") || 1) || 1);
+    setView(sp.get("view") === "cards" ? "cards" : "list");
+  }
+
+  function writeUrl(f, page) {
+    const sp = new URLSearchParams();
+    if (f.q) sp.set("q", f.q);
+    if (f.collection) sp.set("collection", f.collection);
+    if (f.pageSize !== DEFAULT_PAGE_SIZE) sp.set("pageSize", String(f.pageSize));
+    if (f.view === "cards") sp.set("view", "cards");
+    if (page > 1) sp.set("page", String(page));
+    const qs = sp.toString();
+    history.replaceState(
+      null,
+      "",
+      location.pathname + (qs ? "?" + qs : "") + (location.hash || ""),
+    );
+  }
+
+  function setView(view) {
+    state.view = view === "cards" ? "cards" : "list";
+    const listWrap = document.getElementById("lab-list-wrap");
+    const cardsWrap = document.getElementById("lab-cards-wrap");
+    const btnList = document.getElementById("lab-view-list");
+    const btnCards = document.getElementById("lab-view-cards");
+    if (listWrap) listWrap.hidden = state.view !== "list";
+    if (cardsWrap) cardsWrap.hidden = state.view !== "cards";
+    if (btnList) btnList.classList.toggle("on", state.view === "list");
+    if (btnCards) btnCards.classList.toggle("on", state.view === "cards");
+    if (resultsBody) resultsBody.setAttribute("data-view", state.view);
+  }
+
+  function updatePager(page, totalPages, total) {
+    ["lab-pager-top", "lab-pager"].forEach(function (id) {
+      const root = document.getElementById(id);
+      if (!root) return;
+      root.hidden = total === 0;
+      const info = root.querySelector(".pager-info");
+      const prev = root.querySelector(".page-prev");
+      const next = root.querySelector(".page-next");
+      const jump = root.querySelector(".page-jump-input");
+      if (info) {
+        info.textContent =
+          totalPages <= 1
+            ? total + " result" + (total === 1 ? "" : "s")
+            : "Page " + page + " / " + totalPages;
+      }
+      if (prev) prev.disabled = page <= 1 || totalPages <= 1;
+      if (next) next.disabled = page >= totalPages || totalPages <= 1;
+      if (jump) {
+        jump.max = String(Math.max(1, totalPages));
+        jump.value = String(page);
+        jump.disabled = totalPages <= 1;
+      }
+    });
+  }
+
+  function applyResult(msg) {
+    const f = readFilters();
+    state.page = msg.page;
+    writeUrl(f, msg.page);
+    setSkeleton(false);
+
+    if (metaEl) {
+      const start = msg.total === 0 ? 0 : (msg.page - 1) * msg.pageSize + 1;
+      const end = Math.min(msg.page * msg.pageSize, msg.total);
+      const range =
+        msg.total === 0 ? "0 results" : start + "–" + end + " of " + msg.total;
+      const bits = [range];
+      if (!msg.loaded && msg.corpus)
+        bits.push("index " + msg.corpus.toLocaleString());
+      metaEl.textContent = bits.join(" · ");
+    }
+
+    if (!msg.total) {
+      if (resultsEl) resultsEl.innerHTML = "";
+      if (cardGrid) cardGrid.innerHTML = "";
+      const empty = document.getElementById("lab-empty");
+      if (empty) {
+        empty.hidden = false;
+        empty.textContent = "No modules match.";
+      }
+      updatePager(1, 1, 0);
+      return;
+    }
+    const empty = document.getElementById("lab-empty");
+    if (empty) empty.hidden = true;
+
+    if (f.view === "cards") {
+      if (resultsEl) resultsEl.innerHTML = "";
+      if (cardGrid) {
+        cardGrid.innerHTML = msg.rows
+          .map(function (item) {
+            if (item._deny) {
+              return (
+                '<button type="button" class="lab-card deny" data-deny="1" data-fqcn="' +
+                esc(item.fqcn) +
+                '"><span class="r-fqcn">' +
+                esc(item.fqcn) +
+                '</span><span class="r-desc">' +
+                esc(item.description || "") +
+                "</span></button>"
+              );
+            }
+            return (
+              '<button type="button" class="lab-card" data-fqcn="' +
+              esc(item.fqcn) +
+              '"><span class="r-fqcn">' +
+              esc(item.fqcn) +
+              '</span><span class="r-desc">' +
+              esc(item.description || "") +
+              '</span><span class="r-col">' +
+              esc(item.collection || "") +
+              "</span></button>"
+            );
+          })
+          .join("");
+        bindResultClicks(cardGrid, msg.rows);
+      }
+    } else {
+      if (cardGrid) cardGrid.innerHTML = "";
+      if (resultsEl) {
+        resultsEl.innerHTML = msg.rows
+          .map(function (item) {
+            if (item._deny) {
+              return (
+                '<li><button type="button" data-deny="1" data-fqcn="' +
+                esc(item.fqcn) +
+                '"><span class="r-fqcn" style="color:var(--deny)">' +
+                esc(item.fqcn) +
+                '</span><span class="r-desc">' +
+                esc(item.description || "") +
+                "</span></button></li>"
+              );
+            }
+            const sel =
+              selected && selected.fqcn === item.fqcn ? ' aria-selected="true"' : "";
+            return (
+              "<li><button type=\"button\" data-fqcn=\"" +
+              esc(item.fqcn) +
+              '"' +
+              sel +
+              '><span class="r-fqcn">' +
+              esc(item.fqcn) +
+              '</span><span class="r-desc">' +
+              esc(item.description || "") +
+              '</span><div class="r-col">' +
+              esc(item.collection || "") +
+              "</div></button></li>"
+            );
+          })
+          .join("");
+        bindResultClicks(resultsEl, msg.rows);
+      }
+    }
+    updatePager(msg.page, msg.totalPages, msg.total);
+  }
+
+  function bindResultClicks(root, rows) {
+    const byFqcn = {};
+    rows.forEach(function (r) {
+      byFqcn[r.fqcn] = r;
+    });
+    root.querySelectorAll("button[data-fqcn]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const fqcn = btn.getAttribute("data-fqcn");
+        const item = byFqcn[fqcn];
+        if (!item) return;
+        if (item._deny || btn.getAttribute("data-deny") === "1") showDeny(item);
+        else selectModule(item, btn);
+      });
+    });
+  }
+
+  function runQuery(resetPage) {
+    if (resetPage) state.page = 1;
+    const f = readFilters();
+    state.queryId += 1;
+    worker.postMessage({
+      type: "query",
+      id: state.queryId,
+      filters: { q: f.q, collection: f.collection },
+      page: state.page,
+      pageSize: f.pageSize,
+      loaded: state.loaded,
+    });
+  }
+
+  function scheduleQuery(immediate) {
+    if (immediate) {
+      if (state.debounce) clearTimeout(state.debounce);
+      runQuery(true);
+      return;
+    }
+    if (state.debounce) clearTimeout(state.debounce);
+    state.debounce = setTimeout(function () {
+      runQuery(true);
+    }, 220);
+  }
+
+  function setSkeleton(on) {
+    const sk = document.getElementById("lab-skeleton");
+    if (sk) sk.hidden = !on;
+  }
+
+  function fillCollections(list) {
+    if (!collectionEl || !list || !list.length) return;
+    const cur = collectionEl.value;
+    const opts = ['<option value="">Any collection</option>'];
+    list.forEach(function (c) {
+      opts.push(
+        '<option value="' +
+          esc(c.name) +
+          '">' +
+          esc(c.name) +
+          " (" +
+          c.count +
+          ")</option>",
+      );
+    });
+    collectionEl.innerHTML = opts.join("");
+    if (cur) collectionEl.value = cur;
+  }
+
+  async function loadBrowse() {
+    worker.postMessage({ type: "reset" });
+    setSkeleton(true);
+    setStatus("Loading gallery index…");
+    const roots = catalogCandidates();
+    let manifest = null;
+    let rootUsed = null;
+
+    for (let i = 0; i < roots.length; i++) {
+      const root = roots[i];
+      try {
+        const res = await fetch(root + "/browse/manifest.json", {
+          cache: "no-cache",
+        });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        manifest = await res.json();
+        rootUsed = root;
+        break;
+      } catch (_) {
+        /* try next */
+      }
+    }
+
+    if (!manifest || !rootUsed) {
+      await loadGalleryFallback(roots);
+      return;
+    }
+
+    schemaRoot = rootUsed;
+    collections = manifest.collections || [];
+    fillCollections(collections);
+    setStatus(
+      (manifest.total || 0).toLocaleString() +
+        " modules · loading shards…",
+    );
+    if (loadBar) {
+      loadBar.hidden = false;
+      loadBar.textContent =
+        "Loading gallery index… 0/" + (manifest.shardCount || 0) + " shards";
+    }
+
+    const shards = manifest.shards || [];
+    for (let i = 0; i < shards.length; i++) {
+      const res = await fetch(rootUsed + "/browse/" + shards[i]);
+      if (!res.ok) continue;
+      const rows = await res.json();
+      const done = i === shards.length - 1;
+      worker.postMessage({ type: "add", rows: rows, done: done });
+      if (loadBar) {
+        loadBar.textContent = done
+          ? ""
+          : "Loading gallery index… " +
+            (i + 1) +
+            "/" +
+            shards.length +
+            " shards";
+        if (done) loadBar.hidden = true;
+      }
+      if (i === 0) runQuery(true);
+      await new Promise(function (r) {
+        setTimeout(r, 0);
+      });
+    }
+    state.loaded = true;
+    setStatus(
+      (manifest.total || 0).toLocaleString() + " modules · browse ready",
+      "ok",
+    );
+    runQuery(false);
+  }
+
+  async function loadGalleryFallback(roots) {
+    setStatus("Browse shards missing — loading gallery.json…");
+    for (let i = 0; i < roots.length; i++) {
+      const root = roots[i];
+      try {
+        const res = await fetch(root + "/gallery.json");
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error("bad gallery");
+        const rows = data
+          .filter(function (x) {
+            return x && x.fqcn;
+          })
+          .map(function (x) {
+            return {
+              fqcn: x.fqcn,
+              shortName: x.shortName || String(x.fqcn).split(".").pop(),
+              collection: x.collection || "",
+              description: String(x.description || "").slice(0, 120),
+            };
+          });
+        schemaRoot = root;
+        const colCount = {};
+        rows.forEach(function (r) {
+          if (r.collection)
+            colCount[r.collection] = (colCount[r.collection] || 0) + 1;
+        });
+        collections = Object.keys(colCount)
+          .map(function (name) {
+            return { name: name, count: colCount[name] };
+          })
+          .sort(function (a, b) {
+            return b.count - a.count;
+          })
+          .slice(0, 80);
+        fillCollections(collections);
+        worker.postMessage({ type: "add", rows: rows, done: true });
+        state.loaded = true;
+        setSkeleton(false);
+        setStatus(rows.length.toLocaleString() + " modules (legacy gallery)", "ok");
+        runQuery(true);
+        return;
+      } catch (_) {
+        /* next */
+      }
+    }
+    setSkeleton(false);
+    setStatus(
+      "Could not load browse/ or gallery.json. Run scripts/generate_browse.py and site_preview.sh",
+      "err",
+    );
+    const empty = document.getElementById("lab-empty");
+    if (empty) {
+      empty.hidden = false;
+      empty.innerHTML =
+        'No gallery loaded. Run <span class="mono">python3 scripts/generate_browse.py && ./scripts/site_preview.sh</span>';
+    }
   }
 
   function showDeny(item) {
     selected = item;
-    resultsEl.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", "false"));
     if (schemaHead) {
       schemaHead.innerHTML =
-        "<h3 style=\"color:var(--deny)\">" +
+        '<h3 style="color:var(--deny)">' +
         esc(item.fqcn) +
         "</h3><p>Free-form execution module — refused by policy.</p>";
     }
@@ -178,8 +484,14 @@
 
   async function selectModule(item, btn) {
     selected = item;
-    resultsEl.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", "false"));
-    if (btn) btn.setAttribute("aria-selected", "true");
+    document
+      .querySelectorAll("#lab-results button, #lab-cards button")
+      .forEach(function (b) {
+        b.setAttribute(
+          "aria-selected",
+          b.getAttribute("data-fqcn") === item.fqcn ? "true" : "false",
+        );
+      });
 
     const short = String(item.shortName || item.fqcn.split(".").pop()).toLowerCase();
     if (DENY.has(short)) {
@@ -206,7 +518,11 @@
     } catch (e) {
       if (schemaHead) {
         schemaHead.innerHTML =
-          "<h3>" + esc(item.fqcn) + "</h3><p>" + esc(item.description || "") + "</p>";
+          "<h3>" +
+          esc(item.fqcn) +
+          "</h3><p>" +
+          esc(item.description || "") +
+          "</p>";
       }
       if (schemaBody) {
         schemaBody.innerHTML =
@@ -221,7 +537,9 @@
   function renderSchema(schema) {
     if (schemaHead) {
       const doc = schema.docUrl
-        ? ' · <a href="' + esc(schema.docUrl) + '" target="_blank" rel="noopener">docs</a>'
+        ? ' · <a href="' +
+          esc(schema.docUrl) +
+          '" target="_blank" rel="noopener">docs</a>'
         : "";
       schemaHead.innerHTML =
         "<h3>" +
@@ -233,11 +551,13 @@
     }
     const opts = Array.isArray(schema.options) ? schema.options : [];
     if (!opts.length) {
-      schemaBody.innerHTML = '<div class="schema-empty">Schema has no options list.</div>';
+      schemaBody.innerHTML =
+        '<div class="schema-empty">Schema has no options list.</div>';
       return;
     }
     const frag = document.createDocumentFragment();
-    for (const opt of opts) {
+    for (let i = 0; i < opts.length; i++) {
+      const opt = opts[i];
       const row = document.createElement("div");
       row.className = "opt-row";
       const left = document.createElement("div");
@@ -245,18 +565,22 @@
         '<div class="opt-name">' +
         esc(opt.name || "?") +
         (opt.required ? '<span class="req">*</span>' : "") +
-        '</div><div class="opt-badges">' +
-        '<span class="badge type">' +
+        '</div><div class="opt-badges"><span class="badge type">' +
         esc(opt.type || "any") +
         "</span>" +
         (opt.noLog ? '<span class="badge nolog">no_log</span>' : "") +
         "</div>";
       const right = document.createElement("div");
-      let html = '<div class="opt-desc">' + esc(opt.description || "") + "</div>";
+      let html =
+        '<div class="opt-desc">' + esc(opt.description || "") + "</div>";
       if (opt.default !== undefined && opt.default !== null) {
         html +=
           '<div class="opt-default">default: ' +
-          esc(typeof opt.default === "object" ? JSON.stringify(opt.default) : String(opt.default)) +
+          esc(
+            typeof opt.default === "object"
+              ? JSON.stringify(opt.default)
+              : String(opt.default),
+          ) +
           "</div>";
       }
       if (Array.isArray(opt.choices) && opt.choices.length) {
@@ -298,20 +622,79 @@
       (check ? "  // dry-run default" : "  // apply");
   }
 
-  let t = null;
-  inputEl.addEventListener("input", () => {
-    clearTimeout(t);
-    t = setTimeout(() => {
-      renderResults(searchModules(inputEl.value, 50));
-    }, 120);
+  function bindPager(id) {
+    const root = document.getElementById(id);
+    if (!root) return;
+    root.querySelector(".page-prev") &&
+      root.querySelector(".page-prev").addEventListener("click", function () {
+        state.page = Math.max(1, state.page - 1);
+        runQuery(false);
+        document.getElementById("schema-lab") &&
+          document.getElementById("schema-lab").scrollIntoView({
+            block: "nearest",
+            behavior: "smooth",
+          });
+      });
+    root.querySelector(".page-next") &&
+      root.querySelector(".page-next").addEventListener("click", function () {
+        state.page += 1;
+        runQuery(false);
+      });
+    root.querySelector(".page-go") &&
+      root.querySelector(".page-go").addEventListener("click", function () {
+        const jump = Number(
+          (root.querySelector(".page-jump-input") || {}).value || 1,
+        );
+        state.page = Math.max(1, jump || 1);
+        runQuery(false);
+      });
+  }
+
+  applyUrl();
+  bindPager("lab-pager-top");
+  bindPager("lab-pager");
+
+  inputEl.addEventListener("input", function () {
+    scheduleQuery(false);
   });
+  if (collectionEl)
+    collectionEl.addEventListener("change", function () {
+      runQuery(true);
+    });
+  if (pageSizeEl)
+    pageSizeEl.addEventListener("change", function () {
+      runQuery(true);
+    });
+
+  document.getElementById("lab-view-list") &&
+    document.getElementById("lab-view-list").addEventListener("click", function () {
+      setView("list");
+      runQuery(false);
+    });
+  document.getElementById("lab-view-cards") &&
+    document
+      .getElementById("lab-view-cards")
+      .addEventListener("click", function () {
+        setView("cards");
+        runQuery(false);
+      });
+
+  document.getElementById("lab-reset") &&
+    document.getElementById("lab-reset").addEventListener("click", function () {
+      inputEl.value = "";
+      if (collectionEl) collectionEl.value = "";
+      if (pageSizeEl) pageSizeEl.value = String(DEFAULT_PAGE_SIZE);
+      setView("list");
+      state.page = 1;
+      runQuery(true);
+    });
 
   if (checkEl) {
-    checkEl.addEventListener("change", () => {
+    checkEl.addEventListener("change", function () {
       if (selected && selected._deny) updatePreview(null, true);
       else updatePreview(selected ? { fqcn: selected.fqcn } : null, false);
     });
   }
 
-  loadGallery();
+  loadBrowse();
 })();

@@ -31,7 +31,13 @@ jobs:
           set -euo pipefail
           mkdir -p _site/catalog
           cp -a site/. _site/
-          cp -a catalog/gallery.json _site/catalog/gallery.json
+          # Lazy Schema Lab index (preferred)
+          python3 scripts/generate_browse.py
+          cp -a catalog/browse _site/catalog/browse
+          # Keep full gallery for fallback / tooling
+          if [[ -f catalog/gallery.json ]]; then
+            cp -a catalog/gallery.json _site/catalog/gallery.json
+          fi
           cp -a catalog/schemas _site/catalog/schemas
           # Project Pages base path for absolute nav if ever needed
           REPO="${GITHUB_REPOSITORY##*/}"
@@ -41,7 +47,8 @@ jobs:
           done
           # Relative asset URLs stay valid; chrome.js prefixes in-page links with data-base
           echo "Built _site with base ${BASE}"
-          du -sh _site _site/catalog/gallery.json _site/catalog/schemas | head -20
+          du -sh _site _site/catalog/browse _site/catalog/gallery.json _site/catalog/schemas 2>/dev/null | head -20
+          python3 -c "import json; m=json.load(open('_site/catalog/browse/manifest.json')); print('browse', m['total'], 'shards', m['shardCount'])"
 
       - uses: actions/upload-pages-artifact@v3
         with:
