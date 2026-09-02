@@ -83,7 +83,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--port",
         type=int,
         default=None,
-        help="Bind port (default: 8788 or $ANSIBLE_FLOW_ADMIN_PORT)",
+        help="Bind port (default: 8789 or $ANSIBLE_FLOW_ADMIN_PORT)",
     )
     h_serve = hub_sub.add_parser("serve", help="Alias for hub admin")
     h_serve.add_argument("--host", default=None)
@@ -165,30 +165,48 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
+def _leading_command(argv: list[str]) -> str | None:
+    """Return hub|spoke|tui|doctor|serve|help, skipping global flags such as --hub-dir."""
+    i = 0
+    while i < len(argv):
+        a = argv[i]
+        if a in {"-h", "--help"}:
+            return "help"
+        if a in {"hub", "spoke", "tui", "doctor", "serve"}:
+            return a
+        if a in {"--hub-dir", "--spoke-dir"}:
+            i += 2
+            continue
+        if a.startswith("-"):
+            i += 1
+            continue
+        break
+    return None
+
+
 def main(argv: list[str] | None = None) -> None:
     argv = list(sys.argv[1:] if argv is None else argv)
 
+    lead = _leading_command(argv)
     # No subcommand → legacy/dev stdio MCP
-    if not argv or argv[0] not in {"hub", "spoke", "tui", "doctor", "serve", "-h", "--help"}:
-        if argv and argv[0] in {"-h", "--help"}:
-            build_parser().print_help()
-            return
+    if lead is None:
         from ansible_flow_mcp.server import run_server
 
         run_server(role=None)
         return
+    if lead == "help":
+        build_parser().print_help()
+        return
 
     # top-level tui shortcut
-    if argv[0] == "tui":
-        rest = argv[1:]
+    if lead == "tui":
         hub_path = None
-        # allow --hub-dir before/after
         import os
 
-        if "--hub-dir" in rest:
-            i = rest.index("--hub-dir")
-            if i + 1 < len(rest):
-                hub_path = Path(rest[i + 1]).expanduser()
+        if "--hub-dir" in argv:
+            i = argv.index("--hub-dir")
+            if i + 1 < len(argv):
+                hub_path = Path(argv[i + 1]).expanduser()
                 os.environ["ANSIBLE_FLOW_HUB_DIR"] = str(hub_path)
         from ansible_flow_mcp.tui import run_tui
 

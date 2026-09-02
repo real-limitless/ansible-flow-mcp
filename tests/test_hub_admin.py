@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from ansible_flow_mcp.admin.http import make_server
+from ansible_flow_mcp.cli import main as cli_main
 from ansible_flow_mcp.hub.enroll import register_target
 from ansible_flow_mcp.hub.inventory import add_spoke, load_inventory, write_inventory
 from ansible_flow_mcp.hub.state import hub_init, load_admin_token, read_audit
@@ -198,3 +199,11 @@ def test_issue_token_helper_redacts_audit(hub_root: Path):
     events = read_audit(root=hub_root, limit=10)
     blob = json.dumps(events)
     assert issued.token not in blob
+
+
+def test_cli_hub_dir_before_subcommand(hub_root: Path, capsys: pytest.CaptureFixture[str]):
+    cli_main(["--hub-dir", str(hub_root), "hub", "status"])
+    out = capsys.readouterr().out
+    data = json.loads(out)
+    assert data["name"] == "hub-01"
+    assert "web-01" in data["spokes"]
