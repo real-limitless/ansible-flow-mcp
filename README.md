@@ -112,6 +112,7 @@ ansible-flow-mcp hub init --name ctrl-01
 ansible-flow-mcp hub issue-token --name web-03 --ttl 15m
 ansible-flow-mcp spoke join --token "$TOKEN" --hub user@hub:22 --public-addr web-03.example.com
 ansible-flow-mcp hub session          # MCP stdio for the agent
+ansible-flow-mcp hub admin            # web console · http://127.0.0.1:8788/admin/
 ansible-flow-mcp tui                  # servers · groups · invite · OpenCode
 ansible-flow-mcp hub spoke-call --node web-03 --tool list_collections
 ```
@@ -120,7 +121,7 @@ ansible-flow-mcp hub spoke-call --node web-03 --tool list_collections
 
 ```bash
 cd lab && ./scripts/demo.sh
-# then: ./scripts/tui.sh  |  ./scripts/opencode-host.sh
+# then: http://127.0.0.1:8788/admin/  |  ./scripts/tui.sh  |  ./scripts/opencode-host.sh
 ```
 
 See [lab/README.md](lab/README.md).

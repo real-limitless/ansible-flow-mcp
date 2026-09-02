@@ -42,6 +42,27 @@ hub_fix_perms() {
   chmod 660 "$HUB_DIR/tokens/replay.db" 2>/dev/null || true
   chmod 660 "$HUB_DIR/audit.jsonl" 2>/dev/null || true
   chmod g+rw "$HUB_DIR/inventory.yml" "$HUB_DIR/known_hosts" "$HUB_DIR/tokens/replay.db" "$HUB_DIR/audit.jsonl" 2>/dev/null || true
+  if [ -f "$HUB_DIR/admin.token" ]; then
+    chmod 600 "$HUB_DIR/admin.token" 2>/dev/null || true
+    chown mcp-hub:ansible-flow "$HUB_DIR/admin.token" 2>/dev/null || true
+  fi
+}
+
+start_admin() {
+  if [ ! -f "$HUB_DIR/hub_id" ]; then
+    return 0
+  fi
+  # Container must listen on 0.0.0.0 so host 127.0.0.1:8788 publish works.
+  local bind="${ANSIBLE_FLOW_ADMIN_BIND:-0.0.0.0}"
+  local port="${ANSIBLE_FLOW_ADMIN_PORT:-8788}"
+  if [ -f /var/run/ansible-flow-admin.pid ] && kill -0 "$(cat /var/run/ansible-flow-admin.pid)" 2>/dev/null; then
+    echo "[hub] admin already running pid=$(cat /var/run/ansible-flow-admin.pid)"
+    return 0
+  fi
+  nohup ansible-flow-mcp --hub-dir "$HUB_DIR" hub admin --host "$bind" --port "$port" \
+    >>"$HUB_DIR/admin.log" 2>&1 &
+  echo $! >/var/run/ansible-flow-admin.pid
+  echo "[hub] admin console on ${bind}:${port}/admin/ (token file not printed)"
 }
 
 # Lab join identity + mcp-join authorized_keys
@@ -131,5 +152,7 @@ HUB_ID_DISP="(not initialized)"
 if [ -f "$HUB_DIR/hub_id" ]; then
   HUB_ID_DISP=$(cat "$HUB_DIR/hub_id" 2>/dev/null || echo "?")
 fi
+start_admin || true
+
 echo "[hub] starting sshd; hub_id=$HUB_ID_DISP; skip_init=$SKIP_INIT; opencode=$(command -v opencode || echo missing)"
 exec /usr/sbin/sshd -D -e

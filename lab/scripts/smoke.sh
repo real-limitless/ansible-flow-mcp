@@ -77,4 +77,31 @@ except ValueError as e:
     print("ok rejected:", e)
 PY
 
+echo "== admin portal =="
+HEALTH=$(curl -fsS --max-time 5 http://127.0.0.1:8788/health || true)
+if ! echo "$HEALTH" | grep -q '"ok"'; then
+  echo "FAIL: admin /health" >&2
+  echo "$HEALTH" >&2
+  exit 1
+fi
+echo "ok: /health"
+UNAUTH=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 5 http://127.0.0.1:8788/v1/status || true)
+if [ "$UNAUTH" != "401" ]; then
+  echo "FAIL: expected 401 without bearer, got $UNAUTH" >&2
+  exit 1
+fi
+echo "ok: /v1/status unauthorized"
+ADMIN_HTML=$(curl -fsS --max-time 5 http://127.0.0.1:8788/admin/ || true)
+if ! echo "$ADMIN_HTML" | grep -q "ansible-flow"; then
+  echo "FAIL: admin SPA" >&2
+  exit 1
+fi
+echo "ok: /admin/"
+run_hub python3 - <<'PY'
+from pathlib import Path
+p = Path("/var/lib/ansible-flow/hub/admin.token")
+assert p.is_file(), "missing admin.token"
+print("ok: admin.token present (value not printed)")
+PY
+
 echo "SMOKE OK"

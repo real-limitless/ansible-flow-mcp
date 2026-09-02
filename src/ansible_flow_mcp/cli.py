@@ -70,6 +70,24 @@ def build_parser() -> argparse.ArgumentParser:
     hub_sub.add_parser("status", help="Show hub status / spokes + targets")
     hub_sub.add_parser("session", help="Run hub MCP stdio session")
     hub_sub.add_parser("tui", help="Operator TUI (servers, groups, OpenCode launch)")
+    h_admin = hub_sub.add_parser(
+        "admin",
+        help="Operator web console (loopback HTTP; not MCP)",
+    )
+    h_admin.add_argument(
+        "--host",
+        default=None,
+        help="Bind address (default: 127.0.0.1 or $ANSIBLE_FLOW_ADMIN_BIND)",
+    )
+    h_admin.add_argument(
+        "--port",
+        type=int,
+        default=None,
+        help="Bind port (default: 8788 or $ANSIBLE_FLOW_ADMIN_PORT)",
+    )
+    h_serve = hub_sub.add_parser("serve", help="Alias for hub admin")
+    h_serve.add_argument("--host", default=None)
+    h_serve.add_argument("--port", type=int, default=None)
     hub_sub.add_parser(
         "write-opencode-config",
         help="Write OpenCode MCP config pointing at hub session",
@@ -224,6 +242,8 @@ def _hub_main(args: argparse.Namespace) -> None:
 
     if args.hub_cmd == "init":
         st = hub_init(name=args.name, root=root, force=bool(args.force))
+        from ansible_flow_mcp.hub.state import admin_token_path
+
         _out(
             {
                 "ok": True,
@@ -232,6 +252,7 @@ def _hub_main(args: argparse.Namespace) -> None:
                 "root": str(st.root),
                 "inventory": str(st.inventory_path),
                 "client_pub": st.client_pub_path.read_text(encoding="utf-8").strip(),
+                "admin_token_file": str(admin_token_path(st.root)),
             }
         )
         return
@@ -283,6 +304,14 @@ def _hub_main(args: argparse.Namespace) -> None:
         from ansible_flow_mcp.server import run_server
 
         run_server(role="hub")
+        return
+
+    if args.hub_cmd in {"admin", "serve"}:
+        from ansible_flow_mcp.admin.http import serve_admin
+        from ansible_flow_mcp.hub.state import ensure_admin_token
+
+        ensure_admin_token(root)
+        serve_admin(root=root, host=args.host, port=args.port)
         return
 
     if args.hub_cmd == "accept-join":
