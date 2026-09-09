@@ -31,6 +31,7 @@
       '<div class="brand-mark" aria-hidden="true"></div>' +
       '<div class="brand-name">ansible-flow<span>-mcp</span></div></div>' +
       '<p class="legal">Apache-2.0. Ansible on a hub you enroll. Not a god-mode control node.</p>' +
+      '<p class="legal">Apache-2.0. Not affiliated with Red Hat or the Ansible project beyond the public CLI and docs. OpenFlow reads this gallery for its Ansible canvas. Also <a href="https://github.com/real-limitless/mcp-flow" rel="noopener">mcp-flow</a> and <a href="https://github.com/real-limitless/skill-flow" rel="noopener">skill-flow</a>.</p>' +
       "</div>" +
       '<div style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase">' +
       '<a href="' + p("why.html") + '">Why</a>' +
