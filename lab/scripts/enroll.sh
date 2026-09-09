@@ -24,19 +24,24 @@ run_hub ansible-flow-mcp hub status || run_hub ansible-flow-mcp hub init --name 
 # Ensure join key is in place on hub (entrypoint should have done this)
 run_hub bash -lc 'test -f /var/lib/ansible-flow/hub/keys/join_client'
 
-# Ensure mcp-join can read/write hub state (volume perms drift after rebuilds)
-run_hub bash -lc '
-  chown -R mcp-hub:ansible-flow /var/lib/ansible-flow/hub 2>/dev/null || true
-  chmod -R g+rX /var/lib/ansible-flow/hub
-  chmod 775 /var/lib/ansible-flow/hub /var/lib/ansible-flow/hub/tokens 2>/dev/null || true
-  chmod 664 /var/lib/ansible-flow/hub/hub_id 2>/dev/null || true
-  chmod 660 /var/lib/ansible-flow/hub/inventory.yml /var/lib/ansible-flow/hub/known_hosts /var/lib/ansible-flow/hub/tokens/replay.db 2>/dev/null || true
-  usermod -aG ansible-flow mcp-join 2>/dev/null || true
-'
+# Ensure mcp-join can read/write hub state (volume perms drift after rebuilds / inventory writes)
+hub_fix_join_perms() {
+  run_hub bash -lc '
+    chown -R mcp-hub:ansible-flow /var/lib/ansible-flow/hub 2>/dev/null || true
+    chmod -R g+rX /var/lib/ansible-flow/hub
+    chmod 775 /var/lib/ansible-flow/hub /var/lib/ansible-flow/hub/tokens 2>/dev/null || true
+    chmod 664 /var/lib/ansible-flow/hub/hub_id 2>/dev/null || true
+    chmod 660 /var/lib/ansible-flow/hub/inventory.yml /var/lib/ansible-flow/hub/known_hosts /var/lib/ansible-flow/hub/tokens/replay.db 2>/dev/null || true
+    usermod -aG ansible-flow mcp-join 2>/dev/null || true
+  '
+}
+
+hub_fix_join_perms
 
 SPOKES=(spoke-01 spoke-02 spoke-03)
 for s in "${SPOKES[@]}"; do
   echo "== enroll $s =="
+  hub_fix_join_perms
   # skip if container missing
   if ! "${COMPOSE[@]}" -f docker-compose.yml ps --status running -q "$s" >/dev/null 2>&1; then
     # older compose
@@ -160,7 +165,7 @@ for s in "${SPOKES[@]}"; do
   run_hub bash -lc "
     set -e
     ssh-keyscan -p 22 $s 2>/dev/null >> /var/lib/ansible-flow/hub/known_hosts || true
-    chmod 600 /var/lib/ansible-flow/hub/known_hosts
+    chmod 660 /var/lib/ansible-flow/hub/known_hosts
   "
 done
 

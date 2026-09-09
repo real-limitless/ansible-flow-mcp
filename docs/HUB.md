@@ -35,7 +35,7 @@ ansible-flow-mcp spoke join \
   --identity /path/to/join_client
 ```
 
-Install sshd drop-ins from `examples/sshd/` (operator-managed).
+Install sshd drop-ins from `examples/sshd/` (operator-managed). The hub join Match User sets `ANSIBLE_FLOW_HUB_DIR` on ForceCommand so `mcp-join` does not fall back to an empty XDG hub dir. Keep `/var/lib/ansible-flow/hub` group-writable (`ansible-flow`, mode `0775`) and shared files (`inventory.yml`, `known_hosts`, `tokens/replay.db`) at `0660` so accept-join can update inventory after the first spoke.
 
 ## Runtime
 

@@ -145,9 +145,9 @@ Requirements: Python ≥ 3.11 · collection **`ansible.posix`** (JSON callback) 
 
 ```bash
 cd ansible-flow-mcp
-python -m venv .venv && source .venv/bin/activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
-ansible-galaxy collection install ansible.posix
+ansible-galaxy collection install ansible.posix --force
 pytest -q
 ansible-flow-mcp
 ```
@@ -156,7 +156,7 @@ Or install via pypi.org
 
 ```bash
 pip install ansible-flow-mcp
-ansible-galaxy collection install ansible.posix
+ansible-galaxy collection install ansible.posix --force
 ansible-flow-mcp
 ```
 

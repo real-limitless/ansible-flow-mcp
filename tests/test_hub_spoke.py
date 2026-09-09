@@ -207,3 +207,46 @@ def test_default_hub_dir_falls_back_when_prod_unwritable(
         assert paths_mod.hub_dir() == d.resolve()
     finally:
         blocked.chmod(0o700)
+
+
+def test_ensure_dir_preserves_existing_group_mode(tmp_path: Path):
+    from ansible_flow_mcp.hub.inventory import default_inventory, write_inventory
+    from ansible_flow_mcp.paths import ensure_dir
+
+    hub = tmp_path / "hub"
+    hub.mkdir()
+    hub.chmod(0o775)
+    ensure_dir(hub)
+    assert (hub.stat().st_mode & 0o777) == 0o775
+    write_inventory(hub / "inventory.yml", default_inventory())
+    assert (hub.stat().st_mode & 0o777) == 0o775
+    assert ((hub / "inventory.yml").stat().st_mode & 0o777) == 0o660
+
+
+def test_replay_db_is_group_writable(hub_root: Path):
+    from ansible_flow_mcp.hub.state import load_hub_state
+    from ansible_flow_mcp.hub.tokens import issue_token, verify_token
+
+    st = load_hub_state(hub_root)
+    issued = issue_token("perm-spoke", ttl_seconds=120, state=st)
+    verify_token(issued.token, state=st, consume=True)
+    replay = hub_root / "tokens" / "replay.db"
+    assert (replay.stat().st_mode & 0o777) == 0o660
+
+
+def test_hub_dir_env_wins_when_prod_unusable(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+):
+    from ansible_flow_mcp import paths as paths_mod
+
+    blocked = tmp_path / "blocked"
+    blocked.mkdir()
+    blocked.chmod(0o500)
+    monkeypatch.setattr(paths_mod, "PROD_HUB_DIR", blocked / "ansible-flow" / "hub")
+    custom = tmp_path / "explicit-hub"
+    custom.mkdir()
+    monkeypatch.setenv("ANSIBLE_FLOW_HUB_DIR", str(custom))
+    try:
+        assert paths_mod.hub_dir() == custom.resolve()
+    finally:
+        blocked.chmod(0o700)
