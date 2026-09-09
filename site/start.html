@@ -56,27 +56,28 @@
             </div>
           </div>
 
-          <p class="eyebrow" style="margin-top: 48px">uvx / pip</p>
+          <p class="eyebrow" style="margin-top: 48px">pip / uvx</p>
           <h2 class="section-title">Install &amp; run MCP</h2>
-          <p class="lede">Requires Python ≥ 3.11 and <span class="mono">ansible-core</span> on PATH for real runs.</p>
-          <pre class="code-block"># one-shot
-uvx --from ansible-flow-mcp ansible-flow-mcp
-
-# editable dev
+          <p class="lede">Requires Python ≥ 3.11 (Debian/Ubuntu: <span class="mono">python3-venv</span>) and <span class="mono">ansible-core</span> on PATH for real runs. Prefer the venv path if you do not have <span class="mono">uv</span>.</p>
+          <pre class="code-block"># editable dev (reliable)
 git clone https://github.com/real-limitless/ansible-flow-mcp.git
 cd ansible-flow-mcp
-python -m venv .venv && source .venv/bin/activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
+ansible-galaxy collection install ansible.posix --force
 pytest -q
-ansible-flow-mcp</pre>
+ansible-flow-mcp
+
+# optional one-shot if uv is installed
+uvx --from ansible-flow-mcp ansible-flow-mcp</pre>
 
           <p class="eyebrow" style="margin-top: 40px">Editor MCP</p>
           <h2 class="section-title">Cursor example</h2>
+          <p class="lede" style="margin-bottom: 12px">Absolute venv binary is the reliable attach. <span class="mono">uvx</span> is optional (see <span class="mono">examples/cursor-mcp.json</span>).</p>
           <pre class="code-block">{
   "mcpServers": {
     "ansible-flow": {
-      "command": "uvx",
-      "args": ["--from", "ansible-flow-mcp", "ansible-flow-mcp"],
+      "command": "/ABS/PATH/ansible-flow-mcp/.venv/bin/ansible-flow-mcp",
       "env": {
         "ANSIBLE_FLOW_TIMEOUT": "120"
       }

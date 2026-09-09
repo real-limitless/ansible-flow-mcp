@@ -33,7 +33,7 @@ Read **[Security notes](#security-notes)** before production. Deep ops: [HUB.md]
 
 | Requirement | Local MCP (A) | Lab (B) | Bare metal (C) |
 | --- | :---: | :---: | :---: |
-| Python **≥ 3.11** | ✓ | on host optional* | ✓ on hub & spokes |
+| Python **≥ 3.11** (`python3-venv` on Debian/Ubuntu) | ✓ | on host optional* | ✓ on hub & spokes |
 | `ansible-core` (via pip) + **`ansible.posix`** (Galaxy) | ✓ | inside images | ✓ |
 | Git + clone of this repo | ✓ | ✓ | ✓ |
 | Docker **or** Podman + Compose | | ✓ | |
@@ -48,10 +48,16 @@ Read **[Security notes](#security-notes)** before production. Deep ops: [HUB.md]
 Still install the JSON callback collection and anything you will execute:
 
 ```bash
-ansible-galaxy collection install ansible.posix
+# Use the venv's ansible-galaxy (same PATH as pip). --force if a system
+# collection is already "installed" but ansible.posix.json is missing.
+ansible-galaxy collection install ansible.posix --force
 # Plus any collections you will run (match catalog allowlist)
 ansible --version
 ```
+
+If Galaxy prints “Nothing to do. All requested collections are already installed”
+but `run_module` fails with `Invalid callback for stdout specified: ansible.posix.json`,
+re-run with `--force` while the venv is active.
 
 ---
 
@@ -65,11 +71,12 @@ Best first run: prove the agent loop on localhost before multi-host.
 git clone https://github.com/real-limitless/ansible-flow-mcp.git
 cd ansible-flow-mcp
 
+# Debian/Ubuntu: sudo apt install python3-venv  (needed for ensurepip)
 python3 -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -U pip
 pip install -e ".[dev]"             # pulls ansible-core
-ansible-galaxy collection install ansible.posix
+ansible-galaxy collection install ansible.posix --force
 ```
 
 ### A2. Sanity check
@@ -330,7 +337,7 @@ git clone https://github.com/real-limitless/ansible-flow-mcp.git
 cd ansible-flow-mcp
 python3 -m venv .venv && source .venv/bin/activate
 pip install -e .   # installs ansible-core
-ansible-galaxy collection install ansible.posix
+ansible-galaxy collection install ansible.posix --force
 # Plus collections you will run on hub (and spokes if they run modules locally)
 ```
 
@@ -503,6 +510,9 @@ cd lab && ./scripts/smoke.sh
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
 | MCP tools missing in editor | Wrong binary / PATH | Use absolute path to `.venv/bin/ansible-flow-mcp` |
+| `python3 -m venv` fails (`ensurepip`) | Distro missing venv package | `sudo apt install python3-venv` (Debian/Ubuntu) |
+| `Invalid callback ... ansible.posix.json` | System Galaxy collection, not venv | `ansible-galaxy collection install ansible.posix --force` with venv on PATH |
+| Live Pages unknown URL is GitHub 404 | Project Pages custom 404 is `404.html` only | Open `/404.html`; other missing paths may use GitHub’s default page |
 | `get_module_schema` always null | Catalog schemas not installed/imaged | Rebuild wheel/image; do not ignore `catalog/schemas` |
 | Lab OpenCode: no spokes | Pointing at empty **local** hub dir | `cd lab && ./scripts/opencode-host.sh` or `reconnect.sh` |
 | After hub rebuild, inventory empty | Volume/enroll drift | `./scripts/reconnect.sh` |
