@@ -226,10 +226,18 @@ def main(argv: list[str] | None = None) -> None:
         os.environ["ANSIBLE_FLOW_SPOKE_DIR"] = str(Path(args.spoke_dir).expanduser())
 
     if args.cmd == "hub":
-        _hub_main(args)
+        try:
+            _hub_main(args)
+        except ValueError as exc:
+            print(str(exc), file=sys.stderr)
+            raise SystemExit(1) from exc
         return
     if args.cmd == "spoke":
-        _spoke_main(args)
+        try:
+            _spoke_main(args)
+        except ValueError as exc:
+            print(str(exc), file=sys.stderr)
+            raise SystemExit(1) from exc
         return
     if args.cmd == "doctor":
         from ansible_flow_mcp.http_health import doctor_report

@@ -218,6 +218,52 @@ def test_cli_hub_dir_before_doctor(hub_root: Path, capsys: pytest.CaptureFixture
     assert data.get("hubDir")
 
 
+def test_cli_register_target_secret_no_traceback(
+    hub_root: Path, capsys: pytest.CaptureFixture[str]
+):
+    with pytest.raises(SystemExit) as ei:
+        cli_main(
+            [
+                "--hub-dir",
+                str(hub_root),
+                "hub",
+                "register-target",
+                "--name",
+                "win-x",
+                "--host",
+                "10.0.0.9",
+                "--connection",
+                "winrm",
+                "--extra",
+                '{"ansible_password":"nope"}',
+            ]
+        )
+    assert ei.value.code == 1
+    err = capsys.readouterr().err
+    assert "ansible_password" in err
+    assert "Traceback" not in err
+
+
+def test_cli_spoke_call_missing_node_no_traceback(
+    hub_root: Path, capsys: pytest.CaptureFixture[str]
+):
+    with pytest.raises(SystemExit) as ei:
+        cli_main(
+            [
+                "--hub-dir",
+                str(hub_root),
+                "hub",
+                "spoke-call",
+                "--node",
+                "web-99",
+            ]
+        )
+    assert ei.value.code == 1
+    err = capsys.readouterr().err
+    assert "not enrolled" in err
+    assert "Traceback" not in err
+
+
 def test_default_admin_port(monkeypatch: pytest.MonkeyPatch):
     from ansible_flow_mcp.admin.http import DEFAULT_PORT, _default_port
 
