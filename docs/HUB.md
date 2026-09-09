@@ -45,7 +45,26 @@ ansible-flow-mcp hub session   # MCP stdio with hub tools
 ansible-flow-mcp hub status
 ansible-flow-mcp hub spoke-call --node web-03 --tool list_collections
 ansible-flow-mcp hub revoke --name web-03
+ansible-flow-mcp hub admin     # operator web console (loopback)
 ```
+
+### Operator admin portal
+
+Same inventory APIs as the TUI and hub MCP tools, served as a Bearer-token web console (mcp-flow style). **Not** HTTP MCP — agents stay on `hub session` stdio.
+
+```bash
+ansible-flow-mcp hub admin
+# alias: ansible-flow-mcp hub serve   (not the same as top-level `serve`)
+# http://127.0.0.1:8789/admin/
+```
+
+- Default bind: `127.0.0.1:8789` (`$ANSIBLE_FLOW_ADMIN_BIND` / `$ANSIBLE_FLOW_ADMIN_PORT` or `--host` / `--port`)
+- Token: `$ANSIBLE_FLOW_ADMIN_TOKEN` or `$HUB_DIR/admin.token` (created on `hub init`, mode `0600`). The CLI prints the **file path**, never the token.
+- Paste the token once in the browser (stored in `sessionStorage`).
+- Tabs: Status, Servers (invite / edit / revoke / ping), Targets, Groups, Audit
+- `/health` is unauthenticated and returns the same doctor JSON as top-level `serve`
+- Remote operators: SSH or Tailscale to the hub, then open loopback. Do not publish `:8789` on the public internet.
+- Lab compose publishes `127.0.0.1:8789` on the host; inside the container the server binds `0.0.0.0`. Do not run the lab fabric and the root single-node compose at the same time (both want 8789).
 
 ### Operator TUI
 
@@ -136,3 +155,4 @@ Do **not** put `ansible_client` on `mcp-spoke` with ForceCommand. Ansible opens 
 - Spokes cannot lateral-move via this fabric
 - Join tokens: signed, TTL, one-time jti replay cache
 - Mesh user has no shell; ansible user is key-only (lab: passwordless sudo)
+- Admin HTTP is operator-only (Bearer token, loopback by default); no public HTTP MCP

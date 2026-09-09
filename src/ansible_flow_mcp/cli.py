@@ -70,6 +70,24 @@ def build_parser() -> argparse.ArgumentParser:
     hub_sub.add_parser("status", help="Show hub status / spokes + targets")
     hub_sub.add_parser("session", help="Run hub MCP stdio session")
     hub_sub.add_parser("tui", help="Operator TUI (servers, groups, OpenCode launch)")
+    h_admin = hub_sub.add_parser(
+        "admin",
+        help="Operator web console (loopback HTTP; not MCP)",
+    )
+    h_admin.add_argument(
+        "--host",
+        default=None,
+        help="Bind address (default: 127.0.0.1 or $ANSIBLE_FLOW_ADMIN_BIND)",
+    )
+    h_admin.add_argument(
+        "--port",
+        type=int,
+        default=None,
+        help="Bind port (default: 8789 or $ANSIBLE_FLOW_ADMIN_PORT)",
+    )
+    h_serve = hub_sub.add_parser("serve", help="Alias for hub admin")
+    h_serve.add_argument("--host", default=None)
+    h_serve.add_argument("--port", type=int, default=None)
     hub_sub.add_parser(
         "write-opencode-config",
         help="Write OpenCode MCP config pointing at hub session",
@@ -147,30 +165,48 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
+def _leading_command(argv: list[str]) -> str | None:
+    """Return hub|spoke|tui|doctor|serve|help, skipping global flags such as --hub-dir."""
+    i = 0
+    while i < len(argv):
+        a = argv[i]
+        if a in {"-h", "--help"}:
+            return "help"
+        if a in {"hub", "spoke", "tui", "doctor", "serve"}:
+            return a
+        if a in {"--hub-dir", "--spoke-dir"}:
+            i += 2
+            continue
+        if a.startswith("-"):
+            i += 1
+            continue
+        break
+    return None
+
+
 def main(argv: list[str] | None = None) -> None:
     argv = list(sys.argv[1:] if argv is None else argv)
 
+    lead = _leading_command(argv)
     # No subcommand → legacy/dev stdio MCP
-    if not argv or argv[0] not in {"hub", "spoke", "tui", "doctor", "serve", "-h", "--help"}:
-        if argv and argv[0] in {"-h", "--help"}:
-            build_parser().print_help()
-            return
+    if lead is None:
         from ansible_flow_mcp.server import run_server
 
         run_server(role=None)
         return
+    if lead == "help":
+        build_parser().print_help()
+        return
 
     # top-level tui shortcut
-    if argv[0] == "tui":
-        rest = argv[1:]
+    if lead == "tui":
         hub_path = None
-        # allow --hub-dir before/after
         import os
 
-        if "--hub-dir" in rest:
-            i = rest.index("--hub-dir")
-            if i + 1 < len(rest):
-                hub_path = Path(rest[i + 1]).expanduser()
+        if "--hub-dir" in argv:
+            i = argv.index("--hub-dir")
+            if i + 1 < len(argv):
+                hub_path = Path(argv[i + 1]).expanduser()
                 os.environ["ANSIBLE_FLOW_HUB_DIR"] = str(hub_path)
         from ansible_flow_mcp.tui import run_tui
 
@@ -224,6 +260,8 @@ def _hub_main(args: argparse.Namespace) -> None:
 
     if args.hub_cmd == "init":
         st = hub_init(name=args.name, root=root, force=bool(args.force))
+        from ansible_flow_mcp.hub.state import admin_token_path
+
         _out(
             {
                 "ok": True,
@@ -232,6 +270,7 @@ def _hub_main(args: argparse.Namespace) -> None:
                 "root": str(st.root),
                 "inventory": str(st.inventory_path),
                 "client_pub": st.client_pub_path.read_text(encoding="utf-8").strip(),
+                "admin_token_file": str(admin_token_path(st.root)),
             }
         )
         return
@@ -283,6 +322,14 @@ def _hub_main(args: argparse.Namespace) -> None:
         from ansible_flow_mcp.server import run_server
 
         run_server(role="hub")
+        return
+
+    if args.hub_cmd in {"admin", "serve"}:
+        from ansible_flow_mcp.admin.http import serve_admin
+        from ansible_flow_mcp.hub.state import ensure_admin_token
+
+        ensure_admin_token(root)
+        serve_admin(root=root, host=args.host, port=args.port)
         return
 
     if args.hub_cmd == "accept-join":

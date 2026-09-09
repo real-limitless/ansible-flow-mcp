@@ -11,6 +11,7 @@ Guidance for AI coding agents working in this repository.
 | **Core MCP** | `search_modules` → `get_module_schema` → `run_module` / `run_playbook` (check-first) |
 | **Hub/spoke** ([issue #2](https://github.com/real-limitless/ansible-flow-mcp/issues/2)) | Agent attaches to **hub only**; spokes enroll with join tokens; hub→spoke is SSH only |
 | **Operator TUI** | Curses UI on hub: servers/groups CRUD, invite tokens, launch OpenCode |
+| **Admin portal** | Loopback web console (`hub admin`, `http://127.0.0.1:8789/admin/`). Same inventory APIs, Bearer token; **not** HTTP MCP |
 | **Compose lab** (`lab/`) | Full hub + 3 spokes, smoke scripts, OpenCode bridge from host |
 
 Not affiliated with Red Hat/Ansible beyond the public CLI. OpenFlow reads this gallery for its Ansible canvas.
@@ -104,6 +105,8 @@ ansible-flow-mcp hub init --name hub-01
 ansible-flow-mcp hub issue-token --name web-01 --ttl 15m
 ansible-flow-mcp hub status
 ansible-flow-mcp hub session              # MCP stdio + hub tools
+ansible-flow-mcp hub admin                # operator web console (loopback 8789)
+ansible-flow-mcp hub serve                # alias for hub admin (not top-level serve)
 ansible-flow-mcp hub tui                  # operator TUI
 ansible-flow-mcp tui                      # same
 ansible-flow-mcp hub write-opencode-config
@@ -117,6 +120,10 @@ ansible-flow-mcp hub accept-join          # ForceCommand only
 ansible-flow-mcp spoke join --token … --hub mcp-join@hub:22 --public-addr …
 ansible-flow-mcp spoke session            # ForceCommand MCP / simple-exec
 ansible-flow-mcp spoke status
+
+# Family HTTP
+ansible-flow-mcp doctor                   # catalog + env JSON
+ansible-flow-mcp serve                    # health listener on 8789 (not MCP, not admin)
 ```
 
 Env:
@@ -129,6 +136,10 @@ Env:
 | `ANSIBLE_FLOW_CATALOG_DIR` | Override catalog root |
 | `ANSIBLE_FLOW_REQUIRE_CHECK` | If truthy, refuse `check_mode=false` |
 | `OPENCODE_CONFIG` | Path to OpenCode config (lab uses hub or host bridge file) |
+| `ANSIBLE_FLOW_HTTP_PORT` | Top-level `serve` health port (default `8789`) |
+| `ANSIBLE_FLOW_ADMIN_TOKEN` | Bearer token for `hub admin` `/v1/*` (else `$HUB_DIR/admin.token`) |
+| `ANSIBLE_FLOW_ADMIN_BIND` | Admin HTTP bind (default `127.0.0.1`) |
+| `ANSIBLE_FLOW_ADMIN_PORT` | Admin HTTP port (default `8789`) |
 
 ---
 
@@ -203,6 +214,21 @@ ansible-flow-mcp tui
 - Same inventory APIs as hub MCP tools (in-process).  
 - **A** writes `$HUB_DIR/opencode-hub.jsonc` and launches `opencode` if on `PATH`.  
 - Needs a real TTY (curses).
+
+## Operator admin portal
+
+```bash
+ansible-flow-mcp hub admin
+# http://127.0.0.1:8789/admin/
+```
+
+- Vanilla SPA + stdlib HTTP (mcp-flow chassis, Copper Busbar tokens).
+- Tabs: Status, Servers, Targets, Groups, Audit.
+- Auth: Bearer `ANSIBLE_FLOW_ADMIN_TOKEN` or `$HUB_DIR/admin.token` (created on `hub init`).
+- Does **not** expose HTTP MCP or `run_module` / `run_playbook`.
+- `/health` is unauthenticated and matches `ansible-flow-mcp doctor` JSON.
+- Lab: host `http://127.0.0.1:8789/admin/` (compose publishes loopback).
+- Do not run lab fabric and root `docker compose` (health-only `serve` on 8789) at the same time.
 
 ---
 
@@ -294,6 +320,7 @@ pytest tests/test_hub_spoke.py tests/test_hub_groups.py -q
 | `test_catalog.py` | gallery/schema basics |
 | `test_hub_spoke.py` | init, tokens, join, revoke, runner hub gates |
 | `test_hub_groups.py` | groups CRUD, update_node, opencode config write |
+| `test_hub_admin.py` | admin portal auth, CRUD, token redaction, `--hub-dir` dispatcher |
 
 Prefer **pytest green** before claiming done. Lab smokes are separate and slower.
 
@@ -307,6 +334,7 @@ Prefer **pytest green** before claiming done. Lab smokes are separate and slower
 | Install editable | `pip install -e ".[dev]"` |
 | Dev MCP | `ansible-flow-mcp` |
 | Hub MCP | `ANSIBLE_FLOW_HUB_DIR=… ansible-flow-mcp hub session` |
+| Hub admin | `ANSIBLE_FLOW_HUB_DIR=… ansible-flow-mcp hub admin` |
 | Lab full | `cd lab && ./scripts/demo.sh --no-shell` |
 | Lab after rebuild | `cd lab && ./scripts/reconnect.sh` |
 | Host OpenCode → lab | `cd lab && ./scripts/opencode-host.sh` |
@@ -321,7 +349,7 @@ No dedicated lint/typecheck scripts yet. CI: `.github/workflows/ci.yml`.
 
 - Python 3.11+; type hints where the file already uses them.  
 - Concise style; few comments unless security/SSH non-obvious.  
-- Prefer extending `hub/`, `spoke/`, `server.py`, `catalog.py` over new top-level packages.  
+- Prefer extending `hub/`, `spoke/`, `server.py`, `catalog.py`, `admin/` over new top-level packages.  
 - Catalog allowlist: `catalog/collections-allowlist.yml`.  
 - Runtime state **not in git**: hub/spoke dirs, `lab/keys/*`, `lab/opencode-hub.host.jsonc`.  
 - Commit style when asked: `feat(hub):`, `fix(lab):`, `test(lab):`, `docs:`.  

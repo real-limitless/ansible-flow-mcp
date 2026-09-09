@@ -133,6 +133,8 @@ def hub_init(
         audit.write_text("", encoding="utf-8")
         os.chmod(audit, 0o600)
 
+    ensure_admin_token(base)
+
     return load_hub_state(base)
 
 
@@ -173,15 +175,90 @@ def load_hub_state(root: Path | None = None) -> HubState:
     )
 
 
+ADMIN_TOKEN_FILENAME = "admin.token"
+_REDACT_KEY_SUBSTR = ("password", "secret", "token", "private_key")
+
+
+def admin_token_path(root: Path) -> Path:
+    return Path(root).expanduser().resolve() / ADMIN_TOKEN_FILENAME
+
+
+def ensure_admin_token(root: Path) -> Path:
+    """Create `$HUB_DIR/admin.token` (0600) if missing. Never logs the value."""
+    path = admin_token_path(root)
+    if path.is_file() and path.stat().st_size > 0:
+        try:
+            os.chmod(path, 0o600)
+        except OSError:
+            pass
+        return path
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(secrets.token_urlsafe(32) + "\n", encoding="utf-8")
+    os.chmod(path, 0o600)
+    return path
+
+
+def load_admin_token(root: Path) -> str:
+    """Env `ANSIBLE_FLOW_ADMIN_TOKEN` wins; else file (created if missing)."""
+    env = (os.environ.get("ANSIBLE_FLOW_ADMIN_TOKEN") or "").strip()
+    if env:
+        return env
+    path = ensure_admin_token(root)
+    token = path.read_text(encoding="utf-8").strip()
+    if not token:
+        path.unlink(missing_ok=True)
+        path = ensure_admin_token(root)
+        token = path.read_text(encoding="utf-8").strip()
+    return token
+
+
+def _redact_audit_value(key: str, value: Any) -> Any:
+    lk = str(key).lower()
+    if any(part in lk for part in _REDACT_KEY_SUBSTR):
+        return "********"
+    if isinstance(value, dict):
+        return {k: _redact_audit_value(k, v) for k, v in value.items()}
+    return value
+
+
+def redact_audit_record(record: dict[str, Any]) -> dict[str, Any]:
+    return {k: _redact_audit_value(k, v) for k, v in record.items()}
+
+
 def audit_log(state: HubState, event: str, **fields: Any) -> None:
     path = state.root / "audit.jsonl"
-    record = {
-        "ts": datetime.now(timezone.utc).isoformat(),
-        "event": event,
-        **fields,
-    }
-    # never persist raw tokens
-    if "token" in record:
-        record["token"] = "********"
+    record = redact_audit_record(
+        {
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "event": event,
+            **fields,
+        }
+    )
     with path.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(record, ensure_ascii=False, default=str) + "\n")
+
+
+def read_audit(
+    state: HubState | None = None,
+    *,
+    root: Path | None = None,
+    limit: int = 100,
+) -> list[dict[str, Any]]:
+    st = state or load_hub_state(root)
+    path = st.root / "audit.jsonl"
+    if not path.is_file():
+        return []
+    cap = max(1, min(int(limit), 1000))
+    recs: list[dict[str, Any]] = []
+    for line in reversed(path.read_text(encoding="utf-8").splitlines()):
+        if not line.strip():
+            continue
+        try:
+            raw = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(raw, dict):
+            recs.append(redact_audit_record(raw))
+        if len(recs) >= cap:
+            break
+    return recs
