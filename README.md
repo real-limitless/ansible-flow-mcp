@@ -10,26 +10,9 @@ This branch (`CORE`) is documentation only: why it exists, campaign screenshots,
 | **Install / code** | [`DEVELOPMENT`](https://github.com/real-limitless/ansible-flow-mcp/tree/DEVELOPMENT) |
 | **Marketing site** | [site/](site/) |
 | **Hub ops** | [docs/HUB.md](docs/HUB.md) |
-MCP server that exposes real Ansible modules and playbooks to AI agents, plus an **SSH hub/spoke fabric** so multi-host automation is enrolled, bastion-scoped, and check-first by default.
-
-![Hero: agent hub session and enrolled inventory rail](docs/images/campaign-hero.png)
-
-| Track | What you get |
-| --- | --- |
-| **Agent loop** | `search → schema → check → execute` on allowlisted collections |
-| **Fleet fabric** | One hub · join tokens · SSH ForceCommand spokes · fixed inventory |
-
-[OpenFlow gallery](https://github.com/real-limitless/OpenFlow) · [Marketing site](site/) · [Campaign storyboard](docs/campaign/) · [Hub/spoke ops](docs/HUB.md) · Apache-2.0
-
-Not affiliated with Red Hat or the Ansible project beyond using the public Ansible CLI and docs.
-
-**New here?** **[Marketing site](site/)** (story + Schema Lab) · full step-by-step **[docs/QUICKSTART.md](docs/QUICKSTART.md)**: local MCP · compose lab · bare-metal hub/spoke · editor wiring.
-
-```bash
-./scripts/site_preview.sh   # http://127.0.0.1:8765/  (gallery + live schemas)
-```
-
----
+| **Branches** | [BRANCHES.md](BRANCHES.md) |
+| **Species** | [SPECIES.md](SPECIES.md) |
+| **Voice** | [VOICE.md](VOICE.md) |
 
 ## Visual tour
 
@@ -235,3 +218,13 @@ pip install build twine && python -m build
 ```bash
 uvx --from ansible-flow-mcp ansible-flow-mcp
 ```
+
+
+## Family
+
+Written standard: private TheFLOW.
+
+- OpenFlow: reads this Ansible gallery
+- mcp-flow: MCP gateway
+- skill-flow: Agent Skills
+- wiki-flow, roster-flow, CleanFlow, ProjectEverflow: siblings
