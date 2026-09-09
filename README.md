@@ -33,17 +33,17 @@ Agents on a god-mode control node invent inventory, reach for `shell`, and treat
 
 ![Without a fabric vs ansible-flow-mcp controls](docs/images/campaign-why.png)
 
-**You need this when:**
+Typical cases:
 
 - You want Cursor / Claude / OpenCode to run Ansible **like an operator**, not freestyle root across the fleet
-- Multi-host must mean **bastion ops you already understand** (SSH, inventory, enrollment) — not a mesh hop plane
-- Prompt injection will still *ask* for bad ops — **policy and topology must refuse**
+- Multi-host must mean **bastion ops you already understand** (SSH, inventory, enrollment): not a mesh hop plane
+- Prompt injection will still *ask* for bad ops: **policy and topology must refuse**
 
 ---
 
 ## Two tracks
 
-### 1. Agent loop — search → schema → check → execute
+### 1. Agent loop: search → schema → check → execute
 
 Curated module gallery. Slim argSpec before any run. Check mode default. Free-form modules denied. Playbooks path-jailed.
 
@@ -61,7 +61,7 @@ Curated module gallery. Slim argSpec before any run. Check mode default. Free-fo
 
 **Ritual (playbooks):** confirm path under allowlisted roots → check → apply.
 
-### 2. Hub/spoke — nothing is a target until enrolled
+### 2. Hub/spoke: nothing is a target until enrolled
 
 Secure multi-host mode: **agent attaches to the hub only**. Hub reaches spokes over **SSH only**. Spokes execute **localhost** and cannot lateral-move via this fabric.
 
@@ -74,7 +74,7 @@ Secure multi-host mode: **agent attaches to the hub only**. Hub reaches spokes o
 | Agent attach | Any node | **Hub only** |
 | Ops model | Mesh OS | **Classic Ansible bastion** |
 
-**Enrollment:** `hub init` → `issue-token` (TTL, one-time jti) → `spoke join` (token + SSH identity) → hub inventory. Runtime: ForceCommand MCP session — **no shell** on the hub→spoke path.
+**Enrollment:** `hub init` → `issue-token` (TTL, one-time jti) → `spoke join` (token + SSH identity) → hub inventory. Runtime: ForceCommand MCP session: **no shell** on the hub→spoke path.
 
 **Hub tools:** `list_nodes` / `hub_status`, `issue_token`, `revoke_node`, groups (`create_group`, `set_group_members`, …), `spoke_call`, plus catalog `run_*` against **enrolled hosts or groups only**. Client-supplied `-i` is rejected in hub mode.
 
@@ -169,18 +169,18 @@ Hub + OpenCode: `examples/opencode-hub.jsonc` · `ansible-flow-mcp hub write-ope
 | Hub inventory | Enrolled hosts only · no client `-i` · host key checking on |
 | Spoke path | SSH ForceCommand · localhost exec · no peer fabric |
 
-**Residual:** hub compromise = fleet (same class as any Ansible control node). Harden the bastion — see [docs/SECURITY.md](docs/SECURITY.md) and [docs/HUB.md](docs/HUB.md).
+**Residual:** hub compromise = fleet (same class as any Ansible control node). Harden the bastion: see [docs/SECURITY.md](docs/SECURITY.md) and [docs/HUB.md](docs/HUB.md).
 
 ---
 
 ## Catalog & OpenFlow
 
-- `catalog/collections-allowlist.yml` — allowlist + deny free-form modules  
-- `catalog/gallery.json` + `catalog/schemas/` — searchable gallery  
+- `catalog/collections-allowlist.yml`: allowlist + deny free-form modules  
+- `catalog/gallery.json` + `catalog/schemas/`: searchable gallery  
 - Regenerate: `python scripts/generate_catalog.py`  
 - Galaxy factory TUI: [scripts/factory/README.md](scripts/factory/README.md)
 
-Dual-tracked with [OpenFlow](https://github.com/real-limitless/OpenFlow) Ansible canvas gallery  
+OpenFlow reads this gallery for its Ansible canvas
 ([plan](https://github.com/real-limitless/ansible-flow-mcp/issues/1) · [umbrella](https://github.com/real-limitless/OpenFlow/issues/56)).
 
 | OpenFlow | This MCP server |
