@@ -7,9 +7,9 @@ Static multi-page campaign site for **ansible-flow-mcp**.
 | File | Story |
 | --- | --- |
 | `index.html` | Hero · three acts |
-| `why.html` | Act I — enrollment is the perimeter |
-| `how.html` | Act II — ritual + **Schema Lab** (full gallery + schemas) |
-| `fabric.html` | Act III — hub/spoke |
+| `why.html` | Act I: enrollment is the perimeter |
+| `how.html` | Act II: ritual + **Schema Lab** (full gallery + schemas) |
+| `fabric.html` | Act III: hub/spoke |
 | `security.html` | Controls + residual risk |
 | `start.html` | Install / lab / MCP |
 
@@ -47,4 +47,4 @@ Project URL shape: `https://<owner>.github.io/ansible-flow-mcp/`.
 
 ## Design
 
-Copper Busbar tokens shared with `docs/campaign/` (screenshot storyboard). Do not replace campaign frames with this site — both stay.
+Copper Busbar tokens shared with `docs/campaign/` (screenshot storyboard). Do not replace campaign frames with this site: both stay.
