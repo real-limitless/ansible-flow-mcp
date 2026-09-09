@@ -2,26 +2,14 @@
 
 **Give agents Ansible. Not the keys.**
 
-MCP server that exposes real Ansible modules and playbooks to AI agents — and a **SSH hub/spoke fabric** so multi-host automation is enrolled, bastion-scoped, and check-first by default.
+This branch (`CORE`) is documentation only: why it exists, campaign screenshots, and the marketing site. The runnable MCP and hub live on [`DEVELOPMENT`](https://github.com/real-limitless/ansible-flow-mcp/tree/DEVELOPMENT). `main` stays a product alias.
 
-![Hero: agent hub session and enrolled inventory rail](docs/images/campaign-hero.png)
-
-| Track | What you get |
-| --- | --- |
-| **Agent loop** | `search → schema → check → execute` on allowlisted collections |
-| **Fleet fabric** | One hub · join tokens · SSH ForceCommand spokes · fixed inventory |
-
-[OpenFlow dual-track](https://github.com/real-limitless/OpenFlow) · [Marketing site](site/) · [Campaign storyboard](docs/campaign/) · [Hub/spoke ops](docs/HUB.md) · Apache-2.0
-
-Not affiliated with Red Hat or the Ansible project beyond using the public Ansible CLI and docs.
-
-**New here?** **[Marketing site](site/)** (story + Schema Lab) · full step-by-step **[docs/QUICKSTART.md](docs/QUICKSTART.md)** — local MCP · compose lab · bare-metal hub/spoke · editor wiring.
-
-```bash
-./scripts/site_preview.sh   # http://127.0.0.1:8765/  (gallery + live schemas)
-```
-
----
+| | |
+|---|---|
+| **License** | [Apache-2.0](LICENSE) |
+| **Install / code** | [`DEVELOPMENT`](https://github.com/real-limitless/ansible-flow-mcp/tree/DEVELOPMENT) |
+| **Marketing site** | [site/](site/) |
+| **Hub ops** | [docs/HUB.md](docs/HUB.md) |
 
 ## Visual tour
 
