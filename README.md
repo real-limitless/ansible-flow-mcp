@@ -10,6 +10,9 @@ This branch (`CORE`) is documentation only: why it exists, campaign screenshots,
 | **Install / code** | [`DEVELOPMENT`](https://github.com/real-limitless/ansible-flow-mcp/tree/DEVELOPMENT) |
 | **Marketing site** | [site/](site/) |
 | **Hub ops** | [docs/HUB.md](docs/HUB.md) |
+| **Branches** | [BRANCHES.md](BRANCHES.md) |
+| **Species** | [SPECIES.md](SPECIES.md) |
+| **Voice** | [VOICE.md](VOICE.md) |
 
 ## Visual tour
 
@@ -215,3 +218,13 @@ pip install build twine && python -m build
 ```bash
 uvx --from ansible-flow-mcp ansible-flow-mcp
 ```
+
+
+## Family
+
+Written standard: private TheFLOW.
+
+- OpenFlow: reads this Ansible gallery
+- mcp-flow: MCP gateway
+- skill-flow: Agent Skills
+- wiki-flow, roster-flow, CleanFlow, ProjectEverflow: siblings
