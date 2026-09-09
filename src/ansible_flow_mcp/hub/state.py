@@ -126,7 +126,7 @@ def hub_init(
     replay = tokens / "replay.db"
     if not replay.exists():
         replay.write_text(json.dumps({"jti": []}, indent=2) + "\n", encoding="utf-8")
-        os.chmod(replay, 0o600)
+        os.chmod(replay, 0o660)
 
     audit = base / "audit.jsonl"
     if not audit.exists():

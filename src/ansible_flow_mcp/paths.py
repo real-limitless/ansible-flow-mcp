@@ -70,7 +70,20 @@ def spoke_dir(override: str | Path | None = None) -> Path:
     return default_spoke_dir().expanduser().resolve()
 
 
+SHARED_FILE_MODE = 0o660
+
+
+def chmod_shared(path: Path, mode: int = SHARED_FILE_MODE) -> None:
+    """Group-readable/writable mode for hub files mcp-join must update."""
+    try:
+        os.chmod(path, mode)
+    except OSError:
+        pass
+
+
 def ensure_dir(path: Path, mode: int = 0o700) -> Path:
+    """Create *path* if missing. Do not chmod an existing directory (lab hub is 0775)."""
+    existed = path.exists()
     try:
         path.mkdir(parents=True, exist_ok=True)
     except PermissionError as exc:
@@ -83,8 +96,9 @@ def ensure_dir(path: Path, mode: int = 0o700) -> Path:
         )
         print(hint, file=sys.stderr)
         raise PermissionError(hint) from exc
-    try:
-        os.chmod(path, mode)
-    except OSError:
-        pass
+    if not existed:
+        try:
+            os.chmod(path, mode)
+        except OSError:
+            pass
     return path

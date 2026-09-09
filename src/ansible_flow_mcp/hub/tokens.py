@@ -110,10 +110,9 @@ def _save_replay(path: Path, jtis: set[str]) -> None:
     ordered = sorted(jtis)[-10000:]
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps({"jti": ordered}, indent=2) + "\n", encoding="utf-8")
-    try:
-        path.chmod(0o600)
-    except OSError:
-        pass
+    from ansible_flow_mcp.paths import chmod_shared
+
+    chmod_shared(path)
 
 
 def verify_token(

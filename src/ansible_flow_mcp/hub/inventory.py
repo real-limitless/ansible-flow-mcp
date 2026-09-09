@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-import os
 from pathlib import Path
 from typing import Any
 
 import yaml
 
-from ansible_flow_mcp.paths import ensure_dir
+from ansible_flow_mcp.paths import chmod_shared, ensure_dir
 
 
 KIND_SPOKE = "spoke"
@@ -118,10 +117,7 @@ def write_inventory(path: Path, data: dict[str, Any]) -> None:
     ensure_dir(path.parent)
     text = yaml.safe_dump(data, sort_keys=False, default_flow_style=False)
     path.write_text(text, encoding="utf-8")
-    try:
-        os.chmod(path, 0o600)
-    except OSError:
-        pass
+    chmod_shared(path)
 
 
 def _spokes_hosts(inv: dict[str, Any]) -> dict[str, Any]:
