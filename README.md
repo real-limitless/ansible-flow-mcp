@@ -2,6 +2,14 @@
 
 **Give agents Ansible. Not the keys.**
 
+This branch (`CORE`) is documentation only: why it exists, campaign screenshots, and the marketing site. The runnable MCP and hub live on [`DEVELOPMENT`](https://github.com/real-limitless/ansible-flow-mcp/tree/DEVELOPMENT). `main` stays a product alias.
+
+| | |
+|---|---|
+| **License** | [Apache-2.0](LICENSE) |
+| **Install / code** | [`DEVELOPMENT`](https://github.com/real-limitless/ansible-flow-mcp/tree/DEVELOPMENT) |
+| **Marketing site** | [site/](site/) |
+| **Hub ops** | [docs/HUB.md](docs/HUB.md) |
 MCP server that exposes real Ansible modules and playbooks to AI agents, plus an **SSH hub/spoke fabric** so multi-host automation is enrolled, bastion-scoped, and check-first by default.
 
 ![Hero: agent hub session and enrolled inventory rail](docs/images/campaign-hero.png)

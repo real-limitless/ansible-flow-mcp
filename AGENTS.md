@@ -1,7 +1,9 @@
 # AGENTS.md: ansible-flow-mcp
 
-Guidance for AI coding agents working in this repository.
+This checkout is the CORE branch: concept, campaign, marketing site, and Schema Lab catalog. No Python package.
 
+- Runnable MCP and hub: branch DEVELOPMENT. Compose is the supported run path. The multi-spoke lab stays on DEVELOPMENT.
+- Do not add src/, pyproject.toml, or lab images here.
 ## What this is
 
 **ansible-flow-mcp** is an MCP server that exposes Ansible to AI agents, plus an optional **SSH hub/spoke** multi-host fabric:
