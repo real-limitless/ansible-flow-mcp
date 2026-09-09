@@ -1,6 +1,8 @@
 # Hub/spoke lab (`lab/`)
 
-Docker/Podman Compose lab for hub/spoke: **1 hub + 3 spokes**, operator TUI, **admin portal** on `http://127.0.0.1:8788/admin/`, OpenCode + hub MCP, demo inventory/groups.
+Docker/Podman Compose lab for hub/spoke: **1 hub + 3 spokes**, operator TUI, **admin portal** on `http://127.0.0.1:8789/admin/`, OpenCode + hub MCP, demo inventory/groups.
+
+Do not run this lab and the root `docker compose` (single-node health on 8789) at the same time.
 
 Full project walkthrough (install → lab → bare metal): **[docs/QUICKSTART.md](../docs/QUICKSTART.md)** (Path B).
 
@@ -17,7 +19,7 @@ When run in a real terminal, **demo drops you into a shell on the hub** after sm
 ./scripts/demo.sh --no-shell   # setup only (CI)
 ./scripts/shell.sh             # hub shell anytime lab is up
 ./scripts/tui.sh               # operator TUI (inside hub)
-# admin portal on host: http://127.0.0.1:8788/admin/  (token: hub volume admin.token)
+# admin portal on host: http://127.0.0.1:8789/admin/  (token: hub volume admin.token)
 ./scripts/opencode.sh          # OpenCode *inside* hub container
 ./scripts/opencode-host.sh     # OpenCode *on your machine* → lab hub MCP (see spokes)
 ./scripts/reconnect.sh         # after hub rebuild: re-enroll + seed + refresh configs

@@ -31,7 +31,7 @@ Anyone who can call the MCP tools can change systems reachable with the control 
 
 | Control | Behavior |
 | --- | --- |
-| Bind | `127.0.0.1:8788` unless overridden |
+| Bind | `127.0.0.1:8789` unless overridden |
 | Auth | `ANSIBLE_FLOW_ADMIN_TOKEN` or `$HUB_DIR/admin.token` |
 | Surface | Inventory CRUD + audit; **no** `run_module` / `run_playbook` |
 | Health | `/health` is unauthenticated and returns no secrets |

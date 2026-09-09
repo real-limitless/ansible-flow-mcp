@@ -52,9 +52,9 @@ start_admin() {
   if [ ! -f "$HUB_DIR/hub_id" ]; then
     return 0
   fi
-  # Container must listen on 0.0.0.0 so host 127.0.0.1:8788 publish works.
+  # Container must listen on 0.0.0.0 so host 127.0.0.1:8789 publish works.
   local bind="${ANSIBLE_FLOW_ADMIN_BIND:-0.0.0.0}"
-  local port="${ANSIBLE_FLOW_ADMIN_PORT:-8788}"
+  local port="${ANSIBLE_FLOW_ADMIN_PORT:-8789}"
   if [ -f /var/run/ansible-flow-admin.pid ] && kill -0 "$(cat /var/run/ansible-flow-admin.pid)" 2>/dev/null; then
     echo "[hub] admin already running pid=$(cat /var/run/ansible-flow-admin.pid)"
     return 0

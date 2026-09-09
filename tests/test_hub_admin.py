@@ -85,6 +85,8 @@ def test_health_and_unauth(admin_http):
     status, body = _req((host, port), "GET", "/health", token=None)
     assert status == 200
     assert body["ok"] is True
+    assert body.get("version")
+    assert "catalogDir" in body
     assert "token" not in json.dumps(body)
     status, body = _req((host, port), "GET", "/v1/status", token=None)
     assert status == 401
@@ -207,3 +209,20 @@ def test_cli_hub_dir_before_subcommand(hub_root: Path, capsys: pytest.CaptureFix
     data = json.loads(out)
     assert data["name"] == "hub-01"
     assert "web-01" in data["spokes"]
+
+
+def test_cli_hub_dir_before_doctor(hub_root: Path, capsys: pytest.CaptureFixture[str]):
+    cli_main(["--hub-dir", str(hub_root), "doctor"])
+    data = json.loads(capsys.readouterr().out)
+    assert "ok" in data
+    assert data.get("hubDir")
+
+
+def test_default_admin_port(monkeypatch: pytest.MonkeyPatch):
+    from ansible_flow_mcp.admin.http import DEFAULT_PORT, _default_port
+
+    monkeypatch.delenv("ANSIBLE_FLOW_ADMIN_PORT", raising=False)
+    assert DEFAULT_PORT == 8789
+    assert _default_port() == 8789
+    monkeypatch.setenv("ANSIBLE_FLOW_ADMIN_PORT", "18789")
+    assert _default_port() == 18789

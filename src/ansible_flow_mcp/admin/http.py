@@ -11,7 +11,6 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, unquote, urlparse
 
-from ansible_flow_mcp import __version__
 from ansible_flow_mcp.admin import routes
 from ansible_flow_mcp.admin.routes import AdminError
 from ansible_flow_mcp.hub.state import ensure_admin_token, load_admin_token, load_hub_state
@@ -19,7 +18,7 @@ from ansible_flow_mcp.paths import hub_dir
 
 
 DEFAULT_HOST = "127.0.0.1"
-DEFAULT_PORT = 8788
+DEFAULT_PORT = 8789
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 _STATIC_FILES = {
     "index.html": "text/html; charset=utf-8",
@@ -115,7 +114,12 @@ class AdminHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 return
             if path == "/health":
-                self._send(*_json_bytes({"ok": True, "service": "ansible-flow-mcp", "version": __version__}))
+                from ansible_flow_mcp.http_health import doctor_report
+
+                report = doctor_report()
+                report.setdefault("service", "ansible-flow-mcp")
+                status = 200 if report.get("ok") else 503
+                self._send(*_json_bytes(report, status))
                 return
             if path == "/admin/" or path == "/admin/index.html":
                 self._send_static("index.html")
@@ -267,7 +271,7 @@ def make_server(
     ensure_admin_token(hub_root)
     token = load_admin_token(hub_root)
     bind_host = host if host is not None else _default_host()
-    bind_port = DEFAULT_PORT if port is None else int(port)
+    bind_port = _default_port() if port is None else int(port)
     handler = partial(AdminHandler)
     # bind attributes used by instances
     AdminHandler.hub_root = hub_root
