@@ -1,4 +1,4 @@
-# AGENTS.md — ansible-flow-mcp
+# AGENTS.md: ansible-flow-mcp
 
 Guidance for AI coding agents working in this repository.
 
@@ -13,7 +13,7 @@ Guidance for AI coding agents working in this repository.
 | **Operator TUI** | Curses UI on hub: servers/groups CRUD, invite tokens, launch OpenCode |
 | **Compose lab** (`lab/`) | Full hub + 3 spokes, smoke scripts, OpenCode bridge from host |
 
-Not affiliated with Red Hat/Ansible beyond the public CLI. Dual-tracked with [OpenFlow](https://github.com/real-limitless/OpenFlow) gallery concepts.
+Not affiliated with Red Hat/Ansible beyond the public CLI. OpenFlow reads this gallery for its Ansible canvas.
 
 **Product docs:** `README.md`, `docs/QUICKSTART.md`, `docs/HUB.md`, `docs/SECURITY.md`, `lab/README.md`.
 
@@ -138,7 +138,7 @@ Env:
 
 | Tool | Notes |
 | --- | --- |
-| `search_modules` | Gallery substring search (`catalog.py`) — large gallery; keep results compact |
+| `search_modules` | Gallery substring search (`catalog.py`): large gallery; keep results compact |
 | `get_module_schema` | Reads `catalog/schemas/<fqcn>.json`; `null` if missing |
 | `run_module` | Default `check_mode=true`; hub gates hosts/inventory |
 | `run_playbook` | Path-jailed `.yml` |
@@ -157,14 +157,14 @@ Env:
 ### Spoke mode
 
 - Localhost-only execution; no `issue_token` / foreign hosts.  
-- ForceCommand often uses **simple-exec** one-shot JSON (`ansible_flow:1, op:call`), not full MCP framing — see `spoke/session.py` + `ssh.py`.
+- ForceCommand often uses **simple-exec** one-shot JSON (`ansible_flow:1, op:call`), not full MCP framing: see `spoke/session.py` + `ssh.py`.
 
 ---
 
 ## Hub/spoke rules (do not regress)
 
-1. Agent attaches to **hub only** — never make spokes the agent entrypoint.  
-2. Hub inventory is source of truth — **reject client-supplied `-i`** in hub mode.  
+1. Agent attaches to **hub only**: never make spokes the agent entrypoint.  
+2. Hub inventory is source of truth: **reject client-supplied `-i`** in hub mode.  
 3. Target only **enrolled spoke** or **registered target** names or **inventory group** names (+ localhost).  
 4. Host key checking **on** in hub/spoke mode.  
 5. Join tokens: signed, TTL, **one-time jti** replay cache.  
@@ -206,7 +206,7 @@ ansible-flow-mcp tui
 
 ---
 
-## Compose lab (`lab/`) — primary integration suite
+## Compose lab (`lab/`): primary integration suite
 
 **Not pytest.** Docker or Podman Compose. Full fabric + OpenCode wiring.
 
@@ -216,7 +216,7 @@ ansible-flow-mcp tui
 cd lab
 ./scripts/demo.sh              # up → enroll → seed → smoke → hub shell (if TTY)
 ./scripts/demo.sh --no-shell   # CI / non-interactive
-./scripts/manual.sh            # up only — you enroll (TUI/CLI); --blank / --windows / --fresh
+./scripts/manual.sh            # up only: you enroll (TUI/CLI); --blank / --windows / --fresh
 ```
 
 ### After hub image rebuild (spokes “missing” in OpenCode)
@@ -261,11 +261,11 @@ cd lab
 | --- | --- | --- |
 | **Host** | `OPENCODE_CONFIG=lab/opencode-hub.host.jsonc` via `opencode-host.sh` | Yes (bridge into container volume) |
 | **Inside hub** | `/var/lib/ansible-flow/hub/opencode-hub.jsonc` via `opencode.sh` | Yes |
-| Host with default local `ANSIBLE_FLOW_HUB_DIR` empty | local empty hub | **No** — looks like “no servers” |
+| Host with default local `ANSIBLE_FLOW_HUB_DIR` empty | local empty hub | **No**: looks like “no servers” |
 
 ### Lab image pitfalls
 
-1. **Never dockerignore `catalog/schemas`** — hub image must include schemas or `get_module_schema` returns null for everything (gallery alone is not enough).  
+1. **Never dockerignore `catalog/schemas`**: hub image must include schemas or `get_module_schema` returns null for everything (gallery alone is not enough).  
 2. Hub build arg `INSTALL_OPENCODE=1` (default) installs OpenCode for lab AI.  
 3. Editable install in image: code under `/opt/ansible-flow-mcp`; state under `/var/lib/ansible-flow/hub` (volume `hub-data`).  
 4. After `compose build hub` + recreate, run **`reconnect.sh`** if inventory/joins drift or perms break `mcp-join`.
@@ -332,14 +332,14 @@ No dedicated lint/typecheck scripts yet. CI: `.github/workflows/ci.yml`.
 ## Docs & marketing
 
 - Product story: `README.md` (campaign embeds under `docs/images/campaign-*.png`).  
-- Generate PNGs: `docs/campaign/capture.sh` — do **not** reintroduce old OpenFlow `architecture.png` / `gallery-concept.png`.  
+- Generate PNGs: `docs/campaign/capture.sh`: do **not** reintroduce old OpenFlow `architecture.png` / `gallery-concept.png`.  
 - Ops: `docs/HUB.md`. Security: `docs/SECURITY.md`. Lab: `lab/README.md`.
 
 ---
 
 ## Known gaps / next work (do not assume done)
 
-- **search_modules** is linear substring over ~25k gallery entries; fine CPU-wise, but hub path can feel slow due to **compose exec + cold MCP process**. Planned: compact JSON, warm index, hybrid/synonym (RAG-like) search — not implemented until explicitly requested.  
+- **search_modules** is linear substring over ~25k gallery entries; fine CPU-wise, but hub path can feel slow due to **compose exec + cold MCP process**. Planned: compact JSON, warm index, hybrid/synonym (RAG-like) search: not implemented until explicitly requested.  
 - Full semantic embeddings optional later.  
 - Production split of `mcp-spoke` vs Ansible shell user more strict than lab.  
 - No multi-hub HA or public HTTP MCP in v1.  
@@ -371,6 +371,6 @@ No dedicated lint/typecheck scripts yet. CI: `.github/workflows/ci.yml`.
 2. Trace: `cli.py` → `server.py` → `runner.py` / `hub/*` / `ssh.py` / `spoke/*`.  
 3. Unit: `pytest tests/test_hub_spoke.py tests/test_hub_groups.py -q`.  
 4. Lab: `cd lab && ./scripts/smoke.sh && ./scripts/smoke_tui_opencode.sh`.  
-5. Empty servers in OpenCode: use `./scripts/opencode-host.sh` or `./scripts/reconnect.sh` — not a random local hub dir.  
+5. Empty servers in OpenCode: use `./scripts/opencode-host.sh` or `./scripts/reconnect.sh`: not a random local hub dir.  
 6. Missing schemas in lab: ensure `.dockerignore` does **not** exclude `catalog/schemas`.  
 7. Issues: [#2](https://github.com/real-limitless/ansible-flow-mcp/issues/2) hub/spoke, [#1](https://github.com/real-limitless/ansible-flow-mcp/issues/1) core MCP.
