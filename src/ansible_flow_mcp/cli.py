@@ -133,6 +133,17 @@ def build_parser() -> argparse.ArgumentParser:
     spoke_sub.add_parser("session", help="ForceCommand MCP stdio (localhost only)")
     spoke_sub.add_parser("status", help="Show spoke enrollment status")
 
+    sub.add_parser("doctor", help="Environment + catalog health (JSON)")
+
+    serve = sub.add_parser("serve", help="HTTP health listener (family port 8789)")
+    serve.add_argument("--host", default="0.0.0.0")
+    serve.add_argument(
+        "--port",
+        type=int,
+        default=None,
+        help="Listen port (default: $ANSIBLE_FLOW_HTTP_PORT or 8789)",
+    )
+
     return p
 
 
@@ -140,7 +151,7 @@ def main(argv: list[str] | None = None) -> None:
     argv = list(sys.argv[1:] if argv is None else argv)
 
     # No subcommand → legacy/dev stdio MCP
-    if not argv or argv[0] not in {"hub", "spoke", "tui", "-h", "--help"}:
+    if not argv or argv[0] not in {"hub", "spoke", "tui", "doctor", "serve", "-h", "--help"}:
         if argv and argv[0] in {"-h", "--help"}:
             build_parser().print_help()
             return
@@ -183,6 +194,22 @@ def main(argv: list[str] | None = None) -> None:
         return
     if args.cmd == "spoke":
         _spoke_main(args)
+        return
+    if args.cmd == "doctor":
+        from ansible_flow_mcp.http_health import doctor_report
+
+        report = doctor_report()
+        _out(report)
+        if not report.get("ok"):
+            raise SystemExit(1)
+        return
+    if args.cmd == "serve":
+        from ansible_flow_mcp.http_health import serve_http
+
+        import os
+
+        port = int(args.port) if args.port is not None else int(os.environ.get("ANSIBLE_FLOW_HTTP_PORT") or 8789)
+        serve_http(host=args.host, port=port)
         return
     parser.print_help()
 

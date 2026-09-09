@@ -18,6 +18,16 @@ Not affiliated with Red Hat or the Ansible project beyond using the public Ansib
 **New here?** **[Marketing site](site/)** (story + Schema Lab) · full step-by-step **[docs/QUICKSTART.md](docs/QUICKSTART.md)**: local MCP · compose lab · bare-metal hub/spoke · editor wiring.
 
 ```bash
+git clone -b DEVELOPMENT https://github.com/real-limitless/ansible-flow-mcp.git
+cd ansible-flow-mcp
+docker compose up -d --build
+# health: http://127.0.0.1:8789/health
+docker compose exec ansible-flow-mcp ansible-flow-mcp doctor
+```
+
+Single-node hub on **8789**. Multi-spoke fabric is extra: `lab/`.
+
+```bash
 ./scripts/site_preview.sh   # http://127.0.0.1:8765/  (gallery + live schemas)
 ```
 
