@@ -103,6 +103,7 @@ ansible-flow-mcp hub issue-token --name web-03 --ttl 15m
 ansible-flow-mcp spoke join --token "$TOKEN" --hub user@hub:22 --public-addr web-03.example.com
 ansible-flow-mcp hub session          # MCP stdio for the agent
 ansible-flow-mcp tui                  # servers · groups · invite · OpenCode
+ansible-flow-mcp hub serve            # web console http://127.0.0.1:8785 (login)
 ansible-flow-mcp hub spoke-call --node web-03 --tool list_collections
 ```
 
