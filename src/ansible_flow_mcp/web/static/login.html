@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ansible-flow · sign in</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">ansible<span>-flow</span></div></div>
+      <span class="pill">Operator</span>
+    </header>
+    <p class="eyebrow">Hub console</p>
+    <h1 class="display">Sign in.<br /><em>Inventory stays on the hub.</em></h1>
+    <p class="lede">Local operator accounts for this hub only — not SSO, not mesh SSH keys.</p>
+    <form id="form" class="surface auth-card">
+      <div class="panel-head">Sign in</div>
+      <div class="panel-pad">
+        <label class="form-field"><span class="field-label">Email</span><input id="email" type="email" required /></label>
+        <label class="form-field"><span class="field-label">Password</span><input id="password" type="password" required /></label>
+        <p id="err" class="err" hidden></p>
+        <button class="pill-btn primary" type="submit">Sign in</button>
+      </div>
+    </form>
+  </div>
+  <script>
+    (async () => {
+      const st = await fetch("/api/auth/status").then((r) => r.json());
+      if (st.setupRequired) location.replace("/setup");
+      else if (st.authenticated) location.replace("/console");
+    })();
+    document.getElementById("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const err = document.getElementById("err");
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: document.getElementById("email").value,
+          password: document.getElementById("password").value,
+        }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) { err.hidden = false; err.textContent = body.error || "failed"; return; }
+      location.replace("/console");
+    });
+  </script>
+</body>
+</html>

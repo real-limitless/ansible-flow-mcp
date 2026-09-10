@@ -18,6 +18,10 @@ ansible-flow-mcp runs the **local `ansible` CLI** on the machine hosting the MCP
 
 Anyone who can call the MCP tools can change systems reachable with the control node’s Ansible credentials/inventory. Treat MCP access like SSH to your automation host.
 
+The **web console** (`hub serve`) is a second door: email/password sessions for humans. It does **not** authenticate `hub session` stdio MCP. Default bind is `127.0.0.1`. Do not expose it on `0.0.0.0` without TLS and a reverse proxy.
+
+Operator rows live in `$HUB_DIR/console/operators.sqlite` (mode 0600). They are not inventory, join tokens, or SSH keys.
+
 ## Hardening recommendations
 
 1. Run under a dedicated OS user with limited sudo/become.

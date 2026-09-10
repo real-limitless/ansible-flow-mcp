@@ -60,6 +60,18 @@ ansible-flow-mcp tui
 - Static example: `examples/opencode-hub.jsonc`  
 - Config helper: `ansible-flow-mcp hub write-opencode-config`
 
+### Operator web console
+
+Localhost browser UI (email/password, per-hub accounts — not SSO). Does **not** authenticate stdio MCP.
+
+```bash
+ansible-flow-mcp hub serve --host 127.0.0.1 --port 8785
+# first operator: open http://127.0.0.1:8785/setup
+# or: ansible-flow-mcp hub user add --email ops@hub --password '…'
+```
+
+Tabs match the TUI: servers (invite shown once), groups, hub status. Bind stays on loopback by default.
+
 ### Compose lab (TUI + OpenCode + demo inventory)
 
 ```bash

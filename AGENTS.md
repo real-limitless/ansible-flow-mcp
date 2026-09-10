@@ -11,6 +11,7 @@ Guidance for AI coding agents working in this repository.
 | **Core MCP** | `search_modules` → `get_module_schema` → `run_module` / `run_playbook` (check-first) |
 | **Hub/spoke** ([issue #2](https://github.com/real-limitless/ansible-flow-mcp/issues/2)) | Agent attaches to **hub only**; spokes enroll with join tokens; hub→spoke is SSH only |
 | **Operator TUI** | Curses UI on hub: servers/groups CRUD, invite tokens, launch OpenCode |
+| **Operator web console** | `hub serve` localhost login + same ops as TUI (per-hub accounts, not SSO) |
 | **Compose lab** (`lab/`) | Full hub + 3 spokes, smoke scripts, OpenCode bridge from host |
 
 Not affiliated with Red Hat/Ansible beyond the public CLI. Dual-tracked with [OpenFlow](https://github.com/real-limitless/OpenFlow) gallery concepts.
@@ -31,6 +32,7 @@ src/ansible_flow_mcp/
   security.py      # allowlist, redaction
   ssh.py           # spoke_call (ForceCommand simple-exec over SSH)
   tui.py           # operator TUI + write_opencode_hub_config
+  web/             # hub serve: login + operator console
   paths.py         # ANSIBLE_FLOW_HUB_DIR / SPOKE_DIR defaults
   hub/
     state.py       # hub init, keys, signing, audit.jsonl
@@ -105,6 +107,7 @@ ansible-flow-mcp hub issue-token --name web-01 --ttl 15m
 ansible-flow-mcp hub status
 ansible-flow-mcp hub session              # MCP stdio + hub tools
 ansible-flow-mcp hub tui                  # operator TUI
+ansible-flow-mcp hub serve                 # operator web console (127.0.0.1:8785)
 ansible-flow-mcp tui                      # same
 ansible-flow-mcp hub write-opencode-config
 ansible-flow-mcp hub spoke-call --node web-01 --tool list_collections

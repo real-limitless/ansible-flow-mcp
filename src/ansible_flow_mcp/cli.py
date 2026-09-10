@@ -113,6 +113,19 @@ def build_parser() -> argparse.ArgumentParser:
     h_rmt = hub_sub.add_parser("remove-target", help="Remove registered Ansible target")
     h_rmt.add_argument("--name", required=True)
 
+    h_serve = hub_sub.add_parser(
+        "serve",
+        help="Operator web console (login + servers/groups; default 127.0.0.1:8785)",
+    )
+    h_serve.add_argument("--host", default="127.0.0.1")
+    h_serve.add_argument("--port", type=int, default=8785)
+
+    h_user = hub_sub.add_parser("user", help="Manage web-console operators")
+    h_user_sub = h_user.add_subparsers(dest="user_cmd", required=True)
+    h_user_add = h_user_sub.add_parser("add", help="Create an operator account")
+    h_user_add.add_argument("--email", required=True)
+    h_user_add.add_argument("--password", required=True)
+
     # spoke
     spoke = sub.add_parser("spoke", help="Spoke worker commands")
     spoke_sub = spoke.add_subparsers(dest="spoke_cmd", required=True)
@@ -330,6 +343,29 @@ def _hub_main(args: argparse.Namespace) -> None:
 
         _out(remove_target_node(args.name, root=root))
         return
+
+    if args.hub_cmd == "serve":
+        from ansible_flow_mcp.web.app import run_console
+
+        run_console(hub_root=root, host=args.host, port=int(args.port))
+        return
+
+    if args.hub_cmd == "user":
+        from ansible_flow_mcp.web.store import OperatorStore
+
+        store = OperatorStore(root)
+        if args.user_cmd == "add":
+            if len(args.password) < 8:
+                raise SystemExit("password must be at least 8 characters")
+            try:
+                op = store.create(str(args.email).strip().lower(), args.password)
+            except Exception as exc:
+                if "UNIQUE" in str(exc).upper():
+                    raise SystemExit("email already exists") from exc
+                raise
+            _out({"operator": op.to_dict()})
+            return
+        raise SystemExit(f"unknown user command: {args.user_cmd}")
 
     raise SystemExit(f"unknown hub command: {args.hub_cmd}")
 
