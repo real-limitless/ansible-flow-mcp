@@ -158,6 +158,23 @@ def list_collections_tool() -> str:
     return _json({"collections": list_collections(), "version": __version__, "role": _role().value})
 
 
+_HUB_TOOLS_REGISTERED = False
+
+
+def activate_role(*, role: str | None = None) -> None:
+    """Apply hub or spoke tool registration. Safe to call more than once."""
+    global _ROLE, _HUB_TOOLS_REGISTERED
+    _ROLE = role
+    if role == "hub" or (role is None and detect_mode().role == Role.HUB):
+        if os.environ.get("ANSIBLE_FLOW_ROLE", "").lower() != "spoke":
+            os.environ.setdefault("ANSIBLE_FLOW_ROLE", "hub")
+            if not _HUB_TOOLS_REGISTERED:
+                _register_hub_tools()
+                _HUB_TOOLS_REGISTERED = True
+    elif role == "spoke":
+        os.environ["ANSIBLE_FLOW_ROLE"] = "spoke"
+
+
 def _register_hub_tools() -> None:
     @mcp.tool(name="list_nodes")
     def list_nodes_tool() -> str:
@@ -306,14 +323,7 @@ def _register_hub_tools() -> None:
 
 
 def run_server(*, role: str | None = None) -> None:
-    global _ROLE
-    _ROLE = role
-    if role == "hub" or (role is None and detect_mode().role == Role.HUB):
-        if os.environ.get("ANSIBLE_FLOW_ROLE", "").lower() != "spoke":
-            os.environ.setdefault("ANSIBLE_FLOW_ROLE", "hub")
-            _register_hub_tools()
-    elif role == "spoke":
-        os.environ["ANSIBLE_FLOW_ROLE"] = "spoke"
+    activate_role(role=role)
     mcp.run(transport="stdio")
 
 
