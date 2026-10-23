@@ -43,6 +43,11 @@ def test_compose_matches_flavors_and_stays_private():
     assert "ANSIBLE_FLOW_MCP_MAX_SESSIONS: \"32\"" in text
     assert "ANSIBLE_FLOW_MCP_RATE_PER_MINUTE: \"120\"" in text
     assert "afm-test-hub,hub" in text
+    assert 'subnet: "${AFM_TEST_SUBNET:-192.0.2.0/24}"' in text
+    assert "fedora:44" in text
+    assert "alpine:3.24" in text
+    assert "fedora:latest" not in text
+    assert "alpine:3\n" not in text
 
 
 def test_hub_mcp_http_is_the_shared_listener(tmp_path: Path):
@@ -69,3 +74,13 @@ def test_private_net_overlay_publishes_nothing():
     assert "ports:" not in text.lower()
     assert "external: true" in text
     assert "private-network" in text
+    assert "ipam:" not in text
+    assert "${AFM_TEST_PRIVATE_SUBNET" not in text
+    docs = (ROOT / "docs" / "TEST-ENV.md").read_text(encoding="utf-8")
+    assert "AFM_TEST_SUBNET" in docs
+    assert "AFM_TEST_PRIVATE_SUBNET" in docs
+    assert "192.0.2.0/24" in docs
+    assert "198.51.100.0/24" in docs
+    assert "fedora:44" in docs
+    assert "alpine:3.24" in docs
+    assert "fedora:latest" not in docs

@@ -14,7 +14,7 @@ The only list of flavors is [`test-env/flavors.yml`](../test-env/flavors.yml). A
 python3 test-env/scripts/render.py
 ```
 
-That rewrites `test-env/docker-compose.yml`. Current flavors: Debian 12, Ubuntu 24.04, Rocky Linux 9, Fedora (floating `fedora:latest`), Alpine (floating `alpine:3`, latest 3.x). Pin those two tags in `flavors.yml` when you want a frozen build.
+That rewrites `test-env/docker-compose.yml`. Current flavors: Debian 12, Ubuntu 24.04, Rocky Linux 9, Fedora 44 (`fedora:44`), Alpine 3.24 (`alpine:3.24`).
 
 Rocky Linux 9's default Python is older than this package. The spoke image install script selects Python 3.11+ on that family.
 
@@ -24,6 +24,7 @@ Rocky Linux 9's default Python is older than this package. The spoke image insta
 | --- | --- |
 | Compose project | `afm-test` |
 | Network | `afm-test-net` (bridge, `internal: true`, no egress) |
+| Lab subnet | `AFM_TEST_SUBNET`, placeholder `192.0.2.0/24` (RFC 5737). Override it. |
 | Volumes | named `afm-test-*` only |
 | Hub id | created on first boot inside the hub volume (`hub init --name afm-test`) |
 | Keys and tokens | generated at runtime on the volumes; never committed |
@@ -31,6 +32,13 @@ Rocky Linux 9's default Python is older than this package. The spoke image insta
 | Public proxy labels | none |
 
 `internal: true` means the lab has no route to the public internet. Join, SSH, and HTTP stay on `afm-test-net`.
+
+The lab network sets an explicit ipam subnet so compose does not take a slot from the host address pool. The committed default is a documentation range, not a subnet to keep on a shared host:
+
+```bash
+# RFC 5737 placeholder. Replace it with the range your platform assigned.
+export AFM_TEST_SUBNET=192.0.2.0/24
+```
 
 It does not publish the admin port, so it can run beside the single-node compose. The interactive `lab/` stack still publishes a loopback admin port; do not confuse the two.
 
@@ -116,7 +124,15 @@ AFM_TEST_EXTERNAL_NETWORK=private-network \
 test-env/scripts/up.sh
 ```
 
-`AFM_TEST_EXTERNAL_NETWORK` must already exist. Replace `private-network` with that network's name. Set `HUB_PUBLIC_HOST` if the proxy presents a different Host header (`hub.example.com` is the placeholder).
+`AFM_TEST_EXTERNAL_NETWORK` must already exist. The overlay only attaches to it. It does not create a network, so it does not set `AFM_TEST_PRIVATE_SUBNET`. Create the network with an explicit subnet for the same reason as the lab bridge: a shared host may have no free address-pool slot. `198.51.100.0/24` is an RFC 5737 placeholder. Override it.
+
+```bash
+export AFM_TEST_PRIVATE_SUBNET=198.51.100.0/24
+export AFM_TEST_EXTERNAL_NETWORK=private-network
+docker network create --subnet "$AFM_TEST_PRIVATE_SUBNET" "$AFM_TEST_EXTERNAL_NETWORK"
+```
+
+Replace `private-network` with that network's name. Set `HUB_PUBLIC_HOST` if the proxy presents a different Host header (`hub.example.com` is the placeholder).
 
 ### Register the hub on an MCP gateway
 

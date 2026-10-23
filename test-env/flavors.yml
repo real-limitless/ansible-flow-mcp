@@ -1,6 +1,8 @@
 # Flavor matrix for the always-on private test lab.
 # Edit this file, then run: python3 test-env/scripts/render.py
 # Memory values are limits in mebibytes. Their sum must stay <= budget_mb.
+# The lab bridge subnet is not listed here. Compose reads AFM_TEST_SUBNET
+# (placeholder 192.0.2.0/24, RFC 5737). Override that placeholder.
 project: afm-test
 budget_mb: 2048
 # Word the hub maps to the in-container any-address so the private bridge
@@ -28,9 +30,9 @@ spokes:
     memory_mb: 256
   - name: fedora
     family: fedora
-    base: fedora:latest
+    base: fedora:44
     memory_mb: 256
   - name: alpine
     family: alpine
-    base: alpine:3
+    base: alpine:3.24
     memory_mb: 256
