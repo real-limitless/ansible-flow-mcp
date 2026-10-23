@@ -26,6 +26,7 @@ fix_keys() {
   fi
 }
 
+attempt=0
 while true; do
   if [ -f "$SPOKE_DIR/node.yml" ]; then
     fix_keys
@@ -47,5 +48,8 @@ while true; do
       exit 0
     fi
   fi
-  sleep 3
+  # A down hub must not retry as fast as SSH can fail. 1s, then up to 60s, with jitter.
+  seconds="$(python3 /usr/local/bin/retry_delay.py "$attempt" 2>/dev/null || echo 5)"
+  sleep "$seconds"
+  attempt=$((attempt + 1))
 done

@@ -18,6 +18,7 @@ COPY src ./src
 COPY catalog ./catalog
 COPY lab/images/entrypoint-spoke.sh /usr/local/bin/entrypoint-spoke.sh
 COPY lab/images/spoke-test-autojoin.sh /usr/local/bin/spoke-test-autojoin.sh
+COPY lab/images/retry_delay.py /usr/local/bin/retry_delay.py
 COPY lab/images/sshd/spoke.conf /etc/ssh/sshd_config.d/ansible-flow-spoke.conf
 COPY examples/sshd/ansible-flow-spoke.conf /etc/ssh/sshd_config.d/ansible-flow-spoke-force.conf
 
@@ -42,7 +43,7 @@ RUN set -eux; \
       ln -sfn "$BIN" /usr/local/bin/ansible-flow-mcp; \
     fi; \
     test -x /usr/local/bin/ansible-flow-mcp || test -x "$BIN"; \
-    chmod +x /usr/local/bin/entrypoint-spoke.sh /usr/local/bin/spoke-test-autojoin.sh; \
+    chmod +x /usr/local/bin/entrypoint-spoke.sh /usr/local/bin/spoke-test-autojoin.sh /usr/local/bin/retry_delay.py; \
     mkdir -p /var/lib/ansible-flow/spoke /var/run/sshd \
       /home/mcp-spoke/.ssh /home/mcp-ansible/.ssh; \
     if ! id mcp-spoke >/dev/null 2>&1; then \

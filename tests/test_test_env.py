@@ -57,6 +57,25 @@ def test_compose_matches_flavors_and_stays_private():
     assert "alpine:3\n" not in text
 
 
+def test_spoke_join_backoff_grows_and_caps():
+    import random
+
+    path = ROOT / "lab" / "images" / "retry_delay.py"
+    spec = importlib.util.spec_from_file_location("afm_retry_delay", path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    assert module.backoff_seconds(0, rng=random.Random(0)) == 1
+    for attempt in range(0, 12):
+        for seed in range(5):
+            delay = module.backoff_seconds(attempt, rng=random.Random(seed))
+            assert 1 <= delay <= 60
+    assert module.backoff_seconds(8, rng=random.Random(1)) <= 60
+    script = (ROOT / "lab" / "images" / "spoke-test-autojoin.sh").read_text(encoding="utf-8")
+    assert "retry_delay.py" in script
+    assert "sleep 3" not in script
+
+
 def test_mcp_http_unspecified_host_is_a_string(monkeypatch: pytest.MonkeyPatch):
     import os
 
