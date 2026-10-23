@@ -57,6 +57,12 @@ def test_compose_matches_flavors_and_stays_private():
     assert "alpine:3\n" not in text
 
 
+def test_spoke_sshd_omits_options_alpine_rejects():
+    text = (ROOT / "lab" / "images" / "sshd" / "spoke.conf").read_text(encoding="utf-8")
+    directives = [line.strip() for line in text.splitlines() if line.strip() and not line.strip().startswith("#")]
+    assert not any(line.startswith("UsePAM") or line.startswith("GSSAPIAuthentication") for line in directives)
+
+
 def test_spoke_join_backoff_grows_and_caps():
     import random
 
