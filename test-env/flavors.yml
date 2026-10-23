@@ -1,0 +1,36 @@
+# Flavor matrix for the always-on private test lab.
+# Edit this file, then run: python3 test-env/scripts/render.py
+# Memory values are limits in mebibytes. Their sum must stay <= budget_mb.
+project: afm-test
+budget_mb: 2048
+# Unspecified in-container listen address so the private bridge can reach
+# the hub. The compose file publishes no host ports.
+listen_all: "0.0.0.0"
+seed_group: flavors
+hub:
+  memory_mb: 640
+  hostname: afm-test-hub
+  container_name: afm-test-hub
+  install_opencode: "0"
+  install_windows: "0"
+spokes:
+  - name: debian
+    family: debian
+    base: debian:bookworm-slim
+    memory_mb: 256
+  - name: ubuntu
+    family: ubuntu
+    base: ubuntu:24.04
+    memory_mb: 256
+  - name: rocky
+    family: rocky
+    base: rockylinux:9
+    memory_mb: 256
+  - name: fedora
+    family: fedora
+    base: fedora:latest
+    memory_mb: 256
+  - name: alpine
+    family: alpine
+    base: alpine:3
+    memory_mb: 256

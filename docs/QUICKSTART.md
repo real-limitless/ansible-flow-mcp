@@ -541,6 +541,7 @@ cd lab && ./scripts/smoke.sh
 | [HUB.md](HUB.md) | Hub/spoke deploy, dual SSH identities, TUI |
 | [SECURITY.md](SECURITY.md) | Threat model and residual risk |
 | [lab/README.md](../lab/README.md) | Compose scripts map and OpenCode wiring |
+| [TEST-ENV.md](TEST-ENV.md) | Always-on private multi-flavor lab |
 | [AGENTS.md](../AGENTS.md) | Layout and conventions for coding agents |
 | `examples/` | Cursor, Claude Desktop, OpenCode, sshd drop-ins |
 

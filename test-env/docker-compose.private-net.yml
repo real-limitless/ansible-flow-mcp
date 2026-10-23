@@ -1,0 +1,17 @@
+# Optional overlay. Attach the hub to an already-existing private network
+# so a compose platform can proxy it. Nothing here publishes a host port
+# or adds a public router label.
+#
+#   AFM_TEST_ATTACH_PRIVATE_NET=1 \
+#   AFM_TEST_EXTERNAL_NETWORK=private-network \
+#   docker compose -f test-env/docker-compose.yml \
+#     -f test-env/docker-compose.private-net.yml up -d
+services:
+  hub:
+    networks:
+      - afm-test
+      - private
+networks:
+  private:
+    external: true
+    name: ${AFM_TEST_EXTERNAL_NETWORK:-private-network}

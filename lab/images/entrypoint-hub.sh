@@ -22,10 +22,21 @@ usermod -aG ansible-flow mcp-join 2>/dev/null || true
 usermod -s /bin/bash mcp-join 2>/dev/null || true
 passwd -u mcp-join 2>/dev/null || usermod -p '*' mcp-join 2>/dev/null || true
 
-# Host keys
-if [ ! -f /etc/ssh/ssh_host_ed25519_key ]; then
-  ssh-keygen -A
-fi
+# Host keys live on the hub volume so a container recreate does not rotate them.
+persist_host_keys() {
+  mkdir -p "$HUB_DIR/ssh"
+  if [ -f "$HUB_DIR/ssh/ssh_host_ed25519_key" ]; then
+    cp -a "$HUB_DIR/ssh"/ssh_host_* /etc/ssh/
+  else
+    if [ ! -f /etc/ssh/ssh_host_ed25519_key ]; then
+      ssh-keygen -A
+    fi
+    cp -a /etc/ssh/ssh_host_* "$HUB_DIR/ssh/"
+  fi
+  chown root:root "$HUB_DIR/ssh"/ssh_host_* /etc/ssh/ssh_host_* 2>/dev/null || true
+  chmod 600 "$HUB_DIR/ssh"/ssh_host_*_key /etc/ssh/ssh_host_*_key 2>/dev/null || true
+}
+persist_host_keys
 
 hub_fix_perms() {
   chown -R mcp-hub:ansible-flow "$HUB_DIR" || chown -R mcp-hub:mcp-hub "$HUB_DIR" || true
@@ -45,6 +56,16 @@ hub_fix_perms() {
   if [ -f "$HUB_DIR/admin.token" ]; then
     chmod 600 "$HUB_DIR/admin.token" 2>/dev/null || true
     chown mcp-hub:ansible-flow "$HUB_DIR/admin.token" 2>/dev/null || true
+  fi
+  # HTTP MCP bearer is root-only. Group read from the line above must not stick.
+  if [ -f "$HUB_DIR/mcp.http.token" ]; then
+    chmod 400 "$HUB_DIR/mcp.http.token" 2>/dev/null || true
+    chown root:root "$HUB_DIR/mcp.http.token" 2>/dev/null || true
+  fi
+  if [ -d "$HUB_DIR/ssh" ]; then
+    chown -R root:root "$HUB_DIR/ssh" 2>/dev/null || true
+    chmod 700 "$HUB_DIR/ssh" 2>/dev/null || true
+    chmod 600 "$HUB_DIR/ssh"/ssh_host_*_key 2>/dev/null || true
   fi
 }
 
@@ -87,6 +108,9 @@ ensure_join_channel() {
 }
 
 ensure_opencode_config() {
+  case "${ANSIBLE_FLOW_SKIP_OPENCODE:-0}" in
+    1|true|yes|on) return 0 ;;
+  esac
   export PATH="/root/.opencode/bin:/usr/local/bin:${PATH}"
   if ! ansible-flow-mcp --hub-dir "$HUB_DIR" hub write-opencode-config; then
     python3 - <<'PY'
@@ -141,7 +165,7 @@ if [ "$SKIP_INIT" = "1" ]; then
   fi
 else
   if [ ! -f "$HUB_DIR/hub_id" ]; then
-    ansible-flow-mcp hub init --name hub-01
+    ansible-flow-mcp hub init --name "${ANSIBLE_FLOW_HUB_NAME:-hub-01}"
   fi
   hub_fix_perms
   ensure_join_channel
@@ -152,7 +176,50 @@ HUB_ID_DISP="(not initialized)"
 if [ -f "$HUB_DIR/hub_id" ]; then
   HUB_ID_DISP=$(cat "$HUB_DIR/hub_id" 2>/dev/null || echo "?")
 fi
-start_admin || true
+# labadmin is the operator shell (TUI). Key-only; unlock the account so OpenSSH accepts a pubkey.
+if id labadmin >/dev/null 2>&1; then
+  usermod -p '*' labadmin 2>/dev/null || true
+  mkdir -p /home/labadmin/.ssh
+  touch /home/labadmin/.ssh/authorized_keys
+  chown -R labadmin:labadmin /home/labadmin/.ssh
+  chmod 700 /home/labadmin/.ssh
+  chmod 600 /home/labadmin/.ssh/authorized_keys
+fi
+
+supervise_loop() {
+  local name="$1"
+  shift
+  (
+    while true; do
+      "$@" &
+      echo $! >"/var/run/ansible-flow-${name}.pid"
+      wait $! || true
+      sleep 1
+    done
+  ) &
+}
+
+case "${ANSIBLE_FLOW_SUPERVISE_HTTP:-0}" in
+  1|true|yes|on)
+    admin_bind="${ANSIBLE_FLOW_ADMIN_BIND:-localhost}"
+    admin_port="${ANSIBLE_FLOW_ADMIN_PORT:-8789}"
+    supervise_loop admin ansible-flow-mcp --hub-dir "$HUB_DIR" hub admin --host "$admin_bind" --port "$admin_port"
+    case "${ANSIBLE_FLOW_MCP_HTTP:-0}" in
+      1|true|yes|on)
+        mcp_bind="${ANSIBLE_FLOW_MCP_HTTP_BIND:-localhost}"
+        mcp_port="${ANSIBLE_FLOW_MCP_HTTP_PORT:-8790}"
+        supervise_loop mcp-http ansible-flow-mcp --hub-dir "$HUB_DIR" hub mcp-http --host "$mcp_bind" --port "$mcp_port"
+        ;;
+    esac
+    ;;
+  *)
+    start_admin || true
+    ;;
+esac
+
+if [ -n "${ANSIBLE_FLOW_TEST_SPOKES:-}" ]; then
+  nohup /usr/local/bin/hub-test-autojoin.sh >>"$HUB_DIR/autojoin.log" 2>&1 &
+fi
 
 echo "[hub] starting sshd; hub_id=$HUB_ID_DISP; skip_init=$SKIP_INIT; opencode=$(command -v opencode || echo missing)"
 exec /usr/sbin/sshd -D -e

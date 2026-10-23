@@ -1,6 +1,7 @@
 FROM debian:bookworm-slim
 
 ARG INSTALL_OPENCODE=1
+ARG INSTALL_WINDOWS=1
 
 ENV DEBIAN_FRONTEND=noninteractive \
     ANSIBLE_FLOW_ROLE=hub \
@@ -14,9 +15,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       iproute2 ca-certificates curl tini \
       gnupg bash \
     && rm -rf /var/lib/apt/lists/* \
-    && ansible-galaxy collection install ansible.posix ansible.windows \
-    && python3 -m pip install --no-cache-dir --break-system-packages \
-         'pywinrm>=0.4.3' 'requests-ntlm>=1.2.0' \
+    && if [ "$INSTALL_WINDOWS" = "1" ]; then \
+         ansible-galaxy collection install ansible.posix ansible.windows \
+         && python3 -m pip install --no-cache-dir --break-system-packages \
+              'pywinrm>=0.4.3' 'requests-ntlm>=1.2.0'; \
+       else \
+         ansible-galaxy collection install ansible.posix; \
+       fi \
     && mkdir -p /var/run/sshd /var/lib/ansible-flow/hub /lab/keys \
     && useradd -m -s /usr/sbin/nologin mcp-hub \
     && useradd -m -s /bin/bash mcp-join \
@@ -35,6 +40,8 @@ COPY src ./src
 COPY catalog ./catalog
 COPY examples ./examples
 COPY lab/images/entrypoint-hub.sh /usr/local/bin/entrypoint-hub.sh
+COPY lab/images/hub-test-autojoin.sh /usr/local/bin/hub-test-autojoin.sh
+COPY lab/images/hub-healthcheck.py /usr/local/bin/hub-healthcheck.py
 COPY lab/images/lab-opencode /usr/local/bin/lab-opencode
 COPY lab/images/sshd/hub.conf /etc/ssh/sshd_config.d/ansible-flow-hub.conf
 COPY examples/sshd/ansible-flow-hub-join.conf /etc/ssh/sshd_config.d/ansible-flow-hub-join.conf
@@ -42,6 +49,7 @@ COPY examples/sshd/ansible-flow-hub-join.conf /etc/ssh/sshd_config.d/ansible-flo
 RUN python3 -m pip install --no-cache-dir --break-system-packages -e . \
     && ln -sf /usr/local/bin/ansible-flow-mcp /usr/bin/ansible-flow-mcp \
     && chmod +x /usr/local/bin/entrypoint-hub.sh /usr/local/bin/lab-opencode \
+         /usr/local/bin/hub-test-autojoin.sh /usr/local/bin/hub-healthcheck.py \
     && ssh-keygen -A \
     && mkdir -p /home/mcp-join/.ssh \
     && chown -R mcp-join:mcp-join /home/mcp-join \

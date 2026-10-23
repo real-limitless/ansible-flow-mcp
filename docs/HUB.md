@@ -89,6 +89,10 @@ cd lab && ./scripts/demo.sh
 
 After enroll, `seed_demo.sh` creates groups `prod web app data edge batch canary` on the three lab spokes.
 
+### Always-on flavor lab
+
+A separate compose project (hub + one spoke per Linux flavor, no host port publish) is documented in [TEST-ENV.md](TEST-ENV.md). It does not use this lab's published admin port, so it can run beside the single-node compose.
+
 ### Hub MCP tools (agent + TUI parity)
 
 | Tool | Purpose |
