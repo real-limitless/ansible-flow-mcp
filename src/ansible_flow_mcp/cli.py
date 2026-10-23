@@ -153,7 +153,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("doctor", help="Environment + catalog health (JSON)")
 
-    serve = sub.add_parser("serve", help="HTTP health listener (family port 8789)")
+    serve = sub.add_parser(
+        "serve",
+        help="Streamable HTTP MCP at /mcp (bearer required) plus /health (family port 8789)",
+    )
     serve.add_argument("--host", default="0.0.0.0")
     serve.add_argument(
         "--port",
@@ -248,7 +251,7 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
     if args.cmd == "serve":
-        from ansible_flow_mcp.http_health import serve_http
+        from ansible_flow_mcp.http_mcp import serve_http
 
         import os
 

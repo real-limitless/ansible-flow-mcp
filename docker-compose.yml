@@ -1,4 +1,6 @@
-# Family default: single-node hub on 8789. Multi-spoke fabric: lab/
+# Dev/prod single-node hub for Dokploy or any Compose host.
+# No fixed container_name (Dokploy rewrites names). No published host port.
+# Multi-spoke lab stays in lab/. Secrets stay in the environment, not in this file.
 name: ansible-flow-mcp
 
 services:
@@ -7,29 +9,47 @@ services:
       context: .
       dockerfile: Dockerfile
     image: ansible-flow-mcp:local
-    container_name: ansible-flow-mcp
     expose:
       - "8789"
     environment:
       ANSIBLE_FLOW_ROLE: hub
       ANSIBLE_FLOW_HUB_DIR: /var/lib/ansible-flow/hub
       ANSIBLE_FLOW_HUB_NAME: ${ANSIBLE_FLOW_HUB_NAME:-hub-01}
-      ANSIBLE_FLOW_HTTP_PORT: "8789"
+      ANSIBLE_FLOW_HTTP_HOST: 0.0.0.0
+      ANSIBLE_FLOW_HTTP_PORT: ${ANSIBLE_FLOW_HTTP_PORT:-8789}
+      ANSIBLE_FLOW_PUBLIC_HOST: ${ANSIBLE_FLOW_PUBLIC_HOST:-ansible-flow-mcp.z.srl}
+      ANSIBLE_FLOW_MCP_TOKEN: ${ANSIBLE_FLOW_MCP_TOKEN:-}
+      ANSIBLE_FLOW_MCP_CLIENT_ID: ${ANSIBLE_FLOW_MCP_CLIENT_ID:-operator}
+      ANSIBLE_FLOW_MCP_MAX_SESSIONS: ${ANSIBLE_FLOW_MCP_MAX_SESSIONS:-32}
+      ANSIBLE_FLOW_MCP_RATE_PER_MINUTE: ${ANSIBLE_FLOW_MCP_RATE_PER_MINUTE:-120}
+      ANSIBLE_FLOW_MCP_ALLOWED_HOSTS: ${ANSIBLE_FLOW_MCP_ALLOWED_HOSTS:-}
+      ANSIBLE_FLOW_MCP_ALLOWED_ORIGINS: ${ANSIBLE_FLOW_MCP_ALLOWED_ORIGINS:-}
     volumes:
       - ansible-flow-hub:/var/lib/ansible-flow/hub
     restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=${DOKPLOY_NETWORK:-dokploy-network}
+      - traefik.http.routers.ansible-flow-mcp.rule=Host(`${ANSIBLE_FLOW_PUBLIC_HOST:-ansible-flow-mcp.z.srl}`)
+      - traefik.http.routers.ansible-flow-mcp.entrypoints=${ANSIBLE_FLOW_TRAEFIK_ENTRYPOINT:-websecure}
+      - traefik.http.routers.ansible-flow-mcp.tls=true
+      - traefik.http.routers.ansible-flow-mcp.tls.certresolver=${ANSIBLE_FLOW_TRAEFIK_CERTRESOLVER:-letsencrypt}
+      - traefik.http.routers.ansible-flow-mcp.service=ansible-flow-mcp
+      - traefik.http.services.ansible-flow-mcp.loadbalancer.server.port=${ANSIBLE_FLOW_HTTP_PORT:-8789}
+      - traefik.http.services.ansible-flow-mcp.loadbalancer.passhostheader=true
+      - traefik.http.services.ansible-flow-mcp.loadbalancer.responseForwarding.flushInterval=100ms
     healthcheck:
       test:
         [
           "CMD",
           "python3",
           "-c",
-          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8789/health')",
+          "import os,urllib.request; p=os.environ.get('ANSIBLE_FLOW_HTTP_PORT','8789'); urllib.request.urlopen('http://127.0.0.1:%s/health'%p)",
         ]
       interval: 10s
       timeout: 3s
       retries: 10
-      start_period: 20s
+      start_period: 25s
 
 volumes:
   ansible-flow-hub:

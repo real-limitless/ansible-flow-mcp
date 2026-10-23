@@ -123,7 +123,7 @@ ansible-flow-mcp spoke status
 
 # Family HTTP
 ansible-flow-mcp doctor                   # catalog + env JSON
-ansible-flow-mcp serve                    # health listener on 8789 (not MCP, not admin)
+ansible-flow-mcp serve                    # /health + bearer streamable HTTP /mcp (refuses if no token)
 ```
 
 Env:
@@ -136,7 +136,12 @@ Env:
 | `ANSIBLE_FLOW_CATALOG_DIR` | Override catalog root |
 | `ANSIBLE_FLOW_REQUIRE_CHECK` | If truthy, refuse `check_mode=false` |
 | `OPENCODE_CONFIG` | Path to OpenCode config (lab uses hub or host bridge file) |
-| `ANSIBLE_FLOW_HTTP_PORT` | Top-level `serve` health port (default `8789`) |
+| `ANSIBLE_FLOW_HTTP_PORT` | Top-level `serve` port (default `8789`): `/health` and `/mcp` |
+| `ANSIBLE_FLOW_MCP_TOKEN` | Operator bearer for `/mcp`. Required to listen. Not a join token |
+| `ANSIBLE_FLOW_MCP_TOKEN_FILE` | Alternate bearer file |
+| `ANSIBLE_FLOW_PUBLIC_HOST` | Allowed Host for HTTP MCP (default `ansible-flow-mcp.z.srl`) |
+| `ANSIBLE_FLOW_MCP_MAX_SESSIONS` | Concurrent streamable sessions (default 32) |
+| `ANSIBLE_FLOW_MCP_RATE_PER_MINUTE` | `/mcp` request budget (default 120) |
 | `ANSIBLE_FLOW_ADMIN_TOKEN` | Bearer token for `hub admin` `/v1/*` (else `$HUB_DIR/admin.token`) |
 | `ANSIBLE_FLOW_ADMIN_BIND` | Admin HTTP bind (default `127.0.0.1`) |
 | `ANSIBLE_FLOW_ADMIN_PORT` | Admin HTTP port (default `8789`) |
@@ -228,7 +233,7 @@ ansible-flow-mcp hub admin
 - Does **not** expose HTTP MCP or `run_module` / `run_playbook`.
 - `/health` is unauthenticated and matches `ansible-flow-mcp doctor` JSON.
 - Lab: host `http://127.0.0.1:8789/admin/` (compose publishes loopback).
-- Do not run lab fabric and root `docker compose` (health-only `serve` on 8789) at the same time.
+- Root `docker compose` is the dev hub (`serve`: `/health` + bearer `/mcp`). It does not publish a host port. Do not bind the lab admin port and a published dev port to the same host port. See `docs/DEPLOY.md`.
 
 ---
 
@@ -370,7 +375,7 @@ No dedicated lint/typecheck scripts yet. CI: `.github/workflows/ci.yml`.
 - **search_modules** is linear substring over ~25k gallery entries; fine CPU-wise, but hub path can feel slow due to **compose exec + cold MCP process**. Planned: compact JSON, warm index, hybrid/synonym (RAG-like) search: not implemented until explicitly requested.  
 - Full semantic embeddings optional later.  
 - Production split of `mcp-spoke` vs Ansible shell user more strict than lab.  
-- No multi-hub HA or public HTTP MCP in v1.  
+- No multi-hub HA. Authenticated streamable HTTP is `ansible-flow-mcp serve` (`docs/DEPLOY.md`). Public unauthenticated HTTP MCP stays refused.  
 - Ansible **targets** (WinRM/etc. without spoke agent): inventory + register API in progress ([#3](https://github.com/real-limitless/ansible-flow-mcp/issues/3)); TUI/creds hardening still open.
 
 ---
@@ -381,7 +386,7 @@ No dedicated lint/typecheck scripts yet. CI: `.github/workflows/ci.yml`.
 - Full WinRM credential store / AWX-style plugins (path refs + hub Ansible cfg only for now)  
 - Replacing AWX/Controller  
 - Multi-hub HA  
-- Public unauthenticated HTTP MCP  
+- Public unauthenticated HTTP MCP (`serve` exits without `ANSIBLE_FLOW_MCP_TOKEN`)  
 
 ---
 
