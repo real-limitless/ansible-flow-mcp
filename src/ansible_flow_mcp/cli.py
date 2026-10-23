@@ -379,14 +379,14 @@ def _hub_main(args: argparse.Namespace) -> None:
 
     if args.hub_cmd == "mcp-http":
         import os
-        import socket
 
         from ansible_flow_mcp.http_mcp import serve_http
 
         raw_host = (args.host or os.environ.get("ANSIBLE_FLOW_HTTP_HOST") or "").strip()
         port = int(args.port) if args.port is not None else int(os.environ.get("ANSIBLE_FLOW_HTTP_PORT") or 8789)
+        # socket.INADDR_ANY is an int. The environment value must be a string.
         if raw_host in {"unspecified", "all", "*"}:
-            serve_http(host=socket.INADDR_ANY, port=port)
+            serve_http(host="0.0.0.0", port=port)
         elif raw_host:
             serve_http(host=raw_host, port=port)
         else:

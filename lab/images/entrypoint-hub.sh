@@ -201,11 +201,29 @@ supervise_loop() {
   local name="$1"
   shift
   (
+    # A crash must not respawn every second. Delay doubles up to 30s and
+    # resets after a run that lasted at least that long.
+    local delay=1
+    local cap=30
     while true; do
+      local started now elapsed
+      started=$(date +%s)
       "$@" &
       echo $! >"/var/run/ansible-flow-${name}.pid"
       wait $! || true
-      sleep 1
+      now=$(date +%s)
+      elapsed=$((now - started))
+      if [ "$elapsed" -ge "$cap" ]; then
+        delay=1
+      fi
+      echo "[hub] ${name} stopped; next start in ${delay}s" >&2
+      sleep "$delay"
+      if [ "$delay" -lt "$cap" ]; then
+        delay=$((delay * 2))
+        if [ "$delay" -gt "$cap" ]; then
+          delay=$cap
+        fi
+      fi
     done
   ) &
 }

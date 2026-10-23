@@ -56,6 +56,47 @@ def test_compose_matches_flavors_and_stays_private():
     assert "alpine:3\n" not in text
 
 
+def test_mcp_http_unspecified_host_is_a_string(monkeypatch: pytest.MonkeyPatch):
+    import os
+
+    from ansible_flow_mcp.cli import _hub_main, build_parser
+
+    seen: dict[str, object] = {}
+
+    def fake_serve_http(*, host: str = "0.0.0.0", port: int = 8789) -> None:
+        seen["host"] = host
+        seen["port"] = port
+        os.environ["ANSIBLE_FLOW_HTTP_HOST"] = str(host)
+
+    monkeypatch.setattr("ansible_flow_mcp.http_mcp.serve_http", fake_serve_http)
+    args = build_parser().parse_args(["hub", "mcp-http", "--host", "unspecified", "--port", "8790"])
+    _hub_main(args)
+    assert seen["host"] == "0.0.0.0"
+    assert isinstance(seen["host"], str)
+    assert isinstance(os.environ["ANSIBLE_FLOW_HTTP_HOST"], str)
+    assert seen["port"] == 8790
+
+
+def test_serve_http_coerces_int_host_without_binding(monkeypatch: pytest.MonkeyPatch):
+    import os
+
+    import ansible_flow_mcp.http_mcp as http_mcp
+
+    monkeypatch.setenv("ANSIBLE_FLOW_MCP_TOKEN", "file-bearer")
+    monkeypatch.setenv("ANSIBLE_FLOW_ROLE", "hub")
+    monkeypatch.delenv("ANSIBLE_FLOW_HTTP_BIND_SUBNETS", raising=False)
+
+    def fake_run(*_args, **_kwargs):
+        return None
+
+    import uvicorn
+
+    monkeypatch.setattr(uvicorn, "run", fake_run)
+    http_mcp.serve_http(host=0, port=9)  # type: ignore[arg-type]
+    assert os.environ["ANSIBLE_FLOW_HTTP_HOST"] == "0.0.0.0"
+    assert isinstance(os.environ["ANSIBLE_FLOW_HTTP_HOST"], str)
+
+
 def test_hub_mcp_http_is_the_shared_listener(tmp_path: Path):
     import ansible_flow_mcp.http_mcp as http_mcp
     from ansible_flow_mcp.cli import build_parser, read_supplied_token

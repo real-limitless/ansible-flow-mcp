@@ -515,6 +515,11 @@ def _serve_bound(app: Any, port: int, addresses: list[str]) -> None:
 
 def serve_http(*, host: str = "0.0.0.0", port: int = 8789) -> None:
     """Listen for health and authenticated MCP. Exits if no bearer is configured."""
+    # Callers have passed socket.INADDR_ANY (an int). The environment stores text.
+    if isinstance(host, int):
+        host = "0.0.0.0" if host == 0 else str(host)
+    else:
+        host = str(host)
     os.environ["ANSIBLE_FLOW_HTTP_PORT"] = str(port)
     os.environ["ANSIBLE_FLOW_HTTP_HOST"] = host
     role = (os.environ.get("ANSIBLE_FLOW_ROLE") or "").strip().lower()
