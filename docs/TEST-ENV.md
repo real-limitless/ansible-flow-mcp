@@ -98,7 +98,7 @@ No join token is stored in git.
 2. It copies the join client key to a volume mounted read-only on every spoke.
 3. For each name in `ANSIBLE_FLOW_TEST_SPOKES` that is not enrolled, it writes a one-time 15-minute token into that spoke's private drop volume (`/run/join-drop/<name>/token`, mode 0400). Other spokes do not mount that volume.
 4. The spoke entrypoint runs `spoke join --token-file ...` against `mcp-join@hub:22`, then the hub deletes the token file.
-5. When every flavor is enrolled, the hub ensures a group named `flavors` whose members are those spokes.
+5. When every flavor is enrolled, the hub ensures a group named `flavors` whose members are those spokes, then the autojoin process exits. It does not keep polling.
 6. Spoke SSH host keys and authorized keys are on named volumes, so a recreate keeps the enrollment.
 
 The auto-join log must not contain the token. `issue-token` output is captured and written to the drop file only.
@@ -218,7 +218,7 @@ Containers drop every capability and add back only what sshd needs:
 | `NET_BIND_SERVICE` | sshd listens on port 22 |
 | `SETUID`, `SETGID` | privilege separation and the session user |
 | `CHOWN` | entrypoint fixes volume and key ownership |
-| `FOWNER` | `chmod` on hub state after that tree belongs to `mcp-hub`. `CHOWN` changes the owner and `DAC_OVERRIDE` bypasses read and write checks. Neither permits `chmod` of another uid, which returns "Operation not permitted" |
+| `FOWNER` | `chmod` on hub state after that tree belongs to `mcp-hub`. `CHOWN` changes the owner and `DAC_OVERRIDE` bypasses read and write checks. Neither permits `chmod` of another uid, which returns "Operation not permitted". The hub container has this capability, so that chmod should succeed and not warn |
 | `DAC_OVERRIDE` | read mode-0400 host keys and authorized keys |
 | `SYS_CHROOT` | sshd privilege-separation chroot |
 | `AUDIT_WRITE` | sshd loginuid |

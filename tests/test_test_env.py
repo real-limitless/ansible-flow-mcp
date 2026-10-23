@@ -74,6 +74,35 @@ def test_spoke_sshd_omits_options_alpine_rejects():
     assert not any(line.startswith("UsePAM") or line.startswith("GSSAPIAuthentication") for line in directives)
 
 
+def test_hub_autojoin_stops_once_the_group_matches():
+    path = ROOT / "lab" / "images" / "hub_autojoin.py"
+    spec = importlib.util.spec_from_file_location("afm_hub_autojoin", path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    names = ["debian", "ubuntu"]
+    missing, ready = module.plan(set(), {}, names, "flavors")
+    assert missing == names
+    assert ready is False
+    missing, ready = module.plan(set(names), {}, names, "flavors")
+    assert missing == []
+    assert ready is False
+    missing, ready = module.plan(set(names), {"flavors": set(names)}, names, "flavors")
+    assert missing == []
+    assert ready is True
+    missing, ready = module.plan(set(), {}, [], "flavors")
+    assert missing == []
+    assert ready is False
+    script = (ROOT / "lab" / "images" / "hub-test-autojoin.sh").read_text(encoding="utf-8")
+    assert "hub_autojoin.py" in script
+    assert "ansible-flow-mcp hub status" not in script
+    assert "sleep 5" in script
+    assert "exit 0" in script
+    entry = (ROOT / "lab" / "images" / "entrypoint-hub.sh").read_text(encoding="utf-8")
+    assert 'sleep "$delay"' in entry
+    assert '[ "$delay" -ge 1 ]' in entry
+
+
 def test_spoke_join_backoff_grows_and_caps():
     import random
 
@@ -91,6 +120,8 @@ def test_spoke_join_backoff_grows_and_caps():
     script = (ROOT / "lab" / "images" / "spoke-test-autojoin.sh").read_text(encoding="utf-8")
     assert "retry_delay.py" in script
     assert "sleep 3" not in script
+    assert "node.yml" in script
+    assert "exit 0" in script
 
 
 def test_mcp_http_unspecified_host_is_a_string(monkeypatch: pytest.MonkeyPatch):

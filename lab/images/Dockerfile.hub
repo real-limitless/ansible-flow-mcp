@@ -46,6 +46,7 @@ COPY catalog ./catalog
 COPY examples ./examples
 COPY lab/images/entrypoint-hub.sh /usr/local/bin/entrypoint-hub.sh
 COPY lab/images/hub-test-autojoin.sh /usr/local/bin/hub-test-autojoin.sh
+COPY lab/images/hub_autojoin.py /usr/local/bin/hub_autojoin.py
 COPY lab/images/hub-healthcheck.py /usr/local/bin/hub-healthcheck.py
 COPY test-env/scripts/selftest.py /usr/local/bin/afm-selftest.py
 COPY lab/images/lab-opencode /usr/local/bin/lab-opencode
@@ -55,7 +56,8 @@ COPY examples/sshd/ansible-flow-hub-join.conf /etc/ssh/sshd_config.d/ansible-flo
 RUN python3 -m pip install --no-cache-dir --break-system-packages -e . \
     && ln -sf /usr/local/bin/ansible-flow-mcp /usr/bin/ansible-flow-mcp \
     && chmod +x /usr/local/bin/entrypoint-hub.sh /usr/local/bin/lab-opencode \
-         /usr/local/bin/hub-test-autojoin.sh /usr/local/bin/hub-healthcheck.py \
+         /usr/local/bin/hub-test-autojoin.sh /usr/local/bin/hub_autojoin.py \
+         /usr/local/bin/hub-healthcheck.py \
          /usr/local/bin/afm-selftest.py \
     && ssh-keygen -A \
     && mkdir -p /home/mcp-join/.ssh \

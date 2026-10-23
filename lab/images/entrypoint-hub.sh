@@ -216,6 +216,10 @@ supervise_loop() {
       if [ "$elapsed" -ge "$cap" ]; then
         delay=1
       fi
+      # sleep 0 returns immediately and would peg a core if delay were ever 0.
+      if ! [ "$delay" -ge 1 ] 2>/dev/null; then
+        delay=1
+      fi
       echo "[hub] ${name} stopped; next start in ${delay}s" >&2
       sleep "$delay"
       if [ "$delay" -lt "$cap" ]; then
