@@ -14,6 +14,7 @@ from ansible_flow_mcp.runner import run_module, run_playbook
 from ansible_flow_mcp.security import load_policy
 
 _ROLE: str | None = None
+_HUB_TOOLS_REGISTERED = False
 
 
 def _role() -> Role:
@@ -159,6 +160,11 @@ def list_collections_tool() -> str:
 
 
 def _register_hub_tools() -> None:
+    global _HUB_TOOLS_REGISTERED
+    if _HUB_TOOLS_REGISTERED:
+        return
+    _HUB_TOOLS_REGISTERED = True
+
     @mcp.tool(name="list_nodes")
     def list_nodes_tool() -> str:
         """List enrolled spokes and registered Ansible targets (kind, connection, groups)."""
@@ -305,7 +311,8 @@ def _register_hub_tools() -> None:
         return _json(result.to_dict())
 
 
-def run_server(*, role: str | None = None) -> None:
+def use_role(role: str | None) -> None:
+    """Select hub or spoke tool registration for this process."""
     global _ROLE
     _ROLE = role
     if role == "hub" or (role is None and detect_mode().role == Role.HUB):
@@ -314,6 +321,14 @@ def run_server(*, role: str | None = None) -> None:
             _register_hub_tools()
     elif role == "spoke":
         os.environ["ANSIBLE_FLOW_ROLE"] = "spoke"
+    try:
+        mcp._mcp_server.instructions = _instructions()
+    except (AttributeError, TypeError):
+        pass
+
+
+def run_server(*, role: str | None = None) -> None:
+    use_role(role)
     mcp.run(transport="stdio")
 
 

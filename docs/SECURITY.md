@@ -23,7 +23,7 @@ Anyone who can call the MCP tools can change systems reachable with the control 
 1. Run under a dedicated OS user with limited sudo/become.
 2. Pin inventory and disable broad `hosts: all` in agent prompts.
 3. Prefer `check_mode=true` first in agent instructions.
-4. Do not expose the MCP HTTP transport on the public internet without auth (HTTP MCP is out of scope for v1).
+4. HTTP MCP (`ansible-flow-mcp hub mcp-http`) is opt-in. Bearer auth is required. The token lives in a mode-0400 file (`ANSIBLE_FLOW_MCP_TOKEN_FILE` or `$HUB_DIR/mcp.http.token`), not in the environment. Default bind is localhost. Do not publish it on the public internet. It is a different credential from the admin token.
 5. Keep `deny_modules` for free-form execution modules.
 6. Hub **admin portal** (`ansible-flow-mcp hub admin`) is operator HTTP only: bind loopback by default, require `Authorization: Bearer` on `/v1/*`, never log join tokens or `admin.token`. Do not publish it on the public internet; tunnel if you need remote access.
 
@@ -35,3 +35,13 @@ Anyone who can call the MCP tools can change systems reachable with the control 
 | Auth | `ANSIBLE_FLOW_ADMIN_TOKEN` or `$HUB_DIR/admin.token` |
 | Surface | Inventory CRUD + audit; **no** `run_module` / `run_playbook` |
 | Health | `/health` is unauthenticated and returns no secrets |
+
+## HTTP MCP
+
+| Control | Behavior |
+| --- | --- |
+| Command | `hub mcp-http` (off unless you start it) |
+| Path | `/mcp` (streamable HTTP) |
+| Auth | `Authorization: Bearer` from the 0400 token file |
+| Bind | localhost unless `ANSIBLE_FLOW_MCP_HTTP_BIND` is set |
+| Logs | one JSON line on stdout per request; key prefix only, never the token |
