@@ -106,13 +106,13 @@ This lab keeps the admin console on 8789 and sets `ANSIBLE_FLOW_HTTP_PORT` to 87
 | Streamable HTTP MCP | `http://afm-test-hub:8790/mcp` | `ANSIBLE_FLOW_MCP_TOKEN` or `ANSIBLE_FLOW_MCP_TOKEN_FILE` |
 | Admin portal | `http://afm-test-hub:8789/admin/` | `admin.token` (0600), separate from the MCP bearer |
 
-The compose file does not set `ANSIBLE_FLOW_MCP_TOKEN`. On start the hub entrypoint creates `/var/lib/ansible-flow/hub/mcp.http.token` (mode 0400) when that file is missing and points `ANSIBLE_FLOW_MCP_TOKEN_FILE` at it. The value is not printed and is not an environment variable.
+The compose file does not set `ANSIBLE_FLOW_MCP_TOKEN`. On start the hub entrypoint creates `/var/lib/ansible-flow/hub/mcp.http.token` (mode 0400) when that file is missing and points `ANSIBLE_FLOW_MCP_TOKEN_FILE` at it. The listener reads that file on every request, so replacing the file does not require a restart. The value is not printed and is not an environment variable.
 
-`ANSIBLE_FLOW_HTTP_HOST` and `ANSIBLE_FLOW_ADMIN_BIND` are the word `unspecified`. The process maps that word to the in-container any-address so other containers on the private network can connect. Nothing maps those ports onto the host.
+That file is this lab's own bearer. Do not copy it onto any other hub, including the single-node compose file at the repository root. Each hub keeps a distinct token.
 
-Host allow-list is the product list (`localhost` and `ANSIBLE_FLOW_PUBLIC_HOST`) plus `ANSIBLE_FLOW_MCP_ALLOWED_HOSTS` (`afm-test-hub`, `hub`). Set `HUB_PUBLIC_HOST` when a proxy presents another name (placeholder `hub.example.com`). Session and rate caps are the product defaults: `ANSIBLE_FLOW_MCP_MAX_SESSIONS` (32) and `ANSIBLE_FLOW_MCP_RATE_PER_MINUTE` (120).
+`ANSIBLE_FLOW_HTTP_HOST` is the word `unspecified` so containers on the lab bridge, and an attached gateway network, can open port 8790. `ANSIBLE_FLOW_ADMIN_BIND` is `localhost`, so port 8789 is not reachable on those networks. Nothing maps either port onto the host.
 
-Accepted `/mcp` calls are recorded in `audit.jsonl` with `transport=http` and `client_id`. The bearer is not written there.
+`ANSIBLE_FLOW_MCP_ALLOWED_HOSTS` is `afm-test-hub,hub`. `HUB_PUBLIC_HOST` is optional. When it is unset, compose sets `ANSIBLE_FLOW_PUBLIC_HOST` to `afm-test-hub`. Set `HUB_PUBLIC_HOST` only when a proxy presents a different Host header (placeholder `hub.example.com`). Session and rate caps are the product defaults: `ANSIBLE_FLOW_MCP_MAX_SESSIONS` (32) and `ANSIBLE_FLOW_MCP_RATE_PER_MINUTE` (120).
 
 ### Reach them from a private network
 
@@ -132,7 +132,7 @@ export AFM_TEST_EXTERNAL_NETWORK=private-network
 docker network create --subnet "$AFM_TEST_PRIVATE_SUBNET" "$AFM_TEST_EXTERNAL_NETWORK"
 ```
 
-Replace `private-network` with that network's name. Set `HUB_PUBLIC_HOST` if the proxy presents a different Host header (`hub.example.com` is the placeholder).
+Replace `private-network` with that network's name. Create it with `internal: true` (no egress) when the platform allows it. The gateway should use port 8790 only. Admin stays on localhost. `HUB_PUBLIC_HOST` is optional.
 
 ### Register the hub on an MCP gateway
 
@@ -140,16 +140,22 @@ Use placeholders in the gateway config. Put the secret in the gateway's secret s
 
 ```text
 MCP_GATEWAY_URL=https://gateway.example.com/mcp
-HUB_PUBLIC_HOST=hub.example.com
 ```
 
 | Gateway field | Value |
 | --- | --- |
-| Backend URL | `http://afm-test-hub:8790/mcp` on the private network, or `http://hub.example.com:8790/mcp` if the proxy serves that name |
+| Backend URL | `http://afm-test-hub:8790/mcp` on the private network |
 | Header | `Authorization: Bearer <value of AFM_TEST_MCP_TOKEN>` |
-| Secret | name only in git/config, for example `AFM_TEST_MCP_TOKEN`; the value is the contents of `mcp.http.token` |
+| Secret | name only in git/config, for example `AFM_TEST_MCP_TOKEN`; the value is the contents of this lab's `mcp.http.token` |
 
-The admin portal is not MCP. Its own token is `admin.token`. `/health` on the MCP port and on the admin port returns doctor JSON and no tokens. Unauthenticated `/mcp` returns 401.
+The admin portal is not MCP. Its own token is `admin.token`. `/health` on the MCP port returns doctor JSON and no tokens. Unauthenticated `/mcp` returns 401.
+
+Remote admin uses the `tailnet` profile in `test-env/docker-compose.tailnet.yml`. The sidecar shares the hub network namespace and can open `localhost:8789`. It publishes no host port and adds no router labels. Set `AFM_TEST_TAILNET_IMAGE` to the client image and `AFM_TEST_TAILNET_AUTHKEY_FILE` to a secret file (or leave the variable name unset and mount your own file). Do not put the key value in the compose file. `AFM_TEST_TAILNET_SUBNET` defaults to the RFC 5737 placeholder `203.0.113.0/24`; override it. The egress network in that file is only for the client's coordination path. While that network is attached, the hub sets `ANSIBLE_FLOW_HTTP_BIND_SUBNETS` so port 8790 listens on loopback and on the lab subnet (`AFM_TEST_SUBNET`), plus `AFM_TEST_PRIVATE_SUBNET` when that variable is set. It does not listen on the egress address. Healthchecks still use loopback. Include the file only when you want that path. The last compose file replaces `hub.networks`, so do not combine this file with `docker-compose.private-net.yml` unless the last file lists every network the hub should keep:
+
+```bash
+docker compose -f test-env/docker-compose.yml \
+  -f test-env/docker-compose.tailnet.yml --profile tailnet up -d
+```
 
 ## Shell and TUI
 
@@ -164,8 +170,10 @@ SSH as `labadmin` is key-only and only from a host that can already route to the
 
 ```bash
 docker compose --project-name afm-test -f test-env/docker-compose.yml exec -T hub \
-  tee -a /home/labadmin/.ssh/authorized_keys >/dev/null
+  tee -a /var/lib/ansible-flow/hub/ssh/labadmin.authorized_keys >/dev/null
 ```
+
+That file is on the hub volume, so it survives a restart. The home directory is a tmpfs under the read-only root and is not the place to keep a key.
 
 Then, from a machine on that private network: `ssh -p 22 labadmin@afm-test-hub`.
 
@@ -177,7 +185,7 @@ Then, from a machine on that private network: `ssh -p 22 labadmin@afm-test-hub`.
 
 **Rotate test tokens.** `test-env/scripts/rotate-tokens.sh`. It deletes both token files, restarts the listeners, and prints the paths. Copy the new MCP token into the gateway secret store yourself. Do not write the value down in the repo.
 
-**Audit log.** `test-env/scripts/audit.sh`. File: `/var/lib/ansible-flow/hub/audit.jsonl`. Join token material is not written there (issue events store a `jti`, not the token).
+**Audit log.** Each state-changing tool call prints one JSON object on the hub stdout. Fields: `ts` (UTC ISO8601), `event`, `actor`, `client_ip`, `request_id`, `tool`, `outcome` (`ok`, `denied`, or `error`), `duration_ms`, and `target` when there is one. `actor` is a short hash of the bearer, or `ANSIBLE_FLOW_MCP_KEY_LABEL` when that is set. It is not taken from a client header. `client_ip` is the socket peer unless `ANSIBLE_FLOW_TRUST_PROXY=1`, in which case the first forwarded address is used. A missing `X-Request-Id` is generated and echoed on the response. Argument values and tokens are not written. Keeping the stream for 90 days is the operator's job. `test-env/scripts/audit.sh` still tails `/var/lib/ansible-flow/hub/audit.jsonl` for the older file log. Join token material is not written there (issue events store a `jti`, not the token).
 
 **Revoke a spoke.** `test-env/scripts/revoke.sh <name>`. The container keeps running; it is no longer a target. Delete its drop token if you do not want auto-join to enroll it again (remove it from `flavors.yml` so the hub stops issuing a token).
 
@@ -192,6 +200,25 @@ Do not add public router labels and do not add a `ports:` mapping.
 ## Continuous integration
 
 Unit tests cover the shared bearer gate and the rendered compose (budget, no host ports, no public labels). Image builds are not in CI: five foreign bases plus the hub are not a cheap job, and CI must not publish this stack.
+
+## Security note
+
+Containers drop every capability and add back only what sshd needs:
+
+| Capability | Why |
+| --- | --- |
+| `NET_BIND_SERVICE` | sshd listens on port 22 |
+| `SETUID`, `SETGID` | privilege separation and the session user |
+| `CHOWN` | entrypoint fixes volume and key ownership |
+| `DAC_OVERRIDE` | read mode-0400 host keys and authorized keys |
+| `SYS_CHROOT` | sshd privilege-separation chroot |
+| `AUDIT_WRITE` | sshd loginuid |
+
+`no-new-privileges` is set. The root filesystem is read-only. `/tmp`, `/run`, and `/root` are tmpfs. Hub state and spoke homes stay on named volumes. The tailnet sidecar adds `NET_ADMIN` only, because a tun-based client needs it.
+
+The hub process stays root. sshd privilege separation starts as root, and the entrypoint has to fix ownership on the hub volume before sshd runs. Dropping to another user would leave the join channel unable to start under this image. Capabilities are still limited to the list above.
+
+Port 8790 is the gateway path, on the internal lab bridge or on the operator-supplied private network. With the tailnet profile, that port stays off the coordination network. Port 8789 is localhost only, plus the optional tailnet sidecar. There are no host port publishes and no public router labels. The lab bearer in `mcp.http.token` belongs to this hub alone. Do not copy it to any other hub, including the single-node compose file at the repository root.
 
 ## Product notes
 

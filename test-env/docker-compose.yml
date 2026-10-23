@@ -77,6 +77,24 @@ services:
     container_name: afm-test-hub
     restart: unless-stopped
     logging: *logging
+    cap_drop: [ALL]
+    cap_add:
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - DAC_OVERRIDE
+      - SYS_CHROOT
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /run:size=32m,mode=755
+      - /root:size=16m,mode=700
+      - /home/mcp-join:size=16m,mode=755
+      - /home/labadmin:size=16m,mode=755
     networks: [afm-test]
     mem_limit: 640m
     memswap_limit: 640m
@@ -104,11 +122,11 @@ services:
       ANSIBLE_FLOW_HTTP_HOST: "unspecified"
       ANSIBLE_FLOW_HTTP_PORT: "8790"
       ANSIBLE_FLOW_MCP_TOKEN_FILE: /var/lib/ansible-flow/hub/mcp.http.token
-      ANSIBLE_FLOW_PUBLIC_HOST: "${HUB_PUBLIC_HOST:-hub.example.com}"
+      ANSIBLE_FLOW_PUBLIC_HOST: "${HUB_PUBLIC_HOST:-afm-test-hub}"
       ANSIBLE_FLOW_MCP_MAX_SESSIONS: "32"
       ANSIBLE_FLOW_MCP_RATE_PER_MINUTE: "120"
       ANSIBLE_FLOW_MCP_ALLOWED_HOSTS: "afm-test-hub,hub"
-      ANSIBLE_FLOW_ADMIN_BIND: "unspecified"
+      ANSIBLE_FLOW_ADMIN_BIND: localhost
       ANSIBLE_FLOW_ADMIN_PORT: "8789"
       ANSIBLE_FLOW_TEST_SPOKES: "debian ubuntu rocky fedora alpine"
       ANSIBLE_FLOW_TEST_GROUP: "flavors"
@@ -132,6 +150,22 @@ services:
     container_name: afm-test-spoke-debian
     restart: unless-stopped
     logging: *logging
+    cap_drop: [ALL]
+    cap_add:
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - DAC_OVERRIDE
+      - SYS_CHROOT
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /run:size=32m,mode=755
+      - /root:size=16m,mode=700
     networks: [afm-test]
     mem_limit: 256m
     memswap_limit: 256m
@@ -177,6 +211,22 @@ services:
     container_name: afm-test-spoke-ubuntu
     restart: unless-stopped
     logging: *logging
+    cap_drop: [ALL]
+    cap_add:
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - DAC_OVERRIDE
+      - SYS_CHROOT
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /run:size=32m,mode=755
+      - /root:size=16m,mode=700
     networks: [afm-test]
     mem_limit: 256m
     memswap_limit: 256m
@@ -222,6 +272,22 @@ services:
     container_name: afm-test-spoke-rocky
     restart: unless-stopped
     logging: *logging
+    cap_drop: [ALL]
+    cap_add:
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - DAC_OVERRIDE
+      - SYS_CHROOT
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /run:size=32m,mode=755
+      - /root:size=16m,mode=700
     networks: [afm-test]
     mem_limit: 256m
     memswap_limit: 256m
@@ -267,6 +333,22 @@ services:
     container_name: afm-test-spoke-fedora
     restart: unless-stopped
     logging: *logging
+    cap_drop: [ALL]
+    cap_add:
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - DAC_OVERRIDE
+      - SYS_CHROOT
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /run:size=32m,mode=755
+      - /root:size=16m,mode=700
     networks: [afm-test]
     mem_limit: 256m
     memswap_limit: 256m
@@ -312,6 +394,22 @@ services:
     container_name: afm-test-spoke-alpine
     restart: unless-stopped
     logging: *logging
+    cap_drop: [ALL]
+    cap_add:
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - DAC_OVERRIDE
+      - SYS_CHROOT
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /run:size=32m,mode=755
+      - /root:size=16m,mode=700
     networks: [afm-test]
     mem_limit: 256m
     memswap_limit: 256m

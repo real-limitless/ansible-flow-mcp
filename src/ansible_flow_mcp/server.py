@@ -3,6 +3,9 @@ from __future__ import annotations
 import json
 import os
 import sys
+import time
+from collections.abc import Iterator
+from contextlib import contextmanager
 from typing import Any
 
 from mcp.server.fastmcp import FastMCP
@@ -57,6 +60,34 @@ def _json(data: Any) -> str:
     return json.dumps(data, indent=2, ensure_ascii=False, default=str)
 
 
+@contextmanager
+def _audit_tool(tool: str, target: str) -> Iterator[dict[str, str]]:
+    """Record one state-changing tool call. The box holds the outcome."""
+    from ansible_flow_mcp.stdout_audit import actor_var, client_ip_var, emit_audit, request_id_var
+
+    started = time.perf_counter()
+    box = {"outcome": "error"}
+    try:
+        yield box
+    except ValueError:
+        box["outcome"] = "denied"
+        raise
+    except Exception:
+        box["outcome"] = "error"
+        raise
+    finally:
+        emit_audit(
+            event="tool_call",
+            actor=actor_var.get(),
+            client_ip=client_ip_var.get(),
+            request_id=request_id_var.get(),
+            tool=tool,
+            outcome=box["outcome"],
+            duration_ms=int((time.perf_counter() - started) * 1000),
+            target=target,
+        )
+
+
 @mcp.tool(name="search_modules")
 def search_modules_tool(query: str = "", limit: int = 25) -> str:
     """Search allowlisted Ansible modules (gallery) by name, FQCN, collection, or description."""
@@ -101,21 +132,23 @@ def run_module_tool(
     timeout: float = 120,
 ) -> str:
     """Run an Ansible module via local ansible CLI. Prefer check_mode=true first."""
-    result = run_module(
-        module,
-        args=args,
-        hosts=hosts,
-        inventory=inventory,
-        check_mode=check_mode,
-        become=become,
-        become_user=become_user,
-        connection=connection,
-        timeout=timeout,
-    )
-    payload = result.to_dict()
-    payload["stdout"] = (payload.get("stdout") or "")[:8000]
-    payload["stderr"] = (payload.get("stderr") or "")[:4000]
-    return _json(payload)
+    with _audit_tool("run_module", hosts) as status:
+        result = run_module(
+            module,
+            args=args,
+            hosts=hosts,
+            inventory=inventory,
+            check_mode=check_mode,
+            become=become,
+            become_user=become_user,
+            connection=connection,
+            timeout=timeout,
+        )
+        status["outcome"] = "ok" if result.exit_code == 0 else "error"
+        payload = result.to_dict()
+        payload["stdout"] = (payload.get("stdout") or "")[:8000]
+        payload["stderr"] = (payload.get("stderr") or "")[:4000]
+        return _json(payload)
 
 
 @mcp.tool(name="run_playbook")
@@ -133,23 +166,25 @@ def run_playbook_tool(
     timeout: float = 300,
 ) -> str:
     """Run ansible-playbook on a path under allowlisted roots. Prefer check_mode=true first."""
-    result = run_playbook(
-        playbook,
-        inventory=inventory,
-        check_mode=check_mode,
-        become=become,
-        become_user=become_user,
-        connection=connection,
-        extra_vars=extra_vars,
-        limit=limit,
-        tags=tags,
-        skip_tags=skip_tags,
-        timeout=timeout,
-    )
-    payload = result.to_dict()
-    payload["stdout"] = (payload.get("stdout") or "")[:8000]
-    payload["stderr"] = (payload.get("stderr") or "")[:4000]
-    return _json(payload)
+    with _audit_tool("run_playbook", limit or playbook) as status:
+        result = run_playbook(
+            playbook,
+            inventory=inventory,
+            check_mode=check_mode,
+            become=become,
+            become_user=become_user,
+            connection=connection,
+            extra_vars=extra_vars,
+            limit=limit,
+            tags=tags,
+            skip_tags=skip_tags,
+            timeout=timeout,
+        )
+        status["outcome"] = "ok" if result.exit_code == 0 else "error"
+        payload = result.to_dict()
+        payload["stdout"] = (payload.get("stdout") or "")[:8000]
+        payload["stderr"] = (payload.get("stderr") or "")[:4000]
+        return _json(payload)
 
 
 @mcp.tool(name="list_collections")
@@ -195,15 +230,20 @@ def _register_hub_tools() -> None:
         """Issue a one-time spoke join token (hub only). Not used for Ansible targets."""
         from ansible_flow_mcp.hub.tokens import issue_token
 
-        issued = issue_token(name, ttl_seconds=ttl_seconds)
-        return _json(issued.to_dict())
+        with _audit_tool("issue_token", name) as status:
+            issued = issue_token(name, ttl_seconds=ttl_seconds)
+            status["outcome"] = "ok"
+            return _json(issued.to_dict())
 
     @mcp.tool(name="revoke_node")
     def revoke_node_tool(name: str) -> str:
         """Remove spoke from hub inventory and mark revoked."""
         from ansible_flow_mcp.hub.enroll import revoke_node
 
-        return _json(revoke_node(name))
+        with _audit_tool("revoke_node", name) as status:
+            body = _json(revoke_node(name))
+            status["outcome"] = "ok"
+            return body
 
     @mcp.tool(name="update_node")
     def update_node_tool(
@@ -215,14 +255,17 @@ def _register_hub_tools() -> None:
         """Update enrolled spoke connection fields (host/port/user). For targets use update_target."""
         from ansible_flow_mcp.hub.enroll import update_node
 
-        return _json(
-            update_node(
-                name,
-                ansible_host=ansible_host,
-                ansible_port=ansible_port,
-                ansible_user=ansible_user,
+        with _audit_tool("update_node", name) as status:
+            body = _json(
+                update_node(
+                    name,
+                    ansible_host=ansible_host,
+                    ansible_port=ansible_port,
+                    ansible_user=ansible_user,
+                )
             )
-        )
+            status["outcome"] = "ok"
+            return body
 
     @mcp.tool(name="register_target")
     def register_target_tool(
@@ -239,16 +282,19 @@ def _register_hub_tools() -> None:
         """
         from ansible_flow_mcp.hub.enroll import register_target
 
-        return _json(
-            register_target(
-                name,
-                ansible_host=ansible_host,
-                ansible_connection=ansible_connection,
-                ansible_port=ansible_port,
-                ansible_user=ansible_user,
-                extra=extra,
+        with _audit_tool("register_target", name) as status:
+            body = _json(
+                register_target(
+                    name,
+                    ansible_host=ansible_host,
+                    ansible_connection=ansible_connection,
+                    ansible_port=ansible_port,
+                    ansible_user=ansible_user,
+                    extra=extra,
+                )
             )
-        )
+            status["outcome"] = "ok"
+            return body
 
     @mcp.tool(name="update_target")
     def update_target_tool(
@@ -262,23 +308,29 @@ def _register_hub_tools() -> None:
         """Update a registered Ansible target connection fields."""
         from ansible_flow_mcp.hub.enroll import update_target_node
 
-        return _json(
-            update_target_node(
-                name,
-                ansible_host=ansible_host,
-                ansible_port=ansible_port,
-                ansible_user=ansible_user,
-                ansible_connection=ansible_connection,
-                extra=extra,
+        with _audit_tool("update_target", name) as status:
+            body = _json(
+                update_target_node(
+                    name,
+                    ansible_host=ansible_host,
+                    ansible_port=ansible_port,
+                    ansible_user=ansible_user,
+                    ansible_connection=ansible_connection,
+                    extra=extra,
+                )
             )
-        )
+            status["outcome"] = "ok"
+            return body
 
     @mcp.tool(name="remove_target")
     def remove_target_tool(name: str) -> str:
         """Remove a registered Ansible target from hub inventory and groups."""
         from ansible_flow_mcp.hub.enroll import remove_target_node
 
-        return _json(remove_target_node(name))
+        with _audit_tool("remove_target", name) as status:
+            body = _json(remove_target_node(name))
+            status["outcome"] = "ok"
+            return body
 
     @mcp.tool(name="list_groups")
     def list_groups_tool() -> str:
@@ -292,21 +344,30 @@ def _register_hub_tools() -> None:
         """Create an empty targeting group (members must be spokes or targets)."""
         from ansible_flow_mcp.hub.enroll import create_group_op
 
-        return _json(create_group_op(name))
+        with _audit_tool("create_group", name) as status:
+            body = _json(create_group_op(name))
+            status["outcome"] = "ok"
+            return body
 
     @mcp.tool(name="delete_group")
     def delete_group_tool(name: str) -> str:
         """Delete a custom targeting group (not hub/spokes/targets)."""
         from ansible_flow_mcp.hub.enroll import delete_group_op
 
-        return _json(delete_group_op(name))
+        with _audit_tool("delete_group", name) as status:
+            body = _json(delete_group_op(name))
+            status["outcome"] = "ok"
+            return body
 
     @mcp.tool(name="set_group_members")
     def set_group_members_tool(name: str, hosts: list[str]) -> str:
         """Replace group membership with enrolled spoke and/or registered target names."""
         from ansible_flow_mcp.hub.enroll import set_group_members_op
 
-        return _json(set_group_members_op(name, hosts))
+        with _audit_tool("set_group_members", name) as status:
+            body = _json(set_group_members_op(name, hosts))
+            status["outcome"] = "ok"
+            return body
 
     @mcp.tool(name="spoke_call")
     def spoke_call_tool(
@@ -318,8 +379,10 @@ def _register_hub_tools() -> None:
         """SSH to an enrolled mesh spoke ForceCommand MCP and call one tool (not for targets)."""
         from ansible_flow_mcp.ssh import spoke_call
 
-        result = spoke_call(node, tool=tool, arguments=arguments or {}, timeout=timeout)
-        return _json(result.to_dict())
+        with _audit_tool("spoke_call", node) as status:
+            result = spoke_call(node, tool=tool, arguments=arguments or {}, timeout=timeout)
+            status["outcome"] = "ok" if result.ok else "error"
+            return _json(result.to_dict())
 
 
 def run_server(*, role: str | None = None) -> None:

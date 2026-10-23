@@ -33,9 +33,15 @@ def test_compose_matches_flavors_and_stays_private():
     assert "internal: true" in text
     assert "labels:" not in lowered
     assert "INSTALL_OPENCODE: \"0\"" in text
-    assert "hub.example.com" in text
+    assert "hub.example.com" not in text
+    assert 'ANSIBLE_FLOW_PUBLIC_HOST: "${HUB_PUBLIC_HOST:-afm-test-hub}"' in text
+    assert "ANSIBLE_FLOW_ADMIN_BIND: localhost" in text
     assert spec["listen_all"] == "unspecified"
-    assert text.count("unspecified") >= 2
+    assert 'ANSIBLE_FLOW_HTTP_HOST: "unspecified"' in text
+    assert "cap_drop: [ALL]" in text
+    assert "no-new-privileges:true" in text
+    assert "read_only: true" in text
+    assert "ports:" not in lowered
     assert "ANSIBLE_FLOW_HTTP_PORT: \"8790\"" in text
     assert "ANSIBLE_FLOW_MCP_TOKEN_FILE:" in text
     assert "ANSIBLE_FLOW_MCP_TOKEN:" not in text
@@ -84,3 +90,13 @@ def test_private_net_overlay_publishes_nothing():
     assert "fedora:44" in docs
     assert "alpine:3.24" in docs
     assert "fedora:latest" not in docs
+    tailnet_path = ROOT / "test-env" / "docker-compose.tailnet.yml"
+    tailnet = tailnet_path.read_text(encoding="utf-8")
+    assert tailnet == _render().render_tailnet()
+    assert "profiles: [\"tailnet\"]" in tailnet
+    assert "ports:" not in tailnet.lower()
+    assert "203.0.113.0/24" in tailnet
+    assert "NET_ADMIN" in tailnet
+    assert "network_mode: \"service:hub\"" in tailnet
+    assert "ANSIBLE_FLOW_HTTP_BIND_SUBNETS" in tailnet
+    assert "AFM_TEST_TAILNET_SUBNET" not in tailnet.split("ANSIBLE_FLOW_HTTP_BIND_SUBNETS", 1)[1].split("\n", 1)[0]

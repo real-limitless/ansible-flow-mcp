@@ -8,12 +8,14 @@ a spoke join token and not the admin portal token.
 from __future__ import annotations
 
 import hmac
+import ipaddress
 import json
 import os
 import re
 import sys
 import threading
 import time
+import uuid
 from collections import deque
 from pathlib import Path
 from typing import Any
@@ -42,7 +44,11 @@ class McpAuthConfigError(RuntimeError):
 
 
 def load_mcp_bearer_token() -> str:
-    """Return the operator bearer. Empty config is an error, never a default."""
+    """Return the operator bearer. Empty config is an error, never a default.
+
+    The file is read on every call so replacing it does not require a restart.
+    The value is not cached on the process.
+    """
     env = (os.environ.get("ANSIBLE_FLOW_MCP_TOKEN") or "").strip()
     if env:
         return env
@@ -88,6 +94,84 @@ def _warn_token_file_mode(path: Path) -> None:
         sys.stderr.write(
             f"warning: {path} is readable by group or other; tighten permissions if this is not a mounted secret\n"
         )
+
+
+_REQUEST_ID_RE = re.compile(r"[A-Za-z0-9._-]{1,64}")
+
+
+def _request_id(headers: dict[str, str]) -> str:
+    raw = (headers.get("x-request-id") or "").strip()
+    if _REQUEST_ID_RE.fullmatch(raw):
+        return raw
+    return uuid.uuid4().hex
+
+
+def _trust_proxy() -> bool:
+    return (os.environ.get("ANSIBLE_FLOW_TRUST_PROXY") or "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def _peer_ip(scope: Scope, headers: dict[str, str]) -> str:
+    client = scope.get("client")
+    peer = str(client[0]) if client else "-"
+    if _trust_proxy():
+        forwarded = (headers.get("x-forwarded-for") or "").split(",")[0].strip()
+        if forwarded:
+            return forwarded[:64]
+    return peer
+
+
+def listen_hosts(subnets: str, local_ips: list[str]) -> list[str]:
+    """Loopback plus local addresses inside the allowed CIDRs.
+
+    An address on any other interface is left unbound so the MCP port is not
+    open there.
+    """
+    nets: list[ipaddress.IPv4Network | ipaddress.IPv6Network] = []
+    for part in subnets.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        try:
+            nets.append(ipaddress.ip_network(part, strict=False))
+        except ValueError as exc:
+            raise ValueError(f"invalid ANSIBLE_FLOW_HTTP_BIND_SUBNETS entry {part!r}") from exc
+    if not nets:
+        raise ValueError("ANSIBLE_FLOW_HTTP_BIND_SUBNETS is set but empty")
+    chosen = ["127.0.0.1"]
+    seen = {"127.0.0.1"}
+    for raw in local_ips:
+        try:
+            addr = ipaddress.ip_address(str(raw).strip())
+        except ValueError:
+            continue
+        if not isinstance(addr, ipaddress.IPv4Address) or addr.is_loopback:
+            continue
+        text = str(addr)
+        if text in seen:
+            continue
+        if any(addr in net for net in nets):
+            chosen.append(text)
+            seen.add(text)
+    return chosen
+
+
+def local_ipv4s() -> list[str]:
+    """IPv4 addresses marked local in the kernel trie. Empty if unreadable."""
+    try:
+        text = Path("/proc/net/fib_trie").read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return []
+    found: list[str] = []
+    previous = ""
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("|-- "):
+            previous = stripped[4:].strip()
+            continue
+        if stripped.startswith("/32 host LOCAL") and previous:
+            found.append(previous)
+            previous = ""
+    return found
 
 
 def _client_id(header: str | None) -> str:
@@ -312,29 +396,71 @@ class BearerGuard:
             await self.app(scope, receive, send)
             return
 
+        from ansible_flow_mcp.stdout_audit import (
+            actor_from_token,
+            actor_var,
+            client_ip_var,
+            emit_audit,
+            request_id_var,
+        )
+
+        started = time.perf_counter()
         headers = _header_map(scope)
+        request_id = _request_id(headers)
+        client_ip = _peer_ip(scope, headers)
+        # Legacy jsonl field. The stdout actor is the key id, not this header.
         client_id = _client_id(headers.get("x-ansible-flow-client"))
-        if not host_allowed(headers.get("host")):
-            await _send_json(send, 421, {"ok": False, "error": "invalid_host"})
-            return
-        if not rate_limit_allows():
-            await _send_json(send, 429, {"ok": False, "error": "rate_limited"})
-            return
+        req_token = request_id_var.set(request_id)
+        ip_token = client_ip_var.set(client_ip)
+        actor_token = actor_var.set("anonymous")
+
+        async def send_with_id(message: dict[str, Any]) -> None:
+            if message.get("type") == "http.response.start":
+                out = list(message.get("headers") or [])
+                if not any(key.lower() == b"x-request-id" for key, _value in out):
+                    out.append((b"x-request-id", request_id.encode("ascii")))
+                message = {**message, "headers": out}
+            await send(message)
+
+        def _elapsed() -> int:
+            return int((time.perf_counter() - started) * 1000)
+
         try:
-            expected = load_mcp_bearer_token()
-        except McpAuthConfigError:
-            expected = ""
-        if not bearer_matches(headers.get("authorization"), expected):
-            _audit_denied(client_id)
-            await _send_json(
-                send,
-                401,
-                {"ok": False, "error": "unauthorized"},
-                extra_headers=[(b"www-authenticate", b'Bearer realm="ansible-flow-mcp"')],
-            )
-            return
-        _audit_session(headers, client_id)
-        await self.app(scope, receive, send)
+            if not host_allowed(headers.get("host")):
+                await _send_json(send_with_id, 421, {"ok": False, "error": "invalid_host"})
+                return
+            if not rate_limit_allows():
+                await _send_json(send_with_id, 429, {"ok": False, "error": "rate_limited"})
+                return
+            try:
+                expected = load_mcp_bearer_token()
+            except McpAuthConfigError:
+                expected = ""
+            if not bearer_matches(headers.get("authorization"), expected):
+                _audit_denied(client_id)
+                emit_audit(
+                    event="mcp_http",
+                    actor="anonymous",
+                    client_ip=client_ip,
+                    request_id=request_id,
+                    tool="mcp",
+                    outcome="denied",
+                    duration_ms=_elapsed(),
+                )
+                await _send_json(
+                    send_with_id,
+                    401,
+                    {"ok": False, "error": "unauthorized"},
+                    extra_headers=[(b"www-authenticate", b'Bearer realm="ansible-flow-mcp"')],
+                )
+                return
+            actor_var.set(actor_from_token(expected))
+            _audit_session(headers, client_id)
+            await self.app(scope, receive, send_with_id)
+        finally:
+            request_id_var.reset(req_token)
+            client_ip_var.reset(ip_token)
+            actor_var.reset(actor_token)
 
 
 def _header_map(scope: Scope) -> dict[str, str]:
@@ -362,6 +488,31 @@ async def _send_json(
     await send({"type": "http.response.body", "body": body})
 
 
+def _serve_bound(app: Any, port: int, addresses: list[str]) -> None:
+    """One process, one socket per address. Does not listen on every interface."""
+    import socket
+
+    import uvicorn
+
+    sockets: list[socket.socket] = []
+    try:
+        for addr in addresses:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            sock.bind((addr, port))
+            sockets.append(sock)
+    except OSError:
+        for sock in sockets:
+            sock.close()
+        raise
+    shown = ", ".join(f"{addr}:{port}" for addr in addresses)
+    sys.stderr.write(
+        f"ansible-flow-mcp streamable HTTP on {shown}{MCP_PATH} (bearer required); health at /health\n"
+    )
+    config = uvicorn.Config(app, log_level="info", proxy_headers=False, access_log=True)
+    uvicorn.Server(config).run(sockets=sockets)
+
+
 def serve_http(*, host: str = "0.0.0.0", port: int = 8789) -> None:
     """Listen for health and authenticated MCP. Exits if no bearer is configured."""
     os.environ["ANSIBLE_FLOW_HTTP_PORT"] = str(port)
@@ -380,6 +531,19 @@ def serve_http(*, host: str = "0.0.0.0", port: int = 8789) -> None:
 
     activate_role(role="hub" if role == "hub" else None)
     app = build_http_app()
+    subnets = (os.environ.get("ANSIBLE_FLOW_HTTP_BIND_SUBNETS") or "").strip()
+    if subnets:
+        try:
+            addresses = listen_hosts(subnets, local_ipv4s())
+        except ValueError as exc:
+            sys.stderr.write(str(exc) + "\n")
+            raise SystemExit(1) from exc
+        if addresses == ["127.0.0.1"]:
+            sys.stderr.write(
+                "warning: ANSIBLE_FLOW_HTTP_BIND_SUBNETS matched no local address; MCP is on loopback only\n"
+            )
+        _serve_bound(app, port, addresses)
+        return
     import uvicorn
 
     sys.stderr.write(

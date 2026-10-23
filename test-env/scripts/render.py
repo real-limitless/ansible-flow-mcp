@@ -16,6 +16,7 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 FLAVORS = ROOT / "flavors.yml"
 COMPOSE = ROOT / "docker-compose.yml"
+TAILNET = ROOT / "docker-compose.tailnet.yml"
 FAMILIES = {"debian", "ubuntu", "rocky", "fedora", "alpine", "rhel"}
 RESERVED_GROUPS = {"all", "hub", "spokes", "targets", "ungrouped"}
 NAME_RE = re.compile(r"^[a-z][a-z0-9-]{0,30}$")
@@ -69,6 +70,86 @@ def _mem(mb: int) -> str:
     return f"{int(mb)}m"
 
 
+def _harden(*homes: str) -> list[str]:
+    """sshd caps only. Everything else is dropped."""
+    lines = [
+        "    cap_drop: [ALL]",
+        "    cap_add:",
+        "      - NET_BIND_SERVICE",
+        "      - SETUID",
+        "      - SETGID",
+        "      - CHOWN",
+        "      - DAC_OVERRIDE",
+        "      - SYS_CHROOT",
+        "      - AUDIT_WRITE",
+        "    security_opt:",
+        "      - no-new-privileges:true",
+        "    read_only: true",
+        "    tmpfs:",
+        "      - /tmp:size=64m,mode=1777",
+        "      - /run:size=32m,mode=755",
+        "      - /root:size=16m,mode=700",
+    ]
+    for home in homes:
+        lines.append(f"      - {home}:size=16m,mode=755")
+    return lines
+
+
+def render_tailnet() -> str:
+    """Optional profile. Does not publish host ports or add router labels."""
+    return "\n".join(
+        [
+            "# Optional remote admin. Include this file and the profile together:",
+            "#   docker compose -f test-env/docker-compose.yml \\",
+            "#     -f test-env/docker-compose.tailnet.yml --profile tailnet up -d",
+            "# The sidecar shares the hub network namespace so it can open the",
+            "# admin port on localhost. The egress network exists only so the",
+            "# tailnet client can reach its coordination servers. MCP does not bind",
+            "# that network: ANSIBLE_FLOW_HTTP_BIND_SUBNETS is loopback plus the lab",
+            "# subnet, and the private subnet only when AFM_TEST_PRIVATE_SUBNET is set.",
+            "# 203.0.113.0/24 is an RFC 5737 placeholder. Override AFM_TEST_TAILNET_SUBNET.",
+            "# Set AFM_TEST_TAILNET_IMAGE to the client image. The auth key is a",
+            "# file path (AFM_TEST_TAILNET_AUTHKEY_FILE), never a value in this file.",
+            "services:",
+            "  hub:",
+            "    networks:",
+            "      - afm-test",
+            "      - tailnet-egress",
+            "    environment:",
+            "      ANSIBLE_FLOW_HTTP_BIND_SUBNETS: \"${AFM_TEST_SUBNET:-192.0.2.0/24}${AFM_TEST_PRIVATE_SUBNET:+,${AFM_TEST_PRIVATE_SUBNET}}\"",
+            "  tailnet:",
+            "    profiles: [\"tailnet\"]",
+            "    image: ${AFM_TEST_TAILNET_IMAGE:-tailnet-client:local}",
+            "    restart: unless-stopped",
+            "    network_mode: \"service:hub\"",
+            "    depends_on:",
+            "      - hub",
+            "    cap_drop: [ALL]",
+            "    cap_add:",
+            "      - NET_ADMIN",
+            "    security_opt:",
+            "      - no-new-privileges:true",
+            "    read_only: true",
+            "    tmpfs:",
+            "      - /tmp:size=16m,mode=1777",
+            "      - /run:size=16m,mode=755",
+            "    environment:",
+            "      TAILNET_AUTHKEY_FILE: /run/secrets/tailnet-authkey",
+            "    volumes:",
+            "      - ${AFM_TEST_TAILNET_AUTHKEY_FILE:-/var/lib/ansible-flow/hub/tailnet-authkey}:/run/secrets/tailnet-authkey:ro",
+            "",
+            "networks:",
+            "  tailnet-egress:",
+            "    name: ${AFM_TEST_TAILNET_NETWORK:-afm-test-tailnet}",
+            "    driver: bridge",
+            "    ipam:",
+            "      config:",
+            "        - subnet: \"${AFM_TEST_TAILNET_SUBNET:-203.0.113.0/24}\"",
+            "",
+        ]
+    )
+
+
 def render_text(data: dict | None = None) -> str:
     spec = data or load_flavors()
     hub = spec["hub"]
@@ -77,7 +158,7 @@ def render_text(data: dict | None = None) -> str:
     listen = str(spec.get("listen_all") or "unspecified")
     group = str(spec.get("seed_group") or "")
     names = " ".join(s["name"] for s in spokes)
-    public_host = "${HUB_PUBLIC_HOST:-hub.example.com}"
+    public_host = "${HUB_PUBLIC_HOST:-afm-test-hub}"
     lines: list[str] = [
         "# Generated from test-env/flavors.yml by test-env/scripts/render.py.",
         "# Do not edit by hand. Host publish is omitted on purpose.",
@@ -130,6 +211,7 @@ def render_text(data: dict | None = None) -> str:
         f"    container_name: {hub.get('container_name', 'afm-test-hub')}",
         "    restart: unless-stopped",
         "    logging: *logging",
+        *_harden("/home/mcp-join", "/home/labadmin"),
         "    networks: [afm-test]",
         f"    mem_limit: {_mem(hub['memory_mb'])}",
         f"    memswap_limit: {_mem(hub['memory_mb'])}",
@@ -160,7 +242,7 @@ def render_text(data: dict | None = None) -> str:
         "      ANSIBLE_FLOW_MCP_MAX_SESSIONS: \"32\"",
         "      ANSIBLE_FLOW_MCP_RATE_PER_MINUTE: \"120\"",
         "      ANSIBLE_FLOW_MCP_ALLOWED_HOSTS: \"afm-test-hub,hub\"",
-        f"      ANSIBLE_FLOW_ADMIN_BIND: \"{listen}\"",
+        "      ANSIBLE_FLOW_ADMIN_BIND: localhost",
         "      ANSIBLE_FLOW_ADMIN_PORT: \"8789\"",
         f"      ANSIBLE_FLOW_TEST_SPOKES: \"{names}\"",
         f"      ANSIBLE_FLOW_TEST_GROUP: \"{group}\"",
@@ -188,6 +270,7 @@ def render_text(data: dict | None = None) -> str:
             f"    container_name: afm-test-spoke-{name}",
             "    restart: unless-stopped",
             "    logging: *logging",
+            *_harden(),
             "    networks: [afm-test]",
             f"    mem_limit: {_mem(spoke['memory_mb'])}",
             f"    memswap_limit: {_mem(spoke['memory_mb'])}",
@@ -229,6 +312,7 @@ def render_text(data: dict | None = None) -> str:
 def main() -> None:
     text = render_text()
     COMPOSE.write_text(text, encoding="utf-8")
+    TAILNET.write_text(render_tailnet(), encoding="utf-8")
     spec = load_flavors()
     print(f"wrote {COMPOSE} ({spec['_total_mb']} MiB limits / {spec['budget_mb']} budget)")
 

@@ -8,19 +8,19 @@ export ANSIBLE_FLOW_SPOKE_DIR="$SPOKE_DIR"
 mkdir -p "$SPOKE_DIR/keys" /var/run/sshd /home/mcp-spoke/.ssh
 chmod 700 /home/mcp-spoke/.ssh "$SPOKE_DIR" || true
 
-# Keep host keys on the spoke state dir so a recreate does not rotate them
-# out from under the hub known_hosts file.
-mkdir -p "$SPOKE_DIR/ssh"
-if [ -f "$SPOKE_DIR/ssh/ssh_host_ed25519_key" ]; then
-  cp -a "$SPOKE_DIR/ssh"/ssh_host_* /etc/ssh/ 2>/dev/null || true
-else
-  if [ ! -f /etc/ssh/ssh_host_ed25519_key ]; then
-    ssh-keygen -A 2>/dev/null || true
-  fi
-  cp -a /etc/ssh/ssh_host_* "$SPOKE_DIR/ssh/" 2>/dev/null || true
+# Host keys stay on the spoke volume. /etc/ssh is read-only at runtime.
+mkdir -p "$SPOKE_DIR/ssh" /run/sshd
+if [ ! -s "$SPOKE_DIR/ssh/ssh_host_ed25519_key" ]; then
+  ssh-keygen -q -t ed25519 -f "$SPOKE_DIR/ssh/ssh_host_ed25519_key" -N ""
 fi
-chown root:root /etc/ssh/ssh_host_* "$SPOKE_DIR/ssh"/ssh_host_* 2>/dev/null || true
-chmod 600 /etc/ssh/ssh_host_*_key "$SPOKE_DIR/ssh"/ssh_host_*_key 2>/dev/null || true
+chmod 600 "$SPOKE_DIR/ssh/ssh_host_ed25519_key"
+chown root:root "$SPOKE_DIR/ssh/ssh_host_ed25519_key" 2>/dev/null || true
+# Globals before Include. Drop-ins end in Match, and Match must stay last.
+cat > /run/sshd/sshd_config <<EOF
+HostKey ${SPOKE_DIR}/ssh/ssh_host_ed25519_key
+PidFile /run/sshd.pid
+Include /etc/ssh/sshd_config.d/*.conf
+EOF
 
 # Ensure mcp-spoke exists (bash shell + ForceCommand; unlocked for pubkey auth)
 if ! id mcp-spoke >/dev/null 2>&1; then
@@ -72,4 +72,4 @@ case "${ANSIBLE_FLOW_AUTOJOIN:-0}" in
 esac
 
 echo "[spoke ${SPOKE_NAME:-unknown}] starting sshd ($SSHD)"
-exec "$SSHD" -D -e
+exec "$SSHD" -D -e -f /run/sshd/sshd_config

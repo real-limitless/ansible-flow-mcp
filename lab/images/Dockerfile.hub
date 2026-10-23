@@ -23,8 +23,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          ansible-galaxy collection install ansible.posix; \
        fi \
     && mkdir -p /var/run/sshd /var/lib/ansible-flow/hub /lab/keys \
+    && groupadd -f ansible-flow \
     && useradd -m -s /usr/sbin/nologin mcp-hub \
     && useradd -m -s /bin/bash mcp-join \
+    && usermod -aG ansible-flow mcp-hub \
+    && usermod -aG ansible-flow mcp-join \
     && passwd -u mcp-join 2>/dev/null || usermod -p '*' mcp-join \
     && useradd -m -s /bin/bash labadmin
 

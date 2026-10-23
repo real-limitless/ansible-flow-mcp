@@ -1,0 +1,46 @@
+# Optional remote admin. Include this file and the profile together:
+#   docker compose -f test-env/docker-compose.yml \
+#     -f test-env/docker-compose.tailnet.yml --profile tailnet up -d
+# The sidecar shares the hub network namespace so it can open the
+# admin port on localhost. The egress network exists only so the
+# tailnet client can reach its coordination servers. MCP does not bind
+# that network: ANSIBLE_FLOW_HTTP_BIND_SUBNETS is loopback plus the lab
+# subnet, and the private subnet only when AFM_TEST_PRIVATE_SUBNET is set.
+# 203.0.113.0/24 is an RFC 5737 placeholder. Override AFM_TEST_TAILNET_SUBNET.
+# Set AFM_TEST_TAILNET_IMAGE to the client image. The auth key is a
+# file path (AFM_TEST_TAILNET_AUTHKEY_FILE), never a value in this file.
+services:
+  hub:
+    networks:
+      - afm-test
+      - tailnet-egress
+    environment:
+      ANSIBLE_FLOW_HTTP_BIND_SUBNETS: "${AFM_TEST_SUBNET:-192.0.2.0/24}${AFM_TEST_PRIVATE_SUBNET:+,${AFM_TEST_PRIVATE_SUBNET}}"
+  tailnet:
+    profiles: ["tailnet"]
+    image: ${AFM_TEST_TAILNET_IMAGE:-tailnet-client:local}
+    restart: unless-stopped
+    network_mode: "service:hub"
+    depends_on:
+      - hub
+    cap_drop: [ALL]
+    cap_add:
+      - NET_ADMIN
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+      - /run:size=16m,mode=755
+    environment:
+      TAILNET_AUTHKEY_FILE: /run/secrets/tailnet-authkey
+    volumes:
+      - ${AFM_TEST_TAILNET_AUTHKEY_FILE:-/var/lib/ansible-flow/hub/tailnet-authkey}:/run/secrets/tailnet-authkey:ro
+
+networks:
+  tailnet-egress:
+    name: ${AFM_TEST_TAILNET_NETWORK:-afm-test-tailnet}
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "${AFM_TEST_TAILNET_SUBNET:-203.0.113.0/24}"

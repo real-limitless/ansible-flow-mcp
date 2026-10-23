@@ -22,21 +22,25 @@ usermod -aG ansible-flow mcp-join 2>/dev/null || true
 usermod -s /bin/bash mcp-join 2>/dev/null || true
 passwd -u mcp-join 2>/dev/null || usermod -p '*' mcp-join 2>/dev/null || true
 
-# Host keys live on the hub volume so a container recreate does not rotate them.
-persist_host_keys() {
-  mkdir -p "$HUB_DIR/ssh"
-  if [ -f "$HUB_DIR/ssh/ssh_host_ed25519_key" ]; then
-    cp -a "$HUB_DIR/ssh"/ssh_host_* /etc/ssh/
-  else
-    if [ ! -f /etc/ssh/ssh_host_ed25519_key ]; then
-      ssh-keygen -A
-    fi
-    cp -a /etc/ssh/ssh_host_* "$HUB_DIR/ssh/"
+# Host keys stay on the hub volume. The root filesystem may be read-only,
+# so sshd reads a config under /run that points at those keys.
+prepare_sshd() {
+  local keydir="$1"
+  mkdir -p "$keydir" /run/sshd
+  if [ ! -s "$keydir/ssh_host_ed25519_key" ]; then
+    ssh-keygen -q -t ed25519 -f "$keydir/ssh_host_ed25519_key" -N ""
   fi
-  chown root:root "$HUB_DIR/ssh"/ssh_host_* /etc/ssh/ssh_host_* 2>/dev/null || true
-  chmod 600 "$HUB_DIR/ssh"/ssh_host_*_key /etc/ssh/ssh_host_*_key 2>/dev/null || true
+  chown root:root "$keydir/ssh_host_ed25519_key" 2>/dev/null || true
+  chmod 600 "$keydir/ssh_host_ed25519_key"
+  # Globals before Include. Drop-ins end in Match, and Match must stay last.
+  cat > /run/sshd/sshd_config <<EOF
+HostKey ${keydir}/ssh_host_ed25519_key
+PidFile /run/sshd.pid
+AuthorizedKeysFile .ssh/authorized_keys ${keydir}/labadmin.authorized_keys
+Include /etc/ssh/sshd_config.d/*.conf
+EOF
 }
-persist_host_keys
+prepare_sshd "$HUB_DIR/ssh"
 
 hub_fix_perms() {
   chown -R mcp-hub:ansible-flow "$HUB_DIR" || chown -R mcp-hub:mcp-hub "$HUB_DIR" || true
@@ -179,11 +183,18 @@ fi
 # labadmin is the operator shell (TUI). Key-only; unlock the account so OpenSSH accepts a pubkey.
 if id labadmin >/dev/null 2>&1; then
   usermod -p '*' labadmin 2>/dev/null || true
-  mkdir -p /home/labadmin/.ssh
-  touch /home/labadmin/.ssh/authorized_keys
-  chown -R labadmin:labadmin /home/labadmin/.ssh
-  chmod 700 /home/labadmin/.ssh
-  chmod 600 /home/labadmin/.ssh/authorized_keys
+  # Survives a read-only root and a tmpfs home. sshd allows this extra path.
+  persist="$HUB_DIR/ssh/labadmin.authorized_keys"
+  if [ ! -f "$persist" ]; then
+    : >"$persist"
+  fi
+  chmod 600 "$persist"
+  chown root:root "$persist" 2>/dev/null || true
+  mkdir -p /home/labadmin/.ssh 2>/dev/null || true
+  touch /home/labadmin/.ssh/authorized_keys 2>/dev/null || true
+  chown -R labadmin:labadmin /home/labadmin/.ssh 2>/dev/null || true
+  chmod 700 /home/labadmin/.ssh 2>/dev/null || true
+  chmod 600 /home/labadmin/.ssh/authorized_keys 2>/dev/null || true
 fi
 
 supervise_loop() {
@@ -245,4 +256,4 @@ if [ -n "${ANSIBLE_FLOW_TEST_SPOKES:-}" ]; then
 fi
 
 echo "[hub] starting sshd; hub_id=$HUB_ID_DISP; skip_init=$SKIP_INIT; opencode=$(command -v opencode || echo missing)"
-exec /usr/sbin/sshd -D -e
+exec /usr/sbin/sshd -D -e -f /run/sshd/sshd_config
