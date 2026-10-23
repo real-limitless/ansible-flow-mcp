@@ -39,6 +39,7 @@ def test_compose_matches_flavors_and_stays_private():
     assert spec["listen_all"] == "unspecified"
     assert 'ANSIBLE_FLOW_HTTP_HOST: "unspecified"' in text
     assert "cap_drop: [ALL]" in text
+    assert "FOWNER" in text
     assert "no-new-privileges:true" in text
     assert "read_only: true" in text
     assert "ports:" not in lowered

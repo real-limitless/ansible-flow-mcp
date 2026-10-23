@@ -79,6 +79,7 @@ def _harden(*homes: str) -> list[str]:
         "      - SETUID",
         "      - SETGID",
         "      - CHOWN",
+        "      - FOWNER",
         "      - DAC_OVERRIDE",
         "      - SYS_CHROOT",
         "      - AUDIT_WRITE",

@@ -210,6 +210,7 @@ Containers drop every capability and add back only what sshd needs:
 | `NET_BIND_SERVICE` | sshd listens on port 22 |
 | `SETUID`, `SETGID` | privilege separation and the session user |
 | `CHOWN` | entrypoint fixes volume and key ownership |
+| `FOWNER` | `chmod` on hub state after that tree belongs to `mcp-hub`. `CHOWN` changes the owner and `DAC_OVERRIDE` bypasses read and write checks. Neither permits `chmod` of another uid, which returns "Operation not permitted" |
 | `DAC_OVERRIDE` | read mode-0400 host keys and authorized keys |
 | `SYS_CHROOT` | sshd privilege-separation chroot |
 | `AUDIT_WRITE` | sshd loginuid |
