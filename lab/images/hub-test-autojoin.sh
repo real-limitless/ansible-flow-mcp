@@ -9,7 +9,9 @@ KEY_EXPORT="${ANSIBLE_FLOW_JOIN_KEY_EXPORT:-/run/join-key}"
 GROUP_NAME="${ANSIBLE_FLOW_TEST_GROUP:-flavors}"
 
 log() {
-  python3 -c 'from ansible_flow_mcp.access_log import log_access; import sys; log_access(action=sys.argv[1], outcome=sys.argv[2], actor="hub", source_ip="-", request_id="-", spoke=sys.argv[3])' "$1" "$2" "$3"
+  python3 -c 'import json,sys
+from datetime import datetime, timezone
+print(json.dumps({"ts": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "service": "ansible-flow-mcp", "environment": "test", "action": sys.argv[1], "outcome": sys.argv[2], "actor": "hub", "source_ip": "-", "request_id": "-", "spoke": sys.argv[3]}))' "$1" "$2" "$3"
 }
 
 export_join_key() {

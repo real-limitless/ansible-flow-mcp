@@ -20,12 +20,13 @@ Not affiliated with Red Hat or the Ansible project beyond using the public Ansib
 ```bash
 git clone -b DEVELOPMENT https://github.com/real-limitless/ansible-flow-mcp.git
 cd ansible-flow-mcp
+export ANSIBLE_FLOW_MCP_TOKEN='choose-a-long-secret'
 docker compose up -d --build
-# health: http://127.0.0.1:8789/health
-docker compose exec ansible-flow-mcp ansible-flow-mcp doctor
+docker compose exec ansible-flow-mcp python3 -c \
+  "import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:8789/health').read().decode())"
 ```
 
-Single-node hub on **8789**. Multi-spoke fabric is extra: `lab/`.
+Single-node hub on **8789**. `/health` is open. `/mcp` is streamable HTTP and rejects calls that do not send `Authorization: Bearer`. Stdio (`hub session`) still works and does not need the bearer. Dev HTTPS host, Traefik labels, and client snippets: **[docs/DEPLOY.md](docs/DEPLOY.md)**. Multi-spoke fabric is extra: `lab/`.
 
 ```bash
 ./scripts/site_preview.sh   # http://127.0.0.1:8765/  (gallery + live schemas)
@@ -163,7 +164,8 @@ ansible-flow-mcp
 
 
 Editor snippets: `examples/cursor-mcp.json`, `examples/claude-desktop.json`.  
-Hub + OpenCode: `examples/opencode-hub.jsonc` · `ansible-flow-mcp hub write-opencode-config`.
+Remote hub: `examples/cursor-mcp-http.json`, `examples/opencode-hub-http.jsonc` (bearer), `examples/opencode-hub-ssh.jsonc` (SSH stdio).  
+Hub + OpenCode on the box: `examples/opencode-hub.jsonc` · `ansible-flow-mcp hub write-opencode-config`.
 
 ```json
 {

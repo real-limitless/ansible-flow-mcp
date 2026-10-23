@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Liveness: sshd, admin /health, and (when enabled) anonymous /mcp is 401."""
+"""Liveness: sshd, admin /health, and (when enabled) MCP /health plus a closed /mcp."""
 
 from __future__ import annotations
 
@@ -19,7 +19,11 @@ def main() -> int:
         resp.read()
     flag = (os.environ.get("ANSIBLE_FLOW_MCP_HTTP") or "").strip().lower()
     if flag in {"1", "true", "yes", "on"}:
-        port = (os.environ.get("ANSIBLE_FLOW_MCP_HTTP_PORT") or "8790").strip()
+        port = (os.environ.get("ANSIBLE_FLOW_HTTP_PORT") or "8789").strip()
+        with urllib.request.urlopen(f"http://localhost:{port}/health", timeout=3) as resp:
+            if resp.status != 200:
+                return 1
+            resp.read()
         try:
             urllib.request.urlopen(f"http://localhost:{port}/mcp", timeout=3)
         except urllib.error.HTTPError as exc:

@@ -96,16 +96,19 @@ services:
       ANSIBLE_FLOW_REQUIRE_CHECK: "0"
       ANSIBLE_FLOW_SUPERVISE_HTTP: "1"
       ANSIBLE_FLOW_MCP_HTTP: "1"
-      ANSIBLE_FLOW_MCP_HTTP_BIND: "unspecified"
-      ANSIBLE_FLOW_MCP_HTTP_PORT: "8790"
+      ANSIBLE_FLOW_HTTP_HOST: "unspecified"
+      ANSIBLE_FLOW_HTTP_PORT: "8790"
+      ANSIBLE_FLOW_MCP_TOKEN_FILE: /var/lib/ansible-flow/hub/mcp.http.token
+      ANSIBLE_FLOW_PUBLIC_HOST: "${HUB_PUBLIC_HOST:-hub.example.com}"
+      ANSIBLE_FLOW_MCP_MAX_SESSIONS: "32"
+      ANSIBLE_FLOW_MCP_RATE_PER_MINUTE: "120"
+      ANSIBLE_FLOW_MCP_ALLOWED_HOSTS: "afm-test-hub,hub"
       ANSIBLE_FLOW_ADMIN_BIND: "unspecified"
       ANSIBLE_FLOW_ADMIN_PORT: "8789"
       ANSIBLE_FLOW_TEST_SPOKES: "debian ubuntu rocky fedora alpine"
       ANSIBLE_FLOW_TEST_GROUP: "flavors"
       ANSIBLE_FLOW_JOIN_DROP: /run/join-drop
       ANSIBLE_FLOW_JOIN_KEY_EXPORT: /run/join-key
-      ANSIBLE_FLOW_MCP_ALLOWED_HOSTS: >-
-        afm-test-hub:*,hub:*,localhost:*,${HUB_PUBLIC_HOST:-hub.example.com}:*
     healthcheck:
       test: ["CMD", "python3", "/usr/local/bin/hub-healthcheck.py"]
       interval: 15s

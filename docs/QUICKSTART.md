@@ -7,6 +7,7 @@ Get **ansible-flow-mcp** running end-to-end: install → MCP in your editor → 
 | **[A. Local MCP](#path-a--local-mcp-single-node)** | ~10 min | Agent runs Ansible on **this machine** (dev / laptop) |
 | **[B. Compose lab](#path-b--compose-lab-full-hubspoke)** | ~15–30 min | Hub + 3 spokes, TUI, OpenCode, demo groups |
 | **[C. Bare-metal hub/spoke](#path-c--bare-metal-hubspoke)** | varies | Real hosts: enroll spokes, agent on hub only |
+| **[D. Dev HTTPS hub](#path-d-dev-https-hub)** | ~15 min | One container, bearer `/mcp`, Traefik host |
 
 Read **[Security notes](#security-notes)** before production. Deep ops: [HUB.md](HUB.md) · [SECURITY.md](SECURITY.md) · lab: [lab/README.md](../lab/README.md).
 
@@ -523,6 +524,21 @@ cd lab && ./scripts/smoke.sh
 
 ---
 
+## Path D: Dev HTTPS hub
+
+One hub container. No spokes. Agents connect to `https://ansible-flow-mcp.z.srl/mcp` with a bearer token. Full steps, env vars, and Traefik labels: **[DEPLOY.md](DEPLOY.md)**.
+
+```bash
+export ANSIBLE_FLOW_MCP_TOKEN='choose-a-long-secret'
+docker compose up -d --build
+docker compose exec ansible-flow-mcp python3 -c \
+  "import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:8789/health').read().decode())"
+```
+
+Client snippets: `examples/cursor-mcp-http.json`, `examples/opencode-hub-http.jsonc`. SSH stdio instead of HTTP: `examples/opencode-hub-ssh.jsonc`.
+
+`/health` is open. `/mcp` without `Authorization: Bearer` returns 401. The bearer is not a spoke join token.
+
 ## Security notes
 
 - Hub compromise ≈ classic Ansible control node — harden the bastion.  
@@ -540,6 +556,7 @@ cd lab && ./scripts/smoke.sh
 | [README.md](../README.md) | Product story, tools table, security summary |
 | [HUB.md](HUB.md) | Hub/spoke deploy, dual SSH identities, TUI |
 | [SECURITY.md](SECURITY.md) | Threat model and residual risk |
+| [DEPLOY.md](DEPLOY.md) | Dev HTTPS hub, bearer, Traefik |
 | [lab/README.md](../lab/README.md) | Compose scripts map and OpenCode wiring |
 | [TEST-ENV.md](TEST-ENV.md) | Always-on private multi-flavor lab |
 | [AGENTS.md](../AGENTS.md) | Layout and conventions for coding agents |

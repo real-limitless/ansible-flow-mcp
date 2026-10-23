@@ -1,14 +1,11 @@
-"""Doctor JSON and a tiny HTTP health listener (family port 8789)."""
+"""Doctor JSON. The HTTP listener lives in http_mcp (health + authenticated /mcp)."""
 
 from __future__ import annotations
 
-import json
 import os
 import shutil
 import sys
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
-from urllib.parse import urlparse
 
 from ansible_flow_mcp import __version__
 from ansible_flow_mcp.catalog import catalog_dir, load_gallery
@@ -38,27 +35,8 @@ def doctor_report() -> dict[str, Any]:
     }
 
 
-class _Handler(BaseHTTPRequestHandler):
-    def do_GET(self) -> None:  # noqa: N802
-        path = urlparse(self.path).path
-        if path in {"/", "/health"}:
-            report = doctor_report()
-            body = json.dumps(report, indent=2).encode("utf-8")
-            code = 200 if report.get("ok") else 503
-            self.send_response(code)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Content-Length", str(len(body)))
-            self.end_headers()
-            self.wfile.write(body)
-            return
-        self.send_error(404)
-
-    def log_message(self, format: str, *args: Any) -> None:  # noqa: A003
-        return
-
-
 def serve_http(*, host: str = "0.0.0.0", port: int = 8789) -> None:
-    os.environ["ANSIBLE_FLOW_HTTP_PORT"] = str(port)
-    httpd = ThreadingHTTPServer((host, port), _Handler)
-    sys.stderr.write(f"ansible-flow-mcp health on http://{host}:{port}/health\n")
-    httpd.serve_forever()
+    """HTTP entry: /health plus bearer-authenticated streamable MCP at /mcp."""
+    from ansible_flow_mcp.http_mcp import serve_http as serve_mcp_http
+
+    serve_mcp_http(host=host, port=port)

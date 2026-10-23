@@ -14,7 +14,6 @@ from ansible_flow_mcp.runner import run_module, run_playbook
 from ansible_flow_mcp.security import load_policy
 
 _ROLE: str | None = None
-_HUB_TOOLS_REGISTERED = False
 
 
 def _role() -> Role:
@@ -159,12 +158,24 @@ def list_collections_tool() -> str:
     return _json({"collections": list_collections(), "version": __version__, "role": _role().value})
 
 
-def _register_hub_tools() -> None:
-    global _HUB_TOOLS_REGISTERED
-    if _HUB_TOOLS_REGISTERED:
-        return
-    _HUB_TOOLS_REGISTERED = True
+_HUB_TOOLS_REGISTERED = False
 
+
+def activate_role(*, role: str | None = None) -> None:
+    """Apply hub or spoke tool registration. Safe to call more than once."""
+    global _ROLE, _HUB_TOOLS_REGISTERED
+    _ROLE = role
+    if role == "hub" or (role is None and detect_mode().role == Role.HUB):
+        if os.environ.get("ANSIBLE_FLOW_ROLE", "").lower() != "spoke":
+            os.environ.setdefault("ANSIBLE_FLOW_ROLE", "hub")
+            if not _HUB_TOOLS_REGISTERED:
+                _register_hub_tools()
+                _HUB_TOOLS_REGISTERED = True
+    elif role == "spoke":
+        os.environ["ANSIBLE_FLOW_ROLE"] = "spoke"
+
+
+def _register_hub_tools() -> None:
     @mcp.tool(name="list_nodes")
     def list_nodes_tool() -> str:
         """List enrolled spokes and registered Ansible targets (kind, connection, groups)."""
@@ -311,24 +322,8 @@ def _register_hub_tools() -> None:
         return _json(result.to_dict())
 
 
-def use_role(role: str | None) -> None:
-    """Select hub or spoke tool registration for this process."""
-    global _ROLE
-    _ROLE = role
-    if role == "hub" or (role is None and detect_mode().role == Role.HUB):
-        if os.environ.get("ANSIBLE_FLOW_ROLE", "").lower() != "spoke":
-            os.environ.setdefault("ANSIBLE_FLOW_ROLE", "hub")
-            _register_hub_tools()
-    elif role == "spoke":
-        os.environ["ANSIBLE_FLOW_ROLE"] = "spoke"
-    try:
-        mcp._mcp_server.instructions = _instructions()
-    except (AttributeError, TypeError):
-        pass
-
-
 def run_server(*, role: str | None = None) -> None:
-    use_role(role)
+    activate_role(role=role)
     mcp.run(transport="stdio")
 
 

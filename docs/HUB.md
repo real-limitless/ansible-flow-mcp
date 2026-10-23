@@ -50,7 +50,7 @@ ansible-flow-mcp hub admin     # operator web console (loopback)
 
 ### Operator admin portal
 
-Same inventory APIs as the TUI and hub MCP tools, served as a Bearer-token web console (mcp-flow style). **Not** HTTP MCP — agents stay on `hub session` stdio.
+Same inventory APIs as the TUI and hub MCP tools, served as a Bearer-token web console. This console is not MCP. Agents use `hub session` (stdio), an SSH wrap of that command, or top-level `ansible-flow-mcp serve` (`/mcp` with a different bearer). See [DEPLOY.md](DEPLOY.md).
 
 ```bash
 ansible-flow-mcp hub admin
@@ -62,9 +62,9 @@ ansible-flow-mcp hub admin
 - Token: `$ANSIBLE_FLOW_ADMIN_TOKEN` or `$HUB_DIR/admin.token` (created on `hub init`, mode `0600`). The CLI prints the **file path**, never the token.
 - Paste the token once in the browser (stored in `sessionStorage`).
 - Tabs: Status, Servers (invite / edit / revoke / ping), Targets, Groups, Audit
-- `/health` is unauthenticated and returns the same doctor JSON as top-level `serve`
-- Remote operators: SSH or Tailscale to the hub, then open loopback. Do not publish `:8789` on the public internet.
-- Lab compose publishes `127.0.0.1:8789` on the host; inside the container the server binds `0.0.0.0`. Do not run the lab fabric and the root single-node compose at the same time (both want 8789).
+- `/health` is unauthenticated and returns doctor JSON
+- Remote operators: SSH or Tailscale to the hub, then open loopback. Do not publish the admin port on the public internet.
+- Lab compose publishes `127.0.0.1:8789` for the admin console. The root dev compose does not publish a host port; it exposes 8789 for Traefik. Do not point both at the same published host port.
 
 ### Operator TUI
 
@@ -159,4 +159,5 @@ Do **not** put `ansible_client` on `mcp-spoke` with ForceCommand. Ansible opens 
 - Spokes cannot lateral-move via this fabric
 - Join tokens: signed, TTL, one-time jti replay cache
 - Mesh user has no shell; ansible user is key-only (lab: passwordless sudo)
-- Admin HTTP is operator-only (Bearer token, loopback by default); no public HTTP MCP
+- Admin HTTP is operator-only (Bearer token, loopback by default)
+- Remote agents use stdio, an SSH wrap of `hub session`, or streamable HTTP `POST /mcp` with a separate operator bearer. Unauthenticated HTTP MCP does not start. See [DEPLOY.md](DEPLOY.md)

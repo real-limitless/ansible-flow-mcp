@@ -1,0 +1,13 @@
+# Attach the hub to the proxy network. Use with the root compose file:
+#   docker compose -f docker-compose.yml -f deploy/compose.traefik.yml up -d
+# Dokploy hosts already have this network. Skip this file on a laptop.
+services:
+  ansible-flow-mcp:
+    networks:
+      - default
+      - dokploy
+
+networks:
+  dokploy:
+    external: true
+    name: ${DOKPLOY_NETWORK:-dokploy-network}

@@ -199,6 +199,31 @@ supervise_loop() {
   ) &
 }
 
+ensure_mcp_token() {
+  local file="${ANSIBLE_FLOW_MCP_TOKEN_FILE:-$HUB_DIR/mcp.http.token}"
+  if [ -n "${ANSIBLE_FLOW_MCP_TOKEN:-}" ]; then
+    return 0
+  fi
+  export ANSIBLE_FLOW_MCP_TOKEN_FILE="$file"
+  if [ -s "$file" ]; then
+    chmod 400 "$file" 2>/dev/null || true
+    return 0
+  fi
+  mkdir -p "$(dirname "$file")"
+  python3 -c 'import os, pathlib, secrets, sys
+p = pathlib.Path(sys.argv[1])
+p.parent.mkdir(parents=True, exist_ok=True)
+p.write_text(secrets.token_urlsafe(32) + "\n", encoding="utf-8")
+os.chmod(p, 0o400)' "$file"
+}
+
+run_mcp_http() {
+  ensure_mcp_token
+  local bind="${ANSIBLE_FLOW_HTTP_HOST:-unspecified}"
+  local port="${ANSIBLE_FLOW_HTTP_PORT:-8789}"
+  exec ansible-flow-mcp --hub-dir "$HUB_DIR" hub mcp-http --host "$bind" --port "$port"
+}
+
 case "${ANSIBLE_FLOW_SUPERVISE_HTTP:-0}" in
   1|true|yes|on)
     admin_bind="${ANSIBLE_FLOW_ADMIN_BIND:-localhost}"
@@ -206,9 +231,7 @@ case "${ANSIBLE_FLOW_SUPERVISE_HTTP:-0}" in
     supervise_loop admin ansible-flow-mcp --hub-dir "$HUB_DIR" hub admin --host "$admin_bind" --port "$admin_port"
     case "${ANSIBLE_FLOW_MCP_HTTP:-0}" in
       1|true|yes|on)
-        mcp_bind="${ANSIBLE_FLOW_MCP_HTTP_BIND:-localhost}"
-        mcp_port="${ANSIBLE_FLOW_MCP_HTTP_PORT:-8790}"
-        supervise_loop mcp-http ansible-flow-mcp --hub-dir "$HUB_DIR" hub mcp-http --host "$mcp_bind" --port "$mcp_port"
+        supervise_loop mcp-http run_mcp_http
         ;;
     esac
     ;;

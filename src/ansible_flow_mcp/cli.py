@@ -90,18 +90,18 @@ def build_parser() -> argparse.ArgumentParser:
     h_serve.add_argument("--port", type=int, default=None)
     h_mcp = hub_sub.add_parser(
         "mcp-http",
-        help="Authenticated streamable HTTP MCP on /mcp (loopback by default; not public)",
+        help="Same listener as top-level serve: bearer /mcp plus /health",
     )
     h_mcp.add_argument(
         "--host",
         default=None,
-        help="Bind address (default: localhost or $ANSIBLE_FLOW_MCP_HTTP_BIND)",
+        help="Bind address (default: $ANSIBLE_FLOW_HTTP_HOST, or the serve default)",
     )
     h_mcp.add_argument(
         "--port",
         type=int,
         default=None,
-        help="Bind port (default: 8790 or $ANSIBLE_FLOW_MCP_HTTP_PORT)",
+        help="Bind port (default: $ANSIBLE_FLOW_HTTP_PORT or 8789)",
     )
     hub_sub.add_parser(
         "write-opencode-config",
@@ -173,7 +173,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("doctor", help="Environment + catalog health (JSON)")
 
-    serve = sub.add_parser("serve", help="HTTP health listener (family port 8789)")
+    serve = sub.add_parser(
+        "serve",
+        help="Streamable HTTP MCP at /mcp (bearer required) plus /health (family port 8789)",
+    )
     serve.add_argument("--host", default="0.0.0.0")
     serve.add_argument(
         "--port",
@@ -268,7 +271,7 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
     if args.cmd == "serve":
-        from ansible_flow_mcp.http_health import serve_http
+        from ansible_flow_mcp.http_mcp import serve_http
 
         import os
 
@@ -375,17 +378,19 @@ def _hub_main(args: argparse.Namespace) -> None:
         return
 
     if args.hub_cmd == "mcp-http":
-        from ansible_flow_mcp.http_mcp import mcp_http_token_path, serve_mcp_http
+        import os
+        import socket
 
-        _out(
-            {
-                "ok": True,
-                "path": "/mcp",
-                "mcp_token_file": str(mcp_http_token_path(root)),
-                "note": "token value is not printed",
-            }
-        )
-        serve_mcp_http(root=root, host=args.host, port=args.port)
+        from ansible_flow_mcp.http_mcp import serve_http
+
+        raw_host = (args.host or os.environ.get("ANSIBLE_FLOW_HTTP_HOST") or "").strip()
+        port = int(args.port) if args.port is not None else int(os.environ.get("ANSIBLE_FLOW_HTTP_PORT") or 8789)
+        if raw_host in {"unspecified", "all", "*"}:
+            serve_http(host=socket.INADDR_ANY, port=port)
+        elif raw_host:
+            serve_http(host=raw_host, port=port)
+        else:
+            serve_http(port=port)
         return
 
     if args.hub_cmd == "accept-join":

@@ -89,18 +89,22 @@ The auto-join log must not contain the token. `issue-token` output is captured a
 
 ## HTTP MCP and the admin portal
 
-These are different credentials.
+The lab uses the same streamable HTTP listener as `ansible-flow-mcp serve` (see [DEPLOY.md](DEPLOY.md) for the single-node profile). `hub mcp-http` calls that function. It does not start a second server. `/health` on that port is open. `/mcp` requires the operator bearer. Stdio `hub session` is unchanged.
 
-| Surface | Inside the lab | Token file (mode) |
+This lab keeps the admin console on 8789 and sets `ANSIBLE_FLOW_HTTP_PORT` to 8790 so the two listeners do not share a port. The product default for `serve` remains 8789.
+
+| Surface | Inside the lab | Credential |
 | --- | --- | --- |
-| Streamable HTTP MCP | `http://afm-test-hub:8790/mcp` | `/var/lib/ansible-flow/hub/mcp.http.token` (0400) |
-| Admin portal | `http://afm-test-hub:8789/admin/` | `/var/lib/ansible-flow/hub/admin.token` (0600) |
+| Streamable HTTP MCP | `http://afm-test-hub:8790/mcp` | `ANSIBLE_FLOW_MCP_TOKEN` or `ANSIBLE_FLOW_MCP_TOKEN_FILE` |
+| Admin portal | `http://afm-test-hub:8789/admin/` | `admin.token` (0600), separate from the MCP bearer |
 
-`hub mcp-http` is opt-in in the product and **localhost by default**. This lab sets `ANSIBLE_FLOW_MCP_HTTP_BIND` and `ANSIBLE_FLOW_ADMIN_BIND` to the word `unspecified`. The process maps that word to the in-container any-address so other containers on the private network can connect. Nothing maps those ports onto the host.
+The compose file does not set `ANSIBLE_FLOW_MCP_TOKEN`. On start the hub entrypoint creates `/var/lib/ansible-flow/hub/mcp.http.token` (mode 0400) when that file is missing and points `ANSIBLE_FLOW_MCP_TOKEN_FILE` at it. The value is not printed and is not an environment variable.
 
-The bearer value is never passed in an environment variable (so `docker inspect` does not show it). Point `ANSIBLE_FLOW_MCP_TOKEN_FILE` at the file if you move it. Host allow-list for `/mcp` is `ANSIBLE_FLOW_MCP_ALLOWED_HOSTS` (container names, `localhost`, and `HUB_PUBLIC_HOST`, default `hub.example.com`).
+`ANSIBLE_FLOW_HTTP_HOST` and `ANSIBLE_FLOW_ADMIN_BIND` are the word `unspecified`. The process maps that word to the in-container any-address so other containers on the private network can connect. Nothing maps those ports onto the host.
 
-Access log lines are JSON on stdout: `ts` (UTC), `service`, `environment`, `request_id`, `actor` (bearer key prefix only), `source_ip`, `action`, `outcome`. Tokens are not logged.
+Host allow-list is the product list (`localhost` and `ANSIBLE_FLOW_PUBLIC_HOST`) plus `ANSIBLE_FLOW_MCP_ALLOWED_HOSTS` (`afm-test-hub`, `hub`). Set `HUB_PUBLIC_HOST` when a proxy presents another name (placeholder `hub.example.com`). Session and rate caps are the product defaults: `ANSIBLE_FLOW_MCP_MAX_SESSIONS` (32) and `ANSIBLE_FLOW_MCP_RATE_PER_MINUTE` (120).
+
+Accepted `/mcp` calls are recorded in `audit.jsonl` with `transport=http` and `client_id`. The bearer is not written there.
 
 ### Reach them from a private network
 
@@ -129,7 +133,7 @@ HUB_PUBLIC_HOST=hub.example.com
 | Header | `Authorization: Bearer <value of AFM_TEST_MCP_TOKEN>` |
 | Secret | name only in git/config, for example `AFM_TEST_MCP_TOKEN`; the value is the contents of `mcp.http.token` |
 
-The admin portal is not MCP. Its own token is `admin.token`. `/health` on the admin port is the existing unauthenticated doctor and returns no tokens.
+The admin portal is not MCP. Its own token is `admin.token`. `/health` on the MCP port and on the admin port returns doctor JSON and no tokens. Unauthenticated `/mcp` returns 401.
 
 ## Shell and TUI
 
@@ -171,10 +175,8 @@ Do not add public router labels and do not add a `ports:` mapping.
 
 ## Continuous integration
 
-Unit tests cover token-file mode, the bearer gate, and the rendered compose (budget, no host ports, no public labels). Image builds are not in CI: five foreign bases plus the hub are not a cheap job, and CI must not publish this stack.
+Unit tests cover the shared bearer gate and the rendered compose (budget, no host ports, no public labels). Image builds are not in CI: five foreign bases plus the hub are not a cheap job, and CI must not publish this stack.
 
 ## Product notes
 
-Streamable HTTP MCP was not in the tree before this lab. `docs/SECURITY.md` used to mark HTTP MCP out of scope. `hub mcp-http` is the opt-in listener the lab starts so a gateway can attach. Stdio `hub session` is unchanged. The default bind outside this compose file is localhost.
-
-Spoke auto-join is enabled only when `ANSIBLE_FLOW_TEST_SPOKES` / `ANSIBLE_FLOW_AUTOJOIN` are set. The interactive `lab/` flow is still `scripts/enroll.sh`.
+HTTP MCP is `ansible-flow-mcp serve`, documented in [DEPLOY.md](DEPLOY.md) and [SECURITY.md](SECURITY.md). This lab starts that same listener with `hub mcp-http` and does not add a second implementation. It also does not add public proxy labels. Spoke auto-join is enabled only when `ANSIBLE_FLOW_TEST_SPOKES` / `ANSIBLE_FLOW_AUTOJOIN` are set. The interactive `lab/` flow is still `scripts/enroll.sh`.
