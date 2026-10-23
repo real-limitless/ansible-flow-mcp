@@ -2,27 +2,44 @@
 set -eu
 family="${1:-debian}"
 
-install_debian() {
-  export DEBIAN_FRONTEND=noninteractive
-  apt-get update
-  apt-get install -y --no-install-recommends \
-    python3 python3-pip python3-venv \
-    openssh-server openssh-client \
-    iproute2 ca-certificates tini sudo
-  rm -rf /var/lib/apt/lists/*
-  # nologin path
-  if [ ! -e /usr/sbin/nologin ] && [ -e /sbin/nologin ]; then
-    ln -sf /sbin/nologin /usr/sbin/nologin || true
-  fi
+# Install helpers return the installer status. Cleanup runs after that and
+# must not replace a failed install with status 0 (that skipped the Python
+# fallback on Rocky, which has no python3.13 package).
+pkg_debian() {
+  rc=0
+  apt-get install -y --no-install-recommends "$@" || rc=$?
+  rm -rf /var/lib/apt/lists/* || true
+  return "$rc"
 }
 
 pkg_rhel() {
+  rc=0
   if command -v microdnf >/dev/null 2>&1; then
-    microdnf install -y "$@"
-    microdnf clean all
+    microdnf install -y "$@" || rc=$?
+    microdnf clean all || true
   else
-    dnf install -y --setopt=install_weak_deps=False "$@"
-    dnf clean all
+    dnf install -y --setopt=install_weak_deps=False "$@" || rc=$?
+    dnf clean all || true
+  fi
+  return "$rc"
+}
+
+pkg_alpine() {
+  rc=0
+  apk add --no-cache "$@" || rc=$?
+  return "$rc"
+}
+
+install_debian() {
+  export DEBIAN_FRONTEND=noninteractive
+  apt-get update
+  pkg_debian \
+    python3 python3-pip python3-venv \
+    openssh-server openssh-client \
+    iproute2 ca-certificates tini sudo
+  # nologin path
+  if [ ! -e /usr/sbin/nologin ] && [ -e /sbin/nologin ]; then
+    ln -sf /sbin/nologin /usr/sbin/nologin || true
   fi
 }
 
@@ -63,7 +80,7 @@ install_rhel() {
 }
 
 install_alpine() {
-  apk add --no-cache \
+  pkg_alpine \
     python3 py3-pip \
     openssh openssh-server openssh-client \
     iproute2 ca-certificates tini shadow sudo bash
