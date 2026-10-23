@@ -40,6 +40,17 @@ def test_compose_matches_flavors_and_stays_private():
     assert 'ANSIBLE_FLOW_HTTP_HOST: "unspecified"' in text
     assert "cap_drop: [ALL]" in text
     assert "FOWNER" in text
+    selftest = text.split("  selftest:", 1)[1]
+    assert 'profiles: ["selftest"]' in selftest
+    assert 'user: "8790:8790"' in selftest
+    assert "cap_drop: [ALL]" in selftest
+    assert "cap_add:" not in selftest
+    assert "read_only: true" in selftest
+    assert "networks: [afm-test]" in selftest
+    assert "tailnet" not in selftest
+    assert "ports:" not in selftest.lower()
+    assert "afm-selftest.py" in selftest
+    assert "ANSIBLE_FLOW_MCP_TOKEN:" not in selftest
     assert "no-new-privileges:true" in text
     assert "read_only: true" in text
     assert "ports:" not in lowered

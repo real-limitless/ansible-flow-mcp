@@ -228,14 +228,33 @@ supervise_loop() {
   ) &
 }
 
+publish_selftest_token() {
+  # Mode 0400, owned by the selftest uid. The value is not printed.
+  local src="$1"
+  local dest="${ANSIBLE_FLOW_SELFTEST_TOKEN_DIR:-}"
+  [ -n "$dest" ] || return 0
+  [ -s "$src" ] || return 0
+  mkdir -p "$dest"
+  install -m 400 -o 8790 -g 8790 "$src" "$dest/token"
+}
+
 ensure_mcp_token() {
   local file="${ANSIBLE_FLOW_MCP_TOKEN_FILE:-$HUB_DIR/mcp.http.token}"
+  local dest="${ANSIBLE_FLOW_SELFTEST_TOKEN_DIR:-}"
   if [ -n "${ANSIBLE_FLOW_MCP_TOKEN:-}" ]; then
+    if [ -n "$dest" ]; then
+      mkdir -p "$dest"
+      umask 077
+      printf '%s\n' "$ANSIBLE_FLOW_MCP_TOKEN" >"$dest/token.work"
+      install -m 400 -o 8790 -g 8790 "$dest/token.work" "$dest/token"
+      rm -f "$dest/token.work"
+    fi
     return 0
   fi
   export ANSIBLE_FLOW_MCP_TOKEN_FILE="$file"
   if [ -s "$file" ]; then
     chmod 400 "$file" 2>/dev/null || true
+    publish_selftest_token "$file"
     return 0
   fi
   mkdir -p "$(dirname "$file")"
@@ -244,6 +263,7 @@ p = pathlib.Path(sys.argv[1])
 p.parent.mkdir(parents=True, exist_ok=True)
 p.write_text(secrets.token_urlsafe(32) + "\n", encoding="utf-8")
 os.chmod(p, 0o400)' "$file"
+  publish_selftest_token "$file"
 }
 
 run_mcp_http() {

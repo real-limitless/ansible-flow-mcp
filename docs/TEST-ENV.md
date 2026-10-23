@@ -82,6 +82,14 @@ That builds, waits for health, waits for enrollment, runs smoke, and leaves the 
 
 Stepwise: `test-env/scripts/up.sh`, then `test-env/scripts/smoke.sh`.
 
+When the deployment tool cannot exec into a container, run the one-shot checker instead. It is the `selftest` profile: a non-root container on `afm-test` only, with every capability dropped and a read-only root. It reads a mode-0400 copy of this lab's bearer (uid 8790 on the `afm-test-selftest-token` volume; the hub entrypoint publishes that copy and does not print it). The copy stays on this hub. Do not give it to any other hub.
+
+```bash
+docker compose --project-name afm-test -f test-env/docker-compose.yml --profile selftest run --rm selftest
+```
+
+The output is one line per flavor, plus `hub-health`, `hub-initialize`, and `overall`. The exit code is 0 only when every line passed. It checks `/health`, an authenticated MCP initialize, enrollment from `hub_status`, and TCP port 22 to each spoke. It retries until `ANSIBLE_FLOW_SELFTEST_DEADLINE` seconds (default 180). It does not print the bearer. Memory figures still come from `docker stats`. The profile is off unless you ask for it, so it is not part of the always-on 1920 MiB sum.
+
 ## How spokes join
 
 No join token is stored in git.

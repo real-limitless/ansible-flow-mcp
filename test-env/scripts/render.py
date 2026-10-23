@@ -181,6 +181,8 @@ def render_text(data: dict | None = None) -> str:
         "    name: afm-test-hub",
         "  afm-test-join-key:",
         "    name: afm-test-join-key",
+        "  afm-test-selftest-token:",
+        "    name: afm-test-selftest-token",
     ]
     for spoke in spokes:
         name = spoke["name"]
@@ -223,6 +225,7 @@ def render_text(data: dict | None = None) -> str:
         "    volumes:",
         "      - afm-test-hub:/var/lib/ansible-flow/hub",
         "      - afm-test-join-key:/run/join-key",
+        "      - afm-test-selftest-token:/run/selftest-token",
     ]
     for spoke in spokes:
         lines.append(f"      - afm-test-join-{spoke['name']}:/run/join-drop/{spoke['name']}")
@@ -249,6 +252,7 @@ def render_text(data: dict | None = None) -> str:
         f"      ANSIBLE_FLOW_TEST_GROUP: \"{group}\"",
         "      ANSIBLE_FLOW_JOIN_DROP: /run/join-drop",
         "      ANSIBLE_FLOW_JOIN_KEY_EXPORT: /run/join-key",
+        "      ANSIBLE_FLOW_SELFTEST_TOKEN_DIR: /run/selftest-token",
         "    healthcheck:",
         "      test: [\"CMD\", \"python3\", \"/usr/local/bin/hub-healthcheck.py\"]",
         "      interval: 15s",
@@ -306,6 +310,39 @@ def render_text(data: dict | None = None) -> str:
             "      retries: 12",
             "      start_period: 25s",
         ]
+    lines += [
+        "",
+        "  selftest:",
+        "    profiles: [\"selftest\"]",
+        "    build:",
+        "      context: ..",
+        "      dockerfile: lab/images/Dockerfile.hub",
+        "      args:",
+        "        INSTALL_OPENCODE: \"0\"",
+        "        INSTALL_WINDOWS: \"0\"",
+        "    user: \"8790:8790\"",
+        "    entrypoint: [\"python3\", \"/usr/local/bin/afm-selftest.py\"]",
+        "    restart: \"no\"",
+        "    cap_drop: [ALL]",
+        "    security_opt:",
+        "      - no-new-privileges:true",
+        "    read_only: true",
+        "    tmpfs:",
+        "      - /tmp:size=16m,mode=1777",
+        "    networks: [afm-test]",
+        "    mem_limit: 128m",
+        "    depends_on:",
+        "      hub:",
+        "        condition: service_healthy",
+        "    volumes:",
+        "      - afm-test-selftest-token:/run/selftest-token:ro",
+        "    environment:",
+        "      HOME: /tmp",
+        "      PYTHONDONTWRITEBYTECODE: \"1\"",
+        "      ANSIBLE_FLOW_SELFTEST_TOKEN: /run/selftest-token/token",
+        "      ANSIBLE_FLOW_SELFTEST_URL: http://afm-test-hub:8790",
+        f"      ANSIBLE_FLOW_TEST_SPOKES: \"{names}\"",
+    ]
     lines.append("")
     return "\n".join(lines)
 
