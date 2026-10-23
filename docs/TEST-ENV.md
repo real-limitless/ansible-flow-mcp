@@ -96,7 +96,7 @@ These are different credentials.
 | Streamable HTTP MCP | `http://afm-test-hub:8790/mcp` | `/var/lib/ansible-flow/hub/mcp.http.token` (0400) |
 | Admin portal | `http://afm-test-hub:8789/admin/` | `/var/lib/ansible-flow/hub/admin.token` (0600) |
 
-`hub mcp-http` is opt-in in the product and **localhost by default**. This lab sets `ANSIBLE_FLOW_MCP_HTTP_BIND` and `ANSIBLE_FLOW_ADMIN_BIND` to the unspecified address so other containers on the private network can connect. Nothing maps those ports onto the host.
+`hub mcp-http` is opt-in in the product and **localhost by default**. This lab sets `ANSIBLE_FLOW_MCP_HTTP_BIND` and `ANSIBLE_FLOW_ADMIN_BIND` to the word `unspecified`. The process maps that word to the in-container any-address so other containers on the private network can connect. Nothing maps those ports onto the host.
 
 The bearer value is never passed in an environment variable (so `docker inspect` does not show it). Point `ANSIBLE_FLOW_MCP_TOKEN_FILE` at the file if you move it. Host allow-list for `/mcp` is `ANSIBLE_FLOW_MCP_ALLOWED_HOSTS` (container names, `localhost`, and `HUB_PUBLIC_HOST`, default `hub.example.com`).
 

@@ -9,6 +9,7 @@ from __future__ import annotations
 import hmac
 import os
 import secrets
+import socket
 import sys
 import uuid
 from pathlib import Path
@@ -20,6 +21,15 @@ MCP_HTTP_TOKEN_FILENAME = "mcp.http.token"
 DEFAULT_BIND = "localhost"
 DEFAULT_PORT = 8790
 _PATH = "/mcp"
+_ANY_BIND = {"unspecified", "all", "*"}
+
+
+def resolve_bind(host: str | None, *, default: str = DEFAULT_BIND) -> str:
+    """Map the word ``unspecified`` to the in-container any-address."""
+    value = (host or "").strip() or default
+    if value in _ANY_BIND:
+        return socket.INADDR_ANY
+    return value
 
 
 def mcp_http_token_path(root: Path) -> Path:
@@ -206,7 +216,7 @@ def apply_transport_security() -> None:
 
 
 def serve_mcp_http(*, root: Path, host: str | None = None, port: int | None = None) -> None:
-    bind = (host or os.environ.get("ANSIBLE_FLOW_MCP_HTTP_BIND") or DEFAULT_BIND).strip() or DEFAULT_BIND
+    bind = resolve_bind(host or os.environ.get("ANSIBLE_FLOW_MCP_HTTP_BIND"), default=DEFAULT_BIND)
     listen_port = int(port if port is not None else (os.environ.get("ANSIBLE_FLOW_MCP_HTTP_PORT") or DEFAULT_PORT))
     token = load_mcp_http_token(root)
     token_path = mcp_http_token_path(root)

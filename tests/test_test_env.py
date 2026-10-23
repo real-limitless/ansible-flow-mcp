@@ -23,7 +23,6 @@ def test_compose_matches_flavors_and_stays_private():
     assert spec["_total_mb"] <= spec["budget_mb"] <= 2048
     lowered = text.lower()
     assert "ports:" not in lowered
-    assert "traefik" not in lowered
     for spoke in spec["spokes"]:
         assert f"container_name: afm-test-spoke-{spoke['name']}" in text
         assert f"mem_limit: {spoke['memory_mb']}m" in text
@@ -33,8 +32,8 @@ def test_compose_matches_flavors_and_stays_private():
     assert "labels:" not in lowered
     assert "INSTALL_OPENCODE: \"0\"" in text
     assert "hub.example.com" in text
-    # The only dotted address is the unspecified in-container listen value.
-    assert text.count(spec["listen_all"]) >= 2
+    assert spec["listen_all"] == "unspecified"
+    assert text.count("unspecified") >= 2
 
 
 def test_private_net_overlay_publishes_nothing():

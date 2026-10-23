@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import socket
 from pathlib import Path
 
 import pytest
@@ -13,7 +14,14 @@ from ansible_flow_mcp.http_mcp import (
     ensure_mcp_http_token,
     key_prefix,
     load_mcp_http_token,
+    resolve_bind,
 )
+
+
+def test_unspecified_bind_uses_any_address():
+    assert resolve_bind("unspecified") == socket.INADDR_ANY
+    assert resolve_bind("localhost") == "localhost"
+    assert resolve_bind(None) == "localhost"
 
 
 def test_mcp_token_file_mode_and_stability(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):

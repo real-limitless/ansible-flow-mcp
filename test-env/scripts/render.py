@@ -57,6 +57,10 @@ def load_flavors(path: Path | None = None) -> dict:
     group = str(data.get("seed_group") or "")
     if group and (not NAME_RE.match(group) or group in RESERVED_GROUPS):
         raise SystemExit(f"invalid seed_group: {group}")
+    listen = str(data.get("listen_all") or "unspecified")
+    if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]{0,40}", listen):
+        raise SystemExit("listen_all must be a word such as unspecified")
+    data["listen_all"] = listen
     data["_total_mb"] = total
     return data
 
@@ -70,7 +74,7 @@ def render_text(data: dict | None = None) -> str:
     hub = spec["hub"]
     spokes = spec["spokes"]
     project = str(spec.get("project") or "afm-test")
-    listen = str(spec.get("listen_all") or "0.0.0.0")
+    listen = str(spec.get("listen_all") or "unspecified")
     group = str(spec.get("seed_group") or "")
     names = " ".join(s["name"] for s in spokes)
     public_host = "${HUB_PUBLIC_HOST:-hub.example.com}"

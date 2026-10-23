@@ -4,6 +4,7 @@ from __future__ import annotations
 import hmac
 import json
 import os
+import socket
 import sys
 from functools import partial
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -29,6 +30,12 @@ _STATIC_FILES = {
 
 def _default_host() -> str:
     return (os.environ.get("ANSIBLE_FLOW_ADMIN_BIND") or DEFAULT_HOST).strip() or DEFAULT_HOST
+
+
+def _resolve_bind(host: str) -> str:
+    if host in {"unspecified", "all", "*"}:
+        return socket.INADDR_ANY
+    return host
 
 
 def _default_port() -> int:
@@ -270,7 +277,7 @@ def make_server(
     load_hub_state(hub_root)
     ensure_admin_token(hub_root)
     token = load_admin_token(hub_root)
-    bind_host = host if host is not None else _default_host()
+    bind_host = _resolve_bind(host if host is not None else _default_host())
     bind_port = _default_port() if port is None else int(port)
     handler = partial(AdminHandler)
     # bind attributes used by instances
