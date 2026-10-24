@@ -213,13 +213,23 @@ def test_bad_host_rejected(client: TestClient):
     assert response.status_code == 421
 
 
-def test_host_allowlist_includes_public_name():
-    assert host_allowed("ansible-flow-mcp.z.srl") or host_allowed(
-        "ansible-flow-mcp.z.srl",
-        ["ansible-flow-mcp.z.srl", "ansible-flow-mcp.z.srl:*", "127.0.0.1:*"],
-    )
-    assert host_allowed("127.0.0.1:8789", ["127.0.0.1:*"]) is True
-    assert host_allowed("evil.example", ["127.0.0.1:*", "ansible-flow-mcp.z.srl"]) is False
+def test_host_allowlist_includes_public_name(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.delenv("ANSIBLE_FLOW_PUBLIC_HOST", raising=False)
+    from ansible_flow_mcp import http_mcp
+
+    previous = list(http_mcp._ALLOWED_HOSTS)
+    http_mcp._ALLOWED_HOSTS = []
+    try:
+        assert http_mcp._public_host() == "mcp.example.com"
+        assert host_allowed("mcp.example.com")
+        assert host_allowed(
+            "mcp.example.com",
+            ["mcp.example.com", "mcp.example.com:*", "127.0.0.1:*"],
+        )
+        assert host_allowed("127.0.0.1:8789", ["127.0.0.1:*"]) is True
+        assert host_allowed("evil.example", ["127.0.0.1:*", "mcp.example.com"]) is False
+    finally:
+        http_mcp._ALLOWED_HOSTS = previous
 
 
 def test_rate_limit(monkeypatch: pytest.MonkeyPatch, client: TestClient):

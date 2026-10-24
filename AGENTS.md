@@ -112,7 +112,7 @@ ansible-flow-mcp tui                      # same
 ansible-flow-mcp hub write-opencode-config
 ansible-flow-mcp hub spoke-call --node web-01 --tool list_collections
 ansible-flow-mcp hub revoke --name web-01
-ansible-flow-mcp hub register-target --name win-01 --host 10.0.4.20 --connection winrm
+ansible-flow-mcp hub register-target --name win-01 --host 198.51.100.20 --connection winrm
 ansible-flow-mcp hub remove-target --name win-01
 ansible-flow-mcp hub accept-join          # ForceCommand only
 
@@ -139,7 +139,7 @@ Env:
 | `ANSIBLE_FLOW_HTTP_PORT` | Top-level `serve` port (default `8789`): `/health` and `/mcp` |
 | `ANSIBLE_FLOW_MCP_TOKEN` | Operator bearer for `/mcp`. Required to listen. Not a join token |
 | `ANSIBLE_FLOW_MCP_TOKEN_FILE` | Alternate bearer file |
-| `ANSIBLE_FLOW_PUBLIC_HOST` | Allowed Host for HTTP MCP (default `ansible-flow-mcp.z.srl`) |
+| `ANSIBLE_FLOW_PUBLIC_HOST` | Allowed Host for HTTP MCP (placeholder default `mcp.example.com`) |
 | `ANSIBLE_FLOW_MCP_MAX_SESSIONS` | Concurrent streamable sessions (default 32) |
 | `ANSIBLE_FLOW_MCP_RATE_PER_MINUTE` | `/mcp` request budget (default 120) |
 | `ANSIBLE_FLOW_ADMIN_TOKEN` | Bearer token for `hub admin` `/v1/*` (else `$HUB_DIR/admin.token`) |

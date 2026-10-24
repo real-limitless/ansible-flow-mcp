@@ -2,7 +2,7 @@
 
 Single-node hub reachable over HTTPS. Agents attach to the hub only. The lab in `lab/` is still the multi-spoke integration suite. This profile does not start spokes, OpenCode, or sshd.
 
-Public URL for the dev host: `https://ansible-flow-mcp.z.srl/mcp`
+Public URL: `https://mcp.example.com/mcp`. Set `ANSIBLE_FLOW_PUBLIC_HOST` to the name the proxy sends. The committed default is that placeholder.
 
 TLS terminates at Cloudflare, then Traefik. The container speaks HTTP on port 8789 and does not ship a certificate.
 
@@ -25,7 +25,7 @@ Set these in Dokploy (or a local `.env` that is not committed). Do not bake them
 | --- | --- | --- |
 | `ANSIBLE_FLOW_MCP_TOKEN` | yes, or the file below | Operator bearer for `/mcp` |
 | `ANSIBLE_FLOW_MCP_TOKEN_FILE` | alternate | File with the bearer (Docker secret mount is fine) |
-| `ANSIBLE_FLOW_PUBLIC_HOST` | no | Host header Traefik sends. Default `ansible-flow-mcp.z.srl` |
+| `ANSIBLE_FLOW_PUBLIC_HOST` | no | Host header Traefik sends. Default `mcp.example.com` |
 | `ANSIBLE_FLOW_HTTP_PORT` | no | Container port. Default `8789` |
 | `ANSIBLE_FLOW_HUB_DIR` | no | Hub state. Default `/var/lib/ansible-flow/hub` (the volume) |
 | `ANSIBLE_FLOW_HUB_NAME` | no | Name used on first `hub init`. Default `hub-01` |
@@ -47,7 +47,7 @@ Check-then-apply, the collection allowlist, and the free-form module deny list a
 1. Compose file: `docker-compose.yml` at the repo root, branch `DEVELOPMENT`.
 2. Add `deploy/compose.traefik.yml` as a second compose file. It sets `networks: !override [dokploy-network]` (Docker Compose 2.24 or newer) so the service attaches only to the existing external network (`DOKPLOY_NETWORK`, default `dokploy-network`). Compose does not create a project default network. If the Dokploy UI only accepts one file, copy that service `networks` override and the top-level `networks` block into the compose it deploys. Do not also list `default`.
 3. Set `ANSIBLE_FLOW_MCP_TOKEN` in the environment UI. Leave it out of git.
-4. Domain `ansible-flow-mcp.z.srl`, container port `8789`. The compose labels already request that Host on the `websecure` entrypoint. If the Dokploy domain screen creates a second router for the same host, delete one of them.
+4. Set `ANSIBLE_FLOW_PUBLIC_HOST` to the public name (placeholder `mcp.example.com`), container port `8789`. The compose labels already request that Host on the `websecure` entrypoint. If the Dokploy domain screen creates a second router for the same host, delete one of them.
 5. One replica. Session state is in memory. A second replica will drop MCP sessions.
 6. Do not set `container_name`. Do not publish 8789 on the host. Traefik reaches the exposed port on the Docker network.
 7. Cloudflare: proxy the hostname, leave the `Authorization` header intact, and do not cache `/mcp`. If Cloudflare connects to Traefik on plain HTTP instead of `websecure`, set `ANSIBLE_FLOW_TRAEFIK_ENTRYPOINT=web` and turn the TLS label off.
@@ -60,7 +60,7 @@ Traefik labels on the service (also in `docker-compose.yml`):
 labels:
   - traefik.enable=true
   - traefik.docker.network=dokploy-network
-  - traefik.http.routers.ansible-flow-mcp.rule=Host(`ansible-flow-mcp.z.srl`)
+  - traefik.http.routers.ansible-flow-mcp.rule=Host(`${ANSIBLE_FLOW_PUBLIC_HOST:-mcp.example.com}`)
   - traefik.http.routers.ansible-flow-mcp.entrypoints=websecure
   - traefik.http.routers.ansible-flow-mcp.tls=true
   - traefik.http.routers.ansible-flow-mcp.tls.certresolver=letsencrypt
@@ -88,13 +88,15 @@ Unauthenticated `POST /mcp` returns 401. A correct bearer can `initialize`.
 
 ## Connect a client
 
+The client URL uses the public host. The samples use the placeholder `mcp.example.com`.
+
 Cursor (`examples/cursor-mcp-http.json`):
 
 ```json
 {
   "mcpServers": {
     "ansible-flow": {
-      "url": "https://ansible-flow-mcp.z.srl/mcp",
+      "url": "https://mcp.example.com/mcp",
       "headers": {
         "Authorization": "Bearer REPLACE_ME"
       }
@@ -110,7 +112,7 @@ OpenCode (`examples/opencode-hub-http.jsonc`):
   "mcp": {
     "ansible-flow": {
       "type": "remote",
-      "url": "https://ansible-flow-mcp.z.srl/mcp",
+      "url": "https://mcp.example.com/mcp",
       "enabled": true,
       "headers": {
         "Authorization": "Bearer REPLACE_ME"
