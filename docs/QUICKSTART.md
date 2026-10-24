@@ -558,6 +558,7 @@ Client snippets: `examples/cursor-mcp-http.json`, `examples/opencode-hub-http.js
 | [SECURITY.md](SECURITY.md) | Threat model and residual risk |
 | [DEPLOY.md](DEPLOY.md) | Dev HTTPS hub, bearer, Traefik |
 | [lab/README.md](../lab/README.md) | Compose scripts map and OpenCode wiring |
+| [TEST-ENV.md](TEST-ENV.md) | Always-on private multi-flavor lab |
 | [AGENTS.md](../AGENTS.md) | Layout and conventions for coding agents |
 | `examples/` | Cursor, Claude Desktop, OpenCode, sshd drop-ins |
 

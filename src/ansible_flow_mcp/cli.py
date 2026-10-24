@@ -88,6 +88,21 @@ def build_parser() -> argparse.ArgumentParser:
     h_serve = hub_sub.add_parser("serve", help="Alias for hub admin")
     h_serve.add_argument("--host", default=None)
     h_serve.add_argument("--port", type=int, default=None)
+    h_mcp = hub_sub.add_parser(
+        "mcp-http",
+        help="Same listener as top-level serve: bearer /mcp plus /health",
+    )
+    h_mcp.add_argument(
+        "--host",
+        default=None,
+        help="Bind address (default: $ANSIBLE_FLOW_HTTP_HOST, or the serve default)",
+    )
+    h_mcp.add_argument(
+        "--port",
+        type=int,
+        default=None,
+        help="Bind port (default: $ANSIBLE_FLOW_HTTP_PORT or 8789)",
+    )
     hub_sub.add_parser(
         "write-opencode-config",
         help="Write OpenCode MCP config pointing at hub session",
@@ -136,7 +151,12 @@ def build_parser() -> argparse.ArgumentParser:
     spoke_sub = spoke.add_subparsers(dest="spoke_cmd", required=True)
 
     s_join = spoke_sub.add_parser("join", help="Enroll with hub using join token")
-    s_join.add_argument("--token", required=True)
+    s_join.add_argument("--token", default=None, help="Join token (prefer --token-file)")
+    s_join.add_argument(
+        "--token-file",
+        default=None,
+        help="File containing the join token (mode 0400). Not logged.",
+    )
     s_join.add_argument("--hub", required=True, help="user@host[:port] for join SSH")
     s_join.add_argument("--public-addr", required=True, help="Address hub should use for this spoke")
     s_join.add_argument("--name", default=None, help="Node name (default: from token)")
@@ -261,6 +281,20 @@ def main(argv: list[str] | None = None) -> None:
     parser.print_help()
 
 
+def read_supplied_token(*, token: str | None, token_file: str | None) -> str:
+    """Join token from argv or a file. The value is not logged here."""
+    if token and token_file:
+        raise ValueError("pass only one of --token or --token-file")
+    if token_file:
+        text = Path(token_file).expanduser().read_text(encoding="utf-8").strip()
+        if not text:
+            raise ValueError("token file is empty")
+        return text
+    if token and token.strip():
+        return token.strip()
+    raise ValueError("token is required (--token or --token-file)")
+
+
 def _hub_main(args: argparse.Namespace) -> None:
     from ansible_flow_mcp.hub.enroll import accept_join_stdio, hub_status, revoke_node
     from ansible_flow_mcp.hub.state import hub_init, load_hub_state
@@ -341,6 +375,22 @@ def _hub_main(args: argparse.Namespace) -> None:
 
         ensure_admin_token(root)
         serve_admin(root=root, host=args.host, port=args.port)
+        return
+
+    if args.hub_cmd == "mcp-http":
+        import os
+
+        from ansible_flow_mcp.http_mcp import serve_http
+
+        raw_host = (args.host or os.environ.get("ANSIBLE_FLOW_HTTP_HOST") or "").strip()
+        port = int(args.port) if args.port is not None else int(os.environ.get("ANSIBLE_FLOW_HTTP_PORT") or 8789)
+        # socket.INADDR_ANY is an int. The environment value must be a string.
+        if raw_host in {"unspecified", "all", "*"}:
+            serve_http(host="0.0.0.0", port=port)
+        elif raw_host:
+            serve_http(host=raw_host, port=port)
+        else:
+            serve_http(port=port)
         return
 
     if args.hub_cmd == "accept-join":
@@ -429,7 +479,7 @@ def _spoke_main(args: argparse.Namespace) -> None:
         from pathlib import Path as P
 
         result = spoke_join(
-            token=args.token,
+            token=read_supplied_token(token=args.token, token_file=args.token_file),
             hub=args.hub,
             public_addr=args.public_addr,
             node_name=args.name,

@@ -22,10 +22,25 @@ usermod -aG ansible-flow mcp-join 2>/dev/null || true
 usermod -s /bin/bash mcp-join 2>/dev/null || true
 passwd -u mcp-join 2>/dev/null || usermod -p '*' mcp-join 2>/dev/null || true
 
-# Host keys
-if [ ! -f /etc/ssh/ssh_host_ed25519_key ]; then
-  ssh-keygen -A
-fi
+# Host keys stay on the hub volume. The root filesystem may be read-only,
+# so sshd reads a config under /run that points at those keys.
+prepare_sshd() {
+  local keydir="$1"
+  mkdir -p "$keydir" /run/sshd
+  if [ ! -s "$keydir/ssh_host_ed25519_key" ]; then
+    ssh-keygen -q -t ed25519 -f "$keydir/ssh_host_ed25519_key" -N ""
+  fi
+  chown root:root "$keydir/ssh_host_ed25519_key" 2>/dev/null || true
+  chmod 600 "$keydir/ssh_host_ed25519_key"
+  # Globals before Include. Drop-ins end in Match, and Match must stay last.
+  cat > /run/sshd/sshd_config <<EOF
+HostKey ${keydir}/ssh_host_ed25519_key
+PidFile /run/sshd.pid
+AuthorizedKeysFile .ssh/authorized_keys ${keydir}/labadmin.authorized_keys
+Include /etc/ssh/sshd_config.d/*.conf
+EOF
+}
+prepare_sshd "$HUB_DIR/ssh"
 
 hub_fix_perms() {
   chown -R mcp-hub:ansible-flow "$HUB_DIR" || chown -R mcp-hub:mcp-hub "$HUB_DIR" || true
@@ -45,6 +60,16 @@ hub_fix_perms() {
   if [ -f "$HUB_DIR/admin.token" ]; then
     chmod 600 "$HUB_DIR/admin.token" 2>/dev/null || true
     chown mcp-hub:ansible-flow "$HUB_DIR/admin.token" 2>/dev/null || true
+  fi
+  # HTTP MCP bearer is root-only. Group read from the line above must not stick.
+  if [ -f "$HUB_DIR/mcp.http.token" ]; then
+    chmod 400 "$HUB_DIR/mcp.http.token" 2>/dev/null || true
+    chown root:root "$HUB_DIR/mcp.http.token" 2>/dev/null || true
+  fi
+  if [ -d "$HUB_DIR/ssh" ]; then
+    chown -R root:root "$HUB_DIR/ssh" 2>/dev/null || true
+    chmod 700 "$HUB_DIR/ssh" 2>/dev/null || true
+    chmod 600 "$HUB_DIR/ssh"/ssh_host_*_key 2>/dev/null || true
   fi
 }
 
@@ -87,6 +112,9 @@ ensure_join_channel() {
 }
 
 ensure_opencode_config() {
+  case "${ANSIBLE_FLOW_SKIP_OPENCODE:-0}" in
+    1|true|yes|on) return 0 ;;
+  esac
   export PATH="/root/.opencode/bin:/usr/local/bin:${PATH}"
   if ! ansible-flow-mcp --hub-dir "$HUB_DIR" hub write-opencode-config; then
     python3 - <<'PY'
@@ -141,7 +169,7 @@ if [ "$SKIP_INIT" = "1" ]; then
   fi
 else
   if [ ! -f "$HUB_DIR/hub_id" ]; then
-    ansible-flow-mcp hub init --name hub-01
+    ansible-flow-mcp hub init --name "${ANSIBLE_FLOW_HUB_NAME:-hub-01}"
   fi
   hub_fix_perms
   ensure_join_channel
@@ -152,7 +180,122 @@ HUB_ID_DISP="(not initialized)"
 if [ -f "$HUB_DIR/hub_id" ]; then
   HUB_ID_DISP=$(cat "$HUB_DIR/hub_id" 2>/dev/null || echo "?")
 fi
-start_admin || true
+# labadmin is the operator shell (TUI). Key-only; unlock the account so OpenSSH accepts a pubkey.
+if id labadmin >/dev/null 2>&1; then
+  usermod -p '*' labadmin 2>/dev/null || true
+  # Survives a read-only root and a tmpfs home. sshd allows this extra path.
+  persist="$HUB_DIR/ssh/labadmin.authorized_keys"
+  if [ ! -f "$persist" ]; then
+    : >"$persist"
+  fi
+  chmod 600 "$persist"
+  chown root:root "$persist" 2>/dev/null || true
+  mkdir -p /home/labadmin/.ssh 2>/dev/null || true
+  touch /home/labadmin/.ssh/authorized_keys 2>/dev/null || true
+  chown -R labadmin:labadmin /home/labadmin/.ssh 2>/dev/null || true
+  chmod 700 /home/labadmin/.ssh 2>/dev/null || true
+  chmod 600 /home/labadmin/.ssh/authorized_keys 2>/dev/null || true
+fi
+
+supervise_loop() {
+  local name="$1"
+  shift
+  (
+    # A crash must not respawn every second. Delay doubles up to 30s and
+    # resets after a run that lasted at least that long.
+    local delay=1
+    local cap=30
+    while true; do
+      local started now elapsed
+      started=$(date +%s)
+      "$@" &
+      echo $! >"/var/run/ansible-flow-${name}.pid"
+      wait $! || true
+      now=$(date +%s)
+      elapsed=$((now - started))
+      if [ "$elapsed" -ge "$cap" ]; then
+        delay=1
+      fi
+      # sleep 0 returns immediately and would peg a core if delay were ever 0.
+      if ! [ "$delay" -ge 1 ] 2>/dev/null; then
+        delay=1
+      fi
+      echo "[hub] ${name} stopped; next start in ${delay}s" >&2
+      sleep "$delay"
+      if [ "$delay" -lt "$cap" ]; then
+        delay=$((delay * 2))
+        if [ "$delay" -gt "$cap" ]; then
+          delay=$cap
+        fi
+      fi
+    done
+  ) &
+}
+
+publish_selftest_token() {
+  # Mode 0400, owned by the selftest uid. The value is not printed.
+  local src="$1"
+  local dest="${ANSIBLE_FLOW_SELFTEST_TOKEN_DIR:-}"
+  [ -n "$dest" ] || return 0
+  [ -s "$src" ] || return 0
+  mkdir -p "$dest"
+  install -m 400 -o 8790 -g 8790 "$src" "$dest/token"
+}
+
+ensure_mcp_token() {
+  local file="${ANSIBLE_FLOW_MCP_TOKEN_FILE:-$HUB_DIR/mcp.http.token}"
+  local dest="${ANSIBLE_FLOW_SELFTEST_TOKEN_DIR:-}"
+  if [ -n "${ANSIBLE_FLOW_MCP_TOKEN:-}" ]; then
+    if [ -n "$dest" ]; then
+      mkdir -p "$dest"
+      umask 077
+      printf '%s\n' "$ANSIBLE_FLOW_MCP_TOKEN" >"$dest/token.work"
+      install -m 400 -o 8790 -g 8790 "$dest/token.work" "$dest/token"
+      rm -f "$dest/token.work"
+    fi
+    return 0
+  fi
+  export ANSIBLE_FLOW_MCP_TOKEN_FILE="$file"
+  if [ -s "$file" ]; then
+    chmod 400 "$file" 2>/dev/null || true
+    publish_selftest_token "$file"
+    return 0
+  fi
+  mkdir -p "$(dirname "$file")"
+  python3 -c 'import os, pathlib, secrets, sys
+p = pathlib.Path(sys.argv[1])
+p.parent.mkdir(parents=True, exist_ok=True)
+p.write_text(secrets.token_urlsafe(32) + "\n", encoding="utf-8")
+os.chmod(p, 0o400)' "$file"
+  publish_selftest_token "$file"
+}
+
+run_mcp_http() {
+  ensure_mcp_token
+  local bind="${ANSIBLE_FLOW_HTTP_HOST:-unspecified}"
+  local port="${ANSIBLE_FLOW_HTTP_PORT:-8789}"
+  exec ansible-flow-mcp --hub-dir "$HUB_DIR" hub mcp-http --host "$bind" --port "$port"
+}
+
+case "${ANSIBLE_FLOW_SUPERVISE_HTTP:-0}" in
+  1|true|yes|on)
+    admin_bind="${ANSIBLE_FLOW_ADMIN_BIND:-localhost}"
+    admin_port="${ANSIBLE_FLOW_ADMIN_PORT:-8789}"
+    supervise_loop admin ansible-flow-mcp --hub-dir "$HUB_DIR" hub admin --host "$admin_bind" --port "$admin_port"
+    case "${ANSIBLE_FLOW_MCP_HTTP:-0}" in
+      1|true|yes|on)
+        supervise_loop mcp-http run_mcp_http
+        ;;
+    esac
+    ;;
+  *)
+    start_admin || true
+    ;;
+esac
+
+if [ -n "${ANSIBLE_FLOW_TEST_SPOKES:-}" ]; then
+  nohup /usr/local/bin/hub-test-autojoin.sh >>"$HUB_DIR/autojoin.log" 2>&1 &
+fi
 
 echo "[hub] starting sshd; hub_id=$HUB_ID_DISP; skip_init=$SKIP_INIT; opencode=$(command -v opencode || echo missing)"
-exec /usr/sbin/sshd -D -e
+exec /usr/sbin/sshd -D -e -f /run/sshd/sshd_config

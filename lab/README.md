@@ -4,6 +4,8 @@ Docker/Podman Compose lab for hub/spoke: **1 hub + 3 spokes**, operator TUI, **a
 
 Do not run this lab and the root `docker compose` (single-node health on 8789) at the same time.
 
+The always-on flavor lab is a different compose project and publishes no host ports: [docs/TEST-ENV.md](../docs/TEST-ENV.md).
+
 Full project walkthrough (install → lab → bare metal): **[docs/QUICKSTART.md](../docs/QUICKSTART.md)** (Path B).
 
 ## One-shot demo (recommended)

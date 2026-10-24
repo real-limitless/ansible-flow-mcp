@@ -1,0 +1,486 @@
+# Generated from test-env/flavors.yml by test-env/scripts/render.py.
+# Do not edit by hand. Host publish is omitted on purpose.
+name: afm-test
+
+networks:
+  afm-test:
+    name: afm-test-net
+    driver: bridge
+    internal: true
+    # RFC 5737 documentation range. Placeholder only: override AFM_TEST_SUBNET.
+    # An explicit subnet skips the host address pool.
+    ipam:
+      config:
+        - subnet: "${AFM_TEST_SUBNET:-192.0.2.0/24}"
+
+volumes:
+  afm-test-hub:
+    name: afm-test-hub
+  afm-test-join-key:
+    name: afm-test-join-key
+  afm-test-selftest-token:
+    name: afm-test-selftest-token
+  afm-test-spoke-debian:
+    name: afm-test-spoke-debian
+  afm-test-home-debian-mesh:
+    name: afm-test-home-debian-mesh
+  afm-test-home-debian-ansible:
+    name: afm-test-home-debian-ansible
+  afm-test-join-debian:
+    name: afm-test-join-debian
+  afm-test-spoke-ubuntu:
+    name: afm-test-spoke-ubuntu
+  afm-test-home-ubuntu-mesh:
+    name: afm-test-home-ubuntu-mesh
+  afm-test-home-ubuntu-ansible:
+    name: afm-test-home-ubuntu-ansible
+  afm-test-join-ubuntu:
+    name: afm-test-join-ubuntu
+  afm-test-spoke-rocky:
+    name: afm-test-spoke-rocky
+  afm-test-home-rocky-mesh:
+    name: afm-test-home-rocky-mesh
+  afm-test-home-rocky-ansible:
+    name: afm-test-home-rocky-ansible
+  afm-test-join-rocky:
+    name: afm-test-join-rocky
+  afm-test-spoke-fedora:
+    name: afm-test-spoke-fedora
+  afm-test-home-fedora-mesh:
+    name: afm-test-home-fedora-mesh
+  afm-test-home-fedora-ansible:
+    name: afm-test-home-fedora-ansible
+  afm-test-join-fedora:
+    name: afm-test-join-fedora
+  afm-test-spoke-alpine:
+    name: afm-test-spoke-alpine
+  afm-test-home-alpine-mesh:
+    name: afm-test-home-alpine-mesh
+  afm-test-home-alpine-ansible:
+    name: afm-test-home-alpine-ansible
+  afm-test-join-alpine:
+    name: afm-test-join-alpine
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  hub:
+    build:
+      context: ..
+      dockerfile: lab/images/Dockerfile.hub
+      args:
+        INSTALL_OPENCODE: "0"
+        INSTALL_WINDOWS: "0"
+    hostname: afm-test-hub
+    container_name: afm-test-hub
+    restart: unless-stopped
+    logging: *logging
+    cap_drop: [ALL]
+    cap_add:
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - FOWNER
+      - DAC_OVERRIDE
+      - SYS_CHROOT
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /run:size=32m,mode=755
+      - /root:size=16m,mode=700
+      - /home/mcp-join:size=16m,mode=755
+      - /home/labadmin:size=16m,mode=755
+    networks: [afm-test]
+    mem_limit: 640m
+    memswap_limit: 640m
+    deploy:
+      resources:
+        limits:
+          memory: 640M
+    volumes:
+      - afm-test-hub:/var/lib/ansible-flow/hub
+      - afm-test-join-key:/run/join-key
+      - afm-test-selftest-token:/run/selftest-token
+      - afm-test-join-debian:/run/join-drop/debian
+      - afm-test-join-ubuntu:/run/join-drop/ubuntu
+      - afm-test-join-rocky:/run/join-drop/rocky
+      - afm-test-join-fedora:/run/join-drop/fedora
+      - afm-test-join-alpine:/run/join-drop/alpine
+    environment:
+      ANSIBLE_FLOW_ROLE: hub
+      ANSIBLE_FLOW_HUB_DIR: /var/lib/ansible-flow/hub
+      ANSIBLE_FLOW_HUB_NAME: afm-test
+      ANSIBLE_FLOW_ENVIRONMENT: test
+      ANSIBLE_FLOW_SKIP_OPENCODE: "1"
+      ANSIBLE_FLOW_REQUIRE_CHECK: "0"
+      ANSIBLE_FLOW_SUPERVISE_HTTP: "1"
+      ANSIBLE_FLOW_MCP_HTTP: "1"
+      ANSIBLE_FLOW_HTTP_HOST: "unspecified"
+      ANSIBLE_FLOW_HTTP_PORT: "8790"
+      ANSIBLE_FLOW_MCP_TOKEN_FILE: /var/lib/ansible-flow/hub/mcp.http.token
+      ANSIBLE_FLOW_PUBLIC_HOST: "${HUB_PUBLIC_HOST:-afm-test-hub}"
+      ANSIBLE_FLOW_MCP_MAX_SESSIONS: "32"
+      ANSIBLE_FLOW_MCP_RATE_PER_MINUTE: "120"
+      ANSIBLE_FLOW_MCP_ALLOWED_HOSTS: "afm-test-hub,hub"
+      ANSIBLE_FLOW_ADMIN_BIND: localhost
+      ANSIBLE_FLOW_ADMIN_PORT: "8789"
+      ANSIBLE_FLOW_TEST_SPOKES: "debian ubuntu rocky fedora alpine"
+      ANSIBLE_FLOW_TEST_GROUP: "flavors"
+      ANSIBLE_FLOW_JOIN_DROP: /run/join-drop
+      ANSIBLE_FLOW_JOIN_KEY_EXPORT: /run/join-key
+      ANSIBLE_FLOW_SELFTEST_TOKEN_DIR: /run/selftest-token
+    healthcheck:
+      test: ["CMD", "python3", "/usr/local/bin/hub-healthcheck.py"]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+
+  debian:
+    build:
+      context: ..
+      dockerfile: lab/images/Dockerfile.spoke
+      args:
+        BASE_IMAGE: debian:bookworm-slim
+        SPOKE_FAMILY: debian
+    hostname: debian
+    container_name: afm-test-spoke-debian
+    restart: unless-stopped
+    logging: *logging
+    cap_drop: [ALL]
+    cap_add:
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - FOWNER
+      - DAC_OVERRIDE
+      - SYS_CHROOT
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /run:size=32m,mode=755
+      - /root:size=16m,mode=700
+    networks: [afm-test]
+    mem_limit: 256m
+    memswap_limit: 256m
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    volumes:
+      - afm-test-spoke-debian:/var/lib/ansible-flow/spoke
+      - afm-test-home-debian-mesh:/home/mcp-spoke
+      - afm-test-home-debian-ansible:/home/mcp-ansible
+      - afm-test-join-key:/run/join-key:ro
+      - afm-test-join-debian:/run/join-drop:ro
+    environment:
+      ANSIBLE_FLOW_ROLE: spoke
+      ANSIBLE_FLOW_SPOKE_DIR: /var/lib/ansible-flow/spoke
+      ANSIBLE_FLOW_ENVIRONMENT: test
+      SPOKE_NAME: debian
+      ANSIBLE_FLOW_AUTOJOIN: "1"
+      ANSIBLE_FLOW_JOIN_DROP: /run/join-drop
+      ANSIBLE_FLOW_JOIN_KEY: /run/join-key/join_client
+      ANSIBLE_FLOW_JOIN_HUB: mcp-join@hub:22
+      ANSIBLE_FLOW_PUBLIC_ADDR: debian
+    depends_on:
+      hub:
+        condition: service_started
+    healthcheck:
+      test:
+        ["CMD", "python3", "-c", "import socket; socket.create_connection(('localhost', 22), 3).close()"]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 25s
+
+  ubuntu:
+    build:
+      context: ..
+      dockerfile: lab/images/Dockerfile.spoke
+      args:
+        BASE_IMAGE: ubuntu:24.04
+        SPOKE_FAMILY: ubuntu
+    hostname: ubuntu
+    container_name: afm-test-spoke-ubuntu
+    restart: unless-stopped
+    logging: *logging
+    cap_drop: [ALL]
+    cap_add:
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - FOWNER
+      - DAC_OVERRIDE
+      - SYS_CHROOT
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /run:size=32m,mode=755
+      - /root:size=16m,mode=700
+    networks: [afm-test]
+    mem_limit: 256m
+    memswap_limit: 256m
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    volumes:
+      - afm-test-spoke-ubuntu:/var/lib/ansible-flow/spoke
+      - afm-test-home-ubuntu-mesh:/home/mcp-spoke
+      - afm-test-home-ubuntu-ansible:/home/mcp-ansible
+      - afm-test-join-key:/run/join-key:ro
+      - afm-test-join-ubuntu:/run/join-drop:ro
+    environment:
+      ANSIBLE_FLOW_ROLE: spoke
+      ANSIBLE_FLOW_SPOKE_DIR: /var/lib/ansible-flow/spoke
+      ANSIBLE_FLOW_ENVIRONMENT: test
+      SPOKE_NAME: ubuntu
+      ANSIBLE_FLOW_AUTOJOIN: "1"
+      ANSIBLE_FLOW_JOIN_DROP: /run/join-drop
+      ANSIBLE_FLOW_JOIN_KEY: /run/join-key/join_client
+      ANSIBLE_FLOW_JOIN_HUB: mcp-join@hub:22
+      ANSIBLE_FLOW_PUBLIC_ADDR: ubuntu
+    depends_on:
+      hub:
+        condition: service_started
+    healthcheck:
+      test:
+        ["CMD", "python3", "-c", "import socket; socket.create_connection(('localhost', 22), 3).close()"]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 25s
+
+  rocky:
+    build:
+      context: ..
+      dockerfile: lab/images/Dockerfile.spoke
+      args:
+        BASE_IMAGE: rockylinux:9
+        SPOKE_FAMILY: rocky
+    hostname: rocky
+    container_name: afm-test-spoke-rocky
+    restart: unless-stopped
+    logging: *logging
+    cap_drop: [ALL]
+    cap_add:
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - FOWNER
+      - DAC_OVERRIDE
+      - SYS_CHROOT
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /run:size=32m,mode=755
+      - /root:size=16m,mode=700
+    networks: [afm-test]
+    mem_limit: 256m
+    memswap_limit: 256m
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    volumes:
+      - afm-test-spoke-rocky:/var/lib/ansible-flow/spoke
+      - afm-test-home-rocky-mesh:/home/mcp-spoke
+      - afm-test-home-rocky-ansible:/home/mcp-ansible
+      - afm-test-join-key:/run/join-key:ro
+      - afm-test-join-rocky:/run/join-drop:ro
+    environment:
+      ANSIBLE_FLOW_ROLE: spoke
+      ANSIBLE_FLOW_SPOKE_DIR: /var/lib/ansible-flow/spoke
+      ANSIBLE_FLOW_ENVIRONMENT: test
+      SPOKE_NAME: rocky
+      ANSIBLE_FLOW_AUTOJOIN: "1"
+      ANSIBLE_FLOW_JOIN_DROP: /run/join-drop
+      ANSIBLE_FLOW_JOIN_KEY: /run/join-key/join_client
+      ANSIBLE_FLOW_JOIN_HUB: mcp-join@hub:22
+      ANSIBLE_FLOW_PUBLIC_ADDR: rocky
+    depends_on:
+      hub:
+        condition: service_started
+    healthcheck:
+      test:
+        ["CMD", "python3", "-c", "import socket; socket.create_connection(('localhost', 22), 3).close()"]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 25s
+
+  fedora:
+    build:
+      context: ..
+      dockerfile: lab/images/Dockerfile.spoke
+      args:
+        BASE_IMAGE: fedora:44
+        SPOKE_FAMILY: fedora
+    hostname: fedora
+    container_name: afm-test-spoke-fedora
+    restart: unless-stopped
+    logging: *logging
+    cap_drop: [ALL]
+    cap_add:
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - FOWNER
+      - DAC_OVERRIDE
+      - SYS_CHROOT
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /run:size=32m,mode=755
+      - /root:size=16m,mode=700
+    networks: [afm-test]
+    mem_limit: 256m
+    memswap_limit: 256m
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    volumes:
+      - afm-test-spoke-fedora:/var/lib/ansible-flow/spoke
+      - afm-test-home-fedora-mesh:/home/mcp-spoke
+      - afm-test-home-fedora-ansible:/home/mcp-ansible
+      - afm-test-join-key:/run/join-key:ro
+      - afm-test-join-fedora:/run/join-drop:ro
+    environment:
+      ANSIBLE_FLOW_ROLE: spoke
+      ANSIBLE_FLOW_SPOKE_DIR: /var/lib/ansible-flow/spoke
+      ANSIBLE_FLOW_ENVIRONMENT: test
+      SPOKE_NAME: fedora
+      ANSIBLE_FLOW_AUTOJOIN: "1"
+      ANSIBLE_FLOW_JOIN_DROP: /run/join-drop
+      ANSIBLE_FLOW_JOIN_KEY: /run/join-key/join_client
+      ANSIBLE_FLOW_JOIN_HUB: mcp-join@hub:22
+      ANSIBLE_FLOW_PUBLIC_ADDR: fedora
+    depends_on:
+      hub:
+        condition: service_started
+    healthcheck:
+      test:
+        ["CMD", "python3", "-c", "import socket; socket.create_connection(('localhost', 22), 3).close()"]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 25s
+
+  alpine:
+    build:
+      context: ..
+      dockerfile: lab/images/Dockerfile.spoke
+      args:
+        BASE_IMAGE: alpine:3.24
+        SPOKE_FAMILY: alpine
+    hostname: alpine
+    container_name: afm-test-spoke-alpine
+    restart: unless-stopped
+    logging: *logging
+    cap_drop: [ALL]
+    cap_add:
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - FOWNER
+      - DAC_OVERRIDE
+      - SYS_CHROOT
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /run:size=32m,mode=755
+      - /root:size=16m,mode=700
+    networks: [afm-test]
+    mem_limit: 256m
+    memswap_limit: 256m
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    volumes:
+      - afm-test-spoke-alpine:/var/lib/ansible-flow/spoke
+      - afm-test-home-alpine-mesh:/home/mcp-spoke
+      - afm-test-home-alpine-ansible:/home/mcp-ansible
+      - afm-test-join-key:/run/join-key:ro
+      - afm-test-join-alpine:/run/join-drop:ro
+    environment:
+      ANSIBLE_FLOW_ROLE: spoke
+      ANSIBLE_FLOW_SPOKE_DIR: /var/lib/ansible-flow/spoke
+      ANSIBLE_FLOW_ENVIRONMENT: test
+      SPOKE_NAME: alpine
+      ANSIBLE_FLOW_AUTOJOIN: "1"
+      ANSIBLE_FLOW_JOIN_DROP: /run/join-drop
+      ANSIBLE_FLOW_JOIN_KEY: /run/join-key/join_client
+      ANSIBLE_FLOW_JOIN_HUB: mcp-join@hub:22
+      ANSIBLE_FLOW_PUBLIC_ADDR: alpine
+    depends_on:
+      hub:
+        condition: service_started
+    healthcheck:
+      test:
+        ["CMD", "python3", "-c", "import socket; socket.create_connection(('localhost', 22), 3).close()"]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 25s
+
+  selftest:
+    profiles: ["selftest"]
+    build:
+      context: ..
+      dockerfile: lab/images/Dockerfile.hub
+      args:
+        INSTALL_OPENCODE: "0"
+        INSTALL_WINDOWS: "0"
+    user: "8790:8790"
+    entrypoint: ["python3", "/usr/local/bin/afm-selftest.py"]
+    restart: "no"
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    networks: [afm-test]
+    mem_limit: 128m
+    depends_on:
+      hub:
+        condition: service_healthy
+    volumes:
+      - afm-test-selftest-token:/run/selftest-token:ro
+    environment:
+      HOME: /tmp
+      PYTHONDONTWRITEBYTECODE: "1"
+      ANSIBLE_FLOW_SELFTEST_TOKEN: /run/selftest-token/token
+      ANSIBLE_FLOW_SELFTEST_URL: http://afm-test-hub:8790
+      ANSIBLE_FLOW_TEST_SPOKES: "debian ubuntu rocky fedora alpine"
