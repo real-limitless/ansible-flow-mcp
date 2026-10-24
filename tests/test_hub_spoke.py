@@ -111,7 +111,7 @@ def test_revoke_removes_spoke(hub_root: Path):
     from ansible_flow_mcp.hub.enroll import JoinRequest
 
     accept_join(
-        JoinRequest(token=issued.token, node_name="spoke-09", public_addr="10.0.0.9"),
+        JoinRequest(token=issued.token, node_name="spoke-09", public_addr="192.0.2.9"),
         state=st,
     )
     assert "spoke-09" in hub_status(state=st)["spokes"]

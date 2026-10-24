@@ -17,7 +17,7 @@ services:
       ANSIBLE_FLOW_HUB_NAME: ${ANSIBLE_FLOW_HUB_NAME:-hub-01}
       ANSIBLE_FLOW_HTTP_HOST: 0.0.0.0
       ANSIBLE_FLOW_HTTP_PORT: ${ANSIBLE_FLOW_HTTP_PORT:-8789}
-      ANSIBLE_FLOW_PUBLIC_HOST: ${ANSIBLE_FLOW_PUBLIC_HOST:-ansible-flow-mcp.z.srl}
+      ANSIBLE_FLOW_PUBLIC_HOST: ${ANSIBLE_FLOW_PUBLIC_HOST:-mcp.example.com}
       ANSIBLE_FLOW_MCP_TOKEN: ${ANSIBLE_FLOW_MCP_TOKEN:-}
       ANSIBLE_FLOW_MCP_CLIENT_ID: ${ANSIBLE_FLOW_MCP_CLIENT_ID:-operator}
       ANSIBLE_FLOW_MCP_MAX_SESSIONS: ${ANSIBLE_FLOW_MCP_MAX_SESSIONS:-32}
@@ -30,7 +30,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=${DOKPLOY_NETWORK:-dokploy-network}
-      - traefik.http.routers.ansible-flow-mcp.rule=Host(`${ANSIBLE_FLOW_PUBLIC_HOST:-ansible-flow-mcp.z.srl}`)
+      - traefik.http.routers.ansible-flow-mcp.rule=Host(`${ANSIBLE_FLOW_PUBLIC_HOST:-mcp.example.com}`)
       - traefik.http.routers.ansible-flow-mcp.entrypoints=${ANSIBLE_FLOW_TRAEFIK_ENTRYPOINT:-websecure}
       - traefik.http.routers.ansible-flow-mcp.tls=true
       - traefik.http.routers.ansible-flow-mcp.tls.certresolver=${ANSIBLE_FLOW_TRAEFIK_CERTRESOLVER:-letsencrypt}

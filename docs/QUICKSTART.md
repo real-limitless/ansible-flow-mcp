@@ -459,7 +459,7 @@ Windows, routers, and other hosts Ansible can reach **without** `ansible-flow-mc
 ```bash
 ansible-flow-mcp hub register-target \
   --name win-app-02 \
-  --host 10.0.4.20 \
+  --host 198.51.100.20 \
   --connection winrm \
   --user Administrator
 ```
@@ -526,7 +526,7 @@ cd lab && ./scripts/smoke.sh
 
 ## Path D: Dev HTTPS hub
 
-One hub container. No spokes. Agents connect to `https://ansible-flow-mcp.z.srl/mcp` with a bearer token. Full steps, env vars, and Traefik labels: **[DEPLOY.md](DEPLOY.md)**.
+One hub container. No spokes. Agents connect to `https://mcp.example.com/mcp` (placeholder; set `ANSIBLE_FLOW_PUBLIC_HOST`) with a bearer token. Full steps, env vars, and Traefik labels: **[DEPLOY.md](DEPLOY.md)**.
 
 ```bash
 export ANSIBLE_FLOW_MCP_TOKEN='choose-a-long-secret'
