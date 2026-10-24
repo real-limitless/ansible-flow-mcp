@@ -37,7 +37,7 @@ Set these in Dokploy (or a local `.env` that is not committed). Do not bake them
 | `ANSIBLE_FLOW_MCP_ALLOWED_ORIGINS` | no | Extra Origin values. Absent Origin is allowed (server-side gateways) |
 | `ANSIBLE_FLOW_TRAEFIK_ENTRYPOINT` | no | Default `websecure` |
 | `ANSIBLE_FLOW_TRAEFIK_CERTRESOLVER` | no | Default `letsencrypt` |
-| `DOKPLOY_NETWORK` | no | Docker network Traefik uses. Default `dokploy-network` |
+| `DOKPLOY_NETWORK` | no | Existing Docker network Traefik already uses. Default `dokploy-network`. The Traefik overlay does not create it. |
 | `ANSIBLE_FLOW_REQUIRE_CHECK` | no | If set, `check_mode=false` is refused. Same rule as stdio |
 
 Check-then-apply, the collection allowlist, and the free-form module deny list apply to remote callers the same way they apply on stdio. Hub mode still rejects a client-supplied inventory (`-i`).
@@ -45,7 +45,7 @@ Check-then-apply, the collection allowlist, and the free-form module deny list a
 ## Dokploy
 
 1. Compose file: `docker-compose.yml` at the repo root, branch `DEVELOPMENT`.
-2. Add `deploy/compose.traefik.yml` as a second compose file so the service joins `dokploy-network`. If the Dokploy UI only accepts one file, paste the `networks` block from that override into the compose it deploys.
+2. Add `deploy/compose.traefik.yml` as a second compose file. It sets `networks: !override [dokploy-network]` (Docker Compose 2.24 or newer) so the service attaches only to the existing external network (`DOKPLOY_NETWORK`, default `dokploy-network`). Compose does not create a project default network. If the Dokploy UI only accepts one file, copy that service `networks` override and the top-level `networks` block into the compose it deploys. Do not also list `default`.
 3. Set `ANSIBLE_FLOW_MCP_TOKEN` in the environment UI. Leave it out of git.
 4. Domain `ansible-flow-mcp.z.srl`, container port `8789`. The compose labels already request that Host on the `websecure` entrypoint. If the Dokploy domain screen creates a second router for the same host, delete one of them.
 5. One replica. Session state is in memory. A second replica will drop MCP sessions.
@@ -72,6 +72,8 @@ labels:
 `flushInterval` matters because streamable HTTP uses a server-sent stream. A buffering proxy will stall `initialize`.
 
 ## Laptop smoke (no Traefik)
+
+Run the root `docker-compose.yml` alone. That file still uses Compose's project default network. Leave `deploy/compose.traefik.yml` off unless an external proxy network already exists.
 
 ```bash
 export ANSIBLE_FLOW_MCP_TOKEN='choose-a-long-secret'

@@ -1,13 +1,14 @@
-# Attach the hub to the proxy network. Use with the root compose file:
+# Attach the hub only to an existing proxy network. Use with the root compose file:
 #   docker compose -f docker-compose.yml -f deploy/compose.traefik.yml up -d
+# Docker Compose 2.24+ is required for the !override tag.
+# !override replaces network membership so Compose does not create the project
+# default network (hosts with no free address pools cannot allocate a new subnet).
 # Dokploy hosts already have this network. Skip this file on a laptop.
 services:
   ansible-flow-mcp:
-    networks:
-      - default
-      - dokploy
+    networks: !override [dokploy-network]
 
 networks:
-  dokploy:
+  dokploy-network:
     external: true
     name: ${DOKPLOY_NETWORK:-dokploy-network}
