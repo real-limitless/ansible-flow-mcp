@@ -41,8 +41,8 @@ def hub_root(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     hub_init(name="hub-01", root=root)
     # seed two spokes without full join
     inv = load_inventory(root / "inventory.yml")
-    add_spoke(inv, name="web-01", ansible_host="10.0.0.1")
-    add_spoke(inv, name="db-01", ansible_host="10.0.0.2")
+    add_spoke(inv, name="web-01", ansible_host="192.0.2.1")
+    add_spoke(inv, name="db-01", ansible_host="192.0.2.2")
     write_inventory(root / "inventory.yml", inv)
     return root
 
@@ -63,8 +63,8 @@ def test_groups_crud(hub_root: Path):
 
 def test_update_spoke(hub_root: Path):
     inv = load_inventory(hub_root / "inventory.yml")
-    n = update_spoke(inv, "web-01", ansible_host="10.9.9.9", ansible_port=2222)
-    assert n["ansible_host"] == "10.9.9.9"
+    n = update_spoke(inv, "web-01", ansible_host="203.0.113.9", ansible_port=2222)
+    assert n["ansible_host"] == "203.0.113.9"
     assert n["ansible_port"] == 2222
 
 
@@ -131,14 +131,14 @@ def test_do_invite_builds_join_command(hub_root: Path, monkeypatch: pytest.Monke
         "edge-01",
         "15m",
         hub="mcp-join@ctrl.example",
-        public_addr="10.0.0.9",
+        public_addr="192.0.2.9",
     )
     assert app.modal == "token"
     assert app.last_token
     assert "spoke join" in app.last_join_cmd
     assert app.last_token in app.last_join_cmd
     assert "mcp-join@ctrl.example" in app.last_join_cmd
-    assert "10.0.0.9" in app.last_join_cmd
+    assert "192.0.2.9" in app.last_join_cmd
     assert any("Copy and run" in line for line in app.last_join_lines)
 
 

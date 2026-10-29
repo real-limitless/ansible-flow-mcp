@@ -48,7 +48,7 @@ Two ways to attach when the agent is not on the hub's stdin.
 
 The HTTP bearer is not a spoke join token and not `admin.token`. Rotating it is a restart with a new env value. Old copies stop working. `audit.jsonl` records `transport=http` and `client_id` (header `X-Ansible-Flow-Client` or `ANSIBLE_FLOW_MCP_CLIENT_ID`). It does not record the bearer, join tokens, or private keys.
 
-In-process mutual TLS is not implemented. The dev host relies on the proxy certificate. Clients that pin a CA should pin the public certificate of `ansible-flow-mcp.z.srl`.
+In-process mutual TLS is not implemented. The dev host relies on the proxy certificate. Clients that pin a CA should pin the public certificate of the name in `ANSIBLE_FLOW_PUBLIC_HOST` (placeholder `mcp.example.com`).
 
 ### Threat model
 

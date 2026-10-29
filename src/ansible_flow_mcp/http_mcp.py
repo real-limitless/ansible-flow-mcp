@@ -181,7 +181,7 @@ def _client_id(header: str | None) -> str:
 
 
 def _public_host() -> str:
-    return (os.environ.get("ANSIBLE_FLOW_PUBLIC_HOST") or "ansible-flow-mcp.z.srl").strip()
+    return (os.environ.get("ANSIBLE_FLOW_PUBLIC_HOST") or "mcp.example.com").strip()
 
 
 def allowed_hosts() -> list[str]:

@@ -120,7 +120,7 @@ Inventory is fixed; client `-i` rejected in hub mode.
 # Windows / device the hub can already reach with Ansible (no package on remote)
 ansible-flow-mcp hub register-target \
   --name win-app-02 \
-  --host 10.0.4.20 \
+  --host 198.51.100.20 \
   --connection winrm \
   --user Administrator \
   --port 5986

@@ -23,7 +23,7 @@ def hub_root(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     monkeypatch.setenv("ANSIBLE_FLOW_ADMIN_TOKEN", "test-admin-token")
     hub_init(name="hub-01", root=root)
     inv = load_inventory(root / "inventory.yml")
-    add_spoke(inv, name="web-01", ansible_host="10.0.0.1")
+    add_spoke(inv, name="web-01", ansible_host="192.0.2.1")
     write_inventory(root / "inventory.yml", inv)
     return root
 
@@ -115,7 +115,7 @@ def test_status_and_crud(admin_http):
         (host, port),
         "POST",
         "/v1/targets",
-        body={"name": "win-01", "ansible_host": "10.0.4.20", "ansible_connection": "winrm"},
+        body={"name": "win-01", "ansible_host": "198.51.100.20", "ansible_connection": "winrm"},
     )
     assert status == 201
     assert body["ok"] is True
@@ -183,7 +183,7 @@ def test_password_rejected_on_target(admin_http):
         "/v1/targets",
         body={
             "name": "bad-01",
-            "ansible_host": "10.0.0.9",
+            "ansible_host": "192.0.2.9",
             "extra": {"password": "nope"},
         },
     )
@@ -192,7 +192,7 @@ def test_password_rejected_on_target(admin_http):
 
 
 def test_register_target_helper_still_works(hub_root: Path):
-    out = register_target("sw-01", ansible_host="10.1.1.1", ansible_connection="network_cli", root=hub_root)
+    out = register_target("sw-01", ansible_host="203.0.113.1", ansible_connection="network_cli", root=hub_root)
     assert out["ok"] is True
 
 
@@ -231,7 +231,7 @@ def test_cli_register_target_secret_no_traceback(
                 "--name",
                 "win-x",
                 "--host",
-                "10.0.0.9",
+                "192.0.2.9",
                 "--connection",
                 "winrm",
                 "--extra",
