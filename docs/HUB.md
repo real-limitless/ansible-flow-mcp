@@ -62,6 +62,7 @@ ansible-flow-mcp hub admin
 - Token: `$ANSIBLE_FLOW_ADMIN_TOKEN` or `$HUB_DIR/admin.token` (created on `hub init`, mode `0600`). The CLI prints the **file path**, never the token.
 - Paste the token once in the browser (stored in `sessionStorage`).
 - Tabs: Status, Servers (invite / edit / revoke / ping), Targets, Groups, Audit
+- UI source is `admin-ui/` (Vite, React, Tailwind, shadcn/ui). `npm run build` writes `src/ansible_flow_mcp/admin/static`, which the hub serves at the same paths: `/admin/`, `/admin/app.js`, `/admin/styles.css`, and `/admin/assets/*` for fonts. The `/v1/` JSON API is unchanged.
 - `/health` is unauthenticated and returns doctor JSON
 - Remote operators: SSH or Tailscale to the hub, then open loopback. Do not publish the admin port on the public internet.
 - Lab compose publishes `127.0.0.1:8789` for the admin console. The root dev compose does not publish a host port; it exposes 8789 for Traefik. Do not point both at the same published host port.

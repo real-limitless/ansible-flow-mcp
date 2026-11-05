@@ -1,6 +1,16 @@
 # syntax=docker/dockerfile:1
 # Official single-node hub. The multi-spoke lab stays in lab/images.
 # Do not dockerignore catalog/schemas. Do not bake tokens or SSH keys.
+
+# Admin portal: Vite build copied into the package static directory.
+FROM node:22-bookworm-slim AS admin-ui
+WORKDIR /src/admin-ui
+COPY admin-ui/package.json admin-ui/package-lock.json ./
+RUN npm ci
+COPY admin-ui/ ./
+ENV ADMIN_UI_OUTDIR=/out/admin-static
+RUN npm run build
+
 FROM python:3.12-slim-bookworm
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -26,6 +36,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /opt/ansible-flow-mcp
 COPY pyproject.toml README.md LICENSE ./
 COPY src ./src
+COPY --from=admin-ui /out/admin-static ./src/ansible_flow_mcp/admin/static
 COPY catalog ./catalog
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 

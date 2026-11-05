@@ -227,7 +227,7 @@ ansible-flow-mcp hub admin
 # http://127.0.0.1:8789/admin/
 ```
 
-- Vanilla SPA + stdlib HTTP (mcp-flow chassis, Copper Busbar tokens).
+- Vite + React + Tailwind + shadcn/ui, built into `src/ansible_flow_mcp/admin/static` (`cd admin-ui && npm ci && npm run build`). Copper operator console. Stdlib HTTP serves those files.
 - Tabs: Status, Servers, Targets, Groups, Audit.
 - Auth: Bearer `ANSIBLE_FLOW_ADMIN_TOKEN` or `$HUB_DIR/admin.token` (created on `hub init`).
 - Does **not** expose HTTP MCP or `run_module` / `run_playbook`.

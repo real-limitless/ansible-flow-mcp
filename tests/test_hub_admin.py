@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import threading
 from http.client import HTTPConnection
 from pathlib import Path
@@ -98,10 +99,40 @@ def test_admin_static(admin_http):
     host, port, _ = admin_http
     status, body = _req((host, port), "GET", "/admin/", token=None)
     assert status == 200
-    assert "ansible-flow" in str(body)
+    html = str(body)
+    assert "ansible-flow" in html
+    refs = re.findall(r"""(?:src|href)=["']([^"']+)["']""", html)
+    assert refs
+    assert any(ref.startswith("/admin/") and ref.endswith("/app.js") for ref in refs)
+    assert any(ref.startswith("/admin/") and "styles.css" in ref for ref in refs)
+    for ref in refs:
+        assert ref.startswith("/admin/"), ref
+    status, js = _req((host, port), "GET", "/admin/app.js", token=None)
+    assert status == 200
+    assert "ansible_flow_admin_token" in str(js)
     status, css = _req((host, port), "GET", "/admin/styles.css", token=None)
     assert status == 200
     assert "--copper" in str(css) or "--accent" in str(css)
+    status, leaked = _req((host, port), "GET", "/admin/../http.py", token=None)
+    assert status == 404
+    assert "AdminHandler" not in str(leaked)
+    status, missing = _req((host, port), "GET", "/admin/assets/missing.js", token=None)
+    assert status == 404
+    fonts = list(
+        Path(__file__).resolve().parents[1].glob(
+            "src/ansible_flow_mcp/admin/static/assets/*.woff2"
+        )
+    )
+    assert fonts
+    conn = HTTPConnection(host, port, timeout=10)
+    conn.request("GET", f"/admin/assets/{fonts[0].name}")
+    resp = conn.getresponse()
+    payload = resp.read()
+    content_type = resp.getheader("Content-Type")
+    conn.close()
+    assert resp.status == 200
+    assert content_type == "font/woff2"
+    assert payload.startswith(b"wOF2")
 
 
 def test_status_and_crud(admin_http):

@@ -21,11 +21,48 @@ from ansible_flow_mcp.paths import hub_dir
 DEFAULT_HOST = "127.0.0.1"
 DEFAULT_PORT = 8789
 STATIC_DIR = Path(__file__).resolve().parent / "static"
-_STATIC_FILES = {
-    "index.html": "text/html; charset=utf-8",
-    "app.js": "application/javascript; charset=utf-8",
-    "styles.css": "text/css; charset=utf-8",
+# Vite build (admin-ui/) keeps these entry URLs and may add /admin/assets/*.
+_MIME_BY_SUFFIX = {
+    ".html": "text/html; charset=utf-8",
+    ".js": "application/javascript; charset=utf-8",
+    ".mjs": "application/javascript; charset=utf-8",
+    ".css": "text/css; charset=utf-8",
+    ".svg": "image/svg+xml",
+    ".json": "application/json; charset=utf-8",
+    ".map": "application/json; charset=utf-8",
+    ".woff": "font/woff",
+    ".woff2": "font/woff2",
+    ".ttf": "font/ttf",
+    ".otf": "font/otf",
+    ".png": "image/png",
+    ".webp": "image/webp",
+    ".ico": "image/x-icon",
+    ".txt": "text/plain; charset=utf-8",
 }
+
+
+def _static_target(url_path: str) -> Path | None:
+    """Resolve a /admin/ URL to a file under STATIC_DIR, or None."""
+    if url_path in {"/admin/", "/admin/index.html"}:
+        rel = "index.html"
+    elif url_path.startswith("/admin/"):
+        rel = url_path[len("/admin/") :]
+    else:
+        return None
+    if not rel or rel.endswith("/") or "\x00" in rel or "\\" in rel:
+        return None
+    candidate_rel = Path(rel)
+    if candidate_rel.is_absolute() or ".." in candidate_rel.parts:
+        return None
+    root = STATIC_DIR.resolve()
+    candidate = (root / candidate_rel).resolve()
+    try:
+        candidate.relative_to(root)
+    except ValueError:
+        return None
+    if not candidate.is_file():
+        return None
+    return candidate
 
 
 def _default_host() -> str:
@@ -128,14 +165,9 @@ class AdminHandler(BaseHTTPRequestHandler):
                 status = 200 if report.get("ok") else 503
                 self._send(*_json_bytes(report, status))
                 return
-            if path == "/admin/" or path == "/admin/index.html":
-                self._send_static("index.html")
-                return
-            if path == "/admin/app.js":
-                self._send_static("app.js")
-                return
-            if path == "/admin/styles.css":
-                self._send_static("styles.css")
+            if path == "/admin/" or path.startswith("/admin/"):
+                if not self._send_static(path):
+                    self._send(*_json_bytes({"ok": False, "error": "not found"}, 404))
                 return
             if path.startswith("/v1/"):
                 if not self._require_auth():
@@ -172,13 +204,13 @@ class AdminHandler(BaseHTTPRequestHandler):
         except Exception as exc:  # noqa: BLE001
             self._handle_exc(exc)
 
-    def _send_static(self, name: str) -> None:
-        if name not in _STATIC_FILES:
-            self._send(*_json_bytes({"ok": False, "error": "not found"}, 404))
-            return
-        path = STATIC_DIR / name
-        data = path.read_bytes()
-        self._send(200, data, _STATIC_FILES[name])
+    def _send_static(self, url_path: str) -> bool:
+        target = _static_target(url_path)
+        if target is None:
+            return False
+        content_type = _MIME_BY_SUFFIX.get(target.suffix.lower(), "application/octet-stream")
+        self._send(200, target.read_bytes(), content_type)
+        return True
 
     def _handle_exc(self, exc: BaseException) -> None:
         if isinstance(exc, AdminError):
